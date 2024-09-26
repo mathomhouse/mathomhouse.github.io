@@ -23,3 +23,15 @@ function calculateVit() {
     // Display the result
     document.getElementById('result').innerHTML = `Your total VIT is: ${result}`;
 }
+
+function resetVit(){
+    document.getElementById('vitLargeCapsule').value = 0;
+    document.getElementById('vitSmallCapsule').value = 0;
+    document.getElementById('vitPlus50').value = 0;
+    document.getElementById('vitPlus10').value = 0;
+    document.getElementById('vitFlower').value = 0;
+    document.getElementById('vitHeart').value = 0;
+
+    // Clear the result
+    document.getElementById('result').innerHTML = '';
+}
