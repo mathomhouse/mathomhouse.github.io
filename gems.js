@@ -89,6 +89,7 @@ function resetGems(){
     document.getElementById('1000gems').value = 0;
     document.getElementById('1200gems').value = 0;
     document.getElementById('1280gems').value = 0;
+    document.getElementById('2000gems').value = 0;
     document.getElementById('2024gems').value = 0;
     document.getElementById('2560gems').value = 0;
     document.getElementById('3000gems').value = 0;
