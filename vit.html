@@ -1,4 +1,47 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vit Calculator</title>
+    <link rel="stylesheet" href="vit_calculator.css">
+</head>
 <body>
-    <div style="background-color: aquamarine;">This is going to be the VIT calculator.</div>
+
+    <!-- <h1>Vit Calculator</h1> -->
+
+    <!-- Main container for the labels and inputs -->
+    <div class="calculator-container">
+        <div class="labels">
+            <label for="vitLargeCapsule">Large VIT Capsule:</label>
+            <label for="vitSmallCapsule">Small VIT Capsule:</label>
+            <label for="vitPlus50">+50 VIT:</label>
+            <label for="vitPlus10">+10 VIT:</label>
+            <label for="vitFlower">Flower:</label>
+            <label for="vitHeart">Heart:</label>
+        </div>
+        
+        <div class="inputs">
+            <input type="number" id="vitLargeCapsule" placeholder="Enter value">
+            <input type="number" id="vitSmallCapsule" placeholder="Enter value">
+            <input type="number" id="vitPlus50" placeholder="Enter value">
+            <input type="number" id="vitPlus10" placeholder="Enter value">
+            <input type="number" id="vitFlower" placeholder="Enter value">
+            <input type="number" id="vitHeart" placeholder="Enter value">
+        </div>
+    </div>
+
+    <!-- Button to trigger calculation -->
+    <div class="calculate-btn">
+        <button onclick="calculateVit()">Calculate</button>
+    </div>
+
+    <!-- Area to display the result -->
+    <div id="result" class="result">
+        <!-- Result will appear here -->
+    </div>
+
+    <script src="vit.js"></script>
+
 </body>
+</html>

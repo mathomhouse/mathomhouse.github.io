@@ -1,3 +1,4 @@
+/* General styles from both projects */
 * {
     box-sizing: border-box;
 }
@@ -5,17 +6,16 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 20px;
 }
 
-/* Tab container */
+/* Tab functionality styles */
 .tab-container {
     display: flex;
-    flex-wrap: wrap; /* Allows tabs to stack on small screens */
+    flex-wrap: wrap;
     border-bottom: 2px solid #ccc;
 }
 
-/* Style for each tab */
 .tab {
     padding: 10px 20px;
     cursor: pointer;
@@ -27,39 +27,84 @@ body {
     text-align: center;
 }
 
-/* Active tab style */
 .tab.active {
-    background-color: #fff;
-    border-bottom: 2px solid #fff;
+    background-color: lightblue;
+    border-bottom: 2px solid lightblue;
+    font-weight: bold;
 }
 
-/* Content area */
 .tab-content {
     display: none;
     padding: 20px;
     border: 1px solid #ccc;
-    height: 500px; /* Adjust as needed */
+    height: 500px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
-/* Show active content */
 .tab-content.active {
     display: block;
+    opacity: 1;
 }
 
-/* Responsive iframe styling */
 iframe {
     width: 100%;
     height: 100%;
     border: none;
 }
 
-/* Mobile-specific adjustments */
 @media screen and (max-width: 600px) {
     .tab {
-        flex-basis: 100%; /* Makes each tab take up full width on small screens */
+        flex-basis: 100%;
     }
 
     .tab-content {
-        height: 300px; /* Adjust height for smaller screens */
+        height: 300px;
     }
+}
+
+/* Vit Calculator styles */
+h1 {
+    text-align: center;
+}
+
+.calculator-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.labels, .inputs {
+    margin: 10px;
+    padding: 10px;
+}
+
+.labels label {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.inputs input {
+    display: block;
+    margin-bottom: 15px;
+    padding: 5px;
+    width: 200px;
+}
+
+.calculate-btn {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.result {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
 }
