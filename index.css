@@ -131,20 +131,23 @@ button {
 
 /* Table layout styles for labels and inputs */
 .calculator-table {
-    margin: 0 auto;
+    margin: 0; /* Left-align the table */
     border-spacing: 10px 5px; /* Reduced vertical and horizontal spacing */
     width: 100%;
     max-width: 500px; /* Adjust width as needed */
+    border: 1px solid #ccc; /* Border around the entire table */
+    border-collapse: collapse; /* Ensure borders collapse into a single line */
 }
 
 .calculator-table td {
     padding: 5px; /* Reduced padding for tighter layout */
     vertical-align: middle;
+    border: 1px solid #ccc; /* Border for each cell */
 }
 
 .calculator-table label {
     display: block;
-    text-align: left; /* Left-align the labels */
+    text-align: left; /* Ensure labels are left-aligned */
     padding-right: 10px;
 }
 
@@ -155,6 +158,6 @@ button {
 }
 
 .calculate-btn {
-    text-align: center;
+    text-align: left; /* Align the buttons to the left */
     margin-top: 15px; /* Reduced margin between buttons and table */
 }
