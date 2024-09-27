@@ -1,4 +1,57 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Dropdown</title>
+    <style>
+        /* Dropdown option colors */
+        select option[value="grey"] { background-color: grey; }
+        select option[value="green"] { background-color: green; }
+        select option[value="blue"] { background-color: blue; }
+        select option[value="purple"] { background-color: purple; }
+        select option[value="gold"] { background-color: gold; }
+
+        /* Dropdown and checkbox styles */
+        select {
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        #checkbox-section {
+            display: none; /* Hidden by default */
+        }
+    </style>
+</head>
 <body>
-    <div style="background-color: lightseagreen;">This is going to be the equipment calculator.</div>
+
+    <h2>Select a Color</h2>
+    <select id="colorDropdown">
+        <option value="grey">Grey</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+        <option value="purple">Purple</option>
+        <option value="gold">Gold</option>
+    </select>
+
+    <div id="checkbox-section">
+        <label>
+            <input type="checkbox" id="dismantlingCheckbox"> Are you dismantling a purple?
+        </label>
+    </div>
+
+    <script>
+        const dropdown = document.getElementById('colorDropdown');
+        const checkboxSection = document.getElementById('checkbox-section');
+
+        dropdown.addEventListener('change', function () {
+            if (dropdown.value === 'gold') {
+                checkboxSection.style.display = 'block';  // Show checkbox
+            } else {
+                checkboxSection.style.display = 'none';  // Hide checkbox
+            }
+        });
+    </script>
+
 </body>
+</html>
