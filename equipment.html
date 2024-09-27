@@ -93,29 +93,38 @@
            var totalopengreymats = opengreymats + (opengreenmats * 4) + (openbluemats * 16)
            + (openpurplemats * 64) + (opengoldmats * 256);
 
-            var result = '';           
+            var result = '';
+            var g = 0;           
 
 
 
 
             if (dropdown.value === 'grey') { 
-                var g = 70 - totalopengreymats;
+                g = 70 - totalopengreymats;
+
+            } 
+            else if (dropdown.value === 'green') {
+                 g = 280 - totalopengreymats;
                 
-                    if (g <= 0) {
+            }
+            else if (dropdown.value === 'blue') {
+                 g = 1120 - totalopengreymats;
+                
+            }
+            else if (dropdown.value === 'purple') {
+                 g = 4480 - totalopengreymats;
+                
+            }
+            else {
+                 g = 17920 - totalopengreymats;
+                
+            }
+            if (g <= 0) {
                         result = `You don't need anymore materials!`;} 
                         else 
                         {result = `You need ${g} more grey materials.`;}
-            } 
-            else if (dropdown.value === 'green') {
 
-            }
-            else if (dropdown.value === 'blue') {
 
-            }
-            else if (dropdown.value === 'purple') {
-
-            }
-            else {}
 
             document.getElementById('result').innerHTML = result;
             // body...
