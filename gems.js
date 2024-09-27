@@ -1,5 +1,6 @@
 function calculateGems() {
     // Retrieve input values
+    const v_opengems = parseFloat(document.getElementById('opengems').value) || 0;
     const v_100gems = parseFloat(document.getElementById('100gems').value) || 0;
     const v_50gems = parseFloat(document.getElementById('50gems').value) || 0;
     const v_60gems = parseFloat(document.getElementById('60gems').value) || 0;
@@ -57,6 +58,7 @@ function calculateGems() {
 
 
     const result = 
+    v_opengems +
     (v_100gems * v_100gemsvalue) + 
     (v_50gems * v_50gemsvalue) + 
     (v_60gems * v_60gemsvalue) + 
@@ -88,6 +90,7 @@ function calculateGems() {
 }
 
 function resetGems(){
+    document.getElementById('opengems').value = 0;
     document.getElementById('100gems').value = 0;
     document.getElementById('50gems').value = 0;
     document.getElementById('60gems').value = 0;
