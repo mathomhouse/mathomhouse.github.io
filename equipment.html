@@ -119,6 +119,9 @@
             }
             else {
                  g = 17920 - totalopengreymats;
+                 if(document.getElementById('dismantlingCheckbox').checked){
+                    g = g - 4480;
+                 }
                 
             }
             if (g <= 0) {
