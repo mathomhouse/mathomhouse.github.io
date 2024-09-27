@@ -7,7 +7,7 @@ function calculateRSS() {
     const v_50kFood = parseFloat(document.getElementById('50kFood').value) || 0;
     const v_10kFood = parseFloat(document.getElementById('10kFood').value) || 0;
     const v_500Food = parseFloat(document.getElementById('500Food').value) || 0;
-    const v_openOil = parseFloat(document.getElementById('openoil').value) || 0;
+    const v_openOil = parseFloat(document.getElementById('openOil').value) || 0;
     const v_1milOil = parseFloat(document.getElementById('1milOil').value) || 0;
     const v_500kOil = parseFloat(document.getElementById('500kOil').value) || 0;
     const v_100kOil = parseFloat(document.getElementById('100kOil').value) || 0;
@@ -53,12 +53,18 @@ function calculateRSS() {
 }
 
 function resetRSS(){
-    document.getElementById('vitLargeCapsule').value = 0;
-    document.getElementById('vitSmallCapsule').value = 0;
-    document.getElementById('vitPlus50').value = 0;
-    document.getElementById('vitPlus10').value = 0;
-    document.getElementById('vitFlower').value = 0;
-    document.getElementById('vitHeart').value = 0;
+    document.getElementById('openFood').value = 0;
+    document.getElementById('1milFood').value = 0;
+    document.getElementById('500kFood').value = 0;
+    document.getElementById('100kFood').value = 0;
+    document.getElementById('10kFood').value = 0;
+    document.getElementById('500Food').value = 0;
+    document.getElementById('openOil').value = 0;
+    document.getElementById('1milOil').value = 0;
+    document.getElementById('500kOil').value = 0;
+    document.getElementById('100kOil').value = 0;
+    document.getElementById('10kOil').value = 0;
+    document.getElementById('500Oil').value = 0;
 
     // Clear the result
     document.getElementById('result').innerHTML = '';
