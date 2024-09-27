@@ -40,6 +40,38 @@
         </label>
     </div>
 
+<table class="calculator-table">
+        <tr>
+            <td><label for="greymats">Grey Materials & Boxes:</label></td>
+            <td><input type="number" id="greymats" placeholder="Enter value"></td>
+        </tr>
+        <tr>
+            <td><label for="greenmats">Green Materials & Boxes:</label></td>
+            <td><input type="number" id="greenmats" placeholder="Enter value"></td>
+        </tr>
+        <tr>
+            <td><label for="bluemats">Blue Materials & Boxes:</label></td>
+            <td><input type="number" id="bluemats" placeholder="Enter value"></td>
+        </tr>
+        <tr>
+            <td><label for="purplemats">Purple Materials & Boxes:</label></td>
+            <td><input type="number" id="purplemats" placeholder="Enter value"></td>
+        </tr>
+        <tr>
+            <td><label for="goldmats">Gold Materials & Boxes:</label></td>
+            <td><input type="number" id="goldmats" placeholder="Enter value"></td>
+        </tr>
+    </table>
+
+    <div class="calculate-btn">
+        <button onclick="calculatemats()">Calculate</button>
+        <button onclick="resetmats()">Reset</button>
+    </div>
+
+     <div id="result" class="result">
+        <!-- Result will appear here -->
+    </div>
+
     <script>
         const dropdown = document.getElementById('colorDropdown');
         const checkboxSection = document.getElementById('checkbox-section');
@@ -51,6 +83,43 @@
                 checkboxSection.style.display = 'none';  // Hide checkbox
             }
         });
+        function calculatemats() {
+           const opengreymats = parseFloat(document.getElementById('greymats').value) || 0;
+           const opengreenmats = parseFloat(document.getElementById('greeenmats').value) || 0;
+           const openbluemats = parseFloat(document.getElementById('bluemats').value) || 0;
+           const openpurplemats = parseFloat(document.getElementById('purplemats').value) || 0;
+           const opengoldmats = parseFloat(document.getElementById('goldmats').value) || 0;
+
+           var totalopengreymats = opengreymats + (opengreenmats * 4) + (openbluemats * 16)
+           + (openpurplemats * 64) + (opengoldmats * 256);
+
+            var result = '';           
+
+
+
+
+            if (dropdown.value === 'grey') { 
+                var g = 70 - totalopengreymats;
+                
+                    if (g <= 0) {
+                        result = `You don't need anymore materials!`;} 
+                        else 
+                        {result = `You need ${g} more grey materials.`;}
+            } 
+            else if (dropdown.value === 'green') {
+
+            }
+            else if (dropdown.value === 'blue') {
+
+            }
+            else if (dropdown.value === 'purple') {
+
+            }
+            else {}
+
+            document.getElementById('result').innerHTML = result;
+            // body...
+        }
     </script>
 
 </body>
