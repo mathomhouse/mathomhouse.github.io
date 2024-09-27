@@ -57,12 +57,14 @@ function resetRSS(){
     document.getElementById('1milFood').value = 0;
     document.getElementById('500kFood').value = 0;
     document.getElementById('100kFood').value = 0;
+    document.getElementById('50kFood').value = 0;
     document.getElementById('10kFood').value = 0;
     document.getElementById('500Food').value = 0;
     document.getElementById('openOil').value = 0;
     document.getElementById('1milOil').value = 0;
     document.getElementById('500kOil').value = 0;
     document.getElementById('100kOil').value = 0;
+    document.getElementById('50kOil').value = 0;
     document.getElementById('10kOil').value = 0;
     document.getElementById('500Oil').value = 0;
 
