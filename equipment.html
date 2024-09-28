@@ -179,6 +179,7 @@
             now.setDate(now.getDate() + days);
             now.setHours(now.getHours() + hours);
             now.setMinutes(now.getMinutes() + minutes);
+            var formattedDateTime = formatDate(now);
 
             // Return the time as a formatted string
             let result = '';
@@ -186,9 +187,23 @@
             if (hours > 0) result += `${hours} hours `;
             if (minutes > 0 || result === '') result += `${minutes} minutes`;
 
-            return result.trim() + `. The crafting will finish on: ${now.toString()}`;
+            return result.trim() + `. The crafting will finish on: ${formattedDateTime}`;
         }
-
+        
+        function formatDate(date){
+            // Use Intl.DateTimeFormat to format the date and time as mm/dd/yyyy HH:mm
+            const options = {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: true
+                        };
+                        
+            const formattedDateTime = new Intl.DateTimeFormat('en-US', options).format(date);
+            return formattedDateTime;
+        }
     </script>
 
 </body>
