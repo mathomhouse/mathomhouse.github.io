@@ -52,7 +52,7 @@ iframe {
     height: 100%;
     border: none;
 }
-
+/* 
 @media screen and (max-width: 600px) {
     .tab {
         flex-basis: 100%;
@@ -61,7 +61,7 @@ iframe {
     .tab-content {
         height: 300px;
     }
-}
+} */
 
 /* Vit Calculator styles */
 h1 {
@@ -160,4 +160,36 @@ button {
 .calculate-btn {
     text-align: left; /* Align the buttons to the left */
     margin-top: 15px; /* Reduced margin between buttons and table */
+}
+
+/* Dropdown option colors */
+select option[value="grey"] {
+    background-color: grey;
+}
+
+select option[value="green"] {
+    background-color: green;
+}
+
+select option[value="blue"] {
+    background-color: blue;
+}
+
+select option[value="purple"] {
+    background-color: purple;
+}
+
+select option[value="gold"] {
+    background-color: gold;
+}
+
+/* Dropdown and checkbox styles */
+select {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+#checkbox-section {
+    display: none;
+    /* Hidden by default */
 }
