@@ -135,14 +135,11 @@ button {
     border-spacing: 10px 5px; /* Reduced vertical and horizontal spacing */
     width: 100%;
     max-width: 500px; /* Adjust width as needed */
-    border: 1px solid #ccc; /* Border around the entire table */
-    border-collapse: collapse; /* Ensure borders collapse into a single line */
 }
 
 .calculator-table td {
     padding: 5px; /* Reduced padding for tighter layout */
     vertical-align: middle;
-    border: 1px solid #ccc; /* Border for each cell */
 }
 
 .calculator-table label {
