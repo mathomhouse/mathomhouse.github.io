@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Color Dropdown</title>
     <style>
         /* Dropdown option colors */
-        select option[value="grey"] { background-color: grey; }
-        select option[value="green"] { background-color: green; }
-        select option[value="blue"] { background-color: blue; }
-        select option[value="purple"] { background-color: purple; }
-        select option[value="gold"] { background-color: gold; }
+        select option[value="grey"] {
+            background-color: grey;
+        }
+
+        select option[value="green"] {
+            background-color: green;
+        }
+
+        select option[value="blue"] {
+            background-color: blue;
+        }
+
+        select option[value="purple"] {
+            background-color: purple;
+        }
+
+        select option[value="gold"] {
+            background-color: gold;
+        }
 
         /* Dropdown and checkbox styles */
         select {
@@ -19,10 +34,12 @@
         }
 
         #checkbox-section {
-            display: none; /* Hidden by default */
+            display: none;
+            /* Hidden by default */
         }
     </style>
 </head>
+
 <body>
 
     <h2>Select a Color</h2>
@@ -40,7 +57,7 @@
         </label>
     </div>
 
-<table class="calculator-table">
+    <table class="calculator-table">
         <tr>
             <td><label for="greymats">Grey Materials & Boxes:</label></td>
             <td><input type="number" id="greymats" placeholder="Enter value"></td>
@@ -68,7 +85,7 @@
         <button onclick="resetmats()">Reset</button>
     </div>
 
-     <div id="result" class="result">
+    <div id="result" class="result">
         <!-- Result will appear here -->
     </div>
 
@@ -86,66 +103,86 @@
             }
         });
         function calculatemats() {
-           const opengreymats = parseFloat(document.getElementById('greymats').value) || 0;
-           const opengreenmats = parseFloat(document.getElementById('greenmats').value) || 0;
-           const openbluemats = parseFloat(document.getElementById('bluemats').value) || 0;
-           const openpurplemats = parseFloat(document.getElementById('purplemats').value) || 0;
-           const opengoldmats = parseFloat(document.getElementById('goldmats').value) || 0;
+            const opengreymats = parseFloat(document.getElementById('greymats').value) || 0;
+            const opengreenmats = parseFloat(document.getElementById('greenmats').value) || 0;
+            const openbluemats = parseFloat(document.getElementById('bluemats').value) || 0;
+            const openpurplemats = parseFloat(document.getElementById('purplemats').value) || 0;
+            const opengoldmats = parseFloat(document.getElementById('goldmats').value) || 0;
 
-           var totalopengreymats = opengreymats + (opengreenmats * 4) + (openbluemats * 16)
-           + (openpurplemats * 64) + (opengoldmats * 256);
+            var totalopengreymats = opengreymats + (opengreenmats * 4) + (openbluemats * 16)
+                + (openpurplemats * 64) + (opengoldmats * 256);
 
             var result = '';
-            var g = 0;           
+            var g = 0;
 
-
-
-
-            if (dropdown.value === 'grey') { 
+            if (dropdown.value === 'grey') {
                 g = 70 - totalopengreymats;
-
-            } 
+            }
             else if (dropdown.value === 'green') {
-                 g = 280 - totalopengreymats;
-                
+                g = 280 - totalopengreymats;
             }
             else if (dropdown.value === 'blue') {
-                 g = 1120 - totalopengreymats;
-                
+                g = 1120 - totalopengreymats;
             }
             else if (dropdown.value === 'purple') {
-                 g = 4480 - totalopengreymats;
-                
+                g = 4480 - totalopengreymats;
             }
             else {
-                 g = 17920 - totalopengreymats;
-                 if(document.getElementById('dismantlingCheckbox').checked){
+                g = 17920 - totalopengreymats;
+                if (document.getElementById('dismantlingCheckbox').checked) {
                     g = g - 4480;
-                 }
-                
+                }
             }
+
             if (g <= 0) {
-                        result = `You don't need anymore materials!`;} 
-                        else 
-                        {result = `You need ${g} more grey materials.`;}
-
-
+                result = `You don't need anymore materials!`;
+            }
+            else { 
+                var craftingTime = calculateCraftingTime(g);
+                result = `You need ${g} more grey materials. Amount of time needed: ${craftingTime}`; 
+            }
 
             document.getElementById('result').innerHTML = result;
-            // body...
         }
 
-        function resetmats(){
-    document.getElementById('greymats').value = 0;
-    document.getElementById('greenmats').value = 0;
-    document.getElementById('bluemats').value = 0;
-    document.getElementById('purplemats').value = 0;
-    document.getElementById('goldmats').value = 0;
+        function resetmats() {
+            document.getElementById('greymats').value = 0;
+            document.getElementById('greenmats').value = 0;
+            document.getElementById('bluemats').value = 0;
+            document.getElementById('purplemats').value = 0;
+            document.getElementById('goldmats').value = 0;
 
-    // Clear the result
-    document.getElementById('result').innerHTML = '';
-}
+            // Clear the result
+            document.getElementById('result').innerHTML = '';
+        }
+
+        function calculateCraftingTime(materials) {
+            // Define the crafting time for 10 materials in minutes (2 hours 30 minutes = 150 minutes)
+            const timeFor10Materials = 2 * 60 + 30; // 150 minutes
+
+            // Calculate the time per material
+            const timePerMaterial = timeFor10Materials / 10;
+
+            // Calculate total crafting time for the input number of materials
+            const totalMinutes = materials * timePerMaterial;
+
+            // Convert the total minutes into days, hours, and minutes
+            const days = Math.floor(totalMinutes / (24 * 60));
+            const remainingMinutesAfterDays = totalMinutes % (24 * 60);
+            const hours = Math.floor(remainingMinutesAfterDays / 60);
+            const minutes = Math.round(remainingMinutesAfterDays % 60);
+
+            // Return the time as a formatted string
+            let result = '';
+            if (days > 0) result += `${days} days `;
+            if (hours > 0) result += `${hours} hours `;
+            if (minutes > 0 || result === '') result += `${minutes} minutes`;
+
+            return result.trim();
+        }
+
     </script>
 
 </body>
+
 </html>
