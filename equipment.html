@@ -172,13 +172,21 @@
             const hours = Math.floor(remainingMinutesAfterDays / 60);
             const minutes = Math.round(remainingMinutesAfterDays % 60);
 
+             // Get the user's current date and time
+            const now = new Date();
+
+            // Add the calculated time to the current date
+            now.setDate(now.getDate() + days);
+            now.setHours(now.getHours() + hours);
+            now.setMinutes(now.getMinutes() + minutes);
+
             // Return the time as a formatted string
             let result = '';
             if (days > 0) result += `${days} days `;
             if (hours > 0) result += `${hours} hours `;
             if (minutes > 0 || result === '') result += `${minutes} minutes`;
 
-            return result.trim();
+            return result.trim() + `. The crafting will finish on: ${now.toString()}`;
         }
 
     </script>
