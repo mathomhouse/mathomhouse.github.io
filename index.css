@@ -52,19 +52,13 @@ iframe {
     height: 100%;
     border: none;
 }
-/* 
-@media screen and (max-width: 600px) {
-    .tab {
-        flex-basis: 100%;
-    }
-
-    .tab-content {
-        height: 300px;
-    }
-} */
 
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
+    .tab-content {
+        height: 300px;
+    }
+
     .calculator-table {
         width: 100%; /* Ensure table takes full width */
     }
