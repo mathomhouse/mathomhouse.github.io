@@ -47,7 +47,7 @@ function calculatemats() {
     }
     else { 
         var craftingTime = calculateCraftingTime(g);
-        result = `You need ${g} more grey materials. Amount of time needed: ${craftingTime}`; 
+        result = `You need <b>${g}</b> more grey materials. <br>Amount of time needed: ${craftingTime}`; 
     }
 
     document.getElementById('result').innerHTML = result;
@@ -95,7 +95,7 @@ function calculateCraftingTime(materials) {
     if (hours > 0) result += `${hours} hours `;
     if (minutes > 0 || result === '') result += `${minutes} minutes`;
 
-    return result.trim() + `. The crafting will finish on: ${formattedDateTime}`;
+    return result.trim() + `. <br>The crafting will finish on: ${formattedDateTime}`;
 }
 
 function formatDate(date){
