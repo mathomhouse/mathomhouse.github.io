@@ -26,16 +26,16 @@
     <label for="numberSelect">Select a number:</label>
     <select id="numberSelect" onchange="generateTable()">
         <!-- Options from 2 to 10 -->
-        <option value="">Select</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
+        <option value="">Choose</option>
+        <option value="3">2</option>
+        <option value="9">3</option>
+        <option value="27">4</option>
+        <option value="81">5</option>
+        <option value="243">6</option>
+        <option value="729">7</option>
+        <option value="2187">8</option>
+        <option value="6561">9</option>
+        <option value="19683">10</option>
     </select>
 
     <!-- Placeholder for the generated table -->
@@ -47,7 +47,7 @@
     <script>
         function generateTable() {
             // Get the selected value from the dropdown
-            const selectedValue = document.getElementById('numberSelect').value;
+            const selectedValue = document.getElementById('numberSelect').text;
             
             // If no valid option is selected, clear the table and button
             if (!selectedValue) {
