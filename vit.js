@@ -1,3 +1,32 @@
+function calculateOnBlur(inputElement, multiplier, resultElementId) {
+    const value = parseFloat(inputElement.value) || 0; // Get input value or default to 0
+    const result = value * multiplier; // Multiply by the provided multiplier
+
+    // Update the total in the respective cell (third column)
+    const resultElement = document.getElementById(resultElementId);
+    resultElement.innerText = result.toFixed(0); // Update with the calculated result
+}
+
+window.onload = function() {
+    // Define inputs and their respective multipliers and result IDs
+    const inputs = [
+        { id: 'vitLargeCapsule', multiplier: 50, resultId: 'largeCapsuleTotal' },
+        { id: 'vitSmallCapsule', multiplier: 10, resultId: 'smallCapsuleTotal' },
+        { id: 'vitPlus50', multiplier: 50, resultId: 'vitPlus50Total' },
+        { id: 'vitPlus10', multiplier: 10, resultId: 'vit10Total' },
+        { id: 'vitFlower', multiplier: 30, resultId: 'vitFlowerTotal' },
+        { id: 'vitHeart', multiplier: 30, resultId: 'vitHeartTotal' }
+    ];
+
+    // Attach the same calculateOnBlur function to the onblur event for each input
+    inputs.forEach(input => {
+        const inputElement = document.getElementById(input.id);
+        inputElement.onblur = function() {
+            calculateOnBlur(inputElement, input.multiplier, input.resultId);
+        };
+    });
+}
+
 function calculateVit() {
     // Retrieve input values
     const largeCaps = parseFloat(document.getElementById('vitLargeCapsule').value) || 0;

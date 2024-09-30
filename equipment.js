@@ -115,8 +115,8 @@ function formatDate(date){
     // Use Intl.DateTimeFormat to format the date and time as mm/dd/yyyy HH:mm
     const options = {
                     year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
+                    month: 'long',  //this will use the name of the month
+                    day: 'numeric',
                     hour: '2-digit',
                     minute: '2-digit',
                     hour12: true
