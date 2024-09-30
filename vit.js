@@ -21,7 +21,7 @@ function calculateVit() {
         (flowers * flowerValue) + (hearts * heartValue);
 
     // Display the result
-    document.getElementById('result').innerHTML = `Your total VIT is: ${result}`;
+    document.getElementById('result').innerHTML = `Your total VIT is: <b>${result}</b>`;
 }
 
 function resetVit(){

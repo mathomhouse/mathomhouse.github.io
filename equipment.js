@@ -1,15 +1,28 @@
 const dropdown = document.getElementById('colorDropdown');
 const checkboxSection = document.getElementById('checkbox-section');
 
+// Ensure the background color is set when the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", function() {
+    updateBackgroundColor(); // Set initial color when the page loads
+
+    // Add event listener to change background color on selection change
+    document.getElementById("colorDropdown").addEventListener("change", updateBackgroundColor);
+});
+
 dropdown.addEventListener('change', function () {
     // Update the background color of the dropdown to match the selected color
-    dropdown.style.backgroundColor = dropdown.value;
+    updateBackgroundColor();
+
     if (dropdown.value === 'gold') {
         checkboxSection.style.display = 'block';  // Show checkbox
     } else {
         checkboxSection.style.display = 'none';  // Hide checkbox
     }
 });
+
+function updateBackgroundColor(){
+    dropdown.style.backgroundColor = dropdown.value;
+}
 function calculatemats() {
     const opengreymats = parseFloat(document.getElementById('greymats').value) || 0;
     const opengreenmats = parseFloat(document.getElementById('greenmats').value) || 0;
