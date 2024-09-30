@@ -63,6 +63,38 @@ iframe {
     }
 } */
 
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .calculator-table {
+        width: 100%; /* Ensure table takes full width */
+    }
+
+    /* Adjust table layout to stack elements vertically on small screens */
+    table {
+        width: 100%;
+    }
+
+    td, th {
+        display: block;
+        width: 100%;
+    }
+
+    td {
+        margin-bottom: 10px; /* Add space between rows */
+    }
+
+    /* Adjust button size for mobile */
+    .calculate-btn button {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.2rem;
+    }
+
+    .div-buffer {
+        height: 20px; /* Space between sections */
+    }
+}
+
 /* Vit Calculator styles */
 h1 {
     text-align: center;
@@ -89,6 +121,13 @@ h1 {
     margin-bottom: 15px;
     padding: 5px;
     width: 200px;
+}
+
+input[type="number"] {
+    width: 100%; /* Ensure the inputs take full width */
+    padding: 10px; /* Add padding for better touch interaction */
+    font-size: 1rem; /* Make font size larger for readability */
+    box-sizing: border-box; /* Ensure padding doesn't exceed element width */
 }
 
 .calculate-btn {

@@ -14,8 +14,7 @@
     <table class="calculator-table">
         <tr>
             <td><label for="vitLargeCapsule">Large VIT Capsule:</label></td>
-            <td><input type="number" min="0" id="vitLargeCapsule" placeholder="0" oninput="this.value = 
-                !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"></td>
+            <td><input type="number" min="0" id="vitLargeCapsule" placeholder="0"></td>
         </tr>
         <tr>
             <td><label for="vitSmallCapsule">Small VIT Capsule:</label></td>
@@ -39,12 +38,14 @@
         </tr>
     </table>
     <div class="div-buffer"></div>
+
     <!-- Button to trigger calculation -->
     <div class="calculate-btn">
         <button onclick="calculateVit()">Calculate</button>
         <button onclick="resetVit()">Reset</button>
     </div>
     <div class="div-buffer"></div>
+    
     <!-- Area to display the result -->
     <div id="result" class="result">
         <!-- Result will appear here -->
