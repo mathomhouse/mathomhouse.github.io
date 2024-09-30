@@ -1,4 +1,102 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Table Generator</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+        input[type="number"] {
+            width: 100%;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
 <body>
-    <div style="background-color: rebeccapurple;">This is going to be the Components calculator.</div>
+    <h1>Table Generator</h1>
+
+    <!-- Dropdown -->
+    <label for="numberSelect">Select a number:</label>
+    <select id="numberSelect" onchange="generateTable()">
+        <!-- Options from 2 to 10 -->
+        <option value="">Select</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+
+    <!-- Placeholder for the generated table -->
+    <div id="tableContainer"></div>
+
+    <!-- Result Label -->
+    <div id="result"></div>
+
+    <script>
+        function generateTable() {
+            // Get the selected value from the dropdown
+            const selectedValue = document.getElementById('numberSelect').value;
+            
+            // If no valid option is selected, clear the table and button
+            if (!selectedValue) {
+                document.getElementById('tableContainer').innerHTML = "";
+                document.getElementById('result').innerHTML = "";
+                return;
+            }
+
+            // Calculate the number of rows based on the selected value minus 1
+            const numberOfRows = selectedValue - 1;
+
+            // Create a table element
+            let table = "<table><thead><tr><th>Label</th><th>Input</th></tr></thead><tbody>";
+
+            // Loop to create table rows with dynamic "Level" labels and numeric inputs with ids and names
+            for (let i = 0; i < numberOfRows; i++) {
+                let inputId = `input${i + 1}`;  // Define the id and name
+
+                table += `<tr>
+                            <td>Level ${i + 1}</td>
+                            <td><input type="number" id="${inputId}" name="${inputId}" min="0" /></td>
+                          </tr>`;
+            }
+
+            // Close table tags
+            table += "</tbody></table>";
+
+            // Add the 'Calculate' button
+            table += `<button onclick="calculateSum()">Calculate</button>`;
+
+            // Insert the table and button into the div
+            document.getElementById('tableContainer').innerHTML = table;
+        }
+
+        function calculateSum() {
+            let sum = 0;
+            const inputs = document.querySelectorAll('input[type="number"]');
+
+            // Loop through each input and add the values
+            inputs.forEach(input => {
+                const value = parseFloat(input.value);
+                if (!isNaN(value)) {
+                    sum += value;
+                }
+            });
+
+            // Display the result below the button
+            document.getElementById('result').innerHTML = `Total Sum: ${sum}`;
+        }
+    </script>
 </body>
+</html>
