@@ -48,8 +48,10 @@ function calculateRSS() {
     (v_10kOil * v_10kOilvalue) +
     (v_500Oil * v_500Oilvalue);
 
+    var s_food = foodResult.toLocaleString("en-US");
+    var s_oil = oilResult.toLocaleString("en-US");
     // Display the result
-    document.getElementById('result').innerHTML = `Your total food is: ${foodResult} and total oil is: ${oilResult} `;
+    document.getElementById('result').innerHTML = `Your total food is: <b>${s_food}</b> and total oil is: <b>${s_oil}</b> `;
 }
 
 function resetRSS(){

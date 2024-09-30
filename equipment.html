@@ -33,32 +33,32 @@
     <table class="calculator-table">
         <tr>
             <td><label for="greymats">Grey Materials & Boxes:</label></td>
-            <td><input type="number" id="greymats" placeholder="Enter value"></td>
+            <td><input type="number" min="0" id="greymats" placeholder="0"></td>
         </tr>
         <tr>
             <td><label for="greenmats">Green Materials & Boxes:</label></td>
-            <td><input type="number" id="greenmats" placeholder="Enter value"></td>
+            <td><input type="number" min="0" id="greenmats" placeholder="0"></td>
         </tr>
         <tr>
             <td><label for="bluemats">Blue Materials & Boxes:</label></td>
-            <td><input type="number" id="bluemats" placeholder="Enter value"></td>
+            <td><input type="number" min="0" id="bluemats" placeholder="0"></td>
         </tr>
         <tr>
             <td><label for="purplemats">Purple Materials & Boxes:</label></td>
-            <td><input type="number" id="purplemats" placeholder="Enter value"></td>
+            <td><input type="number" min="0" id="purplemats" placeholder="0"></td>
         </tr>
         <tr>
             <td><label for="goldmats">Gold Materials & Boxes:</label></td>
-            <td><input type="number" id="goldmats" placeholder="Enter value"></td>
+            <td><input type="number" min="0" id="goldmats" placeholder="0"></td>
         </tr>
     </table>
-
+    <div class="div-buffer"></div>
     <div class="calculate-btn">
         <button class="button-primary" onclick="calculatemats()">Calculate</button>
         <button onclick="resetmats()">Reset</button>
     </div>
 
-    <div style="height:50px"></div>
+    <div class="div-buffer"></div>
     <div id="result">
         <!-- Result will appear here -->
     </div>

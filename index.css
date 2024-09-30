@@ -6,7 +6,7 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 10px;
 }
 
 /* Tab functionality styles */
@@ -37,7 +37,7 @@ body {
     display: none;
     padding: 20px;
     border: 1px solid #ccc;
-    height: 500px;
+    height: 600px;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
 }
@@ -127,6 +127,10 @@ button {
     flex-grow: 1;
     padding: 5px;
     width: 200px;
+}
+
+.div-buffer{
+    height:50px;
 }
 
 /* Table layout styles for labels and inputs */
