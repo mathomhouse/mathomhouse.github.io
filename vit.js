@@ -1,3 +1,12 @@
+const resultElements = [
+    'largeCapsuleTotal',
+    'smallCapsuleTotal',
+    'vitPlus50Total',
+    'vit10Total',
+    'vitFlowerTotal',
+    'vitHeartTotal'
+];
+
 function calculateOnBlur(inputElement, multiplier, resultElementId) {
     const value = parseFloat(inputElement.value) || 0; // Get input value or default to 0
     const result = value * multiplier; // Multiply by the provided multiplier
@@ -5,9 +14,30 @@ function calculateOnBlur(inputElement, multiplier, resultElementId) {
     // Update the total in the respective cell (third column)
     const resultElement = document.getElementById(resultElementId);
     resultElement.innerText = result.toFixed(0); // Update with the calculated result
+
+    // Update the grand total after each input change
+    updateGrandTotal();
 }
 
-window.onload = function() {
+function updateGrandTotal() {
+    let grandTotal = 0;
+    resultElements.forEach(id => {
+        const resultValue = parseFloat(document.getElementById(id).innerText) || 0;
+        grandTotal += resultValue;
+    });
+
+    // Update the grand total label
+    document.getElementById('grandTotal').innerText = grandTotal.toFixed(0);
+}
+
+function resetTotals(){
+    resultElements.forEach(id => {
+        document.getElementById(id).innerText = "";
+    });
+    document.getElementById('grandTotal').innerText = "";
+}
+
+window.onload = function () {
     // Define inputs and their respective multipliers and result IDs
     const inputs = [
         { id: 'vitLargeCapsule', multiplier: 50, resultId: 'largeCapsuleTotal' },
@@ -21,7 +51,7 @@ window.onload = function() {
     // Attach the same calculateOnBlur function to the onblur event for each input
     inputs.forEach(input => {
         const inputElement = document.getElementById(input.id);
-        inputElement.onblur = function() {
+        inputElement.onblur = function () {
             calculateOnBlur(inputElement, input.multiplier, input.resultId);
         };
     });
@@ -53,7 +83,7 @@ function calculateVit() {
     document.getElementById('result').innerHTML = `Your total VIT is: <b>${result}</b>`;
 }
 
-function resetVit(){
+function resetVit() {
     document.getElementById('vitLargeCapsule').value = 0;
     document.getElementById('vitSmallCapsule').value = 0;
     document.getElementById('vitPlus50').value = 0;
@@ -62,5 +92,7 @@ function resetVit(){
     document.getElementById('vitHeart').value = 0;
 
     // Clear the result
-    document.getElementById('result').innerHTML = '';
+    //document.getElementById('result').innerHTML = '';
+
+    resetTotals();
 }

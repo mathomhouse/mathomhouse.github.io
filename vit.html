@@ -15,7 +15,7 @@
         <tr>
             <th>VIT</th>
             <th>Amount</th>
-            <th>Total</th>
+            <th>Totals</th>
         </tr>
         <tr>
             <td><label for="vitLargeCapsule">Large VIT Capsule:</label></td>
@@ -47,20 +47,26 @@
             <td><input type="number" min="0" id="vitHeart" placeholder="0"></td>
             <td><label id="vitHeartTotal"></td>
         </tr>
+        <tr style="height:10px"></tr>
+        <tr>
+            <td></td>
+            <td><label for="grandTotal" class="bold-text">Grand Total:</label></td>
+            <td><label id="grandTotal" class="bold-text"></label></td>
+        </tr>
     </table>
     <div class="div-buffer"></div>
 
     <!-- Button to trigger calculation -->
     <div class="calculate-btn">
-        <button onclick="calculateVit()">Calculate</button>
+        <!-- <button onclick="calculateVit()">Calculate</button> -->
         <button onclick="resetVit()">Reset</button>
     </div>
     <div class="div-buffer"></div>
 
     <!-- Area to display the result -->
-    <div id="result">
+    <!-- <div id="result">-->
         <!-- Result will appear here -->
-    </div>
+    <!--</div> -->
 
     <script src="vit.js"></script>
 

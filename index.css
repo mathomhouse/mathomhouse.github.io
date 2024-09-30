@@ -227,3 +227,7 @@ select {
     display: none;
     /* Hidden by default */
 }
+
+.bold-text {
+    font-weight: bold;
+}
