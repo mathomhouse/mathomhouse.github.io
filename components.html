@@ -80,19 +80,20 @@
         }
 
         function calculateTotal()
-        {
-            let total = 0;
-            const inputs = document.querySelectorAll('input[type="number"]');
+{
+    let total = 0;
+    const inputs = document.querySelectorAll('input[type="number"]');
 
-            inputs.forEach(input =>
-            {
-                const value = parseFloat(input.value) || 0; // Use 0 if no value is entered
-                total += value*(3**i);
-            });
-            var x = dropdown.options[dropdown.selectedIndex].value - total;
+    for (let i = 0; i < inputs.length; i++) {
+        const value = parseFloat(inputs[i].value) || 0; // Use 0 if no value is entered
+        total += value * (3 ** i);
+    }
 
-            document.getElementById('resultLabel').innerText = `Total Needed: ${x}`;
-        }
+    var x = dropdown.options[dropdown.selectedIndex].value - total;
+
+    document.getElementById('resultLabel').innerText = `Total Needed: ${x}`;
+}
+
     </script>
 </body>
 </html>
