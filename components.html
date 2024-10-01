@@ -26,7 +26,7 @@
     <label for="numberSelect">Select a number:</label>
     <select id="numberSelect" onchange="generateTable()">
         <!-- Options from 2 to 10 -->
-        <option value="">Denethor</option>
+        <option value="">Grima</option>
         <option value="3">2</option>
         <option value="9">3</option>
         <option value="27">4</option>
@@ -88,7 +88,7 @@
         const value = parseFloat(inputs[i].value) || 0; // Use 0 if no value is entered
         total += value * (3 ** i);
     }
-
+    const dropdown = document.getElementById('numberSelect');
     var x = dropdown.options[dropdown.selectedIndex].value - total;
 
     document.getElementById('resultLabel').innerText = `Total Needed: ${x}`;
