@@ -60,7 +60,7 @@
             // Use the selectedText to determine the number of rows
             const numberOfRows = selectedText - 1;  // Subtract 1 as per your requirement
 
-            let table = "<table><thead><tr><th>Label</th><th>Input</th></tr></thead><tbody>";
+            let table = "<table><thead><tr><th>Label</th><th>Input</th><th>Value</th></tr></thead><tbody>";
 
             for (let i = 0; i < numberOfRows; i++)
             {
@@ -68,6 +68,7 @@
                 table += `<tr>
                             <td>Level ${i + 1}</td>
                             <td><input type="number" id="${inputId}" name="${inputId}" min="0" /></td>
+                            <td>${dropdown.options[dropdown.selectedIndex].value}</td>
                           </tr>`;
             }
 
