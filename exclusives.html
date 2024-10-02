@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shards Calculator</title>
+    <title>Exclusive Skill Shards Calculator</title>
     <style>
         label {
             display: inline-block;
@@ -80,6 +80,20 @@
 
     <br><br>
 
+    <!-- Dropdown for target crafting level -->
+    <label for="targetLevel">Select Target Level to Craft:</label>
+    <select id="targetLevel">
+        <option value="1">Level 1</option>
+        <option value="2">Level 2</option>
+        <option value="3">Level 3</option>
+        <option value="4">Level 4</option>
+        <option value="5">Level 5</option>
+        <option value="6">Level 6</option>
+        <option value="7">Level 7</option>
+    </select>
+
+    <br><br>
+
     <!-- Calculate button -->
     <button onclick="calculateTotalShards()">Calculate</button>
 
@@ -105,14 +119,31 @@
                 parseInt(document.getElementById('level7').value) || 0
             ];
 
-            // Calculate the total value in shards
+            // Calculate the total shards based on the levels
             let totalShards = 0;
             for (let i = 0; i < levelQuantities.length; i++) {
                 totalShards += levelQuantities[i] * shardCost * Math.pow(3, i);
             }
 
-            // Display the total result
-            document.getElementById('result').innerHTML = "Total Shards: " + totalShards;
+            // Get the owned shards from the input
+            const ownedShards = parseInt(document.getElementById('ownedShards').value) || 0;
+
+            // Calculate total shards including owned shards
+            const totalOwnedShards = totalShards + ownedShards;
+
+            // Get the target level and calculate the shard cost for that level
+            const targetLevel = parseInt(document.getElementById('targetLevel').value);
+            const targetLevelCost = shardCost * Math.pow(3, targetLevel - 1); // target level cost formula
+
+            // Calculate the remaining shards required
+            const remainingShards = targetLevelCost - totalOwnedShards;
+
+            // Display the result based on whether the user has enough shards
+            if (remainingShards > 0) {
+                document.getElementById('result').innerHTML = "You need " + remainingShards + " more shards.";
+            } else {
+                document.getElementById('result').innerHTML = "You have enough shards!";
+            }
         }
     </script>
 
