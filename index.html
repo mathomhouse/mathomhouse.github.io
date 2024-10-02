@@ -6,149 +6,115 @@
     <title>Top War Calculators</title>
     <link rel="stylesheet" href="index.css">
     <style>
-        /* Basic styles for the header and dropdown menu */
-        body {
-            font-family: Arial, sans-serif;
-        }
-
+        /* Header styling */
         header {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
-            background-color: #333;
-            color: white;
         }
 
+        /* Hamburger Menu */
         .hamburger {
+            display: inline-block;
             cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
         }
 
         .hamburger div {
-            width: 25px;
+            width: 30px;
             height: 3px;
             background-color: white;
+            margin: 5px 0;
         }
 
-        .dropdown-menu {
+        /* Dropdown Menu styles */
+        .dropdown {
             display: none;
+            flex-direction: column;
+            background-color: #444;
             position: absolute;
             top: 60px;
-            left: 20px;
-            background-color: #333;
-            color: white;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            width: 200px;
+            left: 0;
+            width: 100%;
         }
 
-        .dropdown-menu li {
-            padding: 10px;
-            border-bottom: 1px solid #444;
-        }
-
-        .dropdown-menu li:hover {
-            background-color: #444;
-        }
-
-        .dropdown-menu a {
-            color: white;
+        .dropdown a {
+            padding: 15px;
             text-decoration: none;
+            color: white;
+            text-align: center;
+            border-bottom: 1px solid #555;
         }
 
-        /* Responsive handling for the dropdown */
-        @media (min-width: 600px) {
-            .hamburger {
+        .dropdown a:hover {
+            background-color: #555;
+        }
+
+        /* Ensure that the dropdown menu is hidden initially */
+        @media (min-width: 768px) {
+            .dropdown {
                 display: none;
             }
+        }
 
-            .dropdown-menu {
-                display: flex;
-                position: static;
-                flex-direction: row;
-            }
+        /* Responsive adjustments */
+        /* Force the dropdown to always be triggered by the hamburger */
+        .hamburger {
+            display: inline-block;
+        }
 
-            .dropdown-menu li {
-                border: none;
-                padding: 0 15px;
-            }
-
-            .dropdown-menu li:hover {
-                background-color: inherit;
-            }
+        /* Ensuring the dropdown is full width even on larger screens */
+        .dropdown {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
+
+<!-- Reusable Header -->
 <header>
-    <h1>Top War Calculators</h1>
-    <div class="hamburger" onclick="toggleMenu()">
+    <div>
+        <h1>Top War Calculators</h1>
+    </div>
+
+    <!-- Hamburger Button -->
+    <div class="hamburger" onclick="toggleDropdown()">
         <div></div>
         <div></div>
         <div></div>
     </div>
-    <ul class="dropdown-menu" id="dropdown-menu">
-        <li><a href="#" onclick="showTab(event, 'vit')">VIT</a></li>
-        <li><a href="#" onclick="showTab(event, 'gems')">Gems</a></li>
-        <li><a href="#" onclick="showTab(event, 'equipment')">Equipment</a></li>
-        <li><a href="#" onclick="showTab(event, 'components')">Components</a></li>
-        <li><a href="#" onclick="showTab(event, 'resources')">Resources</a></li>
-        <li><a href="#" onclick="showTab(event, 'exclusives')">Exclusive Skills</a></li>
-        <li><a href="#" onclick="showTab(event, 'exclusives2')">Exclusive Skills 2</a></li>
-    </ul>
+
+    <!-- Dropdown Menu -->
+    <nav class="dropdown" id="dropdownMenu">
+        <a href="vit.html">VIT</a>
+        <a href="gems.html">Gems</a>
+        <a href="equipment.html">Equipment</a>
+        <a href="components.html">Components</a>
+        <a href="resources.html">Resources</a>
+        <a href="exclusives.html">Exclusive Skills</a>
+        <a href="exclusives2.html">Exclusive Skills 2</a>
+    </nav>
 </header>
 
-<div id="vit" class="tab-content">
-    <iframe src="vit.html"></iframe>
-</div>
-
-<div id="gems" class="tab-content">
-    <iframe src="gems.html"></iframe>
-</div>
-
-<div id="equipment" class="tab-content">
-    <iframe src="equipment.html"></iframe>
-</div>
-
-<div id="components" class="tab-content active">
-    <iframe src="components.html"></iframe>
-</div>
-
-<div id="resources" class="tab-content">
-    <iframe src="resources.html"></iframe>
-</div>
-
-<div id="exclusives" class="tab-content">
-    <iframe src="exclusives.html"></iframe>
-</div>
-
-<div id="exclusives2" class="tab-content">
-    <iframe src="exclusives2.html"></iframe>
-</div>
+<!-- Content Area -->
+<main>
+    <!-- Page specific content goes here -->
+    <p>Welcome to the VIT Calculator page (example). Content will change based on the linked page.</p>
+</main>
 
 <script>
-    // Function to toggle the dropdown menu for mobile view
-    function toggleMenu() {
-        const menu = document.getElementById('dropdown-menu');
-        if (menu.style.display === 'block') {
-            menu.style.display = 'none';
-        } else {
-            menu.style.display = 'block';
-        }
-    }
-
-    // Function to handle tab switching
-    function showTab(event, tabId) {
-        const tabs = document.querySelectorAll('.tab-content');
-        tabs.forEach(tab => tab.classList.remove('active'));
-        
-        document.getElementById(tabId).classList.add('active');
-        event.preventDefault(); // Prevent the default link behavior
+    function toggleDropdown() {
+        const dropdown = document.getElementById("dropdownMenu");
+        dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
     }
 </script>
+
 </body>
 </html>
