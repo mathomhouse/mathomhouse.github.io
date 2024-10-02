@@ -3,149 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exclusive Skill Shards Calculator</title>
-    <style>
-        label {
-            display: inline-block;
-            width: 150px;
-        }
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 5px;
-            text-align: center;
-        }
-    </style>
+    <title>Gear Comparison Calculator</title>
+    <script defer src="script.js"></script>
 </head>
 <body>
+    <h1>Gear Comparison</h1>
 
-    <h1>Shards Calculator</h1>
+    <div>
+        <h2>Gear 1 Stats</h2>
+        <label for="gear1-damage-increase">Damage Increase (%):</label>
+        <input type="number" id="gear1-damage-increase" value="0"><br>
 
-    <!-- Dropdown for item shard cost -->
-    <label for="shardCost">Select Shard Cost:</label>
-    <select id="shardCost">
-        <option value="10">10</option>
-        <option value="15">15</option>
-        <option value="18">18</option>
-        <option value="20">20</option>
-        <option value="25" selected>25</option>
-        <option value="30">30</option>
-    </select>
+        <label for="gear1-attack">Attack (%):</label>
+        <input type="number" id="gear1-attack" value="0"><br>
 
-    <br><br>
+        <label for="gear1-crit-damage">Crit Damage (%):</label>
+        <input type="number" id="gear1-crit-damage" value="0"><br>
 
-    <!-- Input for owned shards -->
-    <label for="ownedShards">Owned Shards:</label>
-    <input type="number" id="ownedShards" placeholder="Enter owned shards" min="0">
+        <label for="gear1-defense">Defense (%):</label>
+        <input type="number" id="gear1-defense" value="0"><br>
 
-    <br><br>
+        <label for="gear1-hp">HP (%):</label>
+        <input type="number" id="gear1-hp" value="0"><br>
 
-    <!-- Table for item levels -->
-    <table>
-        <tr>
-            <th>Level</th>
-            <th>Quantity</th>
-        </tr>
-        <tr>
-            <td>Level 1</td>
-            <td><input type="number" id="level1" min="0" value="0"></td>
-        </tr>
-        <tr>
-            <td>Level 2</td>
-            <td><input type="number" id="level2" min="0" value="0"></td>
-        </tr>
-        <tr>
-            <td>Level 3</td>
-            <td><input type="number" id="level3" min="0" value="0"></td>
-        </tr>
-        <tr>
-            <td>Level 4</td>
-            <td><input type="number" id="level4" min="0" value="0"></td>
-        </tr>
-        <tr>
-            <td>Level 5</td>
-            <td><input type="number" id="level5" min="0" value="0"></td>
-        </tr>
-        <tr>
-            <td>Level 6</td>
-            <td><input type="number" id="level6" min="0" value="0"></td>
-        </tr>
-        <tr>
-            <td>Level 7</td>
-            <td><input type="number" id="level7" min="0" value="0"></td>
-        </tr>
-    </table>
+        <label for="gear1-damage-decrease">Damage Decrease (%):</label>
+        <input type="number" id="gear1-damage-decrease" value="0"><br>
+    </div>
 
-    <br><br>
+    <div>
+        <h2>Gear 2 Stats</h2>
+        <label for="gear2-damage-increase">Damage Increase (%):</label>
+        <input type="number" id="gear2-damage-increase" value="0"><br>
 
-    <!-- Dropdown for target crafting level -->
-    <label for="targetLevel">Select Target Level to Craft:</label>
-    <select id="targetLevel">
-        <option value="1">Level 1</option>
-        <option value="2">Level 2</option>
-        <option value="3">Level 3</option>
-        <option value="4">Level 4</option>
-        <option value="5">Level 5</option>
-        <option value="6">Level 6</option>
-        <option value="7">Level 7</option>
-    </select>
+        <label for="gear2-attack">Attack (%):</label>
+        <input type="number" id="gear2-attack" value="0"><br>
 
-    <br><br>
+        <label for="gear2-crit-damage">Crit Damage (%):</label>
+        <input type="number" id="gear2-crit-damage" value="0"><br>
 
-    <!-- Calculate button -->
-    <button onclick="calculateTotalShards()">Calculate</button>
+        <label for="gear2-defense">Defense (%):</label>
+        <input type="number" id="gear2-defense" value="0"><br>
 
-    <br><br>
+        <label for="gear2-hp">HP (%):</label>
+        <input type="number" id="gear2-hp" value="0"><br>
 
-    <!-- Result -->
-    <div id="result"></div>
+        <label for="gear2-damage-decrease">Damage Decrease (%):</label>
+        <input type="number" id="gear2-damage-decrease" value="0"><br>
+    </div>
 
-    <script>
-        // Function to calculate the total shards based on levels and shard cost
-        function calculateTotalShards() {
-            // Get the shard cost from the dropdown
-            const shardCost = parseInt(document.getElementById('shardCost').value);
+    <button onclick="compareGear()">Compare Gear</button>
 
-            // Get the values from the level inputs
-            const levelQuantities = [
-                parseInt(document.getElementById('level1').value) || 0,
-                parseInt(document.getElementById('level2').value) || 0,
-                parseInt(document.getElementById('level3').value) || 0,
-                parseInt(document.getElementById('level4').value) || 0,
-                parseInt(document.getElementById('level5').value) || 0,
-                parseInt(document.getElementById('level6').value) || 0,
-                parseInt(document.getElementById('level7').value) || 0
-            ];
+    <h2>Comparison Result</h2>
+    <p id="result"></p>
 
-            // Calculate the total shards based on the levels
-            let totalShards = 0;
-            for (let i = 0; i < levelQuantities.length; i++) {
-                totalShards += levelQuantities[i] * shardCost * Math.pow(3, i);
-            }
+<script>
+    function compareGear() {
+    // Gear 1 stats
+    const gear1DamageIncrease = parseFloat(document.getElementById('gear1-damage-increase').value);
+    const gear1Attack = parseFloat(document.getElementById('gear1-attack').value);
+    const gear1CritDamage = parseFloat(document.getElementById('gear1-crit-damage').value);
+    const gear1Defense = parseFloat(document.getElementById('gear1-defense').value);
+    const gear1HP = parseFloat(document.getElementById('gear1-hp').value);
+    const gear1DamageDecrease = parseFloat(document.getElementById('gear1-damage-decrease').value);
 
-            // Get the owned shards from the input
-            const ownedShards = parseInt(document.getElementById('ownedShards').value) || 0;
+    // Gear 2 stats
+    const gear2DamageIncrease = parseFloat(document.getElementById('gear2-damage-increase').value);
+    const gear2Attack = parseFloat(document.getElementById('gear2-attack').value);
+    const gear2CritDamage = parseFloat(document.getElementById('gear2-crit-damage').value);
+    const gear2Defense = parseFloat(document.getElementById('gear2-defense').value);
+    const gear2HP = parseFloat(document.getElementById('gear2-hp').value);
+    const gear2DamageDecrease = parseFloat(document.getElementById('gear2-damage-decrease').value);
 
-            // Calculate total shards including owned shards
-            const totalOwnedShards = totalShards + ownedShards;
+    // Calculate offense value
+    const gear1Offense = (gear1DamageIncrease * 9) + gear1Attack + (gear1CritDamage * 2);
+    const gear2Offense = (gear2DamageIncrease * 9) + gear2Attack + (gear2CritDamage * 2);
 
-            // Get the target level and calculate the shard cost for that level
-            const targetLevel = parseInt(document.getElementById('targetLevel').value);
-            const targetLevelCost = shardCost * Math.pow(3, targetLevel - 1); // target level cost formula
+    // Calculate defense value
+    const gear1DefenseScore = (gear1Defense * 17) + gear1HP + (gear1DamageDecrease * 6);
+    const gear2DefenseScore = (gear2Defense * 17) + gear2HP + (gear2DamageDecrease * 6);
 
-            // Calculate the remaining shards required
-            const remainingShards = targetLevelCost - totalOwnedShards;
+    // Comparison logic
+    let result = '';
+    if (gear1Offense > gear2Offense) {
+        result += 'Gear 1 has better offense.\n';
+    } else if (gear2Offense > gear1Offense) {
+        result += 'Gear 2 has better offense.\n';
+    } else {
+        result += 'Both gears have equal offense.\n';
+    }
 
-            // Display the result based on whether the user has enough shards
-            if (remainingShards > 0) {
-                document.getElementById('result').innerHTML = "You need " + remainingShards + " more shards.";
-            } else {
-                document.getElementById('result').innerHTML = "You have enough shards!";
-            }
-        }
-    </script>
+    if (gear1DefenseScore > gear2DefenseScore) {
+        result += 'Gear 1 has better defense.\n';
+    } else if (gear2DefenseScore > gear1DefenseScore) {
+        result += 'Gear 2 has better defense.\n';
+    } else {
+        result += 'Both gears have equal defense.\n';
+    }
+
+    // Display result
+    document.getElementById('result').textContent = result;
+}
+
+        
+</script>
 
 </body>
 </html>
