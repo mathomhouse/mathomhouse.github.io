@@ -5,20 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top War Calculators</title>
     <link rel="stylesheet" href="index.css">
+    <style>
+        /* Basic styles for the header and dropdown menu */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+        }
+
+        .hamburger {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 20px;
+            background-color: #333;
+            color: white;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 200px;
+        }
+
+        .dropdown-menu li {
+            padding: 10px;
+            border-bottom: 1px solid #444;
+        }
+
+        .dropdown-menu li:hover {
+            background-color: #444;
+        }
+
+        .dropdown-menu a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Responsive handling for the dropdown */
+        @media (min-width: 600px) {
+            .hamburger {
+                display: none;
+            }
+
+            .dropdown-menu {
+                display: flex;
+                position: static;
+                flex-direction: row;
+            }
+
+            .dropdown-menu li {
+                border: none;
+                padding: 0 15px;
+            }
+
+            .dropdown-menu li:hover {
+                background-color: inherit;
+            }
+        }
+    </style>
 </head>
 <body>
-<div>
+<header>
     <h1>Top War Calculators</h1>
-</div>
-<div class="tab-container">
-    <div class="tab" onclick="showTab(event, 'vit')">VIT</div>
-    <div class="tab" onclick="showTab(event, 'gems')">Gems</div>
-    <div class="tab" onclick="showTab(event, 'equipment')">Equipment</div>
-    <div class="tab active" onclick="showTab(event, 'components')">Components</div>
-    <div class="tab" onclick="showTab(event, 'resources')">Resources</div>
-    <div class="tab" onclick="showTab(event, 'exclusives')">Exclusive Skills</div>
-    <div class="tab" onclick="showTab(event, 'exclusives2')">Exclusive Skills 2</div>
-</div>
+    <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <ul class="dropdown-menu" id="dropdown-menu">
+        <li><a href="#" onclick="showTab(event, 'vit')">VIT</a></li>
+        <li><a href="#" onclick="showTab(event, 'gems')">Gems</a></li>
+        <li><a href="#" onclick="showTab(event, 'equipment')">Equipment</a></li>
+        <li><a href="#" onclick="showTab(event, 'components')">Components</a></li>
+        <li><a href="#" onclick="showTab(event, 'resources')">Resources</a></li>
+        <li><a href="#" onclick="showTab(event, 'exclusives')">Exclusive Skills</a></li>
+        <li><a href="#" onclick="showTab(event, 'exclusives2')">Exclusive Skills 2</a></li>
+    </ul>
+</header>
 
 <div id="vit" class="tab-content">
     <iframe src="vit.html"></iframe>
@@ -43,16 +125,30 @@
 <div id="exclusives" class="tab-content">
     <iframe src="exclusives.html"></iframe>
 </div>
+
 <div id="exclusives2" class="tab-content">
     <iframe src="exclusives2.html"></iframe>
 </div>
-<script src="index.js"></script>
 
+<script>
+    // Function to toggle the dropdown menu for mobile view
+    function toggleMenu() {
+        const menu = document.getElementById('dropdown-menu');
+        if (menu.style.display === 'block') {
+            menu.style.display = 'none';
+        } else {
+            menu.style.display = 'block';
+        }
+    }
+
+    // Function to handle tab switching
+    function showTab(event, tabId) {
+        const tabs = document.querySelectorAll('.tab-content');
+        tabs.forEach(tab => tab.classList.remove('active'));
+        
+        document.getElementById(tabId).classList.add('active');
+        event.preventDefault(); // Prevent the default link behavior
+    }
+</script>
 </body>
-<footer>
-    <p>
-        <div>Authors: gikey, artu</div>
-        <div>Special thanks to Mischief</div>
-    </p>
-</footer>
 </html>
