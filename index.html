@@ -13,14 +13,16 @@
             color: white;
             padding: 10px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
+            position: relative;
         }
 
         /* Hamburger Menu */
         .hamburger {
             display: inline-block;
             cursor: pointer;
+            margin-right: 20px; /* Adds space between the hamburger and the text */
         }
 
         .hamburger div {
@@ -36,24 +38,27 @@
             flex-direction: column;
             background-color: #444;
             position: absolute;
-            top: 60px;
-            left: 0;
-            width: 100%;
+            top: 50px;
+            left: 10px;
+            width: auto;
+            min-width: 150px; /* Minimum width to fit the options */
+            border: 1px solid #333;
         }
 
         .dropdown a {
-            padding: 15px;
+            padding: 10px;
             text-decoration: none;
             color: white;
-            text-align: center;
+            text-align: left;
             border-bottom: 1px solid #555;
+            white-space: nowrap; /* Prevent text from wrapping */
         }
 
         .dropdown a:hover {
             background-color: #555;
         }
 
-        /* Ensure that the dropdown menu is hidden initially */
+        /* Hide dropdown on larger screens as well */
         @media (min-width: 768px) {
             .dropdown {
                 display: none;
@@ -61,17 +66,12 @@
         }
 
         /* Responsive adjustments */
-        /* Force the dropdown to always be triggered by the hamburger */
         .hamburger {
             display: inline-block;
         }
 
-        /* Ensuring the dropdown is full width even on larger screens */
+        /* Ensure dropdown fits content width */
         .dropdown {
-            position: absolute;
-            top: 50px;
-            left: 0;
-            width: 100%;
             z-index: 1;
         }
     </style>
@@ -80,15 +80,15 @@
 
 <!-- Reusable Header -->
 <header>
-    <div>
-        <h1>Top War Calculators</h1>
+    <!-- Hamburger Button on the left side of the text -->
+    <div class="hamburger" id="hamburger" onclick="toggleDropdown()">
+        <div></div>
+        <div></div>
+        <div></div>
     </div>
 
-    <!-- Hamburger Button -->
-    <div class="hamburger" onclick="toggleDropdown()">
-        <div></div>
-        <div></div>
-        <div></div>
+    <div>
+        <h1>Top War Calculators</h1>
     </div>
 
     <!-- Dropdown Menu -->
@@ -114,6 +114,17 @@
         const dropdown = document.getElementById("dropdownMenu");
         dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
     }
+
+    // Hide dropdown when clicking outside of it
+    document.addEventListener("click", function(event) {
+        const dropdown = document.getElementById("dropdownMenu");
+        const hamburger = document.getElementById("hamburger");
+
+        // If the click is outside the dropdown and hamburger, hide the dropdown
+        if (!dropdown.contains(event.target) && !hamburger.contains(event.target)) {
+            dropdown.style.display = "none";
+        }
+    });
 </script>
 
 </body>
