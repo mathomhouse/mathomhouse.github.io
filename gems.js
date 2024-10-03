@@ -57,39 +57,39 @@ function calculateGems() {
     var v_12960gemsvalue = 12960;
 
 
-    const result = 
-    v_opengems +
-    (v_100gems * v_100gemsvalue) + 
-    (v_50gems * v_50gemsvalue) + 
-    (v_60gems * v_60gemsvalue) + 
-    (v_30gems * v_30gemsvalue) + 
-    (v_20gems * v_20gemsvalue) + 
-    (v_10gems * v_10gemsvalue) + 
-    (v_120gems * v_120gemsvalue) + 
-    (v_150gems * v_150gemsvalue) + 
-    (v_200gems * v_200gemsvalue) + 
-    (v_240gems * v_240gemsvalue) + 
-    (v_300gems * v_300gemsvalue) + 
-    (v_400gems * v_400gemsvalue) + 
-    (v_500gems * v_500gemsvalue) + 
-    (v_600gems * v_600gemsvalue) + 
-    (v_800gems * v_800gemsvalue) + 
-    (v_1000gems * v_1000gemsvalue) + 
-    (v_1200gems * v_1200gemsvalue) + 
-    (v_1280gems * v_1280gemsvalue) + 
-    (v_2000gems * v_2000gemsvalue) + 
-    (v_2024gems * v_2024gemsvalue) + 
-    (v_2560gems * v_2560gemsvalue) + 
-    (v_3000gems * v_3000gemsvalue) + 
-    (v_4000gems * v_4000gemsvalue) + 
-    (v_5000gems * v_5000gemsvalue) + 
-    (v_12960gems * v_12960gemsvalue);
+    const result =
+        v_opengems +
+        (v_100gems * v_100gemsvalue) +
+        (v_50gems * v_50gemsvalue) +
+        (v_60gems * v_60gemsvalue) +
+        (v_30gems * v_30gemsvalue) +
+        (v_20gems * v_20gemsvalue) +
+        (v_10gems * v_10gemsvalue) +
+        (v_120gems * v_120gemsvalue) +
+        (v_150gems * v_150gemsvalue) +
+        (v_200gems * v_200gemsvalue) +
+        (v_240gems * v_240gemsvalue) +
+        (v_300gems * v_300gemsvalue) +
+        (v_400gems * v_400gemsvalue) +
+        (v_500gems * v_500gemsvalue) +
+        (v_600gems * v_600gemsvalue) +
+        (v_800gems * v_800gemsvalue) +
+        (v_1000gems * v_1000gemsvalue) +
+        (v_1200gems * v_1200gemsvalue) +
+        (v_1280gems * v_1280gemsvalue) +
+        (v_2000gems * v_2000gemsvalue) +
+        (v_2024gems * v_2024gemsvalue) +
+        (v_2560gems * v_2560gemsvalue) +
+        (v_3000gems * v_3000gemsvalue) +
+        (v_4000gems * v_4000gemsvalue) +
+        (v_5000gems * v_5000gemsvalue) +
+        (v_12960gems * v_12960gemsvalue);
 
     // Display the result
     document.getElementById('result').innerHTML = `Your total Gems are: ${result}`;
 }
 
-function resetGems(){
+function resetGems() {
     document.getElementById('opengems').value = 0;
     document.getElementById('100gems').value = 0;
     document.getElementById('50gems').value = 0;
