@@ -81,20 +81,20 @@
 <script>
     function compareGear() {
     // Gear 1 stats
-    const gear1DamageIncrease = parseFloat(document.getElementById('gear1-damage-increase').value);
-    const gear1Attack = parseFloat(document.getElementById('gear1-attack').value);
-    const gear1CritDamage = parseFloat(document.getElementById('gear1-crit-damage').value);
-    const gear1Defense = parseFloat(document.getElementById('gear1-defense').value);
-    const gear1HP = parseFloat(document.getElementById('gear1-hp').value);
-    const gear1DamageDecrease = parseFloat(document.getElementById('gear1-damage-decrease').value);
+    const gear1DamageIncrease = parseFloat(document.getElementById('gear1-damage-increase').value) || 0;
+    const gear1Attack = parseFloat(document.getElementById('gear1-attack').value) || 0;
+    const gear1CritDamage = parseFloat(document.getElementById('gear1-crit-damage').value) || 0;
+    const gear1Defense = parseFloat(document.getElementById('gear1-defense').value) || 0;
+    const gear1HP = parseFloat(document.getElementById('gear1-hp').value) || 0;
+    const gear1DamageDecrease = parseFloat(document.getElementById('gear1-damage-decrease').value) || 0;
 
     // Gear 2 stats
-    const gear2DamageIncrease = parseFloat(document.getElementById('gear2-damage-increase').value);
-    const gear2Attack = parseFloat(document.getElementById('gear2-attack').value);
-    const gear2CritDamage = parseFloat(document.getElementById('gear2-crit-damage').value);
-    const gear2Defense = parseFloat(document.getElementById('gear2-defense').value);
-    const gear2HP = parseFloat(document.getElementById('gear2-hp').value);
-    const gear2DamageDecrease = parseFloat(document.getElementById('gear2-damage-decrease').value);
+    const gear2DamageIncrease = parseFloat(document.getElementById('gear2-damage-increase').value) || 0;
+    const gear2Attack = parseFloat(document.getElementById('gear2-attack').value) || 0;
+    const gear2CritDamage = parseFloat(document.getElementById('gear2-crit-damage').value) || 0;
+    const gear2Defense = parseFloat(document.getElementById('gear2-defense').value) || 0;
+    const gear2HP = parseFloat(document.getElementById('gear2-hp').value) || 0;
+    const gear2DamageDecrease = parseFloat(document.getElementById('gear2-damage-decrease').value) || 0;
 
     // Calculate offense and defense values for both gear
     const gear1Offense = (gear1DamageIncrease * 9) + gear1Attack + (gear1CritDamage * 2);
