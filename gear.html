@@ -5,10 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gear Comparison Calculator</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+    <style type="text/css">
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #0056b3;
+}
+
+.gear-container {
+    display: flex;
+    justify-content: center;
+
+    </style>
 </head>
 <body>
-    <h1>Gear Comparison (WIP)</h1>
+    <h1>Gear Comparison</h1>
 
     <div class="gear-container">
         <div class="gear-box" id="gear1-box">
@@ -84,7 +102,6 @@
     // Display calculated stats based on input
     let result = '';
 
-    // Check if both offensive and defensive stats are present
     const gear1HasOffense = gear1DamageIncrease || gear1Attack;
     const gear2HasOffense = gear2DamageIncrease || gear2Attack;
     const gear1HasDefense = gear1Defense || gear1HP || gear1DamageDecrease;
@@ -93,7 +110,7 @@
     // Offense comparison
     if (gear1HasOffense || gear2HasOffense) {
         result += `Gear 1 Total Attack: ${gear1Offense.toFixed(2)}\n`;
-        result += `Gear 2 Total Attack: ${gear2Offense.toFixed(2)}\n`;
+        result += `Gear 2 Total Attack: ${gear2Offense.toFixed(2)}\n\n`;
 
         if (gear1Offense > gear2Offense) {
             result += 'Gear 1 has better offense.\n';
@@ -113,7 +130,7 @@
     // Defense comparison
     if (gear1HasDefense || gear2HasDefense) {
         result += `Gear 1 Total HP: ${gear1DefenseScore.toFixed(2)}\n`;
-        result += `Gear 2 Total HP: ${gear2DefenseScore.toFixed(2)}\n`;
+        result += `Gear 2 Total HP: ${gear2DefenseScore.toFixed(2)}\n\n`;
 
         if (gear1DefenseScore > gear2DefenseScore) {
             result += 'Gear 1 has better defense.\n';
@@ -130,7 +147,6 @@
         }
     }
 
-    // Display result
     document.getElementById('result').textContent = result;
 }
 
