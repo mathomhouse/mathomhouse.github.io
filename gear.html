@@ -4,57 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gear Comparison Calculator</title>
+    <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script>
+    <style type="text/css">
+        body {
+    font-family: Arial, sans-serif;
+}
+
+.gear-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.gear-box {
+    border: 
+
+    </style>
 </head>
 <body>
     <h1>Gear Comparison</h1>
 
-    <div>
-        <h2>Gear 1 Stats</h2>
-        <label for="gear1-damage-increase">Damage Increase (%):</label>
-        <input type="number" id="gear1-damage-increase" value="0"><br>
+    <div class="gear-container">
+        <div class="gear-box" id="gear1-box">
+            <h2>Gear 1 Stats</h2>
+            <label for="gear1-damage-increase">Damage Increase (%):</label>
+            <input type="number" id="gear1-damage-increase" value="0"><br>
 
-        <label for="gear1-attack">Attack (%):</label>
-        <input type="number" id="gear1-attack" value="0"><br>
+            <label for="gear1-attack">Attack (%):</label>
+            <input type="number" id="gear1-attack" value="0"><br>
 
-        <label for="gear1-crit-damage">Crit Damage (%):</label>
-        <input type="number" id="gear1-crit-damage" value="0"><br>
+            <label for="gear1-crit-damage">Crit Damage (%):</label>
+            <input type="number" id="gear1-crit-damage" value="0"><br>
 
-        <label for="gear1-defense">Defense (%):</label>
-        <input type="number" id="gear1-defense" value="0"><br>
+            <label for="gear1-defense">Defense (%):</label>
+            <input type="number" id="gear1-defense" value="0"><br>
 
-        <label for="gear1-hp">HP (%):</label>
-        <input type="number" id="gear1-hp" value="0"><br>
+            <label for="gear1-hp">HP (%):</label>
+            <input type="number" id="gear1-hp" value="0"><br>
 
-        <label for="gear1-damage-decrease">Damage Decrease (%):</label>
-        <input type="number" id="gear1-damage-decrease" value="0"><br>
+            <label for="gear1-damage-decrease">Damage Decrease (%):</label>
+            <input type="number" id="gear1-damage-decrease" value="0"><br>
+        </div>
+
+        <div class="gear-box" id="gear2-box">
+            <h2>Gear 2 Stats</h2>
+            <label for="gear2-damage-increase">Damage Increase (%):</label>
+            <input type="number" id="gear2-damage-increase" value="0"><br>
+
+            <label for="gear2-attack">Attack (%):</label>
+            <input type="number" id="gear2-attack" value="0"><br>
+
+            <label for="gear2-crit-damage">Crit Damage (%):</label>
+            <input type="number" id="gear2-crit-damage" value="0"><br>
+
+            <label for="gear2-defense">Defense (%):</label>
+            <input type="number" id="gear2-defense" value="0"><br>
+
+            <label for="gear2-hp">HP (%):</label>
+            <input type="number" id="gear2-hp" value="0"><br>
+
+            <label for="gear2-damage-decrease">Damage Decrease (%):</label>
+            <input type="number" id="gear2-damage-decrease" value="0"><br>
+        </div>
     </div>
 
-    <div>
-        <h2>Gear 2 Stats</h2>
-        <label for="gear2-damage-increase">Damage Increase (%):</label>
-        <input type="number" id="gear2-damage-increase" value="0"><br>
-
-        <label for="gear2-attack">Attack (%):</label>
-        <input type="number" id="gear2-attack" value="0"><br>
-
-        <label for="gear2-crit-damage">Crit Damage (%):</label>
-        <input type="number" id="gear2-crit-damage" value="0"><br>
-
-        <label for="gear2-defense">Defense (%):</label>
-        <input type="number" id="gear2-defense" value="0"><br>
-
-        <label for="gear2-hp">HP (%):</label>
-        <input type="number" id="gear2-hp" value="0"><br>
-
-        <label for="gear2-damage-decrease">Damage Decrease (%):</label>
-        <input type="number" id="gear2-damage-decrease" value="0"><br>
+    <div class="button-container">
+        <button onclick="compareGear()">Compare</button>
+        <button onclick="resetValues()">Reset</button>
     </div>
 
-    <button onclick="compareGear()">Compare Gear</button>
-
-    <h2>Comparison Result</h2>
-    <p id="result"></p>
+    <div id="comparison-result">
+        <h2>Comparison Result</h2>
+        <p id="result"></p>
+    </div>
 
 <script>
     function compareGear() {
@@ -74,37 +96,72 @@
     const gear2HP = parseFloat(document.getElementById('gear2-hp').value);
     const gear2DamageDecrease = parseFloat(document.getElementById('gear2-damage-decrease').value);
 
-    // Calculate offense value
+    // Calculate offense and defense values for both gear
     const gear1Offense = (gear1DamageIncrease * 9) + gear1Attack + (gear1CritDamage * 2);
     const gear2Offense = (gear2DamageIncrease * 9) + gear2Attack + (gear2CritDamage * 2);
 
-    // Calculate defense value
     const gear1DefenseScore = (gear1Defense * 17) + gear1HP + (gear1DamageDecrease * 6);
     const gear2DefenseScore = (gear2Defense * 17) + gear2HP + (gear2DamageDecrease * 6);
 
+    // Display calculated stats
+    let result = `Gear 1 Total Attack: ${gear1Offense.toFixed(2)}\n`;
+    result += `Gear 1 Total HP: ${gear1DefenseScore.toFixed(2)}\n\n`;
+    result += `Gear 2 Total Attack: ${gear2Offense.toFixed(2)}\n`;
+    result += `Gear 2 Total HP: ${gear2DefenseScore.toFixed(2)}\n\n`;
+
     // Comparison logic
-    let result = '';
     if (gear1Offense > gear2Offense) {
         result += 'Gear 1 has better offense.\n';
+        document.getElementById('gear1-box').style.backgroundColor = '#d4edda';
+        document.getElementById('gear2-box').style.backgroundColor = '';
     } else if (gear2Offense > gear1Offense) {
         result += 'Gear 2 has better offense.\n';
+        document.getElementById('gear2-box').style.backgroundColor = '#d4edda';
+        document.getElementById('gear1-box').style.backgroundColor = '';
     } else {
         result += 'Both gears have equal offense.\n';
+        document.getElementById('gear1-box').style.backgroundColor = '';
+        document.getElementById('gear2-box').style.backgroundColor = '';
     }
 
     if (gear1DefenseScore > gear2DefenseScore) {
         result += 'Gear 1 has better defense.\n';
+        document.getElementById('gear1-box').style.backgroundColor = '#d4edda';
+        document.getElementById('gear2-box').style.backgroundColor = '';
     } else if (gear2DefenseScore > gear1DefenseScore) {
         result += 'Gear 2 has better defense.\n';
+        document.getElementById('gear2-box').style.backgroundColor = '#d4edda';
+        document.getElementById('gear1-box').style.backgroundColor = '';
     } else {
         result += 'Both gears have equal defense.\n';
+        document.getElementById('gear1-box').style.backgroundColor = '';
+        document.getElementById('gear2-box').style.backgroundColor = '';
     }
 
     // Display result
     document.getElementById('result').textContent = result;
 }
 
-        
+function resetValues() {
+    document.getElementById('gear1-damage-increase').value = 0;
+    document.getElementById('gear1-attack').value = 0;
+    document.getElementById('gear1-crit-damage').value = 0;
+    document.getElementById('gear1-defense').value = 0;
+    document.getElementById('gear1-hp').value = 0;
+    document.getElementById('gear1-damage-decrease').value = 0;
+
+    document.getElementById('gear2-damage-increase').value = 0;
+    document.getElementById('gear2-attack').value = 0;
+    document.getElementById('gear2-crit-damage').value = 0;
+    document.getElementById('gear2-defense').value = 0;
+    document.getElementById('gear2-hp').value = 0;
+    document.getElementById('gear2-damage-decrease').value = 0;
+
+    document.getElementById('gear1-box').style.backgroundColor = '';
+    document.getElementById('gear2-box').style.backgroundColor = '';
+    document.getElementById('result').textContent = '';
+}
+
 </script>
 
 </body>
