@@ -29,3 +29,15 @@ function calculateTotalShards() {
         document.getElementById('result').innerHTML = "You have enough shards!";
     }
 }
+
+function resetPage(){
+    document.getElementById('level1').value = 0;
+    document.getElementById('level2').value = 0;
+    document.getElementById('level3').value = 0;
+    document.getElementById('level4').value = 0;
+    document.getElementById('level5').value = 0;
+    document.getElementById('level6').value = 0;
+    document.getElementById('level7').value = 0;
+    document.getElementById('result').innerHTML = '';
+    document.getElementById('targetLevel').selectedIndex = 0; 
+}
