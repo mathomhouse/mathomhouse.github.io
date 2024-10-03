@@ -1,0 +1,63 @@
+ /* Header styling */
+ header {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 20px; /* Adds space between the hamburger and the text */
+}
+
+.hamburger div {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+}
+
+/* Dropdown Menu styles */
+.dropdown {
+    display: none;
+    flex-direction: column;
+    background-color: #444;
+    position: absolute;
+    top: 100%; /* Start right under the hamburger button */
+    left: 0;    /* Align left to the hamburger button */
+    width: auto;
+    min-width: 150px; /* Minimum width to fit the options */
+    border: 1px solid #333;
+}
+
+.dropdown a {
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    text-align: left;
+    border-bottom: 1px solid #555;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.dropdown a:hover {
+    background-color: #555;
+}
+
+/* Hide dropdown on larger screens as well */
+@media (min-width: 768px) {
+    .dropdown {
+        display: none;
+    }
+}
+
+/* Ensure dropdown fits content width */
+.dropdown {
+    z-index: 1;
+}
