@@ -12,7 +12,7 @@ function generateTable() {
     // Use the selectedText to determine the number of rows
     const numberOfRows = selectedText - 1;  // Subtract 1 as per your requirement
 
-    let table = "<table><thead><tr><th>Label</th><th>Input</th></tr></thead><tbody>";
+    let table = "<table><thead><tr><th>Component Level</th><th>Amount</th></tr></thead><tbody>";
 
     for (let i = 0; i < numberOfRows; i++) {
         let inputId = `input${i + 1}`;
@@ -26,7 +26,8 @@ function generateTable() {
 
     // Add the Calculate button below the table
     table += `<button id="calculateButton" onclick="calculateTotal()">Calculate</button>`;
-
+    //add reset button
+    table += `<button id="resetButton" onclick="resetPage()">Reset</button>`;
     document.getElementById('tableContainer').innerHTML = table;
 }
 
@@ -43,4 +44,10 @@ function calculateTotal() {
     var y = x / 9;
 
     document.getElementById('resultLabel').innerHTML = `Total level 1 Needed: ${x}. <br>Total level 3 Needed: ${y}. `;
+}
+
+function resetPage(){
+    document.getElementById('tableContainer').innerHTML = '';
+    document.getElementById('resultLabel').innerHTML = '';
+    document.getElementById('numberSelect').selectedIndex = 0;   
 }

@@ -193,3 +193,9 @@ select {
 .bold-text {
     font-weight: bold;
 }
+
+h1 a {
+    text-decoration: none; /* Remove the underline */
+    color: inherit; /* Inherit the color from the parent (h1) */
+    cursor: pointer; /* Change the cursor to pointer when hovering */
+}

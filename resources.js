@@ -33,7 +33,7 @@ function calculateRSS() {
     const foodResult = 
     v_openFood +
     (v_1milFood * v_1milFoodvalue) + 
-    (v_500kFood * v_500Foodvalue) +
+    (v_500kFood * v_500kFoodvalue) +
     (v_100kFood * v_100kFoodvalue) +
     (v_50kFood * v_50kFoodvalue) +
     (v_10kFood * v_10kFoodvalue) +
@@ -42,7 +42,7 @@ function calculateRSS() {
     const oilResult = 
     v_openOil +
     (v_1milOil * v_1milOilvalue) + 
-    (v_500kOil * v_500Oilvalue) +
+    (v_500kOil * v_500kOilvalue) +
     (v_100kOil * v_100kOilvalue) +
     (v_50kOil * v_50kOilvalue) +
     (v_10kOil * v_10kOilvalue) +
