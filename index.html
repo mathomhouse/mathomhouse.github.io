@@ -1,131 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top War Calculators</title>
     <link rel="stylesheet" href="index.css">
-    <style>
-        /* Header styling */
-        header {
-            width: 100%;
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            position: relative;
-        }
-
-        /* Hamburger Menu */
-        .hamburger {
-            display: inline-block;
-            cursor: pointer;
-            margin-right: 20px; /* Adds space between the hamburger and the text */
-        }
-
-        .hamburger div {
-            width: 30px;
-            height: 3px;
-            background-color: white;
-            margin: 5px 0;
-        }
-
-        /* Dropdown Menu styles */
-        .dropdown {
-            display: none;
-            flex-direction: column;
-            background-color: #444;
-            position: absolute;
-            top: 50px;
-            left: 10px;
-            width: auto;
-            min-width: 150px; /* Minimum width to fit the options */
-            border: 1px solid #333;
-        }
-
-        .dropdown a {
-            padding: 10px;
-            text-decoration: none;
-            color: white;
-            text-align: left;
-            border-bottom: 1px solid #555;
-            white-space: nowrap; /* Prevent text from wrapping */
-        }
-
-        .dropdown a:hover {
-            background-color: #555;
-        }
-
-        /* Hide dropdown on larger screens as well */
-        @media (min-width: 768px) {
-            .dropdown {
-                display: none;
-            }
-        }
-
-        /* Responsive adjustments */
-        .hamburger {
-            display: inline-block;
-        }
-
-        /* Ensure dropdown fits content width */
-        .dropdown {
-            z-index: 1;
-        }
-    </style>
+    <script src="header.js" defer></script>
 </head>
+
 <body>
 
-<!-- Reusable Header -->
-<header>
-    <!-- Hamburger Button on the left side of the text -->
-    <div class="hamburger" id="hamburger" onclick="toggleDropdown()">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-
-    <div>
-        <h1>Top War Calculators</h1>
-    </div>
-
-    <!-- Dropdown Menu -->
-    <nav class="dropdown" id="dropdownMenu">
-        <a href="vit.html">VIT</a>
-        <a href="gems.html">Gems</a>
-        <a href="equipment.html">Equipment</a>
-        <a href="components.html">Components</a>
-        <a href="resources.html">Resources</a>
-        <a href="gear.html">Gear</a>
-        <a href="exclusives2.html">Exclusive Skills 2</a>
-    </nav>
-</header>
-
-<!-- Content Area -->
-<main>
-    <!-- Page specific content goes here -->
-    <p>Welcome to the VIT Calculator page (example). Content will change based on the linked page.</p>
-</main>
-
-<script>
-    function toggleDropdown() {
-        const dropdown = document.getElementById("dropdownMenu");
-        dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
-    }
-
-    // Hide dropdown when clicking outside of it
-    document.addEventListener("click", function(event) {
-        const dropdown = document.getElementById("dropdownMenu");
-        const hamburger = document.getElementById("hamburger");
-
-        // If the click is outside the dropdown and hamburger, hide the dropdown
-        if (!dropdown.contains(event.target) && !hamburger.contains(event.target)) {
-            dropdown.style.display = "none";
-        }
-    });
-</script>
+    <!-- Content Area -->
+    <main>
+        <p>Welcome to gikey and artu's Top War Calculators!</p>
+    </main>
 
 </body>
+
 </html>
