@@ -23,6 +23,7 @@ h1 {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .gear-box {
@@ -96,6 +97,41 @@ button:hover {
     background-color: #d4edda;
 }
 
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    .gear-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gear-box {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .gear-box form {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .gear-box label {
+        text-align: left;
+        padding-right: 0;
+    }
+
+    .gear-box input {
+        padding: 10px;
+    }
+
+    button {
+        width: 80%;
+        padding: 15px;
+    }
+
+    #comparison-result {
+        font-size: 1.2rem;
+    }
+}
 
     </style>
 </head>
