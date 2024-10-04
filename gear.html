@@ -22,6 +22,59 @@ h1 {
 .gear-container {
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
+}
+
+.gear-box {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    width: 250px;
+    margin: 10px;
+    background-color: #ffffff;
+}
+
+.gear-box h2 {
+    color: #0056b3;
+}
+
+.button-container {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #003e7e;
+}
+
+#comparison-result {
+    border-top: 2px solid #ccc;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+#result {
+    white-space: pre-line;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.gear-box {
+    transition: background-color 0.3s;
+}
+
+.gear-box.highlight {
+    background-color: #d4edda;
+}
 
     </style>
 </head>
