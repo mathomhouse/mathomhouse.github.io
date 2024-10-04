@@ -224,8 +224,8 @@ button:hover {
 
     // Offense comparison
     if (gear1HasOffense || gear2HasOffense) {
-        result += `Gear 1 Total Attack: ${gear1Offense.toFixed(2)}\n`;
-        result += `Gear 2 Total Attack: ${gear2Offense.toFixed(2)}\n\n`;
+        result += `Gear 1 Total Attack: ${gear1Offense.toFixed()}%\n`;
+        result += `Gear 2 Total Attack: ${gear2Offense.toFixed()}%\n\n`;
 
         if (gear1Offense > gear2Offense) {
             result += 'Gear 1 has better offense.\n';
@@ -244,8 +244,8 @@ button:hover {
 
     // Defense comparison
     if (gear1HasDefense || gear2HasDefense) {
-        result += `Gear 1 Total HP: ${gear1DefenseScore.toFixed(2)}\n`;
-        result += `Gear 2 Total HP: ${gear2DefenseScore.toFixed(2)}\n\n`;
+        result += `Gear 1 Total HP: ${gear1DefenseScore.toFixed()}%\n`;
+        result += `Gear 2 Total HP: ${gear2DefenseScore.toFixed()}%\n\n`;
 
         if (gear1DefenseScore > gear2DefenseScore) {
             result += 'Gear 1 has better defense.\n';
