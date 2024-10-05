@@ -1,3 +1,22 @@
+ function showCalculator() {
+    const selectedCalculator = document.getElementById("calculator-type").value;
+
+    const titanGearCalculator = document.getElementById("titan-gear-calculator");
+    const htChipsCalculator = document.getElementById("ht-chips-calculator");
+
+    if (selectedCalculator === "titan-gear") {
+        titanGearCalculator.style.display = "block";
+        htChipsCalculator.style.display = "none";
+    } else if (selectedCalculator === "ht-chips") {
+        titanGearCalculator.style.display = "none";
+        htChipsCalculator.style.display = "block";
+    }
+     else { titanGearCalculator.style.display = "none";
+        htChipsCalculator.style.display = "none";
+
+     }
+}
+
  function compareGear() {
     // Gear 1 stats
     const gear1DamageIncrease = parseFloat(document.getElementById('gear1-damage-increase').value) || 0;
