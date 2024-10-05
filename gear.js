@@ -107,4 +107,44 @@ function resetValues() {
     document.getElementById('gear2-box').style.backgroundColor = '';
     document.getElementById('result').textContent = '';
 }
+function calculateHTChipsScore() {
+    // Get the input values
+    const def = parseFloat(document.getElementById('ht-def').value) || 0;
+    const shield = parseFloat(document.getElementById('ht-shield').value) || 0;
+    const dmgIncrease = parseFloat(document.getElementById('ht-dmg-increase').value) || 0;
+    const dmgDecrease = parseFloat(document.getElementById('ht-dmg-decrease').value) || 0;
+    const critDmg = parseFloat(document.getElementById('ht-crit-dmg').value) || 0;
+    const critRate = parseFloat(document.getElementById('ht-crit-rate').value) || 0;
+    const atk = parseFloat(document.getElementById('ht-atk').value) || 0;
+    const hp = parseFloat(document.getElementById('ht-hp').value) || 0;
+
+    // Apply the multipliers
+    const score = (def * 15) +
+                  (shield * 13) +
+                  (dmgIncrease * 8) +
+                  (dmgDecrease * 6) +
+                  (critDmg * 4) +
+                  (critRate * 2) +
+                  (atk * 2) +
+                  (hp * 1);
+
+    // Display the result
+    document.getElementById('ht-result').textContent = `Total Score: ${score.toFixed(2)}`;
+}
+
+function resetHTChips() {
+    // Reset all input fields to zero
+    document.getElementById('ht-def').value = 0;
+    document.getElementById('ht-shield').value = 0;
+    document.getElementById('ht-dmg-increase').value = 0;
+    document.getElementById('ht-dmg-decrease').value = 0;
+    document.getElementById('ht-crit-dmg').value = 0;
+    document.getElementById('ht-crit-rate').value = 0;
+    document.getElementById('ht-atk').value = 0;
+    document.getElementById('ht-hp').value = 0;
+
+    // Clear the result display
+    document.getElementById('ht-result').textContent = '';
+}
+
 

@@ -78,11 +78,43 @@
     </div>
 
     <!-- HT Chips calculator (initially visible) -->
-    <div id="ht-chips-calculator" style="display: none;">
-        <h2>HT Chips Calculator</h2>
-        <p>This will contain the HT Chips calculator functionality.</p>
-        <!-- Add HT Chips calculator code here -->
+    <div id="ht-chips-calculator">
+    <h2>HT Chips Calculator</h2>
+    <form>
+        <label for="ht-def">DEF (%):</label>
+        <input type="number" id="ht-def" value="0">
+
+        <label for="ht-shield">Starting Shield (%):</label>
+        <input type="number" id="ht-shield" value="0">
+
+        <label for="ht-dmg-increase">DMG Increase (%):</label>
+        <input type="number" id="ht-dmg-increase" value="0">
+
+        <label for="ht-dmg-decrease">DMG Decrease (%):</label>
+        <input type="number" id="ht-dmg-decrease" value="0">
+
+        <label for="ht-crit-dmg">Crit. DMG (%):</label>
+        <input type="number" id="ht-crit-dmg" value="0">
+
+        <label for="ht-crit-rate">Crit. Rate (%):</label>
+        <input type="number" id="ht-crit-rate" value="0">
+
+        <label for="ht-atk">ATK (%):</label>
+        <input type="number" id="ht-atk" value="0">
+
+        <label for="ht-hp">HP (%):</label>
+        <input type="number" id="ht-hp" value="0">
+    </form>
+    <div class="button-container">
+        <button onclick="calculateHTChipsScore()">Calculate Score</button>
+        <button onclick="resetHTChips()">Reset</button>
     </div>
+    <div id="ht-chips-result">
+        <h2>HT Chips Score</h2>
+        <p id="ht-result"></p>
+    </div>
+</div>
+
 
 <script src="gear.js"> </script>
 
