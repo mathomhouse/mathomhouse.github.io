@@ -134,14 +134,14 @@ function compareHTChips() {
 
     // Display the result
     let result = `HT Chip 1 Score: ${score1.toString()}\n`;
-        result = `HT Chip 2 Score: ${score2.toString()}\n\n`;
+        result += `HT Chip 2 Score: ${score2.toString()}\n\n`;
 
     if (score1 > score2) {
-        result += 'HT Chips 1 has the higher score.';
+        result += 'HT Chip 1 has the higher score.';
         document.getElementById('ht-chips1-box').style.backgroundColor = '#d4edda';
         document.getElementById('ht-chips2-box').style.backgroundColor = '';
     } else if (score2 > score1) {
-        result += 'HT Chips 2 has the higher score.';
+        result += 'HT Chip 2 has the higher score.';
         document.getElementById('ht-chips2-box').style.backgroundColor = '#d4edda';
         document.getElementById('ht-chips1-box').style.backgroundColor = '';
     } else {
