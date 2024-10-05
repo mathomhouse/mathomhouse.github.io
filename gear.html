@@ -137,6 +137,11 @@ button:hover {
 </head>
 <body>
     <h1>Gear Comparison</h1>
+    <p>Input the stats of your HT chips or your Titan Gear and compare it with the one that you 
+        currently have equipped to compare which one will be better suited for your needs! <br>
+    DISCLAIMER: The data used to determine ATK and HP multipliers are purely speculatory. It was 
+    pulled from a screenshot floating around which details the value of certain stats. Do not take
+    these results as gospel. Test or ask experienced players. </p>
 
     <div class="gear-container">
         <div class="gear-box" id="gear1-box">
@@ -228,15 +233,15 @@ button:hover {
         result += `Gear 2 Total Attack: ${gear2Offense.toString()}%\n\n`;
 
         if (gear1Offense > gear2Offense) {
-            result += 'Gear 1 has better offense.\n';
+            result += 'Gear 1 has better offense.\n\n';
             document.getElementById('gear1-box').style.backgroundColor = '#d4edda';
             document.getElementById('gear2-box').style.backgroundColor = '';
         } else if (gear2Offense > gear1Offense) {
-            result += 'Gear 2 has better offense.\n';
+            result += 'Gear 2 has better offense.\n\n';
             document.getElementById('gear2-box').style.backgroundColor = '#d4edda';
             document.getElementById('gear1-box').style.backgroundColor = '';
         } else {
-            result += 'Both gears have equal offense.\n';
+            result += 'Both gears have equal offense.\n\n';
             document.getElementById('gear1-box').style.backgroundColor = '';
             document.getElementById('gear2-box').style.backgroundColor = '';
         }
