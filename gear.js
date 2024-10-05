@@ -107,44 +107,62 @@ function resetValues() {
     document.getElementById('gear2-box').style.backgroundColor = '';
     document.getElementById('result').textContent = '';
 }
-function calculateHTChipsScore() {
-    // Get the input values
-    const def = parseFloat(document.getElementById('ht-def').value) || 0;
-    const shield = parseFloat(document.getElementById('ht-shield').value) || 0;
-    const dmgIncrease = parseFloat(document.getElementById('ht-dmg-increase').value) || 0;
-    const dmgDecrease = parseFloat(document.getElementById('ht-dmg-decrease').value) || 0;
-    const critDmg = parseFloat(document.getElementById('ht-crit-dmg').value) || 0;
-    const critRate = parseFloat(document.getElementById('ht-crit-rate').value) || 0;
-    const atk = parseFloat(document.getElementById('ht-atk').value) || 0;
-    const hp = parseFloat(document.getElementById('ht-hp').value) || 0;
+function compareHTChips() {
+    // HT Chips 1 stats
+    const ht1Def = parseFloat(document.getElementById('ht1-def').value) || 0;
+    const ht1Shield = parseFloat(document.getElementById('ht1-shield').value) || 0;
+    const ht1DmgIncrease = parseFloat(document.getElementById('ht1-dmg-increase').value) || 0;
+    const ht1DmgDecrease = parseFloat(document.getElementById('ht1-dmg-decrease').value) || 0;
+    const ht1CritDmg = parseFloat(document.getElementById('ht1-crit-dmg').value) || 0;
+    const ht1CritRate = parseFloat(document.getElementById('ht1-crit-rate').value) || 0;
+    const ht1Atk = parseFloat(document.getElementById('ht1-atk').value) || 0;
+    const ht1Hp = parseFloat(document.getElementById('ht1-hp').value) || 0;
 
-    // Apply the multipliers
-    const score = (def * 15) +
-                  (shield * 13) +
-                  (dmgIncrease * 8) +
-                  (dmgDecrease * 6) +
-                  (critDmg * 4) +
-                  (critRate * 2) +
-                  (atk * 2) +
-                  (hp * 1);
+    // HT Chips 2 stats
+    const ht2Def = parseFloat(document.getElementById('ht2-def').value) || 0;
+    const ht2Shield = parseFloat(document.getElementById('ht2-shield').value) || 0;
+    const ht2DmgIncrease = parseFloat(document.getElementById('ht2-dmg-increase').value) || 0;
+    const ht2DmgDecrease = parseFloat(document.getElementById('ht2-dmg-decrease').value) || 0;
+    const ht2CritDmg = parseFloat(document.getElementById('ht2-crit-dmg').value) || 0;
+    const ht2CritRate = parseFloat(document.getElementById('ht2-crit-rate').value) || 0;
+    const ht2Atk = parseFloat(document.getElementById('ht2-atk').value) || 0;
+    const ht2Hp = parseFloat(document.getElementById('ht2-hp').value) || 0;
+
+    // Calculate scores using the multipliers
+    const score1 = (ht1Def * 15) + (ht1Shield * 13) + (ht1DmgIncrease * 8) + (ht1DmgDecrease * 6) + (ht1CritDmg * 4) + (ht1CritRate * 2) + (ht1Atk * 2) + (ht1Hp * 1);
+    const score2 = (ht2Def * 15) + (ht2Shield * 13) + (ht2DmgIncrease * 8) + (ht2DmgDecrease * 6) + (ht2CritDmg * 4) + (ht2CritRate * 2) + (ht2Atk * 2) + (ht2Hp * 1);
 
     // Display the result
-    document.getElementById('ht-result').textContent = `Total Score: ${score.toFixed(2)}`;
+    let result = `HT Chips 1 Score: ${score1.toFixed(2)}\nHT Chips 2 Score: ${score2.toFixed(2)}\n\n`;
+
+    if (score1 > score2) {
+        result += 'HT Chips 1 has the higher score.';
+        document.getElementById('ht-chips1-box').style.backgroundColor = '#d4edda';
+        document.getElementById('ht-chips2-box').style.backgroundColor = '';
+    } else if (score2 > score1) {
+        result += 'HT Chips 2 has the higher score.';
+        document.getElementById('ht-chips2-box').style.backgroundColor = '#d4edda';
+        document.getElementById('ht-chips1-box').style.backgroundColor = '';
+    } else {
+        result += 'Both HT Chips have equal scores.';
+        document.getElementById('ht-chips1-box').style.backgroundColor = '';
+        document.getElementById('ht-chips2-box').style.backgroundColor = '';
+    }
+
+    document.getElementById('ht-result').textContent = result;
 }
 
 function resetHTChips() {
-    // Reset all input fields to zero
-    document.getElementById('ht-def').value = 0;
-    document.getElementById('ht-shield').value = 0;
-    document.getElementById('ht-dmg-increase').value = 0;
-    document.getElementById('ht-dmg-decrease').value = 0;
-    document.getElementById('ht-crit-dmg').value = 0;
-    document.getElementById('ht-crit-rate').value = 0;
-    document.getElementById('ht-atk').value = 0;
-    document.getElementById('ht-hp').value = 0;
+    // Reset all input fields for both HT Chips
+    document.querySelectorAll('#ht-chips1-box input, #ht-chips2-box input').forEach(input => input.value = 0);
 
     // Clear the result display
     document.getElementById('ht-result').textContent = '';
+
+    // Reset background colors
+    document.getElementById('ht-chips1-box').style.backgroundColor = '';
+    document.getElementById('ht-chips2-box').style.backgroundColor = '';
 }
+
 
 

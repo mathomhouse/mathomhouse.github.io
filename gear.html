@@ -79,41 +79,77 @@
 
     <!-- HT Chips calculator (initially visible) -->
     <div id="ht-chips-calculator">
-    <h2>HT Chips Calculator</h2>
-    <form>
-        <label for="ht-def">DEF (%):</label>
-        <input type="number" id="ht-def" value="0">
+    <h2>HT Chips Comparison</h2>
+    <div class="gear-container">
+        <div class="gear-box" id="ht-chips1-box">
+            <h2>HT Chips 1 Stats</h2>
+            <form>
+                <label for="ht1-def">DEF (%):</label>
+                <input type="number" id="ht1-def" value="0">
 
-        <label for="ht-shield">Starting Shield (%):</label>
-        <input type="number" id="ht-shield" value="0">
+                <label for="ht1-shield">Starting Shield (%):</label>
+                <input type="number" id="ht1-shield" value="0">
 
-        <label for="ht-dmg-increase">DMG Increase (%):</label>
-        <input type="number" id="ht-dmg-increase" value="0">
+                <label for="ht1-dmg-increase">DMG Increase (%):</label>
+                <input type="number" id="ht1-dmg-increase" value="0">
 
-        <label for="ht-dmg-decrease">DMG Decrease (%):</label>
-        <input type="number" id="ht-dmg-decrease" value="0">
+                <label for="ht1-dmg-decrease">DMG Decrease (%):</label>
+                <input type="number" id="ht1-dmg-decrease" value="0">
 
-        <label for="ht-crit-dmg">Crit. DMG (%):</label>
-        <input type="number" id="ht-crit-dmg" value="0">
+                <label for="ht1-crit-dmg">Crit. DMG (%):</label>
+                <input type="number" id="ht1-crit-dmg" value="0">
 
-        <label for="ht-crit-rate">Crit. Rate (%):</label>
-        <input type="number" id="ht-crit-rate" value="0">
+                <label for="ht1-crit-rate">Crit. Rate (%):</label>
+                <input type="number" id="ht1-crit-rate" value="0">
 
-        <label for="ht-atk">ATK (%):</label>
-        <input type="number" id="ht-atk" value="0">
+                <label for="ht1-atk">ATK (%):</label>
+                <input type="number" id="ht1-atk" value="0">
 
-        <label for="ht-hp">HP (%):</label>
-        <input type="number" id="ht-hp" value="0">
-    </form>
+                <label for="ht1-hp">HP (%):</label>
+                <input type="number" id="ht1-hp" value="0">
+            </form>
+        </div>
+
+        <div class="gear-box" id="ht-chips2-box">
+            <h2>HT Chips 2 Stats</h2>
+            <form>
+                <label for="ht2-def">DEF (%):</label>
+                <input type="number" id="ht2-def" value="0">
+
+                <label for="ht2-shield">Starting Shield (%):</label>
+                <input type="number" id="ht2-shield" value="0">
+
+                <label for="ht2-dmg-increase">DMG Increase (%):</label>
+                <input type="number" id="ht2-dmg-increase" value="0">
+
+                <label for="ht2-dmg-decrease">DMG Decrease (%):</label>
+                <input type="number" id="ht2-dmg-decrease" value="0">
+
+                <label for="ht2-crit-dmg">Crit. DMG (%):</label>
+                <input type="number" id="ht2-crit-dmg" value="0">
+
+                <label for="ht2-crit-rate">Crit. Rate (%):</label>
+                <input type="number" id="ht2-crit-rate" value="0">
+
+                <label for="ht2-atk">ATK (%):</label>
+                <input type="number" id="ht2-atk" value="0">
+
+                <label for="ht2-hp">HP (%):</label>
+                <input type="number" id="ht2-hp" value="0">
+            </form>
+        </div>
+    </div>
+
     <div class="button-container">
-        <button onclick="calculateHTChipsScore()">Calculate Score</button>
+        <button onclick="compareHTChips()">Compare</button>
         <button onclick="resetHTChips()">Reset</button>
     </div>
     <div id="ht-chips-result">
-        <h2>HT Chips Score</h2>
+        <h2>Comparison Result</h2>
         <p id="ht-result"></p>
     </div>
 </div>
+
 
 
 <script src="gear.js"> </script>
