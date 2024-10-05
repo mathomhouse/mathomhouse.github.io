@@ -19,13 +19,13 @@
     <!-- Dropdown to select the type of calculator -->
     <label for="calculator-type">Select Calculator:</label>
     <select id="calculator-type" onchange="showCalculator()">
-        <option value="">Select</option>
+        <option value="default">Select</option>
         <option value="ht-chips">HT Chips</option>
         <option value="titan-gear">Titan Gear</option>
     </select>
 
     <!-- Titan Gear calculator (initially hidden) -->
-    <div id="titan-gear-calculator" style="display: none;">
+    <div id="titan-gear-calculator" >
         <h2>Titan Gear Comparison</h2>
         <div class="gear-container">
             <div class="gear-box" id="gear1-box">
