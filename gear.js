@@ -133,8 +133,8 @@ function compareHTChips() {
     const score2 = (ht2Def * 15) + (ht2Shield * 13) + (ht2DmgIncrease * 8) + (ht2DmgDecrease * 6) + (ht2CritDmg * 4) + (ht2CritRate * 2) + (ht2Atk * 2) + (ht2Hp * 1);
 
     // Display the result
-    let result = `HT Chip 1 Score: ${score1.toString()}\n`;
-        result += `HT Chip 2 Score: ${score2.toString()}\n\n`;
+    let result = `HT Chip 1 Score: ${score1.toString()}<br>`;
+        result += `HT Chip 2 Score: ${score2.toString()}<br><br>`;
 
     if (score1 > score2) {
         result += 'HT Chip 1 has the higher score.';
@@ -150,7 +150,7 @@ function compareHTChips() {
         document.getElementById('ht-chips2-box').style.backgroundColor = '';
     }
 
-    document.getElementById('ht-result').textContent = result;
+    document.getElementById('ht-result').innerHTML = result;
 }
 
 function resetHTChips() {
@@ -158,7 +158,7 @@ function resetHTChips() {
     document.querySelectorAll('#ht-chips1-box input, #ht-chips2-box input').forEach(input => input.value = 0);
 
     // Clear the result display
-    document.getElementById('ht-result').textContent = '';
+    document.getElementById('ht-result').innerHTML = '';
 
     // Reset background colors
     document.getElementById('ht-chips1-box').style.backgroundColor = '';
