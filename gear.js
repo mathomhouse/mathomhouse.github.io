@@ -133,7 +133,8 @@ function compareHTChips() {
     const score2 = (ht2Def * 15) + (ht2Shield * 13) + (ht2DmgIncrease * 8) + (ht2DmgDecrease * 6) + (ht2CritDmg * 4) + (ht2CritRate * 2) + (ht2Atk * 2) + (ht2Hp * 1);
 
     // Display the result
-    let result = `HT Chips 1 Score: ${score1.toString()}\nHT Chips 2 Score: ${score2.toString()}\n\n`;
+    let result = `HT Chip 1 Score: ${score1.toString()}\n`;
+        result = `HT Chip 2 Score: ${score2.toString()}\n\n`;
 
     if (score1 > score2) {
         result += 'HT Chips 1 has the higher score.';
