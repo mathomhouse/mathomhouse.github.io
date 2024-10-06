@@ -1,3 +1,110 @@
+const resultElementsFood = [
+    'OpenFoodTotal',
+    '1milFoodTotal',
+    '500kFoodTotal',
+    '100kFoodTotal',
+    '50kFoodTotal',
+    '10kFoodTotal',
+    '500FoodTotal'
+]
+
+const resultElementsOil = [
+    'OpenOilTotal',
+    '1milOilTotal',
+    '500kOilTotal',
+    '100kOilTotal',
+    '50kOilTotal',
+    '10kOilTotal',
+    '500OilTotal'
+]
+
+function calculateOnBlur(inputElement, multiplier, resultElementId) {
+    const value = parseFloat(inputElement.value) || 0; // Get input value or default to 0
+    const result = value * multiplier; // Multiply by the provided multiplier
+
+    // Update the total in the respective cell (third column)
+    const resultElement = document.getElementById(resultElementId);
+    resultElement.innerText = result.toFixed(0); // Update with the calculated result
+
+    // Update the grand total after each input change
+    updateGrandTotal();
+}
+
+function updateGrandTotal() {
+    let grandTotalFood = 0;
+    resultElementsFood.forEach(id => {
+        const resultValue = parseFloat(document.getElementById(id).innerText) || 0;
+        grandTotal += resultValue;
+    });
+
+    // Update the grand total label
+    document.getElementById('grandTotalFood').innerText = grandTotalFood.toFixed(0);
+
+
+    let grandTotalOil = 0;
+    resultElementsOil.forEach(id => {
+        const resultValue = parseFloat(document.getElementById(id).innerText) || 0;
+        grandTotalOil += resultValue;
+    });
+
+    // Update the grand total label
+    document.getElementById('grandTotalOil').innerText = grandTotalOil.toFixed(0);
+}
+
+function resetTotals(){
+    resultElementsFood.forEach(id => {
+        document.getElementById(id).innerText = "";
+    });
+    document.getElementById('grandTotalFood').innerText = "";
+
+    resultElementsOil.forEach(id => {
+        document.getElementById(id).innerText = "";
+    });
+    document.getElementById('grandTotalOil').innerText = "";
+}
+
+window.onload = function () {
+    // Define inputs and their respective multipliers and result IDs
+    const Foodinputs = [
+        { id: '1milFood', multiplier: 1000000, resultId: '1milFoodTotal' },
+        { id: '500kFood', multiplier: 500000, resultId: '500kFoodTotal' },
+        { id: '100kFood', multiplier: 100000, resultId: '100kFoodTotal' },
+        { id: '50kFood', multiplier: 50000, resultId: '50kFoodTotal' },
+        { id: '10kFood', multiplier: 10000, resultId: '10kFoodTotal' },
+        { id: '500Food', multiplier: 500, resultId: '500FoodTotal' },
+        { id: 'openFood', multiplier: 1, resultId: 'openFoodTotal' }
+
+    ];
+
+    // Attach the same calculateOnBlur function to the onblur event for each input
+    Foodinputs.forEach(input => {
+        const inputElement = document.getElementById(input.id);
+        inputElement.onblur = function () {
+            calculateOnBlur(inputElement, input.multiplier, input.resultId);
+        };
+    });
+    // Define inputs and their respective multipliers and result IDs
+    const Oilinputs = [
+        { id: '1milOil', multiplier: 1000000, resultId: '1milOilTotal' },
+        { id: '500kOil', multiplier: 500000, resultId: '500kOilTotal' },
+        { id: '100kOil', multiplier: 100000, resultId: '100kOilTotal' },
+        { id: '50kOil', multiplier: 50000, resultId: '50kOilTotal' },
+        { id: '10kOil', multiplier: 10000, resultId: '10kOilTotal' },
+        { id: '500Oil', multiplier: 500, resultId: '500OilTotal' },
+        { id: 'openOil', multiplier: 1, resultId: 'openOilTotal' }
+        
+    ];
+
+    // Attach the same calculateOnBlur function to the onblur event for each input
+    Oilinputs.forEach(input => {
+        const inputElement = document.getElementById(input.id);
+        inputElement.onblur = function () {
+            calculateOnBlur(inputElement, input.multiplier, input.resultId);
+        };
+    });
+}
+
+
 function calculateRSS() {
     // Retrieve input values
     const v_openFood = parseFloat(document.getElementById('openFood').value) || 0;
