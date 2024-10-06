@@ -34,7 +34,7 @@ function updateGrandTotal() {
     let grandTotalFood = 0;
     resultElementsFood.forEach(id => {
         const resultValue = parseFloat(document.getElementById(id).innerText) || 0;
-        grandTotal += resultValue;
+        grandTotalFood += resultValue;
     });
 
     // Update the grand total label
