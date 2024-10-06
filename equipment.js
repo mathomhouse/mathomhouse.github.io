@@ -14,7 +14,7 @@ dropdown.addEventListener('change', function () {
     updateBackgroundColor();
 
     if (dropdown.value === 'gold') {
-        checkboxSection.style.display = 'block';  // Show checkbox
+        checkboxSection.style.display = 'inline';  // Show checkbox
     } else {
         checkboxSection.style.display = 'none';  // Hide checkbox
     }
