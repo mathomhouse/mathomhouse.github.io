@@ -15,22 +15,26 @@ body {
         width: 100%; /* Ensure table takes full width */
     }
 
-    /* Adjust table layout to stack elements vertically on small screens */
-    table {
-        width: 100%;
+    .table-container {
+        overflow-x: auto; /* Allows horizontal scrolling */
+        -webkit-overflow-scrolling: touch; /* Adds smooth scrolling for mobile */
     }
 
-    td, th {
-        display: block;
-        width: 100%;
+    table {
+        width: 100%; /* Ensure table takes full width */
+        border-collapse: collapse;
     }
+
+    th, td {
+        white-space: nowrap; /* Prevent text from wrapping */
+        display: table-cell; /* Ensure table cells don't stack */
+        padding: 10px;
+        text-align: left;
+    }
+
 
     tr:nth-child(even) {
         background-color: #f9f9f9;
-    }
-
-    td {
-        margin-bottom: 10px; /* Add space between rows */
     }
 
     /* Adjust button size for mobile */
