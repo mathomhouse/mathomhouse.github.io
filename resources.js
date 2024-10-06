@@ -1,5 +1,5 @@
 const resultElementsFood = [
-    'OpenFoodTotal',
+    'openFoodTotal',
     '1milFoodTotal',
     '500kFoodTotal',
     '100kFoodTotal',
@@ -9,7 +9,7 @@ const resultElementsFood = [
 ]
 
 const resultElementsOil = [
-    'OpenOilTotal',
+    'openOilTotal',
     '1milOilTotal',
     '500kOilTotal',
     '100kOilTotal',
