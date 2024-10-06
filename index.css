@@ -27,7 +27,7 @@ body {
         
         display: table-cell; /* Ensure table cells don't stack */
         padding: 5px;
-        text-align: left;
+        text-align: center;
     }
 
 
