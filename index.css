@@ -150,18 +150,22 @@ tr:nth-child(even) {
 /* Dropdown option colors */
 select option[value="grey"] {
     background-color: lightslategray;
+    color:white;
 }
 
 select option[value="green"] {
     background-color: #3cb371;
+    color:white;
 }
 
 select option[value="blue"] {
     background-color: #1e90ff;
+    color:white;
 }
 
 select option[value="purple"] {
     background-color: #9370db;
+    color:white;
 }
 
 select option[value="gold"] {
