@@ -149,19 +149,19 @@ tr:nth-child(even) {
 
 /* Dropdown option colors */
 select option[value="grey"] {
-    background-color: grey;
+    background-color: lightslategray;
 }
 
 select option[value="green"] {
-    background-color: green;
+    background-color: #3cb371;
 }
 
 select option[value="blue"] {
-    background-color: blue;
+    background-color: #1e90ff;
 }
 
 select option[value="purple"] {
-    background-color: purple;
+    background-color: #9370db;
 }
 
 select option[value="gold"] {
