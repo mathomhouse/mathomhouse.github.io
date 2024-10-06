@@ -13,7 +13,7 @@ function calculateOnBlur(inputElement, multiplier, resultElementId) {
 
     // Update the total in the respective cell (third column)
     const resultElement = document.getElementById(resultElementId);
-    resultElement.innerText = result.toFixed(0); // Update with the calculated result
+    resultElement.innerText = result.toLocaleString("en-US"); // Update with the calculated result
 
     // Update the grand total after each input change
     updateGrandTotal();
@@ -22,12 +22,12 @@ function calculateOnBlur(inputElement, multiplier, resultElementId) {
 function updateGrandTotal() {
     let grandTotal = 0;
     resultElements.forEach(id => {
-        const resultValue = parseFloat(document.getElementById(id).innerText) || 0;
+        const resultValue = parseFloat(document.getElementById(id).innerText.replace(/,/g,'')) || 0;
         grandTotal += resultValue;
     });
 
     // Update the grand total label
-    document.getElementById('grandTotal').innerText = grandTotal.toFixed(0);
+    document.getElementById('grandTotal').innerText = grandTotal.toLocaleString("en-US");
 }
 
 function resetTotals(){
