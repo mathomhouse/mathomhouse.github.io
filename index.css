@@ -24,7 +24,7 @@ body {
     }
 
     th, td {
-        white-space: nowrap; /* Prevent text from wrapping */
+        
         display: table-cell; /* Ensure table cells don't stack */
         padding: 5px;
         text-align: left;
@@ -139,9 +139,8 @@ table {
 th,
 td {
     padding: 3px;
-    text-align: left;
+    text-align: center;
     border: 1px solid #ddd;
-    white-space: nowrap; /* Prevents text from wrapping in cells */
 
 }
 
