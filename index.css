@@ -129,6 +129,9 @@ table {
 
 .table-container{
     display:flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
 }
 
 th,
@@ -136,6 +139,8 @@ td {
     padding: 3px;
     text-align: center;
     border: 1px solid #ddd;
+    white-space: nowrap; /* Prevents text from wrapping in cells */
+
 }
 
 tr:nth-child(even) {
