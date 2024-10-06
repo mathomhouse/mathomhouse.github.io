@@ -89,19 +89,6 @@ label {
     font-weight: bold;
 }
 
-
-/* .labels label {
-    display: block;
-    margin-bottom: 15px;
-} */
-
-/* .inputs input {
-    display: block;
-    margin-bottom: 15px;
-    padding: 5px;
-    width: 200px;
-} */
-
 input,
 select {
     padding: 5px;
@@ -112,7 +99,6 @@ select {
     border-radius: 5px;
     box-sizing: border-box;
 }
-
 
 .result {
     text-align: center;
@@ -128,12 +114,6 @@ select {
     padding-right: 10px;
 }
 
-/* .row input {
-    flex-grow: 1;
-    padding: 5px;
-    width: 200px;
-} */
-
 .div-buffer{
     height:50px;
 }
@@ -144,6 +124,11 @@ table {
     border-collapse: collapse;
     width: 100%;
     max-width: 500px;
+    margin-right:20px;
+}
+
+.table-container{
+    display:flex;
 }
 
 th,
@@ -156,30 +141,6 @@ td {
 tr:nth-child(even) {
     background-color: #f9f9f9;
 }
-/* Table layout styles for labels and inputs */
-/* .calculator-table {
-    margin: 0; 
-    border-spacing: 10px 5px;
-    width: 100%;
-    max-width: 500px;
-}
-
-.calculator-table td {
-    padding: 5px;
-    vertical-align: middle;
-}
-
-.calculator-table label {
-    display: block;
-    text-align: left;
-    padding-right: 10px;
-}
-
-.calculator-table input {
-    width: 100%;
-    padding: 5px;
-    box-sizing: border-box;
-} */
 
 .calculate-btn {
     text-align: left; /* Align the buttons to the left */
