@@ -13,11 +13,11 @@
     <!-- Placeholder for the header -->
     <div id="header-placeholder"></div>
     <br>
-    <h2>VIT Calculator</h2>
+    <h1>VIT Calculator</h1>
     <p>Input the number of each item in the appropriate text box. The totals will update as you go. <br>
         The Reset button will clear the page for you if you want to start over.</p>
     <!-- Main container for the labels and inputs -->
-    <table class="calculator-table">
+    <table>
         <tr>
             <th>VIT</th>
             <th>Amount</th>
@@ -53,21 +53,20 @@
             <td><input type="number" min="0" id="vitHeart" placeholder="0"></td>
             <td><label id="vitHeartTotal"></td>
         </tr>
-        <tr style="height:10px"></tr>
         <tr>
             <td></td>
             <td><label for="grandTotal" class="bold-text">Grand Total:</label></td>
             <td><label id="grandTotal" class="bold-text"></label></td>
         </tr>
     </table>
-    <div class="div-buffer"></div>
+    <br>
 
     <!-- Button to trigger calculation -->
     <div class="calculate-btn">
         <!-- <button onclick="calculateVit()">Calculate</button> -->
         <button onclick="resetVit()">Reset</button>
     </div>
-    <div class="div-buffer"></div>
+    <br>
 
     <script src="vit.js"></script>
 

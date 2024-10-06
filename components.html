@@ -7,53 +7,41 @@
     <title>Components Calculator</title>
     <link rel="stylesheet" href="index.css">
     <script src="header.js" defer></script>
-    <!-- <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            padding: 10px;
-        }
-        input[type="number"] {
-            width: 100%;
-        }
-        #result {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-    </style> -->
 </head>
 
 <body>
     <!-- Placeholder for the header -->
     <div id="header-placeholder"></div>
-    <br>
-    <h2>Components Calculator</h2>
-    <p>This calculator will tell you how many level 1 and level 3 components you need to make the desired level component.<br><br>
-    Select your desired level from the dropdown. If you have lower level components, add the number into the boxes.<br>
-    The Reset button will clear the page for you if you want to start over.</p>
+    <div class="container">
+        <h1>Components Calculator</h1>
+        <p>This calculator will tell you how many level 1 and level 3 components you need to make the desired level
+            component.<br><br>
+            Select your desired level from the dropdown. If you have lower level components, add the number into the
+            boxes.<br>
+            The Reset button will clear the page for you if you want to start over.</p>
 
-    <!-- Dropdown -->
-    <label for="numberSelect">Select the desired level:</label>
-    <select id="numberSelect" onchange="generateTable()">
-        <!-- Options from 2 to 10 -->
-        <option value="">Select</option>
-        <option value="3">2</option>
-        <option value="9">3</option>
-        <option value="27">4</option>
-        <option value="81">5</option>
-        <option value="243">6</option>
-        <option value="729">7</option>
-        <option value="2187">8</option>
-        <option value="6561">9</option>
-        <option value="19683">10</option>
-    </select>
+        <!-- Dropdown -->
+        <label for="numberSelect">Select the desired level:</label>
+        <select id="numberSelect" onchange="generateTable()">
+            <!-- Options from 2 to 10 -->
+            <option value="">Select</option>
+            <option value="3">2</option>
+            <option value="9">3</option>
+            <option value="27">4</option>
+            <option value="81">5</option>
+            <option value="243">6</option>
+            <option value="729">7</option>
+            <option value="2187">8</option>
+            <option value="6561">9</option>
+            <option value="19683">10</option>
+        </select>
 
-    <!-- Placeholder for the generated table -->
-    <div id="tableContainer"></div>
-    <br>
-    <!-- Result Label -->
-    <div id="resultLabel"></div>
-
+        <!-- Placeholder for the generated table -->
+        <div id="tableContainer"></div>
+        <br>
+        <!-- Result Label -->
+        <div id="resultLabel"></div>
+    </div>
     <script src="components.js"></script>
 </body>
 

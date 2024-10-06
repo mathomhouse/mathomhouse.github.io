@@ -1,169 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gear Comparison Calculator</title>
-    <link rel="stylesheet" href="gear.css">
+    <link rel="stylesheet" href="index.css">
     <script src="header.js" defer></script>
 
 </head>
+
 <body>
     <!-- Placeholder for the header -->
     <div id="header-placeholder"></div>
-    <br>
-    <h1>Gear Comparison</h1>
-    <p>Input the stats of your HT chips or your Titan Gear and compare it with the one that you 
-        currently have equipped <br>to compare which one will be better suited for your needs! <br>
-    DISCLAIMER: The data used to determine ATK and HP multipliers are purely speculatory. It was 
-    pulled from <br>a screenshot floating around which details the value of certain stats. Do not take
-    these results as gospel.<br>Test or ask experienced players. </p>
+    <div class="container">
+        <h1>Gear Comparison</h1>
+        <p>Input the stats of your HT chips or your Titan Gear and compare it with the one that you
+            currently have equipped <br>to compare which one will be better suited for your needs! <br>
+            DISCLAIMER: The data used to determine ATK and HP multipliers are purely speculatory. It was
+            pulled from <br>a screenshot floating around which details the value of certain stats. Do not take
+            these results as gospel.<br>Test or ask experienced players. </p>
 
 
-    <!-- Dropdown to select the type of calculator -->
-    <label for="calculator-type">Select Calculator:</label>
-    <select id="calculator-type" onchange="showCalculator()">
-        <option value="default">Select</option>
-        <option value="ht-chips">HT Chips</option>
-        <option value="titan-gear">Titan Gear</option>
-    </select>
+        <!-- Dropdown to select the type of calculator -->
+        <label for="calculator-type">Select Calculator:</label>
+        <select id="calculator-type" onchange="showCalculator()">
+            <option value="default">Select</option>
+            <option value="ht-chips">HT Chips</option>
+            <option value="titan-gear">Titan Gear</option>
+        </select>
 
-    <!-- Titan Gear calculator (initially hidden) -->
-    <div id="titan-gear-calculator" style="display: none;">
-        <h2>Titan Gear Comparison</h2>
-        <div class="gear-container">
-            <div class="gear-box" id="gear1-box">
-                <h2>Gear 1 Stats</h2>
-                <form>
-                    <label for="gear1-damage-increase">Damage Increase (%):</label>
-                    <input type="number" id="gear1-damage-increase" value="0">
+        <!-- Titan Gear calculator (initially hidden) -->
+        <div id="titan-gear-calculator" style="display: none;">
+            <h2>Titan Gear Comparison</h2>
+            <div class="gear-container">
+                <div class="gear-box" id="gear1-box">
+                    <h2>Gear 1 Stats</h2>
+                    <form>
+                        <label for="gear1-damage-increase">Damage Increase (%):</label>
+                        <input type="number" id="gear1-damage-increase" value="0">
 
-                    <label for="gear1-attack">Attack (%):</label>
-                    <input type="number" id="gear1-attack" value="0">
+                        <label for="gear1-attack">Attack (%):</label>
+                        <input type="number" id="gear1-attack" value="0">
 
-                    <label for="gear1-defense">Defense (%):</label>
-                    <input type="number" id="gear1-defense" value="0">
+                        <label for="gear1-defense">Defense (%):</label>
+                        <input type="number" id="gear1-defense" value="0">
 
-                    <label for="gear1-hp">HP (%):</label>
-                    <input type="number" id="gear1-hp" value="0">
+                        <label for="gear1-hp">HP (%):</label>
+                        <input type="number" id="gear1-hp" value="0">
 
-                    <label for="gear1-damage-decrease">Damage Decrease (%):</label>
-                    <input type="number" id="gear1-damage-decrease" value="0">
-                </form>
+                        <label for="gear1-damage-decrease">Damage Decrease (%):</label>
+                        <input type="number" id="gear1-damage-decrease" value="0">
+                    </form>
+                </div>
+                <div class="gear-box" id="gear2-box">
+                    <h2>Gear 2 Stats</h2>
+                    <form>
+                        <label for="gear2-damage-increase">Damage Increase (%):</label>
+                        <input type="number" id="gear2-damage-increase" value="0">
+
+                        <label for="gear2-attack">Attack (%):</label>
+                        <input type="number" id="gear2-attack" value="0">
+
+                        <label for="gear2-defense">Defense (%):</label>
+                        <input type="number" id="gear2-defense" value="0">
+
+                        <label for="gear2-hp">HP (%):</label>
+                        <input type="number" id="gear2-hp" value="0">
+
+                        <label for="gear2-damage-decrease">Damage Decrease (%):</label>
+                        <input type="number" id="gear2-damage-decrease" value="0">
+                    </form>
+                </div>
             </div>
-            <div class="gear-box" id="gear2-box">
-                <h2>Gear 2 Stats</h2>
-                <form>
-                    <label for="gear2-damage-increase">Damage Increase (%):</label>
-                    <input type="number" id="gear2-damage-increase" value="0">
-
-                    <label for="gear2-attack">Attack (%):</label>
-                    <input type="number" id="gear2-attack" value="0">
-
-                    <label for="gear2-defense">Defense (%):</label>
-                    <input type="number" id="gear2-defense" value="0">
-
-                    <label for="gear2-hp">HP (%):</label>
-                    <input type="number" id="gear2-hp" value="0">
-
-                    <label for="gear2-damage-decrease">Damage Decrease (%):</label>
-                    <input type="number" id="gear2-damage-decrease" value="0">
-                </form>
+            <div class="button-container">
+                <button onclick="compareGear()">Compare</button>
+                <button onclick="resetValues()">Reset</button>
+            </div>
+            <div id="comparison-result">
+                <h2>Comparison Result</h2>
+                <p id="result"></p>
             </div>
         </div>
-        <div class="button-container">
-            <button onclick="compareGear()">Compare</button>
-            <button onclick="resetValues()">Reset</button>
+
+        <!-- HT Chips calculator (initially visible) -->
+        <div id="ht-chips-calculator" style="display: none;">
+            <h2>HT Chips Comparison</h2>
+            <p> Please note: this calculator does NOT take ATK SPD into account. <br>
+                ATK SPD is not quantifiable, and is only relevant if it is higher <br>
+                than your opponent. <br><br>
+                Add stats of the same type together. Ignore those that are not your troop type. <br><br>
+                This calculator does NOT take set bonuses into account. Use your own judgement
+
+            </p>
+            <div class="gear-container">
+                <div class="gear-box" id="ht-chips1-box">
+                    <h2>HT Chip 1 Stats</h2>
+                    <form>
+                        <label for="ht1-def">DEF (%):</label>
+                        <input type="number" id="ht1-def" value="0">
+
+                        <label for="ht1-shield">Starting Shield (%):</label>
+                        <input type="number" id="ht1-shield" value="0">
+
+                        <label for="ht1-dmg-increase">DMG Increase (%):</label>
+                        <input type="number" id="ht1-dmg-increase" value="0">
+
+                        <label for="ht1-dmg-decrease">DMG Decrease (%):</label>
+                        <input type="number" id="ht1-dmg-decrease" value="0">
+
+                        <label for="ht1-crit-dmg">Crit. DMG (%):</label>
+                        <input type="number" id="ht1-crit-dmg" value="0">
+
+                        <label for="ht1-crit-rate">Crit. Rate (%):</label>
+                        <input type="number" id="ht1-crit-rate" value="0">
+
+                        <label for="ht1-atk">ATK (%):</label>
+                        <input type="number" id="ht1-atk" value="0">
+
+                        <label for="ht1-hp">HP (%):</label>
+                        <input type="number" id="ht1-hp" value="0">
+                    </form>
+                </div>
+
+                <div class="gear-box" id="ht-chips2-box">
+                    <h2>HT Chip 2 Stats</h2>
+                    <form>
+                        <label for="ht2-def">DEF (%):</label>
+                        <input type="number" id="ht2-def" value="0">
+
+                        <label for="ht2-shield">Starting Shield (%):</label>
+                        <input type="number" id="ht2-shield" value="0">
+
+                        <label for="ht2-dmg-increase">DMG Increase (%):</label>
+                        <input type="number" id="ht2-dmg-increase" value="0">
+
+                        <label for="ht2-dmg-decrease">DMG Decrease (%):</label>
+                        <input type="number" id="ht2-dmg-decrease" value="0">
+
+                        <label for="ht2-crit-dmg">Crit. DMG (%):</label>
+                        <input type="number" id="ht2-crit-dmg" value="0">
+
+                        <label for="ht2-crit-rate">Crit. Rate (%):</label>
+                        <input type="number" id="ht2-crit-rate" value="0">
+
+                        <label for="ht2-atk">ATK (%):</label>
+                        <input type="number" id="ht2-atk" value="0">
+
+                        <label for="ht2-hp">HP (%):</label>
+                        <input type="number" id="ht2-hp" value="0">
+                    </form>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button onclick="compareHTChips()">Compare</button>
+                <button onclick="resetHTChips()">Reset</button>
+            </div>
+            <div id="ht-chips-result">
+                <h2>Comparison Result</h2>
+                <p id="ht-result"></p>
+            </div>
         </div>
-        <div id="comparison-result">
-            <h2>Comparison Result</h2>
-            <p id="result"></p>
-        </div>
+
     </div>
 
-    <!-- HT Chips calculator (initially visible) -->
-    <div id="ht-chips-calculator" style="display: none;">
-    <h2>HT Chips Comparison</h2>
-    <p> Please note: this calculator does NOT take ATK SPD into account. <br>
-        ATK SPD is not quantifiable, and is only relevant if it is higher <br>
-        than your opponent. <br><br>
-        Add stats of the same type together. Ignore those that are not your troop type. <br><br>
-        This calculator does NOT take set bonuses into account. Use your own judgement
-        
-    </p>
-    <div class="gear-container">
-        <div class="gear-box" id="ht-chips1-box">
-            <h2>HT Chip 1 Stats</h2>
-            <form>
-                <label for="ht1-def">DEF (%):</label>
-                <input type="number" id="ht1-def" value="0">
-
-                <label for="ht1-shield">Starting Shield (%):</label>
-                <input type="number" id="ht1-shield" value="0">
-
-                <label for="ht1-dmg-increase">DMG Increase (%):</label>
-                <input type="number" id="ht1-dmg-increase" value="0">
-
-                <label for="ht1-dmg-decrease">DMG Decrease (%):</label>
-                <input type="number" id="ht1-dmg-decrease" value="0">
-
-                <label for="ht1-crit-dmg">Crit. DMG (%):</label>
-                <input type="number" id="ht1-crit-dmg" value="0">
-
-                <label for="ht1-crit-rate">Crit. Rate (%):</label>
-                <input type="number" id="ht1-crit-rate" value="0">
-
-                <label for="ht1-atk">ATK (%):</label>
-                <input type="number" id="ht1-atk" value="0">
-
-                <label for="ht1-hp">HP (%):</label>
-                <input type="number" id="ht1-hp" value="0">
-            </form>
-        </div>
-
-        <div class="gear-box" id="ht-chips2-box">
-            <h2>HT Chip 2 Stats</h2>
-            <form>
-                <label for="ht2-def">DEF (%):</label>
-                <input type="number" id="ht2-def" value="0">
-
-                <label for="ht2-shield">Starting Shield (%):</label>
-                <input type="number" id="ht2-shield" value="0">
-
-                <label for="ht2-dmg-increase">DMG Increase (%):</label>
-                <input type="number" id="ht2-dmg-increase" value="0">
-
-                <label for="ht2-dmg-decrease">DMG Decrease (%):</label>
-                <input type="number" id="ht2-dmg-decrease" value="0">
-
-                <label for="ht2-crit-dmg">Crit. DMG (%):</label>
-                <input type="number" id="ht2-crit-dmg" value="0">
-
-                <label for="ht2-crit-rate">Crit. Rate (%):</label>
-                <input type="number" id="ht2-crit-rate" value="0">
-
-                <label for="ht2-atk">ATK (%):</label>
-                <input type="number" id="ht2-atk" value="0">
-
-                <label for="ht2-hp">HP (%):</label>
-                <input type="number" id="ht2-hp" value="0">
-            </form>
-        </div>
-    </div>
-
-    <div class="button-container">
-        <button onclick="compareHTChips()">Compare</button>
-        <button onclick="resetHTChips()">Reset</button>
-    </div>
-    <div id="ht-chips-result">
-        <h2>Comparison Result</h2>
-        <p id="ht-result"></p>
-    </div>
-</div>
-
-
-
-<script src="gear.js"> </script>
+    <script src="gear.js"> </script>
 
 </body>
+
 </html>

@@ -9,18 +9,8 @@ body {
     padding: 0;
 }
 
-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
-    .tab-content {
-        height: 300px;
-    }
-
     .calculator-table {
         width: 100%; /* Ensure table takes full width */
     }
@@ -33,6 +23,10 @@ iframe {
     td, th {
         display: block;
         width: 100%;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
     }
 
     td {
@@ -49,53 +43,76 @@ iframe {
     .div-buffer {
         height: 20px; /* Space between sections */
     }
+    .gear-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gear-box {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .gear-box form {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .gear-box label {
+        text-align: left;
+        padding-right: 0;
+    }
+
+    .gear-box input {
+        padding: 10px;
+    }
+
+    button {
+        width: 80%;
+        padding: 15px;
+    }
+
+    #comparison-result {
+        font-size: 1.2rem;
+    }
 }
 
 /* Vit Calculator styles */
 h1 {
-    text-align: center;
+    font-size: 2rem;
+    color: #0056b3;
 }
 
-.calculator-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
+label {
+    display: inline-block;
+    width: 150px;
+    font-weight: bold;
 }
 
-.labels, .inputs {
-    margin: 10px;
-    padding: 10px;
-}
 
-.labels label {
+/* .labels label {
     display: block;
     margin-bottom: 15px;
-}
+} */
 
-.inputs input {
+/* .inputs input {
     display: block;
     margin-bottom: 15px;
     padding: 5px;
     width: 200px;
+} */
+
+input,
+select {
+    padding: 5px;
+    margin: 5px 0;
+    width: 100%;
+    max-width: 200px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
-input[type="number"] {
-    width: 100%; /* Ensure the inputs take full width */
-    padding: 10px; /* Add padding for better touch interaction */
-    font-size: 1rem; /* Make font size larger for readability */
-    box-sizing: border-box; /* Ensure padding doesn't exceed element width */
-}
-
-.calculate-btn {
-    text-align: center;
-    margin-top: 20px;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
 
 .result {
     text-align: center;
@@ -105,45 +122,56 @@ button {
 }
 
 /* Layout styles for rows of labels and inputs */
-.row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
 .row label {
     width: 150px;
     text-align: right;
     padding-right: 10px;
 }
 
-.row input {
+/* .row input {
     flex-grow: 1;
     padding: 5px;
     width: 200px;
-}
+} */
 
 .div-buffer{
     height:50px;
 }
 
-/* Table layout styles for labels and inputs */
-.calculator-table {
-    margin: 0; /* Left-align the table */
-    border-spacing: 10px 5px; /* Reduced vertical and horizontal spacing */
+table {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-collapse: collapse;
     width: 100%;
-    max-width: 500px; /* Adjust width as needed */
+    max-width: 500px;
+}
+
+th,
+td {
+    padding: 3px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+/* Table layout styles for labels and inputs */
+/* .calculator-table {
+    margin: 0; 
+    border-spacing: 10px 5px;
+    width: 100%;
+    max-width: 500px;
 }
 
 .calculator-table td {
-    padding: 5px; /* Reduced padding for tighter layout */
+    padding: 5px;
     vertical-align: middle;
 }
 
 .calculator-table label {
     display: block;
-    text-align: left; /* Ensure labels are left-aligned */
+    text-align: left;
     padding-right: 10px;
 }
 
@@ -151,7 +179,7 @@ button {
     width: 100%;
     padding: 5px;
     box-sizing: border-box;
-}
+} */
 
 .calculate-btn {
     text-align: left; /* Align the buttons to the left */
@@ -198,4 +226,85 @@ h1 a {
     text-decoration: none; /* Remove the underline */
     color: inherit; /* Inherit the color from the parent (h1) */
     cursor: pointer; /* Change the cursor to pointer when hovering */
+}
+
+.gear-container {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.gear-box {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    width: 350px;
+    margin: 10px;
+    background-color: #ffffff;
+}
+
+.gear-box h2 {
+    color: #0056b3;
+}
+
+.gear-box form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+}
+
+.gear-box label {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.gear-box input {
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.button-container {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #003e7e;
+}
+
+#comparison-result {
+    border-top: 2px solid #ccc;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+#result {
+    white-space: pre-line;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.gear-box {
+    transition: background-color 0.3s;
+}
+
+.container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }

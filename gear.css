@@ -4,7 +4,7 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
-    text-align: center;
+    text-align: left;
 }
 
 h1 {
@@ -14,7 +14,7 @@ h1 {
 
 .gear-container {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     margin-bottom: 20px;
     flex-wrap: wrap;
 }

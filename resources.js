@@ -38,7 +38,7 @@ function updateGrandTotal() {
     });
 
     // Update the grand total label
-    document.getElementById('grandTotalFood').innerText = grandTotalFood.toFixed(0);
+    document.getElementById('grandTotalFood').innerText = grandTotalFood.toLocaleString("en-US");
 
 
     let grandTotalOil = 0;
@@ -48,7 +48,7 @@ function updateGrandTotal() {
     });
 
     // Update the grand total label
-    document.getElementById('grandTotalOil').innerText = grandTotalOil.toFixed(0);
+    document.getElementById('grandTotalOil').innerText = grandTotalOil.toLocaleString("en-US");
 }
 
 function resetTotals(){

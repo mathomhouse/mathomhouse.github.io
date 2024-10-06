@@ -22,7 +22,7 @@ function generateTable() {
                   </tr>`;
     }
 
-    table += "</tbody></table>";
+    table += "</tbody></table><br>";
 
     // Add the Calculate button below the table
     table += `<button id="calculateButton" onclick="calculateTotal()">Calculate</button>`;
@@ -43,7 +43,7 @@ function calculateTotal() {
     var x = dropdown.options[dropdown.selectedIndex].value - total;
     var y = x / 9;
 
-    document.getElementById('resultLabel').innerHTML = `Total level 1 Needed: ${x} <br>Total level 3 Needed: ${y} `;
+    document.getElementById('resultLabel').innerHTML = `Total level 1 Components Needed: <b>${x}</b> <br>Total level 3 Components Needed: <b>${y}</b> `;
 }
 
 function resetPage(){
