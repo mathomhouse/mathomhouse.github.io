@@ -43,7 +43,8 @@ function calculateTotal() {
     var x = dropdown.options[dropdown.selectedIndex].value - total;
     var y = x / 9;
 
-    document.getElementById('resultLabel').innerHTML = `Total level 1 Components Needed: <b>${x}</b> <br>Total level 3 Components Needed: <b>${y}</b> `;
+    document.getElementById('resultLabel').innerHTML = `Total level 1 Components Needed: <b>${x}</b> <br>Total level 3 Components Needed: <b>${Math.ceil(y)}</b> `;
+
 }
 
 function resetPage(){
