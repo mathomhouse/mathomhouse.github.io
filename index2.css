@@ -1,33 +1,33 @@
 .icon-container {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(4, 1fr); /* 4 icons per row on larger screens */
     gap: 20px;
     justify-items: center;
     padding: 20px;
 }
 
 .home-icon {
-    width: 80px; /* Adjust the size of the icons as needed */
+    width: 80px;
     height: auto;
     cursor: pointer;
     transition: transform 0.3s;
 }
 
 .home-icon:hover {
-    transform: scale(1.1); /* Slightly enlarge the icon on hover */
+    transform: scale(1.1);
 }
 
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
     .icon-container {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr); /* 3 icons per row on medium screens */
         gap: 10px;
     }
 }
 
 @media (max-width: 480px) {
     .icon-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr); /* 2 icons per row on small screens */
         gap: 5px;
     }
 }

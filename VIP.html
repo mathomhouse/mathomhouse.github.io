@@ -90,6 +90,11 @@
     ];
 
     function startCalculation() {
+        const vipPoints = parseFloat(document.getElementById('vipPoints').value);
+        if (isNaN(vipPoints) || vipPoints <= 0) {
+            alert('Please enter valid VIP points.');
+            return;
+        }
         if (confirm("Are you sure you want to know?")) {
             if (confirm("Are you REALLY sure? You might not like the answer...")) {
                 if (confirm("Okay, last chance! Think twice... still sure?")) {
@@ -107,10 +112,7 @@
 
     function calculateSpent() {
         const vipPoints = parseFloat(document.getElementById('vipPoints').value);
-        if (isNaN(vipPoints) || vipPoints <= 0) {
-            alert('Please enter valid VIP points.');
-            return;
-        }
+        
 
         // Calculate the money spent
         let amountSpent = vipPoints / 6; // 1 dollar = 6 points
