@@ -96,8 +96,29 @@
             return;
         }
 
+        // Calculate the money spent
         let amountSpent = vipPoints / 6; // 1 dollar = 6 points
-        document.getElementById('result').innerText = `You have spent approximately $${amountSpent.toFixed(2)}.`;
+        let resultMessage = `You have spent approximately $${amountSpent.toFixed(2)}.`;
+
+        // Find the next VIP level
+        let nextLevel;
+        for (let i = 0; i < vipLevels.length; i++) {
+            if (vipPoints < vipLevels[i].points) {
+                nextLevel = vipLevels[i];
+                break;
+            }
+        }
+
+        // If there is a next VIP level, calculate points and money needed
+        if (nextLevel) {
+            let pointsNeeded = nextLevel.points - vipPoints;
+            let moneyNeeded = pointsNeeded / 6;
+            resultMessage += `<br>You need ${pointsNeeded} more VIP points ($${moneyNeeded.toFixed(2)}) to reach VIP Level ${nextLevel.level}.`;
+        } else {
+            resultMessage += `<br>You are at the highest VIP level!`;
+        }
+
+        document.getElementById('result').innerHTML = resultMessage;
     }
 
     function resetFields() {
