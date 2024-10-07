@@ -30,6 +30,8 @@ function calculateOnBlur(inputElement, multiplier, resultElementId) {
     updateGrandTotal();
 }
 
+
+
 function updateGrandTotal() {
     let grandTotalFood = 0;
     resultElementsFood.forEach(id => {
@@ -179,4 +181,6 @@ function resetRSS(){
 
     // Clear the result
     document.getElementById('result').innerHTML = '';
+
+    resetTotals();
 }

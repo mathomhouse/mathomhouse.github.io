@@ -53,15 +53,15 @@
         result += `Gear 2 Total Attack: ${gear2Offense.toString()}%\n\n`;
 
         if (gear1Offense > gear2Offense) {
-            result += 'Gear 1 has better offense.\n\n';
+            result += 'Gear 1 has better offense\n\n';
             document.getElementById('gear1-box').style.backgroundColor = '#d4edda';
             document.getElementById('gear2-box').style.backgroundColor = '';
         } else if (gear2Offense > gear1Offense) {
-            result += 'Gear 2 has better offense.\n\n';
+            result += 'Gear 2 has better offense\n\n';
             document.getElementById('gear2-box').style.backgroundColor = '#d4edda';
             document.getElementById('gear1-box').style.backgroundColor = '';
         } else {
-            result += 'Both gears have equal offense.\n\n';
+            result += 'Both gears have equal offense\n\n';
             document.getElementById('gear1-box').style.backgroundColor = '';
             document.getElementById('gear2-box').style.backgroundColor = '';
         }
@@ -73,15 +73,15 @@
         result += `Gear 2 Total HP: ${gear2DefenseScore.toString()}%\n\n`;
 
         if (gear1DefenseScore > gear2DefenseScore) {
-            result += 'Gear 1 has better defense.\n';
+            result += 'Gear 1 has better defense\n';
             document.getElementById('gear1-box').style.backgroundColor = '#d4edda';
             document.getElementById('gear2-box').style.backgroundColor = '';
         } else if (gear2DefenseScore > gear1DefenseScore) {
-            result += 'Gear 2 has better defense.\n';
+            result += 'Gear 2 has better defense\n';
             document.getElementById('gear2-box').style.backgroundColor = '#d4edda';
             document.getElementById('gear1-box').style.backgroundColor = '';
         } else {
-            result += 'Both gears have equal defense.\n';
+            result += 'Both gears have equal defense\n';
             document.getElementById('gear1-box').style.backgroundColor = '';
             document.getElementById('gear2-box').style.backgroundColor = '';
         }
