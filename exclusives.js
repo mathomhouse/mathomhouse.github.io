@@ -31,13 +31,13 @@ function calculateTotalShards() {
 }
 
 function resetPage(){
-    document.getElementById('level1').value = 0;
-    document.getElementById('level2').value = 0;
-    document.getElementById('level3').value = 0;
-    document.getElementById('level4').value = 0;
-    document.getElementById('level5').value = 0;
-    document.getElementById('level6').value = 0;
-    document.getElementById('level7').value = 0;
+    document.getElementById('level1').value = "";
+    document.getElementById('level2').value = "";
+    document.getElementById('level3').value = "";
+    document.getElementById('level4').value = "";
+    document.getElementById('level5').value = "";
+    document.getElementById('level6').value = "";
+    document.getElementById('level7').value = "";
     document.getElementById('result').innerHTML = '';
     document.getElementById('targetLevel').selectedIndex = 0; 
 }

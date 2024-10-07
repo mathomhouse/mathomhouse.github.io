@@ -162,20 +162,20 @@ function calculateRSS() {
 }
 
 function resetRSS(){
-    document.getElementById('openFood').value = 0;
-    document.getElementById('1milFood').value = 0;
-    document.getElementById('500kFood').value = 0;
-    document.getElementById('100kFood').value = 0;
-    document.getElementById('50kFood').value = 0;
-    document.getElementById('10kFood').value = 0;
-    document.getElementById('500Food').value = 0;
-    document.getElementById('openOil').value = 0;
-    document.getElementById('1milOil').value = 0;
-    document.getElementById('500kOil').value = 0;
-    document.getElementById('100kOil').value = 0;
-    document.getElementById('50kOil').value = 0;
-    document.getElementById('10kOil').value = 0;
-    document.getElementById('500Oil').value = 0;
+    document.getElementById('openFood').value = "";
+    document.getElementById('1milFood').value = "";
+    document.getElementById('500kFood').value = "";
+    document.getElementById('100kFood').value = "";
+    document.getElementById('50kFood').value = "";
+    document.getElementById('10kFood').value = "";
+    document.getElementById('500Food').value = "";
+    document.getElementById('openOil').value = "";
+    document.getElementById('1milOil').value = "";
+    document.getElementById('500kOil').value = "";
+    document.getElementById('100kOil').value = "";
+    document.getElementById('50kOil').value = "";
+    document.getElementById('10kOil').value = "";
+    document.getElementById('500Oil').value = "";
 
     // Clear the result
     document.getElementById('result').innerHTML = '';

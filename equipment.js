@@ -67,11 +67,11 @@ function calculatemats() {
 }
 
 function resetmats() {
-    document.getElementById('greymats').value = 0;
-    document.getElementById('greenmats').value = 0;
-    document.getElementById('bluemats').value = 0;
-    document.getElementById('purplemats').value = 0;
-    document.getElementById('goldmats').value = 0;
+    document.getElementById('greymats').value = "";
+    document.getElementById('greenmats').value = "";
+    document.getElementById('bluemats').value = "";
+    document.getElementById('purplemats').value = "";
+    document.getElementById('goldmats').value = "";
 
     // Clear the result
     document.getElementById('result').innerHTML = '';

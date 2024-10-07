@@ -85,11 +85,11 @@ function calculateVit() {
 
 function resetVit() {
     document.getElementById('vitLargeCapsule').value = "";
-    document.getElementById('vitSmallCapsule').value = 0;
-    document.getElementById('vitPlus50').value = 0;
-    document.getElementById('vitPlus10').value = 0;
-    document.getElementById('vitFlower').value = 0;
-    document.getElementById('vitHeart').value = 0;
+    document.getElementById('vitSmallCapsule').value = "";
+    document.getElementById('vitPlus50').value = "";
+    document.getElementById('vitPlus10').value = "";
+    document.getElementById('vitFlower').value = "";
+    document.getElementById('vitHeart').value = "";
 
     // Clear the result
     //document.getElementById('result').innerHTML = '';

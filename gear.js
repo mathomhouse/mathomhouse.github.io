@@ -91,17 +91,17 @@
 }
 
 function resetValues() {
-    document.getElementById('gear1-damage-increase').value = 0;
-    document.getElementById('gear1-attack').value = 0;
-    document.getElementById('gear1-defense').value = 0;
-    document.getElementById('gear1-hp').value = 0;
-    document.getElementById('gear1-damage-decrease').value = 0;
+    document.getElementById('gear1-damage-increase').value = "";
+    document.getElementById('gear1-attack').value = "";
+    document.getElementById('gear1-defense').value = "";
+    document.getElementById('gear1-hp').value = "";
+    document.getElementById('gear1-damage-decrease').value = "";
 
-    document.getElementById('gear2-damage-increase').value = 0;
-    document.getElementById('gear2-attack').value = 0;
-    document.getElementById('gear2-defense').value = 0;
-    document.getElementById('gear2-hp').value = 0;
-    document.getElementById('gear2-damage-decrease').value = 0;
+    document.getElementById('gear2-damage-increase').value = "";
+    document.getElementById('gear2-attack').value = "";
+    document.getElementById('gear2-defense').value = "";
+    document.getElementById('gear2-hp').value = "";
+    document.getElementById('gear2-damage-decrease').value = "";
 
     document.getElementById('gear1-box').style.backgroundColor = '';
     document.getElementById('gear2-box').style.backgroundColor = '';
@@ -155,7 +155,7 @@ function compareHTChips() {
 
 function resetHTChips() {
     // Reset all input fields for both HT Chips
-    document.querySelectorAll('#ht-chips1-box input, #ht-chips2-box input').forEach(input => input.value = 0);
+    document.querySelectorAll('#ht-chips1-box input, #ht-chips2-box input').forEach(input => input.value = "");
 
     // Clear the result display
     document.getElementById('ht-result').innerHTML = '';

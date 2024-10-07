@@ -170,33 +170,33 @@ function calculateGems() {
 }
 
 function resetGems() {
-    document.getElementById('opengems').value = 0;
-    document.getElementById('100gems').value = 0;
-    document.getElementById('50gems').value = 0;
-    document.getElementById('60gems').value = 0;
-    document.getElementById('30gems').value = 0;
-    document.getElementById('20gems').value = 0;
-    document.getElementById('10gems').value = 0;
-    document.getElementById('120gems').value = 0;
-    document.getElementById('150gems').value = 0;
-    document.getElementById('200gems').value = 0;
-    document.getElementById('240gems').value = 0;
-    document.getElementById('300gems').value = 0;
-    document.getElementById('400gems').value = 0;
-    document.getElementById('500gems').value = 0;
-    document.getElementById('600gems').value = 0;
-    document.getElementById('800gems').value = 0;
-    document.getElementById('1000gems').value = 0;
-    document.getElementById('1200gems').value = 0;
-    document.getElementById('1280gems').value = 0;
-    document.getElementById('2000gems').value = 0;
-    document.getElementById('2024gems').value = 0;
-    document.getElementById('2560gems').value = 0;
-    document.getElementById('3000gems').value = 0;
-    document.getElementById('3280gems').value = 0;
-    document.getElementById('4000gems').value = 0;
-    document.getElementById('5000gems').value = 0;
-    document.getElementById('12960gems').value = 0;
+    document.getElementById('opengems').value = "";
+    document.getElementById('100gems').value = "";
+    document.getElementById('50gems').value = "";
+    document.getElementById('60gems').value = "";
+    document.getElementById('30gems').value = "";
+    document.getElementById('20gems').value = "";
+    document.getElementById('10gems').value = "";
+    document.getElementById('120gems').value = "";
+    document.getElementById('150gems').value = "";
+    document.getElementById('200gems').value = "";
+    document.getElementById('240gems').value = "";
+    document.getElementById('300gems').value = "";
+    document.getElementById('400gems').value = "";
+    document.getElementById('500gems').value = "";
+    document.getElementById('600gems').value = "";
+    document.getElementById('800gems').value = "";
+    document.getElementById('1000gems').value = "";
+    document.getElementById('1200gems').value = "";
+    document.getElementById('1280gems').value = "";
+    document.getElementById('2000gems').value = "";
+    document.getElementById('2024gems').value = "";
+    document.getElementById('2560gems').value = "";
+    document.getElementById('3000gems').value = "";
+    document.getElementById('3280gems').value = "";
+    document.getElementById('4000gems').value = "";
+    document.getElementById('5000gems').value = "";
+    document.getElementById('12960gems').value = "";
 
     resetTotals();    
 }
