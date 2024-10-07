@@ -39,16 +39,10 @@ body {
 
     /* Adjust button size for mobile */
     .calculate-btn button {
-        padding: 10px 20px;
-    margin: 0 10px 10px 10px; /* Add margin to ensure spacing between buttons */
-    background-color: #0056b3;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: block; /* Ensure buttons are on their own line */
-    width: 80%; /* Make buttons take up less space on mobile */
-    margin-bottom: 10px;
+        width: 100%;
+        padding: 15px;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
     }
 
     .div-buffer {
@@ -79,18 +73,10 @@ body {
     }
 
     button {
-    padding: 10px 20px;
-    margin: 0 10px 10px 10px; /* Add margin to ensure spacing between buttons */
-    background-color: #0056b3;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: block; /* Ensure buttons are on their own line */
-    width: 80%; /* Make buttons take up less space on mobile */
-    margin-bottom: 10px;
-}
-
+        width: 80%;
+        padding: 15px;
+         margin-bottom: 10px;
+    }
 
     #comparison-result {
         font-size: 1.2rem;
