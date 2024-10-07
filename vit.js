@@ -84,7 +84,7 @@ function calculateVit() {
 }
 
 function resetVit() {
-    document.getElementById('vitLargeCapsule').value = 0;
+    document.getElementById('vitLargeCapsule').value = "";
     document.getElementById('vitSmallCapsule').value = 0;
     document.getElementById('vitPlus50').value = 0;
     document.getElementById('vitPlus10').value = 0;
