@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Points Calculator</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="header.js" defer></script>
+    <!--<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        input[type="number"] {
+            width: 80%;
+            padding: 8px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ccc;
+        }
+        button.reset {
+            background-color: #dc3545;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style> -->
+
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+<div class="container">
+    <h2>VIP Points to Money Spent Calculator</h2>
+    <label for="vipPoints">Enter VIP Points:</label>
+    <input type="number" id="vipPoints" placeholder="e.g., 10000" />
+    <br>
+    <button onclick="calculateSpent()">Calculate</button>
+    <button class="reset" onclick="resetFields()">Reset</button>
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    const vipLevels = [
+        { level: 1, points: 6, amount: 1 },
+        { level: 2, points: 30, amount: 5 },
+        { level: 3, points: 100, amount: 16.67 },
+        { level: 4, points: 300, amount: 50 },
+        { level: 5, points: 500, amount: 86.67 },
+        { level: 6, points: 1000, amount: 166.70 },
+        { level: 7, points: 3000, amount: 500 },
+        { level: 8, points: 6000, amount: 1000 },
+        { level: 9, points: 10000, amount: 1667 },
+        { level: 10, points: 30000, amount: 5000 },
+        { level: 11, points: 50000, amount: 8667 },
+        { level: 12, points: 80000, amount: 13330 },
+        { level: 13, points: 120000, amount: 20000 },
+        { level: 14, points: 160000, amount: 26670 },
+        { level: 15, points: 200000, amount: 33670 },
+        { level: 16, points: 300000, amount: 50000 }
+    ];
+
+    function calculateSpent() {
+        const vipPoints = parseFloat(document.getElementById('vipPoints').value);
+        if (isNaN(vipPoints) || vipPoints <= 0) {
+            alert('Please enter valid VIP points.');
+            return;
+        }
+
+        let amountSpent = vipPoints / 6; // 1 dollar = 6 points
+        document.getElementById('result').innerText = `You have spent approximately $${amountSpent.toFixed(2)}.`;
+    }
+
+    function resetFields() {
+        document.getElementById('vipPoints').value = '';
+        document.getElementById('result').innerText = '';
+    }
+</script>
+
+</body>
+</html>
