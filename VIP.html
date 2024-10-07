@@ -64,7 +64,7 @@
     <label for="vipPoints">Enter VIP Points:</label>
     <input type="number" id="vipPoints" placeholder="e.g., 10000" />
     <br>
-    <button onclick="calculateSpent()">Calculate</button>
+    <button onclick="startCalculation()">Calculate</button>
     <button class="reset" onclick="resetFields()">Reset</button>
     <div class="result" id="result"></div>
 </div>
@@ -88,6 +88,22 @@
         { level: 15, points: 200000, amount: 33670 },
         { level: 16, points: 300000, amount: 50000 }
     ];
+
+    function startCalculation() {
+        if (confirm("Are you sure you want to know?")) {
+            if (confirm("Are you REALLY sure? You might not like the answer...")) {
+                if (confirm("Okay, last chance! Think twice... still sure?")) {
+                    calculateSpent();
+                } else {
+                    alert("Phew, dodged a bullet there!");
+                }
+            } else {
+                alert("Good choice! Ignorance is bliss.");
+            }
+        } else {
+            alert("Maybe it's better not to know...");
+        }
+    }
 
     function calculateSpent() {
         const vipPoints = parseFloat(document.getElementById('vipPoints').value);
