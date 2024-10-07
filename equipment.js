@@ -2,7 +2,7 @@ const dropdown = document.getElementById('colorDropdown');
 const checkboxSection = document.getElementById('checkbox-section');
 
 // Ensure the background color is set when the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     updateBackgroundColor(); // Set initial color when the page loads
 
     // Add event listener to change background color on selection change
@@ -20,9 +20,14 @@ dropdown.addEventListener('change', function () {
     }
 });
 
-function updateBackgroundColor(){
-    dropdown.style.backgroundColor = dropdown.value;
+function updateBackgroundColor() {
+    const selectedOption = dropdown.options[dropdown.selectedIndex];
+    const selectedBackgroundColor = window.getComputedStyle(selectedOption).backgroundColor;
+    const selectedTextColor = window.getComputedStyle(selectedOption).color;
+    dropdown.style.backgroundColor = selectedBackgroundColor;
+    dropdown.style.color = selectedTextColor;
 }
+
 function calculatemats() {
     const opengreymats = parseFloat(document.getElementById('greymats').value) || 0;
     const opengreenmats = parseFloat(document.getElementById('greenmats').value) || 0;
@@ -58,9 +63,9 @@ function calculatemats() {
     if (g <= 0) {
         result = `You don't need anymore materials!`;
     }
-    else { 
+    else {
         var craftingTime = calculateCraftingTime(g);
-        result = `You need <b>${g}</b> more grey materials. <br>Amount of time needed: ${craftingTime}`; 
+        result = `You need <b>${g}</b> more grey materials. <br>Amount of time needed: ${craftingTime}`;
     }
 
     document.getElementById('result').innerHTML = result;
@@ -93,7 +98,7 @@ function calculateCraftingTime(materials) {
     const hours = Math.floor(remainingMinutesAfterDays / 60);
     const minutes = Math.round(remainingMinutesAfterDays % 60);
 
-     // Get the user's current date and time
+    // Get the user's current date and time
     const now = new Date();
 
     // Add the calculated time to the current date
@@ -111,17 +116,17 @@ function calculateCraftingTime(materials) {
     return result.trim() + `. <br>The crafting will finish on: ${formattedDateTime}`;
 }
 
-function formatDate(date){
+function formatDate(date) {
     // Use Intl.DateTimeFormat to format the date and time as mm/dd/yyyy HH:mm
     const options = {
-                    year: 'numeric',
-                    month: 'long',  //this will use the name of the month
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: true
-                };
-                
+        year: 'numeric',
+        month: 'long',  //this will use the name of the month
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+    };
+
     const formattedDateTime = new Intl.DateTimeFormat('en-US', options).format(date);
     return formattedDateTime;
 }
