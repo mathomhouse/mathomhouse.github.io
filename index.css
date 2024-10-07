@@ -21,7 +21,6 @@ body {
     table {
         width: 100%; /* Ensure table takes full width */
         border-collapse: collapse;
-        table-layout: auto;
     }
 
     th, td {
@@ -30,7 +29,6 @@ body {
         padding: 5px;
         text-align: center;
         white-space: normal;
-        word-wrap: break-word;
 
     }
 
