@@ -251,13 +251,16 @@ h1 a {
 
 button {
     padding: 10px 20px;
-    margin: 0 10px;
+    margin: 0 10px 10px 10px; /* Add margin to ensure spacing between buttons */
     background-color: #0056b3;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display: block; /* Ensure buttons are on their own line */
+    width: 80%; /* Make buttons take up less space on mobile */
 }
+
 
 button:hover {
     background-color: #003e7e;
