@@ -68,11 +68,14 @@ function calculatemats() {
 
     // If the checkbox is checked, calculate how the extra materials will accumulate over time
     if (includeExtraGrey && g > 0) {
-        while (g > 0) {
+        let remainingMaterials = g;
+
+        while (remainingMaterials > 0) {
             days++; // Increment day count
-            g -= extraGreyPerDay; // Add 25 extra grey materials for each day
+            remainingMaterials -= extraGreyPerDay; // Subtract 25 extra grey materials for each day
         }
-        g = 0; // If the loop completes, g becomes 0 since it's being fulfilled by daily extra materials
+
+        g = Math.max(0, remainingMaterials); // Ensure g doesn't go negative
     }
 
     // Result message when no more materials are needed
@@ -91,6 +94,7 @@ function calculatemats() {
 
     document.getElementById('result').innerHTML = result;
 }
+
 
 
 function resetmats() {
