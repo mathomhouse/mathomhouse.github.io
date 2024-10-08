@@ -66,31 +66,34 @@ function calculatemats() {
     let extraGreyPerDay = 25;
     let days = 0;
 
-    // If the checkbox is checked, calculate how the extra materials will accumulate over time
-    if (includeExtraGrey && g > 0) {
-        while (g > 0) {
-            days++; // Increment day count
-            g -= extraGreyPerDay; // Add 25 extra grey materials for each day
+    // Check if there are any grey materials left to craft
+    if (g > 0) {
+        let craftingRate = 10; // Example: crafting 10 materials every day
+        let remainingMaterials = g;
+
+        // If the checkbox is checked, calculate how the extra 25 materials per day reduce the crafting time
+        if (includeExtraGrey) {
+            while (remainingMaterials > 0) {
+                days++; // Increment day count
+                remainingMaterials -= craftingRate; // Subtract the number of materials crafted per day
+                remainingMaterials -= extraGreyPerDay; // Subtract the 25 extra grey materials per day
+            }
+        } else {
+            // If the checkbox is not checked, calculate crafting time normally
+            days = Math.ceil(remainingMaterials / craftingRate); // Total days needed to craft without extra materials
         }
-        g = 0; // If the loop completes, g becomes 0 since it's being fulfilled by daily extra materials
     }
 
-    // Result message when no more materials are needed
+    // Final result display!
     if (g <= 0) {
-        if (includeExtraGrey) {
-            result = `You will need <b>${days}</b> days to collect the grey materials with 25 additional materials per day.`;
-        } else {
-            result = `You don't need anymore materials!`;
-        }
-    }
-    else {
-        // Calculate the crafting time (this logic remains the same)
-        var craftingTime = calculateCraftingTime(g);
-        result = `You need <b>${g}</b> more grey materials. <br>Amount of time needed: ${craftingTime}`;
+        result = `You don't need anymore materials!`;
+    } else {
+        result = `You need <b>${g}</b> more grey materials. <br>Total crafting time: ${days} days.`;
     }
 
     document.getElementById('result').innerHTML = result;
 }
+
 
 
 
