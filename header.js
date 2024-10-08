@@ -11,12 +11,7 @@ function addFavicon() {
 }
 
 // Call the function to add the favicon when the page loads
-document.addEventListener('DOMContentLoaded', function() {
-    // Ensure favicon is added for the homepage URL
-    if (window.location.pathname === '/' || window.location.pathname === '/TW-Calculators/') {
-        addFavicon();
-    }
-});
+document.addEventListener('DOMContentLoaded', addFavicon);
 
 // Function to load the header.html content
 function loadHeader() {
