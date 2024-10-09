@@ -74,14 +74,17 @@ function calculatemats() {
 
         if (includeExtraGrey) {
             // Loop through each day, subtracting both the crafted materials and the extra grey materials per day
-            while (remainingMaterials > 0) {
-                days++;
+            while (remainingMaterials > craftingRate) {  //change "remaining > 0" to " > craftingRate"
+                days++; //add a full day to the variable
                 remainingMaterials -= craftingRate;
-                if (remainingMaterials > 0) {
-                    remainingMaterials -= extraGreyPerDay; // Subtract extra grey materials if there's still crafting to be done
+                if (remainingMaterials > extraGreyPerDay) {
+                    remainingMaterials -= extraGreyPerDay; // Subtract extra grey materials
                 }
             }
-        } else {
+            //calculate the time needed for the remainder of the mats. Assume Sandtable would be done so subtact extraGreyPerDay
+            days += (Math.abs(remainingMaterials) - extraGreyPerDay) / craftingRate;
+        } 
+        else {
             // If no extra materials are added, calculate crafting time based purely on crafting rate
             days = remainingMaterials / craftingRate;
         }
