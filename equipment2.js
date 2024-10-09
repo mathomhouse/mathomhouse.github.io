@@ -35,67 +35,52 @@ function calculatemats() {
     const openpurplemats = parseFloat(document.getElementById('purplemats').value) || 0;
     const opengoldmats = parseFloat(document.getElementById('goldmats').value) || 0;
 
-    var totalopengreymats = opengreymats + (opengreenmats * 4) + (openbluemats * 16)
-        + (openpurplemats * 64) + (opengoldmats * 256);
-
-    var result = '';
+    var totalopengreymats = opengreymats + (opengreenmats * 4) + (openbluemats * 16) + (openpurplemats * 64) + (opengoldmats * 256);
     var g = 0;
 
-    // Adjust g based on the desired rarity
     if (dropdown.value === 'grey') {
         g = 70 - totalopengreymats;
-    }
-    else if (dropdown.value === 'green') {
+    } else if (dropdown.value === 'green') {
         g = 280 - totalopengreymats;
-    }
-    else if (dropdown.value === 'blue') {
+    } else if (dropdown.value === 'blue') {
         g = 1120 - totalopengreymats;
-    }
-    else if (dropdown.value === 'purple') {
+    } else if (dropdown.value === 'purple') {
         g = 4480 - totalopengreymats;
-    }
-    else {
+    } else {
         g = 17920 - totalopengreymats;
         if (document.getElementById('dismantlingCheckbox').checked) {
-            g = g - 4480;
+            g -= 4480; // Dismantling a purple item gives 4480 grey materials
         }
     }
 
-    // Check if the extra grey materials checkbox is selected
-    let includeExtraGrey = document.getElementById('extraGreyCheckbox').checked;
-    let extraGreyPerDay = 25;
-    let days = 0;
-
-    // Check if there are any grey materials left to craft
-    if (g > 0) {
-        let craftingRate = 10; // Example: crafting 10 materials every day
-        let remainingMaterials = g;
-
-        // If the checkbox is checked, calculate how the extra 25 materials per day reduce the crafting time
-        if (includeExtraGrey) {
-            while (remainingMaterials > 0) {
-                days++; // Increment day count
-                remainingMaterials -= craftingRate; // Subtract the number of materials crafted per day
-                remainingMaterials -= extraGreyPerDay; // Subtract the 25 extra grey materials per day
-            }
-        } else {
-            // If the checkbox is not checked, calculate crafting time normally
-            days = Math.ceil(remainingMaterials / craftingRate); // Total days needed to craft without extra materials
-        }
-    }
-
-    // Final result display!
     if (g <= 0) {
-        result = `You don't need anymore materials!`;
+        result = "You don't need any more materials!";
     } else {
-        result = `You need <b>${g}</b> more grey materials. <br>Total crafting time: ${days} days.`;
+        // Calculate the number of days including free daily materials
+        const craftedPerDay = 96; // 9 batches of 10 materials per day (2.5 hours per batch)
+        const freeMaterialsPerDay = 25; // Free materials from daily task
+        let extraGreyMaterialsPerDay = 0;
+
+        // Check if the 'extraGreyCheckbox' is checked for additional grey materials
+        if (document.getElementById('extraGreyCheckbox').checked) {
+            extraGreyMaterialsPerDay = 25;
+        }
+
+        const totalPerDay = craftedPerDay + freeMaterialsPerDay + extraGreyMaterialsPerDay; // Total materials reduced per day
+
+        let days = 0;
+
+        // Subtract materials day by day
+        while (g > 0) {
+            g -= totalPerDay;
+            days++;
+        }
+
+        result = `You need <b>${Math.max(0, g)}</b> more grey materials. <br>Amount of time needed: ${days} days.`;
     }
 
     document.getElementById('result').innerHTML = result;
 }
-
-
-
 
 
 function resetmats() {
