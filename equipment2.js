@@ -66,6 +66,7 @@ function calculatemats() {
     let extraGreyPerDay = 25;
     let craftingRate = 96; // Example: crafting 10 materials every day
     let days = 0;
+    let totalHours = 0;
 
     // Check if there are any grey materials left to craft
     if (g > 0) {
@@ -82,19 +83,26 @@ function calculatemats() {
             }
         } else {
             // If no extra materials are added, calculate crafting time based purely on crafting rate
-            days = Math.ceil(remainingMaterials / craftingRate);
+            days = remainingMaterials / craftingRate;
         }
+
+        // Separate the decimal part from the days to calculate hours
+        let fullDays = Math.floor(days); // Full days
+        let fractionalDay = days - fullDays; // Fractional part of the day
+        totalHours = Math.round(fractionalDay * 24); // Convert fractional day to hours
+        days = fullDays; // Set days to the whole number
     }
 
-    // Final result display!
+    // Final result display
     if (g <= 0) {
         result = `You don't need anymore materials!`;
     } else {
-        result = `You need <b>${g}</b> more grey materials. <br>Total crafting time: ${days} days.`;
+        result = `You need <b>${g}</b> more grey materials.<br>Total crafting time: <b>${days}</b> days and <b>${totalHours}</b> hours.`;
     }
 
     document.getElementById('result').innerHTML = result;
 }
+
 
 
 
