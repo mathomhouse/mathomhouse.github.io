@@ -82,7 +82,7 @@ function calculatemats() {
                 }
             }
             //calculate the time needed for the remainder of the mats. Assume Sandtable would be done so subtact extraGreyPerDay
-            days += (Math.abs(remainingMaterials) - extraGreyPerDay) / craftingRate;
+            days += Math.abs(remainingMaterials) / craftingRate;
         } 
         else {
             // If no extra materials are added, calculate crafting time based purely on crafting rate
@@ -91,8 +91,8 @@ function calculatemats() {
 
         // Separate the decimal part from the days to calculate hours
         let fullDays = Math.floor(days); // Full days
-        let fractionalDay = days - fullDays; // Fractional part of the day
-        totalHours = Math.round(fractionalDay * 24); // Convert fractional day to hours
+        let fractionalDay = days - fullDays;// Fractional part of the day
+        totalHours = Math.round(fractionalDay  * 24); // Convert fractional day to hours
         days = fullDays; // Set days to the whole number
     }
 
