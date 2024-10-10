@@ -66,7 +66,8 @@ function calculatemats() {
     let extraGreyPerDay = 25;
     let craftingRate = 96; // Example: crafting 10 materials every day
     let days = 0;
-    let totalHours = 0;
+    let hours = 0;
+    let minutes = 0;
 
     // Check if there are any grey materials left to craft
     if (g > 0) {
@@ -89,10 +90,12 @@ function calculatemats() {
             days = remainingMaterials / craftingRate;
         }
 
-        // Separate the decimal part from the days to calculate hours
+        let totalCraftingMinutes = days * (1440);
+
         let fullDays = Math.floor(days); // Full days
-        let fractionalDay = days - fullDays;// Fractional part of the day
-        totalHours = Math.round(fractionalDay  * 24); // Convert fractional day to hours
+        let remainingMinutesAfterDays = totalCraftingMinutes % (1440);
+        hours = Math.floor(remainingMinutesAfterDays / 60);
+        minutes = Math.round(remainingMinutesAfterDays % 60);
         days = fullDays; // Set days to the whole number
     }
 
@@ -100,41 +103,8 @@ function calculatemats() {
     if (g <= 0) {
         result = `You don't need anymore materials!`;
     } else {
-        result = `You need <b>${g}</b> more grey materials.<br>Total crafting time: <b>${days}</b> days and <b>${totalHours}</b> hours.`;
+        result = `You need <b>${g}</b> more grey materials.<br>Total crafting time: `;
     }
-
-    document.getElementById('result').innerHTML = result;
-}
-
-
-
-
-function resetmats() {
-    document.getElementById('greymats').value = "";
-    document.getElementById('greenmats').value = "";
-    document.getElementById('bluemats').value = "";
-    document.getElementById('purplemats').value = "";
-    document.getElementById('goldmats').value = "";
-
-    // Clear the result
-    document.getElementById('result').innerHTML = '';
-}
-
-function calculateCraftingTime(materials) {
-    // Define the crafting time for 10 materials in minutes (2 hours 30 minutes = 150 minutes)
-    const timeFor10Materials = 2 * 60 + 30; // 150 minutes
-
-    // Calculate the time per material
-    const timePerMaterial = timeFor10Materials / 10;
-
-    // Calculate total crafting time for the input number of materials
-    const totalMinutes = materials * timePerMaterial;
-
-    // Convert the total minutes into days, hours, and minutes
-    const days = Math.floor(totalMinutes / (24 * 60));
-    const remainingMinutesAfterDays = totalMinutes % (24 * 60);
-    const hours = Math.floor(remainingMinutesAfterDays / 60);
-    const minutes = Math.round(remainingMinutesAfterDays % 60);
 
     // Get the user's current date and time
     const now = new Date();
@@ -146,12 +116,25 @@ function calculateCraftingTime(materials) {
     var formattedDateTime = formatDate(now);
 
     // Return the time as a formatted string
-    let result = '';
-    if (days > 0) result += `${days} days `;
-    if (hours > 0) result += `${hours} hours `;
-    if (minutes > 0 || result === '') result += `${minutes} minutes`;
+    if (days > 0) result += `<b>${days}</b> days`;
+    if (hours > 0) result += `, <b>${hours}</b> hours`;
+    if (minutes > 0 || result === '') result += `, <b>${minutes}</b> minutes`;
 
-    return result.trim() + `. <br>The crafting will finish on: ${formattedDateTime}`;
+    result += `. <br>The crafting will finish on: ${formattedDateTime}`;
+
+    document.getElementById('result').innerHTML = result;
+}
+
+
+function resetmats() {
+    document.getElementById('greymats').value = "";
+    document.getElementById('greenmats').value = "";
+    document.getElementById('bluemats').value = "";
+    document.getElementById('purplemats').value = "";
+    document.getElementById('goldmats').value = "";
+
+    // Clear the result
+    document.getElementById('result').innerHTML = '';
 }
 
 function formatDate(date) {
