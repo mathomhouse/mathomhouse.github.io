@@ -82,7 +82,7 @@
         if (nextLevel) {
             let pointsNeeded = nextLevel.points - vipPoints;
             let moneyNeeded = pointsNeeded / 6;
-            resultMessage += `<br>You need <b>${pointsNeeded}</b> more VIP points <b>($${moneyNeeded.toFixed(2)})</b> to reach VIP Level ${nextLevel.level}.`;
+            resultMessage += `<br>You need <b>${pointsNeeded}</b> more VIP points <b>($${moneyNeeded.toFixed(2).toLocaleString("en-US")})</b> to reach VIP Level ${nextLevel.level}.`;
         } else {
             resultMessage += `<br>You are at the highest VIP level! Congratulations! You are a whale!<br><br> Click <b><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">here</a></b> to claim your prize! `;
         }
