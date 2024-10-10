@@ -133,7 +133,7 @@ window.onload = function () {
         { id: '2kOdin', multiplier: 2000, resultId: '2kOdinTotal' },
         { id: '1kOdin', multiplier: 1000, resultId: '1kOdinTotal' },
         { id: '100Odin', multiplier: 100, resultId: '100OdinTotal' },
-        { id: '1OdinTotal', multiplier: 1, resultId: '1OdinTotal' },
+        { id: '1Odin', multiplier: 1, resultId: '1OdinTotal' },
         { id: 'openOdin', multiplier: 1, resultId: 'openOdinTotal' }
         
     ];
