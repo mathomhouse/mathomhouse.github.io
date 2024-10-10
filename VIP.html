@@ -11,7 +11,7 @@
     <div id="header-placeholder"></div>
 
 <div class="container">
-    <h2>VIP Points to Money Spent Calculator</h2>
+    <h2>VIP Points Calculator</h2>
     <label for="vipPoints">Enter VIP Points:</label>
     <input type="number" id="vipPoints" placeholder="e.g., 10000" />
     <br><br>
@@ -84,7 +84,7 @@
             let moneyNeeded = pointsNeeded / 6;
             resultMessage += `<br>You need <b>${pointsNeeded}</b> more VIP points <b>($${moneyNeeded.toFixed(2)})</b> to reach VIP Level ${nextLevel.level}.`;
         } else {
-            resultMessage += `<br>You are at the highest VIP level!`;
+            resultMessage += `<br>You are at the highest VIP level! Congratulations! You are a whale!<br><br> Click <b><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">here</a></b> to claim your prize! `;
         }
 
         document.getElementById('result').innerHTML = resultMessage;
