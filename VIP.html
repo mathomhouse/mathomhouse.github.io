@@ -80,7 +80,7 @@
 
         // If there is a next VIP level, calculate points and money needed
         if (nextLevel) {
-            let pointsNeeded = nextLevel.points - vipPoints;
+            let pointsNeeded = (nextLevel.points - vipPoints).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             let moneyNeeded = (pointsNeeded / 6).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             resultMessage += `<br>You need <b>${pointsNeeded}</b> more VIP points <b>($${moneyNeeded})</b> to reach VIP Level ${nextLevel.level}.`;
         } else {
