@@ -66,7 +66,7 @@
         
 
         // Calculate the money spent
-        let amountSpent = (vipPoints / 6).toFixed(2).toLocaleString("en-US"); // 1 dollar = 6 points
+        let amountSpent = (vipPoints / 6).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 1 dollar = 6 points
         let resultMessage = `You have spent approximately <b>$${amountSpent}</b>.`;
 
         // Find the next VIP level
@@ -81,7 +81,7 @@
         // If there is a next VIP level, calculate points and money needed
         if (nextLevel) {
             let pointsNeeded = nextLevel.points - vipPoints;
-            let moneyNeeded = (pointsNeeded / 6).toFixed(2).toLocaleString("en-US");
+            let moneyNeeded = (pointsNeeded / 6).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             resultMessage += `<br>You need <b>${pointsNeeded}</b> more VIP points <b>($${moneyNeeded})</b> to reach VIP Level ${nextLevel.level}.`;
         } else {
             resultMessage += `<br>You are at the highest VIP level! Congratulations! You are a whale!<br><br> Click <b><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">here</a></b> to claim your prize! `;
