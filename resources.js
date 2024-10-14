@@ -18,6 +18,14 @@ const resultElementsOil = [
     '500OilTotal'
 ]
 
+const resultElementsOdin = [
+    'openOdinTotal',
+    '2kOdinTotal',
+    '1kOdinTotal',
+    '100OdinTotal',
+    '1OdinTotal'
+]
+
 function calculateOnBlur(inputElement, multiplier, resultElementId) {
     const value = parseFloat(inputElement.value) || 0; // Get input value or default to 0
     const result = value * multiplier; // Multiply by the provided multiplier
@@ -51,6 +59,15 @@ function updateGrandTotal() {
 
     // Update the grand total label
     document.getElementById('grandTotalOil').innerText = grandTotalOil.toLocaleString("en-US");
+
+    let grandTotalOdin = 0;
+    resultElementsOdin.forEach(id => {
+        const resultValue = parseFloat(document.getElementById(id).innerText.replace(/,/g,'')) || 0;
+        grandTotalOdin += resultValue;
+    });
+
+    // Update the grand total label
+    document.getElementById('grandTotalOdin').innerText = grandTotalOdin.toLocaleString("en-US");
 }
 
 function resetTotals(){
@@ -63,6 +80,13 @@ function resetTotals(){
         document.getElementById(id).innerText = "";
     });
     document.getElementById('grandTotalOil').innerText = "";
+
+    resultElementsOdin.forEach(id => {
+        document.getElementById(id).innerText = "";
+    });
+    document.getElementById('grandTotalOdin').innerText = "";
+
+
 }
 
 window.onload = function () {
@@ -104,6 +128,23 @@ window.onload = function () {
             calculateOnBlur(inputElement, input.multiplier, input.resultId);
         };
     });
+
+    const Odininputs = [
+        { id: '2kOdin', multiplier: 2000, resultId: '2kOdinTotal' },
+        { id: '1kOdin', multiplier: 1000, resultId: '1kOdinTotal' },
+        { id: '100Odin', multiplier: 100, resultId: '100OdinTotal' },
+        { id: '1Odin', multiplier: 1, resultId: '1OdinTotal' },
+        { id: 'openOdin', multiplier: 1, resultId: 'openOdinTotal' }
+        
+    ];
+
+    // Attach the same calculateOnBlur function to the onblur event for each input
+    Odininputs.forEach(input => {
+        const inputElement = document.getElementById(input.id);
+        inputElement.onblur = function () {
+            calculateOnBlur(inputElement, input.multiplier, input.resultId);
+        };
+    });
 }
 
 
@@ -123,6 +164,11 @@ function calculateRSS() {
     const v_50kOil = parseFloat(document.getElementById('50kOil').value) || 0;
     const v_10kOil = parseFloat(document.getElementById('10kOil').value) || 0;
     const v_500Oil = parseFloat(document.getElementById('500Oil').value) || 0;
+    const v_openOdin = parseFloat(document.getElementById('openOdin').value) || 0;
+    const v_2kOdin = parseFloat(document.getElementById('2kOdin').value) || 0;
+    const v_1kOdin = parseFloat(document.getElementById('1kOdin').value) || 0;
+    const v_100Odin = parseFloat(document.getElementById('100Odin').value) || 0;
+    const v_1Odin = parseFloat(document.getElementById('1Odin').value) || 0;
 
     //RSS values
     var v_1milFoodvalue = 1000000;
@@ -137,6 +183,10 @@ function calculateRSS() {
     var v_50kOilvalue = 50000;
     var v_10kOilvalue = 10000;
     var v_500Oilvalue = 500;
+    var v_2kOdinvalue = 2000;
+    var v_1kOdinvalue = 1000;
+    var v_100Odinvalue = 100;
+    var v_1OdinValue = 1;
 
 
     const foodResult = 
@@ -157,10 +207,18 @@ function calculateRSS() {
     (v_10kOil * v_10kOilvalue) +
     (v_500Oil * v_500Oilvalue);
 
+    const odinResult = 
+    v_openOdin +
+    (v_2kOdin * v_2kOdinvalue) + 
+    (v_1kOdin * v_1kOdinvalue) +
+    (v_100Odin * v_100Odinvalue) +
+    (v_1Odin * v_1OdinValue);
+
     var s_food = foodResult.toLocaleString("en-US");
     var s_oil = oilResult.toLocaleString("en-US");
+    var s_odin = odinResult.toLocaleString("en-US");
     // Display the result
-    document.getElementById('result').innerHTML = `Your total food is: <b>${s_food}</b> and total oil is: <b>${s_oil}</b> `;
+    document.getElementById('result').innerHTML = `Your total food is: <b>${s_food}</b> and total oil is: <b>${s_oil}</b> and total odinium is: <b>${s_odin}</b> `;
 }
 
 function resetRSS(){
@@ -178,6 +236,12 @@ function resetRSS(){
     document.getElementById('50kOil').value = "";
     document.getElementById('10kOil').value = "";
     document.getElementById('500Oil').value = "";
+    document.getElementById('openOdin').value = "";
+    document.getElementById('2kOdin').value = "";
+    document.getElementById('1kOdiin').value = "";
+    document.getElementById('100Odin').value = "";
+    document.getElementById('1Odin').value = "";
+
 
     // Clear the result
     document.getElementById('result').innerHTML = '';
