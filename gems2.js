@@ -222,10 +222,10 @@ function addCustomRow() {
     
     // Create cells for custom input (placeholder "insert custom here"), amount input, and total
     const customInputCell = document.createElement("td");
-    customInputCell.innerHTML = `<input type="number" min="0" id="customValue${customRowCount}" placeholder="Insert custom here" oninput="updateCustomTotal(${customRowCount})">`;
+    customInputCell.innerHTML = `<input type="number" min="0" id="customValue${customRowCount}" placeholder="Insert custom here" oninput="checkAndUpdateCustom(${customRowCount})">`;
     
     const customAmountCell = document.createElement("td");
-    customAmountCell.innerHTML = `<input type="number" min="0" id="customAmount${customRowCount}" placeholder="0" oninput="updateCustomTotal(${customRowCount})">`;
+    customAmountCell.innerHTML = `<input type="number" min="0" id="customAmount${customRowCount}" placeholder="0" oninput="checkAndUpdateCustom(${customRowCount})">`;
     
     const totalCell = document.createElement("td");
     totalCell.innerHTML = `<label id="customGemsTotal${customRowCount}"></label>`;
@@ -237,19 +237,27 @@ function addCustomRow() {
     
     // Insert the new row before the custom rows placeholder
     table.insertBefore(newRow, document.getElementById("customRowsPlaceholder"));
-
-    // Automatically add a new empty row for future custom input
-    addCustomRow();
 }
 
-// Function to update the total for a custom row
-function updateCustomTotal(rowNumber) {
+// Function to update the total for a custom row and check if a new row should be added
+function checkAndUpdateCustom(rowNumber) {
     const customValue = document.getElementById(`customValue${rowNumber}`).value || 0;
     const customAmount = document.getElementById(`customAmount${rowNumber}`).value || 0;
     const total = customValue * customAmount;
     
     document.getElementById(`customGemsTotal${rowNumber}`).innerText = total;
 
+    // If both inputs have values, add a new custom row
+    if (customValue > 0 || customAmount > 0) {
+        // Only add a new row if no other custom rows are empty
+        const lastRowValue = document.getElementById(`customValue${customRowCount}`).value || 0;
+        const lastRowAmount = document.getElementById(`customAmount${customRowCount}`).value || 0;
+
+        if (lastRowValue > 0 || lastRowAmount > 0) {
+            addCustomRow();
+        }
+    }
+    
     // Recalculate the grand total whenever a custom row changes
     calculateGrandTotal();
 }
@@ -276,9 +284,4 @@ function calculateGrandTotal() {
 
     // Update the grand total display
     document.getElementById("grandTotal").innerText = grandTotal;
-}
-
-// Initialize the first custom row when the page loads
-window.onload = function() {
-    addCustomRow();
 }
