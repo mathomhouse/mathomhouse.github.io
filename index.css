@@ -131,6 +131,8 @@ table {
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 th,
