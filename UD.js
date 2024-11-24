@@ -7,7 +7,19 @@ function loadMap() {
     fetch('UD_MAP.json')
         .then(response => response.json())
         .then(data => {
-            sheetData = data;
+            console.log("Fetched data (raw):", data); // Log raw data
+            // Transform data into an array of arrays
+            const headers = Object.keys(data[0]); // Extract headers (keys from the first object)
+            const tableData = [headers]; // Start with the headers row
+
+            // Add each row of data as an array
+            data.forEach(row => {
+                const rowArray = headers.map(key => row[key]); // Extract values in header order
+                tableData.push(rowArray);
+            });
+
+            console.log("Transformed data:", tableData); // Log transformed data
+            sheetData = tableData;
             displayMap(sheetData);
         })
         .catch(error => {
@@ -23,7 +35,6 @@ function displayMap(data) {
     container.innerHTML = ''; // Clear previous content
     const table = document.createElement('table');
     data.forEach(row => {
-        console.log("Row being processed:", row); // Log each row
         const tr = document.createElement('tr');
         row.forEach(cell => {
             const td = document.createElement('td');
