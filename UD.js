@@ -18,10 +18,12 @@ function loadMap() {
 
 // Display the map as a table
 function displayMap(data) {
+    console.log("Data passed to displayMap:", data); // Log the data
     const container = document.getElementById('mapContainer');
     container.innerHTML = ''; // Clear previous content
     const table = document.createElement('table');
     data.forEach(row => {
+        console.log("Row being processed:", row); // Log each row
         const tr = document.createElement('tr');
         row.forEach(cell => {
             const td = document.createElement('td');
