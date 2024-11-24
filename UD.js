@@ -20,7 +20,7 @@ function loadMap() {
 
             console.log("Transformed data:", tableData); // Log transformed data
             sheetData = tableData;
-            displayMap(sheetData); // Display full map initially
+            displayMapWithHighlight(sheetData); // Display full map initially
         })
         .catch(error => {
             console.error('Error loading map data:', error);
@@ -96,7 +96,6 @@ function reCenterMap() {
     console.log("Highlighted data:", highlightedData); // Debug
     displayMapWithHighlight(highlightedData); // Display full map with highlighted center
 }
-
 
 // Add event listener for the "Update Map" button
 document.getElementById('updateButton').addEventListener('click', reCenterMap);
