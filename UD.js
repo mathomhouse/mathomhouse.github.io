@@ -50,29 +50,39 @@ function displayMap(data) {
 function reCenterMap() {
     const centerInput = document.getElementById('centerInput').value; // Get user input
     if (!centerInput) {
-        alert('Please enter a valid center point (e.g., 164,348)');
+        alert('Please enter a valid cell value.');
         return;
     }
 
-    const [centerRowHeader, centerColHeader] = centerInput.split(',').map(Number); // Parse input
     const headers = sheetData[0]; // Column headers
     const dataRows = sheetData.slice(1); // Rows of data
 
-    // Find indexes for center row and column
-    const colIndex = headers.indexOf(centerColHeader);
-    const rowIndex = dataRows.findIndex(row => row[0] === centerRowHeader);
+    // Search for the cell containing the input value
+    let centerRowIndex = -1;
+    let centerColIndex = -1;
 
-    if (colIndex === -1 || rowIndex === -1) {
-        alert('Center point not found in map data.');
+    for (let i = 0; i < dataRows.length; i++) {
+        const colIndex = dataRows[i].indexOf(centerInput); // Search in current row
+        if (colIndex !== -1) {
+            centerRowIndex = i; // Found row index
+            centerColIndex = colIndex; // Found column index
+            break;
+        }
+    }
+
+    if (centerRowIndex === -1 || centerColIndex === -1) {
+        alert('Cell value not found in map data.');
         return;
     }
 
-    // Define range (adjust as needed for desired size)
+    console.log(`Center found at: Row ${centerRowIndex + 1}, Column ${centerColIndex + 1}`); // Debug
+
+    // Define range (adjust for desired size)
     const range = 5; // Number of rows/columns around center point
-    const startRow = Math.max(0, rowIndex - range);
-    const endRow = Math.min(dataRows.length, rowIndex + range + 1);
-    const startCol = Math.max(0, colIndex - range);
-    const endCol = Math.min(headers.length, colIndex + range + 1);
+    const startRow = Math.max(0, centerRowIndex - range);
+    const endRow = Math.min(dataRows.length, centerRowIndex + range + 1);
+    const startCol = Math.max(0, centerColIndex - range);
+    const endCol = Math.min(headers.length, centerColIndex + range + 1);
 
     // Extract visible data
     const visibleData = [
