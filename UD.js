@@ -48,7 +48,7 @@ function displayMap(data) {
 
 // Re-center the map
 function reCenterMap() {
-    const centerInput = document.getElementById('centerInput').value; // Get user input
+    const centerInput = document.getElementById('centerInput').value.trim(); // Get user input and trim whitespace
     if (!centerInput) {
         alert('Please enter a valid cell value.');
         return;
@@ -62,7 +62,7 @@ function reCenterMap() {
     let centerColIndex = -1;
 
     for (let i = 0; i < dataRows.length; i++) {
-        const colIndex = dataRows[i].indexOf(centerInput); // Search in current row
+        const colIndex = dataRows[i].findIndex(cell => String(cell) === centerInput); // Convert cell to string for comparison
         if (colIndex !== -1) {
             centerRowIndex = i; // Found row index
             centerColIndex = colIndex; // Found column index
@@ -93,6 +93,7 @@ function reCenterMap() {
     console.log("Visible data:", visibleData); // Log visible data for debugging
     displayMap(visibleData); // Redisplay map
 }
+
 
 // Add event listener for the "Update Map" button
 document.getElementById('updateButton').addEventListener('click', reCenterMap);
