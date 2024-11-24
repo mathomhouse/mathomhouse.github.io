@@ -1,21 +1,19 @@
-document.getElementById('fileInput').addEventListener('change', handleFile);
-document.getElementById('updateButton').addEventListener('click', updateMap);
+document.addEventListener('DOMContentLoaded', loadMap);
 
-let sheetData = []; // To store Excel data
+let sheetData = []; // To store the map data
 
-// Read the Excel file
-function handleFile(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        const data = new Uint8Array(e.target.result);
-        const workbook = XLSX.read(data, { type: 'array' });
-        const sheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[sheetName];
-        sheetData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-        displayMap(sheetData);
-    };
-    reader.readAsArrayBuffer(file);
+// Load the JSON map data
+function loadMap() {
+    fetch('UD_MAP.json')
+        .then(response => response.json())
+        .then(data => {
+            sheetData = data;
+            displayMap(sheetData);
+        })
+        .catch(error => {
+            console.error('Error loading map data:', error);
+            alert('Failed to load map data. Please try again later.');
+        });
 }
 
 // Display the map as a table
@@ -35,17 +33,7 @@ function displayMap(data) {
     container.appendChild(table);
 }
 
-// Update the map based on user input
-function updateMap() {
-    const centerInput = document.getElementById('centerInput').value;
-    if (!centerInput) {
-        alert('Please enter a valid center point!');
-        return;
-    }
-
-    // Example logic to adjust map based on centerInput (e.g., re-center around a point)
-    // You can write your own logic here depending on how you want the map adjusted.
-    alert(`Re-centering map around ${centerInput} (this functionality is a placeholder!)`);
-    // Placeholder: redisplay the same map for now
-    displayMap(sheetData);
-}
+// Placeholder for re-centering the map (to be implemented later)
+document.getElementById('updateButton').addEventListener('click', () => {
+    alert('Re-centering is not implemented yet!');
+});
