@@ -85,21 +85,29 @@ function reCenterMap() {
 
     console.log(`Center found at: Row ${centerRowIndex + 1}, Column ${centerColIndex + 1}`); // Debug
 
-    // Shift the map so the center cell is visually centered
-    const range = 5; // Visible range on each side of the center
-    const startRow = Math.max(0, centerRowIndex - range);
-    const endRow = Math.min(dataRows.length, centerRowIndex + range + 1);
-    const startCol = Math.max(0, centerColIndex - range);
-    const endCol = Math.min(headers.length, centerColIndex + range + 1);
+    // Rebuild the map to ensure the input cell is centered visually
+    const visibleRows = sheetData.slice(); // Copy all rows
+    const headersRow = visibleRows[0]; // Header row remains unchanged
+    const dataOnly = visibleRows.slice(1); // Data rows only
 
-    // Rebuild the data for display
-    const centeredData = [
-        headers.slice(startCol, endCol), // Adjusted headers
-        ...dataRows.slice(startRow, endRow).map(row => row.slice(startCol, endCol))
-    ];
+    // Adjust rows and columns to center the input
+    const centerRow = Math.floor(dataOnly.length / 2);
+    const centerCol = Math.floor(headersRow.length / 2);
 
-    console.log("Centered data:", centeredData); // Debug
-    displayMapWithHighlight(centeredData, range, range); // Center cell is in the middle of the visible range
+    // Swap rows to bring the desired row to the center
+    const rowDiff = centerRow - centerRowIndex;
+    const adjustedRows = [...dataOnly.slice(rowDiff), ...dataOnly.slice(0, rowDiff)];
+
+    // Swap columns to bring the desired column to the center
+    const colDiff = centerCol - centerColIndex;
+    const adjustedHeaders = [...headersRow.slice(colDiff), ...headersRow.slice(0, colDiff)];
+    const adjustedData = adjustedRows.map(row => [...row.slice(colDiff), ...row.slice(0, colDiff)]);
+
+    // Combine headers and adjusted data
+    const finalData = [adjustedHeaders, ...adjustedData];
+
+    console.log("Adjusted map data:", finalData); // Debug
+    displayMapWithHighlight(finalData, centerRow, centerCol); // Center cell is now visually centered
 }
 
 // Add event listener for the "Update Map" button
