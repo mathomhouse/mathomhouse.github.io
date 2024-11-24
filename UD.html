@@ -5,22 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UD Map Viewer</title>
     <style>
+        /* Container for the map */
+        #mapContainer {
+            position: relative;
+            width: 100%;
+            height: 500px; /* Set a fixed height for visualization */
+            overflow: hidden; /* Ensure no scrolling */
+        }
+
+        /* Table styles */
         table {
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 0 auto;
+            transform-origin: center; /* Ensure centering works correctly */
         }
-        table, th, td {
+
+        td, th {
             border: 1px solid black;
-        }
-        th, td {
             padding: 5px;
             text-align: center;
+        }
+
+        /* Highlighted cell styling */
+        td.highlighted {
+            background-color: yellow;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <h1>UD Map Viewer</h1>
-    <input type="text" id="centerInput" placeholder="Enter center point (e.g., A5)">
+    <p>Enter the value of the cell you want to center the map on:</p>
+    <input type="text" id="centerInput" placeholder="Enter cell value (e.g., 2610)">
     <button id="updateButton">Update Map</button>
     <div id="mapContainer"></div>
 

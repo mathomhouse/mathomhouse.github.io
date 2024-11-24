@@ -28,12 +28,15 @@ function loadMap() {
         });
 }
 
-// Display the map as a table with optional highlighting
+// Display the map as a table with optional highlighting and centering
 function displayMapWithHighlight(data, centerRow = null, centerCol = null) {
     console.log("Data passed to displayMapWithHighlight:", data); // Log the data
     const container = document.getElementById('mapContainer');
     container.innerHTML = ''; // Clear previous content
+
+    // Create the table
     const table = document.createElement('table');
+    table.style.position = 'relative'; // Allow visual adjustments for centering
 
     data.forEach((row, rowIndex) => {
         const tr = document.createElement('tr');
@@ -52,6 +55,18 @@ function displayMapWithHighlight(data, centerRow = null, centerCol = null) {
     });
 
     container.appendChild(table);
+
+    // Center the table visually if a center cell is provided
+    if (centerRow !== null && centerCol !== null) {
+        const tableRows = table.rows.length;
+        const tableCols = table.rows[0]?.cells.length || 0;
+
+        // Calculate offsets to position the center cell in the middle
+        const rowOffset = Math.floor((container.offsetHeight / tableRows) * (centerRow - tableRows / 2));
+        const colOffset = Math.floor((container.offsetWidth / tableCols) * (centerCol - tableCols / 2));
+
+        table.style.transform = `translate(${colOffset}px, ${rowOffset}px)`; // Apply visual centering
+    }
 }
 
 // Re-center the map based on user input
@@ -72,8 +87,8 @@ function reCenterMap() {
     for (let i = 0; i < dataRows.length; i++) {
         const colIndex = dataRows[i].findIndex(cell => String(cell).trim() === centerInput); // Ensure both sides are strings
         if (colIndex !== -1) {
-            centerRowIndex = i; // Found row index
-            centerColIndex = colIndex; // Found column index
+            centerRowIndex = i + 1; // Adjust for header row
+            centerColIndex = colIndex;
             break;
         }
     }
@@ -83,25 +98,10 @@ function reCenterMap() {
         return;
     }
 
-    console.log(`Center found at: Row ${centerRowIndex + 1}, Column ${centerColIndex + 1}`); // Debug
+    console.log(`Center found at: Row ${centerRowIndex}, Column ${centerColIndex}`); // Debug
 
-    // Rebuild the map to ensure the input cell is centered visually
-    const range = 5; // Number of rows/columns around the center
-    const totalRows = dataRows.length;
-    const totalCols = headers.length;
-
-    const startRow = Math.max(0, centerRowIndex - range);
-    const endRow = Math.min(totalRows, centerRowIndex + range + 1);
-    const startCol = Math.max(0, centerColIndex - range);
-    const endCol = Math.min(totalCols, centerColIndex + range + 1);
-
-    const centeredData = [
-        headers.slice(startCol, endCol), // Adjusted headers
-        ...dataRows.slice(startRow, endRow).map(row => row.slice(startCol, endCol))
-    ];
-
-    console.log("Centered data:", centeredData); // Debug
-    displayMapWithHighlight(centeredData, centerRowIndex - startRow + 1, centerColIndex - startCol); // Correctly highlight center
+    // Display the map with the highlighted cell
+    displayMapWithHighlight(sheetData, centerRowIndex, centerColIndex);
 }
 
 // Add event listener for the "Update Map" button
