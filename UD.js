@@ -20,7 +20,7 @@ function loadMap() {
 
             console.log("Transformed data:", tableData); // Log transformed data
             sheetData = tableData;
-            displayMap(sheetData);
+            displayMap(sheetData); // Display full map initially
         })
         .catch(error => {
             console.error('Error loading map data:', error);
@@ -46,7 +46,43 @@ function displayMap(data) {
     container.appendChild(table);
 }
 
-// Placeholder for re-centering the map (to be implemented later)
-document.getElementById('updateButton').addEventListener('click', () => {
-    alert('Re-centering is not implemented yet!');
-});
+// Re-center the map
+function reCenterMap() {
+    const centerInput = document.getElementById('centerInput').value; // Get user input
+    if (!centerInput) {
+        alert('Please enter a valid center point (e.g., 164,348)');
+        return;
+    }
+
+    const [centerRowHeader, centerColHeader] = centerInput.split(',').map(Number); // Parse input
+    const headers = sheetData[0]; // Column headers
+    const dataRows = sheetData.slice(1); // Rows of data
+
+    // Find indexes for center row and column
+    const colIndex = headers.indexOf(centerColHeader);
+    const rowIndex = dataRows.findIndex(row => row[0] === centerRowHeader);
+
+    if (colIndex === -1 || rowIndex === -1) {
+        alert('Center point not found in map data.');
+        return;
+    }
+
+    // Define range (adjust as needed for desired size)
+    const range = 5; // Number of rows/columns around center point
+    const startRow = Math.max(0, rowIndex - range);
+    const endRow = Math.min(dataRows.length, rowIndex + range + 1);
+    const startCol = Math.max(0, colIndex - range);
+    const endCol = Math.min(headers.length, colIndex + range + 1);
+
+    // Extract visible data
+    const visibleData = [
+        headers.slice(startCol, endCol), // Column headers
+        ...dataRows.slice(startRow, endRow).map(row => row.slice(startCol, endCol))
+    ];
+
+    console.log("Visible data:", visibleData); // Log visible data for debugging
+    displayMap(visibleData); // Redisplay map
+}
+
+// Add event listener for the "Update Map" button
+document.getElementById('updateButton').addEventListener('click', reCenterMap);
