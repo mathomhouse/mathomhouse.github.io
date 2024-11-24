@@ -28,31 +28,33 @@ function loadMap() {
         });
 }
 
-// Display the map as a table
-function displayMapWithHighlight(data) {
+// Display the map as a table with optional highlighting
+function displayMapWithHighlight(data, centerRow = null, centerCol = null) {
     console.log("Data passed to displayMapWithHighlight:", data); // Log the data
     const container = document.getElementById('mapContainer');
     container.innerHTML = ''; // Clear previous content
     const table = document.createElement('table');
-    data.forEach(row => {
+
+    data.forEach((row, rowIndex) => {
         const tr = document.createElement('tr');
-        row.forEach(cell => {
+        row.forEach((cell, colIndex) => {
             const td = document.createElement('td');
-            if (typeof cell === 'object' && cell.isCenter) {
-                td.textContent = cell.value || ''; // Handle empty cells
-                td.style.backgroundColor = 'yellow'; // Highlight the center cell
-                td.style.fontWeight = 'bold'; // Optional: Make the text bold
-            } else {
-                td.textContent = cell.value || ''; // Normal cell
+            td.textContent = cell || ''; // Handle empty cells
+
+            // Highlight the center cell
+            if (rowIndex === centerRow && colIndex === centerCol) {
+                td.style.backgroundColor = 'yellow';
+                td.style.fontWeight = 'bold';
             }
             tr.appendChild(td);
         });
         table.appendChild(tr);
     });
+
     container.appendChild(table);
 }
 
-// Re-center the map
+// Re-center the map based on user input
 function reCenterMap() {
     const centerInput = document.getElementById('centerInput').value.trim(); // Get user input and trim whitespace
     if (!centerInput) {
@@ -83,18 +85,21 @@ function reCenterMap() {
 
     console.log(`Center found at: Row ${centerRowIndex + 1}, Column ${centerColIndex + 1}`); // Debug
 
-    // Highlight the center point
-    const highlightedData = sheetData.map((row, rowIndex) =>
-        row.map((cell, colIndex) => {
-            if (rowIndex === centerRowIndex + 1 && colIndex === centerColIndex) {
-                return { value: cell, isCenter: true }; // Mark as center
-            }
-            return { value: cell, isCenter: false }; // Normal cell
-        })
-    );
+    // Shift the map so the center cell is visually centered
+    const range = 5; // Visible range on each side of the center
+    const startRow = Math.max(0, centerRowIndex - range);
+    const endRow = Math.min(dataRows.length, centerRowIndex + range + 1);
+    const startCol = Math.max(0, centerColIndex - range);
+    const endCol = Math.min(headers.length, centerColIndex + range + 1);
 
-    console.log("Highlighted data:", highlightedData); // Debug
-    displayMapWithHighlight(highlightedData); // Display full map with highlighted center
+    // Rebuild the data for display
+    const centeredData = [
+        headers.slice(startCol, endCol), // Adjusted headers
+        ...dataRows.slice(startRow, endRow).map(row => row.slice(startCol, endCol))
+    ];
+
+    console.log("Centered data:", centeredData); // Debug
+    displayMapWithHighlight(centeredData, range, range); // Center cell is in the middle of the visible range
 }
 
 // Add event listener for the "Update Map" button
