@@ -29,8 +29,8 @@ function loadMap() {
 }
 
 // Display the map as a table
-function displayMap(data) {
-    console.log("Data passed to displayMap:", data); // Log the data
+function displayMapWithHighlight(data) {
+    console.log("Data passed to displayMapWithHighlight:", data); // Log the data
     const container = document.getElementById('mapContainer');
     container.innerHTML = ''; // Clear previous content
     const table = document.createElement('table');
@@ -38,7 +38,13 @@ function displayMap(data) {
         const tr = document.createElement('tr');
         row.forEach(cell => {
             const td = document.createElement('td');
-            td.textContent = cell || ''; // Handle empty cells
+            if (typeof cell === 'object' && cell.isCenter) {
+                td.textContent = cell.value || ''; // Handle empty cells
+                td.style.backgroundColor = 'yellow'; // Highlight the center cell
+                td.style.fontWeight = 'bold'; // Optional: Make the text bold
+            } else {
+                td.textContent = cell.value || ''; // Normal cell
+            }
             tr.appendChild(td);
         });
         table.appendChild(tr);
@@ -77,21 +83,18 @@ function reCenterMap() {
 
     console.log(`Center found at: Row ${centerRowIndex + 1}, Column ${centerColIndex + 1}`); // Debug
 
-    // Define range (adjust for desired size)
-    const range = 5; // Number of rows/columns around center point
-    const startRow = Math.max(0, centerRowIndex - range);
-    const endRow = Math.min(dataRows.length, centerRowIndex + range + 1);
-    const startCol = Math.max(0, centerColIndex - range);
-    const endCol = Math.min(headers.length, centerColIndex + range + 1);
+    // Highlight the center point
+    const highlightedData = sheetData.map((row, rowIndex) =>
+        row.map((cell, colIndex) => {
+            if (rowIndex === centerRowIndex + 1 && colIndex === centerColIndex) {
+                return { value: cell, isCenter: true }; // Mark as center
+            }
+            return { value: cell, isCenter: false }; // Normal cell
+        })
+    );
 
-    // Extract visible data
-    const visibleData = [
-        headers.slice(startCol, endCol), // Column headers
-        ...dataRows.slice(startRow, endRow).map(row => row.slice(startCol, endCol))
-    ];
-
-    console.log("Visible data:", visibleData); // Log visible data for debugging
-    displayMap(visibleData); // Redisplay map
+    console.log("Highlighted data:", highlightedData); // Debug
+    displayMapWithHighlight(highlightedData); // Display full map with highlighted center
 }
 
 
