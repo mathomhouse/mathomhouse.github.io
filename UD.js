@@ -103,9 +103,10 @@ function wrapMap(dataRows, centerRow, centerCol, headers) {
         wrappedRows.push(wrappedRow);
     }
 
-    // Ensure the headers row is included at the top of the table
+    // Return the full wrapped map including headers
     return [headers, ...wrappedRows];
 }
+
 
 
 // Display the map with highlighting
