@@ -51,6 +51,8 @@ function loadMap() {
 
 // Render Map
 function renderMap() {
+    let mapElement = document.getElementById("mapContainer");
+
     mapElement.innerHTML = ""; // Clear existing table
     //const grid = {};
     mapData.forEach((cell) => {
