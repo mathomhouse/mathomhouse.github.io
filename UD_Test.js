@@ -7,7 +7,7 @@ function loadMap() {
     //event.preventDefault();
     // Parse Excel and Initialize Map
     fetch("UD_Test.xlsx")
-    //fetch("https://mathomhouse.github.io/UD_Test.xlsx")   //for local testing
+    //fetch("https://mathomhouse.github.io/UD MAP.xlsx")   //for local testing
     .then((response) => response.arrayBuffer())
     .then((data) => {
         const workbook = XLSX.read(data, { type: "array" });
@@ -23,7 +23,7 @@ function loadMap() {
                 if (cell) {
                     const parts = String(cell.v).split(/\r?\n/); // Split by line break
                     const sid = parseInt(parts[0], 10) || null;
-                    const msid = parts.length > 1 ? parseInt(parts[1], 10) : null;
+                    const msid = parts.length > 1 ? parseInt(parts[1], 10) : sid;
 
                     // Extract background color
                     const style = sheet['!cols'] || {};
@@ -116,6 +116,8 @@ function reCenterMap() {
 
     // Render the map with the centered and highlighted cell
     renderMap(wrappedData);
+
+    highlightCells();
 }
 
 // Wrap the map like a globe
@@ -162,7 +164,7 @@ function resetPosData(data){
 function highlightCells(){
     let mapElement = document.getElementById("mapContainer");
     let serverNumberString = document.getElementById('highlightServers').value.trim();
-    let serverStrings = serverNumberString.split(',');
+    let serverStrings = serverNumberString.split(' ');
     let serverNumbers = [];
     serverStrings.forEach(num => {
         serverNumbers.push(parseInt(num.trim()));
@@ -194,4 +196,3 @@ function highlightCells(){
 
 // Add event listener for the "Update Map" button
 document.getElementById('updateButton').addEventListener('click', reCenterMap);
-document.getElementById('highlightServersButton').addEventListener('click', highlightCells);
