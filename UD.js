@@ -7,12 +7,12 @@ function loadMap() {
     fetch('UD_MAP.json')
         .then(response => response.json())
         .then(data => {
-            console.log("Fetched data (raw):", data);
+            console.log("Fetched data (raw):", data); // Log raw data
 
-            // Transform JSON into an array of arrays
-            const tableData = data.map(row => Object.values(row)); // Convert objects to arrays
+            // Convert JSON objects into arrays of values
+            const tableData = data.map(row => Object.values(row));
 
-            sheetData = tableData; // Store the full map
+            sheetData = tableData; // Store the entire map
             displayMap(sheetData); // Display the full map initially
         })
         .catch(error => {
