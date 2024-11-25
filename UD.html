@@ -9,21 +9,23 @@
         #mapContainer {
             position: relative;
             width: 100%;
-            height: 500px; /* Set a fixed height for visualization */
-            overflow: hidden; /* Ensure no scrolling */
+            height: 600px; /* Adjust height to fit the map */
+            overflow: auto; /* Allow scrolling for large maps */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         /* Table styles */
         table {
             border-collapse: collapse;
-            margin: 0 auto;
-            transform-origin: center; /* Ensure centering works correctly */
         }
 
         td, th {
             border: 1px solid black;
-            padding: 5px;
+            padding: 10px;
             text-align: center;
+            min-width: 50px; /* Ensure cells have a consistent size */
         }
 
         /* Highlighted cell styling */
@@ -38,7 +40,9 @@
     <p>Enter the value of the cell you want to center the map on:</p>
     <input type="text" id="centerInput" placeholder="Enter cell value (e.g., 2610)">
     <button id="updateButton">Update Map</button>
-    <div id="mapContainer"></div>
+    <div id="mapContainer">
+        <!-- Table will be dynamically inserted here -->
+    </div>
 
     <script src="UD.js"></script>
 </body>

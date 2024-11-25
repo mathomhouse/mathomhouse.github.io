@@ -7,20 +7,19 @@ function loadMap() {
     fetch('UD_MAP.json')
         .then(response => response.json())
         .then(data => {
-            console.log("Fetched data (raw):", data); // Log raw data
-            // Transform data into an array of arrays
-            const headers = Object.keys(data[0]); // Extract headers (keys from the first object)
-            const tableData = [headers]; // Start with the headers row
+            console.log("Fetched data (raw):", data);
+            // Transform the JSON into an array of arrays
+            const headers = Object.keys(data[0]); // Extract headers
+            const tableData = [headers]; // Start with headers
 
-            // Add each row of data as an array
+            // Add rows of data
             data.forEach(row => {
                 const rowArray = headers.map(key => row[key]); // Extract values in header order
                 tableData.push(rowArray);
             });
 
-            console.log("Transformed data:", tableData); // Log transformed data
             sheetData = tableData;
-            displayMapWithHighlight(sheetData); // Display full map initially
+            displayMap(sheetData); // Display the full map initially
         })
         .catch(error => {
             console.error('Error loading map data:', error);
@@ -28,66 +27,45 @@ function loadMap() {
         });
 }
 
-// Display the map as a table with optional highlighting and centering
-function displayMapWithHighlight(data, centerRow = null, centerCol = null) {
-    console.log("Data passed to displayMapWithHighlight:", data); // Log the data
+// Display the full map
+function displayMap(data) {
     const container = document.getElementById('mapContainer');
-    container.innerHTML = ''; // Clear previous content
+    container.innerHTML = ''; // Clear existing content
 
-    // Create the table
     const table = document.createElement('table');
-    table.style.position = 'relative'; // Allow visual adjustments for centering
 
-    data.forEach((row, rowIndex) => {
+    data.forEach(row => {
         const tr = document.createElement('tr');
-        row.forEach((cell, colIndex) => {
+        row.forEach(cell => {
             const td = document.createElement('td');
             td.textContent = cell || ''; // Handle empty cells
-
-            // Highlight the center cell
-            if (rowIndex === centerRow && colIndex === centerCol) {
-                td.style.backgroundColor = 'yellow';
-                td.style.fontWeight = 'bold';
-            }
             tr.appendChild(td);
         });
         table.appendChild(tr);
     });
 
     container.appendChild(table);
-
-    // Center the table visually if a center cell is provided
-    if (centerRow !== null && centerCol !== null) {
-        const tableRows = table.rows.length;
-        const tableCols = table.rows[0]?.cells.length || 0;
-
-        // Calculate offsets to position the center cell in the middle
-        const rowOffset = Math.floor((container.offsetHeight / tableRows) * (centerRow - tableRows / 2));
-        const colOffset = Math.floor((container.offsetWidth / tableCols) * (centerCol - tableCols / 2));
-
-        table.style.transform = `translate(${colOffset}px, ${rowOffset}px)`; // Apply visual centering
-    }
 }
 
-// Re-center the map based on user input
+// Center and highlight a specific cell
 function reCenterMap() {
-    const centerInput = document.getElementById('centerInput').value.trim(); // Get user input and trim whitespace
+    const centerInput = document.getElementById('centerInput').value.trim();
     if (!centerInput) {
         alert('Please enter a valid cell value.');
         return;
     }
 
-    const headers = sheetData[0]; // Column headers
-    const dataRows = sheetData.slice(1); // Rows of data
+    const headers = sheetData[0];
+    const dataRows = sheetData.slice(1);
 
-    // Search for the cell containing the input value
+    // Find the cell containing the input value
     let centerRowIndex = -1;
     let centerColIndex = -1;
 
-    for (let i = 0; i < dataRows.length; i++) {
-        const colIndex = dataRows[i].findIndex(cell => String(cell).trim() === centerInput); // Ensure both sides are strings
+    for (let rowIndex = 0; rowIndex < dataRows.length; rowIndex++) {
+        const colIndex = dataRows[rowIndex].findIndex(cell => String(cell).trim() === centerInput);
         if (colIndex !== -1) {
-            centerRowIndex = i + 1; // Adjust for header row
+            centerRowIndex = rowIndex;
             centerColIndex = colIndex;
             break;
         }
@@ -98,10 +76,56 @@ function reCenterMap() {
         return;
     }
 
-    console.log(`Center found at: Row ${centerRowIndex}, Column ${centerColIndex}`); // Debug
+    console.log(`Centering on value: ${centerInput} at Row: ${centerRowIndex}, Column: ${centerColIndex}`);
 
-    // Display the map with the highlighted cell
-    displayMapWithHighlight(sheetData, centerRowIndex, centerColIndex);
+    // Wrap the map
+    const wrappedData = wrapMap(dataRows, centerRowIndex, centerColIndex, headers);
+
+    // Render the map with the centered and highlighted cell
+    displayMapWithHighlight(wrappedData, centerRowIndex, centerColIndex);
+}
+
+// Wrap the map like a globe
+function wrapMap(dataRows, centerRow, centerCol, headers) {
+    const totalRows = dataRows.length;
+    const totalCols = headers.length;
+
+    // Create a "wrapped" version of the map
+    const wrappedRows = [];
+    for (let rowOffset = -Math.floor(totalRows / 2); rowOffset <= Math.floor(totalRows / 2); rowOffset++) {
+        const rowIndex = (centerRow + rowOffset + totalRows) % totalRows;
+        const wrappedRow = [];
+        for (let colOffset = -Math.floor(totalCols / 2); colOffset <= Math.floor(totalCols / 2); colOffset++) {
+            const colIndex = (centerCol + colOffset + totalCols) % totalCols;
+            wrappedRow.push(dataRows[rowIndex][colIndex]);
+        }
+        wrappedRows.push(wrappedRow);
+    }
+    return [headers, ...wrappedRows];
+}
+
+// Display the map with highlighting
+function displayMapWithHighlight(data, centerRow, centerCol) {
+    const container = document.getElementById('mapContainer');
+    container.innerHTML = '';
+
+    const table = document.createElement('table');
+    data.forEach((row, rowIndex) => {
+        const tr = document.createElement('tr');
+        row.forEach((cell, colIndex) => {
+            const td = document.createElement('td');
+            td.textContent = cell || '';
+
+            // Highlight the center cell
+            if (rowIndex === Math.floor(data.length / 2) && colIndex === Math.floor(row.length / 2)) {
+                td.classList.add('highlighted');
+            }
+            tr.appendChild(td);
+        });
+        table.appendChild(tr);
+    });
+
+    container.appendChild(table);
 }
 
 // Add event listener for the "Update Map" button
