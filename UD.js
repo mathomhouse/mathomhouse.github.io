@@ -7,18 +7,12 @@ function loadMap() {
     fetch('UD_MAP.json')
         .then(response => response.json())
         .then(data => {
-            console.log("Fetched data (raw):", data); // Log raw data
+            console.log("Fetched data (raw):", data);
+
             // Transform JSON into an array of arrays
-            const headers = Object.keys(data[0]); // Extract headers
-            const tableData = [headers]; // Start with headers
+            const tableData = data.map(row => Object.values(row)); // Convert objects to arrays
 
-            // Add rows of data
-            data.forEach(row => {
-                const rowArray = headers.map(key => row[key]); // Extract values in header order
-                tableData.push(rowArray);
-            });
-
-            sheetData = tableData;
+            sheetData = tableData; // Store the full map
             displayMap(sheetData); // Display the full map initially
         })
         .catch(error => {
@@ -55,8 +49,7 @@ function reCenterMap() {
         return;
     }
 
-    const headers = sheetData[0];
-    const dataRows = sheetData.slice(1);
+    const dataRows = sheetData;
 
     // Find the cell containing the input value
     let centerRowIndex = -1;
@@ -79,16 +72,16 @@ function reCenterMap() {
     console.log(`Centering on value: ${centerInput} at Row: ${centerRowIndex}, Column: ${centerColIndex}`);
 
     // Wrap the map
-    const wrappedData = wrapMap(dataRows, centerRowIndex, centerColIndex, headers);
+    const wrappedData = wrapMap(dataRows, centerRowIndex, centerColIndex);
 
     // Render the map with the centered and highlighted cell
     displayMapWithHighlight(wrappedData);
 }
 
 // Wrap the map like a globe
-function wrapMap(dataRows, centerRow, centerCol, headers) {
+function wrapMap(dataRows, centerRow, centerCol) {
     const totalRows = dataRows.length;
-    const totalCols = headers.length;
+    const totalCols = dataRows[0].length;
 
     // Create a wrapped version of the map
     const wrappedRows = [];
@@ -103,8 +96,7 @@ function wrapMap(dataRows, centerRow, centerCol, headers) {
         wrappedRows.push(wrappedRow);
     }
 
-    // Return the full wrapped map including headers
-    return [headers, ...wrappedRows];
+    return wrappedRows;
 }
 
 // Display the map with highlighting
