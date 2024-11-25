@@ -32,15 +32,15 @@
 
         /* Highlighted cell styling */
         td.highlighted {
-            background-color: yellow;
             font-weight: bold;
         }
     </style>
 </head>
 <body>
     <h1>Mathom House's UD Map Viewer</h1>
-    <p>Enter the server number you want to center the map on:</p>
+    <p>Enter the server numbers you want to highlight:</p>
     <input type="text" id="centerInput" placeholder="Enter server number (e.g., 2610)">
+    <input type="text" id="highlightInput" placeholder="Enter second server number (e.g., 1300)">
     <button id="updateButton">Update Map</button>
     <br>
     <div id="mapContainer">

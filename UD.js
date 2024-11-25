@@ -41,17 +41,19 @@ function displayMap(data) {
     container.appendChild(table);
 }
 
-// Center and highlight a specific cell
+// Center and highlight specific cells
 function reCenterMap() {
     const centerInput = document.getElementById('centerInput').value.trim();
+    const highlightInput = document.getElementById('highlightInput').value.trim();
+
     if (!centerInput) {
-        alert('Please enter a valid server number.');
+        alert('Please enter a valid server number in the first box.');
         return;
     }
 
     const dataRows = sheetData;
 
-    // Find the cell containing the input value
+    // Find the cell containing the center input value
     let centerRowIndex = -1;
     let centerColIndex = -1;
 
@@ -65,7 +67,7 @@ function reCenterMap() {
     }
 
     if (centerRowIndex === -1 || centerColIndex === -1) {
-        alert('Cell value not found in map data.');
+        alert('Center value not found in map data.');
         return;
     }
 
@@ -74,8 +76,8 @@ function reCenterMap() {
     // Wrap the map
     const wrappedData = wrapMap(dataRows, centerRowIndex, centerColIndex);
 
-    // Render the map with the centered and highlighted cell
-    displayMapWithHighlight(wrappedData);
+    // Render the map with the centered and highlighted cells
+    displayMapWithHighlight(wrappedData, centerInput, highlightInput);
 }
 
 // Wrap the map like a globe
@@ -99,8 +101,8 @@ function wrapMap(dataRows, centerRow, centerCol) {
     return wrappedRows;
 }
 
-// Display the map with highlighting
-function displayMapWithHighlight(data) {
+// Display the map with multiple highlights
+function displayMapWithHighlight(data, centerInput, highlightInput) {
     const container = document.getElementById('mapContainer');
     container.innerHTML = '';
 
@@ -114,7 +116,15 @@ function displayMapWithHighlight(data) {
             // Highlight the center cell
             if (rowIndex === Math.floor(data.length / 2) && colIndex === Math.floor(row.length / 2)) {
                 td.classList.add('highlighted');
+                td.style.backgroundColor = 'yellow';
             }
+
+            // Highlight cells matching the second input
+            if (String(cell).trim() === highlightInput) {
+                td.style.backgroundColor = 'lightblue';
+                td.style.fontWeight = 'bold';
+            }
+
             tr.appendChild(td);
         });
         table.appendChild(tr);
