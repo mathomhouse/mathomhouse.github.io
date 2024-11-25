@@ -89,10 +89,10 @@ function renderMap(data) {
 // Center and highlight a specific cell
 function reCenterMap() {
     const centerInput = document.getElementById('centerInput').value.trim();
-    // if (!centerInput) {
-    //     alert('Please enter a valid server number.');
-    //     return;
-    // }
+    if (!centerInput) {
+        highlightCells();
+        return;
+    }
 
     const dataRows = mapData;
 
@@ -172,7 +172,7 @@ function highlightCells() {
     let mapElement = document.getElementById("mapContainer");
     let serverNumberString = document.getElementById('highlightServers').value.trim();
     let serverStrings = serverNumberString.split(' ');
-    if (serverStrings === undefined || array.length == 0){
+    if (serverStrings === undefined || serverStrings.length == 0){
         return;
     }
     
@@ -188,8 +188,8 @@ function highlightCells() {
     rows.forEach(row => {
         const cells = row.querySelectorAll('td'); // Get all cells in the row
         cells.forEach(cell => {
-            // Extract text1 value from the cell (value before <br>)
-            const cellValue = cell.innerHTML.split('<br>')[0]; // Text1 is the value before <br>
+            // Extract sid value from the cell (value before <br>)
+            const cellValue = cell.querySelector('.sid').textContent.trim(); // Extract the content of the span with class "sid"
 
             // Check if cellValue matches any value in serverNumbers array
             if (serverNumbers.includes(parseInt(cellValue))) {
