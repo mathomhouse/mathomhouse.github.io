@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", loadMap);
 let mapData = [];
+let grid = {};
 
 // Load the JSON map data
 function loadMap() {
@@ -40,12 +41,35 @@ function loadMap() {
         }
 
         //exportJson(mapData);
-        displayMap(mapData);
+        renderMap();
     })
     .catch(error => {
         console.error('Error loading map data: ', error);
         alert('Failed to load map data. Please try again later. If this issue persists please reach out to artu.');
     });
+}
+
+// Render Map
+function renderMap() {
+    mapElement.innerHTML = ""; // Clear existing table
+    //const grid = {};
+    mapData.forEach((cell) => {
+        const { pos, sid, msid, color } = cell;
+        if (!grid[pos.x]) grid[pos.x] = [];
+        grid[pos.x][pos.y] = { sid, msid, color };
+    });
+
+    for (const rowKey in grid) {
+        const rowElement = document.createElement("tr");
+        const row = grid[rowKey];
+        row.forEach((cell) => {
+            const cellElement = document.createElement("td");
+            cellElement.style.backgroundColor = cell.color;
+            cellElement.innerHTML = `${cell.sid}<br>${cell.msid}`; // Display sid and msid with a line break
+            rowElement.appendChild(cellElement);
+        });
+        mapElement.appendChild(rowElement);
+    }
 }
 
 // Display the full map
