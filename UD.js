@@ -17,7 +17,7 @@ function loadMap() {
         })
         .catch(error => {
             console.error('Error loading map data:', error);
-            alert('Failed to load map data. Please try again later.');
+            alert('Failed to load map data. Please try again later. If this issue persists please reach out to artu.');
         });
 }
 
@@ -45,7 +45,7 @@ function displayMap(data) {
 function reCenterMap() {
     const centerInput = document.getElementById('centerInput').value.trim();
     if (!centerInput) {
-        alert('Please enter a valid cell value.');
+        alert('Please enter a valid server number.');
         return;
     }
 
