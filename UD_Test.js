@@ -10,23 +10,35 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((data) => {
             const workbook = XLSX.read(data, { type: "array" });
             const sheet = workbook.Sheets[workbook.SheetNames[0]];
-            const json = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-            document.getElementById("testLabel").innerText = json;
-            // Process Excel data into the desired structure
-            json.forEach((row, x) => {
-                row.forEach((cell, y) => {
+            const range = XLSX.utils.decode_range(sheet['!ref']); // Get sheet dimensions
+
+            // Iterate through cells in the range
+            for (let row = range.s.r; row <= range.e.r; row++) {
+                for (let col = range.s.c; col <= range.e.c; col++) {
+                    const cellAddress = XLSX.utils.encode_cell({ r: row, c: col });
+                    const cell = sheet[cellAddress];
+
                     if (cell) {
-                        const [sid, msid, color] = cell.split(" ");
+                        const parts = String(cell.v).split(/\r?\n/); // Split by line break
+                        const sid = parseInt(parts[0], 10) || null;
+                        const msid = parts.length > 1 ? parseInt(parts[1], 10) : null;
+
+                        // Extract background color
+                        const style = sheet['!cols'] || {};
+                        const color = cell.s && cell.s.fgColor
+                            ? `#${cell.s.fgColor.rgb}` // Get RGB color
+                            : "#FFFFFF"; // Default to white
+
                         mapData.push({
-                            sid: parseInt(sid),
-                            msid: parseInt(msid),
-                            pos: { x, y },
-                            color: `#${color}` || "#FFFFFF", // Default color if undefined
+                            sid: sid,
+                            msid: msid,
+                            pos: { x: row, y: col },
+                            color: color,
                             name: "",
                         });
                     }
-                });
-            });
+                }
+            }
 
             exportJson(mapData);
             renderMap();
