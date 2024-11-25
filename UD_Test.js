@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
 
-            exportJson(mapData);
+            //exportJson(mapData);
             renderMap();
         })
         .catch(error => {
@@ -49,19 +49,31 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
     // Export JSON Data Automatically
-    function exportJson(data) {
-        const jsonData = JSON.stringify(data, null, 2); // Format JSON with indentation
-        const blob = new Blob([jsonData], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
+    // function exportJson(data) {
+    //     const jsonData = JSON.stringify(data, null, 2); // Format JSON with indentation
+    //     const blob = new Blob([jsonData], { type: "application/json" });
+    //     const url = URL.createObjectURL(blob);
 
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "mapData.json"; // The filename for the downloaded file
-        a.click();
+    //     const a = document.createElement("a");
+    //     a.href = url;
+    //     a.download = "mapData.json"; // The filename for the downloaded file
+    //     a.click();
 
-        URL.revokeObjectURL(url); // Clean up the URL object
-    }
+    //     URL.revokeObjectURL(url); // Clean up the URL object
+    // }
 
+
+    // Center Map on Input
+    centerButton.addEventListener("click", () => {
+        const centerSid = parseInt(centerInput.value);
+        if (!centerSid) {
+            alert("Please enter a valid server number.");
+            return;
+        }
+        renderMap(centerSid);
+    });
+
+    
     // Render Map
     function renderMap(centerSid = null) {
         mapElement.innerHTML = ""; // Clear existing table
@@ -87,14 +99,4 @@ document.addEventListener("DOMContentLoaded", () => {
             mapElement.appendChild(rowElement);
         }
     }
-
-    // Center Map on Input
-    centerButton.addEventListener("click", () => {
-        const centerSid = parseInt(centerInput.value);
-        if (!centerSid) {
-            alert("Please enter a valid server number.");
-            return;
-        }
-        renderMap(centerSid);
-    });
 });
