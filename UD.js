@@ -90,19 +90,23 @@ function wrapMap(dataRows, centerRow, centerCol, headers) {
     const totalRows = dataRows.length;
     const totalCols = headers.length;
 
-    // Create a "wrapped" version of the map
+    // Create a wrapped version of the map
     const wrappedRows = [];
+
     for (let rowOffset = -Math.floor(totalRows / 2); rowOffset <= Math.floor(totalRows / 2); rowOffset++) {
-        const rowIndex = (centerRow + rowOffset + totalRows) % totalRows;
+        const rowIndex = (centerRow + rowOffset + totalRows) % totalRows; // Ensure wrap-around
         const wrappedRow = [];
         for (let colOffset = -Math.floor(totalCols / 2); colOffset <= Math.floor(totalCols / 2); colOffset++) {
-            const colIndex = (centerCol + colOffset + totalCols) % totalCols;
+            const colIndex = (centerCol + colOffset + totalCols) % totalCols; // Ensure wrap-around
             wrappedRow.push(dataRows[rowIndex][colIndex]);
         }
         wrappedRows.push(wrappedRow);
     }
+
+    // Ensure the headers row is included at the top of the table
     return [headers, ...wrappedRows];
 }
+
 
 // Display the map with highlighting
 function displayMapWithHighlight(data, centerRow, centerCol) {
