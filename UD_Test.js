@@ -6,49 +6,49 @@ let grid = {};
 function loadMap() {
     //event.preventDefault();
     // Parse Excel and Initialize Map
-    fetch("UD_Test.xlsx")
-    //fetch("https://mathomhouse.github.io/UD MAP.xlsx")   //for local testing
-    .then((response) => response.arrayBuffer())
-    .then((data) => {
-        const workbook = XLSX.read(data, { type: "array" });
-        const sheet = workbook.Sheets[workbook.SheetNames[0]];
-        const range = XLSX.utils.decode_range(sheet['!ref']); // Get sheet dimensions
+    //fetch("UD_Test.xlsx")
+    fetch("https://mathomhouse.github.io/UD_Test3.xlsx")   //for local testing
+        .then((response) => response.arrayBuffer())
+        .then((data) => {
+            const workbook = XLSX.read(data, { type: "array" });
+            const sheet = workbook.Sheets[workbook.SheetNames[0]];
+            const range = XLSX.utils.decode_range(sheet['!ref']); // Get sheet dimensions
 
-        // Iterate through cells in the range
-        for (let row = range.s.r; row <= range.e.r; row++) {
-            for (let col = range.s.c; col <= range.e.c; col++) {
-                const cellAddress = XLSX.utils.encode_cell({ r: row, c: col });
-                const cell = sheet[cellAddress];
+            // Iterate through cells in the range
+            for (let row = range.s.r; row <= range.e.r; row++) {
+                for (let col = range.s.c; col <= range.e.c; col++) {
+                    const cellAddress = XLSX.utils.encode_cell({ r: row, c: col });
+                    const cell = sheet[cellAddress];
 
-                if (cell) {
-                    const parts = String(cell.v).split(/\r?\n/); // Split by line break
-                    const sid = parseInt(parts[0], 10) || null;
-                    const msid = parts.length > 1 ? parseInt(parts[1], 10) : sid;
+                    if (cell) {
+                        const parts = String(cell.v).split(/\r?\n/); // Split by line break
+                        const sid = parseInt(parts[0], 10) || null;
+                        const msid = parts.length > 1 ? parseInt(parts[1], 10) : sid;
 
-                    // Extract background color
-                    const style = sheet['!cols'] || {};
-                    const color = cell.s && cell.s.fgColor
-                        ? `#${cell.s.fgColor.rgb}` // Get RGB color
-                        : "#FFFFFF"; // Default to white
+                        // Extract background color
+                        const style = sheet['!cols'] || {};
+                        const color = cell.s && cell.s.fgColor
+                            ? `#${cell.s.fgColor.rgb}` // Get RGB color
+                            : "#FFFFFF"; // Default to white
 
-                    mapData.push({
-                        sid: sid,
-                        msid: msid,
-                        pos: { x: row, y: col },
-                        color: color,
-                        name: "",
-                    });
+                        mapData.push({
+                            sid: sid,
+                            msid: msid,
+                            pos: { x: row, y: col },
+                            color: color,
+                            name: "",
+                        });
+                    }
                 }
             }
-        }
 
-        //exportJson(mapData);
-        renderMap(mapData);
-    })
-    .catch(error => {
-        console.error('Error loading map data: ', error);
-        alert('Failed to load map data. Please try again later. If this issue persists please reach out to artu.');
-    });
+            //exportJson(mapData);
+            renderMap(mapData);
+        })
+        .catch(error => {
+            console.error('Error loading map data: ', error);
+            alert('Failed to load map data. Please try again later. If this issue persists please reach out to artu.');
+        });
 }
 
 // Render Map
@@ -65,29 +65,34 @@ function renderMap(data) {
         if (!grid[pos.x]) grid[pos.x] = [];
         grid[pos.x][pos.y] = { sid, msid, color };
     });
-    grid[centerIndex][centerIndex].color = 'highlighted';
+    grid[centerIndex][centerIndex].color = 'highlighted';   //highlight the center element
 
     for (const rowKey in grid) {
         const rowElement = document.createElement("tr");
         const row = grid[rowKey];
         row.forEach((cell) => {
             const cellElement = document.createElement("td");
-            //cellElement.style.backgroundColor = cell.color;
-            cellElement.innerHTML = `${cell.sid}<br>${cell.msid}`; // Display sid and msid with a line break
+
+            cellElement.innerHTML = `
+                <span class="sid">${cell.sid}</span><br>
+                <span class="msid">${cell.msid}</span>
+            `;
             cellElement.classList.add(cell.color);
             rowElement.appendChild(cellElement);
         });
         mapElement.appendChild(rowElement);
     }
+
+    higlightLargestFactions();
 }
 
 // Center and highlight a specific cell
 function reCenterMap() {
     const centerInput = document.getElementById('centerInput').value.trim();
-    if (!centerInput) {
-        alert('Please enter a valid server number.');
-        return;
-    }
+    // if (!centerInput) {
+    //     alert('Please enter a valid server number.');
+    //     return;
+    // }
 
     const dataRows = mapData;
 
@@ -97,7 +102,7 @@ function reCenterMap() {
 
     for (let rowIndex = 0; rowIndex < dataRows.length; rowIndex++) {
         let cell = dataRows[rowIndex];
-        if (cell.sid === parseInt(centerInput)){
+        if (cell.sid === parseInt(centerInput)) {
             centerRowIndex = cell.pos.x;
             centerColIndex = cell.pos.y;
             break;
@@ -135,8 +140,8 @@ function wrapMap(dataRows, centerRow, centerCol) {
         for (let colOffset = -Math.floor(totalCols / 2); colOffset <= Math.floor(totalCols / 2); colOffset++) {
             const colIndex = (centerCol + colOffset + totalCols) % totalCols; // Ensure wrap-around
             //find the correct cell in the original list
-            dataRows.every(cell=> {
-                if (cell.pos.x === rowIndex && cell.pos.y === colIndex){
+            dataRows.every(cell => {
+                if (cell.pos.x === rowIndex && cell.pos.y === colIndex) {
                     wrappedRows.push(cell);
                     return false;
                 }
@@ -149,49 +154,129 @@ function wrapMap(dataRows, centerRow, centerCol) {
     return wrappedRows;
 }
 
-function resetPosData(data){
+//reset the pos.x and pos.y data for each server
+function resetPosData(data) {
     // Calculate the size of the square grid
     const gridSize = Math.ceil(Math.sqrt(data.length));
     let centerIndex = Math.floor(gridSize / 2);
-    
+
     // Update the `pos.x` and `pos.y` properties
     data.forEach((item, index) => {
-      item.pos.x = Math.floor(index / gridSize); // Row number
-      item.pos.y = index % gridSize; // Column number
+        item.pos.x = Math.floor(index / gridSize); // Row number
+        item.pos.y = index % gridSize; // Column number
     });
 }
 
-function highlightCells(){
+//highlight additional cells
+function highlightCells() {
     let mapElement = document.getElementById("mapContainer");
     let serverNumberString = document.getElementById('highlightServers').value.trim();
     let serverStrings = serverNumberString.split(' ');
+    if (serverStrings === undefined || array.length == 0){
+        return;
+    }
+    
     let serverNumbers = [];
     serverStrings.forEach(num => {
         serverNumbers.push(parseInt(num.trim()));
     });
-
-     // Convert the innerHTML to a DOM structure for easier manipulation
-     const rows = mapElement.querySelectorAll('tr'); // Get all rows in the table
     
-     // Loop through each row and each cell to check and highlight
-     rows.forEach(row => {
-         const cells = row.querySelectorAll('td'); // Get all cells in the row
-         cells.forEach(cell => {
-             // Extract text1 value from the cell (value before <br>)
-             const cellValue = cell.innerHTML.split('<br>')[0]; // Text1 is the value before <br>
-             
-             // Check if cellValue matches any value in serverNumbers array
-             if (serverNumbers.includes(parseInt(cellValue))) {
-                 // Add the "highlight" class
-                 if (!cell.classList.contains('highlighted')){
+    // Convert the innerHTML to a DOM structure for easier manipulation
+    const rows = mapElement.querySelectorAll('tr'); // Get all rows in the table
+
+    // Loop through each row and each cell to check and highlight
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td'); // Get all cells in the row
+        cells.forEach(cell => {
+            // Extract text1 value from the cell (value before <br>)
+            const cellValue = cell.innerHTML.split('<br>')[0]; // Text1 is the value before <br>
+
+            // Check if cellValue matches any value in serverNumbers array
+            if (serverNumbers.includes(parseInt(cellValue))) {
+                // Add the "highlight" class
+                if (!cell.classList.contains('highlighted')) {
                     cell.classList.add('additionalHighlight');
-                 }
-             } else {
-                 // Remove "highlight" class in case it was previously applied
-                 cell.classList.remove('additionalHighlight');
-             }
-         });
-     });
+                }
+            } else {
+                // Remove "highlight" class in case it was previously applied
+                cell.classList.remove('additionalHighlight');
+            }
+        });
+    });
+}
+
+//highlight the 3 largest factions
+//if there is a tie, do what?
+function higlightLargestFactions() {
+    let mapElement = document.getElementById("mapContainer");
+
+    //faction data is the msid of each server. Need to create a list of msid, and group by at the same time to get a count
+    // Create a map to count the occurrences of each msid
+    const msidCounts = mapData.reduce((acc, item) => {
+        acc[item.msid] = (acc[item.msid] || 0) + 1;
+        return acc;
+    }, {});
+
+    // Convert the counts object into a sorted array of [msid, count] pairs
+    const sortedMsids = Object.entries(msidCounts)
+        .sort((a, b) => b[1] - a[1]) // Sort by count descending
+        .map(([msid, count]) => ({ msid: parseInt(msid), count })); // Format the output
+
+    //console.log(sortedMsids);
+    let topFactions = sortedMsids.slice(0, 3);   //currently top 3
+    1
+    //create our list of the top msid's
+    let topmsids = [];
+    topFactions.forEach(f =>{
+        topmsids.push(f.msid);
+    });
+
+    //Now go through the HTML and add the styleclass
+    // Convert the innerHTML to a DOM structure for easier manipulation
+    const rows = mapElement.querySelectorAll('tr'); // Get all rows in the table
+
+    // Loop through each row and each cell to check and highlight
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td'); // Get all cells in the row
+        cells.forEach(cell => {
+            // Extract sid and msid values from the cell (value before <br>)
+            const sid = cell.querySelector('.sid').textContent.trim(); // Extract the content of the span with class "sid"
+            const msid = cell.querySelector('.msid').textContent.trim(); // Extract the content of the span with class "msid"
+
+            // Convert to integers if needed
+            const sidInt = parseInt(sid, 10);
+            const msidInt = parseInt(msid, 10);
+
+            // Check if cellValue matches any value in serverNumbers array
+            if (topmsids.includes(msidInt)) {
+                let index = topmsids.indexOf(msidInt);
+                if (index === 0){
+                    if (msidInt === sidInt)
+                        //then we have the center of the faction
+                        cell.classList.add('faction1center');
+                    else
+                        cell.classList.add('faction1');
+                }
+                else if (index === 1){
+                    if (msidInt === sidInt)
+                        //then we have the center of the faction
+                        cell.classList.add('faction2center');
+                    else
+                        cell.classList.add('faction2');
+                }
+                else if (index === 2){
+                    if (msidInt === sidInt)
+                        //then we have the center of the faction
+                        cell.classList.add('faction3center');
+                    else
+                        cell.classList.add('faction3');
+                }
+            } else {
+                // Remove "highlight" class in case it was previously applied
+                cell.classList.remove('additionalHighlight');
+            }
+        });
+    });
 }
 
 // Add event listener for the "Update Map" button

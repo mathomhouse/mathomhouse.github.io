@@ -1,73 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top War UD Map Viewer</title>
-    <style>
-         /* General page styling */
-         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        /* Map container styling */
-        #mapContainer {
-            position: relative;
-            width: 100%;
-        }
-
-        /* Table styling */
-        table {
-            border-collapse: collapse;
-            margin: 0 auto;
-        }
-
-        td, th {
-            border: 1px solid black;
-            padding: 10px;
-            text-align: center;
-            min-width: 50px; /* Ensure consistent cell size */
-        }
-
-        /* Highlighted cell styling */
-        td.highlighted {
-            background-color: yellow;
-            font-weight: bold;
-        }
-
-        #controls {
-            text-align: center;
-            margin: 20px;
-        }
-        input, button {
-            margin-right: 10px;
-            padding: 10px;
-            font-size: 16px;
-        }
-        button {
-            cursor: pointer;
-        }
-        td.additionalHighlight {
-            background-color: pink;
-            font-weight: bold;
-        }
-
-    </style>
+    <link rel="stylesheet" href="UD_Test.css">
 </head>
+
 <body>
     <h1>Mathom House's UD Map Viewer</h1>
     <p>Enter the server number you want to center the map on in the first box.<br>
-    Enter any additional servers you want to highlight in the second box, with a space in between.</p>
+        Enter any additional servers you want to highlight in the second box, with a space in between.</p>
     <input type="text" id="centerInput" placeholder="Enter server number">
     <input type="text" id="highlightServers" placeholder="Additional Servers to highlight">
     <button id="updateButton">Update Map</button>
     <br><br>
     <div id="mapContainer">
-        
+
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="UD_Test.js"></script>
 </body>
+
 </html>

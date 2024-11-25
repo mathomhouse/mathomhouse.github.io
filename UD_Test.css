@@ -1,0 +1,90 @@
+/* General page styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+/* Map container styling */
+#mapContainer {
+    position: relative;
+    width: 100%;
+}
+
+/* Table styling */
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+td,
+th {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+    min-width: 50px;
+    /* Ensure consistent cell size */
+}
+
+/* Highlighted cell styling */
+td.highlighted {
+    background-color: yellow;
+    font-weight: bold;
+}
+
+#controls {
+    text-align: center;
+    margin: 20px;
+}
+
+input,
+button {
+    margin-right: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    cursor: pointer;
+}
+
+td.additionalHighlight {
+    background-color: pink;
+    font-weight: bold;
+}
+
+.sid {
+    font-size: 1.2em;
+    /* Slightly larger for sid */
+    /* font-weight: bold; */
+}
+
+.msid {
+    font-size: 1em;
+    /* Regular size for msid */
+    /* color: gray; */
+    /* Optional: differentiate with color */
+}
+
+td.faction1 {
+    background-color: cyan;
+}
+
+td.faction1center {
+    background-color: darkcyan;
+}
+
+td.faction2 {
+    background-color: magenta;
+}
+
+td.faction2center {
+    background-color: darkmagenta;
+}
+
+td.faction3 {
+    background-color: seagreen;
+}
+
+td.faction3center {
+    background-color: darkseagreen;
+}
