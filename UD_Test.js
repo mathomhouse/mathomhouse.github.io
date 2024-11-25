@@ -12,18 +12,22 @@ document.addEventListener("DOMContentLoaded", () => {
             const sheet = workbook.Sheets[workbook.SheetNames[0]];
             const json = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
-            mapData = json.map((row, x) => 
-                row.map((cell, y) => {
-                    const [sid, msid, color] = cell.split(" ");
-                    return {
-                        sid: parseInt(sid),
-                        msid: parseInt(msid),
-                        color: `#${color}`,
-                        pos: { x, y },
-                        name: "",
-                    };
-                })
-            );
+            // Process Excel data into the desired structure
+            json.forEach((row, x) => {
+                row.forEach((cell, y) => {
+                    if (cell) {
+                        const [sid, msid, color] = cell.split(" ");
+                        mapData.push({
+                            sid: parseInt(sid),
+                            msid: parseInt(msid),
+                            pos: { x, y },
+                            color: `#${color}` || "#FFFFFF", // Default color if undefined
+                            name: "",
+                        });
+                    }
+                });
+            });
+
             exportJson(mapData);
             renderMap();
         })
@@ -49,20 +53,27 @@ document.addEventListener("DOMContentLoaded", () => {
     // Render Map
     function renderMap(centerSid = null) {
         mapElement.innerHTML = ""; // Clear existing table
-        mapData.forEach((row) => {
+        const grid = {};
+        mapData.forEach((cell) => {
+            const { pos, sid, msid, color } = cell;
+            if (!grid[pos.x]) grid[pos.x] = [];
+            grid[pos.x][pos.y] = { sid, msid, color };
+        });
+
+        for (const rowKey in grid) {
             const rowElement = document.createElement("tr");
+            const row = grid[rowKey];
             row.forEach((cell) => {
                 const cellElement = document.createElement("td");
                 cellElement.style.backgroundColor = cell.color;
-                cellElement.textContent = cell.sid;
-
+                cellElement.innerHTML = `${cell.sid}<br>${cell.msid}`; // Display sid and msid with a line break
                 if (centerSid === cell.sid) {
                     cellElement.classList.add("center");
                 }
                 rowElement.appendChild(cellElement);
             });
             mapElement.appendChild(rowElement);
-        });
+        }
     }
 
     // Center Map on Input
