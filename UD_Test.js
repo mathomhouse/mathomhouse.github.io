@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const workbook = XLSX.read(data, { type: "array" });
             const sheet = workbook.Sheets[workbook.SheetNames[0]];
             const json = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-
+            document.getElementById("testLabel").innerText = json;
             // Process Excel data into the desired structure
             json.forEach((row, x) => {
                 row.forEach((cell, y) => {
