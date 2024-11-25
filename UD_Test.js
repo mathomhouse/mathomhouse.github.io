@@ -6,8 +6,8 @@ let grid = {};
 function loadMap() {
     //event.preventDefault();
     // Parse Excel and Initialize Map
-    //fetch("UD_Test.xlsx")
-    fetch("https://mathomhouse.github.io/UD_Test3.xlsx")   //for local testing
+    fetch("UD_Test3.xlsx")
+    //fetch("https://mathomhouse.github.io/UD_Test3.xlsx")   //for local testing
         .then((response) => response.arrayBuffer())
         .then((data) => {
             const workbook = XLSX.read(data, { type: "array" });
