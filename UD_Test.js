@@ -4,8 +4,10 @@ let grid = {};
 
 // Load the JSON map data
 function loadMap() {
+    //event.preventDefault();
     // Parse Excel and Initialize Map
     fetch("UD_Test.xlsx")
+    //fetch("https://mathomhouse.github.io/UD_Test.xlsx")   //for local testing
     .then((response) => response.arrayBuffer())
     .then((data) => {
         const workbook = XLSX.read(data, { type: "array" });
@@ -41,7 +43,7 @@ function loadMap() {
         }
 
         //exportJson(mapData);
-        renderMap();
+        renderMap(mapData);
     })
     .catch(error => {
         console.error('Error loading map data: ', error);
@@ -50,133 +52,146 @@ function loadMap() {
 }
 
 // Render Map
-function renderMap() {
+function renderMap(data) {
     let mapElement = document.getElementById("mapContainer");
+    //set variables to find center of data for highlighting purposes
+    const gridSize = Math.ceil(Math.sqrt(data.length));
+    let centerIndex = Math.floor(gridSize / 2);
 
     mapElement.innerHTML = ""; // Clear existing table
     //const grid = {};
-    mapData.forEach((cell) => {
+    data.forEach((cell) => {
         const { pos, sid, msid, color } = cell;
         if (!grid[pos.x]) grid[pos.x] = [];
         grid[pos.x][pos.y] = { sid, msid, color };
     });
+    grid[centerIndex][centerIndex].color = 'highlighted';
 
     for (const rowKey in grid) {
         const rowElement = document.createElement("tr");
         const row = grid[rowKey];
         row.forEach((cell) => {
             const cellElement = document.createElement("td");
-            cellElement.style.backgroundColor = cell.color;
+            //cellElement.style.backgroundColor = cell.color;
             cellElement.innerHTML = `${cell.sid}<br>${cell.msid}`; // Display sid and msid with a line break
+            cellElement.classList.add(cell.color);
             rowElement.appendChild(cellElement);
         });
         mapElement.appendChild(rowElement);
     }
 }
 
-// // Display the full map
-// function displayMap(data) {
-//     const container = document.getElementById('mapContainer');
-//     container.innerHTML = ''; // Clear existing content
+// Center and highlight a specific cell
+function reCenterMap() {
+    const centerInput = document.getElementById('centerInput').value.trim();
+    if (!centerInput) {
+        alert('Please enter a valid server number.');
+        return;
+    }
 
-//     const table = document.createElement('table');
+    const dataRows = mapData;
 
-//     data.forEach(row => {
-//         const tr = document.createElement('tr');
-//         row.forEach(cell => {
-//             const td = document.createElement('td');
-//             td.textContent = cell || ''; // Handle empty cells
-//             td.style.backgroundColor = cell.color || '#FFFFFF';
-//             tr.appendChild(td);
-//         });
-//         table.appendChild(tr);
-//     });
+    // Find the cell containing the input value
+    let centerRowIndex = -1;
+    let centerColIndex = -1;
 
-//     container.appendChild(table);
-// }
+    for (let rowIndex = 0; rowIndex < dataRows.length; rowIndex++) {
+        let cell = dataRows[rowIndex];
+        if (cell.sid === parseInt(centerInput)){
+            centerRowIndex = cell.pos.x;
+            centerColIndex = cell.pos.y;
+            break;
+        }
+    }
 
+    if (centerRowIndex === -1 || centerColIndex === -1) {
+        alert('Server number not found in map data.');
+        return;
+    }
 
-// // Center and highlight a specific cell
-// function reCenterMap() {
-//     const centerInput = document.getElementById('centerInput').value.trim();
-//     if (!centerInput) {
-//         alert('Please enter a valid server number.');
-//         return;
-//     }
+    console.log(`Centering on value: ${centerInput} at Row: ${centerRowIndex}, Column: ${centerColIndex}`);
 
-//     const dataRows = mapData;
+    // Wrap the map
+    const wrappedData = wrapMap(dataRows, centerRowIndex, centerColIndex);
 
-//     // Find the cell containing the input value
-//     let centerRowIndex = -1;
-//     let centerColIndex = -1;
+    // Render the map with the centered and highlighted cell
+    renderMap(wrappedData);
+}
 
-//     for (let rowIndex = 0; rowIndex < dataRows.length; rowIndex++) {
-//         const colIndex = dataRows[rowIndex].findIndex(cell => String(cell).trim() === centerInput);
-//         if (colIndex !== -1) {
-//             centerRowIndex = rowIndex;
-//             centerColIndex = colIndex;
-//             break;
-//         }
-//     }
+// Wrap the map like a globe
+function wrapMap(dataRows, centerRow, centerCol) {
+    //dataRows is a list of all cells, not an array of arrays
+    //assuming the map is square, then the total number of rows and columns should each be the square root of the total number of cells
+    const totalRows = Math.sqrt(dataRows.length);
+    const totalCols = totalRows;
 
-//     if (centerRowIndex === -1 || centerColIndex === -1) {
-//         alert('Cell value not found in map data.');
-//         return;
-//     }
+    // Create a wrapped version of the map
+    const wrappedRows = [];
 
-//     console.log(`Centering on value: ${centerInput} at Row: ${centerRowIndex}, Column: ${centerColIndex}`);
+    for (let rowOffset = -Math.floor(totalRows / 2); rowOffset <= Math.floor(totalRows / 2); rowOffset++) {
+        const rowIndex = (centerRow + rowOffset + totalRows) % totalRows; // Ensure wrap-around
+        for (let colOffset = -Math.floor(totalCols / 2); colOffset <= Math.floor(totalCols / 2); colOffset++) {
+            const colIndex = (centerCol + colOffset + totalCols) % totalCols; // Ensure wrap-around
+            //find the correct cell in the original list
+            dataRows.every(cell=> {
+                if (cell.pos.x === rowIndex && cell.pos.y === colIndex){
+                    wrappedRows.push(cell);
+                    return false;
+                }
+                return true;
+            });
+        }
+    }
+    resetPosData(wrappedRows);
+    mapData = wrappedRows;
+    return wrappedRows;
+}
 
-//     // Wrap the map
-//     const wrappedData = wrapMap(dataRows, centerRowIndex, centerColIndex);
+function resetPosData(data){
+    // Calculate the size of the square grid
+    const gridSize = Math.ceil(Math.sqrt(data.length));
+    let centerIndex = Math.floor(gridSize / 2);
+    
+    // Update the `pos.x` and `pos.y` properties
+    data.forEach((item, index) => {
+      item.pos.x = Math.floor(index / gridSize); // Row number
+      item.pos.y = index % gridSize; // Column number
+    });
+}
 
-//     // Render the map with the centered and highlighted cell
-//     displayMapWithHighlight(wrappedData);
-// }
+function highlightCells(){
+    let mapElement = document.getElementById("mapContainer");
+    let serverNumberString = document.getElementById('highlightServers').value.trim();
+    let serverStrings = serverNumberString.split(',');
+    let serverNumbers = [];
+    serverStrings.forEach(num => {
+        serverNumbers.push(parseInt(num.trim()));
+    });
 
-// // Wrap the map like a globe
-// function wrapMap(dataRows, centerRow, centerCol) {
-//     const totalRows = dataRows.length;
-//     const totalCols = dataRows[0].length;
+     // Convert the innerHTML to a DOM structure for easier manipulation
+     const rows = mapElement.querySelectorAll('tr'); // Get all rows in the table
+    
+     // Loop through each row and each cell to check and highlight
+     rows.forEach(row => {
+         const cells = row.querySelectorAll('td'); // Get all cells in the row
+         cells.forEach(cell => {
+             // Extract text1 value from the cell (value before <br>)
+             const cellValue = cell.innerHTML.split('<br>')[0]; // Text1 is the value before <br>
+             
+             // Check if cellValue matches any value in serverNumbers array
+             if (serverNumbers.includes(parseInt(cellValue))) {
+                 // Add the "highlight" class
+                 if (!cell.classList.contains('highlighted')){
+                    cell.classList.add('additionalHighlight');
+                 }
+             } else {
+                 // Remove "highlight" class in case it was previously applied
+                 cell.classList.remove('additionalHighlight');
+             }
+         });
+     });
+}
 
-//     // Create a wrapped version of the map
-//     const wrappedRows = [];
-
-//     for (let rowOffset = -Math.floor(totalRows / 2); rowOffset <= Math.floor(totalRows / 2); rowOffset++) {
-//         const rowIndex = (centerRow + rowOffset + totalRows) % totalRows; // Ensure wrap-around
-//         const wrappedRow = [];
-//         for (let colOffset = -Math.floor(totalCols / 2); colOffset <= Math.floor(totalCols / 2); colOffset++) {
-//             const colIndex = (centerCol + colOffset + totalCols) % totalCols; // Ensure wrap-around
-//             wrappedRow.push(dataRows[rowIndex][colIndex]);
-//         }
-//         wrappedRows.push(wrappedRow);
-//     }
-
-//     return wrappedRows;
-// }
-
-// // Display the map with highlighting
-// function displayMapWithHighlight(data) {
-//     const container = document.getElementById('mapContainer');
-//     container.innerHTML = '';
-
-//     const table = document.createElement('table');
-//     data.forEach((row, rowIndex) => {
-//         const tr = document.createElement('tr');
-//         row.forEach((cell, colIndex) => {
-//             const td = document.createElement('td');
-//             td.textContent = cell || '';
-
-//             // Highlight the center cell
-//             if (rowIndex === Math.floor(data.length / 2) && colIndex === Math.floor(row.length / 2)) {
-//                 td.classList.add('highlighted');
-//             }
-//             tr.appendChild(td);
-//         });
-//         table.appendChild(tr);
-//     });
-
-//     container.appendChild(table);
-// }
-
-// // Add event listener for the "Update Map" button
-// document.getElementById('updateButton').addEventListener('click', reCenterMap);
+// Add event listener for the "Update Map" button
+document.getElementById('updateButton').addEventListener('click', reCenterMap);
+document.getElementById('highlightServersButton').addEventListener('click', highlightCells);
