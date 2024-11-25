@@ -7,8 +7,6 @@ function loadMap() {
     fetch('UD_MAP.json')
         .then(response => response.json())
         .then(data => {
-            console.log("Fetched data (raw):", data); // Log raw data
-
             // Convert JSON objects into arrays of values
             const tableData = data.map(row => Object.values(row));
 
@@ -17,7 +15,7 @@ function loadMap() {
         })
         .catch(error => {
             console.error('Error loading map data:', error);
-            alert('Failed to load map data. Please try again later. If this issue persists please reach out to artu.');
+            alert('Failed to load map data. Please try again later. If this issue persists, please reach out to artu.');
         });
 }
 
@@ -113,13 +111,13 @@ function displayMapWithHighlight(data, centerInput, highlightInput) {
             const td = document.createElement('td');
             td.textContent = cell || '';
 
-            // Highlight the center cell
-            if (rowIndex === Math.floor(data.length / 2) && colIndex === Math.floor(row.length / 2)) {
-                td.classList.add('highlighted');
+            // Highlight the center cell (yellow and bold)
+            if (String(cell).trim() === centerInput && rowIndex === Math.floor(data.length / 2) && colIndex === Math.floor(row.length / 2)) {
                 td.style.backgroundColor = 'yellow';
+                td.style.fontWeight = 'bold';
             }
 
-            // Highlight cells matching the second input
+            // Highlight cells matching the second input (light blue and bold)
             if (String(cell).trim() === highlightInput) {
                 td.style.backgroundColor = 'lightblue';
                 td.style.fontWeight = 'bold';
