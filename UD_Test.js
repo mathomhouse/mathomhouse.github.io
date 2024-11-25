@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", loadMap);
+let mapData = [];
 
 // Load the JSON map data
 function loadMap() {
@@ -59,6 +60,7 @@ function displayMap(data) {
         row.forEach(cell => {
             const td = document.createElement('td');
             td.textContent = cell || ''; // Handle empty cells
+            td.style.backgroundColor = cell.color || '#FFFFFF';
             tr.appendChild(td);
         });
         table.appendChild(tr);
@@ -76,7 +78,7 @@ function reCenterMap() {
         return;
     }
 
-    const dataRows = sheetData;
+    const dataRows = mapData;
 
     // Find the cell containing the input value
     let centerRowIndex = -1;
