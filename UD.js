@@ -7,8 +7,8 @@ function loadMap() {
     fetch('UD_MAP.json')
         .then(response => response.json())
         .then(data => {
-            console.log("Fetched data (raw):", data);
-            // Transform the JSON into an array of arrays
+            console.log("Fetched data (raw):", data); // Log raw data
+            // Transform JSON into an array of arrays
             const headers = Object.keys(data[0]); // Extract headers
             const tableData = [headers]; // Start with headers
 
@@ -82,7 +82,7 @@ function reCenterMap() {
     const wrappedData = wrapMap(dataRows, centerRowIndex, centerColIndex, headers);
 
     // Render the map with the centered and highlighted cell
-    displayMapWithHighlight(wrappedData, centerRowIndex, centerColIndex);
+    displayMapWithHighlight(wrappedData);
 }
 
 // Wrap the map like a globe
@@ -107,10 +107,8 @@ function wrapMap(dataRows, centerRow, centerCol, headers) {
     return [headers, ...wrappedRows];
 }
 
-
-
 // Display the map with highlighting
-function displayMapWithHighlight(data, centerRow, centerCol) {
+function displayMapWithHighlight(data) {
     const container = document.getElementById('mapContainer');
     container.innerHTML = '';
 
