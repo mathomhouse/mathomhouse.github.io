@@ -33,22 +33,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Render Map
     function renderMap(centerSid = null) {
-        mapElement.innerHTML = "";
-        const size = mapData.length; // Assuming square map
-        mapElement.style.gridTemplateColumns = `repeat(${size}, auto)`;
-
+        mapElement.innerHTML = ""; // Clear existing table
         mapData.forEach((row) => {
+            const rowElement = document.createElement("tr");
             row.forEach((cell) => {
-                const cellDiv = document.createElement("div");
-                cellDiv.className = "cell";
-                cellDiv.style.backgroundColor = cell.color;
-                cellDiv.textContent = cell.sid;
+                const cellElement = document.createElement("td");
+                cellElement.style.backgroundColor = cell.color;
+                cellElement.textContent = cell.sid;
 
                 if (centerSid === cell.sid) {
-                    cellDiv.classList.add("center");
+                    cellElement.classList.add("center");
                 }
-                mapElement.appendChild(cellDiv);
+                rowElement.appendChild(cellElement);
             });
+            mapElement.appendChild(rowElement);
         });
     }
 

@@ -5,29 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top War UD Map Viewer</title>
     <style>
-        #mapContainer {
-            display: grid;
-            gap: 1px;
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
         }
-        .cell {
+        td {
             width: 30px;
             height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
+            text-align: center;
+            vertical-align: middle;
             border: 1px solid #ccc;
+            font-size: 14px;
         }
         .center {
             background-color: yellow !important;
             font-weight: bold;
         }
         #controls {
-            margin-bottom: 20px;
+            text-align: center;
+            margin: 20px;
         }
         input, button {
             margin-right: 10px;
             padding: 10px;
+            font-size: 16px;
         }
         button {
             cursor: pointer;
@@ -40,9 +41,10 @@
     <input type="text" id="centerInput" placeholder="Enter server number">
     <button id="updateButton">Update Map</button>
     <br>
-    <div id="mapContainer">
-        <!-- The map table will be inserted here -->
-    </div>
+    <table id="mapContainer"></table>
+    <!-- <div id="mapContainer">
+        
+    </div> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="UD_Test.js"></script>
