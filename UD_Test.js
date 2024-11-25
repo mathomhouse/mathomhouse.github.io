@@ -24,12 +24,27 @@ document.addEventListener("DOMContentLoaded", () => {
                     };
                 })
             );
+            exportJson(mapData);
             renderMap();
         })
         .catch(error => {
             console.error('Error loading map data: ', error);
             alert('Failed to load map data. Please try again later. If this issue persists please reach out to artu.');
         });
+
+    // Export JSON Data Automatically
+    function exportJson(data) {
+        const jsonData = JSON.stringify(data, null, 2); // Format JSON with indentation
+        const blob = new Blob([jsonData], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "mapData.json"; // The filename for the downloaded file
+        a.click();
+
+        URL.revokeObjectURL(url); // Clean up the URL object
+    }
 
     // Render Map
     function renderMap(centerSid = null) {
