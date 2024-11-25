@@ -5,18 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top War UD Map Viewer</title>
     <style>
+         /* General page styling */
+         body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        /* Map container styling */
+        #mapContainer {
+            position: relative;
+            width: 100%;
+        }
+
+        /* Table styling */
         table {
             border-collapse: collapse;
-            margin: 20px auto;
+            margin: 0 auto;
         }
-        td {
-            width: 30px;
-            height: 30px;
+
+        td, th {
+            border: 1px solid black;
+            padding: 10px;
             text-align: center;
-            vertical-align: middle;
-            border: 1px solid #ccc;
-            font-size: 14px;
+            min-width: 50px; /* Ensure consistent cell size */
         }
+
+        /* Highlighted cell styling */
+        td.highlighted {
+            background-color: yellow;
+            font-weight: bold;
+        }
+        
         .center {
             background-color: yellow !important;
             font-weight: bold;
@@ -41,10 +60,10 @@
     <input type="text" id="centerInput" placeholder="Enter server number">
     <button id="updateButton">Update Map</button>
     <br>
-    <div id="test">
-        <label id="testlabel"></label>
+    <div id="mapContainer">
+        
     </div>
-    <table id="mapContainer"></table>
+    <!-- <table id="mapContainer"></table> -->
     <!-- <div id="mapContainer">
         
     </div> -->
