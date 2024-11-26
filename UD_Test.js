@@ -6,8 +6,8 @@ let grid = {};
 function loadMap() {
     //event.preventDefault();
     // Parse Excel and Initialize Map
-    fetch("UD_Test3.xlsx")
-    //fetch("https://mathomhouse.github.io/UD_Test3.xlsx")   //for local testing
+    fetch("UD MAP.xlsx")
+    //fetch("https://mathomhouse.github.io/UD MAP.xlsx")   //for local testing
         .then((response) => response.arrayBuffer())
         .then((data) => {
             const workbook = XLSX.read(data, { type: "array" });
@@ -228,7 +228,8 @@ function higlightLargestFactions() {
     //create our list of the top msid's
     let topmsids = [];
     topFactions.forEach(f =>{
-        topmsids.push(f.msid);
+        if (f.count > 1)
+            topmsids.push(f.msid);
     });
 
     //Now go through the HTML and add the styleclass
