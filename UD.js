@@ -104,24 +104,38 @@ function displayMapWithHighlight(data, centerInput, highlightInput) {
     const container = document.getElementById('mapContainer');
     container.innerHTML = '';
 
+    //additional servers
+    let serverStrings = highlightInput.split(' ');
+    let serverNumbers = [];
+    serverStrings.forEach(num => {
+        serverNumbers.push(parseInt(num.trim()));
+    });
+
     const table = document.createElement('table');
     data.forEach((row, rowIndex) => {
         const tr = document.createElement('tr');
         row.forEach((cell, colIndex) => {
             const td = document.createElement('td');
             td.textContent = cell || '';
+            let sid = String(cell).trim();
+
+            // Highlight cells matching the second input (light blue and bold)
+            if (serverNumbers.includes(parseInt(sid))){
+                td.style.backgroundColor = 'lightblue';
+                td.style.fontWeight = 'bold'; 
+            }
 
             // Highlight the center cell (yellow and bold)
-            if (String(cell).trim() === centerInput && rowIndex === Math.floor(data.length / 2) && colIndex === Math.floor(row.length / 2)) {
+            //do this afterwards in case user put the center server number in both inputs
+            if (sid === centerInput && rowIndex === Math.floor(data.length / 2) && colIndex === Math.floor(row.length / 2)) {
                 td.style.backgroundColor = 'yellow';
                 td.style.fontWeight = 'bold';
             }
 
-            // Highlight cells matching the second input (light blue and bold)
-            if (String(cell).trim() === highlightInput) {
-                td.style.backgroundColor = 'lightblue';
-                td.style.fontWeight = 'bold';
-            }
+            // if (String(cell).trim() === highlightInput) {
+            //     td.style.backgroundColor = 'lightblue';
+            //     td.style.fontWeight = 'bold';
+            // }
 
             tr.appendChild(td);
         });

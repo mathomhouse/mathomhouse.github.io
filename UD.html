@@ -34,11 +34,22 @@
         td.highlighted {
             font-weight: bold;
         }
+        input, button {
+            margin-right: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
     <h1>Mathom House's UD Map Viewer</h1>
-    <p>Enter the server numbers you want to highlight:</p>
+    <p>Enter the server number you want to center the map on in the first box.<br>
+        Enter any additional servers you want to highlight in the second box, with a space in between.</p>
     <input type="text" id="centerInput" placeholder="Enter server number (e.g., 2610)">
     <input type="text" id="highlightInput" placeholder="Enter second server number (e.g., 1300)">
     <button id="updateButton">Update Map</button>
