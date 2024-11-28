@@ -22,9 +22,10 @@ function calculateTotalShards() {
     const targetLevelCost = shardCost * Math.pow(3, targetLevel - 1);
 
     const remainingShards = targetLevelCost - totalOwnedShards;
+    const level1skillsneeded = Math.ceil(remainingShards / shardCost);
 
     if (remainingShards > 0) {
-        document.getElementById('result').innerHTML = "You need " + remainingShards + " more shards.";
+        document.getElementById('result').innerHTML = "You need " + remainingShards + " more shards. <br> This equates to " + level1skillsneeded + " level 1 skills";
     } else {
         document.getElementById('result').innerHTML = "You have enough shards!";
     }
