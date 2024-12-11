@@ -4,7 +4,7 @@ let sheetData = []; // To store the map data
 
 // Load the JSON map data
 function loadMap() {
-    fetch('UD_MAP.json')
+    fetch('UD_Practice_Map.json')
         .then(response => response.json())
         .then(data => {
             // Convert JSON objects into arrays of values
