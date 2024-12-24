@@ -36,8 +36,8 @@ function loadMap(){
 }
 
 async function loadAndConvertCSV() {
-    fetch('https://mathomhouse.github.io/EngimaDominators/ED_Prep_FactionDataRound3.csv')
-    //fetch('./EnigmaDominators/ED_Prep_FactionDataRound3.csv')
+    //fetch('https://mathomhouse.github.io/EnigmaDominators/ED_Prep_FactionDataRound3.csv')
+    fetch('./EnigmaDominators/ED_Prep_FactionDataRound3.csv')
     .then((response) => response.text())
     .then((data) => {
         //const csvString = response.text();
