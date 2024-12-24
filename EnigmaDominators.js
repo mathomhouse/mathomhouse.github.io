@@ -97,8 +97,8 @@ function mapToUDJson(csvData) {
 }
 
 function mapNCValues(row, sidValue, sidOrMsid){
-    if(typeof sidValue === 'string' && sidValue === '0'){
-        sidValue = '';  //msid 0 is empty space.
+    if(sidValue === '0'){
+       return '';  //msid 0 is empty space.
     }
     else if(typeof sidValue === 'number'){
         if (sidValue >= 1 && sidValue <= 19) {
@@ -116,8 +116,10 @@ function mapNCValues(row, sidValue, sidOrMsid){
                 return ''; // All msid cases result in an empty string
             }
         }
+        if (sidOrMsid === 'msid') {
+            return `k${sidValue}`;
+        }
     }
-   
     return sidValue;
 }
 
@@ -288,8 +290,8 @@ function higlightFactions() {
 
      // Step 2: Filter msid's with count >= 2
      const frequentMsids = Object.entries(msidCounts)
-        .filter(([msid, count]) => count >= 2 && parseInt(msid, 10) !== 0)
-        .map(([msid]) => parseInt(msid, 10)); // Ensure msid is an integer
+        .filter(([msid, count]) => count >= 2)
+        .map(([msid]) => parseInt(msid.slice(1), 10)); // Ensure msid is an integer
 
     // // Convert the counts object into a sorted array of [msid, count] pairs
     // const sortedMsids = Object.entries(msidCounts)
@@ -320,7 +322,7 @@ function higlightFactions() {
 
             // Convert to integers if needed
             const sidInt = parseInt(sid, 10);
-            const msidInt = parseInt(msid, 10);
+            const msidInt = parseInt(msid.slice(1), 10);
 
             // Check if cellValue matches any value in serverNumbers array
             if (frequentMsids.includes(msidInt)) {
