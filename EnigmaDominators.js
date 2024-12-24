@@ -1,10 +1,34 @@
 document.addEventListener("DOMContentLoaded", loadMap);
 let mapData = [];
 let grid = {};
-let colors = [
-    '#FF5733', '#33FF57', '#3357FF', '#F39C12', '#9B59B6',
-    '#1ABC9C', '#E74C3C', '#3498DB', '#2ECC71', '#D35400'
+const colors = [
+    '#FFC0CB', // Bright Pink
+    '#FFD700', // Gold
+    '#FFA07A', // Light Salmon
+    '#FF7F50', // Coral
+    '#FF6347', // Tomato
+    '#FFDAB9', // Peach Puff
+    '#FFB6C1', // Light Pink
+    '#FFE4B5', // Moccasin
+    '#FFFF99', // Light Yellow
+    '#B0E57C', // Light Green
+    '#98FB98', // Pale Green
+    '#87CEFA', // Light Sky Blue
+    '#87CEEB', // Sky Blue
+    '#ADD8E6', // Light Blue
+    '#00BFFF', // Deep Sky Blue
+    '#E0FFFF', // Light Cyan
+    '#AFEEEE', // Pale Turquoise
+    '#F0E68C', // Khaki
+    '#FFE4E1', // Misty Rose
+    '#FFFACD', // Lemon Chiffon
+    '#DDA0DD', // Plum (Purple)
+    '#DA70D6', // Orchid (Purple)
+    '#BA55D3', // Medium Orchid (Purple)
+    '#9370DB', // Medium Purple
+    '#E6E6FA'  // Lavender
 ];
+
 
 // Load the JSON map data
 function loadMap(){
@@ -12,7 +36,8 @@ function loadMap(){
 }
 
 async function loadAndConvertCSV() {
-    fetch('https://mathomhouse.github.io/ED_Prep_FactionDataRound3.csv')
+    fetch('https://mathomhouse.github.io/EngimaDominators/ED_Prep_FactionDataRound3.csv')
+    //fetch('./EnigmaDominators/ED_Prep_FactionDataRound3.csv')
     .then((response) => response.text())
     .then((data) => {
         //const csvString = response.text();
@@ -72,9 +97,12 @@ function mapToUDJson(csvData) {
 }
 
 function mapNCValues(row, sidValue, sidOrMsid){
-    if(typeof sidValue === 'number'){
-        if (sidValue >= 0 && sidValue <= 19) {
-            sidValue = ''; // Servers 1-19 are empty spaces. msid 0 is empty space.
+    if(typeof sidValue === 'string' && sidValue === '0'){
+        sidValue = '';  //msid 0 is empty space.
+    }
+    else if(typeof sidValue === 'number'){
+        if (sidValue >= 1 && sidValue <= 19) {
+            sidValue = ''; // Servers 1-19 are empty spaces. 
         } 
         const match = sidValue.toString().match(/^([4-6])\d(\d{2})$/); // Match pattern like 4xaa
         if(match){
@@ -125,7 +153,7 @@ function renderMap(data) {
         mapElement.appendChild(rowElement);
     }
 
-    higlightLargestFactions();
+    higlightFactions();
 }
 
 // Center and highlight a specific cell
@@ -247,8 +275,8 @@ function highlightCells() {
     });
 }
 
-//highlight the 10 largest factions
-function higlightLargestFactions() {
+//highlight the factions
+function higlightFactions() {
     let mapElement = document.getElementById("mapContainer");
 
     //faction data is the msid of each server. Need to create a list of msid, and group by at the same time to get a count
@@ -258,20 +286,25 @@ function higlightLargestFactions() {
         return acc;
     }, {});
 
-    // Convert the counts object into a sorted array of [msid, count] pairs
-    const sortedMsids = Object.entries(msidCounts)
-        .sort((a, b) => b[1] - a[1]) // Sort by count descending
-        .map(([msid, count]) => ({ msid: parseInt(msid), count })); // Format the output
+     // Step 2: Filter msid's with count >= 2
+     const frequentMsids = Object.entries(msidCounts)
+        .filter(([msid, count]) => count >= 2 && parseInt(msid, 10) !== 0)
+        .map(([msid]) => parseInt(msid, 10)); // Ensure msid is an integer
 
-    //console.log(sortedMsids);
-    let topFactions = sortedMsids.slice(0, 10);   //currently top 3
-    1
-    //create our list of the top msid's
-    let topmsids = [];
-    topFactions.forEach(f =>{
-        if (f.count > 1)
-            topmsids.push(f.msid);
-    });
+    // // Convert the counts object into a sorted array of [msid, count] pairs
+    // const sortedMsids = Object.entries(msidCounts)
+    //     .sort((a, b) => b[1] - a[1]) // Sort by count descending
+    //     .map(([msid, count]) => ({ msid: parseInt(msid), count })); // Format the output
+
+    // //console.log(sortedMsids);
+    // let topFactions = sortedMsids.slice(0, 30);   //currently top 3
+    // 1
+    // //create our list of the top msid's
+    // let topmsids = [];
+    // topFactions.forEach(f =>{
+    //     if (f.count > 1)
+    //         topmsids.push(f.msid);
+    // });
 
     //Now go through the HTML and add the styleclass
     // Convert the innerHTML to a DOM structure for easier manipulation
@@ -290,8 +323,8 @@ function higlightLargestFactions() {
             const msidInt = parseInt(msid, 10);
 
             // Check if cellValue matches any value in serverNumbers array
-            if (topmsids.includes(msidInt)) {
-                let index = topmsids.indexOf(msidInt) % colors.length;
+            if (frequentMsids.includes(msidInt)) {
+                let index = frequentMsids.indexOf(msidInt) % colors.length;
                 if(msidInt == sidInt){  //faction leader
                     cell.style.background = `radial-gradient(circle, rgba(255, 255, 255, 0) 0%, 
                     ${colors[index]} 100%)`;

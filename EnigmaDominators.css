@@ -64,27 +64,3 @@ td.additionalHighlight {
     /* color: gray; */
     /* Optional: differentiate with color */
 }
-
-td.faction1 {
-    background-color: cyan;
-}
-
-td.faction1center {
-    background-color: darkcyan;
-}
-
-td.faction2 {
-    background-color: magenta;
-}
-
-td.faction2center {
-    background-color: darkmagenta;
-}
-
-td.faction3 {
-    background-color: seagreen;
-}
-
-td.faction3center {
-    background-color: darkseagreen;
-}
