@@ -1,6 +1,21 @@
 document.addEventListener("DOMContentLoaded", loadMap);
+let defaultSid = 1668;
 let mapData = [];
 let grid = {};
+let currentMap = '';
+
+const weekMapData = [
+    {
+        round: 'Test',
+        file: 'dummyFile'
+    },
+    {
+        round: 'Practice3',
+        //file: 'https://mathomhouse.github.io/EnigmaDominators/ED_Prep_FactionDataRound3.csv'
+        file: './EnigmaDominators/ED_Prep_FactionDataRound3.csv'
+    }
+]
+
 const colors = [
     '#FFC0CB', // Bright Pink
     '#FFD700', // Gold
@@ -29,29 +44,38 @@ const colors = [
     '#E6E6FA'  // Lavender
 ];
 
-
 // Load the JSON map data
 function loadMap(){
-    loadAndConvertCSV(); 
+    let currentWeekNumber = weekMapData.length - 1;
+    let currentWeek = weekMapData[currentWeekNumber];
+    currentMap = currentWeek.round;
+    loadEDRounds();
+    loadAndConvertCSV(currentWeek.file);
 }
 
-async function loadAndConvertCSV() {
-    //fetch('https://mathomhouse.github.io/EnigmaDominators/ED_Prep_FactionDataRound3.csv')
-    fetch('./EnigmaDominators/ED_Prep_FactionDataRound3.csv')
+function loadEDRounds(){
+    let edrounds = document.getElementById("edrounds");
+    weekMapData.forEach((round, idx) => {
+		let selected = weekMapData.length - 1 === idx ? 'selected="selected"' : "";
+		edrounds.innerHTML += `<option class="opts" ${selected} value=${round.round}>Round: ${round.round}</option>`;
+	});
+}
+
+function loadAndConvertCSV(fileName) {
+    fetch(fileName)
     .then((response) => response.text())
     .then((data) => {
-        //const csvString = response.text();
         const csvData = csvToJson(data);
         mapData = mapToUDJson(csvData);
 
-        console.log(JSON.stringify(mapData, null, 2));
-
-        renderMap(mapData);
+        console.log(JSON.stringify(mapData, null, 2));  
+        centerMap(mapData, defaultSid);    
     })
     .catch(error =>{
         console.error('Error loading map data: ', error);
         alert('Failed to load map data. Please try again later. If this issue persists please reach out to artu.');
     });
+    return mapData;
 }
 
 function csvToJson(csvString) {
@@ -146,7 +170,7 @@ function renderMap(data) {
             const cellElement = document.createElement("td");
 
             cellElement.innerHTML = `
-                <span class="sid">${cell.sid}</span><br>
+                <span class="sid">${cell.sid}</span>
                 <span class="msid">${cell.msid}</span>
             `;
             cellElement.classList.add(cell.color);
@@ -158,23 +182,14 @@ function renderMap(data) {
     higlightFactions();
 }
 
-// Center and highlight a specific cell
-function reCenterMap() {
-    const centerInput = document.getElementById('centerInput').value.trim();
-    if (!centerInput) {
-        highlightCells();
-        return;
-    }
-
-    const dataRows = mapData;
-
-    // Find the cell containing the input value
+function centerMap(data, sid){
+     // Find the cell containing the input value
     let centerRowIndex = -1;
     let centerColIndex = -1;
 
-    for (let rowIndex = 0; rowIndex < dataRows.length; rowIndex++) {
-        let cell = dataRows[rowIndex];
-        if (cell.sid === parseInt(centerInput)) {
+    for (let rowIndex = 0; rowIndex < data.length; rowIndex++) {
+        let cell = data[rowIndex];
+        if (cell.sid === parseInt(sid)) {
             centerRowIndex = cell.pos.x;
             centerColIndex = cell.pos.y;
             break;
@@ -189,11 +204,30 @@ function reCenterMap() {
     console.log(`Centering on value: ${centerInput} at Row: ${centerRowIndex}, Column: ${centerColIndex}`);
 
     // Wrap the map
-    const wrappedData = wrapMap(dataRows, centerRowIndex, centerColIndex);
+    const wrappedData = wrapMap(data, centerRowIndex, centerColIndex);
 
     // Render the map with the centered and highlighted cell
     renderMap(wrappedData);
+}
 
+// Update Map
+function updateMap() {
+    var weekSelect = document.getElementById('edrounds');
+    var selectedRound = weekSelect.value;
+    //if the selected round has changed, retrieve new data
+    //else just re-center the map
+    if(selectedRound !== currentMap){
+        var round = weekMapData.find(round => round.round === selectedRound);
+        loadAndConvertCSV(round.file);
+    }
+    else{
+        let centerInput = document.getElementById('centerInput').value.trim();
+        if (centerInput === ''){
+            centerInput = defaultSid;
+        }
+        centerMap(mapData, centerInput);
+    }
+    //highlight any extra cells
     highlightCells();
 }
 
@@ -293,21 +327,6 @@ function higlightFactions() {
         .filter(([msid, count]) => count >= 2)
         .map(([msid]) => parseInt(msid.slice(1), 10)); // Ensure msid is an integer
 
-    // // Convert the counts object into a sorted array of [msid, count] pairs
-    // const sortedMsids = Object.entries(msidCounts)
-    //     .sort((a, b) => b[1] - a[1]) // Sort by count descending
-    //     .map(([msid, count]) => ({ msid: parseInt(msid), count })); // Format the output
-
-    // //console.log(sortedMsids);
-    // let topFactions = sortedMsids.slice(0, 30);   //currently top 3
-    // 1
-    // //create our list of the top msid's
-    // let topmsids = [];
-    // topFactions.forEach(f =>{
-    //     if (f.count > 1)
-    //         topmsids.push(f.msid);
-    // });
-
     //Now go through the HTML and add the styleclass
     // Convert the innerHTML to a DOM structure for easier manipulation
     const rows = mapElement.querySelectorAll('tr'); // Get all rows in the table
@@ -343,4 +362,4 @@ function higlightFactions() {
 }
 
 // Add event listener for the "Update Map" button
-document.getElementById('updateButton').addEventListener('click', reCenterMap);
+document.getElementById('updateButton').addEventListener('click', updateMap);
