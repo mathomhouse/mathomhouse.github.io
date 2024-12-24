@@ -56,7 +56,7 @@ function mapToUDJson(csvData) {
         let newSidValue = mapNCValues(row, sidValue, 'sid');
 
         let msidValue =  parseInt(row['Scan_ParsedFaction'], 10) || row['Scan_ParsedFaction'];
-        let newMsidValue = msidValue;//mapNCValues(row, msidValue, 'msid');
+        let newMsidValue = mapNCValues(row, msidValue, 'msid');
         return {
             sid: newSidValue,
             pos: {
