@@ -68,7 +68,7 @@ function loadAndConvertCSV(fileName) {
         const csvData = csvToJson(data);
         mapData = mapToUDJson(csvData);
 
-        console.log(JSON.stringify(mapData, null, 2));  
+        //console.log(JSON.stringify(mapData, null, 2));  
         centerMap(mapData, defaultSid);    
     })
     .catch(error =>{
@@ -200,8 +200,7 @@ function centerMap(data, sid){
         alert('Server number not found in map data.');
         return;
     }
-
-    console.log(`Centering on value: ${centerInput} at Row: ${centerRowIndex}, Column: ${centerColIndex}`);
+    //console.log(`Centering on value: ${centerInput} at Row: ${centerRowIndex}, Column: ${centerColIndex}`);
 
     // Wrap the map
     const wrappedData = wrapMap(data, centerRowIndex, centerColIndex);
