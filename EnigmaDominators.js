@@ -6,14 +6,15 @@ let currentMap = '';
 
 const weekMapData = [
     {
-        round: 'Test',
-        file: 'dummyFile'
-    },
-    {
         round: 'Practice3',
         //file: 'https://mathomhouse.github.io/EnigmaDominators/ED_Prep_FactionDataRound3.csv'
         file: './EnigmaDominators/ED_Prep_FactionDataRound3.csv'
-    }
+    },
+    {
+        round: 'Practice4',
+        //file: 'https://mathomhouse.github.io/EnigmaDominators/ED_Prep_FactionDataRound4.csv'
+        file: './EnigmaDominators/ED_Prep_FactionDataRound4.csv'
+    },
 ]
 
 const colors = [
@@ -32,8 +33,6 @@ const colors = [
     '#87CEEB', // Sky Blue
     '#ADD8E6', // Light Blue
     '#00BFFF', // Deep Sky Blue
-    '#E0FFFF', // Light Cyan
-    '#AFEEEE', // Pale Turquoise
     '#F0E68C', // Khaki
     '#FFE4E1', // Misty Rose
     '#FFFACD', // Lemon Chiffon
