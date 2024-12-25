@@ -10,13 +10,13 @@ let serverNumbers = [];
 const weekMapData = [
     {
         round: 'Practice3',
-        file: './EnigmaDominators/ED_Prep_FactionDataRound3.csv'
-        //file: 'https://mathomhouse.github.io/EnigmaDominators/ED_Prep_FactionDataRound3.csv'
+        //file: './EnigmaDominators/ED_Prep_FactionDataRound3.csv'
+        file: 'https://mathomhouse.github.io/EnigmaDominators/ED_Prep_FactionDataRound3.csv'
     },
     {
         round: 'Practice4',
-        file: './EnigmaDominators/ED_Prep_FactionDataRound4.csv'
-        //file: 'https://mathomhouse.github.io/EnigmaDominators/ED_Prep_FactionDataRound4.csv'
+        //file: './EnigmaDominators/ED_Prep_FactionDataRound4.csv'
+        file: 'https://mathomhouse.github.io/EnigmaDominators/ED_Prep_FactionDataRound4.csv'
     },
 ]
 
@@ -219,21 +219,24 @@ function updateMap() {
     var selectedRound = weekSelect.value;
     let serverNumberString = document.getElementById('highlightServers').value.trim();
     let centerInput = document.getElementById('centerInput').value.trim();
-    centeredSid = centerInput;
+    if (centerInput === '')
+    {
+        centerInput = centeredSid;
+    }
+    //centeredSid = centerInput;
 
     if(selectedRound === currentMap && serverNumberString === highlightedSids && 
-        (centerInput === '' || parseInt(centerInput, 10) === centeredSid)){
+        centerInput.toString() === centeredSid.toString()){
         return;
     }
     else if(selectedRound !== currentMap){
         var round = weekMapData.find(round => round.round === selectedRound);
         currentMap = selectedRound;
+        centeredSid = centerInput;
         loadAndConvertCSV(round.file);
     }
     else{
-        if (centerInput === ''){
-            centerInput = defaultSid;
-        }
+        centeredSid = centerInput;
         centerMap(mapData, centerInput);
         renderMap(mapData);  
         highlightCells();
