@@ -1,17 +1,22 @@
 document.addEventListener("DOMContentLoaded", loadMap);
-let defaultSid = 1668;
+const defaultSid = 1668;
 let mapData = [];
 let grid = {};
 let currentMap = '';
+let centeredSid = 1668;
+let highlightedSids = '';
+let serverNumbers = [];
 
 const weekMapData = [
     {
         round: 'Practice3',
         file: './EnigmaDominators/ED_Prep_FactionDataRound3.csv'
+        //file: 'https://mathomhouse.github.io/EnigmaDominators/ED_Prep_FactionDataRound3.csv'
     },
     {
         round: 'Practice4',
         file: './EnigmaDominators/ED_Prep_FactionDataRound4.csv'
+        //file: 'https://mathomhouse.github.io/EnigmaDominators/ED_Prep_FactionDataRound4.csv'
     },
 ]
 
@@ -64,7 +69,11 @@ function loadAndConvertCSV(fileName) {
         mapData = mapToUDJson(csvData);
 
         //console.log(JSON.stringify(mapData, null, 2));  
-        centerMap(mapData, defaultSid);    
+        centerMap(mapData, centeredSid);  
+        
+        // Render the map with the centered and highlighted cell
+        renderMap(mapData);  
+        highlightCells();
     })
     .catch(error =>{
         console.error('Error loading map data: ', error);
@@ -196,33 +205,39 @@ function centerMap(data, sid){
         return;
     }
     //console.log(`Centering on value: ${centerInput} at Row: ${centerRowIndex}, Column: ${centerColIndex}`);
-
+    centeredSid = sid;
     // Wrap the map
-    const wrappedData = wrapMap(data, centerRowIndex, centerColIndex);
-
-    // Render the map with the centered and highlighted cell
-    renderMap(wrappedData);
+    wrapMap(data, centerRowIndex, centerColIndex);
 }
 
 // Update Map
 function updateMap() {
+    //if everything is the same, do nothing
+    //if the selected round has changed, retrieve new data, re-render
+    //else just re-render the current map (re-centers and re-highlights)
     var weekSelect = document.getElementById('edrounds');
     var selectedRound = weekSelect.value;
-    //if the selected round has changed, retrieve new data
-    //else just re-center the map
-    if(selectedRound !== currentMap){
+    let serverNumberString = document.getElementById('highlightServers').value.trim();
+    let centerInput = document.getElementById('centerInput').value.trim();
+    centeredSid = centerInput;
+
+    if(selectedRound === currentMap && serverNumberString === highlightedSids && 
+        (centerInput === '' || parseInt(centerInput, 10) === centeredSid)){
+        return;
+    }
+    else if(selectedRound !== currentMap){
         var round = weekMapData.find(round => round.round === selectedRound);
+        currentMap = selectedRound;
         loadAndConvertCSV(round.file);
     }
     else{
-        let centerInput = document.getElementById('centerInput').value.trim();
         if (centerInput === ''){
             centerInput = defaultSid;
         }
         centerMap(mapData, centerInput);
+        renderMap(mapData);  
+        highlightCells();
     }
-    //highlight any extra cells
-    highlightCells();
 }
 
 // Wrap the map like a globe
@@ -250,7 +265,6 @@ function wrapMap(dataRows, centerRow, centerCol) {
 
     resetPosData(wrappedRows);
     mapData = wrappedRows;
-    return wrappedRows;
 }
 
 //reset the pos.x and pos.y data for each server
@@ -266,21 +280,30 @@ function resetPosData(data) {
     });
 }
 
-//highlight additional cells
-function highlightCells() {
-    let mapElement = document.getElementById("mapContainer");
+function getHighlightedCells(){
     let serverNumberString = document.getElementById('highlightServers').value.trim();
+    highlightedSids = serverNumberString;
     let serverStrings = serverNumberString.split(' ');
     if (serverStrings === undefined || serverStrings.length == 0 || 
         (serverStrings.length == 1 && serverStrings[0] == '')){
+            serverNumbers = [];
+    }
+    else{
+        serverStrings.forEach(num => {
+            serverNumbers.push(parseInt(num.trim()));
+        });
+    }
+}
+
+//highlight additional cells
+function highlightCells() {
+    getHighlightedCells();
+    if (serverNumbers === undefined || serverNumbers.length == 0){
         return;
     }
     
-    let serverNumbers = [];
-    serverStrings.forEach(num => {
-        serverNumbers.push(parseInt(num.trim()));
-    });
-    
+    let mapElement = document.getElementById("mapContainer");
+       
     // Convert the innerHTML to a DOM structure for easier manipulation
     const rows = mapElement.querySelectorAll('tr'); // Get all rows in the table
 
