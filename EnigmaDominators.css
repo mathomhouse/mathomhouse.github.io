@@ -62,7 +62,6 @@ select {
 }
 
 td.additionalHighlight {
-    background-color: pink;
     font-weight: bold;
     border-color: blue;
     border-width: 10px;
