@@ -301,9 +301,9 @@ function getHighlightedCells(){
 //highlight additional cells
 function highlightCells() {
     getHighlightedCells();
-    if (serverNumbers === undefined || serverNumbers.length == 0){
-        return;
-    }
+    //if (serverNumbers === undefined || serverNumbers.length == 0){
+    //    return;
+    //}
     
     let mapElement = document.getElementById("mapContainer");
        
