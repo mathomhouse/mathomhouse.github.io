@@ -26,6 +26,8 @@ th {
     text-align: center;
     min-width: 30px; 
     vertical-align: middle;
+    width: 30px;
+    height: 30px
     /* Ensure consistent cell size */
 }
 
