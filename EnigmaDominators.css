@@ -19,13 +19,10 @@ table {
 td,
 th {
     border: 1px solid black;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding:5px;
     text-align: center;
     vertical-align: middle;
-    width: 40px;
+    width: 50px;
     height: 50px;
     /* Ensure consistent cell size */
 }
@@ -35,7 +32,7 @@ td.highlighted {
     background-color: yellow;
     font-weight: bold;
     border-color: red;
-    border-width: 10px;
+    border-width: 5px;
     padding: 2px;
 }
 
@@ -65,12 +62,12 @@ select {
 td.additionalHighlight {
     font-weight: bold;
     border-color: blue;
-    border-width: 10px;
+    border-width: 5px;
     padding: 2px;
 }
 
 .sid {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
     /* Slightly larger for sid */
 }
