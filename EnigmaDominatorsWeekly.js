@@ -1,4 +1,4 @@
-
+export const defaultSid = 1668;
 export const weekMapData = [
     {
         round: 'Practice3',

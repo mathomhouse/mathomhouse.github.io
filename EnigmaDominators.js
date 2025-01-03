@@ -1,11 +1,10 @@
-import {weekMapData, colors} from './EnigmaDominatorsWeekly.js';
+import {weekMapData, colors, defaultSid} from './EnigmaDominatorsWeekly.js';
 
 document.addEventListener("DOMContentLoaded", loadMap);
-const defaultSid = 1668;
 let mapData = [];
 let grid = {};
 let currentMap = '';
-let centeredSid = 1668;
+let centeredSid = defaultSid;
 let highlightedSids = '';
 let serverNumbers = [];
 
@@ -189,7 +188,6 @@ function updateMap() {
     {
         centerInput = centeredSid;
     }
-    //centeredSid = centerInput;
 
     if(selectedRound === currentMap && serverNumberString === highlightedSids && 
         centerInput.toString() === centeredSid.toString()){
