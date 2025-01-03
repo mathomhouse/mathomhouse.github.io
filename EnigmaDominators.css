@@ -69,6 +69,8 @@ td.additionalHighlight {
 .sid {
     font-size: 13px;
     font-weight: bold;
+    display:block;
+    width:50px;
     /* Slightly larger for sid */
 }
 
