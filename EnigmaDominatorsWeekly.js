@@ -35,5 +35,3 @@ export const colors = [
     '#9370DB', // Medium Purple
     '#E6E6FA'  // Lavender
 ];
-
-//export {weekMapData, colors}
