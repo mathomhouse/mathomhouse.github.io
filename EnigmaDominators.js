@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", loadMap);
 let mapData = [];
 let grid = {};
 let currentMap = '';
+let gridTotalRows = 0;
+let gridTotalCols = 0;
+
 let centeredSid = defaultSid;
 let highlightedSids = '';
 let serverNumbers = [];
@@ -15,7 +18,8 @@ function loadMap(){
     let currentWeek = weekMapData[currentWeekNumber];
     currentMap = currentWeek.round;
     loadEDRounds();
-    loadAndConvertCSV(currentWeek.file);
+    loadJsonMap(currentWeek.file);
+    //loadAndConvertCSV(currentWeek.file);
 }
 
 function loadEDRounds(){
@@ -26,12 +30,36 @@ function loadEDRounds(){
 	});
 }
 
-function loadAndConvertCSV(fileName) {
+function loadJsonMap(fileName){
     fetch(fileName)
-    .then((response) => response.text())
+    .then((response) => response.json())
     .then((data) => {
-        const csvData = csvToJson(data);
-        mapData = mapToUDJson(csvData);
+        //we have the raw json data
+        gridTotalRows = data.maxX + 1;
+        gridTotalCols = data.maxY + 1;   //this is 0 based so add 1
+
+        const transformedData = [
+            ...data.cityInfos
+            .filter(city => (city.pos.x >= 0 && city.pos.y >= 0)) //exclude Void City, which is -1, -1
+            .map(city => ({
+              sid: mapCityInfoSpecId(city.specId), // Use specId for cityInfos
+              pos: city.pos,
+              msid: mapCityInfoMSids(city.mSid),
+              name: "",
+              color: city.color
+            })),
+            ...data.serverInfos.map(server => ({
+              sid: server.sid, // Use sid for serverInfos
+              pos: server.pos,
+              msid: `k${server.mSid}`,
+              name: "",
+              color: server.color
+            }))
+          ];
+        //convert to the expected json format
+        //map the NC values correctly
+        // Log the transformed data
+        mapData = transformedData;
 
         //console.log(JSON.stringify(mapData, null, 2));  
         centerMap(mapData, centeredSid);  
@@ -44,84 +72,37 @@ function loadAndConvertCSV(fileName) {
         console.error('Error loading map data: ', error);
         alert('Failed to load map data. Please try again later. If this issue persists please reach out to artu.');
     });
-    return mapData;
 }
 
-function csvToJson(csvString) {
-    const rows = csvString.split('\n')
-        .map(row => row.trim())
-        .filter(row => row.length > 0); // Split into rows
-    const headers = rows.shift().split(','); // Extract headers
-
-    const jsonArray = rows.map(row => {
-        const values = row.split(',');
-        return headers.reduce((acc, header, index) => {
-            acc[header.trim()] = values[index] ? values[index].trim() : '';
-            return acc;
-        }, {});
-    });
-
-    return jsonArray;
-}
-
-function mapToUDJson(csvData) {
-    //Servers 1-19 - those are empty spaces on the map 
-    //Servers 4xaa - those are LV 1 Neutral Buildings (aa is the number of the neutral building)
-    //Servers 5xaa - those are LV 2 Neutral Buildings (aa is the number of the neutral building)
-    //Servers 6xaa - those are LV 3 Neutral Buildings (aa is the number of the neutral building)
-    return csvData.map(row => {
-        let sidValue = parseInt(row['Server'], 10) || row['Server'];
-        let newSidValue = mapNCValues(row, sidValue, 'sid');
-
-        let msidValue =  parseInt(row['Scan_ParsedFaction'], 10) || row['Scan_ParsedFaction'];
-        let newMsidValue = mapNCValues(row, msidValue, 'msid');
-        return {
-            sid: newSidValue,
-            pos: {
-                x: (parseInt(row['Row'], 10) - 1) || 0, //subtract 1 to make this 0 based
-                y: (parseInt(row['Column'], 10) - 1) || 0 //subtract 1 to make this 0 based
-            },
-            msid: newMsidValue,
-            name: row['Name'] || '',
-            color: row['Color'] ? parseInt(row['Color'], 10) : undefined
-        };
-    });
-
-}
-
-function mapNCValues(row, sidValue, sidOrMsid){
-    if(sidValue === '0'){
-       return '';  //msid 0 is empty space.
+function mapCityInfoSpecId(specId){
+    if (specId >= 597 && specId <= 606){
+        //level 3 NC
+        return `Lvl 3 NC ${specId - 596}`;
     }
-    else if(typeof sidValue === 'number'){
-        if (sidValue >= 1 && sidValue <= 19) {
-            sidValue = ''; // Servers 1-19 are empty spaces. 
-        } 
-        const match = sidValue.toString().match(/^([4-6])\d(\d{2})$/); // Match pattern like 4xaa
-        if(match){
-            const level = match[1] - 3; //first digit is 4, 5, 6. Corresponds to Lvl 1, 2, 3
-            const lastTwoDigits = match[2];
-            if (sidOrMsid === 'sid') {
-                return `Lvl ${level} NC${lastTwoDigits}`;
-            }
-
-            if (sidOrMsid === 'msid') {
-                return ''; // All msid cases result in an empty string
-            }
-        }
-        if (sidOrMsid === 'msid') {
-            return `k${sidValue}`;
-        }
+    else if (specId >= 607 && specId <= 656){
+        //level 2 NC
+        return `Lvl 2 NC ${specId - 606}`;
     }
-    return sidValue;
+    else {
+        //level 1
+        return `Lvl 1 NC ${specId - 655}`;
+    }
+}
+
+function mapCityInfoMSids(mSid){
+    if (mSid === 0){
+        return '';
+    }
+    else{
+        return `k${mSid}`
+    }
 }
 
 // Render Map
 function renderMap(data) {
     let mapElement = document.getElementById("mapContainer");
     //set variables to find center of data for highlighting purposes
-    const gridSize = Math.ceil(Math.sqrt(data.length));
-    let centerIndex = Math.floor(gridSize / 2);
+    let centerIndex = Math.floor(gridTotalRows / 2);
 
     mapElement.innerHTML = ""; // Clear existing table
     //const grid = {};
@@ -209,23 +190,36 @@ function updateMap() {
 
 // Wrap the map like a globe
 function wrapMap(dataRows, centerRow, centerCol) {
-    // Assuming the map is square
-    const totalRows = Math.sqrt(dataRows.length);
-    const totalCols = totalRows;
-
     // Create a grid for quick access
-    const grid = Array.from({ length: totalRows }, () => Array(totalCols).fill(null));
+    const grid = Array.from({ length: gridTotalRows }, () => Array(gridTotalCols).fill(null));
     dataRows.forEach(cell => {
         grid[cell.pos.x][cell.pos.y] = cell;
     });
 
+    // create the empty cells if they aren't there
+    grid.forEach((row, x) => {
+        row.forEach((cell, y) => {
+            if (cell === null){
+                grid[x][y] = {
+                    sid: '',
+                    pos:{
+                        x: x, 
+                        y: y
+                    },
+                    msid: '',
+                    name: '',
+                    color: 0
+                }
+            }
+        });
+    });
     // Create a wrapped version of the map
     const wrappedRows = [];
 
-    for (let rowOffset = -Math.floor(totalRows / 2); rowOffset < Math.ceil(totalRows / 2); rowOffset++) {
-        const rowIndex = (centerRow + rowOffset + totalRows) % totalRows; // Wrap vertically
-        for (let colOffset = -Math.floor(totalCols / 2); colOffset < Math.ceil(totalCols / 2); colOffset++) {
-            const colIndex = (centerCol + colOffset + totalCols) % totalCols; // Wrap horizontally
+    for (let rowOffset = -Math.floor(gridTotalRows / 2); rowOffset < Math.ceil(gridTotalRows / 2); rowOffset++) {
+        const rowIndex = (centerRow + rowOffset + gridTotalRows) % gridTotalRows; // Wrap vertically
+        for (let colOffset = -Math.floor(gridTotalCols / 2); colOffset < Math.ceil(gridTotalCols / 2); colOffset++) {
+            const colIndex = (centerCol + colOffset + gridTotalCols) % gridTotalCols; // Wrap horizontally
             wrappedRows.push(grid[rowIndex][colIndex]);
         }
     }
@@ -236,10 +230,7 @@ function wrapMap(dataRows, centerRow, centerCol) {
 
 //reset the pos.x and pos.y data for each server
 function resetPosData(data) {
-    // Calculate the size of the square grid
-    const gridSize = Math.ceil(Math.sqrt(data.length));
-    //let centerIndex = Math.floor(gridSize / 2);
-
+    const gridSize = gridTotalRows;
     // Update the `pos.x` and `pos.y` properties
     data.forEach((item, index) => {
         item.pos.x = Math.floor(index / gridSize); // Row number
@@ -256,6 +247,7 @@ function getHighlightedCells(){
             serverNumbers = [];
     }
     else{
+        serverNumbers = []; //reset and rebuild
         serverStrings.forEach(num => {
             serverNumbers.push(parseInt(num.trim()));
         });
@@ -264,11 +256,7 @@ function getHighlightedCells(){
 
 //highlight additional cells
 function highlightCells() {
-    getHighlightedCells();
-    //if (serverNumbers === undefined || serverNumbers.length == 0){
-    //    return;
-    //}
-    
+    getHighlightedCells();   
     let mapElement = document.getElementById("mapContainer");
        
     // Convert the innerHTML to a DOM structure for easier manipulation
@@ -287,9 +275,16 @@ function highlightCells() {
                 if (!cell.classList.contains('highlighted')) {
                     cell.classList.add('additionalHighlight');
                 }
-            } else {
+            } 
+             else {
                 // Remove "highlight" class in case it was previously applied
-                cell.classList.remove('additionalHighlight');
+                if (cell.classList.contains('additionalHighlight')) {
+                    cell.classList.remove('additionalHighlight');
+                }
+            }
+
+            if (cellValue === '3602'){
+                console.log(cell.classList);
             }
         });
     });

@@ -1,14 +1,9 @@
 export const defaultSid = 1668;
 export const weekMapData = [
     {
-        round: 'Practice3',
-        file: './EnigmaDominators/ED_Prep_FactionDataRound3.csv'
-        //file: 'https://mathomhouse.github.io/EnigmaDominators/ED_Prep_FactionDataRound3.csv'
-    },
-    {
-        round: 'Practice4',
-        file: './EnigmaDominators/ED_Prep_FactionDataRound4.csv'
-        //file: 'https://mathomhouse.github.io/EnigmaDominators/ED_Prep_FactionDataRound4.csv'
+        round: '1',
+        file:'./EnigmaDominators/ED_Round1.json'
+        //file:'https://mathomhouse.github.io/EnigmaDominators/ED_Round1.json'
     },
 ]
 
