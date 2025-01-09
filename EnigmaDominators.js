@@ -6,11 +6,9 @@ let grid = {};
 let currentMap = '';
 let gridTotalRows = 0;
 let gridTotalCols = 0;
-
 let centeredSid = defaultSid;
 let highlightedSids = '';
 let serverNumbers = [];
-
 
 // Load the JSON map data
 function loadMap(){
@@ -19,7 +17,6 @@ function loadMap(){
     currentMap = currentWeek.round;
     loadEDRounds();
     loadJsonMap(currentWeek.file);
-    //loadAndConvertCSV(currentWeek.file);
 }
 
 function loadEDRounds(){
@@ -38,33 +35,32 @@ function loadJsonMap(fileName){
         gridTotalRows = data.maxX + 1;
         gridTotalCols = data.maxY + 1;   //this is 0 based so add 1
 
-        const transformedData = [
+        mapData = [
             ...data.cityInfos
             .filter(city => (city.pos.x >= 0 && city.pos.y >= 0)) //exclude Void City, which is -1, -1
             .map(city => ({
               sid: mapCityInfoSpecId(city.specId), // Use specId for cityInfos
-              pos: city.pos,
+              pos: {
+                ...city.pos,
+                x: data.maxX - city.pos.x
+              },
               msid: mapCityInfoMSids(city.mSid),
               name: "",
               color: city.color
             })),
             ...data.serverInfos.map(server => ({
               sid: server.sid, // Use sid for serverInfos
-              pos: server.pos,
+              pos: {
+                ...server.pos,
+                x: data.maxX - server.pos.x
+              },
               msid: `k${server.mSid}`,
               name: "",
               color: server.color
             }))
           ];
-        //convert to the expected json format
-        //map the NC values correctly
-        // Log the transformed data
-        mapData = transformedData;
 
-        //console.log(JSON.stringify(mapData, null, 2));  
         centerMap(mapData, centeredSid);  
-        
-        // Render the map with the centered and highlighted cell
         renderMap(mapData);  
         highlightCells();
     })
@@ -75,16 +71,13 @@ function loadJsonMap(fileName){
 }
 
 function mapCityInfoSpecId(specId){
-    if (specId >= 597 && specId <= 606){
-        //level 3 NC
+    if (specId >= 597 && specId <= 606){  //level 3 NC
         return `Lvl 3 NC ${specId - 596}`;
     }
-    else if (specId >= 607 && specId <= 656){
-        //level 2 NC
+    else if (specId >= 607 && specId <= 656){  //level 2 NC
         return `Lvl 2 NC ${specId - 606}`;
     }
-    else {
-        //level 1
+    else {  //level 1
         return `Lvl 1 NC ${specId - 655}`;
     }
 }
@@ -281,10 +274,6 @@ function highlightCells() {
                 if (cell.classList.contains('additionalHighlight')) {
                     cell.classList.remove('additionalHighlight');
                 }
-            }
-
-            if (cellValue === '3602'){
-                console.log(cell.classList);
             }
         });
     });
