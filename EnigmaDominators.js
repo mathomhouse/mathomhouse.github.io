@@ -42,8 +42,10 @@ function loadJsonMap(fileName){
               sid: mapCityInfoSpecId(city.specId), // Use specId for cityInfos
               pos: {
                 ...city.pos,
-                x: data.maxX - city.pos.x
+                x: city.pos.x,
+                y: data.maxY - city.pos.y
               },
+              //pos: city.pos,
               msid: mapCityInfoMSids(city.mSid),
               name: "",
               color: city.color
@@ -52,8 +54,10 @@ function loadJsonMap(fileName){
               sid: server.sid, // Use sid for serverInfos
               pos: {
                 ...server.pos,
-                x: data.maxX - server.pos.x
+                x: server.pos.x,
+                y: data.maxY - server.pos.y
               },
+             // pos: server.pos,
               msid: `k${server.mSid}`,
               name: "",
               color: server.color
@@ -143,7 +147,6 @@ function centerMap(data, sid){
         alert('Server number not found in map data.');
         return;
     }
-    //console.log(`Centering on value: ${centerInput} at Row: ${centerRowIndex}, Column: ${centerColIndex}`);
     centeredSid = sid;
     // Wrap the map
     wrapMap(data, centerRowIndex, centerColIndex);
@@ -217,17 +220,16 @@ function wrapMap(dataRows, centerRow, centerCol) {
         }
     }
 
-    resetPosData(wrappedRows);
     mapData = wrappedRows;
+    resetPosData();
 }
 
 //reset the pos.x and pos.y data for each server
-function resetPosData(data) {
-    const gridSize = gridTotalRows;
+function resetPosData() {
     // Update the `pos.x` and `pos.y` properties
-    data.forEach((item, index) => {
-        item.pos.x = Math.floor(index / gridSize); // Row number
-        item.pos.y = index % gridSize; // Column number
+    mapData.forEach((item, index) => {
+        item.pos.x = Math.floor(index / gridTotalRows); // Row number
+        item.pos.y = index % gridTotalRows; // Column number
     });
 }
 

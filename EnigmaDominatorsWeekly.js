@@ -10,6 +10,7 @@ export const weekMapData = [
 export const colors = [
     '#FFC0CB', // Bright Pink
     '#FFD700', // Gold
+    '#98FB98', // Pale Green
     '#FFA07A', // Light Salmon
     '#FF7F50', // Coral
     '#FF6347', // Tomato
@@ -18,7 +19,6 @@ export const colors = [
     '#FFE4B5', // Moccasin
     '#FFFF99', // Light Yellow
     '#B0E57C', // Light Green
-    '#98FB98', // Pale Green
     '#87CEFA', // Light Sky Blue
     '#87CEEB', // Sky Blue
     '#ADD8E6', // Light Blue
