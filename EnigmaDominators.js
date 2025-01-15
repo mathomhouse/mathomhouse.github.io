@@ -174,7 +174,7 @@ function updateMap() {
         var round = weekMapData.find(round => round.round === selectedRound);
         currentMap = selectedRound;
         centeredSid = centerInput;
-        loadAndConvertCSV(round.file);
+        loadJsonMap(round.file);
     }
     else{
         centeredSid = centerInput;
