@@ -5,6 +5,10 @@ export const weekMapData = [
         file:'./EnigmaDominators/ED_Round1.json'
         //file:'https://mathomhouse.github.io/EnigmaDominators/ED_Round1.json'
     },
+    {
+        round: '2',
+        file:'./EnigmaDominators/ED_Round2.json'
+    },
 ]
 
 export const colors = [
