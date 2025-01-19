@@ -23,7 +23,7 @@ function loadEDRounds(){
     let edrounds = document.getElementById("edrounds");
     weekMapData.forEach((round, idx) => {
 		let selected = weekMapData.length - 1 === idx ? 'selected="selected"' : "";
-		edrounds.innerHTML += `<option class="opts" ${selected} value=${round.round}>Round: ${round.round}</option>`;
+		edrounds.innerHTML += `<option class="opts" ${selected} value="${round.round}">Round: ${round.round}</option>`;
 	});
 }
 
@@ -78,7 +78,7 @@ function mapCityInfoSpecId(specId){
     if (specId >= 597 && specId <= 606){  //level 3 NC
         return `Lvl 3 NC ${specId - 596}`;
     }
-    else if (specId >= 607 && specId <= 656){  //level 2 NC
+    else if (specId >= 607 && specId < 656){  //level 2 NC
         return `Lvl 2 NC ${specId - 606}`;
     }
     else {  //level 1
@@ -90,8 +90,9 @@ function mapCityInfoMSids(mSid){
     if (mSid === 0){
         return '';
     }
-    else{
-        return `k${mSid}`
+    else {
+        var ms = `k${mSid}`
+        return ms;
     }
 }
 
