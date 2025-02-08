@@ -241,9 +241,9 @@
         "specId": 619
       },
       {
-        "color": 4,
+        "color": 0,
         "isFightServer": 0,
-        "mSid": 3384,
+        "mSid": 0,
         "pos": {
           "x": 22,
           "y": 8
@@ -403,7 +403,7 @@
       {
         "color": 0,
         "isFightServer": 0,
-        "mSid": 3453,
+        "mSid": 0,
         "pos": {
           "x": 23,
           "y": 19
@@ -511,9 +511,9 @@
         "specId": 646
       },
       {
-        "color": 1,
+        "color": 0,
         "isFightServer": 0,
-        "mSid": 1508,
+        "mSid": 0,
         "pos": {
           "x": 10,
           "y": 27
@@ -601,9 +601,9 @@
         "specId": 655
       },
       {
-        "color": 3,
+        "color": 0,
         "isFightServer": 0,
-        "mSid": 770,
+        "mSid": 0,
         "pos": {
           "x": 5,
           "y": 0
@@ -771,9 +771,9 @@
         "specId": 672
       },
       {
-        "color": 4,
+        "color": 0,
         "isFightServer": 0,
-        "mSid": 3384,
+        "mSid": 0,
         "pos": {
           "x": 17,
           "y": 5
@@ -801,9 +801,9 @@
         "specId": 675
       },
       {
-        "color": 4,
+        "color": 0,
         "isFightServer": 0,
-        "mSid": 3384,
+        "mSid": 0,
         "pos": {
           "x": 22,
           "y": 6
@@ -1291,9 +1291,9 @@
         "specId": 724
       },
       {
-        "color": 3,
+        "color": 0,
         "isFightServer": 0,
-        "mSid": 1668,
+        "mSid": 0,
         "pos": {
           "x": 30,
           "y": 22
@@ -1353,7 +1353,7 @@
       {
         "color": 0,
         "isFightServer": 0,
-        "mSid": 3453,
+        "mSid": 0,
         "pos": {
           "x": 23,
           "y": 24
@@ -1601,9 +1601,9 @@
         "specId": 755
       },
       {
-        "color": 5,
+        "color": 0,
         "isFightServer": 0,
-        "mSid": 341,
+        "mSid": 0,
         "pos": {
           "x": 13,
           "y": 33
@@ -14255,5 +14255,4 @@
         "gcfWin": 0
       }
     ]
-
-}
+  }
