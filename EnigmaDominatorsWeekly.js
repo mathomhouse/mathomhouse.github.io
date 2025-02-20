@@ -44,7 +44,6 @@ export const weekMapData = [
 ]
 
 export const colors = [
-    '#FFC0CB', // Bright Pink
     '#FFD700', // Gold
     '#98FB98', // Pale Green
     '#FFA07A', // Light Salmon
