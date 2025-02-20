@@ -55,6 +55,7 @@ export const colors = [
     '#FFFF99', // Light Yellow
     '#B0E57C', // Light Green
     '#87CEFA', // Light Sky Blue
+    '#E9967A', // Dark Salmon
     '#87CEEB', // Sky Blue
     '#00BFFF', // Deep Sky Blue
     '#F0E68C', // Khaki
@@ -69,19 +70,18 @@ export const colors = [
     '#F4A460', // Sandy Brown
     '#DDA0DD', // Medium Plum
     '#FF69B4', // Hot Pink
+    '#87CEFA', // Medium Light Sky Blue
     '#FF6347', // Medium Tomato
     '#FFD700', // Goldenrod Yellow
     '#98FB98', // Soft Lime Green
     '#1E90FF', // Dodger Blue
     '#6495ED', // Cornflower Blue
-    '#87CEFA', // Medium Light Sky Blue
     '#00CED1', // Medium Turquoise
     '#7FFFD4', // Aquamarine
     '#BA55D3', // Orchid
-    '#DA70D6', // Medium Orchid
     '#9370DB', // Purple Medium
     '#FFB347', // Pastel Orange
     '#FFB6C1', // Pastel Pink
-    '#E9967A', // Dark Salmon
+    '#DA70D6', // Medium Orchid
     '#FFA07A', // Coral Medium
 ];
