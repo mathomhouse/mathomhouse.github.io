@@ -47,7 +47,7 @@ export const colors = [
     '#FFC0CB', // Bright Pink
     '#FFD700', // Gold
     '#98FB98', // Pale Green
-    '#FFA07A', // Light Salmon2216
+    '#FFA07A', // Light Salmon
     '#FFDAB9', // Peach Puff
     '#FF6347', // Tomato
     '#FFB6C1', // Light Pink
@@ -75,7 +75,6 @@ export const colors = [
     '#FFD700', // Goldenrod Yellow
     '#98FB98', // Soft Lime Green
     '#1E90FF', // Dodger Blue
-    '#6495ED', // Cornflower Blue
     '#00CED1', // Medium Turquoise
     '#7FFFD4', // Aquamarine
     '#BA55D3', // Orchid
@@ -84,4 +83,5 @@ export const colors = [
     '#FFB347', // Pastel Orange
     '#DA70D6', // Medium Orchid
     '#FFA07A', // Coral Medium
+    '#6495ED', // Cornflower Blue
 ];
