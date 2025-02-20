@@ -47,9 +47,9 @@ export const colors = [
     '#FFC0CB', // Bright Pink
     '#FFD700', // Gold
     '#98FB98', // Pale Green
-    '#FFA07A', // Light Salmon
-    '#FF6347', // Tomato
+    '#FFA07A', // Light Salmon2216
     '#FFDAB9', // Peach Puff
+    '#FF6347', // Tomato
     '#FFB6C1', // Light Pink
     '#FFE4B5', // Moccasin
     '#FFFF99', // Light Yellow
@@ -61,11 +61,11 @@ export const colors = [
     '#F0E68C', // Khaki
     '#DDA0DD', // Plum (Purple)
     '#DA70D6', // Orchid (Purple)
+    '#FF8C69', // Salmon Pink
     '#BA55D3', // Medium Orchid (Purple)
     '#9370DB', // Medium Purple
     '#E6E6FA',  // Lavender
     '#3CB371', // Medium Sea Green
-    '#FF8C69', // Salmon Pink
     '#FFA500', // Medium Orange
     '#F4A460', // Sandy Brown
     '#DDA0DD', // Medium Plum
@@ -80,8 +80,8 @@ export const colors = [
     '#7FFFD4', // Aquamarine
     '#BA55D3', // Orchid
     '#9370DB', // Purple Medium
-    '#FFB347', // Pastel Orange
     '#FFB6C1', // Pastel Pink
+    '#FFB347', // Pastel Orange
     '#DA70D6', // Medium Orchid
     '#FFA07A', // Coral Medium
 ];
