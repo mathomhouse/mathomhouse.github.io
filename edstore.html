@@ -5,108 +5,173 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ED Store</title>
   <style>
+  /* Import a modern Google Font */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ece9e6, #ffffff);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    color: #333;
+  }
+
+  #store {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .store-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    width: calc(33% - 40px);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .store-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  .store-item.greyed-out {
+    background-color: #f0f0f0;
+    opacity: 0.7;
+  }
+
+  .store-item h3 {
+    margin: 10px 0;
+    color: #2c3e50;
+  }
+
+  .store-item input {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .store-item button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .store-item button:hover {
+    background-color: #2980b9;
+  }
+
+  .cart {
+    position: sticky;
+    top: 20px;
+    width: 300px;
+    margin-left: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    height: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+
+  .cart h2 {
+    margin-top: 0;
+    color: #2c3e50;
+  }
+
+  #totalCost {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #16a085;
+  }
+
+  #cartItems div {
+    margin-bottom: 10px;
+  }
+
+  .cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+
+  .cart-item input {
+    width: 50px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .cart-item button {
+    padding: 5px 10px;
+    background-color: #e67e22;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .cart-item button:hover {
+    background-color: #d35400;
+  }
+
+  .contributionPointsInput {
+    margin-top: 20px;
+  }
+
+  .contributionPointsInput input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .message {
+    margin-top: 20px;
+    font-weight: 600;
+    color: #e74c3c;
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 768px) {
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 20px;
-      display: flex;
+      display: block;
+      padding: 10px;
     }
     #store {
-      flex: 1;
-      display: flex;
-      flex-wrap: wrap;
+      display: block;
     }
     .store-item {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      padding: 10px;
-      margin: 10px;
-      border-radius: 5px;
-      display: inline-block;
-      width: calc(33% - 40px);
-      text-align: center;
-      transition: background-color 0.3s;
-    }
-    .store-item.greyed-out {
-      background-color: #ccc;
-    }
-    .store-item h3 {
+      width: 100%;
       margin: 10px 0;
     }
-    .store-item input {
-      width: 60px;
-    }
-    .store-item button {
-      margin-top: 10px;
-    }
     .cart {
-      position: sticky;
-      top: 20px;
-      width: 250px;
-      margin-left: 20px;
-      padding: 10px;
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      height: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-    .cart-info {
+      width: 100%;
+      margin-left: 0;
+      position: static;
+      top: auto;
+      max-height: none;
       margin-top: 20px;
     }
-    .message {
-      margin-top: 20px;
-      font-weight: bold;
-      color: red;
-    }
-    #totalCost {
-      font-size: 18px;
-    }
-    #cartItems {
-      margin-top: 10px;
-    }
-    #cartItems div {
-      margin-bottom: 10px;
-    }
-    .cart-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 5px;
-    }
-    .cart-item input {
-      width: 50px;
-      margin: 0 5px;
-    }
-    .contributionPointsInput {
-      margin-top: 20px;
-    }
-
-    /* Mobile Styles */
-    @media (max-width: 768px) {
-      body {
-        display: block;
-        padding: 10px;
-      }
-      #store {
-        display: block;
-      }
-      .store-item {
-        width: 100%;
-        margin: 10px 0;
-      }
-      .cart {
-        width: 100%;
-        margin-left: 0;
-        position: static;
-        top: auto;
-        max-height: none;
-        margin-top: 20px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
   <div id="store">
