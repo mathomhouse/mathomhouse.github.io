@@ -116,19 +116,18 @@
       margin: 10px 0;
       color: #16a085;
     }
-    #cartItems div {
-      margin-bottom: 10px;
-    }
+    /* Updated cart-item styling using grid layout */
     .cart-item {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 60px 100px;
+      gap: 10px;
       align-items: center;
-      justify-content: space-between;
       padding: 8px;
       background-color: #f9f9f9;
       border-radius: 5px;
     }
     .cart-item input {
-      width: 50px;
+      width: 30px;
       padding: 5px;
       border: 1px solid #ccc;
       border-radius: 5px;
@@ -152,7 +151,7 @@
       gap: 10px;
     }
     .contributionPointsInput input {
-      width: 70px;
+      width: 60px;
       padding: 8px;
       border: 1px solid #ccc;
       border-radius: 5px;
@@ -302,7 +301,7 @@
       const currency = parseInt(document.getElementById('currency').value) || 0;
       const totalCost = cart.reduce((sum, ci) => sum + ci.price * ci.quantity, 0);
       const remainingCost = currency - totalCost;
-      document.getElementById('totalCost').textContent = `Total: ${totalCost} Points \r\nRemaining: ${remainingCost} Points`;
+      document.getElementById('totalCost').innerHTML = `Total: ${totalCost} Points<br>Remaining: ${remainingCost} Points`;
 
       if (totalCost > currency) {
         document.getElementById('message').textContent = 'You do not have enough points!';
@@ -352,7 +351,9 @@
       // Remove any items with 0 quantity
       cart = cart.filter(cartItem => cartItem.quantity > 0);
       updateCart();
-      cart.forEach(cartItem => updateItemStatus(cartItem.index));
+      for (let i = 0; i < items.length; i++) {
+        updateItemStatus(i);
+      }
     }
 
     function updateItemStatus(index) {
