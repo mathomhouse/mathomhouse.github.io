@@ -5,173 +5,173 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ED Store</title>
   <style>
-  /* Import a modern Google Font */
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-  body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ece9e6, #ffffff);
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    color: #333;
-  }
-
-  #store {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-
-  .store-item {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 10px;
-    width: calc(33% - 40px);
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
-
-  .store-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  }
-
-  .store-item.greyed-out {
-    background-color: #f0f0f0;
-    opacity: 0.7;
-  }
-
-  .store-item h3 {
-    margin: 10px 0;
-    color: #2c3e50;
-  }
-
-  .store-item input {
-    width: 60px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-  .store-item button {
-    margin-top: 10px;
-    padding: 8px 12px;
-    background-color: #3498db;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  .store-item button:hover {
-    background-color: #2980b9;
-  }
-
-  .cart {
-    position: sticky;
-    top: 20px;
-    width: 300px;
-    margin-left: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    height: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  }
-
-  .cart h2 {
-    margin-top: 0;
-    color: #2c3e50;
-  }
-
-  #totalCost {
-    font-size: 18px;
-    margin: 10px 0;
-    color: #16a085;
-  }
-
-  #cartItems div {
-    margin-bottom: 10px;
-  }
-
-  .cart-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-  }
-
-  .cart-item input {
-    width: 50px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-  .cart-item button {
-    padding: 5px 10px;
-    background-color: #e67e22;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  .cart-item button:hover {
-    background-color: #d35400;
-  }
-
-  .contributionPointsInput {
-    margin-top: 20px;
-  }
-
-  .contributionPointsInput input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-  .message {
-    margin-top: 20px;
-    font-weight: 600;
-    color: #e74c3c;
-  }
-
-  /* Mobile Styles */
-  @media (max-width: 768px) {
     body {
-      display: block;
-      padding: 10px;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      display: flex;
     }
     #store {
-      display: block;
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
     }
     .store-item {
-      width: 100%;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 10px;
+      width: calc(33% - 40px);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .store-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .store-item.greyed-out {
+      background-color: #f0f0f0;
+      opacity: 0.7;
+    }
+    .store-item h3 {
       margin: 10px 0;
+      color: #2c3e50;
+    }
+    /* Custom quantity control */
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 10px;
+    }
+    .quantity-control button {
+      padding: 4px 8px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 1em;
+    }
+    .quantity-control button:hover {
+      background-color: #2980b9;
+    }
+    .quantity-control input[type="range"] {
+      width: 100px;
+    }
+    .quantity-control input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .store-item button.add-to-cart {
+      margin-top: 10px;
+      padding: 8px 12px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .store-item button.add-to-cart:hover {
+      background-color: 2980b9;
     }
     .cart {
-      width: 100%;
-      margin-left: 0;
-      position: static;
-      top: auto;
-      max-height: none;
+      position: sticky;
+      top: 20px;
+      width: 300px;
+      margin-left: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      height: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .cart h2 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+    #totalCost {
+      font-size: 18px;
+      margin: 10px 0;
+      color: #16a085;
+    }
+    #cartItems div {
+      margin-bottom: 10px;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+    .cart-item input {
+      width: 50px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .cart-item button {
+      padding: 5px 10px;
+      background-color: #e67e22;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .cart-item button:hover {
+      background-color: #d35400;
+    }
+    .contributionPointsInput {
       margin-top: 20px;
     }
-  }
-</style>
+    .contributionPointsInput input {
+      width: 140px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .message {
+      margin-top: 20px;
+      font-weight: 600;
+      color: #e74c3c;
+    }
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      body {
+        display: block;
+        padding: 10px;
+      }
+      #store {
+        display: block;
+      }
+      .store-item {
+        width: 100%;
+        margin: 10px 0;
+      }
+      .cart {
+        width: 100%;
+        margin-left: 0;
+        position: static;
+        top: auto;
+        max-height: none;
+        margin-top: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
   <div id="store">
@@ -181,7 +181,7 @@
   <div class="cart">
     <h2>Shopping Cart</h2>
     <div id="cartItems"></div>
-    <p id="totalCost">Total: 0 Contribution Points</p>
+    <p id="totalCost">Total: 0 Points<br>Remaining: 0 Points</p>
 
     <div class="contributionPointsInput">
       <label for="currency">Your Contribution Points:</label>
@@ -233,23 +233,61 @@
         itemDiv.className = 'store-item';
         itemDiv.innerHTML = `
           <h3>${item.name}</h3>
-          <p>Price: ${item.price} Contribution Points</p>
+          <p>Price: ${item.price} Points</p>
           <p>Max Quantity: ${item.maxQty}</p>
-          <label for="quantity${index}">Quantity: </label>
-          <input type="number" id="quantity${index}" value="0" min="0" max="${item.maxQty}" />
-          <button onclick="addToCart(${index})" id="addButton${index}">Add to Cart</button>
+          <div class="quantity-control">
+            <button class="minus-btn" onclick="decrementQuantity(${index})">-</button>
+            <input type="range" id="range${index}" min="0" max="${item.maxQty}" value="0" oninput="syncQuantityFromRange(${index})">
+            <button class="plus-btn" onclick="incrementQuantity(${index})">+</button>
+            <input type="number" id="quantity${index}" value="0" min="0" max="${item.maxQty}" oninput="syncRangeFromQuantity(${index})">
+          </div>
+          <button class="add-to-cart" onclick="addToCart(${index})" id="addButton${index}">Add to Cart</button>
         `;
         storeDiv.appendChild(itemDiv);
       });
     }
 
-    // Add item to cart, merging entries by unique store index
+    // Synchronize slider with number input
+    function syncQuantityFromRange(index) {
+      const rangeInput = document.getElementById(`range${index}`);
+      const numberInput = document.getElementById(`quantity${index}`);
+      numberInput.value = rangeInput.value;
+    }
+
+    function syncRangeFromQuantity(index) {
+      const rangeInput = document.getElementById(`range${index}`);
+      const numberInput = document.getElementById(`quantity${index}`);
+      rangeInput.value = numberInput.value;
+    }
+
+    // Plus and minus button functions
+    function incrementQuantity(index) {
+      const numberInput = document.getElementById(`quantity${index}`);
+      let current = parseInt(numberInput.value);
+      const max = parseInt(numberInput.max);
+      if (current < max) {
+        current++;
+        numberInput.value = current;
+        syncRangeFromQuantity(index);
+      }
+    }
+
+    function decrementQuantity(index) {
+      const numberInput = document.getElementById(`quantity${index}`);
+      let current = parseInt(numberInput.value);
+      if (current > 0) {
+        current--;
+        numberInput.value = current;
+        syncRangeFromQuantity(index);
+      }
+    }
+
+    // Add item to cart using the value from the number input (which is in sync with the slider)
     function addToCart(index) {
       const quantityToAdd = parseInt(document.getElementById(`quantity${index}`).value);
       if (isNaN(quantityToAdd) || quantityToAdd <= 0) return;
       const item = items[index];
 
-      // Check if this item is already in the cart
       let cartItem = cart.find(ci => ci.index === index);
       if (cartItem) {
         if (quantityToAdd > item.maxQty) {
@@ -265,15 +303,14 @@
       updateItemStatus(index);
     }
 
-    // Update the cart display and currency check. We recalculate the total cost each time.
+    // Update the cart display and currency check
     function updateCart() {
       const cartItemsDiv = document.getElementById('cartItems');
       cartItemsDiv.innerHTML = '';
-      const currency = parseInt(document.getElementById('currency').value);
-      // Recalculate total cost from the cart items
+      const currency = parseInt(document.getElementById('currency').value) || 0;
       const totalCost = cart.reduce((sum, ci) => sum + ci.price * ci.quantity, 0);
       const remainingCost = currency - totalCost;
-      document.getElementById('totalCost').textContent = `Total: ${totalCost} Points \r\nRemaining: ${remainingCost} Points `; 
+      document.getElementById('totalCost').textContent = `Total: ${totalCost} Points \r\nRemaining: ${remainingCost} Points`;
 
       if (totalCost > currency) {
         document.getElementById('message').textContent = 'You do not have enough points!';
@@ -281,7 +318,6 @@
         document.getElementById('message').textContent = '';
       }
 
-      // Create cart items display with update input and button for each entry
       cart.forEach(cartItem => {
         const cartItemDiv = document.createElement('div');
         cartItemDiv.className = 'cart-item';
@@ -295,24 +331,20 @@
         input.min = 0;
         input.max = cartItem.maxQty;
         input.id = `cartQuantity${cartItem.index}`;
+        input.oninput = () => updateCartItem(cartItem.index);
 
-        const updateBtn = document.createElement('button');
-        updateBtn.textContent = 'Update';
-        updateBtn.onclick = () => updateCartItem(cartItem.index);
 
         const costDisplay = document.createElement('span');
         costDisplay.textContent = `Cost: ${cartItem.price * cartItem.quantity}`;
 
         cartItemDiv.appendChild(label);
         cartItemDiv.appendChild(input);
-        cartItemDiv.appendChild(updateBtn);
         cartItemDiv.appendChild(costDisplay);
 
         cartItemsDiv.appendChild(cartItemDiv);
       });
     }
 
-    // Update a cart item when user changes its quantity from the cart display
     function updateCartItem(uniqueIndex) {
       const input = document.getElementById(`cartQuantity${uniqueIndex}`);
       const newQuantity = parseInt(input.value);
@@ -326,7 +358,6 @@
         return;
       }
 
-      // Update or remove the item if quantity is set to 0
       if (newQuantity === 0) {
         cart = cart.filter(ci => ci.index !== uniqueIndex);
       } else {
@@ -336,11 +367,10 @@
       updateItemStatus(uniqueIndex);
     }
 
-    // Update the store item status based on the current cart quantity for that unique item
     function updateItemStatus(index) {
       const item = items[index];
       const itemDiv = document.querySelectorAll('.store-item')[index];
-      const addButton = itemDiv.querySelector('button');
+      const addButton = itemDiv.querySelector('button.add-to-cart');
 
       const currentQtyInCart = cart
         .filter(ci => ci.index === index)
