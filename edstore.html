@@ -161,6 +161,56 @@
       font-weight: 600;
       color: #e74c3c;
     }
+    @media screen and (max-width: 768px) {
+  body {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  #store {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .store-item {
+    width: calc(100% - 20px);
+  }
+
+  .quantity-control {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cart {
+    position: relative;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 20px;
+  }
+
+  .cart-item {
+    grid-template-columns: 1fr 40px 80px;
+    font-size: 14px;
+  }
+
+  .cart-item input {
+    width: 25px;
+  }
+
+  .cart-item button {
+    padding: 4px 8px;
+  }
+
+  .contributionPointsInput {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .contributionPointsInput input {
+    width: 100px;
+  }
+}
+
   </style>
 </head>
 <body>
