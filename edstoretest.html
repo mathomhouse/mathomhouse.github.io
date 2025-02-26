@@ -230,6 +230,40 @@
     border-radius: 5px;
     cursor: pointer;
   }
+
+  .floating-cart {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  text-align: center;
+  line-height: 60px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 1000;
+}
+
+.floating-cart:hover {
+  background-color: #2980b9;
+}
+
+/* Mobile Adjustments */
+@media screen and (max-width: 768px) {
+  .floating-cart {
+    bottom: 15px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    line-height: 50px;
+  }
 }
 
   </style>
@@ -270,6 +304,9 @@
   </div>
 </div>
 
+<button id="cart-toggle" class="floating-cart">
+  🛒
+</button>
 
   <script>
     // List of items (each entry is unique even if names repeat)
@@ -498,6 +535,20 @@
 
     // Initialize the store
     createStoreItems();
+
+    // Floating Cart Toggle Functionality
+document.getElementById("cart-toggle").addEventListener("click", function () {
+  const cart = document.querySelector(".cart");
+  if (cart.style.display === "none" || cart.style.display === "") {
+    cart.style.display = "block"; // Show cart
+    cart.scrollIntoView({ behavior: "smooth" }); // Scroll to cart smoothly
+  } else {
+    cart.style.display = "none"; // Hide cart
+  }
+});
+
+
+
   </script>
 </body>
 </html>
