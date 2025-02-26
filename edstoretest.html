@@ -357,25 +357,25 @@
     }
 
     // Add item to cart using the value from the number input (which is in sync with the slider)
-    function addToCart(index) {
-      const quantityToAdd = parseInt(document.getElementById(`quantity${index}`).value);
-      if (isNaN(quantityToAdd) || quantityToAdd <= 0) return;
-      const item = items[index];
+    function addToCart(index, quantity) {
+  if (isNaN(quantity) || quantity <= 0) return;
+  const item = items[index];
 
-      let cartItem = cart.find(ci => ci.index === index);
-      if (cartItem) {
-        if (quantityToAdd > item.maxQty) {
-          alert(`You can only buy up to ${item.maxQty} of this item.`);
-          return;
-        }
-        cartItem.quantity = quantityToAdd;
-      } else {
-        cartItem = { ...item, quantity: quantityToAdd, index };
-        cart.push(cartItem);
-      }
-      updateCart();
-      updateItemStatus(index);
+  let cartItem = cart.find(ci => ci.index === index);
+  if (cartItem) {
+    if (quantity > item.maxQty) {
+      alert(`You can only buy up to ${item.maxQty} of this item.`);
+      return;
     }
+    cartItem.quantity = quantity;
+  } else {
+    cartItem = { ...item, quantity: quantity, index };
+    cart.push(cartItem);
+  }
+  updateCart();
+  updateItemStatus(index);
+}
+
 
     // Update the cart display and currency check
     function updateCart() {
@@ -471,9 +471,10 @@
       document.getElementById("modal-overlay").classList.add("active");
 
       document.getElementById("modal-add-to-cart").onclick = function () {
-        addToCart(index);
-        closeModal();
-      };
+  const quantity = parseInt(document.getElementById("modal-quantity").value);
+  addToCart(index, quantity);
+  closeModal();
+    };
     }
 
     // Function to close modal
