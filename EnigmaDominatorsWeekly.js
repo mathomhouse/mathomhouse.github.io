@@ -63,10 +63,10 @@ export const colors = [
     '#B0E57C', // Light Green
     '#87CEFA', // Light Sky Blue
     '#E9967A', // Dark Salmon
-    '#87CEEB', // Sky Blue
     '#00BFFF', // Deep Sky Blue
     '#F0E68C', // Khaki
     '#DDA0DD', // Plum (Purple)
+    '#87CEEB', // Sky Blue
     '#DA70D6', // Orchid (Purple)
     '#FF8C69', // Salmon Pink
     '#BA55D3', // Medium Orchid (Purple)
