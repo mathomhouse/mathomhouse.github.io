@@ -217,28 +217,29 @@ body {
     }
     .quantity-control {
         display: flex;
-        flex-wrap: nowrap; /* Prevents wrapping */
-        align-items: center; /* Aligns all elements to the same line */
+        align-items: center;
         justify-content: space-between;
+        gap: 5px; /* Ensures elements don't overlap */
     }
 
     .quantity-control button {
-        flex: 0 0 auto; /* Prevents buttons from shrinking */
+        flex: 0 0 auto; /* Prevents shrinking */
     }
 
     .quantity-control input[type="range"] {
-        flex: 1; /* Allows slider to fill available space */
-        min-width: 100px; /* Prevents shrinking too much */
+        flex: 1; /* Allows it to stretch properly */
+        min-width: 80px; /* Ensures the slider isn't too small */
     }
     .quantity-control input[type="number"] {
-        width: 40px; /* Keeps it small but readable */
-        text-align: center; /* Centers text for better readability */
+        width: 50px; /* Small enough for two-digit numbers */
+        text-align: center; /* Center aligns the number */
+        padding: 5px; /* Keeps it proportional */
     }
     .cart {
-        position: relative; /* Remove 'sticky' to ensure proper placement */
-        width: 100%; /* Ensure cart takes full width instead of overflowing */
-        max-width: 350px; /* Prevent it from being too wide */
-        margin: 0 auto; /* Center it below the store */
+        position: relative; /* Remove sticky positioning */
+        width: 100%; /* Prevent overflow */
+        max-width: 350px; /* Keeps it from being too wide */
+        margin: 20px auto; /* Center it below the store */
     }
 }
 
