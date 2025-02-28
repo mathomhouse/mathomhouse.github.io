@@ -203,9 +203,37 @@ body {
     width: 100px;
   }
 }
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
-    body {
-        zoom: 0.9; /* Adjust zoom for iPad portrait */
+/* Fix for iPad portrait mode */
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .store-item {
+        width: 45%; /* Increase width so items are not too tall */
+        min-width: 250px; /* Prevent excessive shrinking */
     }
 }
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .quantity-control {
+        flex-wrap: wrap; /* Allows wrapping */
+        justify-content: center;
+    }
+    
+    .quantity-control input[type="range"] {
+        width: 80%; /* Makes sure range slider fits */
+    }
+
+    .quantity-control input[type="number"] {
+        width: 50px; /* Prevents overflow */
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    #store {
+        display: flex; /* Ensure store is in flexbox mode */
+        flex-wrap: wrap; /* Ensures wrapping on narrower screens */
+        justify-content: space-around; /* Distributes items evenly */
+    }
+
+    .store-item {
+        width: 45%; /* Allow two items per row */
+    }
+}
+
 
