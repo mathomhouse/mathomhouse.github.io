@@ -213,7 +213,7 @@ body {
 
     .store-item {
         width: 100%; /* Prevents overriding the grid column structure */
-        min-width: 220px; /* Prevents items from being too narrow */
+        min-width: 200px; /* Prevents items from being too narrow */
     }
     .quantity-control {
         display: flex;
@@ -230,6 +230,18 @@ body {
         flex: 1; /* Allows slider to fill available space */
         min-width: 100px; /* Prevents shrinking too much */
     }
+    .quantity-control input[type="number"] {
+        width: 40px; /* Keeps it small but readable */
+        text-align: center; /* Centers text for better readability */
+    }
+    .cart {
+        position: relative; /* Remove 'sticky' to ensure proper placement */
+        width: 100%; /* Ensure cart takes full width instead of overflowing */
+        max-width: 350px; /* Prevent it from being too wide */
+        margin: 0 auto; /* Center it below the store */
+    }
+}
+
 }
 
 
