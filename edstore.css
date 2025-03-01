@@ -207,13 +207,14 @@ body {
 @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
     #store {
         display: grid;
-        grid-template-columns: repeat(3, 1fr); /* Ensure 3 columns */
+        grid-template-columns: repeat(2, 1fr); /* Reduce to 2 columns */
         gap: 10px;
+        width: 100%;
     }
 
     .store-item {
-        width: 100%; /* Prevents overriding the grid column structure */
-        min-width: 200px; /* Prevents items from being too narrow */
+        width: 100%; /* Allow items to fit into grid columns */
+        min-width: 180px; /* Prevent items from getting too small */
     }
     .quantity-control {
         display: flex;
@@ -237,9 +238,9 @@ body {
     }
     .cart {
         position: relative; /* Remove sticky positioning */
-        width: 100%; /* Prevent overflow */
-        max-width: 350px; /* Keeps it from being too wide */
-        margin: 20px auto; /* Center it below the store */
+        width: 90%; /* Allow it to fit within the screen */
+        max-width: 400px; /* Limit max width */
+        margin: 20px auto; /* Center it */
     }
 }
 
