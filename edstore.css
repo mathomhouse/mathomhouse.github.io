@@ -237,7 +237,7 @@ body {
         padding: 5px; /* Keeps it proportional */
     }
     .cart {
-        position: relative; /* Remove sticky positioning */
+        position: sticky; 
         width: 90%; /* Allow it to fit within the screen */
         max-width: 400px; /* Limit max width */
         margin: 20px auto; /* Center it */
