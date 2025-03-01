@@ -204,17 +204,16 @@ body {
   }
 }
 /* Fix for iPad portrait mode */
-@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-    #store {
+#store {
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Reduce to 2 columns */
-        gap: 10px;
+        grid-template-columns: repeat(3, minmax(0, 1fr)); /* Keeps 3 columns */
+        gap: 15px; /* Adds spacing */
         width: 100%;
     }
 
     .store-item {
-        width: 100%; /* Allow items to fit into grid columns */
-        min-width: 180px; /* Prevent items from getting too small */
+        width: 100%; /* Ensures full use of grid columns */
+        min-width: 220px; /* Prevents items from shrinking too much */
     }
     .quantity-control {
         display: flex;
@@ -237,10 +236,11 @@ body {
         padding: 5px; /* Keeps it proportional */
     }
     .cart {
-        position: relative; /* Remove sticky positioning */
-        width: 90%; /* Allow it to fit within the screen */
-        max-width: 400px; /* Limit max width */
-        margin: 20px auto; /* Center it */
+        grid-column: span 3; /* Makes the cart span across all 3 columns */
+        width: 100%; /* Takes up full row width */
+        max-width: 100%; /* Prevents overflow */
+        margin: 20px auto; /* Centers it */
+        position: relative; /* Removes sticky positioning */
     }
 }
 
