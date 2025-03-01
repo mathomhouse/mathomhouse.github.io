@@ -241,14 +241,22 @@
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  font-size: 24px;
-  text-align: center;
-  line-height: 60px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display: flex;  /* Ensures flexbox centering */
+  align-items: center;  /* Vertical centering */
+  justify-content: center;  /* Horizontal centering */
   cursor: pointer;
   transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   z-index: 1000;
+  padding: 0; /* Prevents extra padding */
 }
+
+/* Make sure the SVG scales properly */
+.floating-cart svg {
+  width: 50%;  /* Adjust size to fit within button */
+  height: 50%;
+}
+
 
 .floating-cart:hover {
   background-color: #2980b9;
