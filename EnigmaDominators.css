@@ -3,8 +3,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px;
 }
+#header-placeholder {
+    margin: 0; /* Prevent extra spacing from the placeholder div */
+    padding: 0;
+}
+
 header {
-    margin: 0; /* Reset margin for header only */
+    margin: 0 auto; /* Remove excess margins while keeping centering */
+    width: 100%; /* Ensure full width */
 }
 
 /* Map container styling */
