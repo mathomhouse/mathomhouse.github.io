@@ -11,7 +11,7 @@ body {
 
 header {
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 10px !important;
     width: 100%;
     position: relative; /* Keep it in normal flow */
 }
