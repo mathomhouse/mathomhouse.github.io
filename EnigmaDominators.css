@@ -1,16 +1,26 @@
 /* General page styling */
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
-}
-#header-placeholder {
-    margin: 0; /* Prevent extra spacing from the placeholder div */
+    margin: 0; /* Remove margin from everything */
     padding: 0;
 }
 
+.container {
+    margin: 20px; /* Keep space for the rest of the content */
+}
+
 header {
-    margin: 0 auto; /* Remove excess margins while keeping centering */
-    width: 100%; /* Ensure full width */
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+    position: relative; /* Keep it in normal flow */
+}
+
+#header-placeholder {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block;
+    width: 100%;
 }
 
 /* Map container styling */
