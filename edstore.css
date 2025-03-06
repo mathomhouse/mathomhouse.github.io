@@ -203,47 +203,47 @@ body {
     width: 100px;
   }
 }
-/* Fix for iPad portrait mode */
+/* iPad Portrait Mode: Keep 3 Columns and Place Cart at Page Bottom */
 @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-    #store {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Reduce to 2 columns */
-        gap: 10px;
+    .container {
+        display: flex;
+        flex-direction: column; /* Stack everything vertically */
         width: 100%;
     }
 
+    #store {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Keep 3 columns */
+        gap: 10px;
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto; /* Center the store */
+    }
+
     .store-item {
-        width: 100%; /* Allow items to fit into grid columns */
-        min-width: 180px; /* Prevent items from getting too small */
-    }
-    .quantity-control {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 5px; /* Ensures elements don't overlap */
+        width: 100%;
+        min-width: 160px;
     }
 
-    .quantity-control button {
-        flex: 0 0 auto; /* Prevents shrinking */
-    }
-
-    .quantity-control input[type="range"] {
-        flex: 1; /* Allows it to stretch properly */
-        min-width: 80px; /* Ensures the slider isn't too small */
-    }
-    .quantity-control input[type="number"] {
-        width: 50px; /* Small enough for two-digit numbers */
-        text-align: center; /* Center aligns the number */
-        padding: 5px; /* Keeps it proportional */
-    }
     .cart {
-        position: sticky; 
-        width: 90%; /* Allow it to fit within the screen */
-        max-width: 400px; /* Limit max width */
-        margin: 20px auto; /* Center it */
+        position: relative; /* No sticky or fixed positioning */
+        width: 100%; /* Take full width under store */
+        max-width: 900px; /* Matches store width */
+        margin: 20px auto 0; /* Pushes it below store */
+        padding: 20px;
+        background-color: white;
+        border-top: 2px solid #ddd;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Fixing overall page structure */
+    html, body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* Full-page height */
+    }
+
+    .container {
+        flex-grow: 1; /* Allows store to expand naturally */
     }
 }
-
-}
-
-
