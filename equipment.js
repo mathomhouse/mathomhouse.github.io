@@ -117,8 +117,8 @@ function calculatemats() {
 
     // Return the time as a formatted string
     if (days > 0) result += `<b>${days}</b> days`;
-    if (hours > 0) result += `, <b>${hours}</b> hours`;
-    if (minutes > 0 || result === '') result += `, <b>${minutes}</b> minutes`;
+    if (hours > 0) result += ` <b>${hours}</b> hours`;
+    if (minutes > 0 || result === '') result += ` <b>${minutes}</b> minutes`;
 
     result += `. <br>The crafting will finish on: ${formattedDateTime}`;
 
