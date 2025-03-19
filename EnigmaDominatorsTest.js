@@ -351,7 +351,7 @@ function toggleAnimation() {
     } else {
         let index = dropdown.selectedIndex;
 
-        animationInterval = setInterval(() => {
+        function cycleMap() {
             if (index < dropdown.options.length - 1) {
                 index++;
             } else {
@@ -359,19 +359,20 @@ function toggleAnimation() {
             }
             dropdown.selectedIndex = index;
             updateMap(); // Call existing function to update the map
-        }, animationSpeed); // Use the selected speed
+        }
+
+        cycleMap(); // Update immediately on play
+        animationInterval = setInterval(cycleMap, animationSpeed); // Start interval with chosen speed
 
         button.textContent = "Pause Animation";
         isAnimating = true;
     }
 }
 
-// Function to update speed
+// Function to update speed dynamically
 function updateSpeed() {
-    animationSpeed = document.getElementById("speedControl").value;
-    document.getElementById("speedDisplay").textContent = (animationSpeed / 1000) + "s";
+    animationSpeed = parseInt(document.getElementById("speedControl").value, 10);
 
-    // If animation is running, restart with new speed
     if (isAnimating) {
         clearInterval(animationInterval);
         toggleAnimation(); // Restart animation with new speed
@@ -382,5 +383,5 @@ function updateSpeed() {
 document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM fully loaded. Attaching event listeners...");
     document.getElementById("toggleAnimationButton").addEventListener("click", toggleAnimation);
-    document.getElementById("speedControl").addEventListener("input", updateSpeed);
+    document.getElementById("speedControl").addEventListener("change", updateSpeed);
 });

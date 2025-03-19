@@ -21,10 +21,14 @@
     <button id="updateButton">Update Map</button>
     <button id="toggleAnimationButton">Play Animation</button>
     <label for="speedControl">Speed:</label>
-    <input type="range" id="speedControl" min="500" max="5000" step="500" value="2000">
-    <span id="speedDisplay">2s</span>
-    <p style="font-size: 12px;">Created by artu (s2610) and Gikey (s2610/s3355). Data from tzup (s1668), with help from Joey (s1668) and Ryba (s1668).</p>
-    
+    <select id="speedControl">
+    <option value="500">0.5s</option>
+    <option value="1000">1s</option>
+    <option value="2000" selected>2s</option>
+    <option value="3000">3s</option>
+    <option value="4000">4s</option>
+    <option value="5000">5s</option>
+    </select>
     <div id="mapContainer">
         </div>
     </div>
