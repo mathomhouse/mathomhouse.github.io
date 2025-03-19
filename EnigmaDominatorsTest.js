@@ -337,7 +337,9 @@ document.getElementById('updateButton').addEventListener('click', updateMap);
 
 let animationInterval = null;
 let isAnimating = false;
+let animationSpeed = 2000; // Default speed (2 seconds)
 
+// Function to start/stop animation
 function toggleAnimation() {
     const button = document.getElementById("toggleAnimationButton");
     const dropdown = document.getElementById("edrounds");
@@ -356,13 +358,29 @@ function toggleAnimation() {
                 index = 0; // Loop back to start
             }
             dropdown.selectedIndex = index;
-            updateMap(); // Call the existing function to update the map
-        }, 1000); // Change week every 4 seconds
+            updateMap(); // Call existing function to update the map
+        }, animationSpeed); // Use the selected speed
 
         button.textContent = "Pause Animation";
         isAnimating = true;
     }
 }
 
-// Attach event listener
-document.getElementById("toggleAnimationButton").addEventListener("click", toggleAnimation);
+// Function to update speed
+function updateSpeed() {
+    animationSpeed = document.getElementById("speedControl").value;
+    document.getElementById("speedDisplay").textContent = (animationSpeed / 1000) + "s";
+
+    // If animation is running, restart with new speed
+    if (isAnimating) {
+        clearInterval(animationInterval);
+        toggleAnimation(); // Restart animation with new speed
+    }
+}
+
+// Attach event listeners
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOM fully loaded. Attaching event listeners...");
+    document.getElementById("toggleAnimationButton").addEventListener("click", toggleAnimation);
+    document.getElementById("speedControl").addEventListener("input", updateSpeed);
+});
