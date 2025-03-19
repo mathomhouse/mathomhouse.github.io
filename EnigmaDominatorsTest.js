@@ -357,7 +357,7 @@ function toggleAnimation() {
             }
             dropdown.selectedIndex = index;
             updateMap(); // Call the existing function to update the map
-        }, 4000); // Change week every 4 seconds
+        }, 1000); // Change week every 4 seconds
 
         button.textContent = "Pause Animation";
         isAnimating = true;
