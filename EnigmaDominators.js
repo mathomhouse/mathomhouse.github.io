@@ -314,22 +314,33 @@ function higlightFactions() {
             const sidInt = parseInt(sid, 10);
             const msidInt = parseInt(msid.slice(1), 10);
 
+            const topServers = [148,1668,2216,770,3384,2687,3453,1756,1313,341,1508,619,2842,3535,935,1720,1281,3051,1721,247];
+
+            //set the colors for the top factions
+            if (topServers.includes(msidInt)) {
+                let index = topServers.indexOf(msidInt);
+                colorCellHelper(cell, index, sidInt, msidInt);
+            }
             // Check if cellValue matches any value in serverNumbers array
-            if (frequentMsids.includes(msidInt)) {
+            else if (frequentMsids.includes(msidInt)) {
                 let index = frequentMsids.indexOf(msidInt) % colors.length;
-                if(msidInt == sidInt){  //faction leader
-                    cell.style.background = `radial-gradient(circle, rgba(255, 255, 255, 0) 0%, 
-                    ${colors[index]} 100%)`;
-                }
-                else{
-                    cell.style.backgroundColor = colors[index];
-                }
+                colorCellHelper(cell, index, sidInt, msidInt);
             } else {
                 // Remove "highlight" class in case it was previously applied
                 cell.classList.remove('additionalHighlight');
             }
         });
     });
+}
+
+function colorCellHelper(cell, index, sidInt, msidInt){
+    if(msidInt == sidInt){  //faction leader
+        cell.style.background = `radial-gradient(circle, rgba(255, 255, 255, 0) 0%, 
+        ${colors[index]} 100%)`;
+    }
+    else{
+        cell.style.backgroundColor = colors[index];
+    }
 }
 
 // Add event listener for the "Update Map" button
