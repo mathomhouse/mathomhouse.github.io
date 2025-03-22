@@ -314,7 +314,7 @@ function higlightFactions() {
             const sidInt = parseInt(sid, 10);
             const msidInt = parseInt(msid.slice(1), 10);
 
-            const topServers = [148,1668,2216,770,3384,2687,3453,1756,1313,341,1508,619,2842,3535,935,1720,1281,3051,1721,247];
+            const topServers = [148,1668,2216,770,3384,2687,3453,1756,619,341,1508,1313,2842,3535,935,1720,1281,3051,1721,247];
 
             //set the colors for the top factions
             if (topServers.includes(msidInt)) {
