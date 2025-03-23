@@ -1,22 +1,3 @@
-
-const factionColors = {
-    "Faction A": "#ff5733",
-    "Faction B": "#33ff57",
-    "Faction C": "#3357ff",
-    "Faction D": "#ff33a8",
-    "Faction E": "#f1c40f",
-    "Faction F": "#8e44ad",
-    "Faction G": "#1abc9c",
-    "Faction H": "#e74c3c",
-    "Faction I": "#3498db",
-    "Faction J": "#2ecc71"
-};
-
-// Function to get a color for a given faction
-function getFactionColor(factionName) {
-    return factionColors[factionName] || "#999999"; // Default color if not mapped
-}
-
 import {weekMapData, colors, defaultSid} from './EnigmaDominatorsWeekly.js';
 
 document.addEventListener("DOMContentLoaded", loadMap);
@@ -333,16 +314,17 @@ function higlightFactions() {
             const sidInt = parseInt(sid, 10);
             const msidInt = parseInt(msid.slice(1), 10);
 
+            const topServers = [148,1668,2216,770,3384,2687,3453,1756,619,341,1508,1313,2842,3535,935,1720,1281,3051,1721,247];
+
+            //set the colors for the top factions
+            if (topServers.includes(msidInt)) {
+                let index = topServers.indexOf(msidInt);
+                colorCellHelper(cell, index, sidInt, msidInt);
+            }
             // Check if cellValue matches any value in serverNumbers array
-            if (frequentMsids.includes(msidInt)) {
+            else if (frequentMsids.includes(msidInt)) {
                 let index = frequentMsids.indexOf(msidInt) % colors.length;
-                if(msidInt == sidInt){  //faction leader
-                    cell.style.background = `radial-gradient(circle, rgba(255, 255, 255, 0) 0%, 
-                    ${colors[index]} 100%)`;
-                }
-                else{
-                    cell.style.backgroundColor = colors[index];
-                }
+                colorCellHelper(cell, index, sidInt, msidInt);
             } else {
                 // Remove "highlight" class in case it was previously applied
                 cell.classList.remove('additionalHighlight');
@@ -351,56 +333,15 @@ function higlightFactions() {
     });
 }
 
+function colorCellHelper(cell, index, sidInt, msidInt){
+    if(msidInt == sidInt){  //faction leader
+        cell.style.background = `radial-gradient(circle, rgba(255, 255, 255, 0) 0%, 
+        ${colors[index]} 100%)`;
+    }
+    else{
+        cell.style.backgroundColor = colors[index];
+    }
+}
+
 // Add event listener for the "Update Map" button
 document.getElementById('updateButton').addEventListener('click', updateMap);
-
-let animationInterval = null;
-let isAnimating = false;
-let animationSpeed = 2000; // Default speed (2 seconds)
-
-// Function to start/stop animation
-function toggleAnimation() {
-    const button = document.getElementById("toggleAnimationButton");
-    const dropdown = document.getElementById("edrounds");
-
-    if (isAnimating) {
-        clearInterval(animationInterval);
-        button.textContent = "Play Animation";
-        isAnimating = false;
-    } else {
-        let index = dropdown.selectedIndex;
-
-        function cycleMap() {
-            if (index < dropdown.options.length - 1) {
-                index++;
-            } else {
-                index = 0; // Loop back to start
-            }
-            dropdown.selectedIndex = index;
-            updateMap(); // Call existing function to update the map
-        }
-
-        cycleMap(); // Update immediately on play
-        animationInterval = setInterval(cycleMap, animationSpeed); // Start interval with chosen speed
-
-        button.textContent = "Pause Animation";
-        isAnimating = true;
-    }
-}
-
-// Function to update speed dynamically
-function updateSpeed() {
-    animationSpeed = parseInt(document.getElementById("speedControl").value, 10);
-
-    if (isAnimating) {
-        clearInterval(animationInterval);
-        toggleAnimation(); // Restart animation with new speed
-    }
-}
-
-// Attach event listeners
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM fully loaded. Attaching event listeners...");
-    document.getElementById("toggleAnimationButton").addEventListener("click", toggleAnimation);
-    document.getElementById("speedControl").addEventListener("change", updateSpeed);
-});

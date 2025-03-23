@@ -345,3 +345,54 @@ function colorCellHelper(cell, index, sidInt, msidInt){
 
 // Add event listener for the "Update Map" button
 document.getElementById('updateButton').addEventListener('click', updateMap);
+
+let animationInterval = null;
+let isAnimating = false;
+let animationSpeed = 2000; // Default speed (2 seconds)
+
+// Function to start/stop animation
+function toggleAnimation() {
+    const button = document.getElementById("toggleAnimationButton");
+    const dropdown = document.getElementById("edrounds");
+
+    if (isAnimating) {
+        clearInterval(animationInterval);
+        button.textContent = "Play Animation";
+        isAnimating = false;
+    } else {
+        let index = dropdown.selectedIndex;
+
+        function cycleMap() {
+            if (index < dropdown.options.length - 1) {
+                index++;
+            } else {
+                index = 0; // Loop back to start
+            }
+            dropdown.selectedIndex = index;
+            updateMap(); // Call existing function to update the map
+        }
+
+        cycleMap(); // Update immediately on play
+        animationInterval = setInterval(cycleMap, animationSpeed); // Start interval with chosen speed
+
+        button.textContent = "Pause Animation";
+        isAnimating = true;
+    }
+}
+
+// Function to update speed dynamically
+function updateSpeed() {
+    animationSpeed = parseInt(document.getElementById("speedControl").value, 10);
+
+    if (isAnimating) {
+        clearInterval(animationInterval);
+        toggleAnimation(); // Restart animation with new speed
+    }
+}
+
+// Attach event listeners
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOM fully loaded. Attaching event listeners...");
+    document.getElementById("toggleAnimationButton").addEventListener("click", toggleAnimation);
+    document.getElementById("speedControl").addEventListener("change", updateSpeed);
+});
