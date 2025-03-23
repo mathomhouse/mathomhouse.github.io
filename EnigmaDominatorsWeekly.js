@@ -1,9 +1,12 @@
 export const defaultSid = 1668;
 export const weekMapData = [
     {
+        round: '0',
+        file:'./EnigmaDominators/ED_Round0.json'
+    },    
+    {
         round: '1',
         file:'./EnigmaDominators/ED_Round1.json'
-        //file:'https://mathomhouse.github.io/EnigmaDominators/ED_Round1.json'
     },
     {
         round: '2',
