@@ -1,7 +1,7 @@
 // Google Analytics - Add this at the top of header.js
 const gaScript1 = document.createElement('script');
 gaScript1.setAttribute('async', '');
-gaScript1.src = 'https://www.googletagmanager.com/gtag/js?id=G-V2PHW0X76X';
+gaScript1.src = 'https://www.googletagmanager.com/gtag/js?id=G-4R1NPM39PL';
 document.head.appendChild(gaScript1);
 
 const gaScript2 = document.createElement('script');
@@ -9,7 +9,7 @@ gaScript2.innerHTML = `
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-V2PHW0X76X');
+  gtag('config', 'G-4R1NPM39PL');
 `;
 document.head.appendChild(gaScript2);
 
