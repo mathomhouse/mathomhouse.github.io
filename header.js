@@ -1,3 +1,19 @@
+// Google Analytics - Add this at the top of header.js
+const gaScript1 = document.createElement('script');
+gaScript1.setAttribute('async', '');
+gaScript1.src = 'https://www.googletagmanager.com/gtag/js?id=G-Y2VS937YVX';
+document.head.appendChild(gaScript1);
+
+const gaScript2 = document.createElement('script');
+gaScript2.innerHTML = `
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Y2VS937YVX');
+`;
+document.head.appendChild(gaScript2);
+
+
 // header.js
 
 // Function to dynamically add the favicon
