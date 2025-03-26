@@ -16,7 +16,7 @@ const items = [
       {name: "Advanced-tier Catalyst", price: 5000, maxQty: 10},
       {name: "Mid-tier Catalyst", price: 1000, maxQty: 20},
       {name: "Expert HT Chip Chest", price: 6500, maxQty: 10},
-      {name: "Amazing HT Chip Chest", price: 1300, maxQty: 10},
+      {name: "Amazing HT Chip Chest", price: 1300, maxQty: 30},
       {name: "Power Core", price: 550, maxQty: 25},
       {name: "Universal Formation Upgrade Guide x5", price: 1400, maxQty: 30},
       {name: "Hologram Choice Chest", price: 700, maxQty: 70},
