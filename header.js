@@ -13,6 +13,16 @@ gaScript2.innerHTML = `
 `;
 document.head.appendChild(gaScript2);
 
+// Fire a manual page_view event with page metadata after the DOM loads
+document.addEventListener("DOMContentLoaded", function() {
+  gtag('event', 'page_view', {
+    page_title: document.title,
+    page_location: window.location.href,
+    page_path: window.location.pathname
+  });
+});
+
+
 
 // header.js
 
