@@ -88,6 +88,10 @@ export const weekMapData = [
         round: '11 + NC',
         file:'./EnigmaDominators/ED_Round11NC.json'
     },
+    {
+        round: '12',
+        file:'./EnigmaDominators/ED_Round12.json'
+    },
 ]
 
 export const colors = [
