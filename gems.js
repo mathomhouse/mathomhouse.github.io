@@ -2,7 +2,7 @@ const gemTotalElements =[
     'openGemsTotal', '12960GemsTotal',
     '5000GemsTotal', '4000GemsTotal',
     '3280GemsTotal', '3000GemsTotal', 
-    '2560GemsTotal', '2024GemsTotal', 
+    '2560GemsTotal', 
     '2000GemsTotal', '1280GemsTotal', 
     '1200GemsTotal', '1000GemsTotal', 
     '800GemsTotal',  '600GemsTotal', 
@@ -26,7 +26,6 @@ window.onload = function () {
         {id: '3280gems', multiplier: 3280, resultId: '3280GemsTotal'},
         {id: '3000gems', multiplier: 3000, resultId: '3000GemsTotal'},
         {id: '2560gems', multiplier: 2560, resultId: '2560GemsTotal'},
-        {id: '2024gems', multiplier: 2024, resultId: '2024GemsTotal'},
         {id: '2000gems', multiplier: 2000, resultId: '2000GemsTotal'},
         {id: '1280gems', multiplier: 1280, resultId: '1280GemsTotal'},
         {id: '1200gems', multiplier: 1200, resultId: '1200GemsTotal'},
@@ -91,7 +90,6 @@ function resetGems() {
     document.getElementById('1200gems').value = "";
     document.getElementById('1280gems').value = "";
     document.getElementById('2000gems').value = "";
-    document.getElementById('2024gems').value = "";
     document.getElementById('2560gems').value = "";
     document.getElementById('3000gems').value = "";
     document.getElementById('3280gems').value = "";
