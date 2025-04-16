@@ -181,10 +181,14 @@
     <button onclick="resetForm()">Reset</button>
   </div>
 
-  <div id="comparison-result">
-    <div id="result"></div>
+  <div class="gear-container">
+    <div id="comparison-result1" class = "gear-box">
+      <div id="result1"></div>
+    </div>
+     <div id="comparison-result2" class = "gear-box">
+      <div id="result2"></div>
+    </div>
   </div>
-</div>
 
 <script>
   const maxValues = {
@@ -239,13 +243,15 @@ Sub Stats:
   3. ${pet2.subStats[2].type}: ${pet2.subStats[2].max.toFixed(2)}
 `;
 
-    document.getElementById("result").textContent = resultText;
+    document.getElementById("result1").textContent = resultText;
+    document.getElementById("result2").textContent = resultText;
   }
 
   function resetForm() {
     document.querySelectorAll('input[type="number"]').forEach(input => input.value = '');
     document.querySelectorAll('select').forEach(select => select.selectedIndex = 0);
-    document.getElementById("result").textContent = '';
+    document.getElementById("result1").textContent = '';
+    document.getElementById("result2").textContent = '';
   }
 </script>
 
