@@ -207,7 +207,7 @@
     const mainStat = document.getElementById(`mainStat${petNumber}`);
     const mainStatType = mainStat.options[mainStat.selectedIndex].text;
     const potential = parseFloat(document.getElementById(`potential${petNumber}`).value);
-    const mainY = maxValues[mainStatType];
+    const mainY = maxValues[mainStat.value];
     const mainMax = (potential / 16000) * mainY;
 
     const subStats = [];
@@ -215,7 +215,7 @@
       const t = document.getElementById(`subStat${petNumber}_${i}`);
       const type = t.options[t.selectedIndex].text;
       const subMax = (mainMax / 2) * rarityMultiplier;
-      subStats.push({ type, max: subMax });
+      subStats.push({ t.value, max: subMax });
     }
 
     return {
@@ -231,19 +231,19 @@
 
     const resultText1 = `
 Pet 1:<br>
-Main Stat (${pet1.mainStatType}): ${pet1.mainMax}<br>
+Main Stat (${pet1.mainStatType}): ${pet1.mainMax}%<br>
 Sub Stats:<br>
-  1. ${pet1.subStats[0].type}: ${pet1.subStats[0].max.toFixed(2)}<br>
-  2. ${pet1.subStats[1].type}: ${pet1.subStats[1].max.toFixed(2)}<br>
-  3. ${pet1.subStats[2].type}: ${pet1.subStats[2].max.toFixed(2)}<br>
+  1. ${pet1.subStats[0].type}: ${pet1.subStats[0].max.toFixed(2)}%<br>
+  2. ${pet1.subStats[1].type}: ${pet1.subStats[1].max.toFixed(2)}%<br>
+  3. ${pet1.subStats[2].type}: ${pet1.subStats[2].max.toFixed(2)}%<br>
 `;
     const resultText2 = `
 Pet 2:<br>
-Main Stat (${pet2.mainStatType}): ${pet2.mainMax}<br>
+Main Stat (${pet2.mainStatType}): ${pet2.mainMax}%<br>
 Sub Stats:<br>
-  1. ${pet2.subStats[0].type}: ${pet2.subStats[0].max.toFixed(2)}<br>
-  2. ${pet2.subStats[1].type}: ${pet2.subStats[1].max.toFixed(2)}<br>
-  3. ${pet2.subStats[2].type}: ${pet2.subStats[2].max.toFixed(2)}<br>
+  1. ${pet2.subStats[0].type}: ${pet2.subStats[0].max.toFixed(2)}%<br>
+  2. ${pet2.subStats[1].type}: ${pet2.subStats[1].max.toFixed(2)}%<br>
+  3. ${pet2.subStats[2].type}: ${pet2.subStats[2].max.toFixed(2)}%<br>
 `;
 document.getElementById("result1").innerHTML = resultText1;
 document.getElementById("result2").innerHTML = resultText2;
