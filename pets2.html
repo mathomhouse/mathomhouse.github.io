@@ -230,23 +230,24 @@
     const pet2 = calculatePet(2);
 
     const resultText = `
-Pet 1:
-Main Stat (${pet1.mainStatType}): ${pet1.mainMax}
-Sub Stats:
-  1. ${pet1.subStats[0].type}: ${pet1.subStats[0].max.toFixed(2)}
-  2. ${pet1.subStats[1].type}: ${pet1.subStats[1].max.toFixed(2)}
-  3. ${pet1.subStats[2].type}: ${pet1.subStats[2].max.toFixed(2)}
+Pet 1:<br>
+Main Stat (${pet1.mainStatType}): ${pet1.mainMax}<br>
+Sub Stats:<br>
+  1. ${pet1.subStats[0].type}: ${pet1.subStats[0].max.toFixed(2)}<br>
+  2. ${pet1.subStats[1].type}: ${pet1.subStats[1].max.toFixed(2)}<br>
+  3. ${pet1.subStats[2].type}: ${pet1.subStats[2].max.toFixed(2)}<br><br>
 
-Pet 2:
-Main Stat (${pet2.mainStatType}): ${pet2.mainMax}
-Sub Stats:
-  1. ${pet2.subStats[0].type}: ${pet2.subStats[0].max.toFixed(2)}
-  2. ${pet2.subStats[1].type}: ${pet2.subStats[1].max.toFixed(2)}
-  3. ${pet2.subStats[2].type}: ${pet2.subStats[2].max.toFixed(2)}
+Pet 2:<br>
+Main Stat (${pet2.mainStatType}): ${pet2.mainMax}<br>
+Sub Stats:<br>
+  1. ${pet2.subStats[0].type}: ${pet2.subStats[0].max.toFixed(2)}<br>
+  2. ${pet2.subStats[1].type}: ${pet2.subStats[1].max.toFixed(2)}<br>
+  3. ${pet2.subStats[2].type}: ${pet2.subStats[2].max.toFixed(2)}<br>
 `;
 
-    document.getElementById("result1").textContent = resultText;
-    document.getElementById("result2").textContent = resultText;
+document.getElementById("result1").innerHTML = resultText;
+document.getElementById("result2").innerHTML = resultText;
+
   }
 
   function resetForm() {
