@@ -2,195 +2,174 @@
 <html>
 <head>
   <title>Pet Comparison Calculator</title>
-  <style>
-    .pet-container {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .pet-panel {
-      flex: 1 1 45%;
-      border: 1px solid #ccc;
-      padding: 10px;
-      box-sizing: border-box;
-    }
-
-    @media (max-width: 768px) {
-      .pet-panel {
-        flex: 1 1 100%;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
-<h2>Pet Comparison Calculator</h2>
+<div class="container">
+  <h1>Pet Comparison Calculator</h1>
 
-<div class="pet-container">
-  <div id="pet1" class="pet-panel">
-    <h3>Pet 1</h3>
-    <label>Species + Rarity:
-      <select id="species1">
-        <option value="" disabled selected>Select option</option>
-        <option value="gold">Gold Bear</option>
-        <option value="purple">Purple Bear</option>
-        <option value="gold">Gold Eagle</option>
-        <option value="purple">Purple Eagle</option>
-        <option value="gold">Gold Deer</option>
-        <option value="purple">Purple Deer</option>
-        <option value="gold">Gold Ray</option>
-        <option value="purple">Purple Ray</option>
-      </select>
-    </label><br>
+  <div class="gear-container">
+    <!-- Pet 1 -->
+    <div class="gear-box">
+      <h2>Pet 1</h2>
+      <form>
+        <label>Species + Rarity:</label>
+        <select id="species1">
+          <option value="" disabled selected>Select option</option>
+          <option value="gold">Gold Bear</option>
+          <option value="purple">Purple Bear</option>
+          <option value="gold">Gold Eagle</option>
+          <option value="purple">Purple Eagle</option>
+          <option value="gold">Gold Deer</option>
+          <option value="purple">Purple Deer</option>
+          <option value="gold">Gold Ray</option>
+          <option value="purple">Purple Ray</option>
+        </select>
 
-    <label>Main Stat:
-      <select id="mainStat1">
-        <option value="" disabled selected>Select option</option>
-        <option value="Suppression">Suppression Defense Bonus</option>
-        <option value="DMGInc">Damage Increase</option>
-        <option value="DMGDec">Damage Decrease</option>
-        <option value="DEF">Defense</option>
-        <option value="ATK">Attack</option>
-        <option value="HP">HP</option>
-        <option value="Elemental">Elemental</option>
-      </select>
-      <input type="number" id="mainStatValue1" placeholder="Stat Value">
-    </label><br>
+        <label>Main Stat:</label>
+        <select id="mainStat1">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+        <input type="number" id="mainStatValue1" placeholder="Stat Value">
 
-    <label>Sub Stat 1:
-      <select id="subStat1_1">
-        <option value="" disabled selected>Select option</option>
-        <option value="Suppression">Suppression Defense Bonus</option>
-        <option value="DMGInc">Damage Increase</option>
-        <option value="DMGDec">Damage Decrease</option>
-        <option value="DEF">Defense</option>
-        <option value="ATK">Attack</option>
-        <option value="HP">HP</option>
-        <option value="Elemental">Elemental</option>
-      </select>
-      <input type="number" id="subStatValue1_1" placeholder="Stat Value">
-    </label><br>
+        <label>Sub Stat 1:</label>
+        <select id="subStat1_1">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+        <input type="number" id="subStatValue1_1" placeholder="Stat Value">
 
-    <label>Sub Stat 2:
-      <select id="subStat1_2">
-        <option value="" disabled selected>Select option</option>
-        <option value="Suppression">Suppression Defense Bonus</option>
-        <option value="DMGInc">Damage Increase</option>
-        <option value="DMGDec">Damage Decrease</option>
-        <option value="DEF">Defense</option>
-        <option value="ATK">Attack</option>
-        <option value="HP">HP</option>
-        <option value="Elemental">Elemental</option>
-      </select>
-      <input type="number" id="subStatValue1_2" placeholder="Stat Value">
-    </label><br>
+        <label>Sub Stat 2:</label>
+        <select id="subStat1_2">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+        <input type="number" id="subStatValue1_2" placeholder="Stat Value">
 
-    <label>Sub Stat 3:
-      <select id="subStat1_3">
-        <option value="" disabled selected>Select option</option>
-        <option value="Suppression">Suppression Defense Bonus</option>
-        <option value="DMGInc">Damage Increase</option>
-        <option value="DMGDec">Damage Decrease</option>
-        <option value="DEF">Defense</option>
-        <option value="ATK">Attack</option>
-        <option value="HP">HP</option>
-        <option value="Elemental">Elemental</option>
-      </select>
-      <input type="number" id="subStatValue1_3" placeholder="Stat Value">
-    </label><br>
+        <label>Sub Stat 3:</label>
+        <select id="subStat1_3">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+        <input type="number" id="subStatValue1_3" placeholder="Stat Value">
 
-    <label>Potential:
-      <input type="number" id="potential1" placeholder="e.g. 15000">
-    </label>
+        <label>Potential:</label>
+        <input type="number" id="potential1" placeholder="e.g. 15000">
+      </form>
+    </div>
+
+    <!-- Pet 2 -->
+    <div class="gear-box">
+      <h2>Pet 2</h2>
+      <form>
+        <label>Species + Rarity:</label>
+        <select id="species2">
+          <option value="" disabled selected>Select option</option>
+          <option value="gold">Gold Bear</option>
+          <option value="purple">Purple Bear</option>
+          <option value="gold">Gold Eagle</option>
+          <option value="purple">Purple Eagle</option>
+          <option value="gold">Gold Deer</option>
+          <option value="purple">Purple Deer</option>
+          <option value="gold">Gold Ray</option>
+          <option value="purple">Purple Ray</option>
+        </select>
+
+        <label>Main Stat:</label>
+        <select id="mainStat2">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+        <input type="number" id="mainStatValue2" placeholder="Stat Value">
+
+        <label>Sub Stat 1:</label>
+        <select id="subStat2_1">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+        <input type="number" id="subStatValue2_1" placeholder="Stat Value">
+
+        <label>Sub Stat 2:</label>
+        <select id="subStat2_2">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+        <input type="number" id="subStatValue2_2" placeholder="Stat Value">
+
+        <label>Sub Stat 3:</label>
+        <select id="subStat2_3">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+        <input type="number" id="subStatValue2_3" placeholder="Stat Value">
+
+        <label>Potential:</label>
+        <input type="number" id="potential2" placeholder="e.g. 15000">
+      </form>
+    </div>
   </div>
 
-  <div id="pet2" class="pet-panel">
-    <h3>Pet 2</h3>
-    <label>Species + Rarity:
-      <select id="species2">
-        <option value="" disabled selected>Select option</option>
-        <option value="gold">Gold Bear</option>
-        <option value="purple">Purple Bear</option>
-        <option value="gold">Gold Eagle</option>
-        <option value="purple">Purple Eagle</option>
-        <option value="gold">Gold Deer</option>
-        <option value="purple">Purple Deer</option>
-        <option value="gold">Gold Ray</option>
-        <option value="purple">Purple Ray</option>
-      </select>
-    </label><br>
+  <!-- Buttons -->
+  <div class="calculate-btn">
+    <button onclick="calculate()">Compare</button>
+    <button onclick="resetForm()">Reset</button>
+  </div>
 
-    <label>Main Stat:
-      <select id="mainStat2">
-        <option value="" disabled selected>Select option</option>
-        <option value="Suppression">Suppression Defense Bonus</option>
-        <option value="DMGInc">Damage Increase</option>
-        <option value="DMGDec">Damage Decrease</option>
-        <option value="DEF">Defense</option>
-        <option value="ATK">Attack</option>
-        <option value="HP">HP</option>
-        <option value="Elemental">Elemental</option>
-      </select>
-      <input type="number" id="mainStatValue2" placeholder="Stat Value">
-    </label><br>
-
-    <label>Sub Stat 1:
-      <select id="subStat2_1">
-        <option value="" disabled selected>Select option</option>
-        <option value="Suppression">Suppression Defense Bonus</option>
-        <option value="DMGInc">Damage Increase</option>
-        <option value="DMGDec">Damage Decrease</option>
-        <option value="DEF">Defense</option>
-        <option value="ATK">Attack</option>
-        <option value="HP">HP</option>
-        <option value="Elemental">Elemental</option>
-      </select>
-      <input type="number" id="subStatValue2_1" placeholder="Stat Value">
-    </label><br>
-
-    <label>Sub Stat 2:
-      <select id="subStat2_2">
-        <option value="" disabled selected>Select option</option>
-        <option value="Suppression">Suppression Defense Bonus</option>
-        <option value="DMGInc">Damage Increase</option>
-        <option value="DMGDec">Damage Decrease</option>
-        <option value="DEF">Defense</option>
-        <option value="ATK">Attack</option>
-        <option value="HP">HP</option>
-        <option value="Elemental">Elemental</option>
-      </select>
-      <input type="number" id="subStatValue2_2" placeholder="Stat Value">
-    </label><br>
-
-    <label>Sub Stat 3:
-      <select id="subStat2_3">
-        <option value="" disabled selected>Select option</option>
-        <option value="Suppression">Suppression Defense Bonus</option>
-        <option value="DMGInc">Damage Increase</option>
-        <option value="DMGDec">Damage Decrease</option>
-        <option value="DEF">Defense</option>
-        <option value="ATK">Attack</option>
-        <option value="HP">HP</option>
-        <option value="Elemental">Elemental</option>
-      </select>
-      <input type="number" id="subStatValue2_3" placeholder="Stat Value">
-    </label><br>
-
-    <label>Potential:
-      <input type="number" id="potential2" placeholder="e.g. 15000">
-    </label>
+  <!-- Results -->
+  <div id="comparison-result">
+    <div id="result"></div>
   </div>
 </div>
-
-<hr>
-
-<button onclick="calculate()">Compare</button>
-<button onclick="resetForm()">Reset</button>
-
-<h3>Results</h3>
-<pre id="results"></pre>
 
 <script>
   const maxValues = {
@@ -231,27 +210,27 @@
 
     const resultText = `
 Pet 1:
-  Main Stat (${pet1.mainStatType}): ${pet1.mainMax}
-  Sub Stats:
-    1. ${pet1.subStats[0].type}: ${pet1.subStats[0].max.toFixed(2)}
-    2. ${pet1.subStats[1].type}: ${pet1.subStats[1].max.toFixed(2)}
-    3. ${pet1.subStats[2].type}: ${pet1.subStats[2].max.toFixed(2)}
+Main Stat (${pet1.mainStatType}): ${pet1.mainMax}
+Sub Stats:
+  1. ${pet1.subStats[0].type}: ${pet1.subStats[0].max.toFixed(2)}
+  2. ${pet1.subStats[1].type}: ${pet1.subStats[1].max.toFixed(2)}
+  3. ${pet1.subStats[2].type}: ${pet1.subStats[2].max.toFixed(2)}
 
 Pet 2:
-  Main Stat (${pet2.mainStatType}): ${pet2.mainMax}
-  Sub Stats:
-    1. ${pet2.subStats[0].type}: ${pet2.subStats[0].max.toFixed(2)}
-    2. ${pet2.subStats[1].type}: ${pet2.subStats[1].max.toFixed(2)}
-    3. ${pet2.subStats[2].type}: ${pet2.subStats[2].max.toFixed(2)}
+Main Stat (${pet2.mainStatType}): ${pet2.mainMax}
+Sub Stats:
+  1. ${pet2.subStats[0].type}: ${pet2.subStats[0].max.toFixed(2)}
+  2. ${pet2.subStats[1].type}: ${pet2.subStats[1].max.toFixed(2)}
+  3. ${pet2.subStats[2].type}: ${pet2.subStats[2].max.toFixed(2)}
 `;
 
-    document.getElementById("results").textContent = resultText;
+    document.getElementById("result").textContent = resultText;
   }
 
   function resetForm() {
     document.querySelectorAll('input[type="number"]').forEach(input => input.value = '');
     document.querySelectorAll('select').forEach(select => select.selectedIndex = 0);
-    document.getElementById("results").textContent = '';
+    document.getElementById("result").textContent = '';
   }
 </script>
 
