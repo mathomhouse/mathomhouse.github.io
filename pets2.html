@@ -215,8 +215,7 @@
       const t = document.getElementById(`subStat${petNumber}_${i}`);
       const type = t.options[t.selectedIndex].text;
       const subMax = (mainMax / 2) * rarityMultiplier;
-      const tv = t.value;
-      subStats.push({ tv, max: subMax });
+      subStats.push({ type, max: subMax });
     }
 
     return {
