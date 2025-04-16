@@ -204,14 +204,16 @@
   function calculatePet(petNumber) {
     const species = document.getElementById(`species${petNumber}`).value;
     const rarityMultiplier = (species === "gold") ? 1 : 0.92;
-    const mainStatType = document.getElementById(`mainStat${petNumber}`).value;
+    const mainStat = document.getElementById(`mainStat${petNumber}`);
+    const mainStatType = mainStat.options[mainStat.selectedIndex].text;
     const potential = parseFloat(document.getElementById(`potential${petNumber}`).value);
     const mainY = maxValues[mainStatType];
     const mainMax = (potential / 16000) * mainY;
 
     const subStats = [];
     for (let i = 1; i <= 3; i++) {
-      const type = document.getElementById(`subStat${petNumber}_${i}`).value;
+      const t = document.getElementById(`subStat${petNumber}_${i}`);
+      const type = t.options[t.selectedIndex].text;
       const subMax = (mainMax / 2) * rarityMultiplier;
       subStats.push({ type, max: subMax });
     }
