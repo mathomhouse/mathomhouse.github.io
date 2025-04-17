@@ -218,12 +218,22 @@
 
 <script>
   const subMultipliers = {
-    "ATK": 0.000003699,
-    "HP": 0.000003704,
-    "DMG Dec": 0.000001138,
-    "DMG Inc": 0.000001138,
-    "Suppression": 0.000000614,
-    "Elemental": 0.000007477
+    gold: {
+      "ATK": 0.000937,
+      "HP": 0.000937,
+      "Elemental": 0.001875,
+      "DMG Inc": 0.000312,
+      "DMG Dec": 0.000312,
+      "Suppression": 0.000137
+    },
+    purple: {
+      "ATK": 0.000863,
+      "HP": 0.000863,
+      "Elemental": 0.001725,
+      "DMG Inc": 0.000287,
+      "DMG Dec": 0.000287,
+      "Suppression": 0.000127
+    }
   };
 
   const mainMultipliers = {
@@ -250,8 +260,6 @@
     const xpLevel = parseInt(document.getElementById(`xpLevel${petNumber}`).value) || 1;
     const maxXP = (species === "gold") ? 100 : 80;
     const cappedXP = Math.min(xpLevel, maxXP);
-    const totalLevels = (species === "gold") ? 104 : 84;
-    const currentLevel = starLevel + cappedXP - 1;
     const potential = parseFloat(document.getElementById(`potential${petNumber}`).value) || 0;
 
     const mainStat = document.getElementById(`mainStat${petNumber}`);
@@ -265,13 +273,10 @@
       const subStatElem = document.getElementById(`subStat${petNumber}_${i}`);
       const subLabel = subStatElem.options[subStatElem.selectedIndex].text;
       const subKey = labelToKey[subLabel] || subLabel;
-      const subMultiplier = subMultipliers[subKey] || 0;
+      const subMultiplier = (subMultipliers[species] && subMultipliers[species][subKey]) || 0;
+      const subStatValue = potential * subMultiplier;
 
-      const baseSubStat = potential * subMultiplier;
-      const maxSubStat = mainStatValue / 2;
-      const interpolated = baseSubStat + ((maxSubStat - baseSubStat) * currentLevel / totalLevels);
-
-      subStats.push({ type: subLabel, max: interpolated });
+      subStats.push({ type: subLabel, max: subStatValue });
     }
 
     return {
