@@ -41,7 +41,6 @@
           <option value="gold">Gold Ray</option>
           <option value="purple">Purple Ray</option>
         </select>
-        <span></span> <!-- empty 3rd column for alignment -->
 
         <label>Main Stat:</label>
         <select id="mainStat1">
@@ -92,7 +91,6 @@
 
         <label>Potential:</label>
         <input type="number" id="potential1" placeholder="e.g. 15000">
-        <span></span> <!-- alignment helper -->
       </form>
     </div>
 
@@ -112,7 +110,6 @@
           <option value="gold">Gold Ray</option>
           <option value="purple">Purple Ray</option>
         </select>
-        <span></span>
 
         <label>Main Stat:</label>
         <select id="mainStat2">
@@ -163,7 +160,6 @@
 
         <label>Potential:</label>
         <input type="number" id="potential2" placeholder="e.g. 15000">
-        <span></span>
       </form>
     </div>
   </div>
@@ -190,7 +186,7 @@
     DEF: 4,
     ATK: 30,
     HP: 30,
-    Elemental: 30
+    Elemental: 60
   };
 
   function calculatePet(petNumber) {
@@ -199,14 +195,16 @@
     const mainStat = document.getElementById(`mainStat${petNumber}`);
     const mainStatType = mainStat.options[mainStat.selectedIndex].text;
     const potential = parseFloat(document.getElementById(`potential${petNumber}`).value);
+    const potentialRatio = potential / 16000;
     const mainY = maxValues[mainStat.value];
-    const mainMax = (potential / 16000) * mainY;
+    const mainMax = potentialRatio * mainY;
 
     const subStats = [];
     for (let i = 1; i <= 3; i++) {
       const t = document.getElementById(`subStat${petNumber}_${i}`);
       const type = t.options[t.selectedIndex].text;
-      const subMax = (mainMax / 2) * rarityMultiplier;
+      const subY = maxValues[t.value];
+      const subMax = ((potentialRatio * subY) / 2) * rarityMultiplier;
       subStats.push({ type, max: subMax });
     }
 
@@ -222,24 +220,23 @@
     const pet2 = calculatePet(2);
 
     const resultText1 = `
-Pet 1:<br>
-Main Stat (${pet1.mainStatType}): ${pet1.mainMax}%<br><br>
-Sub Stats:<br>
-  1. ${pet1.subStats[0].type}: ${pet1.subStats[0].max.toFixed(2)}%<br>
-  2. ${pet1.subStats[1].type}: ${pet1.subStats[1].max.toFixed(2)}%<br>
-  3. ${pet1.subStats[2].type}: ${pet1.subStats[2].max.toFixed(2)}%<br>
-`;
-    const resultText2 = `
-Pet 2:<br>
-Main Stat (${pet2.mainStatType}): ${pet2.mainMax}%<br><br>
-Sub Stats:<br>
-  1. ${pet2.subStats[0].type}: ${pet2.subStats[0].max.toFixed(2)}%<br>
-  2. ${pet2.subStats[1].type}: ${pet2.subStats[1].max.toFixed(2)}%<br>
-  3. ${pet2.subStats[2].type}: ${pet2.subStats[2].max.toFixed(2)}%<br>
-`;
-document.getElementById("result1").innerHTML = resultText1;
-document.getElementById("result2").innerHTML = resultText2;
-
+    Pet 1:<br>
+    Main Stat (${pet1.mainStatType}): ${pet1.mainMax}%<br><br>
+    Sub Stats:<br>
+      1. ${pet1.subStats[0].type}: ${pet1.subStats[0].max.toFixed(2)}%<br>
+      2. ${pet1.subStats[1].type}: ${pet1.subStats[1].max.toFixed(2)}%<br>
+      3. ${pet1.subStats[2].type}: ${pet1.subStats[2].max.toFixed(2)}%<br>
+    `;
+        const resultText2 = `
+    Pet 2:<br>
+    Main Stat (${pet2.mainStatType}): ${pet2.mainMax}%<br><br>
+    Sub Stats:<br>
+      1. ${pet2.subStats[0].type}: ${pet2.subStats[0].max.toFixed(2)}%<br>
+      2. ${pet2.subStats[1].type}: ${pet2.subStats[1].max.toFixed(2)}%<br>
+      3. ${pet2.subStats[2].type}: ${pet2.subStats[2].max.toFixed(2)}%<br>
+    `;
+    document.getElementById("result1").innerHTML = resultText1;
+    document.getElementById("result2").innerHTML = resultText2;
   }
 
   function resetForm() {
