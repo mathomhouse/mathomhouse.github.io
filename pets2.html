@@ -260,6 +260,9 @@
     const xpLevel = parseInt(document.getElementById(`xpLevel${petNumber}`).value) || 1;
     const maxXP = (species === "gold") ? 100 : 80;
     const cappedXP = Math.min(xpLevel, maxXP);
+    const totalLevels = (species === "gold") ? 104 : 84;
+    const currentLevel = starLevel + cappedXP - 1;
+    const levelRatio = currentLevel / totalLevels;
     const potential = parseFloat(document.getElementById(`potential${petNumber}`).value) || 0;
 
     const mainStat = document.getElementById(`mainStat${petNumber}`);
@@ -274,9 +277,11 @@
       const subLabel = subStatElem.options[subStatElem.selectedIndex].text;
       const subKey = labelToKey[subLabel] || subLabel;
       const subMultiplier = (subMultipliers[species] && subMultipliers[species][subKey]) || 0;
-      const subStatValue = potential * subMultiplier;
 
-      subStats.push({ type: subLabel, max: subStatValue });
+      const maxSubStat = potential * subMultiplier;
+      const scaledSubStat = maxSubStat * levelRatio;
+
+      subStats.push({ type: subLabel, max: scaledSubStat });
     }
 
     return {
