@@ -218,6 +218,7 @@
 
 
 
+
 <script>
   const subMultipliers = {
     "ATK": 0.000003683,
@@ -232,6 +233,16 @@
     "HP": 0.000375
   };
 
+  const labelToKey = {
+    "Attack": "ATK",
+    "HP": "HP",
+    "Defense": "DEF",
+    "Damage Decrease": "DMG Dec",
+    "Damage Increase": "DMG Inc",
+    "Suppression Defense Bonus": "Suppression",
+    "Elemental": "Elemental"
+  };
+
   function calculatePet(petNumber) {
     const species = document.getElementById(`species${petNumber}`).value;
     const starLevel = parseInt(document.getElementById(`starLevel${petNumber}`).value) || 1;
@@ -241,21 +252,23 @@
     const potential = parseFloat(document.getElementById(`potential${petNumber}`).value) || 0;
 
     const mainStat = document.getElementById(`mainStat${petNumber}`);
-    const mainStatKey = mainStat.options[mainStat.selectedIndex].text;
-    const mainMultiplier = mainMultipliers[mainStatKey] || 0;
+    const mainLabel = mainStat.options[mainStat.selectedIndex].text;
+    const mainKey = labelToKey[mainLabel] || mainLabel;
+    const mainMultiplier = mainMultipliers[mainKey] || 0;
     const mainStatValue = potential * mainMultiplier * starLevel;
 
     const subStats = [];
     for (let i = 1; i <= 3; i++) {
       const subStatElem = document.getElementById(`subStat${petNumber}_${i}`);
-      const subStatKey = subStatElem.options[subStatElem.selectedIndex].text;
-      const subMultiplier = subMultipliers[subStatKey] || 0;
+      const subLabel = subStatElem.options[subStatElem.selectedIndex].text;
+      const subKey = labelToKey[subLabel] || subLabel;
+      const subMultiplier = subMultipliers[subKey] || 0;
       const subStatValue = potential * subMultiplier * (starLevel + cappedXP - 1);
-      subStats.push({ type: subStatKey, max: subStatValue });
+      subStats.push({ type: subLabel, max: subStatValue });
     }
 
     return {
-      mainStatType: mainStatKey,
+      mainStatType: mainLabel,
       mainMax: mainStatValue.toFixed(3),
       subStats
     };
@@ -297,6 +310,7 @@
     document.getElementById("comparison-result2").style.display = "none";
   }
 </script>
+
 
 
 
