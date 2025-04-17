@@ -216,6 +216,7 @@
   </div>
 
 
+
 <script>
   const maxValues = {
     Suppression: 4.4,
@@ -235,24 +236,26 @@
     const potential = parseFloat(document.getElementById(`potential${petNumber}`).value);
     const potentialRatio = potential / 16000;
 
-    const mainY = maxValues[mainStat.value];
-    const baseMain = potentialRatio * mainY;
-
     const starLevel = parseInt(document.getElementById(`starLevel${petNumber}`).value) || 1;
     const xpLevel = parseInt(document.getElementById(`xpLevel${petNumber}`).value) || 1;
-
     const maxXP = (species === "gold") ? 100 : 80;
     const cappedXP = Math.min(xpLevel, maxXP);
+    const maxSubLevel = (species === "gold") ? 104 : 84; // 5 star + max XP - 1
 
+    // Main stat calculation
+    const mainY = maxValues[mainStat.value];
+    const maxMainStat = potentialRatio * mainY;
+    const baseMain = maxMainStat / 5;
     const mainMax = baseMain * starLevel;
 
+    // Sub stat calculation
     const subStats = [];
     for (let i = 1; i <= 3; i++) {
       const t = document.getElementById(`subStat${petNumber}_${i}`);
       const type = t.options[t.selectedIndex].text;
       const subY = maxValues[t.value];
-      const baseSub = ((potentialRatio * subY) / 2) * rarityMultiplier;
-
+      const maxSubStat = ((potentialRatio * subY) / 2) * rarityMultiplier;
+      const baseSub = maxSubStat / maxSubLevel;
       const subMax = baseSub * (starLevel + cappedXP - 1);
       subStats.push({ type, max: subMax });
     }
@@ -300,6 +303,7 @@
     document.getElementById("comparison-result2").style.display = "none";
   }
 </script>
+
 
 
 </body>
