@@ -1,259 +1,257 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Pet Comparison Calculator</title>
-<style>
-  body { font-family: sans-serif; }
-  .pet-container { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; }
-  .input-group { margin-bottom: 10px; }
-  label { display: inline-block; width: 150px; }
-  input[type="text"], select { width: 200px; padding: 5px; }
-  button { padding: 10px 20px; cursor: pointer; }
-  #results { margin-top: 20px; font-weight: bold; }
-</style>
+  <title>Pet Comparison Calculator</title>
+  <link rel="stylesheet" href="index.css">
+  <style>
+    .gear-box form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+    .gear-box select {
+      max-width: none;
+      width: 100%;
+    }
+    .gear-box {
+      width: 450px;
+    }
+  </style>
+  <script src="header.js" defer></script>
 </head>
 <body>
-
+<div id="header-placeholder"></div>
+<div class="container">
   <h1>Pet Comparison Calculator</h1>
 
-  <div class="pet-container">
-    <h2>Pet 1</h2>
-    <div class="input-group">
-      <label for="pet1-species">Species & Rarity:</label>
-      <select id="pet1-species">
-        <option value="gold-bear">Gold Bear</option>
-        <option value="purple-bear">Purple Bear</option>
-        <option value="gold-eagle">Gold Eagle</option>
-        <option value="purple-eagle">Purple Eagle</option>
-        <option value="gold-deer">Gold Deer</option>
-        <option value="purple-deer">Purple Deer</option>
-        <option value="gold-ray">Gold Ray</option>
-        <option value="purple-ray">Purple Ray</option>
-      </select>
+  <div class="gear-container">
+    <!-- Pet 1 -->
+    <div class="gear-box">
+      <h2 style="text-align: center;">Pet 1</h2>
+      <form>
+        <label>Species + Rarity:</label>
+        <select id="species1">
+          <option value="" disabled selected>Select option</option>
+          <option value="gold">Gold Bear</option>
+          <option value="purple">Purple Bear</option>
+          <option value="gold">Gold Eagle</option>
+          <option value="purple">Purple Eagle</option>
+          <option value="gold">Gold Deer</option>
+          <option value="purple">Purple Deer</option>
+          <option value="gold">Gold Ray</option>
+          <option value="purple">Purple Ray</option>
+        </select>
+
+        <label>Main Stat:</label>
+        <select id="mainStat1">
+          <option value="" disabled selected>Select option</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Sub Stat 1:</label>
+        <select id="subStat1_1">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Sub Stat 2:</label>
+        <select id="subStat1_2">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Sub Stat 3:</label>
+        <select id="subStat1_3">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Potential:</label>
+        <input type="number" id="potential1" placeholder="e.g. 15000">
+      </form>
     </div>
-    <div class="input-group">
-      <label for="pet1-potential">Potential (X):</label>
-      <input type="text" id="pet1-potential">
-    </div>
-    <div class="input-group">
-      <label for="pet1-main-stat-type">Main Stat:</label>
-      <select id="pet1-main-stat-type">
-        <option value="">-- Select Main Stat --</option>
-        <option value="suppression">Suppression Defense Bonus</option>
-        <option value="dmg_inc">DMG Inc</option>
-        <option value="dmg_dec">DMG Dec</option>
-        <option value="def">Defense</option>
-        <option value="atk">Attack</option>
-        <option value="hp">HP</option>
-        <option value="elm">Elemental</option>
-      </select>
-      <input type="text" id="pet1-main-stat-value" placeholder="Current Value">
-    </div>
-    <div class="input-group">
-      <label for="pet1-sub-stat1-type">Sub Stat 1:</label>
-      <select id="pet1-sub-stat1-type">
-        <option value="">-- Select Sub Stat --</option>
-        <option value="suppression">Suppression Defense Bonus</option>
-        <option value="dmg_inc">DMG Inc</option>
-        <option value="dmg_dec">DMG Dec</option>
-        <option value="def">Defense</option>
-        <option value="atk">Attack</option>
-        <option value="hp">HP</option>
-        <option value="elm">Elemental</option>
-      </select>
-      <input type="text" id="pet1-sub-stat1-value" placeholder="Current Value">
-    </div>
-    <div class="input-group">
-      <label for="pet1-sub-stat2-type">Sub Stat 2:</label>
-      <select id="pet1-sub-stat2-type">
-        <option value="">-- Select Sub Stat --</option>
-        <option value="suppression">Suppression Defense Bonus</option>
-        <option value="dmg_inc">DMG Inc</option>
-        <option value="dmg_dec">DMG Dec</option>
-        <option value="def">Defense</option>
-        <option value="atk">Attack</option>
-        <option value="hp">HP</option>
-        <option value="elm">Elemental</option>
-      </select>
-      <input type="text" id="pet1-sub-stat2-value" placeholder="Current Value">
-    </div>
-    <div class="input-group">
-      <label for="pet1-sub-stat3-type">Sub Stat 3:</label>
-      <select id="pet1-sub-stat3-type">
-        <option value="">-- Select Sub Stat --</option>
-        <option value="suppression">Suppression Defense Bonus</option>
-        <option value="dmg_inc">DMG Inc</option>
-        <option value="dmg_dec">DMG Dec</option>
-        <option value="def">Defense</option>
-        <option value="atk">Attack</option>
-        <option value="hp">HP</option>
-        <option value="elm">Elemental</option>
-      </select>
-      <input type="text" id="pet1-sub-stat3-value" placeholder="Current Value">
+
+    <!-- Pet 2 -->
+    <div class="gear-box">
+      <h2 style="text-align: center;">Pet 2</h2>
+      <form>
+        <label>Species + Rarity:</label>
+        <select id="species2">
+          <option value="" disabled selected>Select option</option>
+          <option value="gold">Gold Bear</option>
+          <option value="purple">Purple Bear</option>
+          <option value="gold">Gold Eagle</option>
+          <option value="purple">Purple Eagle</option>
+          <option value="gold">Gold Deer</option>
+          <option value="purple">Purple Deer</option>
+          <option value="gold">Gold Ray</option>
+          <option value="purple">Purple Ray</option>
+        </select>
+
+        <label>Main Stat:</label>
+        <select id="mainStat2">
+          <option value="" disabled selected>Select option</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Sub Stat 1:</label>
+        <select id="subStat2_1">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Sub Stat 2:</label>
+        <select id="subStat2_2">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Sub Stat 3:</label>
+        <select id="subStat2_3">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Potential:</label>
+        <input type="number" id="potential2" placeholder="e.g. 15000">
+      </form>
     </div>
   </div>
 
-  <div class="pet-container">
-    <h2>Pet 2</h2>
-    <div class="input-group">
-      <label for="pet2-species">Species & Rarity:</label>
-      <select id="pet2-species">
-        <option value="gold-bear">Gold Bear</option>
-        <option value="purple-bear">Purple Bear</option>
-        <option value="gold-eagle">Gold Eagle</option>
-        <option value="purple-eagle">Purple Eagle</option>
-        <option value="gold-deer">Gold Deer</option>
-        <option value="purple-deer">Purple Deer</option>
-        <option value="gold-ray">Gold Ray</option>
-        <option value="purple-ray">Purple Ray</option>
-      </select>
+  <div class="calculate-btn">
+    <button onclick="calculate()">Compare</button>
+    <button onclick="resetForm()">Reset</button>
+  </div>
+
+  <div class="gear-container">
+    <div id="comparison-result1" class="gear-box" style="display:none">
+      <div id="result1"></div>
     </div>
-    <div class="input-group">
-      <label for="pet2-potential">Potential (X):</label>
-      <input type="text" id="pet2-potential">
-    </div>
-    <div class="input-group">
-      <label for="pet2-main-stat-type">Main Stat:</label>
-      <select id="pet2-main-stat-type">
-        <option value="">-- Select Main Stat --</option>
-        <option value="suppression">Suppression Defense Bonus</option>
-        <option value="dmg_inc">DMG Inc</option>
-        <option value="dmg_dec">DMG Dec</option>
-        <option value="def">Defense</option>
-        <option value="atk">Attack</option>
-        <option value="hp">HP</option>
-        <option value="elm">Elemental</option>
-      </select>
-      <input type="text" id="pet2-main-stat-value" placeholder="Current Value">
-    </div>
-    <div class="input-group">
-      <label for="pet2-sub-stat1-type">Sub Stat 1:</label>
-      <select id="pet2-sub-stat1-type">
-        <option value="">-- Select Sub Stat --</option>
-        <option value="suppression">Suppression Defense Bonus</option>
-        <option value="dmg_inc">DMG Inc</option>
-        <option value="dmg_dec">DMG Dec</option>
-        <option value="def">Defense</option>
-        <option value="atk">Attack</option>
-        <option value="hp">HP</option>
-        <option value="elm">Elemental</option>
-      </select>
-      <input type="text" id="pet2-sub-stat1-value" placeholder="Current Value">
-    </div>
-    <div class="input-group">
-      <label for="pet2-sub-stat2-type">Sub Stat 2:</label>
-      <select id="pet2-sub-stat2-type">
-        <option value="">-- Select Sub Stat --</option>
-        <option value="suppression">Suppression Defense Bonus</option>
-        <option value="dmg_inc">DMG Inc</option>
-        <option value="dmg_dec">DMG Dec</option>
-        <option value="def">Defense</option>
-        <option value="atk">Attack</option>
-        <option value="hp">HP</option>
-        <option value="elm">Elemental</option>
-      </select>
-      <input type="text" id="pet2-sub-stat2-value" placeholder="Current Value">
-    </div>
-    <div class="input-group">
-      <label for="pet2-sub-stat3-type">Sub Stat 3:</label>
-      <select id="pet2-sub-stat3-type">
-        <option value="">-- Select Sub Stat --</option>
-        <option value="suppression">Suppression Defense Bonus</option>
-        <option value="dmg_inc">DMG Inc</option>
-        <option value="dmg_dec">DMG Dec</option>
-        <option value="def">Defense</option>
-        <option value="atk">Attack</option>
-        <option value="hp">HP</option>
-        <option value="elm">Elemental</option>
-      </select>
-      <input type="text" id="pet2-sub-stat3-value" placeholder="Current Value">
+     <div id="comparison-result2" class="gear-box" style="display:none">
+      <div id="result2"></div>
     </div>
   </div>
 
-  <button onclick="calculateComparison()">Calculate</button>
-
-  <div id="results"></div>
-
-  <script>
-    function calculateComparison() {
-  // Get input values for Pet 1
-  const pet1Species = document.getElementById("pet1-species").value;
-  const pet1Potential = parseFloat(document.getElementById("pet1-potential").value);
-  const pet1MainStatType = document.getElementById("pet1-main-stat-type").value;
-  const pet1SubStat1Type = document.getElementById("pet1-sub-stat1-type").value;
-  const pet1SubStat2Type = document.getElementById("pet1-sub-stat2-type").value;
-  const pet1SubStat3Type = document.getElementById("pet1-sub-stat3-type").value;
-
-  // Get input values for Pet 2
-  const pet2Species = document.getElementById("pet2-species").value;
-  const pet2Potential = parseFloat(document.getElementById("pet2-potential").value);
-  const pet2MainStatType = document.getElementById("pet2-main-stat-type").value;
-  const pet2SubStat1Type = document.getElementById("pet2-sub-stat1-type").value;
-  const pet2SubStat2Type = document.getElementById("pet2-sub-stat2-type").value;
-  const pet2SubStat3Type = document.getElementById("pet2-sub-stat3-type").value;
-
-  // Determine rarity multipliers
-  const pet1RarityMultiplier = pet1Species.startsWith("gold") ? 1 : 0.92;
-  const pet2RarityMultiplier = pet2Species.startsWith("gold") ? 1 : 0.92;
-
-  // Define maximum stat values
-  const maxStatValues = {
-    "suppression": 4.4,
-    "dmg_inc": 10,
-    "dmg_dec": 10,
-    "def": 4,
-    "atk": 30,
-    "hp": 30,
-    "elm": 30
+<script>
+  const maxValues = {
+    Suppression: 4.4,
+    DMGInc: 10,
+    DMGDec: 10,
+    DEF: 4,
+    ATK: 30,
+    HP: 30,
+    Elemental: 60
   };
 
-  // Function to calculate max stat
-  function calculateMaxStat(potential, statType) {
-    if (isNaN(potential) || !maxStatValues[statType]) {
-      return NaN; // Handle invalid input or stat type
+  function calculatePet(petNumber) {
+    const species = document.getElementById(`species${petNumber}`).value;
+    const rarityMultiplier = (species === "gold") ? 1 : 0.92;
+    const mainStat = document.getElementById(`mainStat${petNumber}`);
+    const mainStatType = mainStat.options[mainStat.selectedIndex].text;
+    const potential = parseFloat(document.getElementById(`potential${petNumber}`).value);
+    const potentialRatio = potential / 16000;
+    const mainY = maxValues[mainStat.value];
+    const mainMax = potentialRatio * mainY;
+
+    const subStats = [];
+    for (let i = 1; i <= 3; i++) {
+      const t = document.getElementById(`subStat${petNumber}_${i}`);
+      const type = t.options[t.selectedIndex].text;
+      const subY = maxValues[t.value];
+      const subMax = ((potentialRatio * subY) / 2) * rarityMultiplier;
+      subStats.push({ type, max: subMax });
     }
-    return (potential / 16000) * maxStatValues[statType];
+
+    return {
+      mainStatType,
+      mainMax: mainMax.toFixed(2),
+      subStats
+    };
   }
 
-  // Calculate max main stats
-  const pet1MaxMainStat = calculateMaxStat(pet1Potential, pet1MainStatType);
-  const pet2MaxMainStat = calculateMaxStat(pet2Potential, pet2MainStatType);
+  function calculate() {
+    const pet1 = calculatePet(1);
+    const pet2 = calculatePet(2);
 
-  // Function to calculate max sub stat
-  function calculateMaxSubStat(maxMainStat, rarityMultiplier) {
-    if (isNaN(maxMainStat)) {
-      return NaN;
-    }
-    return (maxMainStat / 2) * rarityMultiplier;
+    const resultText1 = `
+    Pet 1:<br>
+    Main Stat (${pet1.mainStatType}): ${pet1.mainMax}%<br><br>
+    Sub Stats:<br>
+      1. ${pet1.subStats[0].type}: ${pet1.subStats[0].max.toFixed(2)}%<br>
+      2. ${pet1.subStats[1].type}: ${pet1.subStats[1].max.toFixed(2)}%<br>
+      3. ${pet1.subStats[2].type}: ${pet1.subStats[2].max.toFixed(2)}%<br>
+    `;
+        const resultText2 = `
+    Pet 2:<br>
+    Main Stat (${pet2.mainStatType}): ${pet2.mainMax}%<br><br>
+    Sub Stats:<br>
+      1. ${pet2.subStats[0].type}: ${pet2.subStats[0].max.toFixed(2)}%<br>
+      2. ${pet2.subStats[1].type}: ${pet2.subStats[1].max.toFixed(2)}%<br>
+      3. ${pet2.subStats[2].type}: ${pet2.subStats[2].max.toFixed(2)}%<br>
+    `;
+    document.getElementById("result1").innerHTML = resultText1;
+    document.getElementById("result2").innerHTML = resultText2;
+
+    document.getElementById("comparison-result1").style.display = "block";
+    document.getElementById("comparison-result2").style.display = "block";
   }
 
-  // Calculate max sub stats for Pet 1
-  const pet1MaxSubStat1 = calculateMaxSubStat(pet1MaxMainStat, pet1RarityMultiplier);
-  const pet1MaxSubStat2 = calculateMaxSubStat(pet1MaxMainStat, pet1RarityMultiplier);
-  const pet1MaxSubStat3 = calculateMaxSubStat(pet1MaxMainStat, pet1RarityMultiplier);
-
-  // Calculate max sub stats for Pet 2
-  const pet2MaxSubStat1 = calculateMaxSubStat(pet2MaxMainStat, pet2RarityMultiplier);
-  const pet2MaxSubStat2 = calculateMaxSubStat(pet2MaxMainStat, pet2RarityMultiplier);
-  const pet2MaxSubStat3 = calculateMaxSubStat(pet2MaxMainStat, pet2RarityMultiplier);
-
-  // Display the results
-  const resultsDiv = document.getElementById("results");
-  resultsDiv.innerHTML = `
-    <h3>Maximum Potential Stats:</h3>
-    <h4>Pet 1 (${pet1Species}):</h4>
-    ${pet1MainStatType}: ${isNaN(pet1MaxMainStat) ? 'Invalid Input' : pet1MaxMainStat.toFixed(2)}<br>
-    ${pet1SubStat1Type}: ${isNaN(pet1MaxSubStat1) ? 'Invalid Input' : pet1MaxSubStat1.toFixed(2)}<br>
-    ${pet1SubStat2Type}: ${isNaN(pet1MaxSubStat2) ? 'Invalid Input' : pet1MaxSubStat2.toFixed(2)}<br>
-    ${pet1SubStat3Type}: ${isNaN(pet1MaxSubStat3) ? 'Invalid Input' : pet1MaxSubStat3.toFixed(2)}<br><br>
-    <h4>Pet 2 (${pet2Species}):</h4>
-    ${pet2MainStatType}: ${isNaN(pet2MaxMainStat) ? 'Invalid Input' : pet2MaxMainStat.toFixed(2)}<br>
-    ${pet2SubStat1Type}: ${isNaN(pet2MaxSubStat1) ? 'Invalid Input' : pet2MaxSubStat1.toFixed(2)}<br>
-    ${pet2SubStat2Type}: ${isNaN(pet2MaxSubStat2) ? 'Invalid Input' : pet2MaxSubStat2.toFixed(2)}<br>
-    ${pet2SubStat3Type}: ${isNaN(pet2MaxSubStat3) ? 'Invalid Input' : pet2MaxSubStat3.toFixed(2)}<br>
-  `;
-}
-  </script>
+  function resetForm() {
+    document.querySelectorAll('input[type="number"]').forEach(input => input.value = '');
+    document.querySelectorAll('select').forEach(select => select.selectedIndex = 0);
+    document.getElementById("result1").textContent = '';
+    document.getElementById("result2").textContent = '';
+    document.getElementById("comparison-result1").style.display = "none";
+    document.getElementById("comparison-result2").style.display = "none";
+  }
+</script>
 
 </body>
 </html>
