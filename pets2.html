@@ -279,8 +279,9 @@
     const xpLevel = parseInt(document.getElementById(`xpLevel${petNumber}`).value) || 1;
     const maxXP = (species === "gold") ? 100 : 80;
     const cappedXP = Math.min(xpLevel, maxXP);
+    const maxXPPerStar = (species === "gold") ? 100 : 80;
     const totalLevels = (species === "gold") ? 104 : 84;
-    (function() { const maxXP = (species === "gold") ? 100 : 80; return (starLevel - 1) * maxXP + (xpLevel - 1); })()
+    const currentLevel = (starLevel - 1) * maxXPPerStar + (xpLevel - 1);
     const levelRatio = currentLevel / totalLevels;
     const potential = parseFloat(document.getElementById(`potential${petNumber}`).value) || 0;
 
