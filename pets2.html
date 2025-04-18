@@ -217,6 +217,25 @@
 
 
 <script>
+  const subBaseMultipliers = {
+    gold: {
+      "ATK": 0.000003725,
+      "HP": 0.000003704,
+      "Elemental": 0.000007477,
+      "DMG Inc": 0.000001195,
+      "DMG Dec": 0.000001195,
+      "Suppression": 0.000000525
+    },
+    purple: {
+      "ATK": 0.000003683,
+      "HP": 0.000003675,
+      "Elemental": 0.000007477,
+      "DMG Inc": 0.000001137,
+      "DMG Dec": 0.000001137,
+      "Suppression": 0.000000514
+    }
+  };
+
   const subMaxMultipliers = {
     gold: {
       "ATK": 0.000937,
@@ -233,25 +252,6 @@
       "DMG Inc": 0.000287,
       "DMG Dec": 0.000287,
       "Suppression": 0.000127
-    }
-  };
-
-  const subScalingFactors = {
-    gold: {
-      "ATK": 251,
-      "HP": 251,
-      "Elemental": 261,
-      "DMG Inc": 261,
-      "DMG Dec": 261,
-      "Suppression": 261
-    },
-    purple: {
-      "ATK": 251,
-      "HP": 251,
-      "Elemental": 261,
-      "DMG Inc": 261,
-      "DMG Dec": 261,
-      "Suppression": 261
     }
   };
 
@@ -295,14 +295,15 @@
       const subStatElem = document.getElementById(`subStat${petNumber}_${i}`);
       const subLabel = subStatElem.options[subStatElem.selectedIndex].text;
       const subKey = labelToKey[subLabel] || subLabel;
+
+      const baseMultiplier = (subBaseMultipliers[species] || {})[subKey] || 0;
       const maxMultiplier = (subMaxMultipliers[species] || {})[subKey] || 0;
-      const scalingFactor = (subScalingFactors[species] || {})[subKey] || 1;
 
+      const baseSubStat = potential * baseMultiplier;
       const maxSubStat = potential * maxMultiplier;
-      const baseSubStat = maxSubStat / scalingFactor;
-      const scaledSubStat = baseSubStat + (maxSubStat - baseSubStat) * levelRatio;
+      const interpolated = baseSubStat + (maxSubStat - baseSubStat) * levelRatio;
 
-      subStats.push({ type: subLabel, max: scaledSubStat });
+      subStats.push({ type: subLabel, max: interpolated });
     }
 
     return {
@@ -348,6 +349,7 @@
     document.getElementById("comparison-result2").style.display = "none";
   }
 </script>
+
 
 
 </body>
