@@ -295,8 +295,8 @@
       const subStatElem = document.getElementById(`subStat${petNumber}_${i}`);
       const subLabel = subStatElem.options[subStatElem.selectedIndex].text;
       const subKey = labelToKey[subLabel] || subLabel;
-      const baseMultiplier = subBaseMultipliers[species][subKey] || 0;
-      const maxMultiplier = subMaxMultipliers[species][subKey] || 0;
+      const baseMultiplier = (subBaseMultipliers[species] || {})[subKey] || 0;
+      const maxMultiplier = (subMaxMultipliers[species] || {})[subKey] || 0;
 
       const baseSubStat = potential * baseMultiplier;
       const maxSubStat = potential * maxMultiplier;
