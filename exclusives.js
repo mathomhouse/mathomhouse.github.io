@@ -8,7 +8,10 @@ function calculateTotalShards() {
         parseInt(document.getElementById('level4').value) || 0,
         parseInt(document.getElementById('level5').value) || 0,
         parseInt(document.getElementById('level6').value) || 0,
-        parseInt(document.getElementById('level7').value) || 0
+        parseInt(document.getElementById('level7').value) || 0,
+        parseInt(document.getElementById('level8').value) || 0,
+        parseInt(document.getElementById('level9').value) || 0,
+        parseInt(document.getElementById('level10').value) || 0
     ];
 
     let totalShards = 0;
@@ -39,6 +42,9 @@ function resetPage(){
     document.getElementById('level5').value = "";
     document.getElementById('level6').value = "";
     document.getElementById('level7').value = "";
+    document.getElementById('level8').value = "";
+    document.getElementById('level9').value = "";
+    document.getElementById('level10').value = "";
     document.getElementById('ownedShards').value = "";
     document.getElementById('result').innerHTML = '';
     document.getElementById('targetLevel').selectedIndex = 0; 
