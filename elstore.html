@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ED Store</title>
+  <link rel="stylesheet" href="edstore.css">
+  <script src="header.js" defer></script>
+</head>
+<body style="display:block; padding-left:0px; padding-top: 0px;">
+  <div id="header-placeholder"></div>
+  <br>
+  <div class="container">
+    <div style="display:flex; gap:20px">
+  <div id="store" style="padding-left: 10px;">
+    <!-- Items will be dynamically added here -->
+  </div>
+
+  <div class="cart">
+    <h2>Shopping Cart</h2>
+    <div id="cartItems"></div>
+    <p id="totalCost">Total: 0 Points<br>Remaining: 0 Points</p>
+
+    <div class="contributionPointsInput">
+      <label for="currency">Your Contribution Points:</label>
+      <input type="number" id="currency" placeholder="10000" />
+      <button id="globalUpdateCartButton" class="add-to-cart" onclick="updateCartGlobal()">Update Cart</button>
+    </div>
+
+    <div id="message" class="message"></div>
+  </div>
+  </div>
+  </div>
+  <script src="edstore.js"></script>
+</body>
+</html>
