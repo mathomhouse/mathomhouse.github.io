@@ -1,4 +1,4 @@
-import {weekMapData, colors, defaultSid} from './EnigmaDominatorsWeekly.js';
+import {weekMapData, colors, defaultSid} from '../archive/EnigmaDominatorsWeekly.js';
 
 document.addEventListener("DOMContentLoaded", loadMap);
 let mapData = [];

@@ -2,99 +2,99 @@ export const defaultSid = 1668;
 export const weekMapData = [
     {
         round: '0',
-        file:'./EnigmaDominators/ED_Round0.json'
+        file:'../EnigmaDominators/ED_Round0.json'
     },    
     {
         round: '1',
-        file:'./EnigmaDominators/ED_Round1.json'
+        file:'../EnigmaDominators/ED_Round1.json'
     },
     {
         round: '2',
-        file:'./EnigmaDominators/ED_Round2.json'
+        file:'../EnigmaDominators/ED_Round2.json'
     },
     {
         round: '2 + NC',
-        file:'./EnigmaDominators/ED_Round2NC.json'
+        file:'../EnigmaDominators/ED_Round2NC.json'
     },
     {
         round: '3',
-        file:'./EnigmaDominators/ED_Round3.json'
+        file:'../EnigmaDominators/ED_Round3.json'
     },
     {
         round: '3 + NC',
-        file:'./EnigmaDominators/ED_Round3NC.json'
+        file:'../EnigmaDominators/ED_Round3NC.json'
     },
     {
         round: '4',
-        file:'./EnigmaDominators/ED_Round4.json'
+        file:'../EnigmaDominators/ED_Round4.json'
     },
     {
         round: '4 + NC',
-        file:'./EnigmaDominators/ED_Round4NC.json'
+        file:'../EnigmaDominators/ED_Round4NC.json'
     },
     {
         round: '5',
-        file:'./EnigmaDominators/ED_Round5.json'
+        file:'../EnigmaDominators/ED_Round5.json'
     },
     {
         round: '5 + NC',
-        file:'./EnigmaDominators/ED_Round5NC.json'
+        file:'../EnigmaDominators/ED_Round5NC.json'
     },
     {
         round: '6',
-        file:'./EnigmaDominators/ED_Round6.json'
+        file:'../EnigmaDominators/ED_Round6.json'
     },
     {
         round: '6 + NC',
-        file:'./EnigmaDominators/ED_Round6NC.json'
+        file:'../EnigmaDominators/ED_Round6NC.json'
     },
     {
         round: '7',
-        file:'./EnigmaDominators/ED_Round7.json'
+        file:'../EnigmaDominators/ED_Round7.json'
     },
     {
         round: '7 + NC',
-        file:'./EnigmaDominators/ED_Round7NC.json'
+        file:'../EnigmaDominators/ED_Round7NC.json'
     },
     {
         round: '8',
-        file:'./EnigmaDominators/ED_Round8.json'
+        file:'../EnigmaDominators/ED_Round8.json'
     },
     {
         round: '8 + NC',
-        file:'./EnigmaDominators/ED_Round8NC.json'
+        file:'../EnigmaDominators/ED_Round8NC.json'
     },
     {
         round: '9',
-        file:'./EnigmaDominators/ED_Round9.json'
+        file:'../EnigmaDominators/ED_Round9.json'
     },
     {
         round: '9 + NC',
-        file:'./EnigmaDominators/ED_Round9NC.json'
+        file:'../EnigmaDominators/ED_Round9NC.json'
     },
     {
         round: '10',
-        file:'./EnigmaDominators/ED_Round10.json'
+        file:'../EnigmaDominators/ED_Round10.json'
     },
     {
         round: '10 + NC',
-        file:'./EnigmaDominators/ED_Round10NC.json'
+        file:'../EnigmaDominators/ED_Round10NC.json'
     },
     {
         round: '11',
-        file:'./EnigmaDominators/ED_Round11.json'
+        file:'../EnigmaDominators/ED_Round11.json'
     },
     {
         round: '11 + NC',
-        file:'./EnigmaDominators/ED_Round11NC.json'
+        file:'../EnigmaDominators/ED_Round11NC.json'
     },
     {
         round: '12',
-        file:'./EnigmaDominators/ED_Round12.json'
+        file:'../EnigmaDominators/ED_Round12.json'
     },
     {
         round: '12 + NC',
-        file:'./EnigmaDominators/ED_Round12NC.json'
+        file:'../EnigmaDominators/ED_Round12NC.json'
     },
 ]
 
