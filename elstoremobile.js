@@ -134,7 +134,7 @@ function updateCart() {
   const totalSignetCost = cartSignets.reduce((sum, ci) => sum + ci.price * ci.quantity, 0);
   const remainingSignetCost = userSignets - totalSignetCost;
   
-  var totals = `Total: ${totalTokenCost} Tokens<br>Remaining: ${remainingTokenCost} Tokens<br>
+  var totals = `Total: ${totalTokenCost} Tokens<br>Remaining: ${remainingTokenCost} Tokens<br><br>
         Total: ${totalSignetCost} Signets<br>Remaining: ${remainingSignetCost} Signets`;
 
   document.getElementById('totalCost').innerHTML = totals;
