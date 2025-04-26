@@ -238,7 +238,7 @@ function resetRSS(){
     document.getElementById('500Oil').value = "";
     document.getElementById('openOdin').value = "";
     document.getElementById('2kOdin').value = "";
-    document.getElementById('1kOdiin').value = "";
+    document.getElementById('1kOdin').value = "";
     document.getElementById('100Odin').value = "";
     document.getElementById('1Odin').value = "";
 
