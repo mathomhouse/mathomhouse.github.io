@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ED Store</title>
-  <link rel="stylesheet" href="edstoremobile.css">
+  <link rel="stylesheet" href="elstoremobile.css">
 
 </head>
 <body style="display:block; padding:0px; width: 100%;">
@@ -21,8 +21,12 @@
     <p id="totalCost">Total: 0 Points<br>Remaining: 0 Points</p>
 
     <div class="contributionPointsInput">
-      <label for="currency">Your Contribution Points:</label>
-      <input type="number" id="currency" placeholder="10000" />
+      <label for="ancientTokens">Your Ancient Tokens:</label>
+          <input type="number" id="ancientTokens" placeholder="10" />
+          <br>
+          <label for="eternalSignets">Your Eternal Signets:</label>
+          <input type="number" id="eternalSignets" placeholder="10000" />
+          <br>
       <button id="globalUpdateCartButton" class="add-to-cart" onclick="updateCartGlobal()">Update Cart</button>
     </div>
 
@@ -56,7 +60,7 @@
 </button>
 
 </div>
-  <script src="edstoremobile.js"></script>
+  <script src="elstoremobile.js"></script>
 </body>
 </body>
 </html>

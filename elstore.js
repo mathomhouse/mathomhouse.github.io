@@ -1,48 +1,46 @@
 // List of items (each entry is unique even if names repeat)
     const items = [
-      {name: "Fading Wings", price: 25, maxQty: 1},
-      {name: "Ashen Bones", price: 25, maxQty: 1},
-      {name: "Undead Skydrake", price: 20, maxQty: 1},
-      {name: "Stone Circle", price: 16, maxQty: 1},
-      {name: "Golden Glaze", price: 12, maxQty: 2},
-      {name: "The Rock", price: 20, maxQty: 1},
-      {name: "Pantheon", price: 50, maxQty: 1},
-      {name: "Power Fist", price: 20, maxQty: 1},
-      {name: "The Labyrinth", price: 120, maxQty: 1},
-      {name: "Roaring Chariot", price: 20, maxQty: 1},
-      {name: "Scaramanga Shard", price: 10, maxQty: 2},
-      {name: "Silence Shard", price: 10, maxQty: 2},      
-      {name: "Orange Blueprint Choice Pack", price: 20, maxQty: 1},
-      {name: "Top-tier Catalyst", price: 6, maxQty: 5},
-      {name: "Stabilizer", price: 10, maxQty: 2},
-      {name: "Enigma Repeater x2", price: 1, maxQty: 15},
-      {name: "Legendary Beast Shard x10", price: 1, maxQty: 30},
-
-
-      {name: "Royal Dragon Boat", price: 5000, maxQty: 1},
-      {name: "Golden Decoration Choice Chest", price: 60000, maxQty: 1},
-      {name: "Large VIT Capsules", price: 500, maxQty: 30},
-      {name: "1,000 Odinium", price: 800, maxQty: 30},
-      {name: "Unit +1 Choice Chest", price: 320, maxQty: 100},
-      {name: "Orange Universal Shard", price: 1400, maxQty: 30},
-      {name: "Universal Exclusive Skill Shard", price: 80, maxQty: 200},
-      {name: "Rare Skill Chest", price: 250, maxQty: 50}
-      {name: "Lv. 3 CPNT Chest", price: 50, maxQty: 150},
-      {name: "Lv. 3 CPNT Chest (NEW)", price: 50, maxQty: 150},
-      {name: "Class Talent Speed-up (1h)", price: 100, maxQty: 80},
-      {name: "Class Item Chests", price: 650, maxQty: 20},
-      {name: "Random Purple Equip Blueprint", price: 3200, maxQty: 2},
-      {name: "Expert HT Chip Chest", price: 5000, maxQty: 2},
-      {name: "Amazing HT Chip Chest", price: 1000, maxQty: 10},
-      {name: "HT Chip Chest", price: 500, maxQty: 30},
-      {name: "Formation Manual Choice Chest (New)", price: 1500, maxQty: 10}
-      {name: "Hologram Choice Chest", price: 800, maxQty: 20},
-      {name: "Resonator Choice Chest", price: 3000, maxQty: 5},
-      {name: "Top-tier Catalyst", price: 12000, maxQty: 2},
-      {name: "Advanced-tier Catalyst", price: 3000, maxQty: 5},
-      {name: "Titan Gear Random Material Box x5", price: 1500, maxQty: 10},
-      {name: "Legendary Beast Shard x10", price: 2000, maxQty: 10},
-      {name: "Ultra Enigma Crystal (Whole)", price: 300, maxQty: 50}
+      {name: "Fading Wings", price: 25, maxQty: 1, currency: "tokens"},
+      {name: "Ashen Bones", price: 25, maxQty: 1, currency: "tokens"},
+      {name: "Undead Skydrake", price: 20, maxQty: 1, currency: "tokens"},
+      {name: "Stone Circle", price: 16, maxQty: 1, currency: "tokens"},
+      {name: "Golden Glaze", price: 12, maxQty: 2, currency: "tokens"},
+      {name: "The Rock", price: 20, maxQty: 1, currency: "tokens"},
+      {name: "Pantheon", price: 50, maxQty: 1, currency: "tokens"},
+      {name: "Power Fist", price: 20, maxQty: 1, currency: "tokens"},
+      {name: "The Labyrinth", price: 120, maxQty: 1, currency: "tokens"},
+      {name: "Roaring Chariot", price: 20, maxQty: 1, currency: "tokens"},
+      {name: "Scaramanga Shard", price: 10, maxQty: 2, currency: "tokens"},
+      {name: "Silence Shard", price: 10, maxQty: 2, currency: "tokens"},      
+      {name: "Orange Blueprint Choice Pack", price: 20, maxQty: 1, currency: "tokens"},
+      {name: "Top-tier Catalyst", price: 6, maxQty: 5, currency: "tokens"},
+      {name: "Stabilizer", price: 10, maxQty: 2, currency: "tokens"},
+      {name: "Enigma Repeater x2", price: 1, maxQty: 15, currency: "tokens"},
+      {name: "Legendary Beast Shard x10", price: 1, maxQty: 30, currency: "tokens"},
+      {name: "Royal Dragon Boat", price: 5000, maxQty: 1, currency: "signets"},
+      {name: "Golden Decoration Choice Chest", price: 60000, maxQty: 1, currency: "signets"},
+      {name: "Large VIT Capsules", price: 500, maxQty: 30, currency: "signets"},
+      {name: "1,000 Odinium", price: 800, maxQty: 30, currency: "signets"},
+      {name: "Unit +1 Choice Chest", price: 320, maxQty: 100, currency: "signets"},
+      {name: "Orange Universal Shard", price: 1400, maxQty: 30, currency: "signets"},
+      {name: "Universal Exclusive Skill Shard", price: 80, maxQty: 200, currency: "signets"},
+      {name: "Rare Skill Chest", price: 250, maxQty: 50, currency: "signets"},
+      {name: "Lv. 3 CPNT Chest", price: 50, maxQty: 150, currency: "signets"},
+      {name: "Lv. 3 CPNT Chest (NEW)", price: 50, maxQty: 150, currency: "signets"},
+      {name: "Class Talent Speed-up (1h)", price: 100, maxQty: 80, currency: "signets"},
+      {name: "Class Item Chests", price: 650, maxQty: 20, currency: "signets"},
+      {name: "Random Purple Equip Blueprint", price: 3200, maxQty: 2, currency: "signets"},
+      {name: "Expert HT Chip Chest", price: 5000, maxQty: 2, currency: "signets"},
+      {name: "Amazing HT Chip Chest", price: 1000, maxQty: 10, currency: "signets"},
+      {name: "HT Chip Chest", price: 500, maxQty: 30, currency: "signets"},
+      {name: "Formation Manual Choice Chest (New)", price: 1500, maxQty: 10, currency: "signets"},
+      {name: "Hologram Choice Chest", price: 800, maxQty: 20, currency: "signets"},
+      {name: "Resonator Choice Chest", price: 3000, maxQty: 5, currency: "signets"},
+      {name: "Top-tier Catalyst", price: 12000, maxQty: 2, currency: "signets"},
+      {name: "Advanced-tier Catalyst", price: 3000, maxQty: 5, currency: "signets"},
+      {name: "Titan Gear Random Material Box x5", price: 1500, maxQty: 10, currency: "signets"},
+      {name: "Legendary Beast Shard x10", price: 2000, maxQty: 10, currency: "signets"},
+      {name: "Ultra Enigma Crystal (Whole)", price: 300, maxQty: 50, currency: "signets"}
     ];
 
     let cart = [];
@@ -57,7 +55,7 @@
         itemDiv.className = 'store-item';
         itemDiv.innerHTML = `
           <h3>${item.name}</h3>
-          <p>Price: ${item.price} Points</p>
+          <p>Price: ${item.price} ${item.currency}</p>
           <p>Max Quantity: ${item.maxQty}</p>
           <div class="quantity-control">
             <button class="minus-btn" onclick="decrementQuantity(${index})">-</button>
@@ -131,15 +129,33 @@
     function updateCart() {
       const cartItemsDiv = document.getElementById('cartItems');
       cartItemsDiv.innerHTML = '';
-      const currency = parseInt(document.getElementById('currency').value) || 0;
-      const totalCost = cart.reduce((sum, ci) => sum + ci.price * ci.quantity, 0);
-      const remainingCost = currency - totalCost;
-      document.getElementById('totalCost').innerHTML = `Total: ${totalCost} Points<br>Remaining: ${remainingCost} Points`;
 
-      if (totalCost > currency) {
-        document.getElementById('message').textContent = 'You do not have enough points!';
-      } else {
-        document.getElementById('message').textContent = '';
+      const userTokens = parseInt(document.getElementById('ancientTokens').value) || 0;
+      const cartTokens = cart.filter(c=> c.currency == "tokens");
+      const totalTokenCost = cartTokens.reduce((sum, ci) => sum + ci.price * ci.quantity, 0);
+      const remainingTokenCost = userTokens - totalTokenCost;
+
+      const userSignets = parseInt(document.getElementById('eternalSignets').value) || 0;
+      const cartSignets = cart.filter(c=> c.currency == "signets");
+      const totalSignetCost = cartSignets.reduce((sum, ci) => sum + ci.price * ci.quantity, 0);
+      const remainingSignetCost = userSignets - totalSignetCost;
+      
+      var totals = `Total: ${totalTokenCost} Tokens<br>Remaining: ${remainingTokenCost} Tokens<br>
+            Total: ${totalSignetCost} Signets<br>Remaining: ${remainingSignetCost} Signets`;
+
+      document.getElementById('totalCost').innerHTML = totals;
+
+      if(totalTokenCost > userTokens && totalSignetCost > userSignets){
+        document.getElementById('message').innerHTML = 'You do not have enough Ancient Tokens!<br>You do not have enough Eternal Signets!';
+      }
+      else if (totalTokenCost > userTokens) {
+        document.getElementById('message').innerHTML = 'You do not have enough Ancient Tokens!';
+      } 
+      else if (totalSignetCost > userSignets) {
+        document.getElementById('message').innerHTML = 'You do not have enough Eternal Signets!';
+      }
+      else {
+        document.getElementById('message').innerHTML = '';
       }
 
       cart.forEach(cartItem => {
