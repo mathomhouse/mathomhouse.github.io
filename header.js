@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', addFavicon);
 // Function to load the header.html content
 function loadHeader() {
     // Fetch the header.html content
-    fetch('header.html')
+    fetch('/header.html')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to load header');
