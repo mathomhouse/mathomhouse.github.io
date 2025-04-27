@@ -9,8 +9,8 @@ function calculateVit() {
     const hearts = parseInt(document.getElementById('vitHeart').value) || 0;
 
     // Calculate totals for each item
-    const largeCapsuleTotal = largeCapsules * 100;
-    const smallCapsuleTotal = smallCapsules * 30;
+    const largeCapsuleTotal = largeCapsules * 50;
+    const smallCapsuleTotal = smallCapsules * 10;
     const vitPlus50Total = plus50 * 50;
     const vit10Total = plus10 * 10;
     const vitFlowerTotal = flowers * 30;
@@ -36,8 +36,9 @@ function calculateVit() {
 function updateMultipliedTotal() {
     const grandTotal = parseInt(document.getElementById('grandTotal').innerText) || 0;
     const multiplier = parseInt(document.getElementById('multiplierDropdown').value) || 1;
-    const multipliedValue = grandTotal * multiplier;
-    document.getElementById('multipliedTotal').innerText = multipliedValue;
+    const multipliedValue = grandTotal * multiplier /5;
+    document.getElementById('multipliedTotal').innerText = multipliedValue + " Honor Points";
+
 }
 
 // Function to reset all input fields and totals

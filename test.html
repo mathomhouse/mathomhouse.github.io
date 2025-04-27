@@ -55,15 +55,29 @@
             </tr>
             <tr>
                 <td></td>
-                <td><label for="grandTotal" class="bold-text">Grand Total:</label></td>
+                <td><label for="grandTotal" class="bold-text">Total VIT:</label></td>
                 <td><label id="grandTotal" class="bold-text"></label></td>
             </tr>
+            <!-- Blurb Row -->
+            <tr>
+                <td colspan="3">
+                    <p>
+                        Below, you can choose which zone you are hitting DF in during EL <br>
+                        to determine how many honor points you can get with the VIT you have.
+                        <br><br> This does not account for Diana. It also assumes you have the <br>
+                        "Extra Gains" EL tech maxed out.
+                    </p>
+                </td>
+            </tr>
+
+
 
             <!-- New row for the Multiplier Dropdown -->
             <tr>
-                <td><label for="multiplierDropdown">Multiplier:</label></td>
+                <td><label for="multiplierDropdown">EL Zone:</label></td>
                 <td>
                     <select id="multiplierDropdown">
+                        <option value="" disabled selected>Select option</option>
                         <option value="120">Zone 1 (120 points)</option>
                         <option value="132">Zone 2 (132 points)</option>
                         <option value="144">Zone 3 (144 points)</option>
