@@ -29,13 +29,15 @@ function calculateVit() {
     document.getElementById('grandTotal').innerText = grandTotal;
 
     // Update the multiplied total too
-    updateMultipliedTotal();
-}
+    if (document.getElementById('multiplierDropdown').value != "") {
+      updateMultipliedTotal();
+    }  
+        }
 
 // Function to update the multiplied total
 function updateMultipliedTotal() {
     const grandTotal = parseInt(document.getElementById('grandTotal').innerText) || 0;
-    const multiplier = parseInt(document.getElementById('multiplierDropdown').value) || 1;
+    const multiplier = parseInt(document.getElementById('multiplierDropdown').value) || 0;
     const multipliedValue = grandTotal * multiplier /5;
     document.getElementById('multipliedTotal').innerText = multipliedValue + " Honor Points";
 
