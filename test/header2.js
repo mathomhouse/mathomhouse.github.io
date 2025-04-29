@@ -36,9 +36,12 @@ function initializeHeader() {
   });
 
   // Toggle dark/light mode (saved to localStorage)
-  themeToggle.addEventListener('click', () => {
+    themeToggle.addEventListener('click', () => {
     if (document.body.dataset.theme === 'dark') {
       document.body.dataset.theme = '';
       localStorage.setItem('theme', 'light');
-      themeToggle.
-}
+    } else {
+      document.body.dataset.theme = 'dark';
+      localStorage.setItem('theme', 'dark');
+    }
+  });
