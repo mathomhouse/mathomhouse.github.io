@@ -1,0 +1,47 @@
+<!-- Updated Header -->
+<link rel="stylesheet" href="header2.css">
+<link rel="icon" href="/cutelogo.ico" type="image/x-icon">
+
+<header id="main-header">
+    <div class="header-left">
+        <div class="hamburger" id="hamburger" onclick="toggleDropdown()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <h1><a href="/index.html">Mathom House Calculators</a></h1>
+    </div>
+
+    <nav class="dropdown" id="dropdownMenu">
+        <a href="/index.html">Home</a>
+        <a href="/vit.html">VIT</a>
+        <a href="/gems.html">Gems</a>
+        <a href="/equipment.html">Equipment</a>
+        <a href="/components.html">Components</a>
+        <a href="/resources.html">Resources</a>
+        <a href="/gear.html">HT Chips/Titan Gear<br>Stat Comparison</a>
+        <a href="/exclusives.html">Exclusive Skills</a>
+        <a href="/VIP.html">VIP</a>
+        <a href="/pets.html">Pets</a>
+        <a href="/elstore.html">EL Store</a>
+        <a href="/archive/EnigmaDominators.html">ED Map</a>
+        <a href="/archive/edstore.html">ED Store</a>
+    </nav>
+</header>
+
+<script>
+// Simple dropdown toggle for mobile menu
+function toggleDropdown() {
+    document.getElementById('dropdownMenu').classList.toggle('show');
+}
+
+// Optional: Add shadow to header on scroll
+window.addEventListener('scroll', () => {
+    const header = document.getElementById('main-header');
+    if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+</script>
