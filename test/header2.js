@@ -1,20 +1,16 @@
-// Fetch and load the header HTML
 function loadHeader() {
-  fetch('header2.html')
+  fetch('header2.html') // adjust path if needed
     .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to load header');
-      }
+      if (!response.ok) throw new Error('Failed to load header');
       return response.text();
     })
     .then(html => {
       document.getElementById('header-placeholder').innerHTML = html;
-      initializeHeader(); // Initialize event listeners after header is loaded
+      initializeHeader();
     })
     .catch(error => console.error('Error loading header:', error));
 }
 
-// Initialize the menu toggle and theme toggle
 function initializeHeader() {
   const nav = document.getElementById('nav');
   const themeToggle = document.getElementById('themeToggle');
@@ -37,7 +33,6 @@ function initializeHeader() {
   }
 }
 
-// Function to toggle dark/light theme
 function toggleTheme() {
   const themeToggle = document.getElementById('themeToggle');
   if (document.body.dataset.theme === 'dark') {
@@ -51,5 +46,4 @@ function toggleTheme() {
   }
 }
 
-// Run loadHeader once DOM is ready
 document.addEventListener('DOMContentLoaded', loadHeader);
