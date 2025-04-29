@@ -41,3 +41,4 @@ function initializeHeader() {
       document.body.dataset.theme = '';
       localStorage.setItem('theme', 'light');
       themeToggle.
+}
