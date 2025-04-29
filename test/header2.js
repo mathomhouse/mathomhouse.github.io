@@ -1,5 +1,3 @@
-// header2.js
-
 // Load header2.html dynamically
 fetch('/header2.html')
   .then(response => {
@@ -36,7 +34,7 @@ function initializeHeader() {
   });
 
   // Toggle dark/light mode (saved to localStorage)
-    themeToggle.addEventListener('click', () => {
+  themeToggle.addEventListener('click', () => {
     if (document.body.dataset.theme === 'dark') {
       document.body.dataset.theme = '';
       localStorage.setItem('theme', 'light');
@@ -45,3 +43,4 @@ function initializeHeader() {
       localStorage.setItem('theme', 'dark');
     }
   });
+}
