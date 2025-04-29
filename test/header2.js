@@ -1,67 +1,43 @@
-// header.js
+// header2.js
 
-// Dynamically add favicon
-function addFavicon() {
-    const link = document.createElement('link');
-    link.rel = 'icon';
-    link.href = '/cutelogo.ico'; // Adjust path if needed
-    link.type = 'image/x-icon';
-    document.head.appendChild(link);
-}
+// Load header2.html dynamically
+fetch('/header2.html')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to load header2.html');
+    }
+    return response.text();
+  })
+  .then(data => {
+    document.getElementById('header-placeholder').innerHTML = data;
+    initializeHeader();
+  })
+  .catch(error => console.error('Error loading header:', error));
 
-document.addEventListener('DOMContentLoaded', addFavicon);
-
-// Load header.html into placeholder
-function loadHeader() {
-    fetch('/header2.html')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to load header');
-            }
-            return response.text();
-        })
-        .then(data => {
-            document.getElementById('header-placeholder').innerHTML = data;
-            initializeHeader(); // After inserting header HTML
-        })
-        .catch(error => console.error('Error loading header:', error));
-}
-
-// Initialize header behavior after load
+// Initialize header interactions
 function initializeHeader() {
-    const dropdown = document.getElementById('dropdownMenu');
-    const hamburger = document.getElementById('hamburger');
-    const header = document.getElementById('main-header');
+  const menuToggle = document.getElementById('menu-toggle');
+  const headerRight = document.querySelector('.header-right');
+  const themeToggle = document.getElementById('theme-toggle');
+  const header = document.getElementById('main-header');
 
-    function toggleDropdown() {
-        const rect = hamburger.getBoundingClientRect();
-        dropdown.style.top = rect.bottom + 'px';
-        dropdown.style.left = rect.left + 'px';
-        dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+  // Toggle mobile menu
+  menuToggle.addEventListener('click', () => {
+    headerRight.classList.toggle('show');
+  });
+
+  // Add shadow to header on scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
     }
+  });
 
-    if (hamburger && dropdown) {
-        hamburger.onclick = toggleDropdown;
-
-        // Hide dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!dropdown.contains(event.target) && !hamburger.contains(event.target)) {
-                dropdown.style.display = 'none';
-            }
-        });
-    }
-
-    // Add header shadow on scroll
-    if (header) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 20) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-    }
-}
-
-// Start loading header when DOM ready
-document.addEventListener('DOMContentLoaded', loadHeader);
+  // Toggle dark/light mode (saved to localStorage)
+  themeToggle.addEventListener('click', () => {
+    if (document.body.dataset.theme === 'dark') {
+      document.body.dataset.theme = '';
+      localStorage.setItem('theme', 'light');
+      themeToggle.
