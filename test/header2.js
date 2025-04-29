@@ -1,37 +1,67 @@
 // header.js
 
-// Load header.html into #header-placeholder
-fetch('/header2.html')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Failed to load header');
-    }
-    return response.text();
-  })
-  .then(data => {
-    document.getElementById('header-placeholder').innerHTML = data;
+// Dynamically add favicon
+function addFavicon() {
+    const link = document.createElement('link');
+    link.rel = 'icon';
+    link.href = '/cutelogo.ico'; // Adjust path if needed
+    link.type = 'image/x-icon';
+    document.head.appendChild(link);
+}
 
-    // Initialize dropdown toggle behavior
+document.addEventListener('DOMContentLoaded', addFavicon);
+
+// Load header.html into placeholder
+function loadHeader() {
+    fetch('/header.html')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to load header');
+            }
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+            initializeHeader(); // After inserting header HTML
+        })
+        .catch(error => console.error('Error loading header:', error));
+}
+
+// Initialize header behavior after load
+function initializeHeader() {
+    const dropdown = document.getElementById('dropdownMenu');
     const hamburger = document.getElementById('hamburger');
-    const dropdownMenu = document.getElementById('dropdownMenu');
+    const header = document.getElementById('main-header');
 
-    if (hamburger && dropdownMenu) {
-      hamburger.addEventListener('click', () => {
-        dropdownMenu.classList.toggle('show');
-      });
+    function toggleDropdown() {
+        const rect = hamburger.getBoundingClientRect();
+        dropdown.style.top = rect.bottom + 'px';
+        dropdown.style.left = rect.left + 'px';
+        dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
     }
 
-    // Add shadow to header on scroll
-    const header = document.getElementById('main-header');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 20) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
+    if (hamburger && dropdown) {
+        hamburger.onclick = toggleDropdown;
 
-  })
-  .catch(error => {
-    console.error('Error loading header:', error);
-  });
+        // Hide dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!dropdown.contains(event.target) && !hamburger.contains(event.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+    }
+
+    // Add header shadow on scroll
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    }
+}
+
+// Start loading header when DOM ready
+document.addEventListener('DOMContentLoaded', loadHeader);
