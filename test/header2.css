@@ -3,7 +3,7 @@
   --text-color: #333;
   --card-bg: white;
   --header-bg: #333;
-  --accent-color: #ffcc00;
+  --accent-color: #0056b3;
 }
 
 [data-theme="dark"] {
@@ -11,7 +11,7 @@
   --text-color: #f0f0f0;
   --card-bg: #2c2c2c;
   --header-bg: #111;
-  --accent-color: #ffcc00;
+  --accent-color: #0056b3;
 }
 
 body {
