@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('/header2.html')
+  fetch('header2.html')
     .then(res => res.text())
     .then(html => {
       // Inject header HTML
