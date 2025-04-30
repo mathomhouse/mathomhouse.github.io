@@ -1,12 +1,26 @@
 :root {
+  --bg-color: #f0f2f5;
+  --text-color: #333;
+  --card-bg: white;
   --header-bg: #333;
   --accent-color: #ffcc00;
 }
 
 [data-theme="dark"] {
+  --bg-color: #1e1e1e;
+  --text-color: #f0f0f0;
+  --card-bg: #2c2c2c;
   --header-bg: #111;
+  --accent-color: #ffcc00;
 }
 
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Header styling */
 header {
   background-color: var(--header-bg);
   padding: 15px 30px;
@@ -44,8 +58,7 @@ nav a {
   transition: color 0.3s;
 }
 
-nav a.active,
-nav a:hover {
+nav a.active, nav a:hover {
   color: var(--accent-color);
 }
 
@@ -73,12 +86,13 @@ nav a:hover {
   transform: rotate(20deg);
 }
 
-/* Mobile Menu */
+/* Mobile */
 @media (max-width: 768px) {
   .header-right {
     flex-direction: column;
     align-items: flex-end;
   }
+
   nav {
     display: none;
     flex-direction: column;
@@ -89,16 +103,20 @@ nav a:hover {
     width: 150px;
     border-radius: 8px;
   }
+
   nav a {
     padding: 10px;
     margin: 5px 0;
   }
+
   .menu-toggle {
     display: flex;
   }
+
   nav.active {
     display: flex;
   }
+
   .theme-toggle {
     margin-top: 10px;
   }
