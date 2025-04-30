@@ -121,3 +121,18 @@ nav a.active, nav a:hover {
     margin-top: 10px;
   }
 }
+
+/* =========================== */
+/*    DARK MODE TABLE FIXES    */
+/* =========================== */
+
+body[data-theme="dark"] table,
+body[data-theme="dark"] td,
+body[data-theme="dark"] th {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+body[data-theme="dark"] tr:nth-child(even) {
+  background-color: #2a2a2a;
+}
