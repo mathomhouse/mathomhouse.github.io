@@ -250,6 +250,12 @@ button:hover {
   transform: translateY(40px);
   transition: opacity 0.8s, transform 0.8s;
 }
+.section-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: var(--accent-color);
+}
 .section.show {
   opacity: 1;
   transform: translateY(0);
