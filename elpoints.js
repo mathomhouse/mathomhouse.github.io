@@ -194,65 +194,75 @@ const buildingData = [
   let projectionChart;
 
   function updateCharts() {
-    const now = new Date();
-    const endTime = new Date(endTimeInput.value);
-    const validEndTime = endTime > now;
-    const minutesRemaining = validEndTime ? Math.floor((endTime - now) / 60000) : 0;
+  const now = new Date();
+  const endTime = new Date(endTimeInput.value);
+  const validEndTime = endTime > now;
+  const minutesRemaining = validEndTime ? Math.floor((endTime - now) / 60000) : 0;
 
-    hpmChart.data.labels = state.servers.map((s, i) =>
-      s.label ? `${s.label} (Server ${i + 1})` : `Server ${i + 1}`
-    );
-    hpmChart.data.datasets[0].data = state.servers.map((s, i) => {
-      let total = s.buildingCounts.reduce((sum, count, bIndex) => sum + count * buildingData[bIndex].points, 0);
-      if (s.hasEternal) total += eternalCity.points;
-      return total;
-    });
-    hpmChart.update();
+  const serverColors = [
+    '#f8a8a8', '#a8f8a8', '#a8a8f8', '#ffd8b0',
+    '#c0ffc0', '#b0d0ff', '#f0e68c', '#ffb0d0'
+  ];
 
-    if (!validEndTime) {
-      if (projectionChart) projectionChart.destroy();
-      return;
-    }
+  // Bar Chart
+  hpmChart.data.labels = state.servers.map((s, i) =>
+    s.label ? `${s.label} (Server ${i + 1})` : `Server ${i + 1}`
+  );
+  hpmChart.data.datasets[0].data = state.servers.map((s, i) => {
+    let total = s.buildingCounts.reduce((sum, count, bIndex) => sum + count * buildingData[bIndex].points, 0);
+    if (s.hasEternal) total += eternalCity.points;
+    return total;
+  });
+  hpmChart.update();
 
-    const labels = [];
-    const pointsByServer = Array(serverCount).fill(null).map(() => []);
-    for (let min = 0; min <= minutesRemaining; min += 5) {
-      const timeLabel = new Date(now.getTime() + min * 60000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      labels.push(timeLabel);
-      state.servers.forEach((s, i) => {
-        let hpm = s.buildingCounts.reduce((sum, count, bIndex) => sum + count * buildingData[bIndex].points, 0);
-        if (s.hasEternal) hpm += eternalCity.points;
-        const raw = s.currentPoints + hpm * min;
-        const rounded = Math.round(raw / 10) * 10;
-        pointsByServer[i].push(rounded);
-      });
-    }
-
-    const datasets = pointsByServer.map((points, i) => ({
-      label: state.servers[i].label ? `${state.servers[i].label} (S${i + 1})` : `Server ${i + 1}`,
-      data: points,
-      borderWidth: 2,
-      fill: false,
-      tension: 0.2
-    }));
-
+  // Line Chart
+  if (!validEndTime) {
     if (projectionChart) projectionChart.destroy();
-    projectionChart = new Chart(projectionCtx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: datasets
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          title: { display: true, text: 'Projected Total Points Over Time' }
-        },
-        scales: {
-          y: { beginAtZero: true }
-        }
-      }
+    return;
+  }
+
+  const labels = [];
+  const pointsByServer = Array(serverCount).fill(null).map(() => []);
+  for (let min = 0; min <= minutesRemaining; min += 5) {
+    const timeLabel = new Date(now.getTime() + min * 60000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    labels.push(timeLabel);
+    state.servers.forEach((s, i) => {
+      let hpm = s.buildingCounts.reduce((sum, count, bIndex) => sum + count * buildingData[bIndex].points, 0);
+      if (s.hasEternal) hpm += eternalCity.points;
+      const raw = s.currentPoints + hpm * min;
+      const rounded = Math.round(raw / 10) * 10;
+      pointsByServer[i].push(rounded);
     });
   }
+
+  const datasets = pointsByServer.map((points, i) => ({
+    label: state.servers[i].label ? `${state.servers[i].label} (S${i + 1})` : `Server ${i + 1}`,
+    data: points,
+    borderColor: serverColors[i],
+    backgroundColor: serverColors[i],
+    borderWidth: 2,
+    fill: false,
+    tension: 0.2
+  }));
+
+  if (projectionChart) projectionChart.destroy();
+  projectionChart = new Chart(projectionCtx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: datasets
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: 'Projected Total Points Over Time' }
+      },
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+}
+
 
   buildTable();
