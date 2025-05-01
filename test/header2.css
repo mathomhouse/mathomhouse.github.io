@@ -136,3 +136,16 @@ body[data-theme="dark"] th {
 body[data-theme="dark"] tr:nth-child(even) {
   background-color: #2a2a2a;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+.theme-toggle {
+  cursor: pointer;
+  font-size: 18px;
+  transition: transform 0.3s;
+}
+.theme-toggle:hover {
+  transform: rotate(20deg);
+}
