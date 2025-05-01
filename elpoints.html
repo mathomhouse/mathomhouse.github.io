@@ -10,7 +10,7 @@
     th, td { border: 1px solid #ccc; padding: 6px; text-align: center; }
     th { background-color: #f4f4f4; }
     .server-name { display: flex; flex-direction: column; align-items: center; }
-    .server-label { font-weight: bold; }
+    .server-label { font-weight: bold; font-size: 14px}
     .name-input, .points-input { width: 80px; margin-top: 4px; }
     .endtime-container { margin-bottom: 20px; }
 
@@ -58,7 +58,7 @@
 <table id="honorTable">
   <thead>
     <tr>
-      <th>Server</th>
+      <th>Server/Alliance</th>
       <th>Expedition Outpost (10)</th>
       <th>Expedition Base (30)</th>
       <th>Arsenal (20)</th>
@@ -114,7 +114,7 @@
       div.className = "server-name";
       const span = document.createElement("span");
       span.className = "server-label";
-      span.textContent = `Server ${i + 1}`;
+      span.textContent = `Server/Alliance ${i + 1}`;
       const nameInput = document.createElement("input");
       nameInput.type = "text";
       nameInput.placeholder = "Label";
@@ -228,7 +228,10 @@
       const projected = Math.round(rawProjected / 10) * 10;
 
       row.querySelector(".total-hpm").textContent = hpm;
-      row.querySelector(".projected-points").textContent = isNaN(projected) ? "0" : projected;
+      row.querySelector(".projected-points").textContent = isNaN(projected)
+  ? "0"
+  : projected.toLocaleString();
+
     });
 
     updateCharts();
