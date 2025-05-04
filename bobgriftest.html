@@ -38,7 +38,7 @@
       });
 
     function populateDropdowns(data) {
-      const heroNames = [...new Set(data.map(item => item["Hero Name"]))];
+      const heroNames = [...new Set(data.map(item => item.Hero))];
       ['hero1', 'hero2', 'hero3'].forEach(id => {
         const select = document.getElementById(id);
         heroNames.forEach(name => {
