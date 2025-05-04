@@ -38,7 +38,7 @@
       });
 
     function populateDropdowns(data) {
-      const heroNames = [...new Set(data.map(item => item.Hero))];
+      const heroNames = [...new Set(data.map(item => item["Hero Name"]))];
       ['hero1', 'hero2', 'hero3'].forEach(id => {
         const select = document.getElementById(id);
         heroNames.forEach(name => {
@@ -51,33 +51,36 @@
     }
 
     function showGear() {
-      const selections = [
-        document.getElementById('hero1').value,
-        document.getElementById('hero2').value,
-        document.getElementById('hero3').value
-      ];
+  const selections = [
+    document.getElementById('hero1').value,
+    document.getElementById('hero2').value,
+    document.getElementById('hero3').value
+  ];
 
-      const resultsDiv = document.getElementById('results');
-      resultsDiv.innerHTML = '';
+  const resultsDiv = document.getElementById('results');
+  resultsDiv.innerHTML = '';
 
-      selections.forEach(heroName => {
-        const gear = titanGearData.find(item => item.Hero === heroName);
-        if (gear) {
-          const heroBlock = document.createElement('div');
-          heroBlock.className = 'hero-block';
-          heroBlock.innerHTML = `
-            <strong>${gear.Hero}</strong><br>
-            Helmet: ${gear.Helmet}<br>
-            Armor: ${gear.Armor}<br>
-            Boots: ${gear.Boots}<br>
-            Weapon: ${gear.Weapon}
-          `;
-          resultsDiv.appendChild(heroBlock);
-        } else {
-          resultsDiv.innerHTML += `<p>No gear found for ${heroName}</p>`;
-        }
-      });
+  selections.forEach(heroName => {
+    const gear = titanGearData.find(item => item["Hero Name"] === heroName);
+    if (gear) {
+      const heroBlock = document.createElement('div');
+      heroBlock.className = 'hero-block';
+      heroBlock.innerHTML = `
+        <strong>${gear["Hero Name"]}</strong><br>
+        Gun: ${gear.Gun}<br>
+        Chest: ${gear.Chest}<br>
+        Optical: ${gear.Optical}<br>
+        Headset: ${gear.Headset}<br>
+        Arms: ${gear.Arms}<br>
+        Boots: ${gear.Boots}
+      `;
+      resultsDiv.appendChild(heroBlock);
+    } else {
+      resultsDiv.innerHTML += `<p>No gear found for ${heroName}</p>`;
     }
+  });
+}
+
   </script>
 
 </body>
