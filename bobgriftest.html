@@ -2,16 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Optimal Titan Gear Selector</title>
+  <title>Titan Gear Selector</title>
   <style>
-    body { font-family: Arial; padding: 20px; }
-    select, .results { margin: 10px 0; }
-    .hero-block { margin-bottom: 20px; border: 1px solid #ccc; padding: 10px; border-radius: 8px; }
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    select, button { margin: 10px 0; }
+    .hero-block {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
   </style>
 </head>
 <body>
 
-  <h1>Select Your Heroes</h1>
+  <h1>Titan Gear Selector</h1>
+
+  <label for="branch">Choose Branch:</label>
+  <select id="branch" onchange="filterHeroesByBranch()">
+    <option value="">-- Select Branch --</option>
+    <option value="Army">Army</option>
+    <option value="Navy">Navy</option>
+    <option value="Air Force">Air Force</option>
+  </select>
+
+  <br><br>
 
   <label for="hero1">Hero 1:</label>
   <select id="hero1"></select><br>
@@ -31,59 +46,63 @@
     let titanGearData = [];
 
     fetch('titan-gear-data.json')
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    titanGearData = data;
-    populateDropdowns(data);
-  });
+      .then(response => response.json())
+      .then(data => {
+        titanGearData = data;
+      });
 
+    function filterHeroesByBranch() {
+      const branch = document.getElementById('branch').value;
+      const dropdownIds = ['hero1', 'hero2', 'hero3'];
 
-    function populateDropdowns(data) {
-      const heroNames = [...new Set(data.map(item => item.Hero))];
-      ['hero1', 'hero2', 'hero3'].forEach(id => {
+      // Filter heroes by selected branch or Universal
+      const filtered = titanGearData
+        .filter(h => h.Branch === branch || h.Branch === "Universal")
+        .map(h => h.Hero);
+
+      dropdownIds.forEach(id => {
         const select = document.getElementById(id);
-        heroNames.forEach(name => {
-          const option = document.createElement('option');
-          option.value = name;
-          option.textContent = name;
+        select.innerHTML = ""; // Clear existing options
+
+        filtered.forEach(hero => {
+          const option = document.createElement("option");
+          option.value = hero;
+          option.textContent = hero;
           select.appendChild(option);
         });
       });
     }
 
     function showGear() {
-  const selections = [
-    document.getElementById('hero1').value.trim(),
-    document.getElementById('hero2').value.trim(),
-    document.getElementById('hero3').value.trim()
-  ];
+      const selections = [
+        document.getElementById('hero1').value.trim(),
+        document.getElementById('hero2').value.trim(),
+        document.getElementById('hero3').value.trim()
+      ];
 
-  const resultsDiv = document.getElementById('results');
-  resultsDiv.innerHTML = '';
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '';
 
-  selections.forEach(heroName => {
-    const gear = titanGearData.find(item => item.Hero.trim() === heroName);
-    if (gear) {
-      const heroBlock = document.createElement('div');
-      heroBlock.className = 'hero-block';
-      heroBlock.innerHTML = `
-        <strong>${gear.Hero}</strong><br>
-        Gun: ${gear.Gun}<br>
-        Chest: ${gear.Chest}<br>
-        Optical: ${gear.Optical}<br>
-        Headset: ${gear.Headset}<br>
-        Arms: ${gear.Arms}<br>
-        Boots: ${gear.Boots}
-      `;
-      resultsDiv.appendChild(heroBlock);
-    } else {
-      resultsDiv.innerHTML += `<p>No gear found for ${heroName}</p>`;
+      selections.forEach(heroName => {
+        const gear = titanGearData.find(item => item.Hero.trim() === heroName);
+        if (gear) {
+          const heroBlock = document.createElement('div');
+          heroBlock.className = 'hero-block';
+          heroBlock.innerHTML = `
+            <strong>${gear.Hero}</strong><br>
+            Gun: ${gear.Gun}<br>
+            Chest: ${gear.Chest}<br>
+            Optical: ${gear.Optical}<br>
+            Headset: ${gear.Headset}<br>
+            Arms: ${gear.Arms}<br>
+            Boots: ${gear.Boots}
+          `;
+          resultsDiv.appendChild(heroBlock);
+        } else {
+          resultsDiv.innerHTML += `<p>No gear found for ${heroName}</p>`;
+        }
+      });
     }
-  });
-}
-
-
   </script>
 
 </body>

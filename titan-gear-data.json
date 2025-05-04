@@ -1,6 +1,7 @@
 [
   {
     "Hero": "Layla",
+    "Branch": "Navy",
     "Gun": "Gun 1",
     "Chest": "Chest 1",
     "Optical": "Optical 1",
@@ -10,6 +11,7 @@
   },
   {
     "Hero": "Po",
+    "Branch": "Universal",
     "Gun": "Gun 2",
     "Chest": "Chest 2",
     "Optical": "Optical 2",
@@ -19,6 +21,7 @@
   },
   {
     "Hero": "Gipsy",
+    "Branch": "Universal",
     "Gun": "Gun 3",
     "Chest": "Chest 3",
     "Optical": "Optical 3",
@@ -28,6 +31,7 @@
   },
   {
     "Hero": "Jester",
+    "Branch": "Navy",
     "Gun": "Gun 4",
     "Chest": "Chest 4",
     "Optical": "Optical 4",
@@ -37,6 +41,7 @@
   },
   {
     "Hero": "Abad",
+    "Branch": "Air Force",
     "Gun": "Gun 5",
     "Chest": "Chest 5",
     "Optical": "Optical 5",
@@ -46,6 +51,7 @@
   },
   {
     "Hero": "Brady",
+    "Branch": "Air Force",
     "Gun": "Gun 6",
     "Chest": "Chest 6",
     "Optical": "Optical 6",
@@ -55,6 +61,7 @@
   },
   {
     "Hero": "Storm Shadow",
+    "Branch": "Air Force",
     "Gun": "Gun 7",
     "Chest": "Chest 7",
     "Optical": "Optical 7",
@@ -64,6 +71,7 @@
   },
   {
     "Hero": "Duke",
+    "Branch": "Universal",
     "Gun": "Gun 8",
     "Chest": "Chest 8",
     "Optical": "Optical 8",
@@ -73,6 +81,7 @@
   },
   {
     "Hero": "Striker",
+    "Branch": "Universal",
     "Gun": "Gun 9",
     "Chest": "Chest 9",
     "Optical": "Optical 9",
@@ -81,7 +90,8 @@
     "Boots": "Boots 9"
   },
   {
-    "Hero": "Bob",
+    "Hero": "Polik",
+    "Branch": "Army",
     "Gun": "Gun 10",
     "Chest": "Chest 10",
     "Optical": "Optical 10",
