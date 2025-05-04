@@ -54,21 +54,21 @@
 
     function showGear() {
   const selections = [
-    document.getElementById('hero1').value,
-    document.getElementById('hero2').value,
-    document.getElementById('hero3').value
+    document.getElementById('hero1').value.trim(),
+    document.getElementById('hero2').value.trim(),
+    document.getElementById('hero3').value.trim()
   ];
 
   const resultsDiv = document.getElementById('results');
   resultsDiv.innerHTML = '';
 
   selections.forEach(heroName => {
-    const gear = titanGearData.find(item => item["Hero Name"] === heroName);
+    const gear = titanGearData.find(item => item.Hero.trim() === heroName);
     if (gear) {
       const heroBlock = document.createElement('div');
       heroBlock.className = 'hero-block';
       heroBlock.innerHTML = `
-        <strong>${gear["Hero Name"]}</strong><br>
+        <strong>${gear.Hero}</strong><br>
         Gun: ${gear.Gun}<br>
         Chest: ${gear.Chest}<br>
         Optical: ${gear.Optical}<br>
@@ -82,6 +82,7 @@
     }
   });
 }
+
 
   </script>
 
