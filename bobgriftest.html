@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Optimal Titan Gear Selector</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    select, .results { margin: 10px 0; }
+    .hero-block { margin-bottom: 20px; border: 1px solid #ccc; padding: 10px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+
+  <h1>Select Your Heroes</h1>
+
+  <label for="hero1">Hero 1:</label>
+  <select id="hero1"></select><br>
+
+  <label for="hero2">Hero 2:</label>
+  <select id="hero2"></select><br>
+
+  <label for="hero3">Hero 3:</label>
+  <select id="hero3"></select><br>
+
+  <button onclick="showGear()">Show Optimal Gear</button>
+
+  <h2>Recommended Titan Gear</h2>
+  <div id="results"></div>
+
+  <script>
+    let titanGearData = [];
+
+    fetch('https://script.google.com/macros/s/AKfycbygdAf0F0peX1H9yayfi9X0BWHpLNcqkKBw0cEr-PXU56uNwvU6TGpqtj2xltTCGn-ztA/exec')
+      .then(response => response.json())
+      .then(data => {
+        titanGearData = data;
+        populateDropdowns(data);
+      });
+
+    function populateDropdowns(data) {
+      const heroNames = [...new Set(data.map(item => item.Hero))];
+      ['hero1', 'hero2', 'hero3'].forEach(id => {
+        const select = document.getElementById(id);
+        heroNames.forEach(name => {
+          const option = document.createElement('option');
+          option.value = name;
+          option.textContent = name;
+          select.appendChild(option);
+        });
+      });
+    }
+
+    function showGear() {
+      const selections = [
+        document.getElementById('hero1').value,
+        document.getElementById('hero2').value,
+        document.getElementById('hero3').value
+      ];
+
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '';
+
+      selections.forEach(heroName => {
+        const gear = titanGearData.find(item => item.Hero === heroName);
+        if (gear) {
+          const heroBlock = document.createElement('div');
+          heroBlock.className = 'hero-block';
+          heroBlock.innerHTML = `
+            <strong>${gear.Hero}</strong><br>
+            Helmet: ${gear.Helmet}<br>
+            Armor: ${gear.Armor}<br>
+            Boots: ${gear.Boots}<br>
+            Weapon: ${gear.Weapon}
+          `;
+          resultsDiv.appendChild(heroBlock);
+        } else {
+          resultsDiv.innerHTML += `<p>No gear found for ${heroName}</p>`;
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
