@@ -30,12 +30,14 @@
   <script>
     let titanGearData = [];
 
-    fetch('https://script.google.com/macros/s/AKfycbygdAf0F0peX1H9yayfi9X0BWHpLNcqkKBw0cEr-PXU56uNwvU6TGpqtj2xltTCGn-ztA/exec')
-      .then(response => response.json())
-      .then(data => {
-        titanGearData = data;
-        populateDropdowns(data);
-      });
+    fetch('titan-gear-data.json')
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    titanGearData = data;
+    populateDropdowns(data);
+  });
+
 
     function populateDropdowns(data) {
       const heroNames = [...new Set(data.map(item => item.Hero))];
