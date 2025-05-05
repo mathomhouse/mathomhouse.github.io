@@ -1,47 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Titan Gear Selector</title>
-  <link rel="stylesheet" href="test/index2.css">
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    select, button { margin: 10px 0; }
-    .hero-block {
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 10px;
-      margin-bottom: 15px;
-    }
-  </style>
+  <link rel="stylesheet" href="index2.css">
 </head>
 <body>
 
-  <h1>Titan Gear Selector</h1>
+  <div class="container">
+    <h1>Titan Gear Selector</h1>
 
-  <label for="branch">Choose Branch:</label>
-  <select id="branch" onchange="filterHeroesByRole()">
-    <option value="">-- Select Branch --</option>
-    <option value="Army">Army</option>
-    <option value="Navy">Navy</option>
-    <option value="Air Force">Air Force</option>
-  </select>
+    <label for="branch">Choose Branch:</label>
+    <select id="branch" onchange="filterHeroesByRole()">
+      <option value="">-- Select Branch --</option>
+      <option value="Army">Army</option>
+      <option value="Navy">Navy</option>
+      <option value="Air Force">Air Force</option>
+    </select>
 
-  <br><br>
+    <label for="heroAttack">Attack Hero:</label>
+    <select id="heroAttack"></select>
 
-  <label for="heroAttack">Attack Hero:</label>
-  <select id="heroAttack"></select><br>
+    <label for="heroHP">HP Hero:</label>
+    <select id="heroHP"></select>
 
-  <label for="heroHP">HP Hero:</label>
-  <select id="heroHP"></select><br>
+    <label for="heroIndestructible">Indestructible Hero:</label>
+    <select id="heroIndestructible"></select>
 
-  <label for="heroIndestructible">Indestructible Hero:</label>
-  <select id="heroIndestructible"></select><br>
+    <div class="calculate-btn">
+      <button onclick="showGear()">Show Optimal Gear</button>
+    </div>
 
-  <button onclick="showGear()">Show Optimal Gear</button>
-
-  <h2>Recommended Titan Gear</h2>
-  <div id="results"></div>
+    <div id="results" class="gear-container"></div>
+  </div>
 
   <script>
     let titanGearData = [];
@@ -97,18 +89,18 @@
       selections.forEach(heroName => {
         const gear = titanGearData.find(item => item.Hero.trim() === heroName);
         if (gear) {
-          const heroBlock = document.createElement('div');
-          heroBlock.className = 'hero-block';
-          heroBlock.innerHTML = `
-            <strong>${gear.Hero}</strong><br>
-            Gun: ${gear.Gun}<br>
-            Chest: ${gear.Chest}<br>
-            Optical: ${gear.Optical}<br>
-            Headset: ${gear.Headset}<br>
-            Arms: ${gear.Arms}<br>
-            Boots: ${gear.Boots}
+          const heroBox = document.createElement('div');
+          heroBox.className = 'gear-box';
+          heroBox.innerHTML = `
+            <h2>${gear.Hero}</h2>
+            <p><strong>Gun:</strong> ${gear.Gun}</p>
+            <p><strong>Chest:</strong> ${gear.Chest}</p>
+            <p><strong>Optical:</strong> ${gear.Optical}</p>
+            <p><strong>Headset:</strong> ${gear.Headset}</p>
+            <p><strong>Arms:</strong> ${gear.Arms}</p>
+            <p><strong>Boots:</strong> ${gear.Boots}</p>
           `;
-          resultsDiv.appendChild(heroBlock);
+          resultsDiv.appendChild(heroBox);
         } else {
           resultsDiv.innerHTML += `<p>No gear found for ${heroName}</p>`;
         }
