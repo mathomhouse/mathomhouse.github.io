@@ -19,7 +19,7 @@
   <h1>Titan Gear Selector</h1>
 
   <label for="branch">Choose Branch:</label>
-  <select id="branch" onchange="filterHeroesByBranch()">
+  <select id="branch" onchange="filterHeroesByRole()">
     <option value="">-- Select Branch --</option>
     <option value="Army">Army</option>
     <option value="Navy">Navy</option>
@@ -28,14 +28,14 @@
 
   <br><br>
 
-  <label for="hero1">Hero 1:</label>
-  <select id="hero1"></select><br>
+  <label for="heroAttack">Attack Hero:</label>
+  <select id="heroAttack"></select><br>
 
-  <label for="hero2">Hero 2:</label>
-  <select id="hero2"></select><br>
+  <label for="heroHP">HP Hero:</label>
+  <select id="heroHP"></select><br>
 
-  <label for="hero3">Hero 3:</label>
-  <select id="hero3"></select><br>
+  <label for="heroIndestructible">Indestructible Hero:</label>
+  <select id="heroIndestructible"></select><br>
 
   <button onclick="showGear()">Show Optimal Gear</button>
 
@@ -51,33 +51,43 @@
         titanGearData = data;
       });
 
-    function filterHeroesByBranch() {
+    function filterHeroesByRole() {
       const branch = document.getElementById('branch').value;
-      const dropdownIds = ['hero1', 'hero2', 'hero3'];
 
-      // Filter heroes by selected branch or Universal
-      const filtered = titanGearData
-        .filter(h => h.Branch === branch || h.Branch === "Universal")
+      const attackHeroes = titanGearData
+        .filter(h => (h.Branch === branch || h.Branch === "Universal") && h.Subcategory === "Attack")
         .map(h => h.Hero);
 
-      dropdownIds.forEach(id => {
-        const select = document.getElementById(id);
-        select.innerHTML = ""; // Clear existing options
+      const hpHeroes = titanGearData
+        .filter(h => (h.Branch === branch || h.Branch === "Universal") && h.Subcategory === "HP")
+        .map(h => h.Hero);
 
-        filtered.forEach(hero => {
-          const option = document.createElement("option");
-          option.value = hero;
-          option.textContent = hero;
-          select.appendChild(option);
-        });
+      const indestructibleHeroes = titanGearData
+        .filter(h => (h.Branch === branch || h.Branch === "Universal") && h.Subcategory === "Indestructible")
+        .map(h => h.Hero);
+
+      populateDropdown('heroAttack', attackHeroes);
+      populateDropdown('heroHP', hpHeroes);
+      populateDropdown('heroIndestructible', indestructibleHeroes);
+    }
+
+    function populateDropdown(dropdownId, heroList) {
+      const select = document.getElementById(dropdownId);
+      select.innerHTML = "";
+
+      heroList.forEach(hero => {
+        const option = document.createElement("option");
+        option.value = hero;
+        option.textContent = hero;
+        select.appendChild(option);
       });
     }
 
     function showGear() {
       const selections = [
-        document.getElementById('hero1').value.trim(),
-        document.getElementById('hero2').value.trim(),
-        document.getElementById('hero3').value.trim()
+        document.getElementById('heroAttack').value.trim(),
+        document.getElementById('heroHP').value.trim(),
+        document.getElementById('heroIndestructible').value.trim()
       ];
 
       const resultsDiv = document.getElementById('results');
