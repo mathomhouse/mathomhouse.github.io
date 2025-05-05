@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mathom House</title>
+  <link rel="stylesheet" href="index2.css">
+  <link rel="stylesheet" href="header2.css">
+  <script src="header2.js" defer></script>
+</head>
+<body>
+<header id="header-placeholder"></header>
+<section id="calculators" class="section">
+  <h2 class="section-title">Calculators</h2>
+  <div class="cards-grid">
+    <a href="exclusives.html" class="card-link">
+  <div class="card">
+    <h3>🧮 Shard Cost Calculator</h3>
+    <p>Calculate the cost to craft your items.</p>
+  </div>
+</a>
+
+  </div>
+</section>
+
+<section id="guides" class="section">
+  <h2 class="section-title">Guides</h2>
+  <div class="search-bar">
+    <input type="text" id="guideSearch" placeholder="Search guides..." oninput="filterGuides()">
+  </div>
+  <div class="cards-grid" id="guideCards"></div>
+</section>
+
+<button id="backToTop" onclick="scrollToTop()">↑</button>
+
+<script>
+function toggleMenu() {
+  document.getElementById('nav').classList.toggle('active');
+}
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function toggleTheme() {
+  if (document.body.dataset.theme === 'dark') {
+    document.body.dataset.theme = '';
+    localStorage.setItem('theme', 'light');
+    document.getElementById('themeToggle').textContent = '🌓';
+  } else {
+    document.body.dataset.theme = 'dark';
+    localStorage.setItem('theme', 'dark');
+    document.getElementById('themeToggle').textContent = '☀️';
+  }
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.body.dataset.theme = 'dark';
+    document.getElementById('themeToggle').textContent = '☀️';
+  }
+});
+window.addEventListener('scroll', () => {
+  const button = document.getElementById('backToTop');
+  button.classList.toggle('show', window.scrollY > 300);
+});
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('show');
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.section').forEach(section => observer.observe(section));
+const guides = [
+  { title: 'Getting Started', desc: 'Start your journey with essential tips.' },
+  { title: 'Advanced Strategies', desc: 'Tactics to level up your gameplay.' },
+  { title: 'Character Builds', desc: 'Optimize your heroes for every challenge.' },
+  { title: 'Event Walkthroughs', desc: 'Step-by-step event guides.' },
+  { title: 'Resource Management', desc: 'Make the most of your materials.' },
+  { title: 'Faction Tips', desc: 'Master your faction strategies.' }
+];
+const guideCardsContainer = document.getElementById('guideCards');
+guides.forEach(guide => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `<h3>📖 ${guide.title}</h3><p>${guide.desc}</p>`;
+  guideCardsContainer.appendChild(card);
+});
+function filterGuides() {
+  const search = document.getElementById('guideSearch').value.toLowerCase();
+  document.querySelectorAll('#guideCards .card').forEach(card => {
+    card.style.display = card.textContent.toLowerCase().includes(search) ? 'block' : 'none';
+  });
+}
+
+//when the user clicks the "Shard Cost Calculator" card, this event fires because we have hooked it up on line 249
+function shardCostCalcDiv_onClick(){
+  //navigate to the correct page
+  window.location.href = "exclusives.html";
+}
+</script>
+</body>
+</html>
