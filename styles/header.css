@@ -59,7 +59,7 @@
 
 /* Ensure dropdown fits content width */
 .dropdown {
-    z-index: 1;
+    z-index: 1001;
 }
 
 h1 a {
