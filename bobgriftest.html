@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Titan Gear Selector</title>
-  <link rel="stylesheet" href="test/index2.css">
+  <link rel="stylesheet" href="index2.css">
 </head>
 <body>
 
@@ -18,13 +18,19 @@
       <option value="Navy">Navy</option>
       <option value="Air Force">Air Force</option>
     </select>
-    <br>
+
+    <label for="loadoutType">Choose Loadout Type:</label>
+    <select id="loadoutType">
+      <option value="Ideal">Ideal</option>
+      <option value="Alternative">Alternative</option>
+    </select>
+
     <label for="heroAttack">Attack Hero:</label>
     <select id="heroAttack"></select>
-    <br>
+
     <label for="heroHP">HP Hero:</label>
     <select id="heroHP"></select>
-    <br>
+
     <label for="heroIndestructible">Indestructible Hero:</label>
     <select id="heroIndestructible"></select>
 
@@ -77,6 +83,7 @@
     }
 
     function showGear() {
+      const loadoutType = document.getElementById('loadoutType').value;
       const selections = [
         document.getElementById('heroAttack').value.trim(),
         document.getElementById('heroHP').value.trim(),
@@ -87,12 +94,14 @@
       resultsDiv.innerHTML = '';
 
       selections.forEach(heroName => {
-        const gear = titanGearData.find(item => item.Hero.trim() === heroName);
+        const hero = titanGearData.find(item => item.Hero.trim() === heroName);
+        const gear = hero?.[loadoutType];
+
         if (gear) {
           const heroBox = document.createElement('div');
           heroBox.className = 'gear-box';
           heroBox.innerHTML = `
-            <h2>${gear.Hero}</h2>
+            <h2>${hero.Hero} <span style="font-size: 0.7em;">(${loadoutType})</span></h2>
             <p><strong>Gun:</strong> ${gear.Gun}</p>
             <p><strong>Chest:</strong> ${gear.Chest}</p>
             <p><strong>Optical:</strong> ${gear.Optical}</p>
@@ -102,7 +111,7 @@
           `;
           resultsDiv.appendChild(heroBox);
         } else {
-          resultsDiv.innerHTML += `<p>No gear found for ${heroName}</p>`;
+          resultsDiv.innerHTML += `<p>No ${loadoutType.toLowerCase()} gear found for ${heroName}</p>`;
         }
       });
     }

@@ -3,110 +3,231 @@
     "Hero": "Layla",
     "Branch": "Navy",
     "Subcategory": "Indestructible",
-    "Gun": "Gun 1",
-    "Chest": "Chest 1",
-    "Optical": "Optical 1",
-    "Headset": "Headset 1",
-    "Arms": "Arms 1",
-    "Boots": "Boots 1"
+    "Ideal": {
+      "Gun": "Gun 1",
+      "Chest": "Chest 1",
+      "Optical": "Optical 1",
+      "Headset": "Headset 1",
+      "Arms": "Arms 1",
+      "Boots": "Boots 1"
+    },
+    "Alternative": {
+      "Gun": "Gun 12",
+      "Chest": "Chest 12",
+      "Optical": "Optical 12",
+      "Headset": "Headset 12",
+      "Arms": "Arms 12",
+      "Boots": "Boots 12"
+    }
   },
   {
     "Hero": "Po",
     "Branch": "Universal",
     "Subcategory": "Attack",
-    "Gun": "Gun 2",
-    "Chest": "Chest 2",
-    "Optical": "Optical 2",
-    "Headset": "Headset 2",
-    "Arms": "Arms 2",
-    "Boots": "Boots 2"
+    "Ideal": {
+      "Gun": "Gun 2",
+      "Chest": "Chest 2",
+      "Optical": "Optical 2",
+      "Headset": "Headset 2",
+      "Arms": "Arms 2",
+      "Boots": "Boots 2"
+    },
+    "Alternative": {
+      "Gun": "Gun 13",
+      "Chest": "Chest 13",
+      "Optical": "Optical 13",
+      "Headset": "Headset 13",
+      "Arms": "Arms 13",
+      "Boots": "Boots 13"
+    }
   },
   {
     "Hero": "Gipsy",
     "Branch": "Universal",
     "Subcategory": "Attack",
-    "Gun": "Gun 3",
-    "Chest": "Chest 3",
-    "Optical": "Optical 3",
-    "Headset": "Headset 3",
-    "Arms": "Arms 3",
-    "Boots": "Boots 3"
+    "Ideal": {
+      "Gun": "Gun 3",
+      "Chest": "Chest 3",
+      "Optical": "Optical 3",
+      "Headset": "Headset 3",
+      "Arms": "Arms 3",
+      "Boots": "Boots 3"
+    },
+    "Alternative": {
+      "Gun": "Gun 14",
+      "Chest": "Chest 14",
+      "Optical": "Optical 14",
+      "Headset": "Headset 14",
+      "Arms": "Arms 14",
+      "Boots": "Boots 14"
+    }
   },
   {
     "Hero": "Jester",
     "Branch": "Navy",
     "Subcategory": "Attack",
-    "Gun": "Gun 4",
-    "Chest": "Chest 4",
-    "Optical": "Optical 4",
-    "Headset": "Headset 4",
-    "Arms": "Arms 4",
-    "Boots": "Boots 4"
+    "Ideal": {
+      "Gun": "Gun 4",
+      "Chest": "Chest 4",
+      "Optical": "Optical 4",
+      "Headset": "Headset 4",
+      "Arms": "Arms 4",
+      "Boots": "Boots 4"
+    },
+    "Alternative": {
+      "Gun": "Gun 15",
+      "Chest": "Chest 15",
+      "Optical": "Optical 15",
+      "Headset": "Headset 15",
+      "Arms": "Arms 15",
+      "Boots": "Boots 15"
+    }
   },
   {
     "Hero": "Abad",
     "Branch": "Air Force",
     "Subcategory": "HP",
-    "Gun": "Gun 5",
-    "Chest": "Chest 5",
-    "Optical": "Optical 5",
-    "Headset": "Headset 5",
-    "Arms": "Arms 5",
-    "Boots": "Boots 5"
+    "Ideal": {
+      "Gun": "Gun 5",
+      "Chest": "Chest 5",
+      "Optical": "Optical 5",
+      "Headset": "Headset 5",
+      "Arms": "Arms 5",
+      "Boots": "Boots 5"
+    },
+    "Alternative": {
+      "Gun": "Gun 16",
+      "Chest": "Chest 16",
+      "Optical": "Optical 16",
+      "Headset": "Headset 16",
+      "Arms": "Arms 16",
+      "Boots": "Boots 16"
+    }
   },
   {
     "Hero": "Brady",
     "Branch": "Air Force",
     "Subcategory": "Attack",
-    "Gun": "Gun 6",
-    "Chest": "Chest 6",
-    "Optical": "Optical 6",
-    "Headset": "Headset 6",
-    "Arms": "Arms 6",
-    "Boots": "Boots 6"
+    "Ideal": {
+      "Gun": "Gun 6",
+      "Chest": "Chest 6",
+      "Optical": "Optical 6",
+      "Headset": "Headset 6",
+      "Arms": "Arms 6",
+      "Boots": "Boots 6"
+    },
+    "Alternative": {
+      "Gun": "Gun 17",
+      "Chest": "Chest 17",
+      "Optical": "Optical 17",
+      "Headset": "Headset 17",
+      "Arms": "Arms 17",
+      "Boots": "Boots 17"
+    }
   },
   {
     "Hero": "Storm Shadow",
     "Branch": "Air Force",
     "Subcategory": "Indestructible",
-    "Gun": "Gun 7",
-    "Chest": "Chest 7",
-    "Optical": "Optical 7",
-    "Headset": "Headset 7",
-    "Arms": "Arms 7",
-    "Boots": "Boots 7"
+    "Ideal": {
+      "Gun": "Gun 7",
+      "Chest": "Chest 7",
+      "Optical": "Optical 7",
+      "Headset": "Headset 7",
+      "Arms": "Arms 7",
+      "Boots": "Boots 7"
+    },
+    "Alternative": {
+      "Gun": "Gun 18",
+      "Chest": "Chest 18",
+      "Optical": "Optical 18",
+      "Headset": "Headset 18",
+      "Arms": "Arms 18",
+      "Boots": "Boots 18"
+    }
   },
   {
     "Hero": "Duke",
     "Branch": "Universal",
     "Subcategory": "Indestructible",
-    "Gun": "Gun 8",
-    "Chest": "Chest 8",
-    "Optical": "Optical 8",
-    "Headset": "Headset 8",
-    "Arms": "Arms 8",
-    "Boots": "Boots 8"
+    "Ideal": {
+      "Gun": "Gun 8",
+      "Chest": "Chest 8",
+      "Optical": "Optical 8",
+      "Headset": "Headset 8",
+      "Arms": "Arms 8",
+      "Boots": "Boots 8"
+    },
+    "Alternative": {
+      "Gun": "Gun 19",
+      "Chest": "Chest 19",
+      "Optical": "Optical 19",
+      "Headset": "Headset 19",
+      "Arms": "Arms 19",
+      "Boots": "Boots 19"
+    }
   },
   {
     "Hero": "Striker",
     "Branch": "Universal",
     "Subcategory": "Indestructible",
-    "Gun": "Gun 9",
-    "Chest": "Chest 9",
-    "Optical": "Optical 9",
-    "Headset": "Headset 9",
-    "Arms": "Arms 9",
-    "Boots": "Boots 9"
+    "Ideal": {
+      "Gun": "Gun 9",
+      "Chest": "Chest 9",
+      "Optical": "Optical 9",
+      "Headset": "Headset 9",
+      "Arms": "Arms 9",
+      "Boots": "Boots 9"
+    },
+    "Alternative": {
+      "Gun": "Gun 20",
+      "Chest": "Chest 20",
+      "Optical": "Optical 20",
+      "Headset": "Headset 20",
+      "Arms": "Arms 20",
+      "Boots": "Boots 20"
+    }
   },
   {
     "Hero": "Polik",
     "Branch": "Army",
     "Subcategory": "HP",
-    "Gun": "Gun 10",
-    "Chest": "Chest 10",
-    "Optical": "Optical 10",
-    "Headset": "Headset 10",
-    "Arms": "Arms 10",
-    "Boots": "Boots 10"
+    "Ideal": {
+      "Gun": "Gun 10",
+      "Chest": "Chest 10",
+      "Optical": "Optical 10",
+      "Headset": "Headset 10",
+      "Arms": "Arms 10",
+      "Boots": "Boots 10"
+    },
+    "Alternative": {
+      "Gun": "Gun 21",
+      "Chest": "Chest 21",
+      "Optical": "Optical 21",
+      "Headset": "Headset 21",
+      "Arms": "Arms 21",
+      "Boots": "Boots 21"
+    }
+  },
+  {
+    "Hero": "Crimson",
+    "Branch": "Navy",
+    "Subcategory": "HP",
+    "Ideal": {
+      "Gun": "Gun 11",
+      "Chest": "Chest 11",
+      "Optical": "Optical 11",
+      "Headset": "Headset 11",
+      "Arms": "Arms 11",
+      "Boots": "Boots 11"
+    },
+    "Alternative": {
+      "Gun": "Gun 22",
+      "Chest": "Chest 22",
+      "Optical": "Optical 22",
+      "Headset": "Headset 22",
+      "Arms": "Arms 22",
+      "Boots": "Boots 22"
+    }
   }
 ]
