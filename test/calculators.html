@@ -196,33 +196,6 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.section').forEach(section => observer.observe(section));
-const guides = [
-  { title: 'Getting Started', desc: 'Start your journey with essential tips.' },
-  { title: 'Advanced Strategies', desc: 'Tactics to level up your gameplay.' },
-  { title: 'Character Builds', desc: 'Optimize your heroes for every challenge.' },
-  { title: 'Event Walkthroughs', desc: 'Step-by-step event guides.' },
-  { title: 'Resource Management', desc: 'Make the most of your materials.' },
-  { title: 'Faction Tips', desc: 'Master your faction strategies.' }
-];
-const guideCardsContainer = document.getElementById('guideCards');
-guides.forEach(guide => {
-  const card = document.createElement('div');
-  card.className = 'card';
-  card.innerHTML = `<h3>📖 ${guide.title}</h3><p>${guide.desc}</p>`;
-  guideCardsContainer.appendChild(card);
-});
-function filterGuides() {
-  const search = document.getElementById('guideSearch').value.toLowerCase();
-  document.querySelectorAll('#guideCards .card').forEach(card => {
-    card.style.display = card.textContent.toLowerCase().includes(search) ? 'block' : 'none';
-  });
-}
-
-//when the user clicks the "Shard Cost Calculator" card, this event fires because we have hooked it up on line 249
-function shardCostCalcDiv_onClick(){
-  //navigate to the correct page
-  window.location.href = "exclusives.html";
-}
   const htIcons = [
     "/images/yellow-ht-icon.png",
     "/images/red-ht-icon.png",
