@@ -1,30 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Honor Points Calculator</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="header.js" defer></script>
+  <link rel="stylesheet" href="styles/index.css">
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
-    th, td { border: 1px solid #ccc; padding: 6px; text-align: center; }
-    th { background-color: #f4f4f4; }
-    .server-name { display: flex; flex-direction: column; align-items: center; }
-    .server-label { font-weight: bold; font-size: 14px}
-    .name-input, .points-input { width: 80px; margin-top: 4px; }
-    .endtime-container { margin-bottom: 20px; }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+    }
 
-    tr:nth-child(1) td { background-color: #f8e8e8; }
-    tr:nth-child(2) td { background-color: #e8f8e8; }
-    tr:nth-child(3) td { background-color: #e8e8f8; }
-    tr:nth-child(4) td { background-color: #fff0e6; }
-    tr:nth-child(5) td { background-color: #f0fff0; }
-    tr:nth-child(6) td { background-color: #e6f0ff; }
-    tr:nth-child(7) td { background-color: #f5f5dc; }
-    tr:nth-child(8) td { background-color: #ffe6f0; }
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 6px;
+      text-align: center;
+    }
 
-    button { margin-bottom: 20px; padding: 6px 12px; font-size: 16px; }
+    th {
+      background-color: #f4f4f4;
+    }
+
+    .server-name {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .server-label {
+      font-weight: bold;
+      font-size: 14px
+    }
+
+    .name-input,
+    .points-input {
+      width: 80px;
+      margin-top: 4px;
+    }
+
+    .endtime-container {
+      margin-bottom: 20px;
+    }
+
+    tr:nth-child(1) td {
+      background-color: #f8e8e8;
+    }
+
+    tr:nth-child(2) td {
+      background-color: #e8f8e8;
+    }
+
+    tr:nth-child(3) td {
+      background-color: #e8e8f8;
+    }
+
+    tr:nth-child(4) td {
+      background-color: #fff0e6;
+    }
+
+    tr:nth-child(5) td {
+      background-color: #f0fff0;
+    }
+
+    tr:nth-child(6) td {
+      background-color: #e6f0ff;
+    }
+
+    tr:nth-child(7) td {
+      background-color: #f5f5dc;
+    }
+
+    tr:nth-child(8) td {
+      background-color: #ffe6f0;
+    }
+
+    button {
+      margin-bottom: 20px;
+      padding: 6px 12px;
+      font-size: 16px;
+    }
 
     .chart-container {
       display: flex;
@@ -44,38 +102,42 @@
     }
   </style>
 </head>
-<body>
-<div id="header-placeholder"></div>
-<h1>Server Honor Points Calculator</h1>
-<div class="endtime-container">
-  <label><strong>End Time:</strong>
-    <input type="datetime-local" id="endTimeInput" onchange="calculatePoints()">
-  </label>
-</div>
-<button onclick="resetAll()">Reset All</button>
 
-<table id="honorTable">
-  <thead>
-    <tr>
-      <th>Server/Alliance</th>
-      <th>Expedition Outpost (10)</th>
-      <th>Expedition Base (30)</th>
-      <th>Arsenal (20)</th>
-      <th>Military Base (20)</th>
-      <th>Military Fortress (80)</th>
-      <th>Research Facility (50)</th>
-      <th>Eternal City (300)</th>
-      <th>Total HPM</th>
-      <th>Current Points</th>
-      <th>Projected Points</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
-<div class="chart-container">
-  <div class="chart-box"><canvas id="hpmChart"></canvas></div>
-  <div class="chart-box"><canvas id="projectionChart"></canvas></div>
-</div>
-<script src="elpoints.js"></script>
+<body>
+  <div id="header-placeholder"></div>
+  <div class="container">
+    <h1>Server Honor Points Calculator</h1>
+    <div class="endtime-container">
+      <label><strong>End Time:</strong>
+        <input type="datetime-local" id="endTimeInput" onchange="calculatePoints()">
+      </label>
+    </div>
+    <button onclick="resetAll()">Reset All</button>
+
+    <table id="honorTable">
+      <thead>
+        <tr>
+          <th>Server/Alliance</th>
+          <th>Expedition Outpost (10)</th>
+          <th>Expedition Base (30)</th>
+          <th>Arsenal (20)</th>
+          <th>Military Base (20)</th>
+          <th>Military Fortress (80)</th>
+          <th>Research Facility (50)</th>
+          <th>Eternal City (300)</th>
+          <th>Total HPM</th>
+          <th>Current Points</th>
+          <th>Projected Points</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="chart-container">
+      <div class="chart-box"><canvas id="hpmChart"></canvas></div>
+      <div class="chart-box"><canvas id="projectionChart"></canvas></div>
+    </div>
+  </div>
+  <script src="elpoints.js"></script>
 </body>
+
 </html>
