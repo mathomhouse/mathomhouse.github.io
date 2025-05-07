@@ -76,7 +76,7 @@
       <a href="gear.html" class="card-link">
         <div class="card">
           <div class="card-icon">
-            <img src="/images/shard-icon.png" alt="Shard Icon">
+            <img id= "ht-icon" src="/images/yellow-ht-icon.png" alt="HT Icon">
           </div>
           <h3>Gear Calculator</h3>
           <p>Compare the stats between two gear</p>
@@ -223,6 +223,32 @@ function shardCostCalcDiv_onClick(){
   //navigate to the correct page
   window.location.href = "exclusives.html";
 }
+  const htIcons = [
+    "/images/yellow-ht-icon.png",
+    "/images/red-ht-icon.png",
+    "/images/blue-ht-icon.png",
+    "/images/ball-ht-icon.png",
+    "/images/white-ht-icon.png",
+    "/images/pink-ht-icon.png"
+  ];
+
+  const iconElement = document.getElementById("ht-icon");
+  let currentIcon = 0;
+
+  setInterval(() => {
+    // Fade out
+    iconElement.style.opacity = 0;
+
+    setTimeout(() => {
+      // Change image while hidden
+      currentIcon = (currentIcon + 1) % htIcons.length;
+      iconElement.src = htIcons[currentIcon];
+
+      // Fade back in
+      iconElement.style.opacity = 1;
+    }, 500); // Matches CSS transition duration
+  }, 2500);
+
 </script>
 </body>
 </html>

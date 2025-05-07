@@ -294,6 +294,12 @@ button:hover {
   gap: 20px;
   padding: 0 20px;
 }
+.card-icon img {
+  width: 64px;
+  height: 64px;
+  transition: opacity 0.5s ease-in-out;
+}
+
 .card {
   background: var(--card-bg);
   padding: 20px;
