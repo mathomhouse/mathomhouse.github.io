@@ -209,18 +209,22 @@ document.querySelectorAll('.section').forEach(section => observer.observe(sectio
   let currentIcon = 0;
 
   setInterval(() => {
-    // Fade out
+    // Start fade-out
     iconElement.style.opacity = 0;
 
-    setTimeout(() => {
-      // Change image while hidden
+    // Wait for the fade-out to complete before changing the image
+    iconElement.addEventListener('transitionend', function handler() {
+      // Remove the event listener to prevent multiple triggers
+      iconElement.removeEventListener('transitionend', handler);
+
+      // Update the image source
       currentIcon = (currentIcon + 1) % htIcons.length;
       iconElement.src = htIcons[currentIcon];
 
-      // Fade back in
+      // Start fade-in
       iconElement.style.opacity = 1;
-    }, 500); // Matches CSS transition duration
-  }, 2500);
+    });
+  }, 2500); // Change icon every 2.5 seconds
 
 </script>
 </body>

@@ -298,7 +298,9 @@ button:hover {
   width: 64px;
   height: 64px;
   transition: opacity 0.5s ease-in-out;
+  opacity: 1;
 }
+
 
 .card {
   background: var(--card-bg);
