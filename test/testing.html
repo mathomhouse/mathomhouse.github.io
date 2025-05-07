@@ -13,168 +13,68 @@
 <body>
     <!-- Placeholder for the header -->
 <header id="header-placeholder"></header>
-    <div class="container">
-        <h1>Gems Calculator</h1>
-        <p>Input the number of each item in the appropriate text box. The totals will update as you go. <br> If you have a gem amount not listed, you can add it at the bottom.<br>
+<div class="container">
+        <h1>Equipment Calculator</h1>
+        <p>This calculator will tell you how many more grey materials you need, how long it will take to craft those, and when crafting would finish.<br>
+            This does not take any special events that give materials into account.<br><br>
+            Select the desired rarity of the equipment you are trying to build. Input the number of each color material you have. <br>
+            If you are crafting gold, check the checkbox if it is applicable.<br>
+            If you would like to include 25 grey materials a day from Sandtable Exercise, check the checkbox.<br>
             The Reset button will clear the page for you if you want to start over.</p>
 
-        <!-- Main container for the labels and inputs -->
+        <label for="colorDropdown">Desired Rarity:</label>
+        <select id="colorDropdown" style="width:150px;margin-right:20px;">
+            <option value="grey" selected>Grey</option>
+            <option value="green">Green</option>
+            <option value="blue">Blue</option>
+            <option value="purple">Purple</option>
+            <option value="gold">Gold</option>
+        </select>
+        <div id="checkbox-section">
+            <label class="equip-label">Are you dismantling a purple?</label>
+            <input type="checkbox" id="dismantlingCheckbox" style="width:20px;">
+        </div>
+        <div id="extra-grey-section">
+    <label class="equip-label">Include daily Sandtable rewards?</label>
+    <input type="checkbox" id="extraGreyCheckbox" style="width:20px;">
+        </div>
+
+
         <div class="table-container">
-        <table>
-            <tr>
-                <th>Gems</th>
-                <th>Amount</th>
-                <th>Totals</th>
-            </tr>
-            <tr>
-                <td><label for="opengems">Opened Gems:</label></td>
-                <td><input type="number" min="0" id="opengems" placeholder="0"></td>
-                <td><label id="openGemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="12960gems">12960 Gems:</label></td>
-                <td><input type="number" min="0" id="12960gems" placeholder="0"></td>
-                <td><label id="12960GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="5000gems">5000 Gems:</label></td>
-                <td><input type="number" min="0" id="5000gems" placeholder="0"></td>
-                <td><label id="5000GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="4000gems">4000 Gems:</label></td>
-                <td><input type="number" min="0" id="4000gems" placeholder="0"></td>
-                <td><label id="4000GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="3280gems">3280 Gems:</label></td>
-                <td><input type="number" min="0" id="3280gems" placeholder="0"></td>
-                <td><label id="3280GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="3000gems">3000 Gems:</label></td>
-                <td><input type="number" min="0" id="3000gems" placeholder="0"></td>
-                <td><label id="3000GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="2560gems">2560 Gems:</label></td>
-                <td><input type="number" min="0" id="2560gems" placeholder="0"></td>
-                <td><label id="2560GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="2000gems">2000 Gems:</label></td>
-                <td><input type="number" min="0" id="2000gems" placeholder="0"></td>
-                <td><label id="2000GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="1280gems">1280 Gems:</label></td>
-                <td><input type="number" min="0" id="1280gems" placeholder="0"></td>
-                <td><label id="1280GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="1200gems">1200 Gems:</label></td>
-                <td><input type="number" min="0" id="1200gems" placeholder="0"></td>
-                <td><label id="1200GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="1000gems">1000 Gems:</label></td>
-                <td><input type="number" min="0" id="1000gems" placeholder="0"></td>
-                <td><label id="1000GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="800gems">800 Gems:</label></td>
-                <td><input type="number" min="0" id="800gems" placeholder="0"></td>
-                <td><label id="800GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="600gems">600 Gems:</label></td>
-                <td><input type="number" min="0" id="600gems" placeholder="0"></td>
-                <td><label id="600GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="500gems">500 Gems:</label></td>
-                <td><input type="number" min="0" id="500gems" placeholder="0"></td>
-                <td><label id="500GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="400gems">400 Gems:</label></td>
-                <td><input type="number" min="0" id="400gems" placeholder="0"></td>
-                <td><label id="400GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="300gems">300 Gems:</label></td>
-                <td><input type="number" min="0" id="300gems" placeholder="0"></td>
-                <td><label id="300GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="240gems">240 Gems:</label></td>
-                <td><input type="number" min="0" id="240gems" placeholder="0"></td>
-                <td><label id="240GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="200gems">200 Gems:</label></td>
-                <td><input type="number" min="0" id="200gems" placeholder="0"></td>
-                <td><label id="200GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="150gems">150 Gems:</label></td>
-                <td><input type="number" min="0" id="150gems" placeholder="0"></td>
-                <td><label id="150GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="120gems">120 Gems:</label></td>
-                <td><input type="number" min="0" id="120gems" placeholder="0"></td>
-                <td><label id="120GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="100gems">100 Gems:</label></td>
-                <td><input type="number" min="0" id="100gems" placeholder="0"></td>
-                <td><label id="100GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="60gems">60 Gems:</label></td>
-                <td><input type="number" min="0" id="60gems" placeholder="0"></td>
-                <td><label id="60GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="50gems">50 Gems:</label></td>
-                <td><input type="number" min="0" id="50gems" placeholder="0"></td>
-                <td><label id="50GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="30gems">30 Gems:</label></td>
-                <td><input type="number" min="0" id="30gems" placeholder="0"></td>
-                <td><label id="30GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="20gems">20 Gems:</label></td>
-                <td><input type="number" min="0" id="20gems" placeholder="0"></td>
-                <td><label id="20GemsTotal"></td>
-            </tr>
-            <tr>
-                <td><label for="10gems">10 Gems:</label></td>
-                <td><input type="number" min="0" id="10gems" placeholder="0"></td>
-                <td><label id="10GemsTotal"></td>
-            </tr>
-
-            <tr id="customRowsPlaceholder"></tr>
-
-            <tr>
-                <td></td>
-                <td><label for="grandTotal" class="bold-text">Grand Total:</label></td>
-                <td><label id="grandTotal" class="bold-text"></label></td>
-            </tr>
-        </table>
-    </div>
-        <br>
-        <!-- Button to trigger calculation -->
-        <div class="calculate-btn">
-            <!-- <button onclick="calculateGems()">Calculate</button> -->
-            <button onclick="resetGems()">Reset</button>
+            <table>
+                <tr>
+                    <td><label for="greymats" class="equip-label">Grey Materials & Boxes:</label></td>
+                    <td><input type="number" min="0" id="greymats" placeholder="0"></td>
+                </tr>
+                <tr>
+                    <td><label for="greenmats" class="equip-label">Green Materials & Boxes:</label></td>
+                    <td><input type="number" min="0" id="greenmats" placeholder="0"></td>
+                </tr>
+                <tr>
+                    <td><label for="bluemats" class="equip-label">Blue Materials & Boxes:</label></td>
+                    <td><input type="number" min="0" id="bluemats" placeholder="0"></td>
+                </tr>
+                <tr>
+                    <td><label for="purplemats" class="equip-label">Purple Materials & Boxes:</label></td>
+                    <td><input type="number" min="0" id="purplemats" placeholder="0"></td>
+                </tr>
+                <tr>
+                    <td><label for="goldmats" class="equip-label">Gold Materials & Boxes:</label></td>
+                    <td><input type="number" min="0" id="goldmats" placeholder="0"></td>
+                </tr>
+            </table>
         </div>
         <br>
+        <div class="calculate-btn">
+            <button class="button-primary" onclick="calculatemats()">Calculate</button>
+            <button onclick="resetmats()">Reset</button>
+        </div>
+        <br>
+        <div id="result">
+            <!-- Result will appear here -->
+        </div>
     </div>
-    <script src="../scripts/gems.js"></script>
+    <script src="../scripts/equipment.js"></script>
 </body>
 
 </html>
