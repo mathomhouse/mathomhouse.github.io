@@ -6,44 +6,139 @@
   <title>Mathom House</title>
   <link rel="stylesheet" href="index2.css">
   <link rel="stylesheet" href="header2.css">
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 6px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+
+    .server-name {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .server-label {
+      font-weight: bold;
+      font-size: 14px
+    }
+
+    .name-input,
+    .points-input {
+      width: 80px;
+      margin-top: 4px;
+    }
+
+    .endtime-container {
+      margin-bottom: 20px;
+    }
+
+    tr:nth-child(1) td {
+      background-color: #f8e8e8;
+    }
+
+    tr:nth-child(2) td {
+      background-color: #e8f8e8;
+    }
+
+    tr:nth-child(3) td {
+      background-color: #e8e8f8;
+    }
+
+    tr:nth-child(4) td {
+      background-color: #fff0e6;
+    }
+
+    tr:nth-child(5) td {
+      background-color: #f0fff0;
+    }
+
+    tr:nth-child(6) td {
+      background-color: #e6f0ff;
+    }
+
+    tr:nth-child(7) td {
+      background-color: #f5f5dc;
+    }
+
+    tr:nth-child(8) td {
+      background-color: #ffe6f0;
+    }
+
+    button {
+      margin-bottom: 20px;
+      padding: 6px 12px;
+      font-size: 16px;
+    }
+
+    .chart-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+
+    .chart-box {
+      flex: 1 1 300px;
+      min-width: 300px;
+    }
+
+    canvas {
+      width: 100%;
+      height: auto;
+    }
+  </style>
   <script src="header2.js" defer></script>
 </head>
 
 
 <body>
-    <!-- Placeholder for the header -->
-<header id="header-placeholder"></header>
-    <div class="container">
-        <h1>Components Calculator</h1>
-        <p>This calculator will tell you how many level 1 and level 3 components you need to make the desired level
-            component.<br><br>
-            Select your desired level from the dropdown. If you have lower level components, add the number into the
-            boxes.<br>
-            The Reset button will clear the page for you if you want to start over.</p>
-
-        <!-- Dropdown -->
-        <label for="numberSelect">Select the desired level:</label>
-        <select id="numberSelect" onchange="generateTable()">
-            <!-- Options from 2 to 10 -->
-            <option value="">Select</option>
-            <option value="3">2</option>
-            <option value="9">3</option>
-            <option value="27">4</option>
-            <option value="81">5</option>
-            <option value="243">6</option>
-            <option value="729">7</option>
-            <option value="2187">8</option>
-            <option value="6561">9</option>
-            <option value="19683">10</option>
-        </select>
-
-        <!-- Placeholder for the generated table -->
-        <div id="tableContainer"></div>
-        <br>
-        <!-- Result Label -->
-        <div id="resultLabel"></div>
+  <div id="header-placeholder"></div>
+  <div class="container">
+    <h1>Server Honor Points Calculator</h1>
+    <div class="endtime-container">
+      <label><strong>End Time:</strong>
+        <input type="datetime-local" id="endTimeInput" onchange="calculatePoints()">
+      </label>
     </div>
-    <script src="../scripts/components.js"></script>
+    <button onclick="resetAll()">Reset All</button>
+
+    <table id="honorTable">
+      <thead>
+        <tr>
+          <th>Server/Alliance</th>
+          <th>Expedition Outpost (10)</th>
+          <th>Expedition Base (30)</th>
+          <th>Arsenal (20)</th>
+          <th>Military Base (20)</th>
+          <th>Military Fortress (80)</th>
+          <th>Research Facility (50)</th>
+          <th>Eternal City (300)</th>
+          <th>Total HPM</th>
+          <th>Current Points</th>
+          <th>Projected Points</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="chart-container">
+      <div class="chart-box"><canvas id="hpmChart"></canvas></div>
+      <div class="chart-box"><canvas id="projectionChart"></canvas></div>
+    </div>
+  </div>
+    <script src="../scripts/elpoints.js"></script>
 </body>
 
 </html>
