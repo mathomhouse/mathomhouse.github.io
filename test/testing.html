@@ -14,94 +14,162 @@
     <!-- Placeholder for the header -->
 <header id="header-placeholder"></header>
 <div class="container">
-    <h1>VIP Points Calculator</h1>
-    <p>
-    Input how many VIP points you have to see how approximately much you've spent <br>
-    and how far you are away from the next VIP level.<br><br> <span style="color: red;"><strong>Proceed at your own risk. You have been warned</strong></span> 
-    </p>
-    <label for="vipPoints">Enter VIP Points:</label>
-    <input type="number" id="vipPoints" placeholder="e.g., 10000" />
-    <br><br>
-    <button onclick="startCalculation()">Calculate</button>
-    <button class="reset" onclick="resetFields()">Reset</button><br><br>
-    <div id="result"></div>
+  <h1>Pet Comparison Calculator</h1>
+        <p>Find out what any pet's max stats will be depending on its potential.<br>
+            Use the dropdowns to select the species/rarity, main stat, and 3 sub stats.
+            <br>
+            Input the potential of the beasts you want to compare. 
+            <br>
+            The Reset button will clear all fields if you want to start over.
+            <br><br> Credit to Tex (s2864) for the data used to make this! <b><a href="./tzupgif.gif">Reference: Diminishing Returns</a></b>
+        </p>
+
+  <div class="gear-container">
+    <!-- Pet 1 -->
+    <div class="gear-box">
+      <h2 style="text-align: center;">Pet 1</h2>
+      <form>
+        <label>Species + Rarity:</label>
+        <select id="species1">
+          <option value="" disabled selected>Select option</option>
+          <option value="gold">Gold Bear</option>
+          <option value="purple">Purple Bear</option>
+          <option value="gold">Gold Eagle</option>
+          <option value="purple">Purple Eagle</option>
+          <option value="gold">Gold Deer</option>
+          <option value="purple">Purple Deer</option>
+          <option value="gold">Gold Ray</option>
+          <option value="purple">Purple Ray</option>
+        </select>
+
+        <label>Main Stat:</label>
+        <select id="mainStat1">
+          <option value="" disabled selected>Select option</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+        </select>
+
+        <label>Sub Stat 1:</label>
+        <select id="subStat1_1">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Sub Stat 2:</label>
+        <select id="subStat1_2">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Sub Stat 3:</label>
+        <select id="subStat1_3">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Potential:</label>
+        <input type="number" id="potential1" placeholder="e.g. 15000">
+      </form>
+    </div>
+
+    <!-- Pet 2 -->
+    <div class="gear-box">
+      <h2 style="text-align: center;">Pet 2</h2>
+      <form>
+        <label>Species + Rarity:</label>
+        <select id="species2">
+          <option value="" disabled selected>Select option</option>
+          <option value="gold">Gold Bear</option>
+          <option value="purple">Purple Bear</option>
+          <option value="gold">Gold Eagle</option>
+          <option value="purple">Purple Eagle</option>
+          <option value="gold">Gold Deer</option>
+          <option value="purple">Purple Deer</option>
+          <option value="gold">Gold Ray</option>
+          <option value="purple">Purple Ray</option>
+        </select>
+
+        <label>Main Stat:</label>
+        <select id="mainStat2">
+          <option value="" disabled selected>Select option</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+        </select>
+
+        <label>Sub Stat 1:</label>
+        <select id="subStat2_1">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Sub Stat 2:</label>
+        <select id="subStat2_2">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Sub Stat 3:</label>
+        <select id="subStat2_3">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Potential:</label>
+        <input type="number" id="potential2" placeholder="e.g. 15000">
+      </form>
+    </div>
+  </div>
+
+  <div class="calculate-btn">
+    <button onclick="calculate()">Compare</button>
+    <button onclick="resetForm()" style="background-color: #FF0000;">Reset</button>
 </div>
 
-<script>
-    const vipLevels = [
-        { level: 1, points: 6, amount: 1 },
-        { level: 2, points: 30, amount: 5 },
-        { level: 3, points: 100, amount: 16.67 },
-        { level: 4, points: 300, amount: 50 },
-        { level: 5, points: 500, amount: 86.67 },
-        { level: 6, points: 1000, amount: 166.70 },
-        { level: 7, points: 3000, amount: 500 },
-        { level: 8, points: 6000, amount: 1000 },
-        { level: 9, points: 10000, amount: 1667 },
-        { level: 10, points: 30000, amount: 5000 },
-        { level: 11, points: 50000, amount: 8667 },
-        { level: 12, points: 80000, amount: 13330 },
-        { level: 13, points: 120000, amount: 20000 },
-        { level: 14, points: 160000, amount: 26670 },
-        { level: 15, points: 200000, amount: 33670 },
-        { level: 16, points: 300000, amount: 50000 }
-    ];
-
-    function startCalculation() {
-        const vipPoints = parseFloat(document.getElementById('vipPoints').value);
-        if (isNaN(vipPoints) || vipPoints <= 0) {
-            alert('Please enter valid VIP points.');
-            return;
-        }
-        if (confirm("Are you sure you want to know?")) {
-            if (confirm("Are you REALLY sure? You might not like the answer...")) {
-                if (confirm("Okay, last chance! Think twice... still sure?")) {
-                    calculateSpent();
-                } else {
-                    alert("Phew, dodged a bullet there!");
-                }
-            } else {
-                alert("Good choice! Ignorance is bliss.");
-            }
-        } else {
-            alert("Maybe it's better not to know...");
-        }
-    }
-
-    function calculateSpent() {
-        const vipPoints = parseFloat(document.getElementById('vipPoints').value);
-        
-
-        // Calculate the money spent
-        let amountSpent = (vipPoints / 6).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 1 dollar = 6 points
-        let resultMessage = `You have spent approximately <b>$${amountSpent}</b>.`;
-
-        // Find the next VIP level
-        let nextLevel;
-        for (let i = 0; i < vipLevels.length; i++) {
-            if (vipPoints < vipLevels[i].points) {
-                nextLevel = vipLevels[i];
-                break;
-            }
-        }
-
-        // If there is a next VIP level, calculate points and money needed
-        if (nextLevel) {
-            let pointsNeeded = nextLevel.points - vipPoints;
-            let moneyNeeded = (pointsNeeded / 6).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            resultMessage += `<br>You need <b>${pointsNeeded}</b> more VIP points <b>($${moneyNeeded})</b> to reach VIP Level ${nextLevel.level}.`;
-        } else {
-            resultMessage += `<br>You are at the highest VIP level! Congratulations! You are a whale!<br><br> Click <b><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">here</a></b> to claim your prize! `;
-        }
-
-        document.getElementById('result').innerHTML = resultMessage;
-    }
-
-    function resetFields() {
-        document.getElementById('vipPoints').value = '';
-        document.getElementById('result').innerText = '';
-    }
-</script>
-
+  <div class="gear-container">
+    <div id="comparison-result1" class="gear-box" style="display:none">
+      <div id="result1"></div>
+    </div>
+     <div id="comparison-result2" class="gear-box" style="display:none">
+      <div id="result2"></div>
+    </div>
+  </div>
+    <script src="../scripts/pets.js"></script>
 </body>
+
 </html>
