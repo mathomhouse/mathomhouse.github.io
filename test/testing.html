@@ -14,167 +14,94 @@
     <!-- Placeholder for the header -->
 <header id="header-placeholder"></header>
 <div class="container">
-        <h1>HT Chip & Titan Gear Stat Comparison</h1>
-        <p>Input the stats of your HT chips or your Titan Gear and compare it with the one that you
-            currently have equipped <br>
-            to compare which one will be better suited for your needs!<br><br>
+    <h1>VIP Points Calculator</h1>
+    <p>
+    Input how many VIP points you have to see how approximately much you've spent <br>
+    and how far you are away from the next VIP level.<br><br> <span style="color: red;"><strong>Proceed at your own risk. You have been warned</strong></span> 
+    </p>
+    <label for="vipPoints">Enter VIP Points:</label>
+    <input type="number" id="vipPoints" placeholder="e.g., 10000" />
+    <br><br>
+    <button onclick="startCalculation()">Calculate</button>
+    <button class="reset" onclick="resetFields()">Reset</button><br><br>
+    <div id="result"></div>
+</div>
 
-            <b>DISCLAIMER</b>: The data used to determine ATK and HP multipliers are purely speculatory. It was
-            taken from <br>
-            a screenshot floating around which details the value of certain stats relative to the base offensive/defensive attributes. 
-            <br>Do not take these results as gospel. Test or ask experienced players. </p>
+<script>
+    const vipLevels = [
+        { level: 1, points: 6, amount: 1 },
+        { level: 2, points: 30, amount: 5 },
+        { level: 3, points: 100, amount: 16.67 },
+        { level: 4, points: 300, amount: 50 },
+        { level: 5, points: 500, amount: 86.67 },
+        { level: 6, points: 1000, amount: 166.70 },
+        { level: 7, points: 3000, amount: 500 },
+        { level: 8, points: 6000, amount: 1000 },
+        { level: 9, points: 10000, amount: 1667 },
+        { level: 10, points: 30000, amount: 5000 },
+        { level: 11, points: 50000, amount: 8667 },
+        { level: 12, points: 80000, amount: 13330 },
+        { level: 13, points: 120000, amount: 20000 },
+        { level: 14, points: 160000, amount: 26670 },
+        { level: 15, points: 200000, amount: 33670 },
+        { level: 16, points: 300000, amount: 50000 }
+    ];
 
+    function startCalculation() {
+        const vipPoints = parseFloat(document.getElementById('vipPoints').value);
+        if (isNaN(vipPoints) || vipPoints <= 0) {
+            alert('Please enter valid VIP points.');
+            return;
+        }
+        if (confirm("Are you sure you want to know?")) {
+            if (confirm("Are you REALLY sure? You might not like the answer...")) {
+                if (confirm("Okay, last chance! Think twice... still sure?")) {
+                    calculateSpent();
+                } else {
+                    alert("Phew, dodged a bullet there!");
+                }
+            } else {
+                alert("Good choice! Ignorance is bliss.");
+            }
+        } else {
+            alert("Maybe it's better not to know...");
+        }
+    }
 
-        <!-- Dropdown to select the type of calculator -->
-        <label for="calculator-type">Select Calculator:</label>
-        <select id="calculator-type" onchange="showCalculator()">
-            <option value="default">Select</option>
-            <option value="ht-chips">HT Chips</option>
-            <option value="titan-gear">Titan Gear</option>
-        </select>
+    function calculateSpent() {
+        const vipPoints = parseFloat(document.getElementById('vipPoints').value);
+        
 
-        <!-- Titan Gear calculator (initially hidden) -->
-        <div id="titan-gear-calculator" style="display: none;">
-            <h2>Titan Gear Comparison</h2>
-            <p> Note: This does not consider "Base Attributes" in the comparison, only "Random Attributes".
-            </p>
-            <div class="gear-container">
-                <div class="gear-box" id="gear1-box">
-                    <h2>Gear 1 Stats</h2>
-                    <form>
-                        <label for="gear1-defense">DEF (%):</label>
-                        <input type="number" id="gear1-defense" placeholder="0">
+        // Calculate the money spent
+        let amountSpent = (vipPoints / 6).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 1 dollar = 6 points
+        let resultMessage = `You have spent approximately <b>$${amountSpent}</b>.`;
 
-                        <label for="gear1-damage-increase">DMG Increase (%):</label>
-                        <input type="number" id="gear1-damage-increase" placeholder="0">
+        // Find the next VIP level
+        let nextLevel;
+        for (let i = 0; i < vipLevels.length; i++) {
+            if (vipPoints < vipLevels[i].points) {
+                nextLevel = vipLevels[i];
+                break;
+            }
+        }
 
-                        <label for="gear1-damage-decrease">DMG Decrease (%):</label>
-                        <input type="number" id="gear1-damage-decrease" placeholder="0">
+        // If there is a next VIP level, calculate points and money needed
+        if (nextLevel) {
+            let pointsNeeded = nextLevel.points - vipPoints;
+            let moneyNeeded = (pointsNeeded / 6).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            resultMessage += `<br>You need <b>${pointsNeeded}</b> more VIP points <b>($${moneyNeeded})</b> to reach VIP Level ${nextLevel.level}.`;
+        } else {
+            resultMessage += `<br>You are at the highest VIP level! Congratulations! You are a whale!<br><br> Click <b><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">here</a></b> to claim your prize! `;
+        }
 
-                        <label for="gear1-attack">ATK (%):</label>
-                        <input type="number" id="gear1-attack" placeholder="0">
+        document.getElementById('result').innerHTML = resultMessage;
+    }
 
-                        <label for="gear1-hp">HP (%):</label>
-                        <input type="number" id="gear1-hp" placeholder="0">
+    function resetFields() {
+        document.getElementById('vipPoints').value = '';
+        document.getElementById('result').innerText = '';
+    }
+</script>
 
-                    </form>
-                </div>
-                <div class="gear-box" id="gear2-box">
-                    <h2>Gear 2 Stats</h2>
-                    <form>
-                        <label for="gear2-defense">DEF (%):</label>
-                        <input type="number" id="gear2-defense" placeholder="0">
-
-                        <label for="gear2-damage-increase">DMG Increase (%):</label>
-                        <input type="number" id="gear2-damage-increase" placeholder="0">
-
-                        <label for="gear2-damage-decrease">DMG Decrease (%):</label>
-                        <input type="number" id="gear2-damage-decrease" placeholder="0">
-
-                        <label for="gear2-attack">ATK (%):</label>
-                        <input type="number" id="gear2-attack" placeholder="0">
-
-                        <label for="gear2-hp">HP (%):</label>
-                        <input type="number" id="gear2-hp" placeholder="0">
-
-                    </form>
-                </div>
-            </div>
-            <div class="button-container">
-                <button onclick="compareGear()">Compare</button>
-                <button onclick="resetValues()">Reset</button>
-            </div>
-            <div id="comparison-result">
-                <h2>Comparison Result</h2>
-                <p id="result"></p>
-            </div>
-        </div>
-
-        <!-- HT Chips calculator (initially visible) -->
-        <div id="ht-chips-calculator" style="display: none;">
-            <h2>HT Chips Comparison</h2>
-            <p> Please note: this calculator does NOT take ATK SPD into account. 
-            ATK SPD is not quantifiable, and is only<br>relevant if it is higher
-                than your opponent. This calculator also does NOT take set bonuses into account.<br>
-                Use your own judgement.
-                <br>
-
-                Add stats of the same type together (e.g. All units DMG increase and Navy DMG increase).
-                <br> Ignore those that are not your troop type. <br><br>
-
-            </p>
-            <div class="gear-container">
-                <div class="gear-box" id="ht-chips1-box">
-                    <h2>HT Chip 1 Stats</h2>
-                    <form>
-                        <label for="ht1-def">DEF (%):</label>
-                        <input type="number" id="ht1-def" placeholder="0">
-
-                        <label for="ht1-shield">Starting Shield (%):</label>
-                        <input type="number" id="ht1-shield" placeholder="0">
-
-                        <label for="ht1-dmg-increase">DMG Increase (%):</label>
-                        <input type="number" id="ht1-dmg-increase" placeholder="0">
-
-                        <label for="ht1-dmg-decrease">DMG Decrease (%):</label>
-                        <input type="number" id="ht1-dmg-decrease" placeholder="0">
-
-                        <label for="ht1-crit-dmg">Crit. DMG (%):</label>
-                        <input type="number" id="ht1-crit-dmg" placeholder="0">
-
-                        <label for="ht1-crit-rate">Crit. Rate (%):</label>
-                        <input type="number" id="ht1-crit-rate" placeholder="0">
-
-                        <label for="ht1-atk">ATK (%):</label>
-                        <input type="number" id="ht1-atk" placeholder="0">
-
-                        <label for="ht1-hp">HP (%):</label>
-                        <input type="number" id="ht1-hp" placeholder="0">
-                    </form>
-                </div>
-
-                <div class="gear-box" id="ht-chips2-box">
-                    <h2>HT Chip 2 Stats</h2>
-                    <form>
-                        <label for="ht2-def">DEF (%):</label>
-                        <input type="number" id="ht2-def" placeholder="0">
-
-                        <label for="ht2-shield">Starting Shield (%):</label>
-                        <input type="number" id="ht2-shield" placeholder="0">
-
-                        <label for="ht2-dmg-increase">DMG Increase (%):</label>
-                        <input type="number" id="ht2-dmg-increase" placeholder="0">
-
-                        <label for="ht2-dmg-decrease">DMG Decrease (%):</label>
-                        <input type="number" id="ht2-dmg-decrease" placeholder="0">
-
-                        <label for="ht2-crit-dmg">Crit. DMG (%):</label>
-                        <input type="number" id="ht2-crit-dmg" placeholder="0">
-
-                        <label for="ht2-crit-rate">Crit. Rate (%):</label>
-                        <input type="number" id="ht2-crit-rate" placeholder="0">
-
-                        <label for="ht2-atk">ATK (%):</label>
-                        <input type="number" id="ht2-atk" placeholder="0">
-
-                        <label for="ht2-hp">HP (%):</label>
-                        <input type="number" id="ht2-hp" placeholder="0">
-                    </form>
-                </div>
-            </div>
-
-            <div class="button-container">
-                <button onclick="compareHTChips()">Compare</button>
-                <button onclick="resetHTChips()">Reset</button>
-            </div>
-            <div id="ht-chips-result">
-                <h2>Comparison Result</h2>
-                <p id="ht-result"></p>
-            </div>
-        </div>
-
-    </div>
-    <script src="../scripts/gear.js"></script>
 </body>
-
 </html>
