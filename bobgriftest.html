@@ -5,18 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Titan Gear Selector</title>
   <link rel="stylesheet" href="test/index2.css">
-  <style>
-    input[type="number"],
-    select {
-      max-width: 800px;
-  </style>
 </head>
 <body>
 
   <div class="container">
     <h1>Titan Gear Selector</h1>
 
-    <label for="branch">Choose Branch:</label>
+    <label for="branch">Choose Branch:</label><br>
     <select id="branch" onchange="filterHeroesByRole()">
       <option value="">-- Select Branch --</option>
       <option value="Army">Army</option>
@@ -24,19 +19,19 @@
       <option value="Air Force">Air Force</option>
     </select>
     <br>
-    <label for="loadoutType">Choose Loadout Type:</label>
+    <label for="loadoutType">Choose Loadout Type:</label><br>
     <select id="loadoutType">
       <option value="Ideal">Ideal</option>
       <option value="Alternative">Alternative</option>
     </select>
     <br>
-    <label for="heroAttack">Attack Hero:</label>
+    <label for="heroAttack">Attack Hero:</label><br>
     <select id="heroAttack"></select>
     <br>
-    <label for="heroHP">HP Hero:</label>
+    <label for="heroHP">HP Hero:</label><br>
     <select id="heroHP"></select>
     <br>
-    <label for="heroIndestructible">Indestructible Hero:</label>
+    <label for="heroIndestructible">Indestructible Hero:</label><br>
     <select id="heroIndestructible"></select>
 
     <div class="calculate-btn">
