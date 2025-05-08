@@ -1,190 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mathom House</title>
-  <link rel="stylesheet" href="index2.css">
-  <link rel="stylesheet" href="header2.css">
-  <script src="header2.js" defer></script>
-  <style>
-    .gear-box form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      align-items: center;
-    }
-    .gear-box select {
-      max-width: none;
-      width: 100%;
-    }
-    .gear-box {
-      width: 350px;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Titan Gear Selector</title>
+  <link rel="stylesheet" href="test/index2.css">
 </head>
-
-
 <body>
-    <!-- Placeholder for the header -->
-<header id="header-placeholder"></header>
-<div class="container">
-  <h1>Pet Comparison Calculator</h1>
-        <p>Find out what any pet's max stats will be depending on its potential.<br>
-            Use the dropdowns to select the species/rarity, main stat, and 3 sub stats.
-            <br>
-            Input the potential of the beasts you want to compare. 
-            <br>
-            The Reset button will clear all fields if you want to start over.
-            <br><br> Credit to Tex (s2864) for the data used to make this! <b><a href="./tzupgif.gif">Reference: Diminishing Returns</a></b>
-        </p>
 
-  <div class="gear-container">
-    <!-- Pet 1 -->
-    <div class="gear-box">
-      <h2 style="text-align: center;">Pet 1</h2>
-      <form>
-        <label>Species + Rarity:</label>
-        <select id="species1">
-          <option value="" disabled selected>Select option</option>
-          <option value="gold">Gold Bear</option>
-          <option value="purple">Purple Bear</option>
-          <option value="gold">Gold Eagle</option>
-          <option value="purple">Purple Eagle</option>
-          <option value="gold">Gold Deer</option>
-          <option value="purple">Purple Deer</option>
-          <option value="gold">Gold Ray</option>
-          <option value="purple">Purple Ray</option>
-        </select>
-
-        <label>Main Stat:</label>
-        <select id="mainStat1">
-          <option value="" disabled selected>Select option</option>
-          <option value="DMGInc">Damage Increase</option>
-          <option value="DMGDec">Damage Decrease</option>
-          <option value="DEF">Defense</option>
-          <option value="ATK">Attack</option>
-          <option value="HP">HP</option>
-        </select>
-
-        <label>Sub Stat 1:</label>
-        <select id="subStat1_1">
-          <option value="" disabled selected>Select option</option>
-          <option value="Suppression">Suppression Defense Bonus</option>
-          <option value="DMGInc">Damage Increase</option>
-          <option value="DMGDec">Damage Decrease</option>
-          <option value="ATK">Attack</option>
-          <option value="HP">HP</option>
-          <option value="Elemental">Elemental</option>
-        </select>
-
-        <label>Sub Stat 2:</label>
-        <select id="subStat1_2">
-          <option value="" disabled selected>Select option</option>
-          <option value="Suppression">Suppression Defense Bonus</option>
-          <option value="DMGInc">Damage Increase</option>
-          <option value="DMGDec">Damage Decrease</option>
-          <option value="ATK">Attack</option>
-          <option value="HP">HP</option>
-          <option value="Elemental">Elemental</option>
-        </select>
-
-        <label>Sub Stat 3:</label>
-        <select id="subStat1_3">
-          <option value="" disabled selected>Select option</option>
-          <option value="Suppression">Suppression Defense Bonus</option>
-          <option value="DMGInc">Damage Increase</option>
-          <option value="DMGDec">Damage Decrease</option>
-          <option value="ATK">Attack</option>
-          <option value="HP">HP</option>
-          <option value="Elemental">Elemental</option>
-        </select>
-
-        <label>Potential:</label>
-        <input type="number" id="potential1" placeholder="e.g. 15000">
-      </form>
-    </div>
-
-    <!-- Pet 2 -->
-    <div class="gear-box">
-      <h2 style="text-align: center;">Pet 2</h2>
-      <form>
-        <label>Species + Rarity:</label>
-        <select id="species2">
-          <option value="" disabled selected>Select option</option>
-          <option value="gold">Gold Bear</option>
-          <option value="purple">Purple Bear</option>
-          <option value="gold">Gold Eagle</option>
-          <option value="purple">Purple Eagle</option>
-          <option value="gold">Gold Deer</option>
-          <option value="purple">Purple Deer</option>
-          <option value="gold">Gold Ray</option>
-          <option value="purple">Purple Ray</option>
-        </select>
-
-        <label>Main Stat:</label>
-        <select id="mainStat2">
-          <option value="" disabled selected>Select option</option>
-          <option value="DMGInc">Damage Increase</option>
-          <option value="DMGDec">Damage Decrease</option>
-          <option value="DEF">Defense</option>
-          <option value="ATK">Attack</option>
-          <option value="HP">HP</option>
-        </select>
-
-        <label>Sub Stat 1:</label>
-        <select id="subStat2_1">
-          <option value="" disabled selected>Select option</option>
-          <option value="Suppression">Suppression Defense Bonus</option>
-          <option value="DMGInc">Damage Increase</option>
-          <option value="DMGDec">Damage Decrease</option>
-          <option value="ATK">Attack</option>
-          <option value="HP">HP</option>
-          <option value="Elemental">Elemental</option>
-        </select>
-
-        <label>Sub Stat 2:</label>
-        <select id="subStat2_2">
-          <option value="" disabled selected>Select option</option>
-          <option value="Suppression">Suppression Defense Bonus</option>
-          <option value="DMGInc">Damage Increase</option>
-          <option value="DMGDec">Damage Decrease</option>
-          <option value="ATK">Attack</option>
-          <option value="HP">HP</option>
-          <option value="Elemental">Elemental</option>
-        </select>
-
-        <label>Sub Stat 3:</label>
-        <select id="subStat2_3">
-          <option value="" disabled selected>Select option</option>
-          <option value="Suppression">Suppression Defense Bonus</option>
-          <option value="DMGInc">Damage Increase</option>
-          <option value="DMGDec">Damage Decrease</option>
-          <option value="ATK">Attack</option>
-          <option value="HP">HP</option>
-          <option value="Elemental">Elemental</option>
-        </select>
-
-        <label>Potential:</label>
-        <input type="number" id="potential2" placeholder="e.g. 15000">
-      </form>
-    </div>
-  </div>
-
-  <div class="calculate-btn">
-    <button onclick="calculate()">Compare</button>
-    <button onclick="resetForm()" style="background-color: #FF0000;">Reset</button>
+  <div class="form-group">
+  <label for="branch">Choose Branch:</label>
+  <select id="branch" onchange="filterHeroesByRole()">
+    <option value="">-- Select Branch --</option>
+    <option value="Army">Army</option>
+    <option value="Navy">Navy</option>
+    <option value="Air Force">Air Force</option>
+  </select>
 </div>
 
-  <div class="gear-container">
-    <div id="comparison-result1" class="gear-box" style="display:none">
-      <div id="result1"></div>
-    </div>
-     <div id="comparison-result2" class="gear-box" style="display:none">
-      <div id="result2"></div>
-    </div>
-  </div>
-    <script src="../scripts/pets.js"></script>
-</body>
+<div class="form-group">
+  <label for="loadoutType">Choose Loadout Type:</label>
+  <select id="loadoutType">
+    <option value="Ideal">Ideal</option>
+    <option value="Alternative">Alternative</option>
+  </select>
+</div>
 
+<div class="form-group">
+  <label for="heroAttack">Attack Hero:</label>
+  <select id="heroAttack"></select>
+</div>
+
+<div class="form-group">
+  <label for="heroHP">HP Hero:</label>
+  <select id="heroHP"></select>
+</div>
+
+<div class="form-group">
+  <label for="heroIndestructible">Indestructible Hero:</label>
+  <select id="heroIndestructible"></select>
+</div>
+
+    <div class="calculate-btn">
+      <button onclick="showGear()">Show Optimal Gear</button>
+    </div>
+
+    <div id="results" class="gear-container"></div>
+  </div>
+
+  <script>
+    let titanGearData = [];
+
+    fetch('titan-gear-data.json')
+      .then(response => response.json())
+      .then(data => {
+        titanGearData = data;
+      });
+
+    function filterHeroesByRole() {
+      const branch = document.getElementById('branch').value;
+
+      const attackHeroes = titanGearData
+        .filter(h => (h.Branch === branch || h.Branch === "Universal") && h.Subcategory === "Attack")
+        .map(h => h.Hero);
+
+      const hpHeroes = titanGearData
+        .filter(h => (h.Branch === branch || h.Branch === "Universal") && h.Subcategory === "HP")
+        .map(h => h.Hero);
+
+      const indestructibleHeroes = titanGearData
+        .filter(h => (h.Branch === branch || h.Branch === "Universal") && h.Subcategory === "Indestructible")
+        .map(h => h.Hero);
+
+      populateDropdown('heroAttack', attackHeroes);
+      populateDropdown('heroHP', hpHeroes);
+      populateDropdown('heroIndestructible', indestructibleHeroes);
+    }
+
+    function populateDropdown(dropdownId, heroList) {
+      const select = document.getElementById(dropdownId);
+      select.innerHTML = "";
+
+      heroList.forEach(hero => {
+        const option = document.createElement("option");
+        option.value = hero;
+        option.textContent = hero;
+        select.appendChild(option);
+      });
+    }
+
+    function showGear() {
+      const loadoutType = document.getElementById('loadoutType').value;
+      const selections = [
+        document.getElementById('heroAttack').value.trim(),
+        document.getElementById('heroHP').value.trim(),
+        document.getElementById('heroIndestructible').value.trim()
+      ];
+
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '';
+
+      selections.forEach(heroName => {
+        const hero = titanGearData.find(item => item.Hero.trim() === heroName);
+        const gear = hero?.[loadoutType];
+
+        if (gear) {
+          const heroBox = document.createElement('div');
+          heroBox.className = 'gear-box';
+          heroBox.innerHTML = `
+            <h2>${hero.Hero} <span style="font-size: 0.7em;">(${loadoutType})</span></h2>
+            <p><strong>Gun:</strong> ${gear.Gun}</p>
+            <p><strong>Chest:</strong> ${gear.Chest}</p>
+            <p><strong>Optical:</strong> ${gear.Optical}</p>
+            <p><strong>Headset:</strong> ${gear.Headset}</p>
+            <p><strong>Arms:</strong> ${gear.Arms}</p>
+            <p><strong>Boots:</strong> ${gear.Boots}</p>
+          `;
+          resultsDiv.appendChild(heroBox);
+        } else {
+          resultsDiv.innerHTML += `<p>No ${loadoutType.toLowerCase()} gear found for ${heroName}</p>`;
+        }
+      });
+    }
+  </script>
+
+</body>
 </html>
