@@ -87,86 +87,28 @@
     }
 
     @media (max-width: 768px) {
-  .store-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    padding: 10px;
-  }
-
-  .store-tile {
-    padding: 6px;
-    font-size: 0.75rem;
-  }
-
-  .store-tile h3 {
-    font-size: 0.95rem;
-  }
-
-  .slider-row {
-    flex-direction: row;
-    gap: 6px;
-  }
-
-  .slider-row button {
-    padding: 2px 6px;
-    font-size: 12px;
-  }
-
-  .store-tile button {
-    padding: 5px 10px;
-    font-size: 13px;
-  }
-
-  .cart-button {
-    font-size: 13px;
-    padding: 6px 12px;
-    border-radius: 20px;
-    width: auto;
-    right: 12px;
-  }
-
-  .cart-panel {
-    width: 100%;
-  }
-
-  .cart-line {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-
-  .cart-line input {
-    width: 100%;
-  }
-}
-
       .store-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        padding: 10px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 12px;
       }
 
       .store-tile {
         padding: 8px;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
       }
 
       .store-tile h3 {
         font-size: 1rem;
       }
 
-      .slider-row {
-        flex-direction: row;
-        gap: 8px;
-      }
-
       .slider-row button {
-        padding: 4px 10px;
+        padding: 4px 8px;
         font-size: 14px;
       }
 
       .store-tile button {
-        padding: 6px 12px;
+        padding: 6px 10px;
         font-size: 14px;
       }
 
@@ -190,6 +132,12 @@
 
       .cart-line input {
         width: 100%;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .store-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
