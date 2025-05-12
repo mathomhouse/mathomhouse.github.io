@@ -8,142 +8,191 @@
   <link rel="stylesheet" href="header2.css">
   <script src="header2.js" defer></script>
   <style>
+    .store-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .store-tile {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 16px;
+      background: var(--card-bg);
+      text-align: center;
+      transition: opacity 0.3s;
+    }
+
+    .store-tile.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .cart-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      padding: 10px 16px;
+      font-size: 16px;
+      border-radius: 50px;
+    }
+
+    .cart-panel {
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 320px;
+      background: var(--card-bg);
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 101;
+    }
+
+    .cart-panel.open {
+      transform: translateX(0);
+    }
+
+    .slider-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .slider-row input[type="range"] {
+      flex-grow: 1;
+    }
+
+    .cart-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .cart-line input {
+      width: 50px;
+    }
+
+    .remove-btn {
+      color: red;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+  .store-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .store-tile {
+    padding: 6px;
+    font-size: 0.75rem;
+  }
+
+  .store-tile h3 {
+    font-size: 0.95rem;
+  }
+
+  .slider-row {
+    flex-direction: row;
+    gap: 6px;
+  }
+
+  .slider-row button {
+    padding: 2px 6px;
+    font-size: 12px;
+  }
+
+  .store-tile button {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+
+  .cart-button {
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    width: auto;
+    right: 12px;
+  }
+
+  .cart-panel {
+    width: 100%;
+  }
+
+  .cart-line {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .cart-line input {
+    width: 100%;
+  }
+}
+
       .store-grid {
-        display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        padding: 20px;
+        gap: 10px;
+        padding: 10px;
       }
 
       .store-tile {
-        border: 2px solid #ccc;
-        border-radius: 10px;
-        padding: 16px;
-        background: var(--card-bg);
-        text-align: center;
-        transition: opacity 0.3s;
+        padding: 8px;
+        font-size: 0.8rem;
       }
 
-      .store-tile.disabled {
-        opacity: 0.4;
-        pointer-events: none;
-      }
-
-      .cart-button {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 100;
-        padding: 10px 16px;
-        font-size: 16px;
-        border-radius: 50px;
-      }
-
-      .cart-panel {
-        position: fixed;
-        right: 0;
-        top: 0;
-        height: 100%;
-        width: 320px;
-        background: var(--card-bg);
-        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
-        padding: 20px;
-        transform: translateX(100%);
-        transition: transform 0.3s ease-in-out;
-        z-index: 101;
-      }
-
-      .cart-panel.open {
-        transform: translateX(0);
+      .store-tile h3 {
+        font-size: 1rem;
       }
 
       .slider-row {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 10px;
+        flex-direction: row;
+        gap: 8px;
       }
 
-      .slider-row input[type="range"] {
-        flex-grow: 1;
+      .slider-row button {
+        padding: 4px 10px;
+        font-size: 14px;
+      }
+
+      .store-tile button {
+        padding: 6px 12px;
+        font-size: 14px;
+      }
+
+      .cart-button {
+        font-size: 14px;
+        padding: 8px 14px;
+        border-radius: 30px;
+        width: auto;
+        right: 15px;
+      }
+
+      .cart-panel {
+        width: 100%;
       }
 
       .cart-line {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 5px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
       }
 
       .cart-line input {
-        width: 50px;
+        width: 100%;
       }
-
-      .remove-btn {
-        color: red;
-        cursor: pointer;
-        font-weight: bold;
-      }
-
-      @media (max-width: 768px) {
-        html, body {
-          overflow-x: hidden;
-        }
-
-        .store-grid {
-          grid-template-columns: repeat(3, 1fr);
-          gap: 10px;
-          padding: 10px;
-        }
-
-        .store-tile {
-          padding: 8px;
-          font-size: 0.8rem;
-        }
-
-        .store-tile h3 {
-          font-size: 1rem;
-        }
-
-        .slider-row {
-          flex-direction: row;
-          gap: 8px;
-        }
-
-        .slider-row button {
-          padding: 4px 10px;
-          font-size: 14px;
-        }
-
-        .store-tile button {
-          padding: 6px 12px;
-          font-size: 14px;
-        }
-
-        .cart-button {
-          font-size: 14px;
-          padding: 8px 14px;
-          border-radius: 30px;
-          width: auto;
-          right: 15px;
-        }
-
-        .cart-panel {
-          width: 100%;
-        }
-
-        .cart-line {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 4px;
-        }
-
-        .cart-line input {
-          width: 100%;
-        }
-      }
-    </style>
+    }
+  </style>
 </head>
 <body>
   <header id="header-placeholder"></header>
