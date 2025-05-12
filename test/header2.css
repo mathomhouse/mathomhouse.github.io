@@ -46,8 +46,15 @@ header {
 }
 
 nav {
-  display: flex;
-  position: relative;
+  display: none;
+  flex-direction: column;
+  background-color: #444;
+  position: absolute;
+  top: 100%; /* Start right under the hamburger button */
+  left: 0;    /* Align left to the hamburger button */
+  width: auto;
+  min-width: 150px; /* Minimum width to fit the options */
+  border: 1px solid #333;
 }
 
 nav a {
