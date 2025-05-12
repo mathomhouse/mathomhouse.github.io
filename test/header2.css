@@ -59,10 +59,13 @@ nav {
 
 nav a {
   margin: 0 15px;
+  padding: 10px;
   text-decoration: none;
   color: white;
   font-weight: bold;
   transition: color 0.3s;
+  border-bottom: 1px solid #555;
+  white-space: nowrap; /* Prevent text from wrapping */
 }
 
 nav a.active, nav a:hover {
