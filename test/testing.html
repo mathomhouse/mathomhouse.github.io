@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mathom House</title>
+  <title>Game Store Simulator</title>
   <link rel="stylesheet" href="index2.css">
   <link rel="stylesheet" href="header2.css">
-  <script src="header2.js" defer></script>
   <style>
     .store-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
       padding: 20px;
     }
@@ -47,6 +46,18 @@
     .cart-panel.open {
       transform: translateX(0);
     }
+
+    .slider-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .slider-row input[type="range"] {
+      flex-grow: 1;
+    }
   </style>
 </head>
 <body>
@@ -81,7 +92,7 @@
       {name: "The Labyrinth", price: 120, maxQty: 1, currency: "tokens"},
       {name: "Roaring Chariot", price: 20, maxQty: 1, currency: "tokens"},
       {name: "Scaramanga Shard", price: 10, maxQty: 2, currency: "tokens"},
-      {name: "Silence Shard", price: 10, maxQty: 2, currency: "tokens"},      
+      {name: "Silence Shard", price: 10, maxQty: 2, currency: "tokens"},
       {name: "Orange Blueprint Choice Pack", price: 20, maxQty: 1, currency: "tokens"},
       {name: "Top-tier Catalyst", price: 6, maxQty: 5, currency: "tokens"},
       {name: "Stabilizer", price: 10, maxQty: 2, currency: "tokens"},
@@ -111,7 +122,8 @@
       {name: "Titan Gear Random Material Box x5", price: 1500, maxQty: 10, currency: "signets"},
       {name: "Legendary Beast Shard x10", price: 2000, maxQty: 10, currency: "signets"},
       {name: "Ultra Enigma Crystal (Whole)", price: 300, maxQty: 50, currency: "signets"}
-];
+    ];
+
     const storeContainer = document.getElementById('storeContainer');
     const cartPanel = document.getElementById('cartPanel');
     const cartItemsContainer = document.getElementById('cartItems');
@@ -124,11 +136,12 @@
         div.innerHTML = `
           <h3>${item.name}</h3>
           <p>Price: ${item.price} ${item.currency}</p>
-          <input type="range" min="0" max="${item.maxQty}" value="0" id="slider-${idx}" onchange="syncInputs(${idx})">
-          <br>
-          <button onclick="changeQty(${idx}, -1)">-</button>
+          <div class="slider-row">
+            <button onclick="changeQty(${idx}, -1)">-</button>
+            <input type="range" min="0" max="${item.maxQty}" value="0" id="slider-${idx}" onchange="syncInputs(${idx})">
+            <button onclick="changeQty(${idx}, 1)">+</button>
+          </div>
           <input type="number" min="0" max="${item.maxQty}" value="0" id="qty-${idx}" onchange="syncSlider(${idx})">
-          <button onclick="changeQty(${idx}, 1)">+</button>
           <br><br>
           <button onclick="addToCart(${idx})">Add to Cart</button>
         `;
