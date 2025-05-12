@@ -15,7 +15,7 @@ function initializeHeader(){
     // Theme toggle setup
     const toggleButton = document.getElementById('themeToggle');
     const savedTheme = localStorage.getItem('theme');
-    console.WriteLine("saved theme" + savedTheme);
+    
     if (savedTheme === 'dark') {
       document.body.dataset.theme = 'dark';
       toggleButton.textContent = '☀️';
