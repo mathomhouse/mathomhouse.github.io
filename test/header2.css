@@ -63,7 +63,6 @@ nav a.active, nav a:hover {
 }
 
 .menu-toggle {
-  display: none;
   flex-direction: column;
   cursor: pointer;
 }
