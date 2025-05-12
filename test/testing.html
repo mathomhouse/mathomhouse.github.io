@@ -7,44 +7,197 @@
   <link rel="stylesheet" href="index2.css">
   <link rel="stylesheet" href="header2.css">
   <script src="header2.js" defer></script>
+  <style>
+    .store-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .store-tile {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 16px;
+      background: var(--card-bg);
+      text-align: center;
+    }
+
+    .cart-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+    }
+
+    .cart-panel {
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 320px;
+      background: var(--card-bg);
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 101;
+    }
+
+    .cart-panel.open {
+      transform: translateX(0);
+    }
+  </style>
 </head>
-
-<body style="display:block; padding-left:0px; padding-top: 0px;">
+<body>
   <header id="header-placeholder"></header>
-  <br>
-  <div class="container">
-    <div style="display:flex; gap:20px">
-      <div id="store" style="padding-left: 10px;">
-        <!-- Items will be dynamically added here -->
-      </div>
+  <h1 style="text-align:center">Game Store</h1>
+  <div class="store-grid" id="storeContainer"></div>
 
-      <div class="cart">
-    <h2>Shopping Cart</h2>
+  <button class="cart-button" onclick="toggleCart()">🛒 Cart</button>
+
+  <div class="cart-panel" id="cartPanel">
+    <h2>Cart</h2>
     <div id="cartItems"></div>
-    <p id="totalCost"></p>
-
-    <div class="contributionPointsInput">
-      <label for="ancientTokens">Your Ancient Tokens:</label>
-      <input type="number" id="ancientTokens" placeholder="10" />
-      <br>
-      <label for="eternalSignets">Your Eternal Signets:</label>
-      <input type="number" id="eternalSignets" placeholder="10000" />
-      </div>
-      <br>
-      <div class="contributionPointsInput">
-      <label>Maximum Attainable Tokens:</label>
-      <label>83</label>
-       <br>
-       <label>Maximum Attainable Signets:</label>
-       <label style="font-size: 60px;">🤷🏼‍♂️</label>
-    </div>
-    <button id="globalUpdateCartButton" class="add-to-cart" onclick="updateCartGlobal()">Update Cart</button>
-
-    <div id="message" class="message"></div>
-</div>
-    </div>
+    <hr>
+    <label>Tokens: <input type="number" id="availableTokens" value="0"></label><br>
+    <label>Signets: <input type="number" id="availableSignets" value="0"></label>
+    <p id="cartTotal"></p>
+    <button onclick="updateCart()">Update Cart</button>
+    <button onclick="clearCart()">Clear Cart</button>
+    <button onclick="toggleCart()">Close</button>
   </div>
-  <script src="/elstoredesktop.js"></script>
-</body>
 
+  <script>
+    const items = [
+      {name: "Fading Wings", price: 25, maxQty: 1, currency: "tokens"},
+      {name: "Ashen Bones", price: 25, maxQty: 1, currency: "tokens"},
+      {name: "Undead Skydrake", price: 20, maxQty: 1, currency: "tokens"},
+      {name: "Stone Circle", price: 16, maxQty: 1, currency: "tokens"},
+      {name: "Golden Glaze", price: 12, maxQty: 2, currency: "tokens"},
+      {name: "The Rock", price: 20, maxQty: 1, currency: "tokens"},
+      {name: "Pantheon", price: 50, maxQty: 1, currency: "tokens"},
+      {name: "Power Fist", price: 20, maxQty: 1, currency: "tokens"},
+      {name: "The Labyrinth", price: 120, maxQty: 1, currency: "tokens"},
+      {name: "Roaring Chariot", price: 20, maxQty: 1, currency: "tokens"},
+      {name: "Scaramanga Shard", price: 10, maxQty: 2, currency: "tokens"},
+      {name: "Silence Shard", price: 10, maxQty: 2, currency: "tokens"},      
+      {name: "Orange Blueprint Choice Pack", price: 20, maxQty: 1, currency: "tokens"},
+      {name: "Top-tier Catalyst", price: 6, maxQty: 5, currency: "tokens"},
+      {name: "Stabilizer", price: 10, maxQty: 2, currency: "tokens"},
+      {name: "Enigma Repeater x2", price: 1, maxQty: 15, currency: "tokens"},
+      {name: "Legendary Beast Shard x10", price: 1, maxQty: 30, currency: "tokens"},
+      {name: "Royal Dragon Boat", price: 5000, maxQty: 1, currency: "signets"},
+      {name: "Golden Decoration Choice Chest", price: 60000, maxQty: 1, currency: "signets"},
+      {name: "Large VIT Capsules", price: 500, maxQty: 30, currency: "signets"},
+      {name: "1,000 Odinium", price: 800, maxQty: 30, currency: "signets"},
+      {name: "Unit +1 Choice Chest", price: 320, maxQty: 100, currency: "signets"},
+      {name: "Orange Universal Shard", price: 1400, maxQty: 30, currency: "signets"},
+      {name: "Universal Exclusive Skill Shard", price: 80, maxQty: 200, currency: "signets"},
+      {name: "Rare Skill Chest", price: 250, maxQty: 50, currency: "signets"},
+      {name: "Lv. 3 CPNT Chest", price: 50, maxQty: 150, currency: "signets"},
+      {name: "Lv. 3 CPNT Chest (NEW)", price: 50, maxQty: 150, currency: "signets"},
+      {name: "Class Talent Speed-up (1h)", price: 100, maxQty: 80, currency: "signets"},
+      {name: "Class Item Chests", price: 650, maxQty: 20, currency: "signets"},
+      {name: "Random Purple Equip Blueprint", price: 3200, maxQty: 2, currency: "signets"},
+      {name: "Expert HT Chip Chest", price: 5000, maxQty: 2, currency: "signets"},
+      {name: "Amazing HT Chip Chest", price: 1000, maxQty: 10, currency: "signets"},
+      {name: "HT Chip Chest", price: 500, maxQty: 30, currency: "signets"},
+      {name: "Formation Manual Choice Chest (New)", price: 1500, maxQty: 10, currency: "signets"},
+      {name: "Hologram Choice Chest", price: 800, maxQty: 20, currency: "signets"},
+      {name: "Resonator Choice Chest", price: 3000, maxQty: 5, currency: "signets"},
+      {name: "Top-tier Catalyst", price: 12000, maxQty: 2, currency: "signets"},
+      {name: "Advanced-tier Catalyst", price: 3000, maxQty: 5, currency: "signets"},
+      {name: "Titan Gear Random Material Box x5", price: 1500, maxQty: 10, currency: "signets"},
+      {name: "Legendary Beast Shard x10", price: 2000, maxQty: 10, currency: "signets"},
+      {name: "Ultra Enigma Crystal (Whole)", price: 300, maxQty: 50, currency: "signets"}
+
+    const storeContainer = document.getElementById('storeContainer');
+    const cartPanel = document.getElementById('cartPanel');
+    const cartItemsContainer = document.getElementById('cartItems');
+    const cart = {};
+
+    function createStore() {
+      items.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = 'store-tile';
+        div.innerHTML = `
+          <h3>${item.name}</h3>
+          <p>Price: ${item.price} ${item.currency}</p>
+          <input type="range" min="0" max="${item.maxQty}" value="0" id="slider-${idx}" onchange="syncInputs(${idx})">
+          <br>
+          <button onclick="changeQty(${idx}, -1)">-</button>
+          <input type="number" min="0" max="${item.maxQty}" value="0" id="qty-${idx}" onchange="syncSlider(${idx})">
+          <button onclick="changeQty(${idx}, 1)">+</button>
+          <br><br>
+          <button onclick="addToCart(${idx})">Add to Cart</button>
+        `;
+        storeContainer.appendChild(div);
+      });
+    }
+
+    function syncInputs(idx) {
+      document.getElementById(`qty-${idx}`).value = document.getElementById(`slider-${idx}`).value;
+    }
+
+    function syncSlider(idx) {
+      const val = Math.min(items[idx].maxQty, Math.max(0, parseInt(document.getElementById(`qty-${idx}`).value)));
+      document.getElementById(`qty-${idx}`).value = val;
+      document.getElementById(`slider-${idx}`).value = val;
+    }
+
+    function changeQty(idx, delta) {
+      const input = document.getElementById(`qty-${idx}`);
+      let val = parseInt(input.value || 0) + delta;
+      val = Math.max(0, Math.min(val, items[idx].maxQty));
+      input.value = val;
+      document.getElementById(`slider-${idx}`).value = val;
+    }
+
+    function addToCart(idx) {
+      const qty = parseInt(document.getElementById(`qty-${idx}`).value);
+      if (qty > 0) {
+        cart[idx] = qty;
+        updateCart();
+      }
+    }
+
+    function updateCart() {
+      cartItemsContainer.innerHTML = '';
+      let totalTokens = 0;
+      let totalSignets = 0;
+
+      for (const idx in cart) {
+        const item = items[idx];
+        const qty = cart[idx];
+        const cost = item.price * qty;
+        const line = document.createElement('p');
+        line.textContent = `${item.name} x${qty} = ${cost} ${item.currency}`;
+        cartItemsContainer.appendChild(line);
+
+        if (item.currency === 'tokens') totalTokens += cost;
+        else totalSignets += cost;
+      }
+
+      const tokensAvailable = parseInt(document.getElementById('availableTokens').value);
+      const signetsAvailable = parseInt(document.getElementById('availableSignets').value);
+
+      const remainingTokens = tokensAvailable - totalTokens;
+      const remainingSignets = signetsAvailable - totalSignets;
+
+      document.getElementById('cartTotal').textContent = `Total: ${totalTokens} tokens (${remainingTokens} remaining)\nTotal: ${totalSignets} signets (${remainingSignets} remaining)`;
+    }
+
+    function clearCart() {
+      for (const key in cart) delete cart[key];
+      updateCart();
+    }
+
+    function toggleCart() {
+      cartPanel.classList.toggle('open');
+    }
+
+    createStore();
+  </script>
+</body>
 </html>
