@@ -7,6 +7,13 @@
   <link rel="stylesheet" href="index2.css">
   <link rel="stylesheet" href="header2.css">
   <script src="header2.js" defer></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Store Simulator</title>
+  <link rel="stylesheet" href="index2.css">
   <style>
     .store-grid {
       display: grid;
@@ -81,6 +88,42 @@
       color: red;
       cursor: pointer;
       font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .store-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        padding: 10px;
+      }
+
+      .store-tile {
+        padding: 10px;
+        font-size: 0.85rem;
+      }
+
+      .store-tile h3 {
+        font-size: 1rem;
+      }
+
+      .slider-row {
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .cart-panel {
+        width: 100%;
+      }
+
+      .cart-line {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+
+      .cart-line input {
+        width: 100%;
+      }
     }
   </style>
 </head>
