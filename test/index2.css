@@ -363,6 +363,12 @@ button:hover {
 /*      EL Store Components    */
 /* =========================== */
 
+.container {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
 #store {
   flex: 1;
   display: flex;
@@ -392,12 +398,12 @@ button:hover {
 
 .quantity-control {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 5px;
   margin-top: auto;
   margin-bottom: 10px;
+  flex-wrap: nowrap; /* fixes buttons stacking */
 }
 
 .quantity-control button {
@@ -409,12 +415,10 @@ button:hover {
   cursor: pointer;
   transition: background-color var(--transition-speed);
   font-size: 1em;
-  flex: 0 0 auto;
 }
 
 .quantity-control input[type="range"] {
   width: 100px;
-  flex: 1 1 100%;
 }
 
 .quantity-control input[type="number"] {
@@ -425,7 +429,7 @@ button:hover {
 }
 
 button.add-to-cart {
-  margin-top: auto;
+  margin-top: 10px;
   padding: 8px 12px;
   background-color: var(--accent-color);
   color: #fff;
@@ -433,4 +437,82 @@ button.add-to-cart {
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: background-color var(--transition-speed);
+}
+
+/* Cart Styling */
+.cart {
+  position: sticky;
+  top: 20px;
+  width: 300px;
+  margin-left: 20px;
+  padding: 20px;
+  background-color: var(--card-bg);
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cart h2 {
+  margin-top: 0;
+  color: var(--accent-color);
+}
+
+#totalCost {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #16a085;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 1fr 60px 100px;
+  gap: 10px;
+  align-items: center;
+  padding: 8px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.cart-item input {
+  width: 30px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+}
+
+.cart-item button {
+  padding: 5px 10px;
+  background-color: #e67e22;
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+}
+
+.cart-item button:hover {
+  background-color: #d35400;
+}
+
+.contributionPointsInput {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.contributionPointsInput input {
+  width: 60px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+}
+
+.message {
+  margin-top: 20px;
+  font-weight: 600;
+  color: #e74c3c;
 }
