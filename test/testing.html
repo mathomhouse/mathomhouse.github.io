@@ -21,6 +21,12 @@
       padding: 16px;
       background: var(--card-bg);
       text-align: center;
+      transition: opacity 0.3s;
+    }
+
+    .store-tile.disabled {
+      opacity: 0.4;
+      pointer-events: none;
     }
 
     .cart-button {
@@ -58,6 +64,23 @@
 
     .slider-row input[type="range"] {
       flex-grow: 1;
+    }
+
+    .cart-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .cart-line input {
+      width: 50px;
+    }
+
+    .remove-btn {
+      color: red;
+      cursor: pointer;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -131,12 +154,17 @@
     const cart = {};
 
     function createStore() {
+      storeContainer.innerHTML = '';
       items.forEach((item, idx) => {
         const div = document.createElement('div');
         div.className = 'store-tile';
+        div.id = `tile-${idx}`;
+        const currentQty = cart[idx] || 0;
+        if (currentQty >= item.maxQty) div.classList.add('disabled');
         div.innerHTML = `
           <h3>${item.name}</h3>
           <p>Price: ${item.price} ${item.currency}</p>
+          <p>Max Qty: ${item.maxQty}</p>
           <div class="slider-row">
             <button onclick="changeQty(${idx}, -1)">-</button>
             <input type="range" min="0" max="${item.maxQty}" value="0" id="slider-${idx}" onchange="syncInputs(${idx})">
@@ -171,8 +199,9 @@
     function addToCart(idx) {
       const qty = parseInt(document.getElementById(`qty-${idx}`).value);
       if (qty > 0) {
-        cart[idx] = qty;
+        cart[idx] = (cart[idx] || 0) + qty;
         updateCart();
+        createStore();
       }
     }
 
@@ -185,8 +214,15 @@
         const item = items[idx];
         const qty = cart[idx];
         const cost = item.price * qty;
-        const line = document.createElement('p');
-        line.textContent = `${item.name} x${qty} = ${cost} ${item.currency}`;
+
+        const line = document.createElement('div');
+        line.className = 'cart-line';
+        line.innerHTML = `
+          <span>${item.name}</span>
+          <input type="number" min="0" max="${item.maxQty}" value="${qty}" onchange="editCart(${idx}, this.value)">
+          <span>${cost} ${item.currency}</span>
+          <span class="remove-btn" onclick="removeFromCart(${idx})">×</span>
+        `;
         cartItemsContainer.appendChild(line);
 
         if (item.currency === 'tokens') totalTokens += cost;
@@ -200,6 +236,19 @@
       const remainingSignets = signetsAvailable - totalSignets;
 
       document.getElementById('cartTotal').textContent = `Total: ${totalTokens} tokens (${remainingTokens} remaining)\nTotal: ${totalSignets} signets (${remainingSignets} remaining)`;
+      createStore();
+    }
+
+    function editCart(idx, value) {
+      const qty = Math.max(0, Math.min(parseInt(value) || 0, items[idx].maxQty));
+      if (qty === 0) delete cart[idx];
+      else cart[idx] = qty;
+      updateCart();
+    }
+
+    function removeFromCart(idx) {
+      delete cart[idx];
+      updateCart();
     }
 
     function clearCart() {
