@@ -28,18 +28,6 @@ function initializeHeader(){
       toggleButton.textContent = isDark ? '🌓' : '☀️';
     });
 
-
-    const hamburger = document.getElementById("menu-toggle");
-    const dropdown =  document.getElementById("nav");
-
-    function toggleDropdown() {
-      const rect = hamburger.getBoundingClientRect();
-      dropdown.style.top = rect.bottom + "px";
-      dropdown.style.left = rect.left + "px";
-      dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
-    }
-    hamburger.onclick = toggleDropdown;
-
     // Hide dropdown when clicking outside of it
     document.addEventListener("click", function(event) {
       if (!dropdown.contains(event.target) && !hamburger.contains(event.target)) {
@@ -55,6 +43,15 @@ function initializeHeader(){
         nav.classList.toggle('active');
       });
     }
+}
+
+function toggleDropdown() {
+  //const hamburger = document.getElementById("hamburger");
+  const dropdown =  document.getElementById("nav");
+  const rect = hamburger.getBoundingClientRect();
+  dropdown.style.top = rect.bottom + "px";
+  dropdown.style.left = rect.left + "px";
+  dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
 }
 
 document.addEventListener("DOMContentLoaded", loadHeader);
