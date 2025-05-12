@@ -278,8 +278,8 @@
         line.innerHTML = `
           <span>${item.name}</span>
           <input type="number" min="0" max="${item.maxQty}" value="${qty}" onchange="editCart(${idx}, this.value)">
-          <span>${cost} ${item.currency}</span>
-          <span class="remove-btn" onclick="removeFromCart(${idx})">×</span>
+          <span><div>${cost} ${item.currency}</div>
+          <div class="remove-btn" onclick="removeFromCart(${idx})">×</div></span>
         `;
         cartItemsContainer.appendChild(line);
 
