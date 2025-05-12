@@ -12,6 +12,8 @@ function loadHeader(){
 
 function initializeHeader(){
     // Now that the header exists, wire up the buttons and behavior
+    const hamburger = document.getElementById("hamburger");
+    const dropdown =  document.getElementById("nav");
     // Theme toggle setup
     const toggleButton = document.getElementById('themeToggle');
     const savedTheme = localStorage.getItem('theme');
@@ -46,7 +48,7 @@ function initializeHeader(){
 }
 
 function toggleDropdown() {
-  //const hamburger = document.getElementById("hamburger");
+  const hamburger = document.getElementById("hamburger");
   const dropdown =  document.getElementById("nav");
   const rect = hamburger.getBoundingClientRect();
   dropdown.style.top = rect.bottom + "px";
