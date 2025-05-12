@@ -5,6 +5,7 @@ function loadHeader(){
     // Inject header HTML
     const placeholder = document.getElementById('header-placeholder');
     placeholder.innerHTML = html; 
+    initializeHeader();
   })
   .catch(err => console.error('Header load error:', err));
 }
