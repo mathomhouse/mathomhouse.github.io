@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="index2.css">
   <link rel="stylesheet" href="header2.css">
   <script src="header2.js" defer></script>
-  <style>
+  <style >
     .store-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -51,6 +51,7 @@
       transform: translateX(100%);
       transition: transform 0.3s ease-in-out;
       z-index: 101;
+      overflow-y: auto;
     }
 
     .cart-panel.open {
@@ -78,21 +79,21 @@
       padding: 6px 0;
     }
 
-    .cart-line .item-name {
+    .item-name {
       flex: 2;
     }
 
-    .cart-line .item-qty {
+    .item-qty {
       width: 50px;
     }
 
-    .cart-line .item-remove {
+    .item-remove {
       color: red;
       cursor: pointer;
       font-weight: bold;
     }
 
-    .cart-line .item-cost {
+    .item-cost {
       flex: 1;
       text-align: right;
     }
@@ -277,10 +278,10 @@
         const line = document.createElement('div');
         line.className = 'cart-line';
         line.innerHTML = `
-          <span>${item.name}</span>
-          <input type="number" min="0" max="${item.maxQty}" value="${qty}" onchange="editCart(${idx}, this.value)">
-          <span><div>${cost} ${item.currency}</div>
-          <div class="remove-btn" onclick="removeFromCart(${idx})">×</div></span>
+          <span class="item-name">${item.name}</span>
+          <input class="item-qty" type="number" min="0" max="${item.maxQty}" value="${qty}" onchange="editCart(${idx}, this.value)">
+          <span class="item-remove" onclick="removeFromCart(${idx})">×</span>
+          <span class="item-cost">${cost} ${item.currency}</span>
         `;
         cartItemsContainer.appendChild(line);
 
