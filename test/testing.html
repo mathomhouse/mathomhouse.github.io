@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="header2.css">
   <script src="header2.js" defer></script>
   <style >
+    input[type="number"], select {
+      max-width: 100px;
+    }
     .store-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -91,6 +94,7 @@
       color: red;
       cursor: pointer;
       font-weight: bold;
+      font-size: 30px;
     }
 
     .item-cost {
@@ -155,8 +159,8 @@
     <h2>Cart</h2>
     <div id="cartItems"></div>
     <hr>
-    <label>Tokens: <input type="number" id="availableTokens" value="0"></label><br>
-    <label>Signets: <input type="number" id="availableSignets" value="0"></label>
+    <label>Your Tokens: <input type="number" id="availableTokens" value="0"></label><br>
+    <label>Your Signets: <input type="number" id="availableSignets" value="0"></label>
     <p id="cartTotal"></p>
     <button onclick="updateCart()">Update Cart</button>
     <button onclick="clearCart()">Clear Cart</button>
@@ -295,7 +299,7 @@
       const remainingTokens = tokensAvailable - totalTokens;
       const remainingSignets = signetsAvailable - totalSignets;
 
-      document.getElementById('cartTotal').textContent = `Total: ${totalTokens} tokens (${remainingTokens} remaining)\nTotal: ${totalSignets} signets (${remainingSignets} remaining)`;
+      document.getElementById('cartTotal').textContent = `Total: ${totalTokens} tokens (${remainingTokens} remaining)<br>Total: ${totalSignets} signets (${remainingSignets} remaining)`;
       createStore();
     }
 
