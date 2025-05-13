@@ -14,10 +14,11 @@ function initializeHeader(){
     // Now that the header exists, wire up the buttons and behavior
     const hamburger = document.getElementById("hamburger");
     const dropdown =  document.getElementById("nav");
+
     // Theme toggle setup
     const toggleButton = document.getElementById('themeToggle');
     const savedTheme = localStorage.getItem('theme');
-    
+
     if (savedTheme === 'dark') {
       document.body.dataset.theme = 'dark';
       toggleButton.textContent = '☀️';
@@ -34,6 +35,8 @@ function initializeHeader(){
     document.addEventListener("click", function(event) {
       if (!dropdown.contains(event.target) && !hamburger.contains(event.target)) {
           dropdown.style.display = "none";
+          // Close any open submenus
+          document.querySelectorAll('.submenu-container.open').forEach(el => el.classList.remove('open'));
       }
     });
 
@@ -45,6 +48,21 @@ function initializeHeader(){
         nav.classList.toggle('active');
       });
     }
+
+    // === Submenu support ===
+    document.querySelectorAll('.submenu-container > a').forEach(trigger => {
+      trigger.addEventListener("click", function (e) {
+        e.preventDefault();
+        const container = this.closest('.submenu-container');
+
+        // Close all other open submenus
+        document.querySelectorAll('.submenu-container.open').forEach(open => {
+          if (open !== container) open.classList.remove('open');
+        });
+
+        container.classList.toggle("open");
+      });
+    });
 }
 
 function toggleDropdown() {

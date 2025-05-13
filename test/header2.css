@@ -50,10 +50,10 @@ nav {
   flex-direction: column;
   background-color: #444;
   position: absolute;
-  top: 100%; /* Start right under the hamburger button */
-  left: 0;    /* Align left to the hamburger button */
+  top: 100%;
+  left: 0;
   width: auto;
-  min-width: 150px; /* Minimum width to fit the options */
+  min-width: 150px;
   border: 1px solid #333;
 }
 
@@ -65,7 +65,7 @@ nav a {
   font-weight: bold;
   transition: color 0.3s;
   border-bottom: 1px solid #555;
-  white-space: nowrap; /* Prevent text from wrapping */
+  white-space: nowrap;
 }
 
 nav a.active, nav a:hover {
@@ -93,6 +93,31 @@ nav a.active, nav a:hover {
 
 .theme-toggle:hover {
   transform: rotate(20deg);
+}
+
+/* Submenu styling */
+.submenu-container {
+  position: relative;
+}
+
+.submenu {
+  display: none;
+  flex-direction: column;
+  background-color: #555;
+  position: relative;
+  left: 10px;
+  margin-top: 5px;
+  border-left: 2px solid var(--accent-color);
+  border-radius: 4px;
+}
+
+.submenu a {
+  padding-left: 20px;
+  border: none;
+}
+
+.submenu-container.open .submenu {
+  display: flex;
 }
 
 /* Mobile */
@@ -131,10 +156,7 @@ nav a.active, nav a:hover {
   }
 }
 
-/* =========================== */
-/*    DARK MODE TABLE FIXES    */
-/* =========================== */
-
+/* Dark Mode Table Fixes */
 body[data-theme="dark"] table,
 body[data-theme="dark"] td,
 body[data-theme="dark"] th {
@@ -148,13 +170,4 @@ body[data-theme="dark"] tr:nth-child(even) {
 
 html {
   scroll-behavior: smooth;
-}
-
-.theme-toggle {
-  cursor: pointer;
-  font-size: 18px;
-  transition: transform 0.3s;
-}
-.theme-toggle:hover {
-  transform: rotate(20deg);
 }
