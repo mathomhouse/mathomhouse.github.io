@@ -299,7 +299,7 @@
       const remainingTokens = tokensAvailable - totalTokens;
       const remainingSignets = signetsAvailable - totalSignets;
 
-      document.getElementById('cartTotal').textContent = `Total: ${totalTokens} tokens (${remainingTokens} remaining)<br>Total: ${totalSignets} signets (${remainingSignets} remaining)`;
+      document.getElementById('cartTotal').innerHTML = `Total: ${totalTokens} tokens (${remainingTokens} remaining)<br>Total: ${totalSignets} signets (${remainingSignets} remaining)`;
       createStore();
     }
 
