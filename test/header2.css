@@ -36,6 +36,8 @@ header {
 .logo a {
   color: white;
   text-decoration: none; /* optional, removes underline */
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .logo a:hover {
