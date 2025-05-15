@@ -249,34 +249,77 @@ document.querySelectorAll('.section').forEach(section => observer.observe(sectio
   function openFeedbackModal() {
   document.getElementById('feedback-modal').classList.remove('hidden');
   document.getElementById('modal-backdrop').classList.remove('hidden');
+}
+
+function closeFeedbackModal() {
+  document.getElementById('feedback-modal').classList.add('hidden');
+  document.getElementById('modal-backdrop').classList.add('hidden');
+  document.getElementById('feedback-confirmation').classList.add('hidden');
+}
+
+function submitModalFeedback() {
+  const type = document.getElementById('feedback-type').value;
+  const feedback = document.getElementById('modal-feedback-input').value.trim();
+  const discord = document.getElementById('discord-name').value.trim();
+
+  if (!feedback) {
+    alert("Please enter your feedback.");
+    return;
   }
-  function closeFeedbackModal() {
-    document.getElementById('feedback-modal').classList.add('hidden');
-    document.getElementById('modal-backdrop').classList.add('hidden');
-  }
-  function submitModalFeedback() {
-    const input = document.getElementById('modal-feedback-input').value.trim();
-    if (!input) {
-      alert("Please enter your feedback.");
-      return;
-    }
-    alert("Thanks for your feedback!");
-    document.getElementById('modal-feedback-input').value = '';
+
+  // This is where you'll eventually call fetch() to Google Form
+  console.log("Submitting:", { type, feedback, discord });
+
+  // Reset form
+  document.getElementById('modal-feedback-input').value = '';
+  document.getElementById('discord-name').value = '';
+  document.getElementById('char-count').textContent = '0';
+
+  // Show confirmation
+  document.getElementById('feedback-confirmation').classList.remove('hidden');
+
+  setTimeout(() => {
     closeFeedbackModal();
-  }
+  }, 3000);
+}
+
+// Character counter
+document.getElementById('modal-feedback-input').addEventListener('input', function () {
+  document.getElementById('char-count').textContent = this.value.length;
+});
+
 
 
 </script>
 <div id="feedback-modal" class="modal hidden">
   <div class="modal-content">
     <h2>Send Feedback</h2>
-    <textarea id="modal-feedback-input" placeholder="Your feedback..." rows="5"></textarea>
+
+    <label for="feedback-type">Type of Feedback:</label>
+    <select id="feedback-type">
+      <option value="General">General</option>
+      <option value="Bug Report">Bug Report</option>
+      <option value="Feature Request">Feature Request</option>
+      <option value="Design/UI">Design/UI</option>
+    </select>
+
+    <label for="modal-feedback-input">Your Feedback:</label>
+    <textarea id="modal-feedback-input" placeholder="Let us know what you're thinking..." rows="5" maxlength="500"></textarea>
+    <small><span id="char-count">0</span>/500</small>
+
+    <label for="discord-name">Discord Username (optional):</label>
+    <input type="text" id="discord-name" placeholder="e.g., KimH#1234" />
+
     <div class="modal-buttons">
       <button onclick="submitModalFeedback()">Submit</button>
       <button onclick="closeFeedbackModal()">Cancel</button>
     </div>
+
+    <div id="feedback-confirmation" class="confirmation-message hidden">✅ Feedback sent! Thank you!</div>
   </div>
 </div>
+<div id="modal-backdrop" class="modal-backdrop hidden" onclick="closeFeedbackModal()"></div>
+
 <div id="modal-backdrop" class="modal-backdrop hidden" onclick="closeFeedbackModal()"></div>
 
 </body>

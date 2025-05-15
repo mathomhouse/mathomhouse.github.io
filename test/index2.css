@@ -400,3 +400,28 @@ button:hover {
 .hidden {
   display: none;
 }
+.modal-content label {
+  display: block;
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.modal-content select,
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  box-sizing: border-box;
+}
+
+.confirmation-message {
+  margin-top: 15px;
+  font-weight: bold;
+  color: green;
+  font-size: 1rem;
+}
