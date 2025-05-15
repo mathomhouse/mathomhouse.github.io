@@ -267,21 +267,30 @@ function submitModalFeedback() {
     return;
   }
 
-  // This is where you'll eventually call fetch() to Google Form
-  console.log("Submitting:", { type, feedback, discord });
+  const formURL = 'https://docs.google.com/forms/d/e/1FAIpQLSerJUAkcskPE5sDyrMarZoskzm6wpN2HvHzPeKxjnFmPZHddg/formResponse';
 
-  // Reset form
+  const formData = new FormData();
+  formData.append('entry.1593678335', type);     // Type of Feedback
+  formData.append('entry.486773277', feedback);  // Feedback Message
+  formData.append('entry.1545987824', discord);  // Discord Username
+
+  fetch(formURL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: formData
+  });
+
+  // Clear the form and show confirmation
   document.getElementById('modal-feedback-input').value = '';
   document.getElementById('discord-name').value = '';
   document.getElementById('char-count').textContent = '0';
-
-  // Show confirmation
   document.getElementById('feedback-confirmation').classList.remove('hidden');
 
   setTimeout(() => {
     closeFeedbackModal();
   }, 3000);
 }
+
 
 // Character counter
 document.getElementById('modal-feedback-input').addEventListener('input', function () {
