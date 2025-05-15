@@ -261,14 +261,25 @@ function submitModalFeedback() {
   const type = document.getElementById('feedback-type').value;
   const feedback = document.getElementById('modal-feedback-input').value.trim();
   const discord = document.getElementById('discord-name').value.trim();
+  const pageURL = window.location.href;
 
   if (!feedback) {
     alert("Please enter your feedback.");
     return;
   }
 
-  const formURL = 'https://docs.google.com/forms/d/e/1FAIpQLSerJUAkcskPE5sDyrMarZoskzm6wpN2HvHzPeKxjnFmPZHddg/formResponse';
+  // 🕒 Local time (Pacific Time)
+  const localTime = new Date().toLocaleString('en-US', {
+    timeZone: 'America/Los_Angeles',
+    dateStyle: 'medium',
+    timeStyle: 'short'
+  });
 
+  // 🌐 User's browser language
+  const userLang = navigator.language || navigator.userLanguage;
+
+  // Submit to Google Form
+  const formURL = 'https://docs.google.com/forms/d/e/1FAIpQLSerJUAkcskPE5sDyrMarZoskzm6wpN2HvHzPeKxjnFmPZHddg/formResponse';
   const formData = new FormData();
   formData.append('entry.1593678335', type);     // Type of Feedback
   formData.append('entry.486773277', feedback);  // Feedback Message
@@ -280,16 +291,46 @@ function submitModalFeedback() {
     body: formData
   });
 
-  // Clear the form and show confirmation
+  // Submit to Discord via embed
+  const discordWebhookUrl = 'https://discord.com/api/webhooks/1372702749145436160/T2Up9M6X6ZkgAU10Yw5zFTR6XBDiSs7cU33So9McJZp7SP504koGAIbQ7APYS9jx9TEN';
+  const discordPayload = {
+    embeds: [{
+      title: "📬 New Feedback Submitted",
+      color: 3447003,
+      fields: [
+        { name: "🗂️ Type", value: type, inline: true },
+        { name: "👤 Discord", value: discord || "N/A", inline: true },
+        { name: "📝 Message", value: feedback },
+        { name: "📍 Page", value: pageURL },
+        { name: "🌐 Language", value: userLang, inline: true },
+        { name: "🕒 Local Time (PST)", value: localTime, inline: true }
+      ],
+      timestamp: new Date().toISOString()
+    }]
+  };
+
+  fetch(discordWebhookUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(discordPayload)
+  });
+
+  // Reset form
   document.getElementById('modal-feedback-input').value = '';
   document.getElementById('discord-name').value = '';
   document.getElementById('char-count').textContent = '0';
-  document.getElementById('feedback-confirmation').classList.remove('hidden');
 
+  // Show toast and close modal
+  showToast("✅ Feedback submitted!");
   setTimeout(() => {
     closeFeedbackModal();
   }, 3000);
 }
+
+
+
 
 
 // Character counter
@@ -297,7 +338,12 @@ document.getElementById('modal-feedback-input').addEventListener('input', functi
   document.getElementById('char-count').textContent = this.value.length;
 });
 
-
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
 
 </script>
 <div id="feedback-modal" class="modal hidden">
@@ -330,6 +376,6 @@ document.getElementById('modal-feedback-input').addEventListener('input', functi
 <div id="modal-backdrop" class="modal-backdrop hidden" onclick="closeFeedbackModal()"></div>
 
 <div id="modal-backdrop" class="modal-backdrop hidden" onclick="closeFeedbackModal()"></div>
-
+<div id="toast" class="toast">✅ Feedback submitted!</div>
 </body>
 </html>
