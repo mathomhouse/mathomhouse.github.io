@@ -165,7 +165,7 @@
   </div>
 </section>     
 <section id="feedback" class="section">
-  <h2 class="section-title">Feedback</h2>
+  <h2 class="section-title">Feedback / Support</h2>
   <div class="cards-grid">
     <a href="#" class="card-link" onclick="openFeedbackModal(); return false;">
       <div class="card">
@@ -176,6 +176,16 @@
         <p>Found a bug? Got an idea? Let us know what you'd like to see!</p>
       </div>
     </a>
+    <a href="#" class="card-link" onclick="openSupportModal(); return false;">
+  <div class="card">
+    <div class="card-icon">
+      <img src="/images/coffee-icon.png" alt="Coffee Icon" />
+    </div>
+    <h3>Buy Me a Coffee</h3>
+    <p>If this site has helped you, consider supporting it with a coffee!</p>
+  </div>
+</a>
+
   </div>
 </section>
 
@@ -344,6 +354,15 @@ function showToast(message) {
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 3000);
 }
+function openSupportModal() {
+  document.getElementById('support-modal').classList.remove('hidden');
+  document.getElementById('support-backdrop').classList.remove('hidden');
+}
+
+function closeSupportModal() {
+  document.getElementById('support-modal').classList.add('hidden');
+  document.getElementById('support-backdrop').classList.add('hidden');
+}
 
 </script>
 <div id="feedback-modal" class="modal hidden">
@@ -363,7 +382,7 @@ function showToast(message) {
     <small><span id="char-count">0</span>/500</small>
 
     <label for="discord-name">Discord Username (optional):</label>
-    <input type="text" id="discord-name" placeholder="e.g., KimH#1234" />
+    <input type="text" id="discord-name" placeholder="e.g., .gikey" />
 
     <div class="modal-buttons">
       <button onclick="submitModalFeedback()">Submit</button>
@@ -377,5 +396,17 @@ function showToast(message) {
 
 <div id="modal-backdrop" class="modal-backdrop hidden" onclick="closeFeedbackModal()"></div>
 <div id="toast" class="toast">✅ Feedback submitted!</div>
+<div id="support-modal" class="modal hidden">
+  <div class="modal-content">
+    <h2>☕ Support This Site</h2>
+    <p>If you enjoy using these tools, you can help keep them free by buying me a coffee!</p>
+    <a href="https://www.buymeacoffee.com/gikey" target="_blank" rel="noopener" class="coffee-btn">Buy Me a Coffee</a>
+    <div class="modal-buttons">
+      <button onclick="closeSupportModal()">Close</button>
+    </div>
+  </div>
+</div>
+<div id="support-backdrop" class="modal-backdrop hidden" onclick="closeSupportModal()"></div>
+
 </body>
 </html>
