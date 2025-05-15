@@ -164,6 +164,20 @@
     </a>
   </div>
 </section>     
+<section id="feedback" class="section">
+  <h2 class="section-title">Feedback</h2>
+  <div class="cards-grid">
+    <a href="#" class="card-link" onclick="openFeedbackModal(); return false;">
+      <div class="card">
+        <div class="card-icon">
+          <img src="/images/feedback-icon.png" alt="Feedback Icon">
+        </div>
+        <h3>Submit Feedback</h3>
+        <p>Found a bug? Got an idea? Let us know what you'd like to see!</p>
+      </div>
+    </a>
+  </div>
+</section>
 
 <button id="backToTop" onclick="scrollToTop()">↑</button>
 
@@ -232,7 +246,38 @@ document.querySelectorAll('.section').forEach(section => observer.observe(sectio
       iconElement.style.opacity = 1;
     });
   }, 5000); // Change icon every 2.5 seconds
+  function openFeedbackModal() {
+  document.getElementById('feedback-modal').classList.remove('hidden');
+  document.getElementById('modal-backdrop').classList.remove('hidden');
+  }
+  function closeFeedbackModal() {
+    document.getElementById('feedback-modal').classList.add('hidden');
+    document.getElementById('modal-backdrop').classList.add('hidden');
+  }
+  function submitModalFeedback() {
+    const input = document.getElementById('modal-feedback-input').value.trim();
+    if (!input) {
+      alert("Please enter your feedback.");
+      return;
+    }
+    alert("Thanks for your feedback!");
+    document.getElementById('modal-feedback-input').value = '';
+    closeFeedbackModal();
+  }
+
 
 </script>
+<div id="feedback-modal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Send Feedback</h2>
+    <textarea id="modal-feedback-input" placeholder="Your feedback..." rows="5"></textarea>
+    <div class="modal-buttons">
+      <button onclick="submitModalFeedback()">Submit</button>
+      <button onclick="closeFeedbackModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+<div id="modal-backdrop" class="modal-backdrop hidden" onclick="closeFeedbackModal()"></div>
+
 </body>
 </html>

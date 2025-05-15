@@ -358,3 +358,45 @@ button:hover {
   border: 2px solid #ccc;
   border-radius: 6px;
 }
+.modal {
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--card-bg);
+  border: 2px solid #ccc;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+}
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  resize: vertical;
+}
+.modal-buttons {
+  margin-top: 15px;
+}
+.modal-buttons button {
+  margin: 0 10px;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 9998;
+}
+.hidden {
+  display: none;
+}
