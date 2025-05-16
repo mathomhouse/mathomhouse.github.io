@@ -66,43 +66,12 @@ function initializeHeader(){
 }
 
 function toggleDropdown() {
-  const nav = document.getElementById("nav");
-  nav.classList.toggle("active");
+  const hamburger = document.getElementById("hamburger");
+  const dropdown =  document.getElementById("nav");
+  const rect = hamburger.getBoundingClientRect();
+  dropdown.style.top = rect.bottom + "px";
+  dropdown.style.left = rect.left + "px";
+  dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
 }
 
-function toggleSubmenu(event) {
-  event.preventDefault();
-  const clicked = event.target.closest(".submenu-container");
-  document.querySelectorAll('.submenu-container').forEach(container => {
-    if (container !== clicked) container.classList.remove('open');
-  });
-  clicked.classList.toggle("open");
-}
-
-// Dark mode toggle
-document.addEventListener('DOMContentLoaded', function () {
-  const toggleButton = document.getElementById('themeToggle');
-  const savedTheme = localStorage.getItem('theme');
-
-  if (savedTheme === 'dark') {
-    document.body.dataset.theme = 'dark';
-    toggleButton.textContent = '☀️';
-  }
-
-  toggleButton.addEventListener('click', () => {
-    const isDark = document.body.dataset.theme === 'dark';
-    document.body.dataset.theme = isDark ? '' : 'dark';
-    localStorage.setItem('theme', isDark ? 'light' : 'dark');
-    toggleButton.textContent = isDark ? '🌙' : '☀️';
-  });
-});
-
-// Close menu when clicking outside
-document.addEventListener('click', function (event) {
-  const nav = document.getElementById('nav');
-  const hamburger = document.getElementById('hamburger');
-  if (!nav.contains(event.target) && !hamburger.contains(event.target)) {
-    nav.classList.remove('active');
-    document.querySelectorAll('.submenu-container').forEach(c => c.classList.remove('open'));
-  }
-});
+document.addEventListener("DOMContentLoaded", loadHeader);
