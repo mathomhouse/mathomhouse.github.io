@@ -104,7 +104,7 @@ nav a.active, nav a:hover {
 /* Submenu styling */
 .submenu-container {
   position: relative;
-  height: 25px;
+  height: auto;
   margin: 4px 0;
 }
 
