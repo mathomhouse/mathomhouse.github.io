@@ -6,21 +6,6 @@
   <title>Mathom House</title>
   <link rel="stylesheet" href="index2.css">
   <link rel="stylesheet" href="header2.css">
-  <style >
-    .card-link {
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-    .card-icon {
-      margin-bottom: 0.5rem;
-    }
-    .card-icon img {
-      width: 64px;
-      height: 64px;
-    }
-
-  </style>
   <script src="header2.js" defer></script>
 </head>
 <body>
@@ -207,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'dark') {
     document.body.dataset.theme = 'dark';
-    document.getElementById('themeToggle').textContent = '☀️';
+    //document.getElementById('themeToggle').textContent = '☀️';
   }
 
   const toggleButton = document.getElementById('themeToggle');
