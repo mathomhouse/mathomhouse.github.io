@@ -104,11 +104,8 @@ nav a.active, nav a:hover {
 /* Submenu styling */
 .submenu-container {
   position: relative;
-  height: 3px;
-  width: 25px;
-  background-color: white;
+  height: 25px;
   margin: 4px 0;
-  border-radius: 3px;
 }
 
 .submenu {
