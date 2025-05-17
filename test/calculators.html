@@ -38,7 +38,7 @@
   <div class="main-links">
     <a href="#calculators">Calculators</a>
     <a href="#eternalland">Eternal Land</a>
-    <a href="#enigmadominators">Enigma <br>Dominators</a>
+    <a href="#enigmadominators">Enigma Dominators</a>
     <a href="#feedback">Feedback<br>+<br>Support</a>
   </div>
 </section>
@@ -362,6 +362,10 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('support-backdrop').classList.add('hidden');
   };
 });
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 </script>
 
 <div id="feedback-modal" class="modal hidden">
