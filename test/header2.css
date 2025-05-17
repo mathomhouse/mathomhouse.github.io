@@ -58,14 +58,14 @@ nav {
   position: absolute;
   top: 100%;
   left: 0;
-  width: auto;
+  width: fit-content;
   min-width: 150px;
   border: 1px solid #333;
 }
 
 nav a {
   margin: 0 15px;
-  padding: 10px;
+  padding: 5px;
   text-decoration: none;
   color: white;
   font-weight: bold;
@@ -156,7 +156,7 @@ nav a.active, nav a:hover {
     position: absolute;
     top: 60px;
     right: 20px;
-    width: 150px;
+    width: fit-content;
     border-radius: 8px;
   }
 
