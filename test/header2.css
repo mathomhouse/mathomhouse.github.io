@@ -70,7 +70,6 @@ nav a {
   color: white;
   font-weight: bold;
   transition: color 0.3s;
-  border-bottom: 1px solid #555;
   white-space: nowrap;
 }
 
@@ -106,6 +105,8 @@ nav a.active, nav a:hover {
   position: relative;
   height: auto;
   margin: 4px 0;
+  padding: 5px;
+  border-bottom: 1px solid #555;
 }
 
 .submenu {
@@ -161,7 +162,7 @@ nav a.active, nav a:hover {
   }
 
   nav a {
-    padding: 10px;
+    padding: 5px;
     margin: 5px 0;
   }
 
