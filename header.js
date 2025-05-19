@@ -21,6 +21,7 @@ function addFavicon() {
     link.type = 'image/x-icon';
     
     document.head.appendChild(link);
+}
 
 function loadHeader(){
   fetch('header.html')
