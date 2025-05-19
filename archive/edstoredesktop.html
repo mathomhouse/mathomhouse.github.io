@@ -204,6 +204,9 @@
       items.forEach((item, idx) => {
         const div = document.createElement('div');
         div.className = 'store-tile';
+          const currentQty = cart[idx] || 0;
+          if (currentQty >= item.maxQty) div.classList.add('disabled');
+
         div.innerHTML = `
           <h3>${item.name}</h3>
           <p>Price: ${item.price} Contribution Points</p>
@@ -242,10 +245,13 @@
     function addToCart(idx) {
       const qty = parseInt(document.getElementById(`qty-${idx}`).value);
       if (qty > 0) {
-        cart[idx] = (cart[idx] || 0) + qty;
+        const currentQty = cart[idx] || 0;
+        const newQty = Math.min(currentQty + qty, items[idx].maxQty);
+        cart[idx] = newQty;
         updateCart();
         createStore();
       }
+
     }
 
     function updateCart() {
