@@ -139,15 +139,21 @@ function compareHTChips() {
     if (score1 > score2) {
         result += 'HT Chip 1 has the higher score.';
         document.getElementById('ht-chips1-box').style.backgroundColor = '#d4edda';
+        document.getElementById('ht-chips1-box').style.color = 'black';
         document.getElementById('ht-chips2-box').style.backgroundColor = '';
+        document.getElementById('ht-chips2-box').style.color = '';
     } else if (score2 > score1) {
         result += 'HT Chip 2 has the higher score.';
         document.getElementById('ht-chips2-box').style.backgroundColor = '#d4edda';
+        document.getElementById('ht-chips2-box').style.color = 'black';
         document.getElementById('ht-chips1-box').style.backgroundColor = '';
+        document.getElementById('ht-chips1-box').style.color = '';
     } else {
         result += 'Both HT Chips have equal scores.';
         document.getElementById('ht-chips1-box').style.backgroundColor = '';
         document.getElementById('ht-chips2-box').style.backgroundColor = '';
+        document.getElementById('ht-chips1-box').style.color = '';
+        document.getElementById('ht-chips2-box').style.color = '';
     }
 
     document.getElementById('ht-result').innerHTML = result;
