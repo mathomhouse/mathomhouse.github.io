@@ -3,14 +3,18 @@ const checkboxSection = document.getElementById('checkbox-section');
 
 // Ensure the background color is set when the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function () {
-    updateBackgroundColor(); // Set initial color when the page loads
-
+    setColorsAndCheckBoxSection();
+    
     // Add event listener to change background color on selection change
     document.getElementById("colorDropdown").addEventListener("change", updateBackgroundColor);
 });
 
 dropdown.addEventListener('change', function () {
     // Update the background color of the dropdown to match the selected color
+    setColorsAndCheckBoxSection();
+});
+
+function setColorsAndCheckBoxSection(){
     updateBackgroundColor();
 
     if (dropdown.value === 'gold') {
@@ -18,7 +22,7 @@ dropdown.addEventListener('change', function () {
     } else {
         checkboxSection.style.display = 'none';  // Hide checkbox
     }
-});
+}
 
 function updateBackgroundColor() {
     const selectedOption = dropdown.options[dropdown.selectedIndex];
