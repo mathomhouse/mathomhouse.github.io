@@ -55,15 +55,21 @@
         if (gear1Offense > gear2Offense) {
             result += 'Gear 1 has better offense\n\n';
             document.getElementById('gear1-box').style.backgroundColor = '#d4edda';
+            document.getElementById('gear1-box').style.color = 'black';
             document.getElementById('gear2-box').style.backgroundColor = '';
+            document.getElementById('gear2-box').style.color = '';
         } else if (gear2Offense > gear1Offense) {
             result += 'Gear 2 has better offense\n\n';
             document.getElementById('gear2-box').style.backgroundColor = '#d4edda';
+            document.getElementById('gear2-box').style.color = 'black';
             document.getElementById('gear1-box').style.backgroundColor = '';
+            document.getElementById('gear1-box').style.color = '';
         } else {
             result += 'Both gears have equal offense\n\n';
             document.getElementById('gear1-box').style.backgroundColor = '';
+            document.getElementById('gear1-box').style.color = '';
             document.getElementById('gear2-box').style.backgroundColor = '';
+            document.getElementById('gear2-box').style.color = '';
         }
     }
 
