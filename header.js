@@ -13,19 +13,6 @@ gaScript2.innerHTML = `
 `;
 document.head.appendChild(gaScript2);
 
-// Fire a manual page_view event with page metadata after the DOM loads
-document.addEventListener("DOMContentLoaded", function() {
-  gtag('event', 'page_view', {
-    page_title: document.title,
-    page_location: window.location.href,
-    page_path: window.location.pathname
-  });
-});
-
-
-
-// header.js
-
 // Function to dynamically add the favicon
 function addFavicon() {
     const link = document.createElement('link');
@@ -34,49 +21,81 @@ function addFavicon() {
     link.type = 'image/x-icon';
     
     document.head.appendChild(link);
+
+function loadHeader(){
+  fetch('header.html')
+  .then(res => res.text())
+  .then(html => {
+    // Inject header HTML
+    const placeholder = document.getElementById('header-placeholder');
+    placeholder.innerHTML = html; 
+    initializeHeader();
+  })
+  .catch(err => console.error('Header load error:', err));
 }
 
-// Call the function to add the favicon when the page loads
-document.addEventListener('DOMContentLoaded', addFavicon);
-
-// Function to load the header.html content
-function loadHeader() {
-    // Fetch the header.html content
-    fetch('/header.html')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to load header');
-            }
-            return response.text(); // Read the HTML content as text
-        })
-        .then(data => {
-            document.getElementById('header-placeholder').innerHTML = data; // Insert the header HTML into the placeholder
-            initializeHeader(); // Initialize header behavior after loading
-        })
-        .catch(error => console.error('Error loading header:', error));
-}
-
-// Function to initialize dropdown and event listeners
-function initializeHeader() {
-    const dropdown = document.getElementById("dropdownMenu");
+function initializeHeader(){
+    // Now that the header exists, wire up the buttons and behavior
     const hamburger = document.getElementById("hamburger");
+    const dropdown =  document.getElementById("nav");
 
-    function toggleDropdown() {
-        const rect = hamburger.getBoundingClientRect();
-        dropdown.style.top = rect.bottom + "px";
-        dropdown.style.left = rect.left + "px";
-        dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
+    // Theme toggle setup
+    const toggleButton = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme === 'dark') {
+      document.body.dataset.theme = 'dark';
+      toggleButton.textContent = '☀️';
     }
 
-    hamburger.onclick = toggleDropdown;
+    toggleButton.addEventListener('click', () => {
+      const isDark = document.body.dataset.theme === 'dark';
+      document.body.dataset.theme = isDark ? '' : 'dark';
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      toggleButton.textContent = isDark ? '🌓' : '☀️';
+    });
 
     // Hide dropdown when clicking outside of it
     document.addEventListener("click", function(event) {
-        if (!dropdown.contains(event.target) && !hamburger.contains(event.target)) {
-            dropdown.style.display = "none";
-        }
+      if (!dropdown.contains(event.target) && !hamburger.contains(event.target)) {
+          dropdown.style.display = "none";
+          // Close any open submenus
+          document.querySelectorAll('.submenu-container.open').forEach(el => el.classList.remove('open'));
+      }
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.getElementById('nav');
+    if (menuToggle && nav) {
+      menuToggle.addEventListener('click', () => {
+        nav.classList.toggle('active');
+      });
+    }
+
+    // === Submenu support ===
+    document.querySelectorAll('.submenu-container > a').forEach(trigger => {
+      trigger.addEventListener("click", function (e) {
+        e.preventDefault();
+        const container = this.closest('.submenu-container');
+
+        // Close all other open submenus
+        document.querySelectorAll('.submenu-container.open').forEach(open => {
+          if (open !== container) open.classList.remove('open');
+        });
+
+        container.classList.toggle("open");
+      });
     });
 }
 
-// Call the loadHeader function when the DOM is fully loaded
+function toggleDropdown() {
+  const hamburger = document.getElementById("hamburger");
+  const dropdown =  document.getElementById("nav");
+  const rect = hamburger.getBoundingClientRect();
+  dropdown.style.top = rect.bottom + "px";
+  dropdown.style.left = rect.left + "px";
+  dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
+}
+
 document.addEventListener("DOMContentLoaded", loadHeader);

@@ -2,60 +2,251 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top War Calculators</title>
-    <link rel="stylesheet" href="styles/index.css">
-    <script src="header.js" defer></script>
-    <link rel="icon" href="/cutelogo.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mathom House</title>
+  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="styles/header.css">
+  <script src="index.js"></script>
+  <script src="header.js" defer></script>
+  <link rel="icon" href="/cutelogo.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="/cutelogo.ico">
     <link rel="apple-touch-icon" sizes="167x167" href="/cutelogo.ico">
     <link rel="apple-touch-icon" sizes="120x120" href="/cutelogo.ico">
     <link rel="apple-touch-icon" sizes="76x76" href="/cutelogo.ico">
-
 </head>
 
 <body>
-    <!-- Placeholder for the header -->
-    <div id="header-placeholder"></div>
-    <div class="container">
-        <!-- Content Area -->
-        <main>
-            <h1>Welcome to Mathom House’s Top War Calculators!</h1>
-            <p>You may use any of the following calculators:<br><br>
-                <a href="vit.html">VIT</a>: see just how much VIT I have!<br><br>
-                <a href="gems.html">Gems</a>: just how many gems have I been hoarding??<br><br>
-                <a href="equipment.html">Equipment</a>: How much longer will it take for me to craft that one gold equipment?!<br><br>
-                <a href="components.html">Components</a>: gimme that ROF10 please!<br><br>
-                <a href="resources.html">Resources</a>: corn and lube!<br><br>
-                <a href="gear.html">Stat Comparisons</a>: Compare the stats on titan gear and HT chips!<br><br>
-                <a href="exclusives.html">Exclusive Skills</a>: how far am I away from an ES 7??<br><br>
-                <a href="VIP.html">VIP</a>: see just how much money I've been spending on this game! <br><br>
-                <a href="pets.html">Pets</a>: Compare what the max stats on two pets are to see which you want to use! <br><br>
-            </p>
-            <p>
-                <a href="elstore.html">2025 Eternal Land Store</a>: Simulated version of the EL Store!<br>
-                <a href="elpoints.html">Eternal Land Points</a>: Simulate the rankings for your EL!
-            </p>
-
-
-            <br>
-            <p>
-                <b><a href="archive/EnigmaDominators.html">2025 Enigma Dominators Map</a></b>: Look at an interactive version of the ED map! <br>We will do our best to keep this updated with the latest map information.
-                <br><br>
-                <a href="archive/edstore.html">2025 Enigma Dominators Store</a>: Simulated version of the ED Store!
-            </p>
-            <div class="div-buffer"></div>
-            <p>
-                If you run into any issues, please reach out to:<br>
-                Master Calculator: Gikey (dc: .gikey)<br>
-                Master Coder: artu (dc: artuntaure)<br>
-                Special shoutout to Mischief for the inspiration!
-            </p>
-            <br><br><br>
-            <p style="font-size:x-small; text-align: right;">Version: 8.6.7.5309</p>
-        </main>
+  <header id="header-placeholder"></header>
+  <section class="hero-blurb">
+    <div class="blurb-container">
+      <h1>Welcome to Mathom House v2.0</h1>
+      <p>
+        A collection of tools and calculators for Top War players, created by <strong>Gikey (s2698/3355)</strong> and <strong>artu (s2698)</strong> with help from friends around the community. <br><br>
+        If you have any suggestions for current or future tools or the site in general, please let us know <a href="#feedback">here</a>!
+      </p>
     </div>
-</body>
+  </section>
 
+  <section id="home" class="section">
+    <div class="main-links">
+      <a href="#calculators">Calculators</a>
+      <a href="#eternalland">Eternal Land</a>
+      <a href="#enigmadominators">Enigma Dominators</a>
+      <a href="#feedback">Feedback<br>+<br>Support</a>
+    </div>
+  </section>
+  <section id="calculators" class="section">
+    <h2 class="section-title">Calculators</h2>
+    <div class="cards-grid">
+      <a href="/exclusives.html" class="card-link">
+        <div class="card">
+          <div class="card-icon">
+            <img src="/images/shard-icon.png" alt="Shard Icon">
+          </div>
+          <h3>ES Calculator</h3>
+          <p>Figure out how many ES shards you need for an ES 7!</p>
+        </div>
+      </a>
+      <a href="/gems.html" class="card-link">
+        <div class="card">
+          <div class="card-icon">
+            <img src="/images/gems-icon.png" alt="Gems Icon">
+          </div>
+          <h3>Gem Calculator</h3>
+          <p>Add up how many gems you've been hoarding!</p>
+        </div>
+      </a>
+      <a href="/equipment.html" class="card-link">
+        <div class="card">
+          <div class="card-icon">
+            <img src="/images/equipment-icon.png" alt="Equipment Icon">
+          </div>
+          <h3>Equipment Calculator</h3>
+          <p>Calculate how long until your equipment can be crafted</p>
+        </div>
+      </a>
+      <a href="/components.html" class="card-link">
+        <div class="card">
+          <div class="card-icon">
+            <img src="/images/components-icon.png" alt="Components Icon">
+          </div>
+          <h3>Components Calculator</h3>
+          <p>How close are you to ROF 10?</p>
+        </div>
+      </a>
+      <a href="/resources.html" class="card-link">
+        <div class="card">
+          <div class="card-icon">
+            <img src="/images/resources-icon.png" alt="Resources Icon">
+          </div>
+          <h3>Resources Calculator</h3>
+          <p>How much Food, Oil, and Odinium do you have saved?</p>
+        </div>
+      </a>
+      <a href="/gear.html" class="card-link">
+        <div class="card">
+          <div class="card-icon">
+            <img id="ht-icon" src="/images/yellow-ht-icon.png" alt="HT Icon">
+          </div>
+          <h3>Gear Calculator</h3>
+          <p>Compare the stats between two gear</p>
+        </div>
+      </a>
+      <a href="/vit.html" class="card-link">
+        <div class="card">
+          <div class="card-icon">
+            <img src="/images/vit-icon.png" alt="VIT Icon">
+          </div>
+          <h3>VIT Calculator</h3>
+          <p>How much VIT do I have saved up?</p>
+        </div>
+      </a>
+      <a href="/VIP.html" class="card-link">
+        <div class="card">
+          <div class="card-icon">
+            <img src="/images/VIP-icon.png" alt="VIP Icon">
+          </div>
+          <h3>VIP Calculator</h3>
+          <p>Do you <strong>really</strong> want to know how much you've spent?</p>
+        </div>
+      </a>
+      <a href="/pets.html" class="card-link">
+        <div class="card">
+          <div class="card-icon">
+            <img src="/images/pets-icon.png" alt="Pets Icon">
+          </div>
+          <h3>Pets Calculator</h3>
+          <p>Find out the max stats for gold or purple pets! Made in collaboration with Tex (s2864)</p>
+        </div>
+      </a>
+    </div>
+  </section>
+  <section id="eternalland" class="section">
+    <h2 class="section-title">Eternal Land</h2>
+    <div class="cards-grid">
+      <a href="/elstore.html" class="card-link">
+        <div class="card">
+          <div class="card-icon">
+            <img src="/images/powerstation-icon.png" alt="Power Station Icon">
+          </div>
+          <h3>EL Store</h3>
+          <p>Figure out what you want to buy from the EL Store</p>
+        </div>
+      </a>
+      <a href="/elpoints.html" class="card-link">
+        <div class="card">
+          <div class="card-icon">
+            <img src="/images/eternalcity-icon.png" alt="Eternal City Icon">
+          </div>
+          <h3>EL Rankings Simulator</h3>
+          <p>Simulate the rankings for your EL</p>
+        </div>
+      </a>
+      <a href="/vit.html" class="card-link">
+        <div class="card">
+          <div class="card-icon">
+            <img src="/images/vit-icon.png" alt="VIT Icon">
+          </div>
+          <h3>VIT Calculator</h3>
+          <p>Use the VIT calculator to calculate your EL individual points!</p>
+        </div>
+      </a>
+    </div>
+  </section>
+  <section id="enigmadominators" class="section">
+    <h2 class="section-title">Enigma Dominators</h2>
+    <div class="cards-grid">
+      <a href="archive/edstore.html" class="card-link">
+        <div class="card">
+          <div class="card-icon">
+            <img src="/images/ED-icon.png" alt="ED Icon">
+          </div>
+          <h3>ED Store</h3>
+          <p>Figure out what you want to buy from the ED Store</p>
+        </div>
+      </a>
+      <a href="archive/EnigmaDominators.html" class="card-link">
+        <div class="card">
+          <div class="card-icon">
+            <img src="/images/ED-icon.png" alt="ED Icon">
+          </div>
+          <h3>ED Map</h3>
+          <p>Interactive map from ED 2025.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+  <section id="feedback" class="section">
+    <h2 class="section-title">Feedback / Support</h2>
+    <div class="cards-grid">
+      <a href="#" class="card-link" onclick="openFeedbackModal(); return false;">
+        <div class="card">
+          <div class="card-icon">
+            <img src="/images/feedback-icon.png" alt="Feedback Icon">
+          </div>
+          <h3>Submit Feedback</h3>
+          <p>Found a bug? Got an idea? Let us know what you'd like to see!</p>
+        </div>
+      </a>
+      <a href="#" class="card-link" onclick="openSupportModal(); return false;">
+        <div class="card">
+          <div class="card-icon">
+            <img src="/images/coffee-icon.png" alt="Coffee Icon" />
+          </div>
+          <h3>Support / Buy Me a Coffee</h3>
+          <p>If this site has helped you, consider supporting it's creators!</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <button id="backToTop" onclick="scrollToTop()">↑</button>
+
+  <div id="feedback-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Send Feedback</h2>
+
+      <label for="feedback-type">Type of Feedback:</label>
+      <select id="feedback-type">
+        <option value="General">General</option>
+        <option value="Bug Report">Bug Report</option>
+        <option value="Feature Request">Feature Request</option>
+        <option value="Design/UI">Design/UI</option>
+      </select>
+
+      <label for="modal-feedback-input">Your Feedback:</label>
+      <textarea id="modal-feedback-input" placeholder="Let us know what you're thinking..." rows="5"
+        maxlength="500"></textarea>
+      <small><span id="char-count">0</span>/500</small>
+
+      <label for="discord-name">Discord Username (optional):</label>
+      <input type="text" id="discord-name" placeholder="e.g., .gikey" />
+
+      <div class="modal-buttons">
+        <button onclick="submitModalFeedback()">Submit</button>
+        <button onclick="closeFeedbackModal()">Cancel</button>
+      </div>
+
+      <div id="feedback-confirmation" class="confirmation-message hidden">✅ Feedback sent! Thank you!</div>
+    </div>
+  </div>
+  <div id="modal-backdrop" class="modal-backdrop hidden" onclick="closeFeedbackModal()"></div>
+
+  <div id="modal-backdrop" class="modal-backdrop hidden" onclick="closeFeedbackModal()"></div>
+  <div id="toast" class="toast">✅ Feedback submitted!</div>
+  <div id="support-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>☕ Support This Site</h2>
+      <p>If you enjoy using these tools and wish to support its creators, please do so here via 'Buy Me a Coffee.' </p>
+      <a href="https://www.buymeacoffee.com/gikey" target="_blank" rel="noopener" class="coffee-btn">Buy Me a Coffee</a>
+      <div class="modal-buttons">
+        <button onclick="closeSupportModal()">Close</button>
+      </div>
+    </div>
+  </div>
+  <div id="support-backdrop" class="modal-backdrop hidden" onclick="closeSupportModal()"></div>
+
+
+</body>
 </html>

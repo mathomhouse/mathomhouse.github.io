@@ -1,0 +1,295 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .table-container {
+        overflow-x: auto; /* Allows horizontal scrolling */
+        -webkit-overflow-scrolling: touch; /* Adds smooth scrolling for mobile */
+    }
+
+    table {
+        width: 100%; /* Ensure table takes full width */
+        border-collapse: collapse;
+    }
+
+    th, td {
+        
+        display: table-cell; /* Ensure table cells don't stack */
+        padding: 5px;
+        text-align: center;
+        white-space: normal;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    /* Adjust button size for mobile */
+    .calculate-btn button {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .div-buffer {
+        height: 20px; /* Space between sections */
+    }
+    .gear-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gear-box {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .gear-box form {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .gear-box label {
+        text-align: left;
+        padding-right: 0;
+    }
+
+    .gear-box input {
+        padding: 10px;
+    }
+
+    .gear-box select {
+      max-width: none;
+      width: 100%;
+    }
+
+    button {
+        width: 80%;
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+
+    #comparison-result {
+        font-size: 1.2rem;
+    }
+}
+
+h1 {
+    font-size: 2rem;
+    color: #0056b3;
+}
+
+label {
+    display: inline-block;
+    width: 150px;
+    font-weight: bold;
+}
+
+input,
+select {
+    padding: 5px;
+    margin: 5px 0;
+    width: 100%;
+    max-width: 200px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.result {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.row label {
+    width: 150px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.div-buffer{
+    height:50px;
+}
+
+table {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 500px;
+    margin-right:20px;
+}
+
+.table-container{
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+th,
+td {
+    padding: 3px;
+    text-align: center;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.calculate-btn {
+    text-align: left; /* Align the buttons to the left */
+    margin-top: 15px; /* Reduced margin between buttons and table */
+}
+
+/* Dropdown option colors */
+select option[value="grey"] {
+    background-color: lightslategray;
+    color:white;
+}
+
+select option[value="green"] {
+    background-color: #3cb371;
+    color:white;
+}
+
+select option[value="blue"] {
+    background-color: #1e90ff;
+    color:white;
+}
+
+select option[value="purple"] {
+    background-color: #9370db;
+    color:white;
+}
+
+select option[value="gold"] {
+    background-color: gold;
+    color:black;
+}
+
+/* Dropdown and checkbox styles */
+select {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+#checkbox-section {
+    display: none;
+    /* Hidden by default */
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+h1 a {
+    text-decoration: none; /* Remove the underline */
+    color: inherit; /* Inherit the color from the parent (h1) */
+    cursor: pointer; /* Change the cursor to pointer when hovering */
+}
+
+.gear-container {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.gear-box {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    width: 350px;
+    margin-left: 0px;
+    background-color: #ffffff;
+}
+
+.gear-box h2 {
+    color: #0056b3;
+}
+
+.gear-box form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+}
+
+.gear-box label {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.gear-box input {
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.button-container {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 0 10px 10px;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #003e7e;
+}
+
+#comparison-result {
+    border-top: 2px solid #ccc;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+#result {
+    white-space: pre-line;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.gear-box {
+    transition: background-color 0.3s;
+}
+
+.container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.home-icons{
+    width:50px;
+    height:auto;
+}
+
+.equip-label{
+    width:auto;
+    vertical-align: middle;
+}

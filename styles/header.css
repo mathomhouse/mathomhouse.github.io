@@ -1,69 +1,196 @@
- /* Header styling */
- header {
-    width: 100%;
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    position: relative;
+:root {
+  --bg-color: #f0f2f5;
+  --text-color: #333;
+  --card-bg: white;
+  --header-bg: #333;
+  --accent-color: #0056b3;
 }
 
-/* Hamburger Menu */
-.hamburger {
-    display: inline-block;
-    cursor: pointer;
-    margin-right: 20px; /* Adds space between the hamburger and the text */
+[data-theme="dark"] {
+  --bg-color: #1e1e1e;
+  --text-color: #f0f0f0;
+  --card-bg: #2c2c2c;
+  --header-bg: #111;
+  --accent-color: #0056b3;
 }
 
-.hamburger div {
-    width: 30px;
-    height: 3px;
-    background-color: white;
-    margin: 5px 0;
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
 }
 
-/* Dropdown Menu styles */
-.dropdown {
+/* Header styling */
+header {
+  background-color: var(--header-bg);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo a {
+  color: white;
+  text-decoration: none; /* optional, removes underline */
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.logo a:hover {
+  color: var(--accent-color); /* optional, adds hover effect */
+}
+
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+nav {
+  display: none;
+  flex-direction: column;
+  background-color: #444;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: fit-content;
+  min-width: 150px;
+  border: 1px solid #333;
+}
+
+nav a {
+  margin: 0 15px;
+  padding: 5px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+
+nav a.active, nav a:hover {
+  color: var(--accent-color);
+}
+
+.menu-toggle {
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.bar {
+  height: 3px;
+  width: 25px;
+  background-color: white;
+  margin: 4px 0;
+  border-radius: 3px;
+}
+
+.theme-toggle {
+  cursor: pointer;
+  font-size: 18px;
+  transition: transform 0.3s;
+}
+
+.theme-toggle:hover {
+  transform: rotate(20deg);
+}
+
+/* Submenu styling */
+.submenu-container {
+  position: relative;
+  height: auto;
+  margin: 4px 0;
+  padding: 5px;
+  border-bottom: 1px solid #555;
+}
+
+.submenu {
+  display: none;
+  flex-direction: column;
+  background-color: #555;
+  position: relative;
+  left: 10px;
+  margin-top: 5px;
+  border-left: 2px solid var(--accent-color);
+  border-radius: 4px;
+}
+
+.submenu a {
+  padding-left: 20px;
+  border: none;
+}
+
+.submenu-container.open .submenu {
+  display: flex;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.card-icon {
+  margin-bottom: 0.5rem;
+}
+.card-icon img {
+  width: 64px;
+  height: 64px;
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+  .header-right {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  nav {
     display: none;
     flex-direction: column;
-    background-color: #444;
+    background: var(--header-bg);
     position: absolute;
-    top: 100%; /* Start right under the hamburger button */
-    left: 0;    /* Align left to the hamburger button */
-    width: auto;
-    min-width: 150px; /* Minimum width to fit the options */
-    border: 1px solid #333;
+    top: 60px;
+    right: 20px;
+    width: fit-content;
+    border-radius: 8px;
+  }
+
+  nav a {
+    padding: 5px;
+    margin: 5px 0;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  nav.active {
+    display: flex;
+  }
+
+  .theme-toggle {
+    margin-top: 10px;
+  }
 }
 
-.dropdown a {
-    padding: 10px;
-    text-decoration: none;
-    color: white;
-    text-align: left;
-    border-bottom: 1px solid #555;
-    white-space: nowrap; /* Prevent text from wrapping */
+/* Dark Mode Table Fixes */
+body[data-theme="dark"] table,
+body[data-theme="dark"] td,
+body[data-theme="dark"] th {
+  background-color: var(--card-bg);
+  color: var(--text-color);
 }
 
-.dropdown a:hover {
-    background-color: #555;
+body[data-theme="dark"] tr:nth-child(even) {
+  background-color: #2a2a2a;
 }
 
-/* Hide dropdown on larger screens as well */
-@media (min-width: 768px) {
-    .dropdown {
-        display: none;
-    }
-}
-
-/* Ensure dropdown fits content width */
-.dropdown {
-    z-index: 1001;
-}
-
-h1 a {
-    text-decoration: none; /* Remove the underline */
-    color: inherit; /* Inherit the color from the parent (h1) */
-    cursor: pointer; /* Change the cursor to pointer when hovering */
+html {
+  scroll-behavior: smooth;
 }
