@@ -17,7 +17,7 @@ document.head.appendChild(gaScript2);
 function addFavicon() {
     const link = document.createElement('link');
     link.rel = 'icon';
-    link.href = 'cutelogo.ico'; // Make sure the path is correct
+    link.href = '/cutelogo.ico'; // Make sure the path is correct
     link.type = 'image/x-icon';
     
     document.head.appendChild(link);
