@@ -9,20 +9,6 @@ body {
     margin: 20px; /* Keep space for the rest of the content */
 }
 
-/* header {
-    margin: 0 !important;
-    padding: 10px !important;
-    width: 100%;
-    position: relative; 
-}
-
-#header-placeholder {
-    margin: 0 !important;
-    padding: 0 !important;
-    display: block;
-    width: 100%;
-} */
-
 /* Map container styling */
 #mapContainer {
     position: relative;
@@ -30,13 +16,12 @@ body {
 }
 
 /* Table styling */
-table {
+/* table {
     border-collapse: collapse;
     margin: 0 auto;
-}
+} */
 
-td,
-th {
+td {
     border: 1px solid black;
     padding:5px;
     text-align: center;
@@ -47,18 +32,18 @@ th {
 }
 
 /* Highlighted cell styling */
-td.highlighted {
+/* td.highlighted {
     background-color: yellow;
     font-weight: bold;
     border-color: red;
     border-width: 5px;
     padding: 2px;
-}
+} */
 
-#controls {
+/* #controls {
     text-align: center;
     margin: 20px;
-}
+} */
 
 select,
 input,
@@ -78,12 +63,12 @@ select {
     width: 200px;
 }
 
-td.additionalHighlight {
+/* td.additionalHighlight {
     font-weight: bold;
     border-color: blue;
     border-width: 5px;
     padding: 2px;
-}
+} */
 
 .sid {
     font-size: 13px;
