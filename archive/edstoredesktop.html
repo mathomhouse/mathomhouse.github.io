@@ -2,35 +2,249 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ED Store</title>
-  <link rel="stylesheet" href="edstoredesktop.css">
-  <script src="../header.js" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contribution Store</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .store-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .store-tile {
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .cart-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 320px;
+      height: 100%;
+      background: white;
+      border-left: 1px solid #ccc;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+
+    .cart-panel.open {
+      transform: translateX(0);
+    }
+
+    .cart-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+
+    .item-name {
+      flex: 2;
+    }
+
+    .item-qty {
+      width: 50px;
+    }
+
+    .item-remove {
+      color: red;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .cart-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
 </head>
-<body style="display:block; padding-left:0px; padding-top: 0px;">
-  <header id="header-placeholder"></header>
-  <br>
-  <div class="container">
-    <div style="display:flex; gap:20px">
-  <div id="store" style="padding-left: 10px;">
-    <!-- Items will be dynamically added here -->
-  </div>
+<body>
+  <h1>Contribution Store</h1>
 
-  <div class="cart">
-    <h2>Shopping Cart</h2>
+  <div class="store-grid" id="storeContainer"></div>
+
+  <button class="cart-button" onclick="toggleCart()">🛒 Cart</button>
+
+  <div class="cart-panel" id="cartPanel">
+    <h2>Your Cart</h2>
     <div id="cartItems"></div>
-    <p id="totalCost">Total: 0 Points<br>Remaining: 0 Points</p>
+    <hr />
+    <label>Your Contribution Points: <input type="number" id="availablePoints" value="0" /></label>
+    <p id="cartTotal"></p>
+    <button onclick="updateCart()">Update Cart</button>
+    <button onclick="clearCart()">Clear Cart</button>
+    <button onclick="toggleCart()">Close</button>
+  </div>
 
-    <div class="contributionPointsInput">
-      <label for="currency">Your Contribution Points:</label>
-      <input type="number" id="currency" placeholder="10000" />
-      <button id="globalUpdateCartButton" class="add-to-cart" onclick="updateCartGlobal()">Update Cart</button>
-    </div>
+  <script>
+    const items = [
+      {name: "Orange Universal Shards", price: 1400, maxQty: 40},
+      {name: "Orange Universal Shards", price: 1800, maxQty: 40},
+      {name: "Orange Universal Shards", price: 2400, maxQty: 40},
+      {name: "Universal Exclusive Skill Shards x5", price: 600, maxQty: 20},
+      {name: "Universal Exclusive Skill Shards x5", price: 900, maxQty: 20},
+      {name: "Universal Exclusive Skill Shards x5", price: 1200, maxQty: 20},
+      {name: "Universal Decor Shards x5", price: 600, maxQty: 20},
+      {name: "Universal Decor Shards x5", price: 900, maxQty: 20},
+      {name: "Universal Decor Shards x5", price: 1200, maxQty: 20},
+      {name: "Legendary Beast Chest", price: 24000, maxQty: 3},
+      {name: "Epic Beast Chest", price: 4200, maxQty: 10},
+      {name: "Ultra Enigma Crystal (Whole) x5", price: 2100, maxQty: 10},
+      {name: "Top-tier Catalyst", price: 20000, maxQty: 3},
+      {name: "Advanced-tier Catalyst", price: 5000, maxQty: 10},
+      {name: "Mid-tier Catalyst", price: 1000, maxQty: 20},
+      {name: "Expert HT Chip Chest", price: 6500, maxQty: 10},
+      {name: "Amazing HT Chip Chest", price: 1300, maxQty: 30},
+      {name: "Power Core", price: 550, maxQty: 25},
+      {name: "Universal Formation Upgrade Guide x5", price: 1400, maxQty: 30},
+      {name: "Hologram Choice Chest", price: 700, maxQty: 70},
+      {name: "Hologram Choice Chest", price: 1400, maxQty: 70},
+      {name: "Mastery Research x5", price: 1200, maxQty: 30},
+      {name: "Mastery Research x5", price: 2400, maxQty: 30},
+      {name: "Titan Gear Random Material Box x5", price: 2500, maxQty: 100},
+      {name: "Scent of Victory", price: 2000, maxQty: 1}
+    ];
 
-    <div id="message" class="message"></div>
-  </div>
-  </div>
-  </div>
-  <script src="edstoredesktop.js"></script>
+    const storeContainer = document.getElementById('storeContainer');
+    const cartPanel = document.getElementById('cartPanel');
+    const cartItemsContainer = document.getElementById('cartItems');
+    const cart = {};
+
+    function createStore() {
+      storeContainer.innerHTML = '';
+      items.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = 'store-tile';
+        div.innerHTML = `
+          <h3>${item.name}</h3>
+          <p>Price: ${item.price} Contribution Points</p>
+          <p>Max Qty: ${item.maxQty}</p>
+          <div class="slider-row">
+            <button onclick="changeQty(${idx}, -1)">-</button>
+            <input type="range" min="0" max="${item.maxQty}" value="0" id="slider-${idx}" onchange="syncInputs(${idx})">
+            <button onclick="changeQty(${idx}, 1)">+</button>
+          </div>
+          <input type="number" min="0" max="${item.maxQty}" value="0" id="qty-${idx}" onchange="syncSlider(${idx})">
+          <br><br>
+          <button onclick="addToCart(${idx})">Add to Cart</button>
+        `;
+        storeContainer.appendChild(div);
+      });
+    }
+
+    function syncInputs(idx) {
+      document.getElementById(`qty-${idx}`).value = document.getElementById(`slider-${idx}`).value;
+    }
+
+    function syncSlider(idx) {
+      const val = Math.min(items[idx].maxQty, Math.max(0, parseInt(document.getElementById(`qty-${idx}`).value)));
+      document.getElementById(`qty-${idx}`).value = val;
+      document.getElementById(`slider-${idx}`).value = val;
+    }
+
+    function changeQty(idx, delta) {
+      const input = document.getElementById(`qty-${idx}`);
+      let val = parseInt(input.value || 0) + delta;
+      val = Math.max(0, Math.min(val, items[idx].maxQty));
+      input.value = val;
+      document.getElementById(`slider-${idx}`).value = val;
+    }
+
+    function addToCart(idx) {
+      const qty = parseInt(document.getElementById(`qty-${idx}`).value);
+      if (qty > 0) {
+        cart[idx] = (cart[idx] || 0) + qty;
+        updateCart();
+        createStore();
+      }
+    }
+
+    function updateCart() {
+      cartItemsContainer.innerHTML = '';
+      let total = 0;
+
+      for (const idx in cart) {
+        const item = items[idx];
+        const qty = cart[idx];
+        const cost = item.price * qty;
+        total += cost;
+
+        const line = document.createElement('div');
+        line.className = 'cart-line';
+        line.innerHTML = `
+          <span class="item-name">${item.name}</span>
+          <input class="item-qty" type="number" min="0" max="${item.maxQty}" value="${qty}" onchange="editCart(${idx}, this.value)">
+          <span class="item-remove" onclick="removeFromCart(${idx})">×</span>
+          <span>${cost}</span>
+        `;
+        cartItemsContainer.appendChild(line);
+      }
+
+      const available = parseInt(document.getElementById('availablePoints').value) || 0;
+      const remaining = available - total;
+      document.getElementById('cartTotal').innerHTML = `Total: ${total} Contribution Points<br>Remaining: ${remaining}`;
+    }
+
+    function editCart(idx, value) {
+      const qty = Math.max(0, Math.min(parseInt(value) || 0, items[idx].maxQty));
+      if (qty === 0) delete cart[idx];
+      else cart[idx] = qty;
+      updateCart();
+    }
+
+    function removeFromCart(idx) {
+      delete cart[idx];
+      updateCart();
+    }
+
+    function clearCart() {
+      for (const key in cart) delete cart[key];
+      updateCart();
+    }
+
+    function toggleCart() {
+      cartPanel.classList.toggle('open');
+    }
+
+    createStore();
+  </script>
 </body>
 </html>
