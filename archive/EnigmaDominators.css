@@ -9,11 +9,11 @@ body {
     margin: 20px; /* Keep space for the rest of the content */
 }
 
-header {
+/* header {
     margin: 0 !important;
     padding: 10px !important;
     width: 100%;
-    position: relative; /* Keep it in normal flow */
+    position: relative; 
 }
 
 #header-placeholder {
@@ -21,7 +21,7 @@ header {
     padding: 0 !important;
     display: block;
     width: 100%;
-}
+} */
 
 /* Map container styling */
 #mapContainer {
