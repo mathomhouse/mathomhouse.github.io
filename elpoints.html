@@ -100,6 +100,16 @@
       width: 100%;
       height: auto;
     }
+    /* Fix for table headers in light and dark themes */
+  body[data-theme="dark"] th {
+    background-color: var(--accent-color);
+    color: #ffffff;
+  }
+
+  body:not([data-theme="dark"]) th {
+    background-color: #f4f4f4;
+    color: #000000;
+  }
   </style>
 </head>
 
