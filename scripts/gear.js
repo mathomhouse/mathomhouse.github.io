@@ -75,15 +75,21 @@
         if (gear1DefenseScore > gear2DefenseScore) {
             result += 'Gear 1 has better defense\n';
             document.getElementById('gear1-box').style.backgroundColor = '#d4edda';
+            document.getElementById('gear1-box').style.color = 'black';
             document.getElementById('gear2-box').style.backgroundColor = '';
+            document.getElementById('gear2-box').style.color = '';
         } else if (gear2DefenseScore > gear1DefenseScore) {
             result += 'Gear 2 has better defense\n';
             document.getElementById('gear2-box').style.backgroundColor = '#d4edda';
+            document.getElementById('gear2-box').style.color = 'black';
             document.getElementById('gear1-box').style.backgroundColor = '';
+            document.getElementById('gear1-box').style.color = '';
         } else {
             result += 'Both gears have equal defense\n';
             document.getElementById('gear1-box').style.backgroundColor = '';
+            document.getElementById('gear1-box').style.color = '';
             document.getElementById('gear2-box').style.backgroundColor = '';
+            document.getElementById('gear2-box').style.color = '';
         }
     }
 
@@ -105,6 +111,8 @@ function resetValues() {
 
     document.getElementById('gear1-box').style.backgroundColor = '';
     document.getElementById('gear2-box').style.backgroundColor = '';
+    document.getElementById('gear1-box').style.color = '';
+    document.getElementById('gear2-box').style.color = '';
     document.getElementById('result').textContent = '';
 }
 function compareHTChips() {
@@ -169,6 +177,8 @@ function resetHTChips() {
     // Reset background colors
     document.getElementById('ht-chips1-box').style.backgroundColor = '';
     document.getElementById('ht-chips2-box').style.backgroundColor = '';
+    document.getElementById('ht-chips1-box').style.color = '';
+    document.getElementById('ht-chips2-box').style.color = '';
 }
 
 
