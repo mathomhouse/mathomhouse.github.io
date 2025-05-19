@@ -12,29 +12,30 @@
 <body>
     <header id="header-placeholder"></header>
     <div class="container">
-    <h1>Mathom House's UD Map Viewer</h1>
-    <p>Enter the server number you want to center the map on in the first box.<br>
-        Enter any additional servers you want to highlight in the second box, with a space in between.</p>
-    <input type="text" id="centerInput" placeholder="Enter server number">
-    <input type="text" id="highlightServers" placeholder="Additional Servers to highlight">
-    <select id="edrounds"></select>
-    <button id="updateButton">Update Map</button>
-    <button id="toggleAnimationButton">Play Animation</button>
-    <label for="speedControl">Speed:</label>
-    <select id="speedControl" style="width:100px">
-    <option value="100">0.1s</option>
-    <option value="500">0.5s</option>
-    <option value="1000">1s</option>
-    <option value="2000" selected>2s</option>
-    <option value="3000">3s</option>
-    <option value="4000">4s</option>
-    <option value="5000">5s</option>
-    </select>
-    <p style="font-size: 12px;">Created by artu (s2698) and Gikey (s2698/s3355). Data from tzup (s1668), with help from Joey (s1668) and Ryba (s1668).</p>
-    <div id="mapContainer">
+        <h1>Mathom House's UD Map Viewer</h1>
+        <p>Enter the server number you want to center the map on in the first box.<br>
+            Enter any additional servers you want to highlight in the second box, with a space in between.</p>
+        <input type="text" id="centerInput" placeholder="Enter server number">
+        <input type="text" id="highlightServers" placeholder="Additional Servers to highlight">
+        <select id="edrounds"></select>
+        <button id="updateButton">Update Map</button>
+        <button id="toggleAnimationButton">Play Animation</button>
+        <label for="speedControl">Speed:</label>
+        <select id="speedControl" style="width:100px">
+            <option value="100">0.1s</option>
+            <option value="500">0.5s</option>
+            <option value="1000">1s</option>
+            <option value="2000" selected>2s</option>
+            <option value="3000">3s</option>
+            <option value="4000">4s</option>
+            <option value="5000">5s</option>
+        </select>
+        <p style="font-size: 12px;">Created by artu (s2698) and Gikey (s2698/s3355). Data from tzup (s1668), with help
+            from Joey (s1668) and Ryba (s1668).</p>
+        <div id="mapContainer">
         </div>
     </div>
-  
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script type="module" src="EnigmaDominators.js"></script>
 </body>

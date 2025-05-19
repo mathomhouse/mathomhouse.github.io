@@ -24,7 +24,7 @@ function addFavicon() {
 }
 
 function loadHeader(){
-  fetch('header.html')
+  fetch('/header.html')
   .then(res => res.text())
   .then(html => {
     // Inject header HTML
