@@ -4,9 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Titan Gear Selector</title>
-  <script src="header.js" defer></script>
   <link rel="stylesheet" href="styles/index.css">
-
   <style>
     .gear-box {
       width: 300px;
@@ -97,21 +95,21 @@
         const heroName = document.getElementById(id).value.trim();
         const hero = titanGearData.find(item => item.Hero.trim() === heroName);
 
-        if (!hero) return;
+        if (!hero || !hero.Loadouts) return;
 
         const heroBox = document.createElement('div');
         heroBox.className = 'gear-box';
         heroBox.dataset.hero = hero.Hero;
 
-        const loadout = "Ideal";
-        const gear = hero[loadout];
+        const loadoutKeys = Object.keys(hero.Loadouts);
+        const defaultLoadout = loadoutKeys[0];
+        const gear = hero.Loadouts[defaultLoadout];
 
         heroBox.innerHTML = `
           <h2>${hero.Hero} <span style="font-size: 0.7em;">(${role})</span></h2>
           <label for="loadout-${hero.Hero}">Loadout:</label>
-          <select class="hero-loadout" data-hero="${hero.Hero}" onchange="updateGearLoadout(this)">
-            <option value="Ideal" selected>Ideal</option>
-            <option value="Alternative">Alternative</option>
+          <select class="hero-loadout" data-hero="${hero.Hero}" onchange="updateDynamicGear(this)">
+            ${loadoutKeys.map(key => `<option value="${key}">${key}</option>`).join('')}
           </select>
           <div class="gear-details" id="gear-${hero.Hero}">
             ${renderGearDetails(gear)}
@@ -132,12 +130,12 @@
       `;
     }
 
-    function updateGearLoadout(selectElement) {
+    function updateDynamicGear(selectElement) {
       const heroName = selectElement.dataset.hero;
-      const loadout = selectElement.value;
+      const selectedLoadout = selectElement.value;
 
       const hero = titanGearData.find(item => item.Hero.trim() === heroName);
-      const gear = hero?.[loadout];
+      const gear = hero?.Loadouts?.[selectedLoadout];
 
       const gearDiv = document.getElementById(`gear-${heroName}`);
       if (gearDiv && gear) {
