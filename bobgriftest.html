@@ -4,15 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Titan Gear Selector</title>
-  <link rel="stylesheet" href="test/index2.css">
+  <script src="header.js" defer></script>
+  <link rel="stylesheet" href="styles/index.css">
+
   <style>
     .gear-box {
-    width: 300px;
-}
+      width: 300px;
+    }
   </style>
 </head>
 <body>
-
   <div class="container">
     <h1>Titan Gear Selector</h1>
 
@@ -24,12 +25,7 @@
       <option value="Air Force">Air Force</option>
     </select>
     <br>
-    <label for="loadoutType">Choose Loadout Type:</label><br>
-    <select id="loadoutType">
-      <option value="Ideal">Ideal</option>
-      <option value="Alternative">Alternative</option>
-    </select>
-    <br>
+
     <label for="heroAttack">Attack Hero:</label><br>
     <select id="heroAttack"></select>
     <br>
@@ -88,39 +84,66 @@
     }
 
     function showGear() {
-      const loadoutType = document.getElementById('loadoutType').value;
       const selections = [
-        document.getElementById('heroAttack').value.trim(),
-        document.getElementById('heroHP').value.trim(),
-        document.getElementById('heroIndestructible').value.trim()
+        { role: "Attack", id: "heroAttack" },
+        { role: "HP", id: "heroHP" },
+        { role: "Indestructible", id: "heroIndestructible" }
       ];
 
       const resultsDiv = document.getElementById('results');
       resultsDiv.innerHTML = '';
 
-      selections.forEach(heroName => {
+      selections.forEach(({ role, id }) => {
+        const heroName = document.getElementById(id).value.trim();
         const hero = titanGearData.find(item => item.Hero.trim() === heroName);
-        const gear = hero?.[loadoutType];
 
-        if (gear) {
-          const heroBox = document.createElement('div');
-          heroBox.className = 'gear-box';
-          heroBox.innerHTML = `
-            <h2>${hero.Hero} <span style="font-size: 0.7em;">(${loadoutType})</span></h2>
-            <p><strong>Gun:</strong> ${gear.Gun}</p>
-            <p><strong>Chest:</strong> ${gear.Chest}</p>
-            <p><strong>Optical:</strong> ${gear.Optical}</p>
-            <p><strong>Headset:</strong> ${gear.Headset}</p>
-            <p><strong>Arms:</strong> ${gear.Arms}</p>
-            <p><strong>Boots:</strong> ${gear.Boots}</p>
-          `;
-          resultsDiv.appendChild(heroBox);
-        } else {
-          resultsDiv.innerHTML += `<p>No ${loadoutType.toLowerCase()} gear found for ${heroName}</p>`;
-        }
+        if (!hero) return;
+
+        const heroBox = document.createElement('div');
+        heroBox.className = 'gear-box';
+        heroBox.dataset.hero = hero.Hero;
+
+        const loadout = "Ideal";
+        const gear = hero[loadout];
+
+        heroBox.innerHTML = `
+          <h2>${hero.Hero} <span style="font-size: 0.7em;">(${role})</span></h2>
+          <label for="loadout-${hero.Hero}">Loadout:</label>
+          <select class="hero-loadout" data-hero="${hero.Hero}" onchange="updateGearLoadout(this)">
+            <option value="Ideal" selected>Ideal</option>
+            <option value="Alternative">Alternative</option>
+          </select>
+          <div class="gear-details" id="gear-${hero.Hero}">
+            ${renderGearDetails(gear)}
+          </div>
+        `;
+        resultsDiv.appendChild(heroBox);
       });
     }
-  </script>
 
+    function renderGearDetails(gear) {
+      return `
+        <p><strong>Gun:</strong> ${gear.Gun}</p>
+        <p><strong>Chest:</strong> ${gear.Chest}</p>
+        <p><strong>Optical:</strong> ${gear.Optical}</p>
+        <p><strong>Headset:</strong> ${gear.Headset}</p>
+        <p><strong>Arms:</strong> ${gear.Arms}</p>
+        <p><strong>Boots:</strong> ${gear.Boots}</p>
+      `;
+    }
+
+    function updateGearLoadout(selectElement) {
+      const heroName = selectElement.dataset.hero;
+      const loadout = selectElement.value;
+
+      const hero = titanGearData.find(item => item.Hero.trim() === heroName);
+      const gear = hero?.[loadout];
+
+      const gearDiv = document.getElementById(`gear-${heroName}`);
+      if (gearDiv && gear) {
+        gearDiv.innerHTML = renderGearDetails(gear);
+      }
+    }
+  </script>
 </body>
 </html>
