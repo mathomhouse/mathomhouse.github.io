@@ -127,7 +127,7 @@
         const gear = hero.Loadouts[defaultLoadout];
 
         heroBox.innerHTML = `
-          <h2>${hero.Hero} <span style="font-size: 0.7em;">(${role})</span></h2>
+          <h2>${hero.Hero} <br><span style="font-size: 0.7em;">(${role})</span></h2>
           <label for="loadout-${hero.Hero}">Loadout:</label>
           <select class="hero-loadout" data-hero="${hero.Hero}" onchange="updateDynamicGear(this)">
             ${loadoutKeys.map(key => `<option value="${key}">${key}</option>`).join('')}
