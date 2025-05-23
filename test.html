@@ -1,110 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIT Calculator</title>
-    <link rel="stylesheet" href="styles/index.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Titan Gear Selector</title>
+  <link rel="stylesheet" href="styles/index.css">
+  <style>
+    .gear-box {
+      width: 300px;
+    }
+    .gear-slot img {
+      display: block;
+      margin-top: 4px;
+      height: 32px;
+    }
+  </style>
 </head>
-
 <body>
-    <!-- Placeholder for the header -->
-    <header id="header-placeholder"></header>
-    <div class="container">
-        <h1>VIT Calculator</h1>
-        <p>Input the number of each item in the appropriate text box. The totals will update as you go. <br>
-            The Reset button will clear the page for you if you want to start over.</p>
-        <!-- Main container for the labels and inputs -->
-        <div class="table-container">
-        <table>
-            <tr>
-                <th>VIT</th>
-                <th>Amount</th>
-                <th>Totals</th>
-            </tr>
-            <tr>
-                <td><label for="vitLargeCapsule">Large VIT Capsule:</label></td>
-                <td><input type="number" min="0" id="vitLargeCapsule" placeholder="0"></td>
-                <td><label id="largeCapsuleTotal"></label></td>
-            </tr>
-            <tr>
-                <td><label for="vitSmallCapsule">Small VIT Capsule:</label></td>
-                <td><input type="number" min="0" id="vitSmallCapsule" placeholder="0"></td>
-                <td><label id="smallCapsuleTotal"></label></td>
-            </tr>
-            <tr>
-                <td><label for="vitPlus50">+50 VIT:</label></td>
-                <td><input type="number" min="0" id="vitPlus50" placeholder="0"></td>
-                <td><label id="vitPlus50Total"></label></td>
-            </tr>
-            <tr>
-                <td><label for="vitPlus10">+10 VIT:</label></td>
-                <td><input type="number" min="0" id="vitPlus10" placeholder="0"></td>
-                <td><label id="vit10Total"></label></td>
-            </tr>
-            <tr>
-                <td><label for="vitFlower">Flower:</label></td>
-                <td><input type="number" min="0" id="vitFlower" placeholder="0"></td>
-                <td><label id="vitFlowerTotal"></label></td>
-            </tr>
-            <tr>
-                <td><label for="vitHeart">Heart:</label></td>
-                <td><input type="number" min="0" id="vitHeart" placeholder="0"></td>
-                <td><label id="vitHeartTotal"></label></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><label for="grandTotal" class="bold-text">Total VIT:</label></td>
-                <td><label id="grandTotal" class="bold-text"></label></td>
-            </tr>
-            <!-- Blurb Row -->
-            <tr>
-                <td colspan="3">
-                    <p>
-                        Below, you can choose which zone you are hitting DF in during EL <br>
-                        to determine how many honor points you can get with the VIT you have.
-                        <br><br> This does not account for Diana. It also assumes you have the <br>
-                        "Extra Gains" EL tech maxed out.
-                    </p>
-                </td>
-            </tr>
+  <div class="container">
+    <h1>Titan Gear Selector</h1>
 
+    <label for="branch">Choose Branch:</label><br>
+    <select id="branch" onchange="filterHeroesByRole()">
+      <option value="">-- Select Branch --</option>
+      <option value="Army">Army</option>
+      <option value="Navy">Navy</option>
+      <option value="Air Force">Air Force</option>
+    </select>
+    <br>
 
+    <label for="heroAttack">Attack Hero:</label><br>
+    <select id="heroAttack"></select>
+    <br>
+    <label for="heroHP">HP Hero:</label><br>
+    <select id="heroHP"></select>
+    <br>
+    <label for="heroIndestructible">Indestructible Hero:</label><br>
+    <select id="heroIndestructible"></select>
 
-            <!-- New row for the Multiplier Dropdown -->
-            <tr>
-                <td><label for="multiplierDropdown">EL Zone:</label></td>
-                <td>
-                    <select id="multiplierDropdown">
-                        <option value="" disabled selected>Select option</option>
-                        <option value="120">Zone 1 (120 points)</option>
-                        <option value="132">Zone 2 (132 points)</option>
-                        <option value="144">Zone 3 (144 points)</option>
-                        <option value="144">SRA 1 (144 points)</option>
-                        <option value="156">SRA 2 (156 points)</option>
-                        <option value="168">SRA 3 (168 points)</option>
-                        <option value="168">Capital Area (168 points)</option>
-                    </select>
-                </td>
-                <td><label id="multipliedTotal" class="bold-text"></label></td>
-            </tr>
-
-        </table>
-        </div>
-
-        <br>
-
-        <!-- Button to trigger calculation -->
-        <div class="calculate-btn">
-            <button onclick="resetVit()">Reset</button>
-        </div>
-
-        <br>
+    <div class="calculate-btn">
+      <button onclick="showGear()">Show Optimal Gear</button>
     </div>
 
-    <script src="scripts/test.js"></script>
+    <div id="results" class="gear-container"></div>
+  </div>
 
+  <script>
+    let titanGearData = [];
+
+    const liveUrl = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+    const fallbackUrl = 'titan-gear-data.json';
+
+    fetch(liveUrl)
+      .then(res => {
+        if (!res.ok) throw new Error("Live data unavailable");
+        return res.json();
+      })
+      .then(data => {
+        console.log("Loaded live data");
+        titanGearData = data;
+        filterHeroesByRole();
+      })
+      .catch(err => {
+        console.warn("Falling back to static data:", err.message);
+        fetch(fallbackUrl)
+          .then(res => res.json())
+          .then(data => {
+            console.log("Loaded static fallback data");
+            titanGearData = data;
+            filterHeroesByRole();
+          })
+          .catch(err => {
+            console.error("Static fallback failed too!", err);
+          });
+      });
+
+    function filterHeroesByRole() {
+      const branch = document.getElementById('branch').value;
+
+      const attackHeroes = titanGearData
+        .filter(h => (h.Branch === branch || h.Branch === "Universal") && h.Subcategory === "Attack")
+        .map(h => h.Hero);
+
+      const hpHeroes = titanGearData
+        .filter(h => (h.Branch === branch || h.Branch === "Universal") && h.Subcategory === "HP")
+        .map(h => h.Hero);
+
+      const indestructibleHeroes = titanGearData
+        .filter(h => (h.Branch === branch || h.Branch === "Universal") && h.Subcategory === "Indestructible")
+        .map(h => h.Hero);
+
+      populateDropdown('heroAttack', attackHeroes);
+      populateDropdown('heroHP', hpHeroes);
+      populateDropdown('heroIndestructible', indestructibleHeroes);
+    }
+
+    function populateDropdown(dropdownId, heroList) {
+      const select = document.getElementById(dropdownId);
+      select.innerHTML = "";
+
+      heroList.forEach(hero => {
+        const option = document.createElement("option");
+        option.value = hero;
+        option.textContent = hero;
+        select.appendChild(option);
+      });
+    }
+
+    function showGear() {
+      const selections = [
+        { role: "Attack", id: "heroAttack" },
+        { role: "HP", id: "heroHP" },
+        { role: "Indestructible", id: "heroIndestructible" }
+      ];
+
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '';
+
+      selections.forEach(({ role, id }) => {
+        const heroName = document.getElementById(id).value.trim();
+        const hero = titanGearData.find(item => item.Hero.trim() === heroName);
+
+        if (!hero || !hero.Loadouts) return;
+
+        const heroBox = document.createElement('div');
+        heroBox.className = 'gear-box';
+        heroBox.dataset.hero = hero.Hero;
+
+        const loadoutKeys = Object.keys(hero.Loadouts);
+        const defaultLoadout = loadoutKeys[0];
+        const gear = hero.Loadouts[defaultLoadout];
+
+        heroBox.innerHTML = `
+          <h2>${hero.Hero} <span style="font-size: 0.7em;">(${role})</span></h2>
+          <label for="loadout-${hero.Hero}">Loadout:</label>
+          <select class="hero-loadout" data-hero="${hero.Hero}" onchange="updateDynamicGear(this)">
+            ${loadoutKeys.map(key => `<option value="${key}">${key}</option>`).join('')}
+          </select>
+          <div class="gear-details" id="gear-${hero.Hero}">
+            ${renderGearDetails(gear)}
+          </div>
+        `;
+        resultsDiv.appendChild(heroBox);
+      });
+    }
+
+    function renderGearDetails(gear) {
+      const gearSlots = ['Gun', 'Chest', 'Optical', 'Headset', 'Arms', 'Boots'];
+
+      return gearSlots.map(slot => {
+        const rune = gear[slot];
+        const iconPath = `images/runes/${rune}.png`;
+        return `
+          <div class="gear-slot">
+            <p><strong>${slot}:</strong> ${rune}</p>
+            <img src="${iconPath}" alt="${rune}" title="${rune}" />
+          </div>
+        `;
+      }).join('');
+    }
+
+    function updateDynamicGear(selectElement) {
+      const heroName = selectElement.dataset.hero;
+      const selectedLoadout = selectElement.value;
+
+      const hero = titanGearData.find(item => item.Hero.trim() === heroName);
+      const gear = hero?.Loadouts?.[selectedLoadout];
+
+      const gearDiv = document.getElementById(`gear-${heroName}`);
+      if (gearDiv && gear) {
+        gearDiv.innerHTML = renderGearDetails(gear);
+      }
+    }
+  </script>
 </body>
-
 </html>
