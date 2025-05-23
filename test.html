@@ -23,7 +23,10 @@
     }
     .gear-slot img {
       height: 48px;
-      margin-bottom: 4px;
+      margin: 4px 0;
+    }
+    input[type="number"], select {
+    max-width: 150px;
     }
   </style>
 </head>
@@ -143,7 +146,7 @@
         const gear = hero.Loadouts[defaultLoadout];
 
         heroBox.innerHTML = `
-          <h2>${hero.Hero} <span style="font-size: 0.7em;">(${role})</span></h2>
+          <h2>${hero.Hero}<br> <span style="font-size: 0.7em;">(${role})</span></h2>
           <label for="loadout-${hero.Hero}">Loadout:</label>
           <select class="hero-loadout" data-hero="${hero.Hero}" onchange="updateDynamicGear(this)">
             ${loadoutKeys.map(key => `<option value="${key}">${key}</option>`).join('')}
@@ -163,8 +166,9 @@
         const iconPath = `images/runes/${rune}.png`;
         return `
           <div class="gear-slot">
+            <p><strong>${slot}</strong></p>
             <img src="${iconPath}" alt="${rune}" title="${rune}" />
-            <p><strong>${slot}</strong><br>${rune}</p>
+            <p>${rune}</p>
           </div>
         `;
       }).join('') + `</div>`;
