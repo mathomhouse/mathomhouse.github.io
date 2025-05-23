@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Titan Gear Selector</title>
-  <link rel="stylesheet" href="test/index2.css">
+  <link rel="stylesheet" href="styles/index.css">
   <style>
     .gear-box {
       width: 300px;
@@ -26,7 +26,7 @@
       margin: 4px 0;
     }
     input[type="number"], select {
-    max-width: 150px;
+      max-width: 150px;
     }
   </style>
 </head>
@@ -160,17 +160,33 @@
     }
 
     function renderGearDetails(gear) {
-      const gearSlots = ['Gun', 'Chest', 'Optical', 'Headset', 'Arms', 'Boots'];
-      return `<div class="gear-grid">` + gearSlots.map(slot => {
-        const rune = gear[slot];
-        const iconPath = `images/runes/${rune}.png`;
-        return `
-          <div class="gear-slot">
-            <p><strong>${slot}</strong></p>
-            <img src="${iconPath}" alt="${rune}" title="${rune}" />
-            <p>${rune}</p>
-          </div>
-        `;
+      const displayNames = {
+        Gun: 'Assault Pistol',
+        Chest: 'Tactical Backarmor',
+        Optical: 'Optical Add-on',
+        Headset: 'Raytheon Headset',
+        Arms: 'Portable GPS',
+        Boots: 'Power Boots'
+      };
+
+      const slotOrder = [
+        ['Gun', 'Headset'],
+        ['Chest', 'Arms'],
+        ['Optical', 'Boots']
+      ];
+
+      return `<div class="gear-grid">` + slotOrder.map(pair => {
+        return pair.map(slot => {
+          const rune = gear[slot];
+          const iconPath = `images/runes/${rune}.png`;
+          return `
+            <div class="gear-slot">
+              <p><strong>${displayNames[slot]}</strong></p>
+              <img src="${iconPath}" alt="${rune}" title="${rune}" />
+              <p>${rune}</p>
+            </div>
+          `;
+        }).join('');
       }).join('') + `</div>`;
     }
 
