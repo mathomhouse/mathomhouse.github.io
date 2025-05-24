@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Titan Gear Selector</title>
+  <title>Titan Gear Runes</title>
   <link rel="stylesheet" href="styles/index.css">
+  <script src="/test/header2.js" defer></script>
   <style>
     .gear-box {
       width: 300px;
@@ -43,9 +44,12 @@
   </style>
 </head>
 <body>
+<header id="header-placeholder"></header>
   <div class="container">
-    <h1>Titan Gear Selector</h1>
-
+    <h1>Bob's Recommended Runes</h1>
+    <p>
+       Use the dropdowns below to choose your branch and heroes. Some heroes will have multiple different rune "loadouts". Be sure to cycle through them to find the best setup for you. <br><br>This guide provided courtesy of Bobgrif!
+    </p>
     <label for="branch">Choose Branch:</label><br>
     <select id="branch" onchange="filterHeroesByRole()">
       <option value="" disabled selected>Select branch</option>

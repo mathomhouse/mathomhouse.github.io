@@ -1,5 +1,15 @@
+// Function to dynamically add the favicon
+function addFavicon() {
+    const link = document.createElement('link');
+    link.rel = 'icon';
+    link.href = '/cutelogo.ico'; // Make sure the path is correct
+    link.type = 'image/x-icon';
+    
+    document.head.appendChild(link);
+}
+
 function loadHeader(){
-  fetch('header2.html')
+  fetch('/header.html')
   .then(res => res.text())
   .then(html => {
     // Inject header HTML
