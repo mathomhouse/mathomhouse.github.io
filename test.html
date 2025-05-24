@@ -48,7 +48,7 @@
 
     <label for="branch">Choose Branch:</label><br>
     <select id="branch" onchange="filterHeroesByRole()">
-      <option value="">-- Select Branch --</option>
+      <option value="" disabled selected>Select branch</option>
       <option value="Army">Army</option>
       <option value="Navy">Navy</option>
       <option value="Air Force">Air Force</option>
@@ -104,6 +104,14 @@
     function filterHeroesByRole() {
       const branch = document.getElementById('branch').value;
 
+      // Prevent population if no branch is selected
+      if (!branch) {
+        populateDropdown('heroAttack', []);
+        populateDropdown('heroHP', []);
+        populateDropdown('heroIndestructible', []);
+        return;
+      }
+
       const attackHeroes = titanGearData
         .filter(h => (h.Branch === branch || h.Branch === "Universal") && h.Subcategory === "Attack")
         .map(h => h.Hero);
@@ -120,6 +128,7 @@
       populateDropdown('heroHP', hpHeroes);
       populateDropdown('heroIndestructible', indestructibleHeroes);
     }
+
 
     function populateDropdown(dropdownId, heroList) {
       const select = document.getElementById(dropdownId);
