@@ -5,22 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Titan Gear Runes</title>
   <link rel="stylesheet" href="styles/index.css">
+  <script src="/test/header2.js" defer></script>
   <style>
     .gear-box {
       width: 300px;
     }
+    .gear-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .gear-slot {
+      display: grid;
+      grid-template-rows: auto 48px auto;
+      align-items: center;
+      justify-items: center;
+      text-align: center;
+      height: 160px;
+    }
+    .gear-slot p {
+      margin: 4px 0;
+      line-height: 1.2;
+      max-width: 120px;
+      word-wrap: break-word;
+    }
+    .gear-slot p:nth-child(1),
+    .gear-slot p:nth-child(3) {
+      min-height: 2.2em;
+    }
+    .gear-slot img {
+      height: 64px;
+      margin: 4px 0;
+    }
     input[type="number"], select {
-    max-width: 175px;
+      max-width: 150px;
     }
   </style>
 </head>
 <body>
+<header id="header-placeholder"></header>
   <div class="container">
     <h1>Bob's Recommended Runes</h1>
-
+    <p>
+       Use the dropdowns below to choose your branch and heroes. Some heroes will have multiple different rune "loadouts". Be sure to cycle through them to find the best setup for you. <br><br>This guide provided courtesy of Bobgrif!
+    </p>
     <label for="branch">Choose Branch:</label><br>
     <select id="branch" onchange="filterHeroesByRole()">
-      <option value="">-- Select Branch --</option>
+      <option value="" disabled selected>Select branch</option>
       <option value="Army">Army</option>
       <option value="Navy">Navy</option>
       <option value="Air Force">Air Force</option>
@@ -37,7 +69,7 @@
     <select id="heroIndestructible"></select>
 
     <div class="calculate-btn">
-      <button onclick="showGear()">Show Optimal Runes</button>
+      <button onclick="showGear()">Show Optimal Gear</button>
     </div>
 
     <div id="results" class="gear-container"></div>
@@ -76,6 +108,14 @@
     function filterHeroesByRole() {
       const branch = document.getElementById('branch').value;
 
+      // Prevent population if no branch is selected
+      if (!branch) {
+        populateDropdown('heroAttack', []);
+        populateDropdown('heroHP', []);
+        populateDropdown('heroIndestructible', []);
+        return;
+      }
+
       const attackHeroes = titanGearData
         .filter(h => (h.Branch === branch || h.Branch === "Universal") && h.Subcategory === "Attack")
         .map(h => h.Hero);
@@ -92,6 +132,7 @@
       populateDropdown('heroHP', hpHeroes);
       populateDropdown('heroIndestructible', indestructibleHeroes);
     }
+
 
     function populateDropdown(dropdownId, heroList) {
       const select = document.getElementById(dropdownId);
@@ -130,7 +171,7 @@
         const gear = hero.Loadouts[defaultLoadout];
 
         heroBox.innerHTML = `
-          <h2>${hero.Hero} <br><span style="font-size: 0.7em;">(${role})</span></h2>
+          <h2>${hero.Hero}<br> <span style="font-size: 0.7em;">(${role})</span></h2>
           <label for="loadout-${hero.Hero}">Loadout:</label>
           <select class="hero-loadout" data-hero="${hero.Hero}" onchange="updateDynamicGear(this)">
             ${loadoutKeys.map(key => `<option value="${key}">${key}</option>`).join('')}
@@ -144,14 +185,34 @@
     }
 
     function renderGearDetails(gear) {
-      return `
-        <p><strong>Assault Pistol:<br></strong> ${gear.Gun}</p>
-        <p><strong>Tactical Backarmor:<br></strong> ${gear.Chest}</p>
-        <p><strong>Optical Add-on:<br></strong> ${gear.Optical}</p>
-        <p><strong>Raytheon Headset:<br></strong> ${gear.Headset}</p>
-        <p><strong>Portable GPS:<br></strong> ${gear.Arms}</p>
-        <p><strong>Power Boots:<br></strong> ${gear.Boots}</p>
-      `;
+      const displayNames = {
+        Gun: 'Assault Pistol',
+        Chest: 'Tactical Backarmor',
+        Optical: 'Optical Add-on',
+        Headset: 'Raytheon Headset',
+        Arms: 'Portable GPS',
+        Boots: 'Power Boots'
+      };
+
+      const slotOrder = [
+        ['Gun', 'Headset'],
+        ['Chest', 'Arms'],
+        ['Optical', 'Boots']
+      ];
+
+      return `<div class="gear-grid">` + slotOrder.map(pair => {
+        return pair.map(slot => {
+          const rune = gear[slot];
+          const iconPath = `images/runes/${rune}.png`;
+          return `
+            <div class="gear-slot">
+              <p><strong>${displayNames[slot]}</strong></p>
+              <img src="${iconPath}" alt="${rune}" title="${rune}" />
+              <p>${rune}</p>
+            </div>
+          `;
+        }).join('');
+      }).join('') + `</div>`;
     }
 
     function updateDynamicGear(selectElement) {
