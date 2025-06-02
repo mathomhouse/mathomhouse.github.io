@@ -133,7 +133,6 @@
       populateDropdown('heroIndestructible', indestructibleHeroes);
     }
 
-
     function populateDropdown(dropdownId, heroList) {
       const select = document.getElementById(dropdownId);
       select.innerHTML = "";
@@ -145,6 +144,8 @@
         select.appendChild(option);
       });
     }
+
+    // UPDATED showGear and renderGearDetails go here
 
     function showGear() {
       const selections = [
@@ -167,19 +168,31 @@
         heroBox.dataset.hero = hero.Hero;
 
         const loadoutKeys = Object.keys(hero.Loadouts);
-        const defaultLoadout = loadoutKeys[0];
-        const gear = hero.Loadouts[defaultLoadout];
+
+        // Try to preserve previous selected loadout (if any)
+        const existingSelect = document.querySelector(`select.hero-loadout[data-hero="${hero.Hero}"]`);
+        let selectedLoadout = loadoutKeys[0];
+
+        if (existingSelect) {
+          const currentSelection = existingSelect.value;
+          if (loadoutKeys.includes(currentSelection)) {
+            selectedLoadout = currentSelection;
+          }
+        }
+
+        const gear = hero.Loadouts[selectedLoadout];
 
         heroBox.innerHTML = `
           <h2>${hero.Hero}<br> <span style="font-size: 0.7em;">(${role})</span></h2>
           <label for="loadout-${hero.Hero}">Loadout:</label>
           <select class="hero-loadout" data-hero="${hero.Hero}" onchange="updateDynamicGear(this)">
-            ${loadoutKeys.map(key => `<option value="${key}">${key}</option>`).join('')}
+            ${loadoutKeys.map(key => `<option value="${key}" ${key === selectedLoadout ? 'selected' : ''}>${key}</option>`).join('')}
           </select>
           <div class="gear-details" id="gear-${hero.Hero}">
             ${renderGearDetails(gear)}
           </div>
         `;
+
         resultsDiv.appendChild(heroBox);
       });
     }
@@ -200,7 +213,6 @@
         ['Optical', 'Boots']
       ];
 
-      // Build the gear grid
       let gridHtml = `<div class="gear-grid">` + slotOrder.map(pair => {
         return pair.map(slot => {
           const rune = gear[slot];
@@ -228,8 +240,7 @@
       }
 
       return gridHtml;
-}
-
+    }
 
     function updateDynamicGear(selectElement) {
       const heroName = selectElement.dataset.hero;
