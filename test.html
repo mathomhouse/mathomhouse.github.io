@@ -153,12 +153,19 @@
         { role: "Indestructible", id: "heroIndestructible" }
       ];
 
+      const selectedBranch = document.getElementById('branch').value;
+
       const resultsDiv = document.getElementById('results');
       resultsDiv.innerHTML = '';
 
       selections.forEach(({ role, id }) => {
         const heroName = document.getElementById(id).value.trim();
-        const hero = titanGearData.find(item => item.Hero.trim() === heroName);
+
+        // IMPORTANT: Now match BOTH Hero name AND Branch!
+        const hero = titanGearData.find(item =>
+          item.Hero.trim() === heroName &&
+          item.Branch === selectedBranch
+        );
 
         if (!hero || !hero.Loadouts) return;
 
@@ -183,6 +190,7 @@
         resultsDiv.appendChild(heroBox);
       });
     }
+
 
     function renderGearDetails(gear) {
   const displayNames = {
@@ -235,7 +243,13 @@
       const heroName = selectElement.dataset.hero;
       const selectedLoadout = selectElement.value;
 
-      const hero = titanGearData.find(item => item.Hero.trim() === heroName);
+      const selectedBranch = document.getElementById('branch').value;
+
+      const hero = titanGearData.find(item =>
+        item.Hero.trim() === heroName &&
+        item.Branch === selectedBranch
+      );
+
       const gear = hero?.Loadouts?.[selectedLoadout];
 
       const gearDiv = document.getElementById(`gear-${heroName}`);
@@ -243,6 +257,7 @@
         gearDiv.innerHTML = renderGearDetails(gear);
       }
     }
+
   </script>
 </body>
 </html>
