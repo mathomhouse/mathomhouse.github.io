@@ -200,7 +200,8 @@
         ['Optical', 'Boots']
       ];
 
-      return `<div class="gear-grid">` + slotOrder.map(pair => {
+      // Build the gear grid
+      let gridHtml = `<div class="gear-grid">` + slotOrder.map(pair => {
         return pair.map(slot => {
           const rune = gear[slot];
           const iconPath = `images/runes/${rune}.png`;
@@ -213,7 +214,22 @@
           `;
         }).join('');
       }).join('') + `</div>`;
-    }
+
+      // Add Suggested Combos (if present)
+      const suggestedCombosRaw = gear['SuggestedCombos']?.trim();
+      if (suggestedCombosRaw) {
+        const combos = suggestedCombosRaw.split('\n').map(c => c.trim());
+        gridHtml += `
+          <div class="suggested-combos" style="margin-top: 12px; font-size: 0.9em; color: #555; text-align: left;">
+            <strong>Suggested Hero Combos:</strong><br>
+            ${combos.map(combo => `• ${combo}<br>`).join('')}
+          </div>
+        `;
+      }
+
+      return gridHtml;
+}
+
 
     function updateDynamicGear(selectElement) {
       const heroName = selectElement.dataset.hero;
