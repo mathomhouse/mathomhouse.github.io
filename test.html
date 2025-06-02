@@ -69,7 +69,7 @@
     <select id="heroIndestructible"></select>
 
     <div class="calculate-btn">
-      <button onclick="showAllGear()">Show / Update Gear</button>
+      <button onclick="showGear()">Show Optimal Gear</button>
     </div>
 
     <div id="results" class="gear-container"></div>
@@ -81,33 +81,34 @@
     const liveUrl = 'https://script.google.com/macros/s/AKfycbw5qdmm2p_5lCMlfWlxAWfWy6jcZwsBt5RSDXttvWxfag150xb-hPJlceEs6mcyrNvJgQ/exec';
     const fallbackUrl = 'titan-gear-data.json';
 
-    // Load data cleanly using async/await
-    async function loadData() {
-      try {
-        const res = await fetch(liveUrl);
+    fetch(liveUrl)
+      .then(res => {
         if (!res.ok) throw new Error("Live data unavailable");
-        titanGearData = await res.json();
+        return res.json();
+      })
+      .then(data => {
         console.log("Loaded live data");
-      } catch (err) {
+        titanGearData = data;
+        filterHeroesByRole();
+      })
+      .catch(err => {
         console.warn("Falling back to static data:", err.message);
-        try {
-          const res = await fetch(fallbackUrl);
-          titanGearData = await res.json();
-          console.log("Loaded static fallback data");
-        } catch (fallbackErr) {
-          console.error("Static fallback failed too!", fallbackErr);
-        }
-      }
-
-      // Now populate branch dropdowns
-      filterHeroesByRole();
-    }
-
-    loadData();
+        fetch(fallbackUrl)
+          .then(res => res.json())
+          .then(data => {
+            console.log("Loaded static fallback data");
+            titanGearData = data;
+            filterHeroesByRole();
+          })
+          .catch(err => {
+            console.error("Static fallback failed too!", err);
+          });
+      });
 
     function filterHeroesByRole() {
       const branch = document.getElementById('branch').value;
 
+      // Prevent population if no branch is selected
       if (!branch) {
         populateDropdown('heroAttack', []);
         populateDropdown('heroHP', []);
@@ -132,20 +133,20 @@
       populateDropdown('heroIndestructible', indestructibleHeroes);
     }
 
+
     function populateDropdown(dropdownId, heroList) {
       const select = document.getElementById(dropdownId);
       select.innerHTML = "";
 
-      heroList.forEach((hero, index) => {
+      heroList.forEach(hero => {
         const option = document.createElement("option");
         option.value = hero;
         option.textContent = hero;
-        if (index === 0) option.selected = true;
         select.appendChild(option);
       });
     }
 
-    function showAllGear() {
+    function showGear() {
       const selections = [
         { role: "Attack", id: "heroAttack" },
         { role: "HP", id: "heroHP" },
@@ -157,45 +158,30 @@
 
       selections.forEach(({ role, id }) => {
         const heroName = document.getElementById(id).value.trim();
-        if (heroName) {
-          updateGearForHero(heroName, role);
-        }
+        const hero = titanGearData.find(item => item.Hero.trim() === heroName);
+
+        if (!hero || !hero.Loadouts) return;
+
+        const heroBox = document.createElement('div');
+        heroBox.className = 'gear-box';
+        heroBox.dataset.hero = hero.Hero;
+
+        const loadoutKeys = Object.keys(hero.Loadouts);
+        const defaultLoadout = loadoutKeys[0];
+        const gear = hero.Loadouts[defaultLoadout];
+
+        heroBox.innerHTML = `
+          <h2>${hero.Hero}<br> <span style="font-size: 0.7em;">(${role})</span></h2>
+          <label for="loadout-${hero.Hero}">Loadout:</label>
+          <select class="hero-loadout" data-hero="${hero.Hero}" onchange="updateDynamicGear(this)">
+            ${loadoutKeys.map(key => `<option value="${key}">${key}</option>`).join('')}
+          </select>
+          <div class="gear-details" id="gear-${hero.Hero}">
+            ${renderGearDetails(gear)}
+          </div>
+        `;
+        resultsDiv.appendChild(heroBox);
       });
-    }
-
-    function updateGearForHero(heroName, role) {
-      const hero = titanGearData.find(item => item.Hero.trim() === heroName);
-      if (!hero || !hero.Loadouts) return;
-
-      const loadoutKeys = Object.keys(hero.Loadouts);
-      let selectedLoadout = loadoutKeys[0];
-
-      const existingSelect = document.querySelector(`select.hero-loadout[data-hero="${hero.Hero}"]`);
-      if (existingSelect) {
-        const currentSelection = existingSelect.value;
-        if (loadoutKeys.includes(currentSelection)) {
-          selectedLoadout = currentSelection;
-        }
-      }
-
-      const gear = hero.Loadouts[selectedLoadout];
-
-      const heroBox = document.createElement('div');
-      heroBox.className = 'gear-box';
-      heroBox.dataset.hero = hero.Hero;
-
-      heroBox.innerHTML = `
-        <h2>${hero.Hero}<br> <span style="font-size: 0.7em;">(${role})</span></h2>
-        <label for="loadout-${hero.Hero}">Loadout:</label>
-        <select class="hero-loadout" data-hero="${hero.Hero}" onchange="updateGearForHero('${hero.Hero}', '${role}')">
-          ${loadoutKeys.map(key => `<option value="${key}" ${key === selectedLoadout ? 'selected' : ''}>${key}</option>`).join('')}
-        </select>
-        <div class="gear-details" id="gear-${hero.Hero}">
-          ${renderGearDetails(gear)}
-        </div>
-      `;
-
-      document.getElementById('results').appendChild(heroBox);
     }
 
     function renderGearDetails(gear) {
@@ -214,7 +200,7 @@
         ['Optical', 'Boots']
       ];
 
-      let gridHtml = `<div class="gear-grid">` + slotOrder.map(pair => {
+      return `<div class="gear-grid">` + slotOrder.map(pair => {
         return pair.map(slot => {
           const rune = gear[slot];
           const iconPath = `images/runes/${rune}.png`;
@@ -227,19 +213,19 @@
           `;
         }).join('');
       }).join('') + `</div>`;
+    }
 
-      const suggestedCombosRaw = gear['SuggestedCombos']?.trim();
-      if (suggestedCombosRaw) {
-        const combos = suggestedCombosRaw.split('\n').map(c => c.trim());
-        gridHtml += `
-          <div class="suggested-combos" style="margin-top: 12px; font-size: 0.9em; color: #555; text-align: left;">
-            <strong>Suggested Hero Combos:</strong><br>
-            ${combos.map(combo => `• ${combo}<br>`).join('')}
-          </div>
-        `;
+    function updateDynamicGear(selectElement) {
+      const heroName = selectElement.dataset.hero;
+      const selectedLoadout = selectElement.value;
+
+      const hero = titanGearData.find(item => item.Hero.trim() === heroName);
+      const gear = hero?.Loadouts?.[selectedLoadout];
+
+      const gearDiv = document.getElementById(`gear-${heroName}`);
+      if (gearDiv && gear) {
+        gearDiv.innerHTML = renderGearDetails(gear);
       }
-
-      return gridHtml;
     }
   </script>
 </body>
