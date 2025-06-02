@@ -168,7 +168,18 @@
     heroBox.dataset.hero = hero.Hero;
 
     const loadoutKeys = Object.keys(hero.Loadouts);
-    const selectedLoadout = loadoutKeys[0];
+
+    // Try to preserve previous selected loadout (if any)
+    let selectedLoadout = loadoutKeys[0];
+
+    const existingSelect = document.querySelector(`select.hero-loadout[data-hero="${hero.Hero}"]`);
+    if (existingSelect) {
+      const currentSelection = existingSelect.value;
+      if (loadoutKeys.includes(currentSelection)) {
+        selectedLoadout = currentSelection;
+      }
+    }
+
     const gear = hero.Loadouts[selectedLoadout];
 
     heroBox.innerHTML = `
