@@ -185,7 +185,7 @@
     heroBox.innerHTML = `
       <h2>${hero.Hero}<br> <span style="font-size: 0.7em;">(${role})</span></h2>
       <label for="loadout-${hero.Hero}">Loadout:</label>
-      <select class="hero-loadout" data-hero="${hero.Hero}">
+      <select class="hero-loadout" data-hero="${hero.Hero}" onchange="showGear()">
         ${loadoutKeys.map(key => `<option value="${key}" ${key === selectedLoadout ? 'selected' : ''}>${key}</option>`).join('')}
       </select>
       <div class="gear-details" id="gear-${hero.Hero}">
@@ -196,6 +196,9 @@
     resultsDiv.appendChild(heroBox);
   });
 }
+
+// Update button text in HTML:
+// <button onclick="showGear()">Show / Update Gear</button>
 
 
     function renderGearDetails(gear) {
