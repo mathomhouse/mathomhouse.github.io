@@ -226,7 +226,7 @@
   // Add Suggested Combos (if present)
   const suggestedCombosRaw = gear['SuggestedCombos']?.trim();
   if (suggestedCombosRaw) {
-    const combos = suggestedCombosRaw.split('\n').map(c => c.trim());
+    const combos = suggestedCombosRaw.split(/\r?\n/).map(c => c.trim());
     gridHtml += `
       <div class="suggested-combos" style="margin-top: 12px; font-size: 0.9em; color: #555; text-align: left;">
         <strong>Suggested Hero Combos:</strong><br>
