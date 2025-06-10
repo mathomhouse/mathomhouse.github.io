@@ -35,11 +35,26 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll('.section').forEach(section => observer.observe(section));
 
 function filterGuides() {
-  const search = document.getElementById('guideSearch').value.toLowerCase();
-  document.querySelectorAll('.cards-grid .card').forEach(card => {
-    const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
-    const description = card.querySelector('p')?.textContent.toLowerCase() || '';
-    const matches = title.includes(search) || description.includes(search);
-    card.style.display = matches ? 'block' : 'none';
+  const query = document.getElementById('guideSearch').value.toLowerCase();
+  const sections = document.querySelectorAll('.section');
+
+  sections.forEach(section => {
+    const cards = section.querySelectorAll('.card');
+    let sectionHasVisibleCard = false;
+
+    cards.forEach(card => {
+      const title = card.querySelector('h3').textContent.toLowerCase();
+      const content = card.querySelector('p').textContent.toLowerCase();
+      const isMatch = title.includes(query) || content.includes(query);
+
+      card.classList.toggle('hidden', !isMatch);
+
+      if (isMatch) sectionHasVisibleCard = true;
+    });
+
+    // Skip 'home' section (navigation/search)
+    if (section.id !== 'home') {
+      section.classList.toggle('hidden', !sectionHasVisibleCard);
+    }
   });
 }

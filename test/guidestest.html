@@ -5,6 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guides</title>
   <link rel="stylesheet" href="/styles/index.css">
+  <style>
+    /* For fade/slide effect */
+    .section,
+    .card {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    /* Hidden class for smooth hiding */
+    .hidden {
+      opacity: 0;
+      transform: scaleY(0);
+      height: 0;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      pointer-events: none;
+    }
+  </style>
   <script src="header2.js" defer></script>
 </head>
 <body>
