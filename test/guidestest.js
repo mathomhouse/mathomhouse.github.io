@@ -45,16 +45,16 @@ function filterGuides() {
     cards.forEach(card => {
       const title = card.querySelector('h3').textContent.toLowerCase();
       const content = card.querySelector('p').textContent.toLowerCase();
-      const isMatch = title.includes(query) || content.includes(query);
+      const keywords = card.dataset.keywords?.toLowerCase() || '';
+      const isMatch = title.includes(query) || content.includes(query) || keywords.includes(query);
 
       card.classList.toggle('hidden', !isMatch);
-
       if (isMatch) sectionHasVisibleCard = true;
     });
 
-    // Skip 'home' section (navigation/search)
     if (section.id !== 'home') {
       section.classList.toggle('hidden', !sectionHasVisibleCard);
     }
   });
 }
+
