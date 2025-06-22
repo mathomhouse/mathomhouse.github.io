@@ -14,9 +14,11 @@
     <div class="container">
         <h1>Passive Hero Buffs</h1>
         <p>
-            Some heroes provide passive buffs at specific star or exclusive skill levels. Choose a skill category to view
+            Some heroes provide passive buffs at specific star or exclusive skill levels. Choose a skill category to
+            view
             the list of heroes that provide buffs within that category.
-            This guide was born from an idea by lexisdoll. It was originally made by Maymi, and has since been updated by artu.
+            This guide was born from an idea by lexisdoll. It was originally made by Maymi, and has since been updated
+            by artu.
         </p>
 
         <label for="skillsSelect">Select a skill category: </label>
@@ -26,10 +28,10 @@
             <option value="skillsNonCombat">Non-Combat Skills</option>
             <option value="skillsGathering">Gathering Skills</option>
         </select>
-        <h2>Passive Hero Buffs</h2>
         <div class="table-container">
             <table id="skillsCombat" hidden="true">
                 <thead>
+                    <tr>Combat Skills</tr>
                     <tr>
                         <th>Hero</th>
                         <th>Exclusive Skill Level</th>
@@ -323,6 +325,7 @@
             </table>
             <table id="skillsNonCombat" hidden="true">
                 <thead>
+                    <tr>Non-Combat Skills</tr>
                     <tr>
                         <th>Hero</th>
                         <th>Exclusive Skill Level</th>
@@ -477,29 +480,104 @@
             </table>
             <table id="skillsGathering" hidden="true">
                 <thead>
-                  <tr>
-                    <th>Hero</th>
-                    <th>Exclusive Skill Level</th>
-                    <th>Buff</th>
-                    <th>Skill Shards per Lvl</th>
-                    <th>Skill Shards</th>
-                  </tr>
+                    <tr>Gathering Skills</tr>
+                    <tr>
+                        <th>Hero</th>
+                        <th>Exclusive Skill Level</th>
+                        <th>Buff</th>
+                        <th>Skill Shards per Lvl</th>
+                        <th>Skill Shards</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr><td>Tywin</td><td>3</td><td>Increase gathering speed on the World Map 15%</td><td>15</td><td>135.0</td></tr>
-                  <tr><td></td><td>5</td><td>Increase gathering speed on the World Map 30%</td><td>15</td><td>1215.0</td></tr>
-                  <tr><td></td><td>7</td><td>Increase gathering speed on the World Map 60%</td><td>15</td><td>10935.0</td></tr>
-                  <tr><td>Ganso</td><td>3</td><td>Increase gathering speed on the World Map 15%</td><td>15</td><td>135.0</td></tr>
-                  <tr><td></td><td>5</td><td>Increase gathering speed on the World Map 30%</td><td>15</td><td>1215.0</td></tr>
-                  <tr><td></td><td>7</td><td>Increase gathering speed on the World Map 60%</td><td>15</td><td>10935.0</td></tr>
-                  <tr><td>Kate Curry</td><td>x</td><td>Increase gathering speed<br>Increases by 0.04% every 100 Hero DEF</td><td>(increase through star and XP levels)</td><td></td></tr>
-                  <tr><td>Ishi Tarou</td><td>x</td><td>Increase gathering speed<br>Increases by 0.05% every 100 Hero DEF</td><td>(increase through star and XP levels)</td><td></td></tr>
-                  <tr><td>Delhuyar</td><td>x</td><td>Increase gathering speed<br>Increases gathering speed by 0.04% per 100 Hero DEF<br>Increases Odinium gathering speed by 0.06% per 100 Hero DEF</td><td>(increase through star and XP levels)</td><td></td></tr>
-                  <tr><td>Lancaster</td><td>all</td><td>Increase Odinium gathering speed 30% (without es)<br>Gathering speed further increases with every es level: (5, 10, 16, 25, 35, 50, 70, 100, 150, 250%)</td><td>25</td><td></td></tr>
-                  <tr><td>Black Widow</td><td>x</td><td>Increase gathering speed<br>Increases by 0.07% every 100 Hero DEF</td><td>(increase through star and XP levels)</td><td></td></tr>
-                  <tr><td>Flora</td><td>x</td><td>Increase gathering speed<br>Increases by 0.04% every 100 Hero DEF</td><td>(increase through star and XP levels)</td><td></td></tr>
+                    <tr>
+                        <td>Tywin</td>
+                        <td>3</td>
+                        <td>Increase gathering speed on the World Map 15%</td>
+                        <td>15</td>
+                        <td>135.0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>5</td>
+                        <td>Increase gathering speed on the World Map 30%</td>
+                        <td>15</td>
+                        <td>1215.0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>7</td>
+                        <td>Increase gathering speed on the World Map 60%</td>
+                        <td>15</td>
+                        <td>10935.0</td>
+                    </tr>
+                    <tr>
+                        <td>Ganso</td>
+                        <td>3</td>
+                        <td>Increase gathering speed on the World Map 15%</td>
+                        <td>15</td>
+                        <td>135.0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>5</td>
+                        <td>Increase gathering speed on the World Map 30%</td>
+                        <td>15</td>
+                        <td>1215.0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>7</td>
+                        <td>Increase gathering speed on the World Map 60%</td>
+                        <td>15</td>
+                        <td>10935.0</td>
+                    </tr>
+                    <tr>
+                        <td>Kate Curry</td>
+                        <td>x</td>
+                        <td>Increase gathering speed<br>Increases by 0.04% every 100 Hero DEF</td>
+                        <td>(increase through star and XP levels)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Ishi Tarou</td>
+                        <td>x</td>
+                        <td>Increase gathering speed<br>Increases by 0.05% every 100 Hero DEF</td>
+                        <td>(increase through star and XP levels)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Delhuyar</td>
+                        <td>x</td>
+                        <td>Increase gathering speed<br>Increases gathering speed by 0.04% per 100 Hero DEF<br>Increases
+                            Odinium gathering speed by 0.06% per 100 Hero DEF</td>
+                        <td>(increase through star and XP levels)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Lancaster</td>
+                        <td>all</td>
+                        <td>Increase Odinium gathering speed 30% (without es)<br>Gathering speed further increases with
+                            every es level: (5, 10, 16, 25, 35, 50, 70, 100, 150, 250%)</td>
+                        <td>25</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Black Widow</td>
+                        <td>x</td>
+                        <td>Increase gathering speed<br>Increases by 0.07% every 100 Hero DEF</td>
+                        <td>(increase through star and XP levels)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Flora</td>
+                        <td>x</td>
+                        <td>Increase gathering speed<br>Increases by 0.04% every 100 Hero DEF</td>
+                        <td>(increase through star and XP levels)</td>
+                        <td></td>
+                    </tr>
                 </tbody>
-              </table>
+            </table>
         </div>
     </div>
     <script src="/scripts/passiveheroskills.js"></script>
