@@ -12,22 +12,14 @@
 <body>
     <header id="header-placeholder"></header>
     <div class="container">
-        <h1>Guide Title Here</h1>
-
+        <h1>Passive Hero Buffs</h1>
         <p>
-            This is the introductory paragraph. Use this space to explain the purpose of the guide or summarize key
-            points.
+            Some heroes provide passive buffs at specific star or exclusive skill levels. Choose a skill category to view
+            the list of heroes that provide buffs within that category.
+            This guide was born from an idea by lexisdoll. It was originally made by Maymi, and has since been updated by artu.
         </p>
 
-        <h2>Section Header</h2>
-        <p>
-            Here's where you put more detailed text for the section. You can use additional <strong>bold text</strong>
-            or <em>italic text</em> as needed.
-        </p>
-
-        <!-- Optional Image -->
-        <img src="path-to-image.jpg" alt="Descriptive Alt Text"
-            style="max-width: 100%; border-radius: 8px; margin: 20px 0;" />
+        <label for="skillsSelect">Select a skill category: </label>
         <select id="skillsSelect" onchange="showTable()">
             <option value="">Select</option>
             <option value="skillsCombat">Combat Skills</option>
@@ -508,16 +500,7 @@
                   <tr><td>Flora</td><td>x</td><td>Increase gathering speed<br>Increases by 0.04% every 100 Hero DEF</td><td>(increase through star and XP levels)</td><td></td></tr>
                 </tbody>
               </table>
-              
-
         </div>
-
-        <h2>Conclusion</h2>
-        <p>
-            Wrap up your guide here. Offer final tips, link to related resources, or provide encouragement.
-        </p>
-
-        <div class="div-buffer"></div>
     </div>
     <script src="/scripts/passiveheroskills.js"></script>
 </body>
