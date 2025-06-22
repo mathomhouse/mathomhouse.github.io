@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guides</title>
+  <link rel="stylesheet" href="/styles/index.css">
+  <style>
+    /* For fade/slide effect */
+    .section,
+    .card {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    /* Hidden class for smooth hiding */
+    .hidden {
+      opacity: 0;
+      transform: scaleY(0);
+      height: 0;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      pointer-events: none;
+    }
+  </style>
+  <script src="/header.js" defer></script>
+</head>
+<body>
+  <header id="header-placeholder"></header>
+  <section class="hero-blurb">
+    <div class="blurb-container">
+      <p>
+        This page is under construction. What you see may not yet be an active link, or is a placeholder. In time, this will be a searchable guide for all your Top War needs.<br><br>
+        If you have any suggestions for guides or information you think would be useful, please submit that feedback <a href="/index.html#feedback">here</a>!
+      </p>
+    </div>
+  </section>
+
+<section id="home" class="section">
+  <div class="main-links">
+    <a href="#heavytrooper">Heavy Trooper</a>
+    <a href="#titangear">Titan Gear</a>
+    <a href="#heroes">Heroes</a>
+  </div>
+  <div class="search-bar">
+    <input type="text" id="guideSearch" placeholder="Filter guides..." oninput="filterGuides()">
+  </div>
+</section>
+
+<section id="heavytrooper" class="section">
+  <h2 class="section-title">Heavy Trooper</h2>
+  <div class="cards-grid">
+    <div class="card"><h3>Army HT</h3><p>General info about army HT.</p></div>
+    <div class="card" data-keywords="navy heavy trooper">
+      <h3>Navy HT</h3>
+      <p>Navy strategies for HT.</p>
+    </div>
+    <div class="card"><h3>Air Force HT</h3><p>AF strategies for HT.</p></div>
+  </div>
+</section>
+
+<section id="titangear" class="section">
+  <h2 class="section-title">Titan Gear</h2>
+  <div class="cards-grid">
+    <div class="card"><h3>Army Titan Gear</h3><p>Details about army titan gear.</p></div>
+    <div class="card"><h3>Navy Titan Gear</h3><p>Navy-specific titan tips.</p></div>
+    <div class="card"><h3>Air Force Titan Gear</h3><p>AF titan gear breakdown.</p></div>
+  </div>
+</section>
+
+<section id="heroes" class="section">
+  <h2 class="section-title">Heroes</h2>
+  <div class="cards-grid">
+    <div class="card"><h3>Army Heroes</h3><p>Top army hero picks.</p></div>
+    <div class="card"><h3>Navy Heroes</h3><p>Navy hero synergies.</p></div>
+    <div class="card"><h3>Air Force Heroes</h3><p>AF hero recommendations.</p></div>
+  </div>
+</section>
+
+<button id="backToTop" onclick="scrollToTop()">↑</button>
+
+<script src="guides.js"></script>
+</body>
+</html>
