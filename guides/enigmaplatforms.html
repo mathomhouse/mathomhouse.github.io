@@ -15,10 +15,15 @@
     <p>
       This is the introductory paragraph. Use this space to explain the purpose of the guide or summarize key points.
     </p>
+    <select id="enigmaSelect" onchange="showTable()">
+            <option value="">Select</option>
+            <option value="enigmaComponent">Component</option>
+            <option value="enigmaFormation">Formation</option>
+            <option value="enigmaEquipment">Equipment</option>
+        </select>
 
-    <h2>Component</h2>
     <div class="table-container">
-      <table border="1">
+      <table id = "enigmaComponent" hidden = "true">
   <thead>
     <tr>
       <th rowspan="2">Level</th>
@@ -62,9 +67,8 @@
 
 
     </div>
-<h2>Formation</h2>
 <div class="table-container">
-      <table border="1">
+      <table id = "enigmaFormation" hidden = "true">
   <thead>
     <tr>
       <th rowspan="2">Level</th>
@@ -113,10 +117,8 @@
 
 
     </div>    
-<h2>Equipment</h2>
 <div class="table-container">
-  <table border="1">
-  <thead>
+  <table id = "enigmaEquipment" hidden = "true">  <thead>
     <tr>
       <th rowspan="2">Level</th>
       <th colspan="2">SLOT 1</th>
@@ -169,6 +171,7 @@
 
     <div class="div-buffer"></div>
   </div>
+  <script src="/scripts/enigmaplatforms.js"></script>
 
 </body>
 </html>
