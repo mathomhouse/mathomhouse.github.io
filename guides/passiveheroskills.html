@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guide Title Here</title>
+    <link rel="stylesheet" href="/styles/index.css" />
+    <script src="/header.js" defer></script>
+</head>
+
+<body>
+    <header id="header-placeholder"></header>
+    <div class="container">
+        <h1>Guide Title Here</h1>
+
+        <p>
+            This is the introductory paragraph. Use this space to explain the purpose of the guide or summarize key
+            points.
+        </p>
+
+        <h2>Section Header</h2>
+        <p>
+            Here's where you put more detailed text for the section. You can use additional <strong>bold text</strong>
+            or <em>italic text</em> as needed.
+        </p>
+
+        <!-- Optional Image -->
+        <img src="path-to-image.jpg" alt="Descriptive Alt Text"
+            style="max-width: 100%; border-radius: 8px; margin: 20px 0;" />
+        <select id="skillsSelect" onchange="showTable()">
+            <option value="">Select</option>
+            <option value="skillsCombat">Combat Skills</option>
+            <option value="skillsNonCombat">Non-Combat Skills</option>
+            <option value="skillsGathering">Gathering Skills</option>
+        </select>
+        <h2>Passive Hero Buffs</h2>
+        <div class="table-container">
+            <table id="skillsCombat" hidden="true">
+                <thead>
+                    <tr>
+                        <th>Hero</th>
+                        <th>Exclusive Skill Level</th>
+                        <th>Buff</th>
+                        <th>Skill Shards per Lvl</th>
+                        <th>Skill Shards</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Silence</td>
+                        <td>3</td>
+                        <td>DMG increase all units 3%</td>
+                        <td>30</td>
+                        <td>270.0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>5</td>
+                        <td>DMG increase all units 7%</td>
+                        <td></td>
+                        <td>2430.0</td>
+                    </tr>
+                    <tr>
+                        <td>Maximo</td>
+                        <td>5</td>
+                        <td>DMG decreased taken all units 3%</td>
+                        <td>25</td>
+                        <td>2025.0</td>
+                    </tr>
+                    <tr>
+                        <td>Piedmont</td>
+                        <td>5</td>
+                        <td>DMG decreased taken all units 1%</td>
+                        <td>15</td>
+                        <td>1215.0</td>
+                    </tr>
+                    <tr>
+                        <td>Megatron</td>
+                        <td>3</td>
+                        <td>DMG decreased taken all units 3%</td>
+                        <td>25</td>
+                        <td>225.0</td>
+                    </tr>
+                    <tr>
+                        <td>Akatora</td>
+                        <td>5</td>
+                        <td>DMG decreased taken all units 2%</td>
+                        <td>25</td>
+                        <td>2025.0</td>
+                    </tr>
+                    <tr>
+                        <td>Selina</td>
+                        <td>5</td>
+                        <td>DMG decreased taken all units 3%</td>
+                        <td>25</td>
+                        <td>2025.0</td>
+                    </tr>
+                    <tr>
+                        <td>Bailos</td>
+                        <td>5</td>
+                        <td>All heroes WAR +120</td>
+                        <td>25</td>
+                        <td>2025.0</td>
+                    </tr>
+                    <tr>
+                        <td>Preycis</td>
+                        <td>5</td>
+                        <td>DMG increase all units 3%</td>
+                        <td>25</td>
+                        <td>2025.0</td>
+                    </tr>
+                    <tr>
+                        <td>Yuu</td>
+                        <td>5</td>
+                        <td>DMG increase all units 3%</td>
+                        <td>25</td>
+                        <td>2025.0</td>
+                    </tr>
+                    <tr>
+                        <td>Mei</td>
+                        <td>5</td>
+                        <td>DMG increase all units 3%</td>
+                        <td>25</td>
+                        <td>2025.0</td>
+                    </tr>
+                    <tr>
+                        <td>Optimus</td>
+                        <td>5</td>
+                        <td>All heroes DEF +200</td>
+                        <td>25</td>
+                        <td>2025.0</td>
+                    </tr>
+                    <tr>
+                        <td>Aya</td>
+                        <td>5</td>
+                        <td>DMG increase all units 2%</td>
+                        <td>25</td>
+                        <td>2025.0</td>
+                    </tr>
+                    <tr>
+                        <td>Comedy Consortium</td>
+                        <td>7</td>
+                        <td>Relax Effect: decreased DMG taken all units 4%</td>
+                        <td>10</td>
+                        <td>7290.0</td>
+                    </tr>
+                    <tr>
+                        <td>Starscream</td>
+                        <td>7</td>
+                        <td>DMG decreased taken all units 2%</td>
+                        <td>10</td>
+                        <td>7290.0</td>
+                    </tr>
+                    <tr>
+                        <td>Arcee</td>
+                        <td>7</td>
+                        <td>DMG decreased taken all units 3%</td>
+                        <td>15</td>
+                        <td>10935.0</td>
+                    </tr>
+                    <tr>
+                        <td>Nereid</td>
+                        <td>7</td>
+                        <td>DMG decreased taken all units 3%</td>
+                        <td>25</td>
+                        <td>18225.0</td>
+                    </tr>
+                    <tr>
+                        <td>Cherno Alpha</td>
+                        <td>Reinforced lvl5</td>
+                        <td>DMG decreased taken (4% reinforced effect)</td>
+                        <td>25</td>
+                        <td>2025.0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Reinforced lvl7</td>
+                        <td>DMG decreased taken (12% reinforced effect)</td>
+                        <td>25</td>
+                        <td>18225.0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Focus</td>
+                        <td>ATK of all units (1,2,6,10,16,22,30,40,60,90%)</td>
+                        <td>(increase through exl. skill level)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Steadfast</td>
+                        <td>increased HP of all units (2,6,12,20,30%)</td>
+                        <td>(increase through star level)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Mercury</td>
+                        <td>Letter from Home</td>
+                        <td>increased HP of all units (2,6,12,20,30%)</td>
+                        <td>(increase through star level)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Good News</td>
+                        <td>ATK of all units (1,2,6,10,16,22,30,40,60,90%)</td>
+                        <td>(increase through exl. skill level)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Master Plan Lvl5</td>
+                        <td>Capacity of Hangar, Garage, Dock (20% master plan effect)</td>
+                        <td>25</td>
+                        <td>2025.0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>War Letter Lvl7</td>
+                        <td>increases DMG increase (15% war letter effect)</td>
+                        <td>25</td>
+                        <td>18225.0</td>
+                    </tr>
+                    <tr>
+                        <td>Kaworu Nagisa</td>
+                        <td>Annihilation Lvl5</td>
+                        <td>increases DMG increase (3% annihilation effect)</td>
+                        <td>25</td>
+                        <td>2025.0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Annihilation Lvl7</td>
+                        <td>increases DMG increase (10% annihilation effect)</td>
+                        <td>25</td>
+                        <td>18225.0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Coexistence</td>
+                        <td>ATK of all units (1,2,6,10,16,22,30,40,60,90%)</td>
+                        <td>(increase through exl. skill level)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Beserk</td>
+                        <td>increased HP of all units (2,6,12,20,30%)</td>
+                        <td>(increase through star level)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Shaq</td>
+                        <td>Domination Effect Lvl5</td>
+                        <td>increases HP and ATK of all units (2% domination effect)</td>
+                        <td>25</td>
+                        <td>2025.0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Major Impact Lvl7</td>
+                        <td>increases DMG increase and decrease (2% major impact effect)</td>
+                        <td>25</td>
+                        <td>18225.0</td>
+                    </tr>
+                    <tr>
+                        <td>Roadblock</td>
+                        <td>Guard Duty lvl5</td>
+                        <td>DMG decreased taken (4% Guard Duty effect)</td>
+                        <td>25</td>
+                        <td>2025.0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Guard Duty Lvl7</td>
+                        <td>DMG decreased taken (12% Guard Duty effect)</td>
+                        <td>25</td>
+                        <td>18225.0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Feast</td>
+                        <td>increased HP of all units (1,3,6,10,15,21,30,40,60,90%)</td>
+                        <td>(increase through exl. skill level)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Block</td>
+                        <td>increase ATK of all units (2,6,12,20,30%)</td>
+                        <td>(increase through star level)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Shifu</td>
+                        <td>Wisdom Lvl5</td>
+                        <td>increased DMG increase (4% Wisdom effect)</td>
+                        <td>25</td>
+                        <td>2025.0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Wisdom Lvl7</td>
+                        <td>increased DMG increase (12% Wisdom effect)</td>
+                        <td>25</td>
+                        <td>18225.0</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Harsh Training</td>
+                        <td>ATK of all units (1,3,6,10,15,22,30,40,60,90%)</td>
+                        <td>(increase through exl. skill level)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Meditation</td>
+                        <td>increased HP of all units (2,6,12,20,30%)</td>
+                        <td>(increase through star level)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Flora</td>
+                        <td>Heart</td>
+                        <td>increased HP of all units (0, 0.4, 0.8, 1.2, 1.6, 2%)</td>
+                        <td>(increase through star level)</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table id="skillsNonCombat" hidden="true">
+                <thead>
+                    <tr>
+                        <th>Hero</th>
+                        <th>Exclusive Skill Level</th>
+                        <th>Buff</th>
+                        <th>Skill Shards per Lvl</th>
+                        <th>Skill Shards</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Kuruzo</td>
+                        <td>x</td>
+                        <td>Train troops instantly<br>100 CMD = 4 units<br>5 stars = 84 units</td>
+                        <td>(increase through star and XP levels)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>3</td>
+                        <td>Train 10 extra troops</td>
+                        <td>15</td>
+                        <td>135</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>5</td>
+                        <td>Train 25 extra troops</td>
+                        <td>15</td>
+                        <td>1215</td>
+                    </tr>
+                    <tr>
+                        <td>Scaramanga</td>
+                        <td>x</td>
+                        <td>Train Valhalla troops instantly, at a reduced cost<br>Fast training: +3 valhallas for each
+                            star (1 star = 5 troops)<br>Repair cost: decreases an additional 0.02% every 100 WAR</td>
+                        <td>(increase through star and XP levels)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Lady Zizak</td>
+                        <td>3</td>
+                        <td>Increase Air Force training speed 15%</td>
+                        <td>15</td>
+                        <td>135</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>5</td>
+                        <td>Increase Air Force training speed 30%</td>
+                        <td>15</td>
+                        <td>1215</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>7</td>
+                        <td>Increase Air Force training speed 60%</td>
+                        <td>15</td>
+                        <td>10935</td>
+                    </tr>
+                    <tr>
+                        <td>Merida</td>
+                        <td>3</td>
+                        <td>Increase Navy training speed 15%</td>
+                        <td>15</td>
+                        <td>135</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>5</td>
+                        <td>Increase Navy training speed 30%</td>
+                        <td>15</td>
+                        <td>1215</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>7</td>
+                        <td>Increase Navy training speed 60%</td>
+                        <td>15</td>
+                        <td>10935</td>
+                    </tr>
+                    <tr>
+                        <td>Lancaster</td>
+                        <td>3</td>
+                        <td>Capacity of Hangar +5</td>
+                        <td>25</td>
+                        <td>225</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>5</td>
+                        <td>Daily free repair Air Force Vals +50</td>
+                        <td></td>
+                        <td>2025</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>7</td>
+                        <td>Capacity of Hangar +30</td>
+                        <td></td>
+                        <td>18225</td>
+                    </tr>
+                    <tr>
+                        <td>Pop</td>
+                        <td>3</td>
+                        <td>Repair factory capacity +6</td>
+                        <td>x</td>
+                        <td>x</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>5</td>
+                        <td>Repair factory capacity +12</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>7</td>
+                        <td>Repair factory capacity +20</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Mercury</td>
+                        <td>Letter from Home</td>
+                        <td>increased HP of all units (2,6,12,20,30%)</td>
+                        <td>(increase through star level)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Good News</td>
+                        <td>ATK of all units (1,2,6,10,16,22,30,40,60,90%)</td>
+                        <td>(increase through exl. skill level)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Master Plan Lvl5</td>
+                        <td>Capacity of Hangar, Garage, Dock (20% master plan effect)</td>
+                        <td>25</td>
+                        <td>2025</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>War Letter Lvl7</td>
+                        <td>increases DMG increase (15% war letter effect)</td>
+                        <td>25</td>
+                        <td>18225</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table id="skillsGathering" hidden="true">
+                <thead>
+                  <tr>
+                    <th>Hero</th>
+                    <th>Exclusive Skill Level</th>
+                    <th>Buff</th>
+                    <th>Skill Shards per Lvl</th>
+                    <th>Skill Shards</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Tywin</td><td>3</td><td>Increase gathering speed on the World Map 15%</td><td>15</td><td>135.0</td></tr>
+                  <tr><td></td><td>5</td><td>Increase gathering speed on the World Map 30%</td><td>15</td><td>1215.0</td></tr>
+                  <tr><td></td><td>7</td><td>Increase gathering speed on the World Map 60%</td><td>15</td><td>10935.0</td></tr>
+                  <tr><td>Ganso</td><td>3</td><td>Increase gathering speed on the World Map 15%</td><td>15</td><td>135.0</td></tr>
+                  <tr><td></td><td>5</td><td>Increase gathering speed on the World Map 30%</td><td>15</td><td>1215.0</td></tr>
+                  <tr><td></td><td>7</td><td>Increase gathering speed on the World Map 60%</td><td>15</td><td>10935.0</td></tr>
+                  <tr><td>Kate Curry</td><td>x</td><td>Increase gathering speed<br>Increases by 0.04% every 100 Hero DEF</td><td>(increase through star and XP levels)</td><td></td></tr>
+                  <tr><td>Ishi Tarou</td><td>x</td><td>Increase gathering speed<br>Increases by 0.05% every 100 Hero DEF</td><td>(increase through star and XP levels)</td><td></td></tr>
+                  <tr><td>Delhuyar</td><td>x</td><td>Increase gathering speed<br>Increases gathering speed by 0.04% per 100 Hero DEF<br>Increases Odinium gathering speed by 0.06% per 100 Hero DEF</td><td>(increase through star and XP levels)</td><td></td></tr>
+                  <tr><td>Lancaster</td><td>all</td><td>Increase Odinium gathering speed 30% (without es)<br>Gathering speed further increases with every es level: (5, 10, 16, 25, 35, 50, 70, 100, 150, 250%)</td><td>25</td><td></td></tr>
+                  <tr><td>Black Widow</td><td>x</td><td>Increase gathering speed<br>Increases by 0.07% every 100 Hero DEF</td><td>(increase through star and XP levels)</td><td></td></tr>
+                  <tr><td>Flora</td><td>x</td><td>Increase gathering speed<br>Increases by 0.04% every 100 Hero DEF</td><td>(increase through star and XP levels)</td><td></td></tr>
+                </tbody>
+              </table>
+              
+
+        </div>
+
+        <h2>Conclusion</h2>
+        <p>
+            Wrap up your guide here. Offer final tips, link to related resources, or provide encouragement.
+        </p>
+
+        <div class="div-buffer"></div>
+    </div>
+    <script src="/scripts/passiveheroskills.js"></script>
+</body>
+
+</html>
