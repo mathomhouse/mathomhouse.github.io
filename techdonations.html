@@ -8,19 +8,31 @@
   <link rel="stylesheet" href="styles/index.css" />
   <script src="/test/header2.js" defer></script>
   <style>
-    .form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-top: 20px;
-}
+    .form-aligned {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 15px 30px;
+      align-items: center;
+      margin-top: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-@media (max-width: 768px) {
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-}
+    @media (max-width: 768px) {
+      .form-aligned {
+        grid-template-columns: 1fr;
+      }
 
+      .form-aligned label {
+        text-align: left;
+        padding-top: 10px;
+      }
+    }
+
+    #result {
+      margin-top: 30px;
+    }
   </style>
 </head>
 
@@ -35,40 +47,32 @@
     </p>
 
     <form id="donationForm">
-  <div class="form-grid">
-    <div>
-      <label for="techSelect">Select Technology:</label>
-      <select id="techSelect" required>
-        <option value="territory1">Territorial Expansion - Level 1</option>
-        <option value="territory2">Territorial Expansion - Level 2</option>
-        <option value="glory1">The New Era of Glory - Level 1</option>
-      </select>
-    </div>
+      <div class="form-aligned">
+        <label for="techSelect">Select Technology:</label>
+        <select id="techSelect" required>
+          <option value="territory1">Territorial Expansion - Level 1</option>
+          <option value="territory2">Territorial Expansion - Level 2</option>
+          <option value="glory1">The New Era of Glory - Level 1</option>
+        </select>
 
-    <div>
-      <label for="currentXP">Current XP Donated:</label>
-      <input type="number" id="currentXP" min="0" required />
-    </div>
+        <label for="currentXP">Current XP Donated:</label>
+        <input type="number" id="currentXP" min="0" required />
 
-    <div>
-      <label for="people">Number of People Donating:</label>
-      <input type="number" id="people" min="1" required />
-    </div>
+        <label for="people">Number of People Donating:</label>
+        <input type="number" id="people" min="1" required />
 
-    <div>
-      <label for="donationsPerPerson">Donations Per Person Per Day:</label>
-      <input type="number" id="donationsPerPerson" min="1" required />
-    </div>
+        <label for="donationsPerPerson">Donations Per Person Per Day:</label>
+        <input type="number" id="donationsPerPerson" min="1" required />
+      </div>
+
+      <div class="calculate-btn">
+        <button type="button" onclick="calculateFinish()">Calculate</button>
+        <button type="reset" onclick="resetForm()">Reset</button>
+      </div>
+    </form>
+
+    <div id="result" class="result"></div>
   </div>
-
-  <div class="calculate-btn">
-    <button type="button" onclick="calculateFinish()">Calculate</button>
-    <button type="button" onclick="resetForm()">Reset</button>
-
-  </div>
-</form>
-<div id="result" class="result"></div>
-
 
   <script>
     const techData = {
@@ -107,11 +111,11 @@
       resultEl.textContent =
         `Estimated completion in ${daysNeeded} day(s):\n${finishDate.toDateString()}`;
     }
-    function resetForm() {
-  document.getElementById("donationForm").reset();
-  document.getElementById("result").textContent = "";
-}
 
+    function resetForm() {
+      document.getElementById("donationForm").reset();
+      document.getElementById("result").textContent = "";
+    }
   </script>
 </body>
 </html>
