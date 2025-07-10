@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Technology Donation Calculator</title>
   <link rel="stylesheet" href="styles/index.css" />
-  <script src="/test/header2.js" defer></script>
+  <script src="header.js" defer></script>
   <style>
     .form-aligned {
       display: grid;
@@ -48,11 +48,12 @@
 
     <form id="donationForm">
       <div class="form-aligned">
-        <label for="techSelect">Select Technology:</label>
+        <label for="techSelect">Technology:</label>
         <select id="techSelect" required>
+          <option value="" disabled selected>Select tech...</option>
           <option value="territory1">Territorial Expansion - Level 1</option>
           <option value="territory2">Territorial Expansion - Level 2</option>
-          <option value="glory1">The New Era of Glory - Level 1</option>
+          <option value="glory1">The New Era of Glory</option>
         </select>
 
         <label for="currentXP">Current XP Donated:</label>
@@ -61,7 +62,7 @@
         <label for="people">Number of People Donating:</label>
         <input type="number" id="people" min="1" required />
 
-        <label for="donationsPerPerson">Donations Per Person Per Day:</label>
+        <label for="donationsPerPerson">Donations Per Player Per Day:</label>
         <input type="number" id="donationsPerPerson" min="1" required />
       </div>
 
