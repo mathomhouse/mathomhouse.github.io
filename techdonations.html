@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Technology Donation Calculator</title>
+  <link rel="stylesheet" href="styles/index.css" />
+  <script src="/test/header2.js" defer></script>
+</head>
+
+<body>
+  <!-- Site Header -->
+  <header id="header-placeholder"></header>
+
+  <div class="container">
+    <h1>Technology Donation Calculator</h1>
+    <p>
+      Select the technology and level you're working on, enter how much XP has already been donated, how many players are contributing, and how many donations per player per day. The calculator will estimate how many days are needed and the expected finish date.
+    </p>
+
+    <form id="donationForm">
+      <label for="techSelect">Select Technology:</label>
+      <select id="techSelect" required>
+        <option value="territory1">Territorial Expansion - Level 1</option>
+        <option value="territory2">Territorial Expansion - Level 2</option>
+        <option value="glory1">The New Era of Glory - Level 1</option>
+      </select>
+
+      <label for="currentXP">Current XP Donated:</label>
+      <input type="number" id="currentXP" min="0" required />
+
+      <label for="people">Number of People Donating:</label>
+      <input type="number" id="people" min="1" required />
+
+      <label for="donationsPerPerson">Donations Per Person Per Day:</label>
+      <input type="number" id="donationsPerPerson" min="1" required />
+
+      <div class="calculate-btn">
+        <button type="button" onclick="calculateFinish()">Calculate</button>
+      </div>
+    </form>
+
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    const techData = {
+      territory1: { name: "Territorial Expansion - Level 1", totalXP: 3000000, xpPerDonation: 20 },
+      territory2: { name: "Territorial Expansion - Level 2", totalXP: 33600000, xpPerDonation: 30 },
+      glory1: { name: "The New Era of Glory - Level 1", totalXP: 12000000, xpPerDonation: 20 },
+    };
+
+    function calculateFinish() {
+      const techKey = document.getElementById("techSelect").value;
+      const currentXP = parseInt(document.getElementById("currentXP").value);
+      const people = parseInt(document.getElementById("people").value);
+      const donationsPerPerson = parseInt(document.getElementById("donationsPerPerson").value);
+      const resultEl = document.getElementById("result");
+
+      if (!techKey || isNaN(currentXP) || isNaN(people) || isNaN(donationsPerPerson)) {
+        resultEl.textContent = "Please fill in all fields.";
+        return;
+      }
+
+      const tech = techData[techKey];
+      const remainingXP = tech.totalXP - currentXP;
+
+      if (remainingXP <= 0) {
+        resultEl.textContent = `${tech.name} is already completed! 🎉`;
+        return;
+      }
+
+      const dailyXP = people * donationsPerPerson * tech.xpPerDonation;
+      const daysNeeded = Math.ceil(remainingXP / dailyXP);
+
+      const today = new Date();
+      const finishDate = new Date(today);
+      finishDate.setDate(today.getDate() + daysNeeded);
+
+      resultEl.textContent =
+        `Estimated completion in ${daysNeeded} day(s):\n${finishDate.toDateString()}`;
+    }
+  </script>
+</body>
+</html>
