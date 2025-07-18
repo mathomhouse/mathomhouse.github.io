@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Custom Map Editor</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rotated Custom Map Editor (Orange Edition)</title>
   <style>
     body {
       font-family: sans-serif;
@@ -12,68 +12,93 @@
       align-items: center;
       margin: 20px;
     }
+
+    #reset {
+      margin-bottom: 20px;
+      padding: 5px 15px;
+    }
+
+    .grid-wrapper {
+      transform: rotate(45deg);
+      margin: 40px;
+      position: relative;
+    }
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(8, 50px);
-      grid-template-rows: repeat(8, 50px);
+      grid-template-columns: repeat(8, 40px);
+      grid-template-rows: repeat(8, 40px);
       gap: 1px;
       background: #333;
+      position: relative;
     }
+
     .cell {
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       background-color: #eee;
       border: 1px solid #999;
       box-sizing: border-box;
+      /* transform: rotate(-45deg); <-- REMOVE THIS LINE */
+      position: relative;
     }
+
+
     .center {
       background-color: black !important;
       pointer-events: none;
     }
+
+    .pieces {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
     .piece {
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       cursor: grab;
       display: inline-block;
+      transform: rotate(45deg);
     }
-    .piece.beige {
-      width: 102px;
-      height: 102px;
-      background-color: beige;
-      position: absolute;
+
+    .piece.orange {
+      width: 82px;
+      height: 82px;
+      background-color: orange;
+      position: relative;
     }
+
     .piece.blue { background-color: blue; }
     .piece.red { background-color: red; }
     .piece.green { background-color: green; }
     .piece.yellow { background-color: yellow; }
-    .pieces {
-      margin: 10px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      width: 420px;
-      justify-content: center;
-    }
-    #reset {
-      margin-top: 10px;
-    }
   </style>
 </head>
 <body>
-  <h1>Custom Map Editor</h1>
+  <h1>Rotated Custom Map Editor (Orange Edition)</h1>
+
+  <button id="reset">Reset</button>
+
   <div class="pieces">
-    <div class="piece beige" draggable="true"></div>
-    <div class="piece blue" draggable="true"></div>
-    <div class="piece red" draggable="true"></div>
-    <div class="piece green" draggable="true"></div>
-    <div class="piece yellow" draggable="true"></div>
+    <div class="piece orange" draggable="true" data-type="orange"></div>
+    <div class="piece blue" draggable="true" data-type="blue"></div>
+    <div class="piece red" draggable="true" data-type="red"></div>
+    <div class="piece green" draggable="true" data-type="green"></div>
+    <div class="piece yellow" draggable="true" data-type="yellow"></div>
   </div>
 
-  <div class="grid" id="grid"></div>
-  <button id="reset">Reset</button>
+  <div class="grid-wrapper">
+    <div class="grid" id="grid"></div>
+  </div>
 
   <script>
     const grid = document.getElementById('grid');
+    let draggedType = null;
+    let draggingFromCell = null;
 
     function createGrid() {
       grid.innerHTML = '';
@@ -86,41 +111,83 @@
           }
           cell.dataset.row = row;
           cell.dataset.col = col;
+          cell.dataset.color = '';
           cell.addEventListener('dragover', e => e.preventDefault());
           cell.addEventListener('drop', handleDrop);
+          cell.addEventListener('dragstart', handleDragStart);
+          cell.setAttribute('draggable', true);
           grid.appendChild(cell);
         }
       }
     }
 
-    let dragged;
+    function handleDragStart(e) {
+      const cell = e.target;
+      if (!cell.classList.contains('cell') || cell.classList.contains('center')) return;
+      if (!cell.dataset.color) return;
+      draggingFromCell = cell;
+      draggedType = cell.dataset.color;
+    }
 
     document.querySelectorAll('.piece').forEach(piece => {
       piece.addEventListener('dragstart', (e) => {
-        dragged = piece.cloneNode(true);
+        draggedType = piece.dataset.type;
+        draggingFromCell = null;
       });
     });
 
     function handleDrop(e) {
-      if (!dragged) return;
-
+      if (!draggedType) return;
       const cell = e.target;
       const row = parseInt(cell.dataset.row);
       const col = parseInt(cell.dataset.col);
 
-      if (dragged.classList.contains('beige')) {
-        if (row > 6 || col > 6) return; // 2x2 would overflow
+      if (draggingFromCell) {
+        // Clear previous placement
+        if (draggingFromCell.dataset.color === 'orange') {
+          clear2x2(parseInt(draggingFromCell.dataset.row), parseInt(draggingFromCell.dataset.col));
+        } else {
+          draggingFromCell.style.backgroundColor = '#eee';
+          draggingFromCell.dataset.color = '';
+        }
+        draggingFromCell = null;
+      }
+
+      if (draggedType === 'orange') {
+        if (row > 6 || col > 6) return;
+        // Ensure target 2x2 is clear
         for (let r = 0; r < 2; r++) {
           for (let c = 0; c < 2; c++) {
             const index = (row + r) * 8 + (col + c);
             const square = grid.children[index];
-            if (!square || square.classList.contains('center')) return;
-            square.style.backgroundColor = 'beige';
+            if (!square || square.classList.contains('center') || square.dataset.color) return;
+          }
+        }
+        for (let r = 0; r < 2; r++) {
+          for (let c = 0; c < 2; c++) {
+            const index = (row + r) * 8 + (col + c);
+            const square = grid.children[index];
+            square.style.backgroundColor = 'orange';
+            square.dataset.color = 'orange';
           }
         }
       } else {
-        if (cell.classList.contains('center')) return;
-        cell.style.backgroundColor = dragged.style.backgroundColor;
+        if (cell.classList.contains('center') || cell.dataset.color) return;
+        cell.style.backgroundColor = draggedType;
+        cell.dataset.color = draggedType;
+      }
+    }
+
+    function clear2x2(row, col) {
+      for (let r = 0; r < 2; r++) {
+        for (let c = 0; c < 2; c++) {
+          const index = (row + r) * 8 + (col + c);
+          const square = grid.children[index];
+          if (square && !square.classList.contains('center')) {
+            square.style.backgroundColor = '#eee';
+            square.dataset.color = '';
+          }
+        }
       }
     }
 
