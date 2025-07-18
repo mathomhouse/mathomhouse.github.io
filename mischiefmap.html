@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rotated Custom Map Editor (Orange Edition)</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interactive Map Editor</title>
   <style>
     body {
       font-family: sans-serif;
@@ -13,15 +13,19 @@
       margin: 20px;
     }
 
-    #reset {
-      margin-bottom: 20px;
+    #reset, #clear-toggle {
+      margin-bottom: 10px;
       padding: 5px 15px;
     }
 
     .grid-wrapper {
       transform: rotate(45deg);
-      margin: 40px;
-      position: relative;
+      margin: 20px;
+      padding: 10px;
+      border: 3px solid #555;
+      background: #222;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      display: inline-block;
     }
 
     .grid {
@@ -39,10 +43,27 @@
       background-color: #eee;
       border: 1px solid #999;
       box-sizing: border-box;
-      /* transform: rotate(-45deg); <-- REMOVE THIS LINE */
       position: relative;
     }
 
+    .cell span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      font-size: 10px;
+      font-weight: bold;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .cell.highlight-valid {
+      outline: 2px solid lime;
+    }
+
+    .cell.highlight-invalid {
+      outline: 2px solid red;
+    }
 
     .center {
       background-color: black !important;
@@ -54,7 +75,7 @@
       gap: 10px;
       flex-wrap: wrap;
       justify-content: center;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     .piece {
@@ -63,6 +84,18 @@
       cursor: grab;
       display: inline-block;
       transform: rotate(45deg);
+      position: relative;
+    }
+
+    .piece span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      font-size: 10px;
+      font-weight: bold;
+      color: white;
+      pointer-events: none;
     }
 
     .piece.orange {
@@ -76,29 +109,41 @@
     .piece.red { background-color: red; }
     .piece.green { background-color: green; }
     .piece.yellow { background-color: yellow; }
+
+    .legend {
+      margin-top: 10px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
-  <h1>Rotated Custom Map Editor (Orange Edition)</h1>
+  <h1>Interactive Map Editor (Enhanced)</h1>
 
   <button id="reset">Reset</button>
+  <button id="clear-toggle">Toggle Clear Mode</button>
 
   <div class="pieces">
     <div class="piece orange" draggable="true" data-type="orange"></div>
-    <div class="piece blue" draggable="true" data-type="blue"></div>
-    <div class="piece red" draggable="true" data-type="red"></div>
-    <div class="piece green" draggable="true" data-type="green"></div>
-    <div class="piece yellow" draggable="true" data-type="yellow"></div>
+    <div class="piece blue" draggable="true" data-type="blue"><span>SF</span></div>
+    <div class="piece red" draggable="true" data-type="red"><span>WF</span></div>
+    <div class="piece green" draggable="true" data-type="green"><span>UC</span></div>
+    <div class="piece yellow" draggable="true" data-type="yellow"><span>SB</span></div>
   </div>
 
   <div class="grid-wrapper">
     <div class="grid" id="grid"></div>
   </div>
 
+  <div class="legend">
+    <strong>Legend:</strong><br>
+    UC = Urgent Care | WF = Weakening Facility | SF = Strengthening Facility | SB = Small Base
+  </div>
+
   <script>
     const grid = document.getElementById('grid');
     let draggedType = null;
     let draggingFromCell = null;
+    let clearMode = false;
 
     function createGrid() {
       grid.innerHTML = '';
@@ -112,11 +157,63 @@
           cell.dataset.row = row;
           cell.dataset.col = col;
           cell.dataset.color = '';
-          cell.addEventListener('dragover', e => e.preventDefault());
+          cell.addEventListener('dragover', handleDragOver);
+          cell.addEventListener('dragleave', clearHighlights);
           cell.addEventListener('drop', handleDrop);
           cell.addEventListener('dragstart', handleDragStart);
+          cell.addEventListener('click', handleCellClick);
           cell.setAttribute('draggable', true);
           grid.appendChild(cell);
+        }
+      }
+    }
+
+    function handleCellClick(e) {
+      if (!clearMode) return;
+      const cell = e.target;
+      if (cell.classList.contains('center')) return;
+      clearCell(cell);
+    }
+
+    function clearHighlights() {
+      [...grid.children].forEach(cell => {
+        cell.classList.remove('highlight-valid', 'highlight-invalid');
+      });
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+      if (!draggedType) return;
+      const cell = e.target;
+      const row = parseInt(cell.dataset.row);
+      const col = parseInt(cell.dataset.col);
+
+      clearHighlights();
+
+      if (draggedType === 'orange') {
+        if (row > 6 || col > 6) return;
+        let valid = true;
+        for (let r = 0; r < 2; r++) {
+          for (let c = 0; c < 2; c++) {
+            const index = (row + r) * 8 + (col + c);
+            const square = grid.children[index];
+            if (!square || square.classList.contains('center') || square.dataset.color) valid = false;
+          }
+        }
+        for (let r = 0; r < 2; r++) {
+          for (let c = 0; c < 2; c++) {
+            const index = (row + r) * 8 + (col + c);
+            const square = grid.children[index];
+            if (square && !square.classList.contains('center')) {
+              square.classList.add(valid ? 'highlight-valid' : 'highlight-invalid');
+            }
+          }
+        }
+      } else {
+        if (cell.classList.contains('center') || cell.dataset.color) {
+          cell.classList.add('highlight-invalid');
+        } else {
+          cell.classList.add('highlight-valid');
         }
       }
     }
@@ -142,20 +239,19 @@
       const row = parseInt(cell.dataset.row);
       const col = parseInt(cell.dataset.col);
 
+      clearHighlights();
+
       if (draggingFromCell) {
-        // Clear previous placement
         if (draggingFromCell.dataset.color === 'orange') {
           clear2x2(parseInt(draggingFromCell.dataset.row), parseInt(draggingFromCell.dataset.col));
         } else {
-          draggingFromCell.style.backgroundColor = '#eee';
-          draggingFromCell.dataset.color = '';
+          clearCell(draggingFromCell);
         }
         draggingFromCell = null;
       }
 
       if (draggedType === 'orange') {
         if (row > 6 || col > 6) return;
-        // Ensure target 2x2 is clear
         for (let r = 0; r < 2; r++) {
           for (let c = 0; c < 2; c++) {
             const index = (row + r) * 8 + (col + c);
@@ -173,9 +269,22 @@
         }
       } else {
         if (cell.classList.contains('center') || cell.dataset.color) return;
+        let label = '';
+        if (draggedType === 'green') label = 'UC';
+        if (draggedType === 'red') label = 'WF';
+        if (draggedType === 'blue') label = 'SF';
+        if (draggedType === 'yellow') label = 'SB';
+
+        cell.innerHTML = `<span>${label}</span>`;
         cell.style.backgroundColor = draggedType;
         cell.dataset.color = draggedType;
       }
+    }
+
+    function clearCell(cell) {
+      cell.innerHTML = '';
+      cell.style.backgroundColor = '#eee';
+      cell.dataset.color = '';
     }
 
     function clear2x2(row, col) {
@@ -192,6 +301,11 @@
     }
 
     document.getElementById('reset').addEventListener('click', createGrid);
+
+    document.getElementById('clear-toggle').addEventListener('click', () => {
+      clearMode = !clearMode;
+      document.getElementById('clear-toggle').textContent = clearMode ? 'Exit Clear Mode' : 'Toggle Clear Mode';
+    });
 
     createGrid();
   </script>
