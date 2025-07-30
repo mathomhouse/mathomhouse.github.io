@@ -1,139 +1,125 @@
 [
   {
-    "Hero": "Layla",
-    "Branch": "Navy",
+    "Hero": "Vivian",
+    "Branch": "Air Force",
     "Subcategory": "Indestructible",
     "Loadouts": {
-      "Indestructible": {
-        "Gun": "Gun 1",
-        "Chest": "Chest 1",
-        "Optical": "Optical 1",
-        "Headset": "Headset 1",
-        "Arms": "Arms 1",
-        "Boots": "Boots 1"
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
       },
-      "Debilitate": {
-        "Gun": "Gun 12",
-        "Chest": "Chest 12",
-        "Optical": "Optical 12",
-        "Headset": "Headset 12",
-        "Arms": "Arms 12",
-        "Boots": "Boots 12"
-      }
-    }
-  },
-  {
-    "Hero": "Po",
-    "Branch": "Universal",
-    "Subcategory": "Attack",
-    "Loadouts": {
-      "Aggressive": {
-        "Gun": "Gun 2",
-        "Chest": "Chest 2",
-        "Optical": "Optical 2",
-        "Headset": "Headset 2",
-        "Arms": "Arms 2",
-        "Boots": "Boots 2"
+      "Damage - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
       },
-      "Defensive": {
-        "Gun": "Gun 13",
-        "Chest": "Chest 13",
-        "Optical": "Optical 13",
-        "Headset": "Headset 13",
-        "Arms": "Arms 13",
-        "Boots": "Boots 13"
-      }
-    }
-  },
-  {
-    "Hero": "Gipsy",
-    "Branch": "Universal",
-    "Subcategory": "Attack",
-    "Loadouts": {
-      "Tanky": {
-        "Gun": "Gun 3",
-        "Chest": "Chest 3",
-        "Optical": "Optical 3",
-        "Headset": "Headset 3",
-        "Arms": "Arms 3",
-        "Boots": "Boots 3"
+      "Damage - Unbreakable": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
       },
-      "Squishy": {
-        "Gun": "Gun 14",
-        "Chest": "Chest 14",
-        "Optical": "Optical 14",
-        "Headset": "Headset 14",
-        "Arms": "Arms 14",
-        "Boots": "Boots 14"
-      }
-    }
-  },
-  {
-    "Hero": "Jester",
-    "Branch": "Navy",
-    "Subcategory": "Attack",
-    "Loadouts": {
-      "Clown": {
-        "Gun": "Gun 4",
-        "Chest": "Chest 4",
-        "Optical": "Optical 4",
-        "Headset": "Headset 4",
-        "Arms": "Arms 4",
-        "Boots": "Boots 4"
+      "Damage - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
       },
-      "Big Boom": {
-        "Gun": "Gun 15",
-        "Chest": "Chest 15",
-        "Optical": "Optical 15",
-        "Headset": "Headset 15",
-        "Arms": "Arms 15",
-        "Boots": "Boots 15"
-      }
-    }
-  },
-  {
-    "Hero": "Abad",
-    "Branch": "Air Force",
-    "Subcategory": "HP",
-    "Loadouts": {
-      "Idk": {
-        "Gun": "Gun 5",
-        "Chest": "Chest 5",
-        "Optical": "Optical 5",
-        "Headset": "Headset 5",
-        "Arms": "Arms 5",
-        "Boots": "Boots 5"
+      "Debilitation": {
+        "Gun": "Impact",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
       },
-      "Testing": {
-        "Gun": "Gun 16",
-        "Chest": "Chest 16",
-        "Optical": "Optical 16",
-        "Headset": "Headset 16",
-        "Arms": "Arms 16",
-        "Boots": "Boots 16"
-      }
-    }
-  },
-  {
-    "Hero": "Brady",
-    "Branch": "Air Force",
-    "Subcategory": "Attack",
-    "Loadouts": {
-      "Tom Brady?": {
-        "Gun": "Gun 6",
-        "Chest": "Chest 6",
-        "Optical": "Optical 6",
-        "Headset": "Headset 6",
-        "Arms": "Arms 6",
-        "Boots": "Boots 6"
+      "Debilitation - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
       },
-      "Sucks?": {
-        "Gun": "Gun 17",
-        "Chest": "Chest 17",
-        "Optical": "Optical 17",
-        "Headset": "Headset 17",
-        "Arms": "Arms 17",
-        "Boots": "Boots 17"
+      "Debilitation - Unbreakable": {
+        "Gun": "Impact",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Ignition": {
+        "Gun": "Searing",
+        "Chest": "Flammable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Flammable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Unbreakable": {
+        "Gun": "Searing",
+        "Chest": "Unbreakable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
       }
     }
   },
@@ -142,67 +128,2150 @@
     "Branch": "Air Force",
     "Subcategory": "Indestructible",
     "Loadouts": {
-      "Ninja": {
-        "Gun": "Gun 7",
-        "Chest": "Chest 7",
-        "Optical": "Optical 7",
-        "Headset": "Headset 7",
-        "Arms": "Arms 7",
-        "Boots": "Boots 7"
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
       },
-      "Stuff": {
-        "Gun": "Gun 18",
-        "Chest": "Chest 18",
-        "Optical": "Optical 18",
-        "Headset": "Headset 18",
-        "Arms": "Arms 18",
-        "Boots": "Boots 18"
+      "Damage - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Unbreakable": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Debilitation": {
+        "Gun": "Impact",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Unbreakable": {
+        "Gun": "Impact",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Ignition": {
+        "Gun": "Searing",
+        "Chest": "Flammable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Flammable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Unbreakable": {
+        "Gun": "Searing",
+        "Chest": "Unbreakable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Striker Eureka",
+    "Branch": "Air Force",
+    "Subcategory": "Indestructible",
+    "Loadouts": {
+      "Damage (AF)": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - All Out Surge (AF)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Unbreakable (AF)": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Hybrid (AF)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Debilitation (AF)": {
+        "Gun": "Impact",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - All Out Surge (AF)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Unbreakable (AF)": {
+        "Gun": "Impact",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Hybrid (AF)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Ignition (AF)": {
+        "Gun": "Searing",
+        "Chest": "Flammable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Damage (AF)": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - All Out Surge (AF)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Flammable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Unbreakable (AF)": {
+        "Gun": "Searing",
+        "Chest": "Unbreakable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Hybrid (AF)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
       }
     }
   },
   {
     "Hero": "Duke",
-    "Branch": "Universal",
+    "Branch": "Air Force",
     "Subcategory": "Indestructible",
     "Loadouts": {
-      "Blue Devils": {
-        "Gun": "Gun 8",
-        "Chest": "Chest 8",
-        "Optical": "Optical 8",
-        "Headset": "Headset 8",
-        "Arms": "Arms 8",
-        "Boots": "Boots 8"
+      "Damage (AF)": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
       },
-      "Tar Heels": {
-        "Gun": "Gun 19",
-        "Chest": "Chest 19",
-        "Optical": "Optical 19",
-        "Headset": "Headset 19",
-        "Arms": "Arms 19",
-        "Boots": "Boots 19"
+      "Damage - All Out Surge (AF)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Unbreakable (AF)": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Hybrid (AF)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Debilitation (AF)": {
+        "Gun": "Impact",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - All Out Surge (AF)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Unbreakable (AF)": {
+        "Gun": "Impact",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Hybrid (AF)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Ignition (AF)": {
+        "Gun": "Searing",
+        "Chest": "Flammable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Damage (AF)": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - All Out Surge (AF)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Flammable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Unbreakable (AF)": {
+        "Gun": "Searing",
+        "Chest": "Unbreakable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Hybrid (AF)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
       }
     }
   },
   {
-    "Hero": "Striker",
-    "Branch": "Universal",
+    "Hero": "Layla",
+    "Branch": "Navy",
     "Subcategory": "Indestructible",
     "Loadouts": {
-      "Transformers": {
-        "Gun": "Gun 9",
-        "Chest": "Chest 9",
-        "Optical": "Optical 9",
-        "Headset": "Headset 9",
-        "Arms": "Arms 9",
-        "Boots": "Boots 9"
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
       },
-      "Robots in Disguise": {
-        "Gun": "Gun 20",
-        "Chest": "Chest 20",
-        "Optical": "Optical 20",
-        "Headset": "Headset 20",
-        "Arms": "Arms 20",
-        "Boots": "Boots 20"
+      "Damage - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Unbreakable": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Debilitation": {
+        "Gun": "Impact",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Unbreakable": {
+        "Gun": "Impact",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Abnormal State": {
+        "Gun": "Magnetic Field",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Abnormal State - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Debilitate",
+        "Optical": "Magnetic Field",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Abnormal State - Unbreakable": {
+        "Gun": "Magnetic Field",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Abnormal State - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Magnetic Field",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Ada Wong",
+    "Branch": "Navy",
+    "Subcategory": "Indestructible",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Unbreakable": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Debilitation": {
+        "Gun": "Impact",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Unbreakable": {
+        "Gun": "Impact",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Abnormal State": {
+        "Gun": "Magnetic Field",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Abnormal State - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Debilitate",
+        "Optical": "Magnetic Field",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Abnormal State - Unbreakable": {
+        "Gun": "Magnetic Field",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Abnormal State - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Magnetic Field",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Duke",
+    "Branch": "Navy",
+    "Subcategory": "Indestructible",
+    "Loadouts": {
+      "Damage (Navy)": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - All Out Surge (Navy)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Unbreakable (Navy)": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Hybrid (Navy)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Debilitation (Navy)": {
+        "Gun": "Impact",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - All Out Surge (Navy)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Unbreakable (Navy)": {
+        "Gun": "Impact",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Hybrid (Navy)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Abnormal State (Navy)": {
+        "Gun": "Magnetic Field",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Abnormal State - All Out Surge (Navy)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Debilitate",
+        "Optical": "Magnetic Field",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Abnormal State - Unbreakable (Navy)": {
+        "Gun": "Magnetic Field",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Abnormal State - Hybrid (Navy)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Magnetic Field",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Duke",
+    "Branch": "Army",
+    "Subcategory": "Indestructible",
+    "Loadouts": {
+      "Damage (Army)": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - All Out Surge (Army)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Unbreakable (Army)": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Hybrid (Army)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Debilitation (Army)": {
+        "Gun": "Impact",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - All Out Surge (Army)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Unbreakable (Army)": {
+        "Gun": "Impact",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Hybrid (Army)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Pulse (Army)": {
+        "Gun": "Magnetic Field",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - All Out Surge (Army)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - Unbreakable (Army)": {
+        "Gun": "Magnetic Field",
+        "Chest": "Unbreakable",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - Hybrid (Army)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Striker Eureka",
+    "Branch": "Army",
+    "Subcategory": "Indestructible",
+    "Loadouts": {
+      "Damage (Army)": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - All Out Surge (Army)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Unbreakable (Army)": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Hybrid (Army)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Debilitation (Army)": {
+        "Gun": "Impact",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - All Out Surge (Army)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Unbreakable (Army)": {
+        "Gun": "Impact",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Hybrid (Army)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Pulse (Army)": {
+        "Gun": "Magnetic Field",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - All Out Surge (Army)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - Unbreakable (Army)": {
+        "Gun": "Magnetic Field",
+        "Chest": "Unbreakable",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - Hybrid (Army)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Shinji",
+    "Branch": "Army",
+    "Subcategory": "Indestructible",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Unbreakable": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Debilitation": {
+        "Gun": "Impact",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Unbreakable": {
+        "Gun": "Impact",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Pulse": {
+        "Gun": "Magnetic Field",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - Unbreakable": {
+        "Gun": "Magnetic Field",
+        "Chest": "Unbreakable",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Marvingt",
+    "Branch": "Army",
+    "Subcategory": "Indestructible",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Unbreakable": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Debilitation": {
+        "Gun": "Impact",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Debilitate",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Unbreakable": {
+        "Gun": "Impact",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Impact",
+        "Headset": "Debilitate",
+        "Arms": "Impact",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Pulse": {
+        "Gun": "Magnetic Field",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - Unbreakable": {
+        "Gun": "Magnetic Field",
+        "Chest": "Unbreakable",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Unbreakable",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Tigress",
+    "Branch": "Air Force",
+    "Subcategory": "Attack",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Ignition": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Brady",
+    "Branch": "Air Force",
+    "Subcategory": "Attack",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Ignition": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Kum & Hazel",
+    "Branch": "Air Force",
+    "Subcategory": "Attack",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Ignition": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Serval",
+    "Branch": "Air Force",
+    "Subcategory": "Attack",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Ignition": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Hiccup",
+    "Branch": "Air Force",
+    "Subcategory": "Attack",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Ignition": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Lin",
+    "Branch": "Air Force",
+    "Subcategory": "Attack",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Ignition": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Cranston",
+    "Branch": "Air Force",
+    "Subcategory": "Attack",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Ignition": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Carna",
+    "Branch": "Air Force",
+    "Subcategory": "HP",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Steel Torrent": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Kai",
+    "Branch": "Air Force",
+    "Subcategory": "HP",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Steel Torrent": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Barbie",
+    "Branch": "Air Force",
+    "Subcategory": "HP",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Steel Torrent": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Jett",
+    "Branch": "Air Force",
+    "Subcategory": "HP",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Steel Torrent": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Ignition": {
+        "Gun": "Searing",
+        "Chest": "Flammable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - All Out Surge/Damage": {
+        "Gun": "All-Out Surge",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Flammable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Steel Torrent": {
+        "Gun": "Searing",
+        "Chest": "Steel Torrent",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Abad",
+    "Branch": "Air Force",
+    "Subcategory": "HP",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Steel Torrent": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Ignition": {
+        "Gun": "Searing",
+        "Chest": "Flammable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - All Out Surge/Damage": {
+        "Gun": "All-Out Surge",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Flammable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Steel Torrent": {
+        "Gun": "Searing",
+        "Chest": "Steel Torrent",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Asuka",
+    "Branch": "Air Force",
+    "Subcategory": "HP",
+    "Loadouts": {
+      "Damage (AF)": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Steel Torrent (AF)": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Ignition (AF)": {
+        "Gun": "Searing",
+        "Chest": "Flammable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Damage (AF)": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - All Out Surge/Damage (AF)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Flammable",
+        "Optical": "Tactical Awareness",
+        "Headset": "Flammable",
+        "Arms": "Tactical Awareness",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - All Out Surge (AF)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Flammable",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Steel Torrent (AF)": {
+        "Gun": "Searing",
+        "Chest": "Steel Torrent",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      },
+      "Ignition - Hybrid (AF)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Searing",
+        "Headset": "Flammable",
+        "Arms": "Searing",
+        "Boots": "Flammable",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Nelle",
+    "Branch": "Army",
+    "Subcategory": "Attack",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Pulse": {
+        "Gun": "Magnetic Field",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Binary",
+    "Branch": "Army",
+    "Subcategory": "Attack",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Pulse": {
+        "Gun": "Magnetic Field",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Asuka",
+    "Branch": "Army",
+    "Subcategory": "Attack",
+    "Loadouts": {
+      "Damage (Army)": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Artillery Storm (Army)": {
+        "Gun": "Artillery Storm",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Pulse (Army)": {
+        "Gun": "Magnetic Field",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - All Out Surge (Army)": {
+        "Gun": "All-Out Surge",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - Artillery Storm (Army)": {
+        "Gun": "Artillery Storm",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Chris Redfield",
+    "Branch": "Army",
+    "Subcategory": "Attack",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable": {
+        "Gun": "Armor-Breaking",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Po",
+    "Branch": "Army",
+    "Subcategory": "Attack",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable": {
+        "Gun": "Armor-Breaking",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Gipsy",
+    "Branch": "Army",
+    "Subcategory": "Attack",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable": {
+        "Gun": "Armor-Breaking",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Leon Kennedy",
+    "Branch": "Army",
+    "Subcategory": "HP",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Steel Torrent": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Snake Eyes",
+    "Branch": "Army",
+    "Subcategory": "HP",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Steel Torrent": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
       }
     }
   },
@@ -211,44 +2280,1104 @@
     "Branch": "Army",
     "Subcategory": "HP",
     "Loadouts": {
-      "Why?": {
-        "Gun": "Gun 10",
-        "Chest": "Chest 10",
-        "Optical": "Optical 10",
-        "Headset": "Headset 10",
-        "Arms": "Arms 10",
-        "Boots": "Boots 10"
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
       },
-      "Pick a new hero": {
-        "Gun": "Gun 21",
-        "Chest": "Chest 21",
-        "Optical": "Optical 21",
-        "Headset": "Headset 21",
-        "Arms": "Arms 21",
-        "Boots": "Boots 21"
+      "Damage - Steel Torrent": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
       }
     }
   },
   {
-    "Hero": "Crimson",
+    "Hero": "Brynhildr",
+    "Branch": "Army",
+    "Subcategory": "HP",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Steel Torrent": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Pulse": {
+        "Gun": "Magnetic Field",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - Steel Torrent": {
+        "Gun": "Magnetic Field",
+        "Chest": "Steel Torrent",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Quily",
+    "Branch": "Army",
+    "Subcategory": "HP",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Steel Torrent": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Pulse": {
+        "Gun": "Magnetic Field",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - Steel Torrent": {
+        "Gun": "Magnetic Field",
+        "Chest": "Steel Torrent",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Sara",
+    "Branch": "Army",
+    "Subcategory": "HP",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Steel Torrent": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Pulse": {
+        "Gun": "Magnetic Field",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - All Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Magnetize",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - Steel Torrent": {
+        "Gun": "Magnetic Field",
+        "Chest": "Steel Torrent",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      },
+      "Pulse - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Magnetic Field",
+        "Headset": "Magnetize",
+        "Arms": "Magnetic Field",
+        "Boots": "Magnetize",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Shen Suyu",
     "Branch": "Navy",
     "Subcategory": "HP",
     "Loadouts": {
-      "Old": {
-        "Gun": "Gun 11",
-        "Chest": "Chest 11",
-        "Optical": "Optical 11",
-        "Headset": "Headset 11",
-        "Arms": "Arms 11",
-        "Boots": "Boots 11"
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
       },
-      "Gold": {
-        "Gun": "Gun 22",
-        "Chest": "Chest 22",
-        "Optical": "Optical 22",
-        "Headset": "Headset 22",
-        "Arms": "Arms 22",
-        "Boots": "Boots 22"
+      "Damage - All-Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Steel Torrent": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Abnormal State": {
+        "Gun": "Magnetic Field",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - All-Out Surge/Steel Torrent": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Abnormal State/Steel Torrent": {
+        "Gun": "Magnetic Field",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Magnetic Field",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable": {
+        "Gun": "Armor-Breaking",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - All-Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Steel Torrent": {
+        "Gun": "Armor-Breaking",
+        "Chest": "Steel Torrent",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Abnormal State": {
+        "Gun": "Magnetic Field",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - All-Out Surge/Steel Torrent": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Abnormal State/Steel Torrent": {
+        "Gun": "Magnetic Field",
+        "Chest": "Steel Torrent",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Magnetic Field",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Zhen",
+    "Branch": "Navy",
+    "Subcategory": "HP",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - All-Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Steel Torrent": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Abnormal State": {
+        "Gun": "Magnetic Field",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - All-Out Surge/Steel Torrent": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Abnormal State/Steel Torrent": {
+        "Gun": "Magnetic Field",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Magnetic Field",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable": {
+        "Gun": "Armor-Breaking",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - All-Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Steel Torrent": {
+        "Gun": "Armor-Breaking",
+        "Chest": "Steel Torrent",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Abnormal State": {
+        "Gun": "Magnetic Field",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - All-Out Surge/Steel Torrent": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Abnormal State/Steel Torrent": {
+        "Gun": "Magnetic Field",
+        "Chest": "Steel Torrent",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Magnetic Field",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Crimson Typhoon",
+    "Branch": "Navy",
+    "Subcategory": "HP",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - All-Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Steel Torrent": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Abnormal State": {
+        "Gun": "Magnetic Field",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - All-Out Surge/Steel Torrent": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Abnormal State/Steel Torrent": {
+        "Gun": "Magnetic Field",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Magnetic Field",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable": {
+        "Gun": "Armor-Breaking",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - All-Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Steel Torrent": {
+        "Gun": "Armor-Breaking",
+        "Chest": "Steel Torrent",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Abnormal State": {
+        "Gun": "Magnetic Field",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - All-Out Surge/Steel Torrent": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Abnormal State/Steel Torrent": {
+        "Gun": "Magnetic Field",
+        "Chest": "Steel Torrent",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Steel Torrent",
+        "Optical": "Magnetic Field",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Stoick",
+    "Branch": "Navy",
+    "Subcategory": "HP",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Steel Torrent": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable": {
+        "Gun": "Armor-Breaking",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - All-Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Abnormal State": {
+        "Gun": "Magnetic Field",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Heavy Blow",
+        "Optical": "Magnetic Field",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Meowzilla",
+    "Branch": "Navy",
+    "Subcategory": "HP",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Steel Torrent": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable": {
+        "Gun": "Armor-Breaking",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - All-Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Abnormal State": {
+        "Gun": "Magnetic Field",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Heavy Blow",
+        "Optical": "Magnetic Field",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Mapleyn",
+    "Branch": "Navy",
+    "Subcategory": "HP",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Steel Torrent": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Steel Torrent",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable": {
+        "Gun": "Armor-Breaking",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - All-Out Surge": {
+        "Gun": "All-Out Surge",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Abnormal State": {
+        "Gun": "Magnetic Field",
+        "Chest": "Heavy Blow",
+        "Optical": "Armor-Breaking",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Hybrid": {
+        "Gun": "All-Out Surge",
+        "Chest": "Heavy Blow",
+        "Optical": "Magnetic Field",
+        "Headset": "Heavy Blow",
+        "Arms": "Armor-Breaking",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Jill Valentine",
+    "Branch": "Navy",
+    "Subcategory": "Attack",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Debilitation": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Debilitate",
+        "Optical": "Tactical Awareness",
+        "Headset": "Debilitate",
+        "Arms": "Tactical Awareness",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Debilitate",
+        "Optical": "Tactical Awareness",
+        "Headset": "Debilitate",
+        "Arms": "Tactical Awareness",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Heavy Blow",
+        "Optical": "Tactical Awareness",
+        "Headset": "Heavy Blow",
+        "Arms": "Tactical Awareness",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Heavy Blow",
+        "Optical": "Tactical Awareness",
+        "Headset": "Heavy Blow",
+        "Arms": "Tactical Awareness",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Debilitation/Vulnerable": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Debilitate",
+        "Optical": "Tactical Awareness",
+        "Headset": "Debilitate",
+        "Arms": "Tactical Awareness",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable/Debilitation": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Heavy Blow",
+        "Optical": "Tactical Awareness",
+        "Headset": "Heavy Blow",
+        "Arms": "Tactical Awareness",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation/Vulnerable - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Debilitate",
+        "Optical": "Tactical Awareness",
+        "Headset": "Debilitate",
+        "Arms": "Tactical Awareness",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable/Debilitation - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Heavy Blow",
+        "Optical": "Tactical Awareness",
+        "Headset": "Heavy Blow",
+        "Arms": "Tactical Awareness",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Jester",
+    "Branch": "Navy",
+    "Subcategory": "Attack",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Debilitation": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Debilitate",
+        "Optical": "Tactical Awareness",
+        "Headset": "Debilitate",
+        "Arms": "Tactical Awareness",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Debilitate",
+        "Optical": "Tactical Awareness",
+        "Headset": "Debilitate",
+        "Arms": "Tactical Awareness",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Heavy Blow",
+        "Optical": "Tactical Awareness",
+        "Headset": "Heavy Blow",
+        "Arms": "Tactical Awareness",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Heavy Blow",
+        "Optical": "Tactical Awareness",
+        "Headset": "Heavy Blow",
+        "Arms": "Tactical Awareness",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Debilitation/Vulnerable": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Debilitate",
+        "Optical": "Tactical Awareness",
+        "Headset": "Debilitate",
+        "Arms": "Tactical Awareness",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable/Debilitation": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Heavy Blow",
+        "Optical": "Tactical Awareness",
+        "Headset": "Heavy Blow",
+        "Arms": "Tactical Awareness",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation/Vulnerable - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Debilitate",
+        "Optical": "Tactical Awareness",
+        "Headset": "Debilitate",
+        "Arms": "Tactical Awareness",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable/Debilitation - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Heavy Blow",
+        "Optical": "Tactical Awareness",
+        "Headset": "Heavy Blow",
+        "Arms": "Tactical Awareness",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Stromoy",
+    "Branch": "Navy",
+    "Subcategory": "Attack",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Debilitation": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Debilitate",
+        "Optical": "Tactical Awareness",
+        "Headset": "Debilitate",
+        "Arms": "Tactical Awareness",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Debilitate",
+        "Optical": "Tactical Awareness",
+        "Headset": "Debilitate",
+        "Arms": "Tactical Awareness",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Heavy Blow",
+        "Optical": "Tactical Awareness",
+        "Headset": "Heavy Blow",
+        "Arms": "Tactical Awareness",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Heavy Blow",
+        "Optical": "Tactical Awareness",
+        "Headset": "Heavy Blow",
+        "Arms": "Tactical Awareness",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Debilitation/Vulnerable": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Debilitate",
+        "Optical": "Tactical Awareness",
+        "Headset": "Debilitate",
+        "Arms": "Tactical Awareness",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable/Debilitation": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Heavy Blow",
+        "Optical": "Tactical Awareness",
+        "Headset": "Heavy Blow",
+        "Arms": "Tactical Awareness",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      },
+      "Debilitation/Vulnerable - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Debilitate",
+        "Optical": "Tactical Awareness",
+        "Headset": "Debilitate",
+        "Arms": "Tactical Awareness",
+        "Boots": "Heavy Blow",
+        "SuggestedCombos": ""
+      },
+      "Vulnerable/Debilitation - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Heavy Blow",
+        "Optical": "Tactical Awareness",
+        "Headset": "Heavy Blow",
+        "Arms": "Tactical Awareness",
+        "Boots": "Debilitate",
+        "SuggestedCombos": ""
+      }
+    }
+  },
+  {
+    "Hero": "Lilia",
+    "Branch": "Navy",
+    "Subcategory": "Attack",
+    "Loadouts": {
+      "Damage": {
+        "Gun": "Tactical Awareness",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
+      },
+      "Damage - Artillery Storm": {
+        "Gun": "Artillery Storm",
+        "Chest": "Stealth Hologram",
+        "Optical": "Tactical Awareness",
+        "Headset": "Stealth Hologram",
+        "Arms": "Tactical Awareness",
+        "Boots": "Stealth Hologram",
+        "SuggestedCombos": ""
       }
     }
   }
