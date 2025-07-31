@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Titan Gear Runes</title>
+  <title>Bobgrif's Titan Gear Runes</title>
   <link rel="stylesheet" href="styles/index.css">
   <script src="/test/header2.js" defer></script>
   <style>
@@ -73,14 +73,15 @@
 <header id="header-placeholder"></header>
 
 <div class="container">
-  <h1>Bob's Recommended Runes</h1>
-  <p>
-    Use the tabs below to view loadouts by hero or by suggested march combinations.
+  <h1>Bobgrif's Runes Guide</h1>
+  <p>This guide was made in collaboration with Bobgrif, who provided all the data to help you figure out how you should set up the runes in your marches!
+    <br><br>
+    Use the tabs below to view various loadouts by hero or see the Bobgrif's recommended marches and the runes they make.
   </p>
 
   <div class="tabs">
     <button class="tab-button active" onclick="openTab('loadouts')">Rune Loadouts</button>
-    <button class="tab-button" onclick="openTab('combos')">Hero Combos</button>
+    <button class="tab-button" onclick="openTab('combos')">Suggested Marches</button>
   </div>
 
   <!-- Loadouts Tab -->
@@ -112,7 +113,7 @@
     <h2>Recommended Hero Combinations + Runes</h2>
     <p>Select your Exclusive Skill Level and March Type to view suggested hero and rune combinations.</p>
 
-    <label for="skillLevel">Skill Level:</label>
+    <label for="skillLevel">Exclusive Skill Level:</label>
   <select id="skillLevel">
     <option value="" disabled selected>Select option</option>
     <option value="Level 5 Skill">Level 5</option>
@@ -125,7 +126,7 @@
   </select>
 
   <div class="calculate-btn">
-    <button onclick="renderHeroCombos()">View Suggested Combos</button>
+    <button onclick="renderHeroCombos()">View Suggested Marches</button>
   </div>
 
     <div id="comboResults" style="margin-top: 20px;"></div>
@@ -136,7 +137,7 @@
 let titanGearData = [];
 let suggestedCombosData = {};
 
-const liveUrl = 'https://script.google.com/macros/s/AKfycbw5qdmm2p_5lCMlfWlxAWfWy6jcZwsBt5RSDXttvWxfag150xb-hPJlceEs6mcyrNvJgQ/exec';
+const liveUrl = 'testing';
 const fallbackUrl = 'titan-gear-data.json';
 
 fetch(liveUrl)
