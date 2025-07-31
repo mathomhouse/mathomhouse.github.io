@@ -113,13 +113,20 @@
     <p>Select your Exclusive Skill Level and March Type to view suggested hero and rune combinations.</p>
 
     <label for="skillLevel">Skill Level:</label>
-    <select id="skillLevel" onchange="updateMarchOptions()">
-      <option value="Level 5 Skill">Level 5</option>
-      <option value="Level 7 Skill">Level 7</option>
-    </select>
+  <select id="skillLevel">
+    <option value="" disabled selected>Select option</option>
+    <option value="Level 5 Skill">Level 5</option>
+    <option value="Level 7 Skill">Level 7</option>
+  </select>
 
-    <label for="marchType">March Type:</label>
-    <select id="marchType" onchange="renderHeroCombos()"></select>
+  <label for="marchType">March Type:</label>
+  <select id="marchType">
+    <option value="" disabled selected>Select option</option>
+  </select>
+
+  <div class="calculate-btn">
+    <button onclick="renderHeroCombos()">View Suggested Combos</button>
+  </div>
 
     <div id="comboResults" style="margin-top: 20px;"></div>
   </div>
@@ -298,32 +305,30 @@ function updateMarchOptions() {
   const marchSelect = document.getElementById('marchType');
   marchSelect.innerHTML = '';
 
-  const marches = Object.keys(suggestedCombosData[skillLevel] || {});
-  marches.forEach(march => {
-    const option = document.createElement('option');
-    option.value = march;
-    option.textContent = march;
-    marchSelect.appendChild(option);
+  const marchTypes = Object.keys(suggestedCombosData[skillLevel] || {});
+  marchTypes.forEach(march => {
+    const opt = document.createElement('option');
+    opt.value = march;
+    opt.textContent = march;
+    marchSelect.appendChild(opt);
   });
-
-  renderHeroCombos();
 }
 
 function renderHeroCombos() {
   const skillLevel = document.getElementById('skillLevel').value;
   const marchType = document.getElementById('marchType').value;
-  const container = document.getElementById('comboResults');
-  container.innerHTML = '';
+  const resultsDiv = document.getElementById('comboResults');
+  resultsDiv.innerHTML = '';
 
-  const combos = suggestedCombosData[skillLevel]?.[marchType] || [];
-  combos.forEach(heroObj => {
-    const div = document.createElement('div');
-    div.className = 'gear-box';
-    div.innerHTML = `
+  const heroes = suggestedCombosData[skillLevel]?.[marchType] || [];
+  heroes.forEach(heroObj => {
+    const box = document.createElement('div');
+    box.className = 'gear-box';
+    box.innerHTML = `
       <h3>${heroObj.Hero}</h3>
       ${renderGearDetails(heroObj.Gear)}
     `;
-    container.appendChild(div);
+    resultsDiv.appendChild(box);
   });
 }
 </script>
