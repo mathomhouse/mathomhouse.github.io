@@ -323,6 +323,9 @@ function renderHeroCombos() {
   resultsDiv.innerHTML = '';
 
   const heroes = suggestedCombosData[skillLevel]?.[marchType] || [];
+  const heavyTroopers = heavyTrooperData?.[marchType] || [];
+
+  // Display hero gear boxes
   heroes.forEach(heroObj => {
     const box = document.createElement('div');
     box.className = 'gear-box';
@@ -332,7 +335,54 @@ function renderHeroCombos() {
     `;
     resultsDiv.appendChild(box);
   });
+
+  // Display heavy trooper box
+  if (heavyTroopers.length) {
+    const box = document.createElement('div');
+    box.className = 'gear-box';
+    box.innerHTML = `
+      <h3>Heavy Troopers</h3>
+      <div class="gear-grid">
+        ${heavyTroopers.map(ht => {
+          const htIconMap = {
+            "Earthshaker E-100": "yellow",
+            "Blazing Gale Rx": "red",
+            "Tide Crusher BW-3": "blue",
+            "Doom Sawblade D-4": "ball",
+            "Luminary Knight LP-4": "white",
+            "Blade Angel BA-6": "pink"
+          };
+
+          const chipIconMap = {
+            "Xyston": "xyston",
+            "Hoplon": "hoplon",
+            "Shamshir": "shamshir",
+            "Estoc Piercing Sword": "estoc",
+            "Rondel Dagger": "rondel",
+            "Scramsax Blade": "scramsax",
+            "Kris Sword": "kris-sword",
+            "Ring of Cosmos": "cosmos",
+            "Sasanian's Chain": "sasanian"
+          };
+
+          const htKey = htIconMap[ht.trooper] || "unknown";
+          const chipKey = chipIconMap[ht.chipType] || "unknown";
+
+          return `
+            <div class="gear-slot">
+              <p><strong>Slot ${ht.slot}</strong></p>
+              <img src="images/${chipKey}-icon.png" alt="${ht.chipType}" title="${ht.chipType}" />
+              <img src="images/${htKey}-ht-icon.png" alt="${ht.trooper}" title="${ht.trooper}" />
+              <p>${ht.trooper}</p>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+    resultsDiv.appendChild(box);
+  }
 }
+
 </script>
 </body>
 </html>
