@@ -11,8 +11,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -20,8 +19,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Unbreakable": {
           "Gun": "Tactical Awareness",
@@ -29,8 +27,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Hybrid": {
           "Gun": "All-Out Surge",
@@ -38,8 +35,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Debilitation": {
           "Gun": "Impact",
@@ -47,8 +43,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -56,8 +51,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Unbreakable": {
           "Gun": "Impact",
@@ -65,8 +59,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Hybrid": {
           "Gun": "All-Out Surge",
@@ -74,8 +67,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Ignition": {
           "Gun": "Searing",
@@ -83,8 +75,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Damage": {
           "Gun": "Tactical Awareness",
@@ -92,8 +83,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -101,8 +91,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Unbreakable": {
           "Gun": "Searing",
@@ -110,8 +99,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Hybrid": {
           "Gun": "All-Out Surge",
@@ -119,8 +107,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         }
       }
     },
@@ -135,8 +122,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -144,8 +130,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Unbreakable": {
           "Gun": "Tactical Awareness",
@@ -153,8 +138,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Hybrid": {
           "Gun": "All-Out Surge",
@@ -162,8 +146,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Debilitation": {
           "Gun": "Impact",
@@ -171,8 +154,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -180,8 +162,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Unbreakable": {
           "Gun": "Impact",
@@ -189,8 +170,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Hybrid": {
           "Gun": "All-Out Surge",
@@ -198,8 +178,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Ignition": {
           "Gun": "Searing",
@@ -207,8 +186,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Damage": {
           "Gun": "Tactical Awareness",
@@ -216,8 +194,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -225,8 +202,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Unbreakable": {
           "Gun": "Searing",
@@ -234,8 +210,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Hybrid": {
           "Gun": "All-Out Surge",
@@ -243,8 +218,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         }
       }
     },
@@ -259,8 +233,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - All Out Surge (AF)": {
           "Gun": "All-Out Surge",
@@ -268,8 +241,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Unbreakable (AF)": {
           "Gun": "Tactical Awareness",
@@ -277,8 +249,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Hybrid (AF)": {
           "Gun": "All-Out Surge",
@@ -286,8 +257,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Debilitation (AF)": {
           "Gun": "Impact",
@@ -295,8 +265,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - All Out Surge (AF)": {
           "Gun": "All-Out Surge",
@@ -304,8 +273,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Unbreakable (AF)": {
           "Gun": "Impact",
@@ -313,8 +281,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Hybrid (AF)": {
           "Gun": "All-Out Surge",
@@ -322,8 +289,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Ignition (AF)": {
           "Gun": "Searing",
@@ -331,8 +297,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Damage (AF)": {
           "Gun": "Tactical Awareness",
@@ -340,8 +305,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - All Out Surge (AF)": {
           "Gun": "All-Out Surge",
@@ -349,8 +313,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Unbreakable (AF)": {
           "Gun": "Searing",
@@ -358,8 +321,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Hybrid (AF)": {
           "Gun": "All-Out Surge",
@@ -367,8 +329,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         }
       }
     },
@@ -383,8 +344,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - All Out Surge (AF)": {
           "Gun": "All-Out Surge",
@@ -392,8 +352,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Unbreakable (AF)": {
           "Gun": "Tactical Awareness",
@@ -401,8 +360,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Hybrid (AF)": {
           "Gun": "All-Out Surge",
@@ -410,8 +368,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Debilitation (AF)": {
           "Gun": "Impact",
@@ -419,8 +376,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - All Out Surge (AF)": {
           "Gun": "All-Out Surge",
@@ -428,8 +384,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Unbreakable (AF)": {
           "Gun": "Impact",
@@ -437,8 +392,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Hybrid (AF)": {
           "Gun": "All-Out Surge",
@@ -446,8 +400,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Ignition (AF)": {
           "Gun": "Searing",
@@ -455,8 +408,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Damage (AF)": {
           "Gun": "Tactical Awareness",
@@ -464,8 +416,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - All Out Surge (AF)": {
           "Gun": "All-Out Surge",
@@ -473,8 +424,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Unbreakable (AF)": {
           "Gun": "Searing",
@@ -482,8 +432,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Hybrid (AF)": {
           "Gun": "All-Out Surge",
@@ -491,8 +440,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         }
       }
     },
@@ -507,8 +455,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -516,8 +463,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Unbreakable": {
           "Gun": "Tactical Awareness",
@@ -525,8 +471,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Hybrid": {
           "Gun": "All-Out Surge",
@@ -534,8 +479,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Debilitation": {
           "Gun": "Impact",
@@ -543,8 +487,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -552,8 +495,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Unbreakable": {
           "Gun": "Impact",
@@ -561,8 +503,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Hybrid": {
           "Gun": "All-Out Surge",
@@ -570,8 +511,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Abnormal State": {
           "Gun": "Magnetic Field",
@@ -579,8 +519,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Abnormal State - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -588,8 +527,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Abnormal State - Unbreakable": {
           "Gun": "Magnetic Field",
@@ -597,8 +535,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Abnormal State - Hybrid": {
           "Gun": "All-Out Surge",
@@ -606,8 +543,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         }
       }
     },
@@ -622,8 +558,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -631,8 +566,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Unbreakable": {
           "Gun": "Tactical Awareness",
@@ -640,8 +574,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Hybrid": {
           "Gun": "All-Out Surge",
@@ -649,8 +582,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Debilitation": {
           "Gun": "Impact",
@@ -658,8 +590,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -667,8 +598,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Unbreakable": {
           "Gun": "Impact",
@@ -676,8 +606,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Hybrid": {
           "Gun": "All-Out Surge",
@@ -685,8 +614,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Abnormal State": {
           "Gun": "Magnetic Field",
@@ -694,8 +622,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Abnormal State - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -703,8 +630,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Abnormal State - Unbreakable": {
           "Gun": "Magnetic Field",
@@ -712,8 +638,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Abnormal State - Hybrid": {
           "Gun": "All-Out Surge",
@@ -721,8 +646,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         }
       }
     },
@@ -737,8 +661,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - All Out Surge (Navy)": {
           "Gun": "All-Out Surge",
@@ -746,8 +669,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Unbreakable (Navy)": {
           "Gun": "Tactical Awareness",
@@ -755,8 +677,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Hybrid (Navy)": {
           "Gun": "All-Out Surge",
@@ -764,8 +685,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Debilitation (Navy)": {
           "Gun": "Impact",
@@ -773,8 +693,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - All Out Surge (Navy)": {
           "Gun": "All-Out Surge",
@@ -782,8 +701,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Unbreakable (Navy)": {
           "Gun": "Impact",
@@ -791,8 +709,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Hybrid (Navy)": {
           "Gun": "All-Out Surge",
@@ -800,8 +717,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Abnormal State (Navy)": {
           "Gun": "Magnetic Field",
@@ -809,8 +725,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Abnormal State - All Out Surge (Navy)": {
           "Gun": "All-Out Surge",
@@ -818,8 +733,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Abnormal State - Unbreakable (Navy)": {
           "Gun": "Magnetic Field",
@@ -827,8 +741,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Abnormal State - Hybrid (Navy)": {
           "Gun": "All-Out Surge",
@@ -836,8 +749,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         }
       }
     },
@@ -852,8 +764,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - All Out Surge (Army)": {
           "Gun": "All-Out Surge",
@@ -861,8 +772,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Unbreakable (Army)": {
           "Gun": "Tactical Awareness",
@@ -870,8 +780,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Hybrid (Army)": {
           "Gun": "All-Out Surge",
@@ -879,8 +788,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Debilitation (Army)": {
           "Gun": "Impact",
@@ -888,8 +796,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - All Out Surge (Army)": {
           "Gun": "All-Out Surge",
@@ -897,8 +804,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Unbreakable (Army)": {
           "Gun": "Impact",
@@ -906,8 +812,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Hybrid (Army)": {
           "Gun": "All-Out Surge",
@@ -915,8 +820,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Pulse (Army)": {
           "Gun": "Magnetic Field",
@@ -924,8 +828,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - All Out Surge (Army)": {
           "Gun": "All-Out Surge",
@@ -933,8 +836,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - Unbreakable (Army)": {
           "Gun": "Magnetic Field",
@@ -942,8 +844,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - Hybrid (Army)": {
           "Gun": "All-Out Surge",
@@ -951,8 +852,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         }
       }
     },
@@ -967,8 +867,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - All Out Surge (Army)": {
           "Gun": "All-Out Surge",
@@ -976,8 +875,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Unbreakable (Army)": {
           "Gun": "Tactical Awareness",
@@ -985,8 +883,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Hybrid (Army)": {
           "Gun": "All-Out Surge",
@@ -994,8 +891,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Debilitation (Army)": {
           "Gun": "Impact",
@@ -1003,8 +899,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - All Out Surge (Army)": {
           "Gun": "All-Out Surge",
@@ -1012,8 +907,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Unbreakable (Army)": {
           "Gun": "Impact",
@@ -1021,8 +915,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Hybrid (Army)": {
           "Gun": "All-Out Surge",
@@ -1030,8 +923,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Pulse (Army)": {
           "Gun": "Magnetic Field",
@@ -1039,8 +931,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - All Out Surge (Army)": {
           "Gun": "All-Out Surge",
@@ -1048,8 +939,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - Unbreakable (Army)": {
           "Gun": "Magnetic Field",
@@ -1057,8 +947,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - Hybrid (Army)": {
           "Gun": "All-Out Surge",
@@ -1066,8 +955,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         }
       }
     },
@@ -1082,8 +970,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -1091,8 +978,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Unbreakable": {
           "Gun": "Tactical Awareness",
@@ -1100,8 +986,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Hybrid": {
           "Gun": "All-Out Surge",
@@ -1109,8 +994,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Debilitation": {
           "Gun": "Impact",
@@ -1118,8 +1002,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -1127,8 +1010,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Unbreakable": {
           "Gun": "Impact",
@@ -1136,8 +1018,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Hybrid": {
           "Gun": "All-Out Surge",
@@ -1145,8 +1026,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Pulse": {
           "Gun": "Magnetic Field",
@@ -1154,8 +1034,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -1163,8 +1042,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - Unbreakable": {
           "Gun": "Magnetic Field",
@@ -1172,8 +1050,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - Hybrid": {
           "Gun": "All-Out Surge",
@@ -1181,8 +1058,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         }
       }
     },
@@ -1197,8 +1073,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -1206,8 +1081,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Unbreakable": {
           "Gun": "Tactical Awareness",
@@ -1215,8 +1089,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Hybrid": {
           "Gun": "All-Out Surge",
@@ -1224,8 +1097,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Debilitation": {
           "Gun": "Impact",
@@ -1233,8 +1105,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -1242,8 +1113,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Unbreakable": {
           "Gun": "Impact",
@@ -1251,8 +1121,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Hybrid": {
           "Gun": "All-Out Surge",
@@ -1260,8 +1129,7 @@
           "Optical": "Impact",
           "Headset": "Debilitate",
           "Arms": "Impact",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Pulse": {
           "Gun": "Magnetic Field",
@@ -1269,8 +1137,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -1278,8 +1145,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - Unbreakable": {
           "Gun": "Magnetic Field",
@@ -1287,8 +1153,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - Hybrid": {
           "Gun": "All-Out Surge",
@@ -1296,8 +1161,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         }
       }
     },
@@ -1312,8 +1176,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -1321,8 +1184,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Ignition": {
           "Gun": "Tactical Awareness",
@@ -1330,8 +1192,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -1339,8 +1200,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         }
       }
     },
@@ -1355,8 +1215,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -1364,8 +1223,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Ignition": {
           "Gun": "Tactical Awareness",
@@ -1373,8 +1231,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -1382,8 +1239,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         }
       }
     },
@@ -1398,8 +1254,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -1407,8 +1262,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Ignition": {
           "Gun": "Tactical Awareness",
@@ -1416,8 +1270,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -1425,8 +1278,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         }
       }
     },
@@ -1441,8 +1293,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -1450,8 +1301,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Ignition": {
           "Gun": "Tactical Awareness",
@@ -1459,8 +1309,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -1468,8 +1317,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         }
       }
     },
@@ -1484,8 +1332,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -1493,8 +1340,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Ignition": {
           "Gun": "Tactical Awareness",
@@ -1502,8 +1348,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -1511,8 +1356,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         }
       }
     },
@@ -1527,8 +1371,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -1536,8 +1379,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Ignition": {
           "Gun": "Tactical Awareness",
@@ -1545,8 +1387,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -1554,8 +1395,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         }
       }
     },
@@ -1570,8 +1410,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -1579,8 +1418,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Ignition": {
           "Gun": "Tactical Awareness",
@@ -1588,8 +1426,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -1597,8 +1434,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         }
       }
     },
@@ -1613,8 +1449,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent": {
           "Gun": "Tactical Awareness",
@@ -1622,8 +1457,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         }
       }
     },
@@ -1638,8 +1472,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent": {
           "Gun": "Tactical Awareness",
@@ -1647,8 +1480,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         }
       }
     },
@@ -1663,8 +1495,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent": {
           "Gun": "Tactical Awareness",
@@ -1672,8 +1503,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         }
       }
     },
@@ -1688,8 +1518,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent": {
           "Gun": "Tactical Awareness",
@@ -1697,8 +1526,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Ignition": {
           "Gun": "Searing",
@@ -1706,8 +1534,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Damage": {
           "Gun": "Tactical Awareness",
@@ -1715,8 +1542,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - All Out Surge/Damage": {
           "Gun": "All-Out Surge",
@@ -1724,8 +1550,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -1733,8 +1558,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Steel Torrent": {
           "Gun": "Searing",
@@ -1742,8 +1566,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Hybrid": {
           "Gun": "All-Out Surge",
@@ -1751,8 +1574,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         }
       }
     },
@@ -1767,8 +1589,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent": {
           "Gun": "Tactical Awareness",
@@ -1776,8 +1597,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Ignition": {
           "Gun": "Searing",
@@ -1785,8 +1605,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Damage": {
           "Gun": "Tactical Awareness",
@@ -1794,8 +1613,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - All Out Surge/Damage": {
           "Gun": "All-Out Surge",
@@ -1803,8 +1621,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -1812,8 +1629,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Steel Torrent": {
           "Gun": "Searing",
@@ -1821,8 +1637,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Hybrid": {
           "Gun": "All-Out Surge",
@@ -1830,8 +1645,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         }
       }
     },
@@ -1846,8 +1660,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent (AF)": {
           "Gun": "Tactical Awareness",
@@ -1855,8 +1668,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Ignition (AF)": {
           "Gun": "Searing",
@@ -1864,8 +1676,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Damage (AF)": {
           "Gun": "Tactical Awareness",
@@ -1873,8 +1684,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - All Out Surge/Damage (AF)": {
           "Gun": "All-Out Surge",
@@ -1882,8 +1692,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Flammable",
           "Arms": "Tactical Awareness",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - All Out Surge (AF)": {
           "Gun": "All-Out Surge",
@@ -1891,8 +1700,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Steel Torrent (AF)": {
           "Gun": "Searing",
@@ -1900,8 +1708,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         },
         "Ignition - Hybrid (AF)": {
           "Gun": "All-Out Surge",
@@ -1909,8 +1716,7 @@
           "Optical": "Searing",
           "Headset": "Flammable",
           "Arms": "Searing",
-          "Boots": "Flammable",
-          "SuggestedCombos": ""
+          "Boots": "Flammable"
         }
       }
     },
@@ -1925,8 +1731,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -1934,8 +1739,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Pulse": {
           "Gun": "Magnetic Field",
@@ -1943,8 +1747,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -1952,8 +1755,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -1961,8 +1763,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         }
       }
     },
@@ -1977,8 +1778,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -1986,8 +1786,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Pulse": {
           "Gun": "Magnetic Field",
@@ -1995,8 +1794,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -2004,8 +1802,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -2013,8 +1810,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         }
       }
     },
@@ -2029,8 +1825,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Artillery Storm (Army)": {
           "Gun": "Artillery Storm",
@@ -2038,8 +1833,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Pulse (Army)": {
           "Gun": "Magnetic Field",
@@ -2047,8 +1841,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - All Out Surge (Army)": {
           "Gun": "All-Out Surge",
@@ -2056,8 +1849,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - Artillery Storm (Army)": {
           "Gun": "Artillery Storm",
@@ -2065,8 +1857,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         }
       }
     },
@@ -2081,8 +1872,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -2090,8 +1880,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Vulnerable": {
           "Gun": "Armor-Breaking",
@@ -2099,8 +1888,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -2108,8 +1896,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -2117,8 +1904,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         }
       }
     },
@@ -2133,8 +1919,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -2142,8 +1927,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Vulnerable": {
           "Gun": "Armor-Breaking",
@@ -2151,8 +1935,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -2160,8 +1943,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -2169,8 +1951,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         }
       }
     },
@@ -2185,8 +1966,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -2194,8 +1974,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Vulnerable": {
           "Gun": "Armor-Breaking",
@@ -2203,8 +1982,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -2212,8 +1990,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -2221,8 +1998,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         }
       }
     },
@@ -2237,8 +2013,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent": {
           "Gun": "Tactical Awareness",
@@ -2246,8 +2021,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         }
       }
     },
@@ -2262,8 +2036,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent": {
           "Gun": "Tactical Awareness",
@@ -2271,8 +2044,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         }
       }
     },
@@ -2287,8 +2059,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent": {
           "Gun": "Tactical Awareness",
@@ -2296,8 +2067,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         }
       }
     },
@@ -2312,8 +2082,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent": {
           "Gun": "Tactical Awareness",
@@ -2321,8 +2090,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Pulse": {
           "Gun": "Magnetic Field",
@@ -2330,8 +2098,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -2339,8 +2106,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - Steel Torrent": {
           "Gun": "Magnetic Field",
@@ -2348,8 +2114,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - Hybrid": {
           "Gun": "All-Out Surge",
@@ -2357,8 +2122,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         }
       }
     },
@@ -2373,8 +2137,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent": {
           "Gun": "Tactical Awareness",
@@ -2382,8 +2145,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Pulse": {
           "Gun": "Magnetic Field",
@@ -2391,8 +2153,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -2400,8 +2161,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - Steel Torrent": {
           "Gun": "Magnetic Field",
@@ -2409,8 +2169,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - Hybrid": {
           "Gun": "All-Out Surge",
@@ -2418,8 +2177,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         }
       }
     },
@@ -2434,8 +2192,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent": {
           "Gun": "Tactical Awareness",
@@ -2443,8 +2200,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Pulse": {
           "Gun": "Magnetic Field",
@@ -2452,8 +2208,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - All Out Surge": {
           "Gun": "All-Out Surge",
@@ -2461,8 +2216,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - Steel Torrent": {
           "Gun": "Magnetic Field",
@@ -2470,8 +2224,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         },
         "Pulse - Hybrid": {
           "Gun": "All-Out Surge",
@@ -2479,8 +2232,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Magnetize",
           "Arms": "Magnetic Field",
-          "Boots": "Magnetize",
-          "SuggestedCombos": ""
+          "Boots": "Magnetize"
         }
       }
     },
@@ -2495,8 +2247,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - All-Out Surge": {
           "Gun": "All-Out Surge",
@@ -2504,8 +2255,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent": {
           "Gun": "Tactical Awareness",
@@ -2513,8 +2263,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Abnormal State": {
           "Gun": "Magnetic Field",
@@ -2522,8 +2271,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - All-Out Surge/Steel Torrent": {
           "Gun": "All-Out Surge",
@@ -2531,8 +2279,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Abnormal State/Steel Torrent": {
           "Gun": "Magnetic Field",
@@ -2540,8 +2287,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Hybrid": {
           "Gun": "All-Out Surge",
@@ -2549,8 +2295,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Vulnerable": {
           "Gun": "Armor-Breaking",
@@ -2558,8 +2303,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - All-Out Surge": {
           "Gun": "All-Out Surge",
@@ -2567,8 +2311,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Steel Torrent": {
           "Gun": "Armor-Breaking",
@@ -2576,8 +2319,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Abnormal State": {
           "Gun": "Magnetic Field",
@@ -2585,8 +2327,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - All-Out Surge/Steel Torrent": {
           "Gun": "All-Out Surge",
@@ -2594,8 +2335,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Abnormal State/Steel Torrent": {
           "Gun": "Magnetic Field",
@@ -2603,8 +2343,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Hybrid": {
           "Gun": "All-Out Surge",
@@ -2612,8 +2351,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         }
       }
     },
@@ -2628,8 +2366,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - All-Out Surge": {
           "Gun": "All-Out Surge",
@@ -2637,8 +2374,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent": {
           "Gun": "Tactical Awareness",
@@ -2646,8 +2382,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Abnormal State": {
           "Gun": "Magnetic Field",
@@ -2655,8 +2390,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - All-Out Surge/Steel Torrent": {
           "Gun": "All-Out Surge",
@@ -2664,8 +2398,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Abnormal State/Steel Torrent": {
           "Gun": "Magnetic Field",
@@ -2673,8 +2406,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Hybrid": {
           "Gun": "All-Out Surge",
@@ -2682,8 +2414,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Vulnerable": {
           "Gun": "Armor-Breaking",
@@ -2691,8 +2422,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - All-Out Surge": {
           "Gun": "All-Out Surge",
@@ -2700,8 +2430,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Steel Torrent": {
           "Gun": "Armor-Breaking",
@@ -2709,8 +2438,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Abnormal State": {
           "Gun": "Magnetic Field",
@@ -2718,8 +2446,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - All-Out Surge/Steel Torrent": {
           "Gun": "All-Out Surge",
@@ -2727,8 +2454,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Abnormal State/Steel Torrent": {
           "Gun": "Magnetic Field",
@@ -2736,8 +2462,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Hybrid": {
           "Gun": "All-Out Surge",
@@ -2745,8 +2470,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         }
       }
     },
@@ -2761,8 +2485,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - All-Out Surge": {
           "Gun": "All-Out Surge",
@@ -2770,8 +2493,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent": {
           "Gun": "Tactical Awareness",
@@ -2779,8 +2501,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Abnormal State": {
           "Gun": "Magnetic Field",
@@ -2788,8 +2509,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - All-Out Surge/Steel Torrent": {
           "Gun": "All-Out Surge",
@@ -2797,8 +2517,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Abnormal State/Steel Torrent": {
           "Gun": "Magnetic Field",
@@ -2806,8 +2525,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Hybrid": {
           "Gun": "All-Out Surge",
@@ -2815,8 +2533,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Vulnerable": {
           "Gun": "Armor-Breaking",
@@ -2824,8 +2541,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - All-Out Surge": {
           "Gun": "All-Out Surge",
@@ -2833,8 +2549,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Steel Torrent": {
           "Gun": "Armor-Breaking",
@@ -2842,8 +2557,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Abnormal State": {
           "Gun": "Magnetic Field",
@@ -2851,8 +2565,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - All-Out Surge/Steel Torrent": {
           "Gun": "All-Out Surge",
@@ -2860,8 +2573,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Abnormal State/Steel Torrent": {
           "Gun": "Magnetic Field",
@@ -2869,8 +2581,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Hybrid": {
           "Gun": "All-Out Surge",
@@ -2878,8 +2589,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         }
       }
     },
@@ -2894,8 +2604,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent": {
           "Gun": "Tactical Awareness",
@@ -2903,8 +2612,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Vulnerable": {
           "Gun": "Armor-Breaking",
@@ -2912,8 +2620,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - All-Out Surge": {
           "Gun": "All-Out Surge",
@@ -2921,8 +2628,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Abnormal State": {
           "Gun": "Magnetic Field",
@@ -2930,8 +2636,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Hybrid": {
           "Gun": "All-Out Surge",
@@ -2939,8 +2644,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         }
       }
     },
@@ -2955,8 +2659,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent": {
           "Gun": "Tactical Awareness",
@@ -2964,8 +2667,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Vulnerable": {
           "Gun": "Armor-Breaking",
@@ -2973,8 +2675,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - All-Out Surge": {
           "Gun": "All-Out Surge",
@@ -2982,8 +2683,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Abnormal State": {
           "Gun": "Magnetic Field",
@@ -2991,8 +2691,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Hybrid": {
           "Gun": "All-Out Surge",
@@ -3000,8 +2699,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         }
       }
     },
@@ -3016,8 +2714,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Steel Torrent": {
           "Gun": "Tactical Awareness",
@@ -3025,8 +2722,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Vulnerable": {
           "Gun": "Armor-Breaking",
@@ -3034,8 +2730,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - All-Out Surge": {
           "Gun": "All-Out Surge",
@@ -3043,8 +2738,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Abnormal State": {
           "Gun": "Magnetic Field",
@@ -3052,8 +2746,7 @@
           "Optical": "Armor-Breaking",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Hybrid": {
           "Gun": "All-Out Surge",
@@ -3061,8 +2754,7 @@
           "Optical": "Magnetic Field",
           "Headset": "Heavy Blow",
           "Arms": "Armor-Breaking",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         }
       }
     },
@@ -3077,8 +2769,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -3086,8 +2777,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Debilitation": {
           "Gun": "Tactical Awareness",
@@ -3095,8 +2785,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Debilitate",
           "Arms": "Tactical Awareness",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -3104,8 +2793,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Debilitate",
           "Arms": "Tactical Awareness",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Vulnerable": {
           "Gun": "Tactical Awareness",
@@ -3113,8 +2801,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Heavy Blow",
           "Arms": "Tactical Awareness",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -3122,8 +2809,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Heavy Blow",
           "Arms": "Tactical Awareness",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Debilitation/Vulnerable": {
           "Gun": "Tactical Awareness",
@@ -3131,8 +2817,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Debilitate",
           "Arms": "Tactical Awareness",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable/Debilitation": {
           "Gun": "Tactical Awareness",
@@ -3140,8 +2825,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Heavy Blow",
           "Arms": "Tactical Awareness",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation/Vulnerable - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -3149,8 +2833,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Debilitate",
           "Arms": "Tactical Awareness",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable/Debilitation - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -3158,8 +2841,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Heavy Blow",
           "Arms": "Tactical Awareness",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         }
       }
     },
@@ -3174,8 +2856,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -3183,8 +2864,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Debilitation": {
           "Gun": "Tactical Awareness",
@@ -3192,8 +2872,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Debilitate",
           "Arms": "Tactical Awareness",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -3201,8 +2880,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Debilitate",
           "Arms": "Tactical Awareness",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Vulnerable": {
           "Gun": "Tactical Awareness",
@@ -3210,8 +2888,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Heavy Blow",
           "Arms": "Tactical Awareness",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -3219,8 +2896,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Heavy Blow",
           "Arms": "Tactical Awareness",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Debilitation/Vulnerable": {
           "Gun": "Tactical Awareness",
@@ -3228,8 +2904,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Debilitate",
           "Arms": "Tactical Awareness",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable/Debilitation": {
           "Gun": "Tactical Awareness",
@@ -3237,8 +2912,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Heavy Blow",
           "Arms": "Tactical Awareness",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation/Vulnerable - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -3246,8 +2920,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Debilitate",
           "Arms": "Tactical Awareness",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable/Debilitation - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -3255,8 +2928,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Heavy Blow",
           "Arms": "Tactical Awareness",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         }
       }
     },
@@ -3271,8 +2943,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -3280,8 +2951,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Debilitation": {
           "Gun": "Tactical Awareness",
@@ -3289,8 +2959,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Debilitate",
           "Arms": "Tactical Awareness",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -3298,8 +2967,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Debilitate",
           "Arms": "Tactical Awareness",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Vulnerable": {
           "Gun": "Tactical Awareness",
@@ -3307,8 +2975,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Heavy Blow",
           "Arms": "Tactical Awareness",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -3316,8 +2983,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Heavy Blow",
           "Arms": "Tactical Awareness",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Debilitation/Vulnerable": {
           "Gun": "Tactical Awareness",
@@ -3325,8 +2991,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Debilitate",
           "Arms": "Tactical Awareness",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable/Debilitation": {
           "Gun": "Tactical Awareness",
@@ -3334,8 +2999,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Heavy Blow",
           "Arms": "Tactical Awareness",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         },
         "Debilitation/Vulnerable - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -3343,8 +3007,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Debilitate",
           "Arms": "Tactical Awareness",
-          "Boots": "Heavy Blow",
-          "SuggestedCombos": ""
+          "Boots": "Heavy Blow"
         },
         "Vulnerable/Debilitation - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -3352,8 +3015,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Heavy Blow",
           "Arms": "Tactical Awareness",
-          "Boots": "Debilitate",
-          "SuggestedCombos": ""
+          "Boots": "Debilitate"
         }
       }
     },
@@ -3368,8 +3030,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         },
         "Damage - Artillery Storm": {
           "Gun": "Artillery Storm",
@@ -3377,8 +3038,7 @@
           "Optical": "Tactical Awareness",
           "Headset": "Stealth Hologram",
           "Arms": "Tactical Awareness",
-          "Boots": "Stealth Hologram",
-          "SuggestedCombos": ""
+          "Boots": "Stealth Hologram"
         }
       }
     }
