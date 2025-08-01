@@ -7,6 +7,36 @@
   <link rel="stylesheet" href="styles/index.css">
   <script src="/test/header2.js" defer></script>
   <style>
+    #comboResults {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    /* Keep HT section full width and on bottom */
+    #comboResults .gear-box:last-child {
+      flex-basis: 100%;
+    }
+
+    /* Make hero boxes consistent width */
+    #comboResults .gear-box {
+      flex: 1 1 300px;
+      max-width: 300px;
+    }
+
+    /* On small screens, stack vertically (default behavior) */
+    @media (max-width: 768px) {
+      #comboResults {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #comboResults .gear-box {
+        max-width: 100%;
+      }
+    }
+
     .gear-box {
       width: 300px;
     }
