@@ -152,7 +152,6 @@
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.03); /* Optional: subtle background */
-    border: 2px solid var(--accent-color, #333);
     padding: 20px;
     box-sizing: border-box;
   }
@@ -214,6 +213,20 @@
     margin-top: 4px;
     text-align: center;
   }
+  .skeleton-box {
+    background: linear-gradient(90deg, #eee 25%, #ddd 50%, #eee 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite linear;
+    border-radius: 12px;
+    width: 300px;
+    height: 200px;
+    margin: 10px;
+  }
+
+  @keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
 
 </style>
 </head>
@@ -253,7 +266,12 @@
       <button onclick="showGear()">View Rune Loadouts</button>
     </div>
 
-    <div id="results" class="gear-container"></div>
+    <div id="results" class="gear-container">
+      <div class="skeleton-box"></div>
+      <div class="skeleton-box"></div>
+      <div class="skeleton-box"></div>
+    </div>
+
   </div>
 
   <!-- Hero Combos Tab -->
@@ -277,7 +295,10 @@
     <button onclick="renderHeroCombos()">View Suggested Marches</button>
   </div>
 
-    <div id="comboResults" style="margin-top: 20px;"></div>
+    <div id="comboResults" style="margin-top: 20px;">
+      <div class="skeleton-box"></div>
+      <div class="skeleton-box"></div>
+    </div>
   </div>
 </div>
 
@@ -301,6 +322,7 @@ fetch(liveUrl)
     heavyTrooperData = data.heavyTroopers || {};
     console.log("Heavy Troopers:", heavyTrooperData);
     filterHeroesByRole();
+      document.getElementById('results').innerHTML = ''; // Clear Rune Loadouts skeleton
     updateMarchOptions();
   })
   .catch(err => {
