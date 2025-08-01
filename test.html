@@ -7,130 +7,145 @@
   <link rel="stylesheet" href="styles/index.css">
   <script src="/test/header2.js" defer></script>
   <style>
-    #comboResults {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
+  #comboResults {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
 
-    #comboResults .gear-box:last-child {
-      flex-basis: 100%;
-      display: flex;
+  #comboResults .gear-box:last-child {
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+
+  .ht-slot {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+  }
+
+  .ht-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .ht-icons img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+  }
+
+  .ht-name {
+    font-size: 1em;
+    text-align: center;
+    line-height: 1.2;
+    font-weight: 500;
+  }
+
+  /* Keep HT section full width and on bottom */
+  #comboResults .gear-box:last-child {
+    flex-basis: 100%;
+  }
+
+  /* Make hero boxes consistent width */
+  #comboResults .gear-box {
+    flex: 1 1 300px;
+    max-width: 300px;
+  }
+
+  /* On small screens, stack vertically (default behavior) */
+  @media (max-width: 768px) {
+    #comboResults {
       flex-direction: column;
       align-items: center;
     }
 
-    .ht-slot {
-      text-align: center;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    .ht-icons {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 5px;
-    }
-
-    .ht-icons img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-    }
-
-    .ht-name {
-      font-size: 0.9em;
-      margin-top: 2px;
-    }
-
-
-    /* Keep HT section full width and on bottom */
-    #comboResults .gear-box:last-child {
-      flex-basis: 100%;
-    }
-
-    /* Make hero boxes consistent width */
     #comboResults .gear-box {
-      flex: 1 1 300px;
-      max-width: 300px;
+      max-width: 100%;
     }
+  }
 
-    /* On small screens, stack vertically (default behavior) */
-    @media (max-width: 768px) {
-      #comboResults {
-        flex-direction: column;
-        align-items: center;
-      }
+  .gear-box {
+    width: 300px;
+  }
 
-      #comboResults .gear-box {
-        max-width: 100%;
-      }
-    }
+  .gear-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 12px;
+  }
 
-    .gear-box {
-      width: 300px;
-    }
-    .gear-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 12px;
-    }
-    .gear-slot {
-      display: grid;
-      grid-template-rows: auto 48px auto;
-      align-items: center;
-      justify-items: center;
-      text-align: center;
-      height: 160px;
-    }
-    .gear-slot p {
-      margin: 4px 0;
-      line-height: 1.2;
-      max-width: 120px;
-      word-wrap: break-word;
-    }
-    .gear-slot p:nth-child(1),
-    .gear-slot p:nth-child(3) {
-      min-height: 2.2em;
-    }
-    .gear-slot img {
-      height: 64px;
-      margin: 4px 0;
-    }
-    input[type="number"], select {
-      max-width: 150px;
-    }
+  .gear-slot {
+    display: grid;
+    grid-template-rows: auto 48px auto;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    height: 160px;
+  }
 
-    .tabs {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-    .tab-button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background: var(--accent-color, #333);
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .tab-button.active {
-      background: var(--accent-hover, #555);
-    }
-    .tab-content {
-      display: none;
-    }
-    .tab-content.active {
-      display: block;
-    }
-  </style>
+  .gear-slot p {
+    margin: 4px 0;
+    line-height: 1.2;
+    max-width: 120px;
+    word-wrap: break-word;
+  }
+
+  .gear-slot p:nth-child(1),
+  .gear-slot p:nth-child(3) {
+    min-height: 2.2em;
+  }
+
+  .gear-slot img {
+    height: 64px;
+    margin: 4px 0;
+  }
+
+  input[type="number"],
+  select {
+    max-width: 150px;
+  }
+
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .tab-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: var(--accent-color, #333);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .tab-button.active {
+    background: var(--accent-hover, #555);
+  }
+
+  .tab-content {
+    display: none;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+</style>
 </head>
 <body>
 <header id="header-placeholder"></header>
