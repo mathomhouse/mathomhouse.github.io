@@ -180,7 +180,7 @@ function renderGearDetails(gear) {
   return `<div class="gear-grid">` + slotOrder.map(pair => {
     return pair.map(slot => {
       const rune = gear[slot];
-      const iconPath = `/images/runes/${rune}.png`;
+      const iconPath = `/images/runes/${rune.replace(/ /g, '%20')}.png`;
       return `
         <div class="gear-slot">
           <p><strong>${displayNames[slot]}</strong></p>
@@ -264,11 +264,11 @@ function renderHeroCombos() {
             <div class="gear-slot">
               <div class="ht-icon-row">
                 <div class="ht-icon-column">
-                  <img src="/images/${chipKey}-icon.png" alt="${ht.chipType}" title="${ht.chipType}" />
+                  <img src="/images/${chipKey.replace(/ /g, '%20')}-icon.png" alt="${ht.chipType}" title="${ht.chipType}" />
                   <div class="chip-name">${ht.chipType}</div>
                 </div>
                 <div class="ht-icon-column">
-                  <img src="/images/${htKey}-ht-icon.png" alt="${ht.trooper}" title="${ht.trooper}" />
+                  <img src="/images/${htKey.replace(/ /g, '%20')}-ht-icon.png" alt="${ht.trooper}" title="${ht.trooper}" />
                   <div class="ht-name">${ht.trooper}</div>
                 </div>
               </div>
