@@ -152,7 +152,7 @@
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.03); /* Optional: subtle background */
-    border-top: 2px solid var(--accent-color, #333);
+    border: 2px solid var(--accent-color, #333);
     padding: 20px;
     box-sizing: border-box;
   }
@@ -203,8 +203,8 @@
 
   /* Ensure consistent image sizes */
   .ht-icon-column img {
-    width: 48px;
-    height: 48px;
+    width: 100px;
+    height: 100px;
     object-fit: contain;
   }
 
@@ -493,7 +493,7 @@ function renderHeroCombos() {
     const box = document.createElement('div');
     box.className = 'gear-box';
     box.innerHTML = `
-      <h3>Heavy Troopers</h3>
+      <h3>Heavy Trooper</h3>
       <div class="gear-grid">
         ${heavyTroopers.map(ht => {
           const htIconMap = {
@@ -521,8 +521,8 @@ function renderHeroCombos() {
           const chipKey = chipIconMap[ht.chipType] || "unknown";
 
           return `
+            <div class="ht-slot">Slot ${ht.slot}</div>
             <div class="gear-slot">
-              <div class="ht-slot">Slot ${ht.slot}</div>
               <div class="ht-icon-row">
                 <div class="ht-icon-column">
                   <img src="images/${chipKey}-icon.png" alt="${ht.chipType}" title="${ht.chipType}" />
