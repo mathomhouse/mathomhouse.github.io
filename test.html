@@ -145,6 +145,47 @@
   .tab-content.active {
     display: block;
   }
+  /* Center-align HT Section */
+  #comboResults .gear-box:last-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.03); /* Optional: subtle background */
+    border-top: 2px solid var(--accent-color, #333);
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  /* Change HT gear grid layout to centered flex */
+  #comboResults .gear-box:last-child .gear-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  /* Stack chip + HT vertically */
+  .ht-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Chip image adjustments */
+  .ht-icons img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+  }
+
+  /* Chip name styling */
+  .chip-name {
+    font-size: 0.9em;
+    margin-top: 4px;
+    text-align: center;
+  }
 </style>
 </head>
 <body>
@@ -455,8 +496,10 @@ function renderHeroCombos() {
               <div class="ht-slot">Slot ${ht.slot}</div>
               <div class="ht-icons">
                 <img src="images/${chipKey}-icon.png" alt="${ht.chipType}" title="${ht.chipType}" />
+                <div class="chip-name">${ht.chipType}</div>
                 <img src="images/${htKey}-ht-icon.png" alt="${ht.trooper}" title="${ht.trooper}" />
               </div>
+
               <div class="ht-name">${ht.trooper}</div>
             </div>
           `;

@@ -3045,219 +3045,219 @@
   ],
   "suggestedCombos": {
     "Level 5 Skill": {
-      "Army - Pulse": [
+      "Army - Pulse - ES5": [
         {
           "Hero": "Binary",
           "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
+            "Gun": "Magnetic Field",
+            "Chest": "Magnetize",
+            "Optical": "Magnetic Field",
+            "Headset": "Magnetize",
+            "Arms": "Magnetic Field",
+            "Boots": "Magnetize"
           }
         },
         {
           "Hero": "Sara",
           "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
+            "Gun": "Magnetic Field",
+            "Chest": "Magnetize",
+            "Optical": "Magnetic Field",
+            "Headset": "Magnetize",
+            "Arms": "Magnetic Field",
+            "Boots": "Magnetize"
+          }
+        },
+        {
+          "Hero": "Marvingt",
+          "Gear": {
+            "Gun": "Impact",
+            "Chest": "Debilitate",
+            "Optical": "Impact",
+            "Headset": "Debilitate",
+            "Arms": "Impact",
+            "Boots": "Debilitate"
+          }
+        }
+      ],
+      "Army - Counter Attack - ES5": [
+        {
+          "Hero": "Po",
+          "Gear": {
+            "Gun": "Armor-Breaking",
+            "Chest": "Heavy Blow",
+            "Optical": "Armor-Breaking",
+            "Headset": "Heavy Blow",
+            "Arms": "Armor-Breaking",
+            "Boots": "Heavy Blow"
           }
         },
         {
           "Hero": "Duke",
           "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
-          }
-        }
-      ],
-      "Army - Counter Attack": [
-        {
-          "Hero": "Po",
-          "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
-          }
-        },
-        {
-          "Hero": "Striker",
-          "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
+            "Gun": "Tactical Awareness",
+            "Chest": "Stealth Hologram",
+            "Optical": "Tactical Awareness",
+            "Headset": "Stealth Hologram",
+            "Arms": "Tactical Awareness",
+            "Boots": "Stealth Hologram"
           }
         },
         {
           "Hero": "Leon Kennedy",
           "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
+            "Gun": "Tactical Awareness",
+            "Chest": "Stealth Hologram",
+            "Optical": "Tactical Awareness",
+            "Headset": "Stealth Hologram",
+            "Arms": "Tactical Awareness",
+            "Boots": "Stealth Hologram"
           }
         }
       ],
-      "Navy - Abnormal": [
+      "Navy - Abnormal - ES5": [
         {
-          "Hero": "Shen",
+          "Hero": "Crimson Typhoon",
           "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
+            "Gun": "Magnetic Field",
+            "Chest": "Heavy Blow",
+            "Optical": "Armor-Breaking",
+            "Headset": "Heavy Blow",
+            "Arms": "Armor-Breaking",
+            "Boots": "Heavy Blow"
           }
         },
         {
           "Hero": "Layla",
           "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
+            "Gun": "Impact",
+            "Chest": "Debilitate",
+            "Optical": "Impact",
+            "Headset": "Debilitate",
+            "Arms": "Impact",
+            "Boots": "Debilitate"
           }
         },
         {
           "Hero": "Jill",
           "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
+            "Gun": "Tactical Awareness",
+            "Chest": "Debilitate",
+            "Optical": "Tactical Awareness",
+            "Headset": "Debilitate",
+            "Arms": "Tactical Awareness",
+            "Boots": "Debilitate"
           }
         }
       ],
-      "Navy - Splash": [
+      "Navy - Splash - ES5": [
         {
           "Hero": "Stoick",
           "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
+            "Gun": "Tactical Awareness",
+            "Chest": "Stealth Hologram",
+            "Optical": "Tactical Awareness",
+            "Headset": "Stealth Hologram",
+            "Arms": "Tactical Awareness",
+            "Boots": "Stealth Hologram"
           }
         },
         {
           "Hero": "Ada Wong",
           "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
+            "Gun": "Tactical Awareness",
+            "Chest": "Unbreakable",
+            "Optical": "Tactical Awareness",
+            "Headset": "Debilitate",
+            "Arms": "Tactical Awareness",
+            "Boots": "Debilitate"
           }
         },
         {
-          "Hero": "Lilia",
+          "Hero": "Stromoy",
           "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
+            "Gun": "Tactical Awareness",
+            "Chest": "Stealth Hologram",
+            "Optical": "Tactical Awareness",
+            "Headset": "Stealth Hologram",
+            "Arms": "Tactical Awareness",
+            "Boots": "Stealth Hologram"
           }
         }
       ],
-      "Air Force - Ignition": [
+      "Air Force - Ignition - ES5": [
         {
           "Hero": "Storm Shadow",
           "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
+            "Gun": "Impact",
+            "Chest": "Debilitate",
+            "Optical": "Impact",
+            "Headset": "Debilitate",
+            "Arms": "Impact",
+            "Boots": "Debilitate"
           }
         },
         {
           "Hero": "Jett",
           "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
+            "Gun": "Impact",
+            "Chest": "Debilitate",
+            "Optical": "Impact",
+            "Headset": "Debilitate",
+            "Arms": "Impact",
+            "Boots": "Debilitate"
           }
         },
         {
           "Hero": "Hiccup",
           "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
+            "Gun": "Tactical Awareness",
+            "Chest": "Flammable",
+            "Optical": "Tactical Awareness",
+            "Headset": "Flammable",
+            "Arms": "Tactical Awareness",
+            "Boots": "Flammable"
           }
         }
       ],
-      "Air Force - Combo": [
+      "Air Force - Combo - ES5": [
+        {
+          "Hero": "Carnia",
+          "Gear": {
+            "Gun": "Tactical Awareness",
+            "Chest": "Stealth Hologram",
+            "Optical": "Tactical Awareness",
+            "Headset": "Stealth Hologram",
+            "Arms": "Tactical Awareness",
+            "Boots": "Stealth Hologram"
+          }
+        },
         {
           "Hero": "Vivian",
           "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
+            "Gun": "Impact",
+            "Chest": "Debilitate",
+            "Optical": "Impact",
+            "Headset": "Debilitate",
+            "Arms": "Impact",
+            "Boots": "Debilitate"
           }
         },
         {
-          "Hero": "Abad",
+          "Hero": "Lin",
           "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
-          }
-        },
-        {
-          "Hero": "Tigress",
-          "Gear": {
-            "Gun": "",
-            "Chest": "",
-            "Optical": "",
-            "Headset": "",
-            "Arms": "",
-            "Boots": ""
+            "Gun": "Tactical Awareness",
+            "Chest": "Stealth Hologram",
+            "Optical": "Tactical Awareness",
+            "Headset": "Stealth Hologram",
+            "Arms": "Tactical Awareness",
+            "Boots": "Stealth Hologram"
           }
         }
       ]
     },
     "Level 7 Skill": {
-      "Army - Pulse": [
+      "Army - ES 7 - Pulse": [
         {
           "Hero": "Binary",
           "Gear": {
@@ -3292,7 +3292,7 @@
           }
         }
       ],
-      "Army - Counter Attack (No WFAC)": [
+      "Army - ES7 - Counter Attack (No WFAC)": [
         {
           "Hero": "Po",
           "Gear": {
@@ -3327,7 +3327,7 @@
           }
         }
       ],
-      "Army - Counter Attack (WFAC)": [
+      "Army - ES7 - Counter Attack (WFAC)": [
         {
           "Hero": "Chris Redfield",
           "Gear": {
@@ -3362,7 +3362,7 @@
           }
         }
       ],
-      "Navy - Abnormal": [
+      "Navy - ES7 - Abnormal": [
         {
           "Hero": "Shen",
           "Gear": {
@@ -3397,7 +3397,7 @@
           }
         }
       ],
-      "Navy - Splash": [
+      "Navy - ES7 - Splash": [
         {
           "Hero": "Stoick",
           "Gear": {
@@ -3432,7 +3432,7 @@
           }
         }
       ],
-      "Air Force - Ignition": [
+      "Air Force - ES7 - Ignition": [
         {
           "Hero": "Storm Shadow",
           "Gear": {
@@ -3467,7 +3467,7 @@
           }
         }
       ],
-      "Air Force - Combo 1": [
+      "Air Force - ES7 - Combo 1": [
         {
           "Hero": "Vivian",
           "Gear": {
@@ -3502,7 +3502,7 @@
           }
         }
       ],
-      "Air Force - Combo 2": [
+      "Air Force - ES7 - Combo 2": [
         {
           "Hero": "Carna",
           "Gear": {
@@ -3540,60 +3540,102 @@
     }
   },
   "heavyTroopers": {
-    "Army - Pulse": [
+    "Army - ES 7 - Pulse": [
       {
         "trooper": "Doom Sawblade D-4",
         "chipType": "Xyston",
-        "slot": ""
+        "slot": 5
       }
     ],
-    "Army - Counter Attack (No WFAC)": [
+    "Army - ES7 - Counter Attack (No WFAC)": [
       {
         "trooper": "Earthshaker E-100",
         "chipType": "Xyston",
-        "slot": ""
+        "slot": 5
       }
     ],
-    "Army - Counter Attack (WFAC)": [
+    "Army - ES7 - Counter Attack (WFAC)": [
       {
         "trooper": "Earthshaker E-100",
         "chipType": "Xyston",
-        "slot": ""
+        "slot": 5
       }
     ],
-    "Navy - Abnormal": [
+    "Navy - ES7 - Abnormal": [
       {
         "trooper": "Tide Crusher BW-3",
         "chipType": "Estoc Piercing Sword",
-        "slot": ""
+        "slot": 2
       }
     ],
-    "Navy - Splash": [
+    "Navy - ES7 - Splash": [
       {
         "trooper": "Blazing Gale Rx",
         "chipType": "Ring of Cosmos",
-        "slot": ""
+        "slot": 8
       }
     ],
-    "Air Force - Ignition": [
+    "Air Force - ES7 - Ignition": [
       {
         "trooper": "Luminary Knight LP-4",
         "chipType": "Kris Sword",
-        "slot": ""
+        "slot": 5
       }
     ],
-    "Air Force - Combo 1": [
+    "Air Force - ES7 - Combo 1": [
       {
         "trooper": "Blade Angel BA-6",
         "chipType": "Ring of Cosmos",
-        "slot": ""
+        "slot": 5
       }
     ],
-    "Air Force - Combo 2": [
+    "Air Force - ES7 - Combo 2": [
       {
         "trooper": "Blade Angel BA-6",
         "chipType": "Ring of Cosmos",
-        "slot": ""
+        "slot": 5
+      }
+    ],
+    "Army - Pulse - ES5": [
+      {
+        "trooper": "Doom Sawblade D-4",
+        "chipType": "Xyston",
+        "slot": 5
+      }
+    ],
+    "Army - Counter Attack - ES5": [
+      {
+        "trooper": "Earthshaker E-100",
+        "chipType": "Xyston",
+        "slot": 5
+      }
+    ],
+    "Navy - Abnormal - ES5": [
+      {
+        "trooper": "Tide Crusher BW-3",
+        "chipType": "Estoc Piercing Sword",
+        "slot": 2
+      }
+    ],
+    "Navy - Splash - ES5": [
+      {
+        "trooper": "Blazing Gale Rx",
+        "chipType": "Ring of Cosmos",
+        "slot": 8
+      }
+    ],
+    "Air Force - Ignition - ES5": [
+      {
+        "trooper": "Luminary Knight LP-4",
+        "chipType": "Kris Sword",
+        "slot": 5
+      }
+    ],
+    "Air Force - Combo - ES5": [
+      {
+        "trooper": "Blade Angel BA-6",
+        "chipType": "Ring of Cosmos",
+        "slot": 5
       }
     ]
   }
