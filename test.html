@@ -14,6 +14,39 @@
       gap: 20px;
     }
 
+    #comboResults .gear-box:last-child {
+      flex-basis: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .ht-slot {
+      text-align: center;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .ht-icons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 5px;
+    }
+
+    .ht-icons img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
+
+    .ht-name {
+      font-size: 0.9em;
+      margin-top: 2px;
+    }
+
+
     /* Keep HT section full width and on bottom */
     #comboResults .gear-box:last-child {
       flex-basis: 100%;
@@ -404,12 +437,15 @@ function renderHeroCombos() {
 
           return `
             <div class="gear-slot">
-              <p><strong>Slot ${ht.slot}</strong></p>
-              <img src="images/${chipKey}-icon.png" alt="${ht.chipType}" title="${ht.chipType}" />
-              <img src="images/${htKey}-ht-icon.png" alt="${ht.trooper}" title="${ht.trooper}" />
-              <p>${ht.trooper}</p>
+              <div class="ht-slot">Slot ${ht.slot}</div>
+              <div class="ht-icons">
+                <img src="images/${chipKey}-icon.png" alt="${ht.chipType}" title="${ht.chipType}" />
+                <img src="images/${htKey}-ht-icon.png" alt="${ht.trooper}" title="${ht.trooper}" />
+              </div>
+              <div class="ht-name">${ht.trooper}</div>
             </div>
           `;
+
         }).join('')}
       </div>
     `;
