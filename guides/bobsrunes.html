@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bobgrif's Titan Gear Runes</title>
+  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="styles/bobsrunes.css">
+  <script src="/test/header2.js" defer></script>
+</head>
+<body>
+<header id="header-placeholder"></header>
+
+<div class="container">
+  <h1>Bobgrif's Runes Guide</h1>
+  <p>This guide was made in collaboration with Bobgrif, who provided all the data to help you figure out how you should set up the runes in your marches!
+    <br><br>
+    Use the tabs below to view various loadouts by hero or see the Bobgrif's recommended marches and the runes they make.
+  </p>
+
+  <div class="tabs">
+    <button class="tab-button active" onclick="openTab('loadouts')">Rune Loadouts</button>
+    <button class="tab-button" onclick="openTab('combos')">Suggested Marches</button>
+  </div>
+
+  <!-- Loadouts Tab -->
+  <div id="loadouts" class="tab-content active">
+    <label for="branch">Choose Branch:</label><br>
+    <select id="branch" onchange="filterHeroesByRole()">
+      <option value="" disabled selected>Select branch</option>
+      <option value="Army">Army</option>
+      <option value="Navy">Navy</option>
+      <option value="Air Force">Air Force</option>
+    </select><br>
+
+    <label for="heroAttack">Attack Hero:</label><br>
+    <select id="heroAttack"></select><br>
+    <label for="heroHP">HP Hero:</label><br>
+    <select id="heroHP"></select><br>
+    <label for="heroIndestructible">Indestructible Hero:</label><br>
+    <select id="heroIndestructible"></select>
+
+    <div class="calculate-btn">
+      <button onclick="showGear()">View Rune Loadouts</button>
+    </div>
+
+    <div id="results" class="gear-container">
+      <div class="skeleton-box"></div>
+      <div class="skeleton-box"></div>
+      <div class="skeleton-box"></div>
+    </div>
+
+  </div>
+
+  <!-- Hero Combos Tab -->
+  <div id="combos" class="tab-content">
+    <h2>Recommended Hero Combinations + Runes</h2>
+    <p>Select your Exclusive Skill Level and March Type to view suggested hero and rune combinations.</p>
+
+    <label for="skillLevel">Exclusive Skill Level:</label>
+  <select id="skillLevel" onchange="updateMarchOptions()">
+    <option value="" disabled selected>Select option</option>
+    <option value="Level 5 Skill">Level 5</option>
+    <option value="Level 7 Skill">Level 7</option>
+  </select>
+
+  <label for="marchType">March Type:</label>
+  <select id="marchType">
+    <option value="" disabled selected>Select option</option>
+  </select>
+
+  <div class="calculate-btn">
+    <button onclick="renderHeroCombos()">View Suggested Marches</button>
+  </div>
+
+    <div id="comboResults" style="margin-top: 20px;">
+      <div class="skeleton-box"></div>
+      <div class="skeleton-box"></div>
+    </div>
+  </div>
+</div>
+
+    <script src="scripts/bobsrunes.js"> </script>
+
+
+</body>
+</html>

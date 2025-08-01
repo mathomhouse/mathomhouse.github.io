@@ -1,0 +1,220 @@
+  #comboResults {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  #comboResults .gear-box:last-child {
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+
+  .ht-slot {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+  }
+
+  .ht-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .ht-icons img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+  }
+
+  .ht-name {
+    font-size: 1em;
+    text-align: center;
+    line-height: 1.2;
+    font-weight: 500;
+  }
+
+  /* Keep HT section full width and on bottom */
+  #comboResults .gear-box:last-child {
+    flex-basis: 100%;
+  }
+
+  /* Make hero boxes consistent width */
+  #comboResults .gear-box {
+    flex: 1 1 300px;
+    max-width: 300px;
+  }
+
+  /* On small screens, stack vertically (default behavior) */
+  @media (max-width: 768px) {
+    #comboResults {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #comboResults .gear-box {
+      max-width: 100%;
+    }
+  }
+
+  .gear-box {
+    width: 300px;
+  }
+
+  .gear-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .gear-slot {
+    display: grid;
+    grid-template-rows: auto 48px auto;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    height: 160px;
+  }
+
+  .gear-slot p {
+    margin: 4px 0;
+    line-height: 1.2;
+    max-width: 120px;
+    word-wrap: break-word;
+  }
+
+  .gear-slot p:nth-child(1),
+  .gear-slot p:nth-child(3) {
+    min-height: 2.2em;
+  }
+
+  .gear-slot img {
+    height: 64px;
+    margin: 4px 0;
+  }
+
+  input[type="number"],
+  select {
+    max-width: 150px;
+  }
+
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .tab-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: var(--accent-color, #333);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .tab-button.active {
+    background: var(--accent-hover, #555);
+  }
+
+  .tab-content {
+    display: none;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+  /* Center-align HT Section */
+  #comboResults .gear-box:last-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.03); /* Optional: subtle background */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  /* Change HT gear grid layout to centered flex */
+  #comboResults .gear-box:last-child .gear-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  /* Stack chip + HT vertically */
+  .ht-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Chip image adjustments */
+  .ht-icons img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+  }
+
+  /* Chip name styling */
+  .chip-name {
+    font-size: 0.9em;
+    margin-top: 4px;
+    text-align: center;
+  }
+  /* Aligns HT Icons side by side */
+  .ht-icon-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* Ensures each image + name is stacked */
+  .ht-icon-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Ensure consistent image sizes */
+  .ht-icon-column img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+  }
+
+  /* Name styling */
+  .chip-name, .ht-name {
+    font-size: 0.9em;
+    margin-top: 4px;
+    text-align: center;
+  }
+  .skeleton-box {
+    background: linear-gradient(90deg, #eee 25%, #ddd 50%, #eee 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite linear;
+    border-radius: 12px;
+    width: 300px;
+    height: 200px;
+    margin: 10px;
+  }
+
+  @keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
