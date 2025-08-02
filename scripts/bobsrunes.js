@@ -1,125 +1,105 @@
-// ==========================
-// Constants & Configurations
-// ==========================
-const API_URLS = {
-  live: 'https://script.google.com/macros/s/AKfycbw5qdmm2p_5lCMlfWlxAWfWy6jcZwsBt5RSDXttvWxfag150xb-hPJlceEs6mcyrNvJgQ/exec',
-  fallback: '/titan-gear-data.json'
-};
+let titanGearData = [];
+let suggestedCombosData = {};
+let heavyTrooperData = {};
 
-const htIconMap = {
-  "Earthshaker E-100": "yellow",
-  "Blazing Gale Rx": "red",
-  "Tide Crusher BW-3": "blue",
-  "Doom Sawblade D-4": "ball",
-  "Luminary Knight LP-4": "white",
-  "Blade Angel BA-6": "pink"
-};
+const liveUrl = 'https://script.google.com/macros/s/AKfycbw5qdmm2p_5lCMlfWlxAWfWy6jcZwsBt5RSDXttvWxfag150xb-hPJlceEs6mcyrNvJgQ/exec';
+const fallbackUrl = 'titan-gear-data.json';
 
-const chipIconMap = {
-  "Xyston": "xyston",
-  "Hoplon": "hoplon",
-  "Shamshir": "shamshir",
-  "Estoc Piercing Sword": "estoc",
-  "Rondel Dagger": "rondel",
-  "Scramsax Blade": "scramsax",
-  "Kris Sword": "kris-sword",
-  "Ring of Cosmos": "cosmos",
-  "Sasanian's Chain": "sasanian"
-};
+fetch(liveUrl)
+  .then(res => {
+    if (!res.ok) throw new Error("Live data unavailable");
+    return res.json();
+  })
+  .then(data => {
+    console.log("Live data loaded");
+    titanGearData = data.titanGearData;
+    suggestedCombosData = data.suggestedCombos;
+    heavyTrooperData = data.heavyTroopers || {};
+    console.log("Heavy Troopers:", heavyTrooperData);
+    filterHeroesByRole();
+      document.getElementById('results').innerHTML = ''; // Clear Rune Loadouts skeleton
+      document.getElementById('comboResults').innerHTML = ''; // Clear Suggested Marches skeleton
+    updateMarchOptions();
+  })
+  .catch(err => {
+  console.warn("Falling back to static data:", err.message);
 
-// ==========================
-// Utility Functions
-// ==========================
-function encodeFileName(name) {
-  return name.replace(/ /g, '%20');
-}
-
-function clearSkeleton(containerId) {
-  document.getElementById(containerId).innerHTML = '';
-}
-
-function populateDropdown(dropdownId, options) {
-  const select = document.getElementById(dropdownId);
-  select.innerHTML = '';
-  options.forEach(option => {
-    const opt = document.createElement('option');
-    opt.value = option;
-    opt.textContent = option;
-    select.appendChild(opt);
-  });
-}
-
-// ==========================
-// Data Fetching & Initialization
-// ==========================
-function fetchData() {
-  fetch(API_URLS.live)
-    .then(res => {
-      if (!res.ok) throw new Error('Live data unavailable');
-      return res.json();
-    })
-    .then(data => initializeData(data))
-    .catch(err => {
-      console.warn("Falling back to static data:", err.message);
-      showFallbackBanner();
-      fetch(API_URLS.fallback)
-        .then(res => res.json())
-        .then(data => initializeData(data));
-    });
-}
-
-function initializeData(data) {
-  // Assign data to global vars
-  titanGearData = data.titanGearData;
-  suggestedCombosData = data.suggestedCombos;
-  heavyTrooperData = data.heavyTroopers || {};
-
-  filterHeroesByRole();
-  updateMarchOptions();
-
-  // Clear skeletons after data is ready
-  clearSkeleton('results');
-  clearSkeleton('comboResults');
-}
-
-function showFallbackBanner() {
+  // Inject fallback banner at the top of the body
   document.body.insertAdjacentHTML('afterbegin', `
-    <div id="fallback-banner" style="background:#fdd;padding:10px;text-align:center;">⚠️ Live data could not be loaded. Displaying cached data.</div>
+    <div id="fallback-banner" style="
+      background-color: #ffdddd;
+      color: #900;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      border-bottom: 2px solid #900;
+      font-family: sans-serif;
+    ">
+      ⚠️ Live data could not be loaded. Displaying cached data.
+    </div>
   `);
+
+  // Proceed with fetching fallback data
+  fetch(fallbackUrl)
+    .then(res => res.json())
+    .then(data => {
+      console.log("Fallback data loaded");
+      titanGearData = data.titanGearData;
+      suggestedCombosData = data.suggestedCombos;
+      heavyTrooperData = data.heavyTroopers || {};
+      console.log("Heavy Troopers (fallback):", heavyTrooperData);
+      filterHeroesByRole();
+
+      // Clear Skeletons for both sections
+      document.getElementById('results').innerHTML = '';
+      document.getElementById('comboResults').innerHTML = '';
+    });
+});
+;
+
+function openTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+  document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  event.target.classList.add('active');
 }
 
-// ==========================
-// UI Rendering Functions
-// ==========================
-function renderGearDetails(gear) {
-  const displayNames = {
-    Gun: 'Assault Pistol',
-    Chest: 'Tactical Backarmor',
-    Optical: 'Optical Add-on',
-    Headset: 'Raytheon Headset',
-    Arms: 'Portable GPS',
-    Boots: 'Power Boots'
-  };
+function filterHeroesByRole() {
+  const branch = document.getElementById('branch').value;
 
-  const slotOrder = [
-    ['Gun', 'Headset'],
-    ['Chest', 'Arms'],
-    ['Optical', 'Boots']
-  ];
+  if (!branch) {
+    populateDropdown('heroAttack', []);
+    populateDropdown('heroHP', []);
+    populateDropdown('heroIndestructible', []);
+    return;
+  }
 
-  return `<div class="gear-grid">` + slotOrder.map(pair => {
-    return pair.map(slot => {
-      const rune = gear[slot];
-      const iconPath = `/images/runes/${rune.replace(/ /g, '%20')}.png`;
-      return `
-        <div class="gear-slot">
-          <p><strong>${displayNames[slot]}</strong></p>
-          <img src="${iconPath}" alt="${rune}" title="${rune}" />
-          <p>${rune}</p>
-        </div>
-      `;
-    }).join('');
-  }).join('') + `</div>`;
+  const attackHeroes = titanGearData
+    .filter(h => (h.Branch === branch || h.Branch === "Universal") && h.Subcategory === "Attack")
+    .map(h => h.Hero);
+
+  const hpHeroes = titanGearData
+    .filter(h => (h.Branch === branch || h.Branch === "Universal") && h.Subcategory === "HP")
+    .map(h => h.Hero);
+
+  const indestructibleHeroes = titanGearData
+    .filter(h => (h.Branch === branch || h.Branch === "Universal") && h.Subcategory === "Indestructible")
+    .map(h => h.Hero);
+
+  populateDropdown('heroAttack', attackHeroes);
+  populateDropdown('heroHP', hpHeroes);
+  populateDropdown('heroIndestructible', indestructibleHeroes);
+}
+
+function populateDropdown(dropdownId, heroList) {
+  const select = document.getElementById(dropdownId);
+  select.innerHTML = "";
+  heroList.forEach(hero => {
+    const option = document.createElement("option");
+    option.value = hero;
+    option.textContent = hero;
+    select.appendChild(option);
+  });
 }
 
 function showGear() {
@@ -162,6 +142,54 @@ function showGear() {
     `;
     resultsDiv.appendChild(heroBox);
   });
+}
+
+function updateDynamicGear(selectElement) {
+  const heroName = selectElement.dataset.hero;
+  const branch = selectElement.dataset.branch;
+  const selectedLoadout = selectElement.value;
+
+  const hero = titanGearData.find(item =>
+    item.Hero.trim() === heroName &&
+    item.Branch === branch
+  );
+  const gear = hero?.Loadouts?.[selectedLoadout];
+
+  const gearDiv = document.getElementById(`gear-${heroName}-${branch}`);
+  if (gearDiv && gear) {
+    gearDiv.innerHTML = renderGearDetails(gear);
+  }
+}
+
+function renderGearDetails(gear) {
+  const displayNames = {
+    Gun: 'Assault Pistol',
+    Chest: 'Tactical Backarmor',
+    Optical: 'Optical Add-on',
+    Headset: 'Raytheon Headset',
+    Arms: 'Portable GPS',
+    Boots: 'Power Boots'
+  };
+
+  const slotOrder = [
+    ['Gun', 'Headset'],
+    ['Chest', 'Arms'],
+    ['Optical', 'Boots']
+  ];
+
+  return `<div class="gear-grid">` + slotOrder.map(pair => {
+    return pair.map(slot => {
+      const rune = gear[slot];
+      const iconPath = `/images/runes/${rune.replace(/ /g, '%20')}.png`;
+      return `
+        <div class="gear-slot">
+          <p><strong>${displayNames[slot]}</strong></p>
+          <img src="${iconPath}" alt="${rune}" title="${rune}" />
+          <p>${rune}</p>
+        </div>
+      `;
+    }).join('');
+  }).join('') + `</div>`;
 }
 
 function updateMarchOptions() {
@@ -253,18 +281,3 @@ function renderHeroCombos() {
     resultsDiv.appendChild(box);
   }
 }
-
-// ==========================
-// Event Handlers
-// ==========================
-function openTab(tabId) {
-  document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-  document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-  document.getElementById(tabId).classList.add('active');
-  event.target.classList.add('active');
-}
-
-// ==========================
-// Initialize Page
-// ==========================
-fetchData();
