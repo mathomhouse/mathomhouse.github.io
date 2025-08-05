@@ -80,29 +80,50 @@
       <div class="skeleton-box"></div>
       <div class="skeleton-box"></div>
     </div>
-<!--<hr>
+<hr>
 <h2>Hero Comparisons</h2>
-    <p>Below are some comparisons between heroes and their particular stats</p>
-    <h3>Army</h3>
-    <div class="sample-images">
-      <img src="/images/test.png" alt="Chaos Crafting Reference Sample 1" style="border-radius: 8px; margin: 20px 0; max-width: 45%; height: auto;" />
-      <img src="/images/test.png" alt="Chaos Crafting Reference Sample 2" style="border-radius: 8px; margin: 20px 0; max-width: 45%; height: auto;" />
-    </div>
-    <h3>Navy</h3>
-    <div class="sample-images">
-      <img src="/images/test.png" alt="Chaos Crafting Reference Sample 1" style="border-radius: 8px; margin: 20px 0; max-width: 45%; height: auto;" />
-      <img src="/images/test.png" alt="Chaos Crafting Reference Sample 2" style="border-radius: 8px; margin: 20px 0; max-width: 45%; height: auto;" />
-    </div>
-    <h3>Air Force</h3>
-    <div class="sample-images">
-      <img src="/images/test.png" alt="Chaos Crafting Reference Sample 1" style="border-radius: 8px; margin: 20px 0; max-width: 45%; height: auto;" />
-      <img src="/images/test.png" alt="Chaos Crafting Reference Sample 2" style="border-radius: 8px; margin: 20px 0; max-width: 45%; height: auto;" />
-    </div>
-    -->
+<p>Below are some comparisons between heroes and their particular stats.</p>
+
+<h3>Army</h3>
+<div class="sample-images">
+  <img src="/images/army-pulse-comparison1.jpg" alt="Army Pulse Comparison Table 1" class="clickable-image" style="border-radius: 8px; margin: 20px 0; max-width: 45%; height: auto;" />
+  <img src="/images/army-pulse-comparison2.jpg" alt="Army Pulse Comparison Table 2" class="clickable-image" style="border-radius: 8px; margin: 20px 0; max-width: 45%; height: auto;" />
+</div>
+<div id="imageModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalImage">
+  <div id="caption"></div>
+</div>
+
+
   </div>
 </div>
 
     <script src="/scripts/bobsrunes.js"> </script>
+<script>
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImage");
+  const captionText = document.getElementById("caption");
+
+  document.querySelectorAll(".clickable-image").forEach(img => {
+    img.addEventListener("click", function() {
+      modal.style.display = "block";
+      modalImg.src = this.src;
+      captionText.innerHTML = this.alt;
+    });
+  });
+
+  document.querySelector(".close").addEventListener("click", function() {
+    modal.style.display = "none";
+  });
+
+  window.addEventListener("click", function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  });
+</script>
+
 
 
 </body>
