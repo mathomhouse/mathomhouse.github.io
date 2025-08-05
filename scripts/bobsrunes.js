@@ -281,3 +281,24 @@ function renderHeroCombos() {
     resultsDiv.appendChild(box);
   }
 }
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImage");
+  const captionText = document.getElementById("caption");
+
+  document.querySelectorAll(".clickable-image").forEach(img => {
+    img.addEventListener("click", function() {
+      modal.style.display = "block";
+      modalImg.src = this.src;
+      captionText.innerHTML = this.alt;
+    });
+  });
+
+  document.querySelector(".close").addEventListener("click", function() {
+    modal.style.display = "none";
+  });
+
+  window.addEventListener("click", function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  });
