@@ -6,13 +6,10 @@
   <title>Ranked Match Store</title>
   <link rel="stylesheet" href="styles/index.css" />
   <script src="header.js" defer></script>
-  <style>
-    :root {
-      --card-bg: rgba(255,255,255,0.06);
+  <style >
+    input[type="number"], select {
+      max-width: 100px;
     }
-
-    input[type="number"], select { max-width: 100px; }
-
     .store-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -42,7 +39,6 @@
       padding: 10px 16px;
       font-size: 16px;
       border-radius: 50px;
-      cursor: pointer;
     }
 
     .cart-panel {
@@ -52,16 +48,17 @@
       height: 100%;
       width: 320px;
       background: var(--card-bg);
-      box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
       padding: 20px;
       transform: translateX(100%);
       transition: transform 0.3s ease-in-out;
       z-index: 101;
       overflow-y: auto;
-      backdrop-filter: blur(6px);
     }
 
-    .cart-panel.open { transform: translateX(0); }
+    .cart-panel.open {
+      transform: translateX(0);
+    }
 
     .slider-row {
       display: flex;
@@ -71,7 +68,9 @@
       margin-top: 10px;
     }
 
-    .slider-row input[type="range"] { flex-grow: 1; }
+    .slider-row input[type="range"] {
+      flex-grow: 1;
+    }
 
     .cart-line {
       display: flex;
@@ -82,25 +81,69 @@
       padding: 6px 0;
     }
 
-    .item-name { flex: 2; }
-    .item-qty { width: 50px; }
+    .item-name {
+      flex: 2;
+    }
+
+    .item-qty {
+      width: 50px;
+    }
+
     .item-remove {
       color: red;
       cursor: pointer;
       font-weight: bold;
       font-size: 30px;
-      line-height: 1;
     }
-    .item-cost { flex: 1; text-align: right; }
 
-    @media (max-width: 1024px) {
-      .store-grid { grid-template-columns: repeat(2, 1fr); }
+    .item-cost {
+      flex: 1;
+      text-align: right;
     }
-    @media (max-width: 600px) {
-      .store-grid { grid-template-columns: 1fr; gap: 12px; padding: 12px; }
-      .store-tile { padding: 12px; font-size: 0.95rem; }
-      .cart-panel { width: 100%; }
-      .cart-button { font-size: 14px; padding: 8px 14px; border-radius: 30px; right: 15px; }
+
+    @media (max-width: 768px) {
+      .store-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 12px;
+      }
+
+      .store-tile {
+        padding: 8px;
+        font-size: 0.85rem;
+      }
+
+      .store-tile h3 {
+        font-size: 1rem;
+      }
+
+      .slider-row button {
+        padding: 2px 6px;
+        font-size: 12px;
+      }
+
+      .store-tile button {
+        padding: 5px 8px;
+        font-size: 13px;
+      }
+
+      .cart-button {
+        font-size: 14px;
+        padding: 8px 14px;
+        border-radius: 30px;
+        width: auto;
+        right: 15px;
+      }
+
+      .cart-panel {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .store-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
