@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Map Labeler — Select a Map & Add Labels</title>
+  <style>
+    :root{
+      --cell: 18px;
+      --gap: 1px;
+      --panel: #121218;
+      --panel-2: #1a1a22;
+      --text: #e9e9ef;
+      --muted: #9aa0a6;
+      --accent: #6ea8ff;
+    }
+    html, body { height: 100%; }
+    body{
+      margin:0; color:var(--text);
+      background: linear-gradient(180deg,#0b0b0c,#0f1016);
+      font:14px/1.35 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      display:grid; grid-template-columns: 340px 1fr; grid-template-rows:auto 1fr; grid-template-areas:
+      "header header" "sidebar main";
+    }
+    header{ grid-area:header; display:flex; gap:10px; align-items:center; flex-wrap:wrap; padding:12px 16px; background:#0e0f14; border-bottom:1px solid #23232b; }
+    header h1{ font-size:16px; margin:0; letter-spacing:.2px; }
+    header .sp{ flex:1; }
+    header select, header button{ background:var(--panel-2); border:1px solid #2a2a34; color:var(--text); border-radius:10px; padding:8px 10px; }
+    header button{ cursor:pointer; }
+    header button:hover{ filter:brightness(1.1); }
+
+    aside{ grid-area:sidebar; background:var(--panel); border-right:1px solid #23232b; padding:14px; overflow:auto; }
+    aside h2{ font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin:6px 0 10px; }
+    .note{ color:var(--muted); font-size:12px; }
+
+    .legend{ display:grid; gap:8px; }
+    .legend .row{ display:flex; align-items:center; gap:8px; background:var(--panel-2); border:1px solid #2a2a34; border-radius:10px; padding:6px 8px; }
+    .legend .sw{ width:18px; height:18px; border-radius:4px; border:1px solid #0008; box-shadow: inset 0 0 0 1px #ffffff22; }
+
+    .labels{ display:grid; gap:8px; }
+    .item{ display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:8px; background:var(--panel-2); border:1px solid #2a2a34; border-radius:12px; padding:8px; }
+    .item .tag{ font-weight:700; padding:2px 8px; border-radius:6px; background:#2a2a34; }
+    .item .meta{ color:var(--muted); font-size:12px; }
+    .btns{ display:flex; gap:6px; }
+    .btn, .btn-xs{ background:var(--panel-2); border:1px solid #2a2a34; color:var(--text); border-radius:10px; cursor:pointer; }
+    .btn{ padding:8px 10px; }
+    .btn-xs{ padding:4px 6px; font-size:12px; border-radius:8px; }
+
+    main{ grid-area:main; display:grid; place-items:center; overflow:auto; }
+    .grid-wrap{ position:relative; padding:18px; }
+    .grid{ --cols:50; display:grid; grid-template-columns: repeat(var(--cols), var(--cell)); grid-auto-rows: var(--cell); gap:var(--gap); background:#1c1c24; border:1px solid #2a2a34; padding:var(--gap); border-radius:14px; box-shadow:0 10px 30px #0006, inset 0 0 0 1px #ffffff10; image-rendering: pixelated; user-select:none; touch-action:none; }
+    .cell{ position:relative; width:var(--cell); height:var(--cell); background:#f2f4f7; border-radius:3px; box-shadow: inset 0 0 0 1px #00000011; }
+    .lbl{ pointer-events:none; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:11px; color:#fff; text-shadow: -1px 0 #000, 1px 0 #000, 0 -1px #000, 0 1px #000, -1px -1px #000, 1px 1px #000, -1px 1px #000, 1px -1px #000; }
+    @keyframes flashRing{ 0%{outline-color:transparent;} 30%{outline-color:var(--accent);} 100%{outline-color:transparent;} }
+    .flash{ outline:2px solid var(--accent); outline-offset:-2px; animation:flashRing .9s ease; }
+
+    .hint{ position:fixed; bottom:10px; left:50%; transform:translateX(-50%); color:#c6c7cf; font-size:12px; background:#0e0f14aa; padding:6px 10px; border:1px solid #2a2a34; border-radius:999px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Map Labeler</h1>
+    <div class="sp sp1"></div>
+    <label for="mapSelect" class="note">Choose map</label>
+    <select id="mapSelect" title="Pick a map">
+      <!-- Replace data-src values with your hosted JSON URLs or paths -->
+      <option value="map1" data-src="maps/map1.json">Map 1</option>
+      <option value="map2" data-src="maps/map2.json">Map 2</option>
+      <option value="map3" data-src="maps/map3.json">Map 3</option>
+      <option value="map4" data-src="maps/map4.json">Map 4</option>
+      <option value="map5" data-src="maps/map5.json">Map 5</option>
+      <option value="map6" data-src="round6map.json">Round 6 Map</option>
+    </select>
+    <button id="btnReload" title="Reload base map (discard local labels)">Reset Map</button>
+    <div class="sp"></div>
+    <button id="btnExportPNG" title="Download PNG of this map with labels">Export PNG</button>
+    <button id="btnUploadJson" title="Load a custom JSON (optional)">Load JSON</button>
+    <input id="fileInput" type="file" accept="application/json" hidden />
+    <button id="btnEditor" title="Create custom map in editor">Open Custom Editor</button>
+  </header>
+
+  <aside>
+    <h2>Legend</h2>
+    <div id="legend" class="legend"></div>
+
+    <h2>Labels</h2>
+    <div id="labelList" class="labels"></div>
+    <div style="display:flex; gap:8px; margin:8px 0 16px;">
+      <button id="btnExportLabels" class="btn" title="Export labels as CSV">Export Labels CSV</button>
+      <button id="btnClearLabels" class="btn" title="Remove all labels">Clear</button>
+    </div>
+
+    <p class="note">This page is <strong>label‑only</strong>: Left‑click a cell to set/rename a label; right‑click to remove. Painting and palette edits are disabled here.</p>
+  </aside>
+
+  <main>
+    <div class="grid-wrap">
+      <div id="grid" class="grid" role="grid" aria-label="Labelable map grid"></div>
+    </div>
+  </main>
+
+  <div class="hint">Labels auto‑save per map in your browser. PNG export includes labels.</div>
+
+  <script>
+    //===========================
+    // Minimal runtime for label‑only flow
+    //===========================
+    let rows=50, cols=50, matrix=[], PALETTE=[];
+
+    const gridEl = document.getElementById('grid');
+    const legendEl = document.getElementById('legend');
+    const mapSelect = document.getElementById('mapSelect');
+    const labelListEl = document.getElementById('labelList');
+
+    // Per‑map label store
+    const labelMap = new Map(); // key "r,c" -> text
+    const keyFor = (r,c)=>`${r},${c}`;
+
+    function getLSKey(){ return `labels:${mapSelect.value}`; }
+    function saveLabels(){ const arr=[...labelMap].map(([k,t])=>{const [r,c]=k.split(',').map(Number); return {r,c,text:t};}); localStorage.setItem(getLSKey(), JSON.stringify(arr)); }
+    function loadLabels(){ labelMap.clear(); try{ const raw=localStorage.getItem(getLSKey()); if(raw){ const arr=JSON.parse(raw)||[]; for(const it of arr){ if(Number.isInteger(it.r)&&Number.isInteger(it.c)&&typeof it.text==='string'){ labelMap.set(keyFor(it.r,it.c), it.text); } } } }catch{} }
+
+    function makeMatrix(r,c,fill='empty'){ return Array.from({length:r},()=>Array.from({length:c},()=>fill)); }
+
+    function keyToColor(key){ const p=PALETTE.find(p=>p.key===key); return p? p.color : '#f2f4f7'; }
+
+    function paintAllFromMatrix(){
+      gridEl.style.setProperty('--cols', cols);
+      gridEl.innerHTML='';
+      for(let r=0;r<rows;r++){
+        for(let c=0;c<cols;c++){
+          const cell=document.createElement('div');
+          cell.className='cell'; cell.dataset.r=r; cell.dataset.c=c; cell.style.background=keyToColor(matrix[r][c]);
+          gridEl.appendChild(cell);
+        }
+      }
+      paintAllLabels();
+    }
+
+    function updateCellLabelDOM(r,c){
+      const idx=r*cols+c; const cell=gridEl.children[idx]; if(!cell) return;
+      let span=cell.querySelector('.lbl'); const text=labelMap.get(keyFor(r,c));
+      if(text && text.trim()){
+        if(!span){ span=document.createElement('span'); span.className='lbl'; cell.appendChild(span); }
+        span.textContent=text;
+      } else if(span){ span.remove(); }
+    }
+
+    function paintAllLabels(){
+      for(const cell of gridEl.children){ const s=cell.querySelector('.lbl'); if(s) s.remove(); }
+      for(const [k, text] of labelMap){ const [r,c]=k.split(',').map(Number); updateCellLabelDOM(r,c); }
+      renderLabelList();
+    }
+
+    function renderLegend(){
+      legendEl.innerHTML='';
+      for(const p of PALETTE){
+        const row=document.createElement('div'); row.className='row';
+        row.innerHTML = `<span class="sw" style="background:${p.color}"></span><span>${p.name}</span>`;
+        legendEl.appendChild(row);
+      }
+    }
+
+    // Label interactions (left‑click: set/rename; right‑click: remove)
+    gridEl.addEventListener('contextmenu', e=>e.preventDefault());
+    gridEl.addEventListener('pointerdown', (e)=>{
+      const t=e.target; if(!t.classList.contains('cell')) return; e.preventDefault();
+      const r=+t.dataset.r, c=+t.dataset.c; const k=keyFor(r,c);
+      if(e.button===2){ labelMap.delete(k); updateCellLabelDOM(r,c); saveLabels(); renderLabelList(); return; }
+      const existing = labelMap.get(k)||''; const text = prompt('Label for this cell (blank to remove):', existing);
+      if(text===null) return; // cancel
+      if(!text.trim()){ labelMap.delete(k); }
+      else{ labelMap.set(k, text.trim()); }
+      updateCellLabelDOM(r,c); saveLabels(); renderLabelList();
+    });
+
+    function renderLabelList(){
+      const rows=[...labelMap].map(([k,text])=>{const [r,c]=k.split(',').map(Number); return {r,c,text,k};}).sort((a,b)=> (a.text||'').localeCompare(b.text||''));
+      labelListEl.innerHTML = rows.length? '' : '<div class="note">No labels yet. Click a cell on the map to add one.</div>';
+      for(const it of rows){
+        const wrap=document.createElement('div'); wrap.className='item';
+        const tag=document.createElement('span'); tag.className='tag'; tag.textContent=it.text; wrap.appendChild(tag);
+        const meta=document.createElement('div'); meta.className='meta'; meta.textContent=`(${it.r}, ${it.c})`;
+        const btns=document.createElement('div'); btns.className='btns';
+        btns.innerHTML=`<button class="btn-xs" data-act="jump" data-k="${it.k}">Jump</button>
+                         <button class="btn-xs" data-act="rename" data-k="${it.k}">Rename</button>
+                         <button class="btn-xs" data-act="del" data-k="${it.k}">Delete</button>`;
+        wrap.appendChild(meta); wrap.appendChild(btns); labelListEl.appendChild(wrap);
+      }
+    }
+
+    labelListEl.addEventListener('click', (e)=>{
+      const btn=e.target.closest('button[data-act]'); if(!btn) return;
+      const [r,c]=btn.dataset.k.split(',').map(Number); const act=btn.dataset.act; const k=keyFor(r,c);
+      if(act==='jump'){
+        const idx=r*cols+c; const cell=gridEl.children[idx]; if(!cell) return; cell.classList.remove('flash'); cell.scrollIntoView({behavior:'smooth', block:'center', inline:'center'}); setTimeout(()=>cell.classList.add('flash'),200); setTimeout(()=>cell.classList.remove('flash'),1100); return;
+      }
+      if(act==='rename'){
+        const existing=labelMap.get(k)||''; const text=prompt('New label:', existing); if(text===null) return; if(!text.trim()) return; labelMap.set(k,text.trim()); updateCellLabelDOM(r,c); saveLabels(); renderLabelList(); return;
+      }
+      if(act==='del'){ labelMap.delete(k); updateCellLabelDOM(r,c); saveLabels(); renderLabelList(); return; }
+    });
+
+    // PNG export (draw matrix + labels)
+    document.getElementById('btnExportPNG').addEventListener('click', ()=>{
+      const scale=20, gapPx=0; const canvas=document.createElement('canvas');
+      canvas.width=cols*scale+(cols-1)*gapPx; canvas.height=rows*scale+(rows-1)*gapPx; const ctx=canvas.getContext('2d');
+      for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){ ctx.fillStyle=keyToColor(matrix[r][c]); ctx.fillRect(c*(scale+gapPx), r*(scale+gapPx), scale, scale); }
+      ctx.textAlign='center'; ctx.textBaseline='middle'; const fontSize=Math.max(10, Math.floor(scale*0.6)); ctx.font=`700 ${fontSize}px system-ui, -apple-system, Segoe UI, Roboto, Arial`;
+      for(const [k,text] of labelMap){ if(!text) continue; const [r,c]=k.split(',').map(Number); const x=c*(scale+gapPx)+scale/2, y=r*(scale+gapPx)+scale/2; ctx.lineWidth=Math.max(1, Math.floor(fontSize/4)); ctx.strokeStyle='#000'; ctx.strokeText(text,x,y); ctx.fillStyle='#fff'; ctx.fillText(text,x,y); }
+      canvas.toBlob((blob)=>{ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`${mapSelect.value}.png`; a.click(); URL.revokeObjectURL(a.href); });
+    });
+
+    // Labels CSV export / clear
+    document.getElementById('btnExportLabels').addEventListener('click', ()=>{
+      const rowsCSV=[["label","row","col"]];
+      for(const [k,text] of labelMap){ const [r,c]=k.split(',').map(Number); rowsCSV.push([text,r,c]); }
+      const csv=rowsCSV.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(',')).join('\n');
+      const blob=new Blob([csv],{type:'text/csv'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`${mapSelect.value}-labels.csv`; a.click(); URL.revokeObjectURL(a.href);
+    });
+    document.getElementById('btnClearLabels').addEventListener('click', ()=>{ if(!labelMap.size) return; if(confirm('Remove all labels for this map?')){ labelMap.clear(); paintAllLabels(); saveLabels(); }});
+
+    // Load JSON helpers
+    async function fetchJSON(url){ const rsp=await fetch(url, {cache:'no-store'}); if(!rsp.ok) throw new Error('Failed to load '+url); return await rsp.json(); }
+    function fromJSON(obj){
+      rows=obj.rows; cols=obj.cols; matrix=obj.matrix; PALETTE=obj.palette || [];
+      // normalize unknown keys to 'empty'
+      const keys=new Set(PALETTE.map(p=>p.key));
+      for(let r=0;r<rows;r++) for(let c=0;c<cols;c++) if(!keys.has(matrix[r][c])) matrix[r][c]='empty';
+      renderLegend(); paintAllFromMatrix(); paintAllLabels();
+    }
+
+    async function loadSelectedMap(discardLabels){
+      const opt=mapSelect.options[mapSelect.selectedIndex]; const src=opt?.dataset?.src; if(!src){ alert('Missing data-src for selected option'); return; }
+      const data=await fetchJSON(src); fromJSON(data);
+      if(discardLabels){ labelMap.clear(); saveLabels(); }
+      else{ loadLabels(); paintAllLabels(); }
+    }
+
+    mapSelect.addEventListener('change', ()=> loadSelectedMap(false));
+    document.getElementById('btnReload').addEventListener('click', ()=> loadSelectedMap(true));
+
+    // Optional: upload custom JSON just for preview/labeling
+    document.getElementById('btnUploadJson').addEventListener('click', ()=> document.getElementById('fileInput').click());
+    document.getElementById('fileInput').addEventListener('change', async (e)=>{
+      const file=e.target.files[0]; if(!file) return; const text=await file.text();
+      try{ const obj=JSON.parse(text); fromJSON(obj); labelMap.clear(); saveLabels(); }catch(err){ alert('Invalid JSON'); console.error(err); }
+      finally{ e.target.value=''; }
+    });
+
+    // Link to full editor (replace href to your actual editor URL)
+    document.getElementById('btnEditor').addEventListener('click', ()=>{
+      // TODO: swap this to your actual editor page path
+      location.href = 'editor.html';
+    });
+
+    //===========================
+    // Self tests (safe, non‑destructive)
+    //===========================
+    (function runSelfTests(){
+      try{
+        console.groupCollapsed('Map Labeler — self tests');
+        // 1) CSV newline
+        const csv=[['a',1,2],['b',3,4]].map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(',')).join('\n');
+        console.assert(csv.includes('\n'), 'CSV should include newline');
+        // 2) local label round‑trip
+        const k='labels:_test'; const before=localStorage.getItem(k);
+        localStorage.setItem(k, JSON.stringify([{r:1,c:2,text:'Z'}]));
+        const arr=JSON.parse(localStorage.getItem(k)||'[]');
+        console.assert(arr[0].text==='Z' && arr[0].r===1 && arr[0].c===2, 'localStorage label round-trip');
+        if(before===null) localStorage.removeItem(k); else localStorage.setItem(k,before);
+        // 3) DOM presence
+        console.assert(document.getElementById('grid') && document.getElementById('legend'), 'core DOM nodes present');
+        console.groupEnd();
+      }catch(e){ console.error('Self tests failed', e); }
+    })();
+
+    //===========================
+    // Boot — load first map
+    //===========================
+    loadSelectedMap(false).catch(err=>{
+      console.warn('Initial map load failed:', err);
+      // fallback to a blank grid if fetch fails (dev without server)
+      rows=30; cols=30; PALETTE=[{key:'empty', name:'Remaining Area', color:'#f2f4f7'}]; matrix=makeMatrix(rows,cols,'empty'); renderLegend(); paintAllFromMatrix();
+    });
+  </script>
+</body>
+</html>
