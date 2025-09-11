@@ -4,7 +4,7 @@
   "palette": [
     {
       "key": "entrance",
-      "name": "Entrances (2–4)",
+      "name": "Gates",
       "color": "#0066cc"
     },
     {
@@ -14,18 +14,13 @@
     },
     {
       "key": "forts",
-      "name": "Fortresses (6–8)",
+      "name": "2x2 POI",
       "color": "#db0b19"
     },
     {
       "key": "deploy",
-      "name": "Deployment Area",
+      "name": "1x1 POI",
       "color": "#ff59cf"
-    },
-    {
-      "key": "gates",
-      "name": "Gates (2–4)",
-      "color": "#2f3132"
     },
     {
       "key": "core",
