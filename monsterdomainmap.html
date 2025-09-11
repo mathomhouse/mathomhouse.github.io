@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Interactive Map Grid</title>
+  <title>Interactive Map Grid + Labels</title>
   <style>
     :root{
       --cell: 18px; /* change for bigger/smaller cells */
@@ -28,7 +28,6 @@
       grid-template-areas:
         "header header"
         "sidebar main";
-      gap: 0;
     }
 
     header{
@@ -74,16 +73,10 @@
     label.inline{ display:flex; align-items:center; gap:8px; margin: 8px 0; }
     input[type="number"], select{ background:#0e0f14; color:var(--text); border:1px solid #2a2a34; border-radius:8px; padding:6px 8px; width: 100%; }
 
-    .toolbar{ display:grid; grid-template-columns: repeat(2,1fr); gap:8px; }
-    .btn{
-      background: var(--panel-2);
-      border: 1px solid #2a2a34;
-      color: var(--text);
-      padding: 8px 10px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
+    .toolbar{ display:grid; grid-template-columns: repeat(3,1fr); gap:8px; }
+    .btn{ background: var(--panel-2); border: 1px solid #2a2a34; color: var(--text); padding: 8px 10px; border-radius: 10px; cursor: pointer; }
     .btn:disabled{ opacity:.6; cursor:not-allowed; }
+    .btn[aria-pressed="true"]{ outline:2px solid var(--accent); }
 
     .note{ color: var(--muted); font-size: 12px; }
 
@@ -92,6 +85,7 @@
 
     .grid-wrap{ position: relative; padding: 18px; }
     .grid{
+      --cols: 50;
       display: grid;
       grid-template-columns: repeat(var(--cols), var(--cell));
       grid-auto-rows: var(--cell);
@@ -106,6 +100,7 @@
       touch-action: none; /* smoother touch drag */
     }
     .cell{
+      position: relative;
       width: var(--cell);
       height: var(--cell);
       background: #f2f4f7; /* Remaining Area */
@@ -113,10 +108,18 @@
       box-shadow: inset 0 0 0 1px #00000011;
     }
 
-    /* subtle focus ring for keyboard painting */
-    .cell:focus{ outline: 2px solid var(--accent); outline-offset: -2px; }
+    /* cell-centered label */
+    .cell .lbl{
+      pointer-events: none;
+      position: absolute; inset: 0; display:flex; align-items:center; justify-content:center;
+      font-weight: 700; line-height: 1; letter-spacing: .02em;
+      font-size: 11px; /* auto-scaled on export */
+      color: #ffffff; /* white text */
+      text-shadow:
+        -1px 0 #000, 1px 0 #000, 0 -1px #000, 0 1px #000,
+        -1px -1px #000, 1px 1px #000, -1px 1px #000, 1px -1px #000; /* outline for contrast */
+    }
 
-    /* Footer hint */
     .hint{ position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); color:#c6c7cf; font-size:12px; background:#0e0f14aa; padding:6px 10px; border:1px solid #2a2a34; border-radius:999px; }
   </style>
 </head>
@@ -138,6 +141,7 @@
     <div class="toolbar" style="margin-bottom:10px;">
       <button id="toolBrush" class="btn" aria-pressed="true">Brush</button>
       <button id="toolEraser" class="btn">Eraser</button>
+      <button id="toolLabel" class="btn">Label</button>
     </div>
 
     <label class="inline">Brush size
@@ -152,7 +156,7 @@
         <input id="rows" type="number" min="8" max="120" value="50" />
       </label>
     </div>
-    <div class="toolbar" style="margin-top:8px;">
+    <div class="toolbar" style="margin-top:8px; grid-template-columns: repeat(2,1fr);">
       <button id="btnResize" class="btn">Resize Grid</button>
       <button id="btnSeed" class="btn" title="Draw a small core with gates in the center">Seed Template</button>
     </div>
@@ -160,7 +164,7 @@
     <h2>Legend</h2>
     <div class="legend" id="legend"></div>
 
-    <p class="note" style="margin-top:12px;">Tips: Click or click‑drag to paint. Right‑click to erase. Hold <kbd>Shift</kbd> to draw a straight line. Brush size paints a small square.</p>
+    <p class="note" style="margin-top:12px;">Tips: Paint = drag • Erase = right‑click • Line = hold <kbd>Shift</kbd> • <strong>Labels:</strong> choose <em>Label</em>, click a cell to enter text (blank to remove). Right‑click while on Label tool removes a label.</p>
   </aside>
 
   <main>
@@ -169,7 +173,7 @@
     </div>
   </main>
 
-  <div class="hint">Paint: drag • Erase: right‑click • Line: hold Shift • Save/Load: JSON • Export: PNG</div>
+  <div class="hint">Save/Load JSON includes labels • PNG export renders labels</div>
 
   <script>
     // ---- Configuration ----
@@ -186,7 +190,7 @@
     // ---- State ----
     let rows = 50, cols = 50;
     let brush = 'core';
-    let tool = 'brush';
+    let tool = 'brush'; // 'brush' | 'eraser' | 'label'
     let brushSize = 1;
     let isMouseDown = false;
     let lastCell = null; // for shift-line drawing
@@ -195,10 +199,34 @@
     const paletteEl= document.getElementById('palette');
     const legendEl = document.getElementById('legend');
 
+    // Label storage (cell -> text)
+    const labelMap = new Map(); // key: "r,c" -> text
+    const keyFor = (r,c) => `${r},${c}`;
+    function setLabel(r,c,text){ labelMap.set(keyFor(r,c), text); updateCellLabelDOM(r,c); }
+    function removeLabel(r,c){ labelMap.delete(keyFor(r,c)); updateCellLabelDOM(r,c); }
+    function getLabel(r,c){ return labelMap.get(keyFor(r,c)); }
+
+    function updateCellLabelDOM(r,c){
+      const idx = r*cols + c; const cell = gridEl.children[idx]; if(!cell) return;
+      let span = cell.querySelector('.lbl');
+      const text = getLabel(r,c);
+      if(text && text.trim()){
+        if(!span){ span = document.createElement('span'); span.className = 'lbl'; cell.appendChild(span); }
+        span.textContent = text;
+      } else if(span) { span.remove(); }
+    }
+    function paintAllLabels(){
+      // clear all
+      for(const cell of gridEl.children){ const s = cell.querySelector('.lbl'); if(s) s.remove(); }
+      for(const [k, text] of labelMap){
+        const [r,c] = k.split(',').map(Number); updateCellLabelDOM(r,c);
+      }
+    }
+
     // Build palette UI
     function buildPalette(){
       paletteEl.innerHTML = '';
-      PALETTE.forEach((p, i) => {
+      PALETTE.forEach((p) => {
         const btn = document.createElement('button');
         btn.className = 'swatch-btn';
         btn.setAttribute('type','button');
@@ -235,7 +263,6 @@
     function rebuildGrid(){
       gridEl.style.setProperty('--cols', cols);
       gridEl.innerHTML = '';
-      gridEl.style.setProperty('--cell', getComputedStyle(document.documentElement).getPropertyValue('--cell'));
       matrix = makeMatrix(rows, cols, 'empty');
       for(let r=0;r<rows;r++){
         for(let c=0;c<cols;c++){
@@ -248,6 +275,7 @@
         }
       }
       paintAllFromMatrix();
+      paintAllLabels();
     }
 
     function keyToColor(key){ return (PALETTE.find(p=>p.key===key)||PALETTE.at(-1)).color; }
@@ -301,38 +329,59 @@
     gridEl.addEventListener('contextmenu', e => e.preventDefault());
 
     gridEl.addEventListener('pointerdown', (e) => {
-      if(!(e.target).classList.contains('cell')) return;
+      const target = e.target;
+      if(!target.classList.contains('cell')) return;
       e.preventDefault();
       isMouseDown = true;
-      tool = (e.button === 2 || e.ctrlKey) ? 'eraser' : tool; // right-click erase
-      const r = +e.target.dataset.r; const c = +e.target.dataset.c;
+      const r = +target.dataset.r; const c = +target.dataset.c;
+
+      if(tool === 'label'){
+        if(e.button === 2){ removeLabel(r,c); }
+        else {
+          const existing = getLabel(r,c) || '';
+          const text = prompt('Label for this cell (blank to remove):', existing);
+          if(text === null) { /* cancel */ }
+          else if(!text.trim()) removeLabel(r,c);
+          else setLabel(r,c, text.trim());
+        }
+        lastCell = target; return;
+      }
+
+      // painting tools
+      const useEraser = (e.button === 2 || e.ctrlKey);
+      const prevTool = tool; if(useEraser) tool = 'eraser';
       if(e.shiftKey && lastCell){
         linePaint(+lastCell.dataset.r, +lastCell.dataset.c, r, c);
       } else {
         paintAt(r,c);
       }
-      lastCell = e.target;
+      if(useEraser) tool = prevTool;
+      lastCell = target;
     });
+
     gridEl.addEventListener('pointermove', (e) => {
       if(!isMouseDown) return;
-      if(!(e.target).classList.contains('cell')) return;
-      const r = +e.target.dataset.r; const c = +e.target.dataset.c;
+      const target = e.target;
+      if(!target.classList.contains('cell')) return;
+      const r = +target.dataset.r; const c = +target.dataset.c;
+      if(tool === 'label') return; // no drag labels
       paintAt(r,c);
-      lastCell = e.target;
+      lastCell = target;
     });
     window.addEventListener('pointerup', () => { isMouseDown = false; });
 
     // Controls
-    document.getElementById('toolBrush').addEventListener('click', () => {
-      tool = 'brush';
-      document.getElementById('toolBrush').setAttribute('aria-pressed','true');
-      document.getElementById('toolEraser').setAttribute('aria-pressed','false');
-    });
-    document.getElementById('toolEraser').addEventListener('click', () => {
-      tool = 'eraser';
-      document.getElementById('toolBrush').setAttribute('aria-pressed','false');
-      document.getElementById('toolEraser').setAttribute('aria-pressed','true');
-    });
+    function setTool(name){
+      tool = name;
+      document.getElementById('toolBrush').setAttribute('aria-pressed', String(name==='brush'));
+      document.getElementById('toolEraser').setAttribute('aria-pressed', String(name==='eraser'));
+      document.getElementById('toolLabel').setAttribute('aria-pressed', String(name==='label'));
+    }
+
+    document.getElementById('toolBrush').addEventListener('click', () => setTool('brush'));
+    document.getElementById('toolEraser').addEventListener('click', () => setTool('eraser'));
+    document.getElementById('toolLabel').addEventListener('click', () => setTool('label'));
+
     document.getElementById('brushSize').addEventListener('input', e => brushSize = +e.target.value || 1);
 
     document.getElementById('btnResize').addEventListener('click', () => {
@@ -353,11 +402,17 @@
 
     // Save / Load JSON
     function toJSON(){
-      return JSON.stringify({ rows, cols, palette: PALETTE, matrix }, null, 2);
+      const labels = Array.from(labelMap, ([k,text]) => { const [r,c] = k.split(',').map(Number); return {r,c,text}; });
+      return JSON.stringify({ rows, cols, palette: PALETTE, matrix, labels }, null, 2);
     }
     function fromJSON(obj){
       rows = obj.rows; cols = obj.cols; rebuildGrid();
       matrix = obj.matrix; paintAllFromMatrix();
+      labelMap.clear();
+      if(Array.isArray(obj.labels)){
+        for(const it of obj.labels){ if(Number.isInteger(it.r) && Number.isInteger(it.c) && typeof it.text === 'string'){ setLabel(it.r, it.c, it.text); } }
+      }
+      paintAllLabels();
     }
 
     document.getElementById('btnSaveJSON').addEventListener('click', () => {
@@ -379,7 +434,7 @@
       finally{ fileInput.value = ''; }
     });
 
-    // Export PNG by drawing matrix to an offscreen <canvas>
+    // Export PNG by drawing matrix + labels to an offscreen <canvas>
     document.getElementById('btnExportPNG').addEventListener('click', () => {
       const scale = 20; // pixels per cell
       const gapPx = 0;  // no gaps in exported image
@@ -387,12 +442,522 @@
       canvas.width  = cols * scale + (cols-1)*gapPx;
       canvas.height = rows * scale + (rows-1)*gapPx;
       const ctx = canvas.getContext('2d');
+
+      // cells
       for(let r=0;r<rows;r++){
         for(let c=0;c<cols;c++){
           ctx.fillStyle = keyToColor(matrix[r][c]);
           ctx.fillRect(c*(scale+gapPx), r*(scale+gapPx), scale, scale);
         }
       }
+
+      // labels
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      const fontSize = Math.max(10, Math.floor(scale * 0.6));
+      ctx.font = `700 ${fontSize}px system-ui, -apple-system, Segoe UI, Roboto, Arial`;
+
+      for(const [k, text] of labelMap){
+        if(!text) continue;
+        const [r,c] = k.split(',').map(Number);
+        const x = c*(scale+gapPx) + scale/2;
+        const y = r*(scale+gapPx) + scale/2;
+        // outline then fill for contrast
+        ctx.lineWidth = Math.max(1, Math.floor(fontSize/4));
+        ctx.strokeStyle = '#000';
+        ctx.strokeText(text, x, y);
+        ctx.fillStyle = '#fff';
+        ctx.fillText(text, x, y);
+      }
+
+      canvas.toBlob((blob)=>{
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'map.png';
+        a.click();
+        URL.revokeObjectURL(a.href);
+      });
+    });
+
+    // Initialize
+    buildPalette();
+    buildLegend();
+    rebuildGrid();
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Interactive Map Grid + Labels</title>
+  <style>
+    :root{
+      --cell: 18px; /* change for bigger/smaller cells */
+      --gap: 1px;
+      --bg: #0b0b0c;
+      --panel: #121218;
+      --panel-2: #1a1a22;
+      --text: #e9e9ef;
+      --muted: #9aa0a6;
+      --accent: #6ea8ff;
+    }
+
+    html, body { height: 100%; }
+    body{
+      margin: 0;
+      background: linear-gradient(180deg, #0b0b0c, #0f1016);
+      color: var(--text);
+      font: 14px/1.35 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      grid-template-rows: auto 1fr;
+      grid-template-areas:
+        "header header"
+        "sidebar main";
+    }
+
+    header{
+      grid-area: header;
+      padding: 12px 16px;
+      background: #0e0f14;
+      border-bottom: 1px solid #23232b;
+      display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+    }
+    header h1{ font-size: 16px; margin: 0; letter-spacing: .3px; }
+    header .spacer{ flex: 1; }
+    header .btn{
+      background: var(--panel-2);
+      border: 1px solid #2a2a34;
+      color: var(--text);
+      padding: 8px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    header .btn:hover{ filter: brightness(1.1); }
+
+    /* Sidebar */
+    aside{
+      grid-area: sidebar;
+      background: var(--panel);
+      border-right: 1px solid #23232b;
+      padding: 14px;
+      overflow: auto;
+    }
+    aside h2{ font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 8px 0 10px; }
+
+    .legend{ display: grid; grid-template-columns: 20px 1fr auto; align-items:center; gap: 8px 10px; }
+    .swatch{ width: 20px; height: 20px; border-radius: 4px; border: 1px solid #0008; box-shadow: inset 0 0 0 1px #ffffff22; }
+    .legend button{ justify-self:end; }
+
+    .palette{ display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+    .swatch-btn{
+      display:flex; align-items:center; gap:8px; width:100%;
+      padding:8px; background: var(--panel-2); border:1px solid #2a2a34; border-radius: 10px; color:var(--text); cursor:pointer;
+    }
+    .swatch-btn[aria-pressed="true"]{ outline: 2px solid var(--accent); }
+
+    label.inline{ display:flex; align-items:center; gap:8px; margin: 8px 0; }
+    input[type="number"], select{ background:#0e0f14; color:var(--text); border:1px solid #2a2a34; border-radius:8px; padding:6px 8px; width: 100%; }
+
+    .toolbar{ display:grid; grid-template-columns: repeat(3,1fr); gap:8px; }
+    .btn{ background: var(--panel-2); border: 1px solid #2a2a34; color: var(--text); padding: 8px 10px; border-radius: 10px; cursor: pointer; }
+    .btn:disabled{ opacity:.6; cursor:not-allowed; }
+    .btn[aria-pressed="true"]{ outline:2px solid var(--accent); }
+
+    .note{ color: var(--muted); font-size: 12px; }
+
+    /* Main canvas */
+    main{ grid-area: main; display:grid; place-items:center; overflow:auto; }
+
+    .grid-wrap{ position: relative; padding: 18px; }
+    .grid{
+      --cols: 50;
+      display: grid;
+      grid-template-columns: repeat(var(--cols), var(--cell));
+      grid-auto-rows: var(--cell);
+      gap: var(--gap);
+      background: #1c1c24;
+      border: 1px solid #2a2a34;
+      padding: var(--gap);
+      border-radius: 14px;
+      box-shadow: 0 10px 30px #0006, inset 0 0 0 1px #ffffff10;
+      image-rendering: pixelated;
+      user-select: none;
+      touch-action: none; /* smoother touch drag */
+    }
+    .cell{
+      position: relative;
+      width: var(--cell);
+      height: var(--cell);
+      background: #f2f4f7; /* Remaining Area */
+      border-radius: 3px;
+      box-shadow: inset 0 0 0 1px #00000011;
+    }
+
+    /* cell-centered label */
+    .cell .lbl{
+      pointer-events: none;
+      position: absolute; inset: 0; display:flex; align-items:center; justify-content:center;
+      font-weight: 700; line-height: 1; letter-spacing: .02em;
+      font-size: 11px; /* auto-scaled on export */
+      color: #ffffff; /* white text */
+      text-shadow:
+        -1px 0 #000, 1px 0 #000, 0 -1px #000, 0 1px #000,
+        -1px -1px #000, 1px 1px #000, -1px 1px #000, 1px -1px #000; /* outline for contrast */
+    }
+
+    .hint{ position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); color:#c6c7cf; font-size:12px; background:#0e0f14aa; padding:6px 10px; border:1px solid #2a2a34; border-radius:999px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Interactive Map Grid</h1>
+    <div class="spacer"></div>
+    <button id="btnExportPNG" class="btn" title="Download a PNG of the current map">Export PNG</button>
+    <button id="btnSaveJSON" class="btn" title="Download a JSON file you can load later">Save JSON</button>
+    <button id="btnLoadJSON" class="btn" title="Load a previously saved JSON file">Load JSON</button>
+    <input id="fileInput" type="file" accept="application/json" hidden />
+  </header>
+
+  <aside>
+    <h2>Palette</h2>
+    <div id="palette" class="palette"></div>
+
+    <h2>Tools & Grid</h2>
+    <div class="toolbar" style="margin-bottom:10px;">
+      <button id="toolBrush" class="btn" aria-pressed="true">Brush</button>
+      <button id="toolEraser" class="btn">Eraser</button>
+      <button id="toolLabel" class="btn">Label</button>
+    </div>
+
+    <label class="inline">Brush size
+      <input id="brushSize" type="number" min="1" max="5" value="1"/>
+    </label>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+      <label class="inline">Cols
+        <input id="cols" type="number" min="8" max="120" value="50" />
+      </label>
+      <label class="inline">Rows
+        <input id="rows" type="number" min="8" max="120" value="50" />
+      </label>
+    </div>
+    <div class="toolbar" style="margin-top:8px; grid-template-columns: repeat(2,1fr);">
+      <button id="btnResize" class="btn">Resize Grid</button>
+      <button id="btnSeed" class="btn" title="Draw a small core with gates in the center">Seed Template</button>
+    </div>
+
+    <h2>Legend</h2>
+    <div class="legend" id="legend"></div>
+
+    <p class="note" style="margin-top:12px;">Tips: Paint = drag • Erase = right‑click • Line = hold <kbd>Shift</kbd> • <strong>Labels:</strong> choose <em>Label</em>, click a cell to enter text (blank to remove). Right‑click while on Label tool removes a label.</p>
+  </aside>
+
+  <main>
+    <div class="grid-wrap">
+      <div id="grid" class="grid" role="grid" aria-label="Editable map grid"></div>
+    </div>
+  </main>
+
+  <div class="hint">Save/Load JSON includes labels • PNG export renders labels</div>
+
+  <script>
+    // ---- Configuration ----
+    const PALETTE = [
+      { key: 'entrance', name: 'Entrances (2–4)',  color: '#0066cc' }, // blue
+      { key: 'walls',    name: 'Walls',            color: '#ffd400' }, // yellow
+      { key: 'forts',    name: 'Fortresses (6–8)', color: '#db0b19' }, // red
+      { key: 'deploy',   name: 'Deployment Area',  color: '#ff59cf' }, // magenta
+      { key: 'gates',    name: 'Gates (2–4)',      color: '#2f3132' }, // dark gray
+      { key: 'core',     name: 'Core',             color: '#03a34a' }, // green
+      { key: 'empty',    name: 'Remaining Area',   color: '#f2f4f7' }, // white
+    ];
+
+    // ---- State ----
+    let rows = 50, cols = 50;
+    let brush = 'core';
+    let tool = 'brush'; // 'brush' | 'eraser' | 'label'
+    let brushSize = 1;
+    let isMouseDown = false;
+    let lastCell = null; // for shift-line drawing
+
+    const gridEl   = document.getElementById('grid');
+    const paletteEl= document.getElementById('palette');
+    const legendEl = document.getElementById('legend');
+
+    // Label storage (cell -> text)
+    const labelMap = new Map(); // key: "r,c" -> text
+    const keyFor = (r,c) => `${r},${c}`;
+    function setLabel(r,c,text){ labelMap.set(keyFor(r,c), text); updateCellLabelDOM(r,c); }
+    function removeLabel(r,c){ labelMap.delete(keyFor(r,c)); updateCellLabelDOM(r,c); }
+    function getLabel(r,c){ return labelMap.get(keyFor(r,c)); }
+
+    function updateCellLabelDOM(r,c){
+      const idx = r*cols + c; const cell = gridEl.children[idx]; if(!cell) return;
+      let span = cell.querySelector('.lbl');
+      const text = getLabel(r,c);
+      if(text && text.trim()){
+        if(!span){ span = document.createElement('span'); span.className = 'lbl'; cell.appendChild(span); }
+        span.textContent = text;
+      } else if(span) { span.remove(); }
+    }
+    function paintAllLabels(){
+      // clear all
+      for(const cell of gridEl.children){ const s = cell.querySelector('.lbl'); if(s) s.remove(); }
+      for(const [k, text] of labelMap){
+        const [r,c] = k.split(',').map(Number); updateCellLabelDOM(r,c);
+      }
+    }
+
+    // Build palette UI
+    function buildPalette(){
+      paletteEl.innerHTML = '';
+      PALETTE.forEach((p) => {
+        const btn = document.createElement('button');
+        btn.className = 'swatch-btn';
+        btn.setAttribute('type','button');
+        btn.setAttribute('aria-pressed', p.key === brush);
+        btn.dataset.key = p.key;
+        btn.innerHTML = `<span class="swatch" style="background:${p.color}"></span><span>${p.name}</span>`;
+        btn.addEventListener('click', () => {
+          brush = p.key;
+          document.querySelectorAll('.swatch-btn').forEach(b=>b.setAttribute('aria-pressed','false'));
+          btn.setAttribute('aria-pressed','true');
+        });
+        paletteEl.appendChild(btn);
+      });
+    }
+
+    // Build legend UI (read-only labels w/ copy color button)
+    function buildLegend(){
+      legendEl.innerHTML = '';
+      PALETTE.forEach(p => {
+        const box = document.createElement('div'); box.className='swatch'; box.style.background=p.color; legendEl.appendChild(box);
+        const label = document.createElement('div'); label.textContent = p.name; legendEl.appendChild(label);
+        const copy = document.createElement('button'); copy.className='btn'; copy.textContent='Copy';
+        copy.addEventListener('click',()=>{ navigator.clipboard.writeText(p.color); copy.textContent='Copied'; setTimeout(()=>copy.textContent='Copy',900);});
+        legendEl.appendChild(copy);
+      });
+    }
+
+    // Create grid matrix
+    let matrix = [];
+    function makeMatrix(r, c, fill='empty'){
+      return Array.from({length:r}, () => Array.from({length:c}, () => fill));
+    }
+
+    function rebuildGrid(){
+      gridEl.style.setProperty('--cols', cols);
+      gridEl.innerHTML = '';
+      matrix = makeMatrix(rows, cols, 'empty');
+      for(let r=0;r<rows;r++){
+        for(let c=0;c<cols;c++){
+          const cell = document.createElement('div');
+          cell.className = 'cell';
+          cell.tabIndex = 0;
+          cell.dataset.r = r;
+          cell.dataset.c = c;
+          gridEl.appendChild(cell);
+        }
+      }
+      paintAllFromMatrix();
+      paintAllLabels();
+    }
+
+    function keyToColor(key){ return (PALETTE.find(p=>p.key===key)||PALETTE.at(-1)).color; }
+
+    function setCell(r,c,key){
+      if(r<0||c<0||r>=rows||c>=cols) return;
+      matrix[r][c] = key;
+      const idx = r*cols + c;
+      const cell = gridEl.children[idx];
+      if(cell) cell.style.background = keyToColor(key);
+    }
+    function getCellKey(r,c){ return (matrix[r] && matrix[r][c]) || 'empty'; }
+
+    function paintAllFromMatrix(){
+      for(let r=0;r<rows;r++){
+        for(let c=0;c<cols;c++){
+          const idx = r*cols + c;
+          gridEl.children[idx].style.background = keyToColor(matrix[r][c]);
+        }
+      }
+    }
+
+    // Painting logic
+    function paintAt(r,c){
+      const radius = Math.max(1, Math.floor(brushSize));
+      const half = Math.floor(radius/2);
+      for(let dr=0; dr<radius; dr++){
+        for(let dc=0; dc<radius; dc++){
+          const rr = r + dr - half;
+          const cc = c + dc - half;
+          if(tool === 'eraser') setCell(rr,cc,'empty');
+          else setCell(rr,cc,brush);
+        }
+      }
+    }
+
+    function linePaint(r0,c0,r1,c1){
+      // Bresenham-ish
+      let dx = Math.abs(c1 - c0), sx = c0 < c1 ? 1 : -1;
+      let dy = -Math.abs(r1 - r0), sy = r0 < r1 ? 1 : -1; 
+      let err = dx + dy, e2;
+      while(true){
+        paintAt(r0,c0);
+        if (c0 === c1 && r0 === r1) break;
+        e2 = 2*err;
+        if (e2 >= dy) { err += dy; c0 += sx; }
+        if (e2 <= dx) { err += dx; r0 += sy; }
+      }
+    }
+
+    gridEl.addEventListener('contextmenu', e => e.preventDefault());
+
+    gridEl.addEventListener('pointerdown', (e) => {
+      const target = e.target;
+      if(!target.classList.contains('cell')) return;
+      e.preventDefault();
+      isMouseDown = true;
+      const r = +target.dataset.r; const c = +target.dataset.c;
+
+      if(tool === 'label'){
+        if(e.button === 2){ removeLabel(r,c); }
+        else {
+          const existing = getLabel(r,c) || '';
+          const text = prompt('Label for this cell (blank to remove):', existing);
+          if(text === null) { /* cancel */ }
+          else if(!text.trim()) removeLabel(r,c);
+          else setLabel(r,c, text.trim());
+        }
+        lastCell = target; return;
+      }
+
+      // painting tools
+      const useEraser = (e.button === 2 || e.ctrlKey);
+      const prevTool = tool; if(useEraser) tool = 'eraser';
+      if(e.shiftKey && lastCell){
+        linePaint(+lastCell.dataset.r, +lastCell.dataset.c, r, c);
+      } else {
+        paintAt(r,c);
+      }
+      if(useEraser) tool = prevTool;
+      lastCell = target;
+    });
+
+    gridEl.addEventListener('pointermove', (e) => {
+      if(!isMouseDown) return;
+      const target = e.target;
+      if(!target.classList.contains('cell')) return;
+      const r = +target.dataset.r; const c = +target.dataset.c;
+      if(tool === 'label') return; // no drag labels
+      paintAt(r,c);
+      lastCell = target;
+    });
+    window.addEventListener('pointerup', () => { isMouseDown = false; });
+
+    // Controls
+    function setTool(name){
+      tool = name;
+      document.getElementById('toolBrush').setAttribute('aria-pressed', String(name==='brush'));
+      document.getElementById('toolEraser').setAttribute('aria-pressed', String(name==='eraser'));
+      document.getElementById('toolLabel').setAttribute('aria-pressed', String(name==='label'));
+    }
+
+    document.getElementById('toolBrush').addEventListener('click', () => setTool('brush'));
+    document.getElementById('toolEraser').addEventListener('click', () => setTool('eraser'));
+    document.getElementById('toolLabel').addEventListener('click', () => setTool('label'));
+
+    document.getElementById('brushSize').addEventListener('input', e => brushSize = +e.target.value || 1);
+
+    document.getElementById('btnResize').addEventListener('click', () => {
+      const r = Math.max(8, Math.min(120, +document.getElementById('rows').value || rows));
+      const c = Math.max(8, Math.min(120, +document.getElementById('cols').value || cols));
+      rows=r; cols=c; rebuildGrid();
+    });
+
+    // Seed a simple central template (core + gates ring)
+    document.getElementById('btnSeed').addEventListener('click', () => {
+      const cr = Math.floor(rows/2), cc = Math.floor(cols/2);
+      // core 4x4
+      for(let r=-2;r<2;r++) for(let c=-2;c<2;c++) setCell(cr+r, cc+c, 'core');
+      // gates (dark gray) single ring around a 6x6 area
+      for(let r=-4;r<=3;r++) { setCell(cr-4, cc+r, 'gates'); setCell(cr+3, cc+r, 'gates'); }
+      for(let c=-4;c<=3;c++) { setCell(cr+c, cc-4, 'gates'); setCell(cr+c, cc+3, 'gates'); }
+    });
+
+    // Save / Load JSON
+    function toJSON(){
+      const labels = Array.from(labelMap, ([k,text]) => { const [r,c] = k.split(',').map(Number); return {r,c,text}; });
+      return JSON.stringify({ rows, cols, palette: PALETTE, matrix, labels }, null, 2);
+    }
+    function fromJSON(obj){
+      rows = obj.rows; cols = obj.cols; rebuildGrid();
+      matrix = obj.matrix; paintAllFromMatrix();
+      labelMap.clear();
+      if(Array.isArray(obj.labels)){
+        for(const it of obj.labels){ if(Number.isInteger(it.r) && Number.isInteger(it.c) && typeof it.text === 'string'){ setLabel(it.r, it.c, it.text); } }
+      }
+      paintAllLabels();
+    }
+
+    document.getElementById('btnSaveJSON').addEventListener('click', () => {
+      const blob = new Blob([toJSON()], {type:'application/json'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'map.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    const fileInput = document.getElementById('fileInput');
+    document.getElementById('btnLoadJSON').addEventListener('click', ()=> fileInput.click());
+    fileInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0]; if(!file) return;
+      const text = await file.text();
+      try{ fromJSON(JSON.parse(text)); }
+      catch(err){ alert('Invalid JSON file.'); console.error(err); }
+      finally{ fileInput.value = ''; }
+    });
+
+    // Export PNG by drawing matrix + labels to an offscreen <canvas>
+    document.getElementById('btnExportPNG').addEventListener('click', () => {
+      const scale = 20; // pixels per cell
+      const gapPx = 0;  // no gaps in exported image
+      const canvas = document.createElement('canvas');
+      canvas.width  = cols * scale + (cols-1)*gapPx;
+      canvas.height = rows * scale + (rows-1)*gapPx;
+      const ctx = canvas.getContext('2d');
+
+      // cells
+      for(let r=0;r<rows;r++){
+        for(let c=0;c<cols;c++){
+          ctx.fillStyle = keyToColor(matrix[r][c]);
+          ctx.fillRect(c*(scale+gapPx), r*(scale+gapPx), scale, scale);
+        }
+      }
+
+      // labels
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      const fontSize = Math.max(10, Math.floor(scale * 0.6));
+      ctx.font = `700 ${fontSize}px system-ui, -apple-system, Segoe UI, Roboto, Arial`;
+
+      for(const [k, text] of labelMap){
+        if(!text) continue;
+        const [r,c] = k.split(',').map(Number);
+        const x = c*(scale+gapPx) + scale/2;
+        const y = r*(scale+gapPx) + scale/2;
+        // outline then fill for contrast
+        ctx.lineWidth = Math.max(1, Math.floor(fontSize/4));
+        ctx.strokeStyle = '#000';
+        ctx.strokeText(text, x, y);
+        ctx.fillStyle = '#fff';
+        ctx.fillText(text, x, y);
+      }
+
       canvas.toBlob((blob)=>{
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
