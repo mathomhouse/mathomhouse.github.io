@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Interactive Map Grid + Labels</title>
+  <title>Map Editor</title>
   <style>
     :root{
       --cell: 18px; /* change for bigger/smaller cells */
@@ -135,12 +135,12 @@
     @keyframes flashRing{ 0%{outline-color:transparent;} 30%{outline-color:var(--accent);} 100%{outline-color:transparent;} }
     .cell.flash{ outline: 2px solid var(--accent); outline-offset: -2px; animation: flashRing .9s ease; }
 
-    .hint{ position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); color:#c6c7cf; font-size:12px; background:#0e0f14aa; padding:6px 10px; border:1px solid #2a2a34; border-radius:999px; }
   </style>
+  <script src="header.js" defer></script>
 </head>
 <body>
   <header>
-    <h1>Interactive Map Grid</h1>
+    <h1>Map Editor</h1>
     <div class="spacer"></div>
     <button id="btnExportPNG" class="btn" title="Download a PNG of the current map">Export PNG</button>
     <button id="btnSaveJSON" class="btn" title="Download a JSON file you can load later">Save JSON</button>
@@ -172,7 +172,7 @@
       </label>
     </div>
     <div class="toolbar" style="margin-top:8px; grid-template-columns: repeat(2,1fr);">
-      <button id="btnResize" class="btn">Resize Grid</button>
+      <button id="btnResize" class="btn">Resize / Clear</button>
       <button id="btnSeed" class="btn" title="Draw a small core with gates in the center">Seed Template</button>
     </div>
 
@@ -200,16 +200,14 @@
     </div>
   </main>
 
-  <div class="hint">JSON includes labels & palette • PNG export renders labels</div>
-
   <script>
     // ---- Configuration ----
     let PALETTE = [
-      { key: 'entrance', name: 'Entrances (2–4)',  color: '#0066cc' }, // blue
+      { key: 'entrance', name: 'Entrances',  color: '#0066cc' }, // blue
       { key: 'walls',    name: 'Walls',            color: '#ffd400' }, // yellow
-      { key: 'forts',    name: 'Fortresses (6–8)', color: '#db0b19' }, // red
+      { key: 'forts',    name: 'Fortresses', color: '#db0b19' }, // red
       { key: 'deploy',   name: 'Deployment Area',  color: '#ff59cf' }, // magenta
-      { key: 'gates',    name: 'Gates (2–4)',      color: '#2f3132' }, // dark gray
+      { key: 'gates',    name: 'Gates',      color: '#2f3132' }, // dark gray
       { key: 'core',     name: 'Core',             color: '#03a34a' }, // green
       { key: 'empty',    name: 'Remaining Area',   color: '#f2f4f7' }, // white (non-deletable)
     ];

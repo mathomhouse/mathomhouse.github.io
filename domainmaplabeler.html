@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Map Labeler — Select a Map & Add Labels</title>
+  <title>Map Labeler</title>
   <style>
     :root{
       --cell: 18px;
@@ -53,8 +53,6 @@
     .lbl{ pointer-events:none; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:11px; color:#fff; text-shadow: -1px 0 #000, 1px 0 #000, 0 -1px #000, 0 1px #000, -1px -1px #000, 1px 1px #000, -1px 1px #000, 1px -1px #000; }
     @keyframes flashRing{ 0%{outline-color:transparent;} 30%{outline-color:var(--accent);} 100%{outline-color:transparent;} }
     .flash{ outline:2px solid var(--accent); outline-offset:-2px; animation:flashRing .9s ease; }
-
-    .hint{ position:fixed; bottom:10px; left:50%; transform:translateX(-50%); color:#c6c7cf; font-size:12px; background:#0e0f14aa; padding:6px 10px; border:1px solid #2a2a34; border-radius:999px; }
   </style>
 </head>
 <body>
@@ -98,9 +96,6 @@
       <div id="grid" class="grid" role="grid" aria-label="Labelable map grid"></div>
     </div>
   </main>
-
-  <div class="hint">Labels auto‑save per map in your browser. PNG export includes labels.</div>
-
   <script>
     //===========================
     // Minimal runtime for label‑only flow
