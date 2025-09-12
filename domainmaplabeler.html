@@ -80,7 +80,7 @@
     <select id="mapSelect" title="Pick a map">
       <!-- Replace data-src values with your hosted JSON URLs or paths -->
       <option value="map1" data-src="maps/map1.json">Map 1 (N/A)</option>
-      <option value="map2" data-src="maps/map2.json">Map 2 (N/A)</option>
+      <option value="map2" data-src="domainmaps/round2map.json">Round 2 Map</option>
       <option value="map3" data-src="maps/map3.json">Map 3 (N/A)</option>
       <option value="map4" data-src="maps/map4.json">Map 4 (N/A)</option>
       <option value="map5" data-src="domainmaps/round5map.json">Round 5 Map</option>
@@ -91,9 +91,7 @@
     <button id="btnExportPNG" title="Download PNG of this map with labels">Export PNG</button>
     <button id="btnUploadJson" title="Load a custom JSON (optional)">Load JSON</button>
     <input id="fileInput" type="file" accept="application/json" hidden />
-    <button id="btnEditor" title="Create custom map in editor">Open Custom Editor</button>
-    <!-- NEW: header control to collapse/expand sidebar -->
-    <button id="btnToggleSidebar" class="btn" title="Show/Hide legend & labels">Panel</button>
+    <button id="btnToggleSidebar" class="btn" title="Show/Hide legend & labels">Collapse Legend</button>
   </header>
 
   <aside>
