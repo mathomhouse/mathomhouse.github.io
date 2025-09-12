@@ -88,7 +88,7 @@
       <button id="btnClearLabels" class="btn" title="Remove all labels">Clear</button>
     </div>
 
-    <p class="note">This page is <strong>label‑only</strong>: Left‑click a cell to set/rename a label; right‑click to remove. Painting and palette edits are disabled here.</p>
+    <p class="note">This page is <strong>label-only</strong>: Left-click a cell to set/rename a label; right-click to remove. Painting and palette edits are disabled here.</p>
   </aside>
 
   <main>
@@ -98,7 +98,7 @@
   </main>
   <script>
     //===========================
-    // Minimal runtime for label‑only flow
+    // Minimal runtime for label-only flow
     //===========================
     let rows=50, cols=50, matrix=[], PALETTE=[];
 
@@ -107,13 +107,46 @@
     const mapSelect = document.getElementById('mapSelect');
     const labelListEl = document.getElementById('labelList');
 
-    // Per‑map label store
+    // ---------- URL routing (map + lock) ----------
+    function getRoute(){
+      const u = new URL(location.href);
+      const map = u.searchParams.get('map') || mapSelect.value || 'map1';
+      const locked = u.searchParams.get('locked') === '1';
+      return { map, locked };
+    }
+    function applyRouteToUI(){
+      const { map, locked } = getRoute();
+      if (mapSelect.value !== map) mapSelect.value = map;
+      if (locked) {
+        const labelEl = document.querySelector('label[for="mapSelect"]');
+        if (labelEl) labelEl.style.display = 'none';
+        mapSelect.style.display = 'none';
+      }
+    }
+
+    // Per-map label store
     const labelMap = new Map(); // key "r,c" -> text
     const keyFor = (r,c)=>`${r},${c}`;
 
-    function getLSKey(){ return `labels:${mapSelect.value}`; }
-    function saveLabels(){ const arr=[...labelMap].map(([k,t])=>{const [r,c]=k.split(',').map(Number); return {r,c,text:t};}); localStorage.setItem(getLSKey(), JSON.stringify(arr)); }
-    function loadLabels(){ labelMap.clear(); try{ const raw=localStorage.getItem(getLSKey()); if(raw){ const arr=JSON.parse(raw)||[]; for(const it of arr){ if(Number.isInteger(it.r)&&Number.isInteger(it.c)&&typeof it.text==='string'){ labelMap.set(keyFor(it.r,it.c), it.text); } } } }catch{} }
+    function getLSKey(){ return `labels:${mapSelect.value}`; } // per-map local storage (unchanged)
+    function saveLabels(){
+      const arr=[...labelMap].map(([k,t])=>{const [r,c]=k.split(',').map(Number); return {r,c,text:t};});
+      localStorage.setItem(getLSKey(), JSON.stringify(arr));
+    }
+    function loadLabels(){
+      labelMap.clear();
+      try{
+        const raw=localStorage.getItem(getLSKey());
+        if(raw){
+          const arr=JSON.parse(raw)||[];
+          for(const it of arr){
+            if(Number.isInteger(it.r)&&Number.isInteger(it.c)&&typeof it.text==='string'){
+              labelMap.set(keyFor(it.r,it.c), it.text);
+            }
+          }
+        }
+      }catch{}
+    }
 
     function makeMatrix(r,c,fill='empty'){ return Array.from({length:r},()=>Array.from({length:c},()=>fill)); }
 
@@ -156,7 +189,7 @@
       }
     }
 
-    // Label interactions (left‑click: set/rename; right‑click: remove)
+    // Label interactions (left-click: set/rename; right-click: remove)
     gridEl.addEventListener('contextmenu', e=>e.preventDefault());
     gridEl.addEventListener('pointerdown', (e)=>{
       const t=e.target; if(!t.classList.contains('cell')) return; e.preventDefault();
@@ -232,7 +265,13 @@
       else{ loadLabels(); paintAllLabels(); }
     }
 
-    mapSelect.addEventListener('change', ()=> loadSelectedMap(false));
+    // Keep URL in sync if the dropdown is visible
+    mapSelect.addEventListener('change', ()=>{
+      const u=new URL(location.href);
+      u.searchParams.set('map', mapSelect.value);
+      history.pushState(null,'',u);
+      loadSelectedMap(false);
+    });
     document.getElementById('btnReload').addEventListener('click', ()=> loadSelectedMap(true));
 
     // Optional: upload custom JSON just for preview/labeling
@@ -250,7 +289,7 @@
     });
 
     //===========================
-    // Self tests (safe, non‑destructive)
+    // Self tests (safe, non-destructive)
     //===========================
     (function runSelfTests(){
       try{
@@ -258,7 +297,7 @@
         // 1) CSV newline
         const csv=[['a',1,2],['b',3,4]].map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(',')).join('\n');
         console.assert(csv.includes('\n'), 'CSV should include newline');
-        // 2) local label round‑trip
+        // 2) local label round-trip
         const k='labels:_test'; const before=localStorage.getItem(k);
         localStorage.setItem(k, JSON.stringify([{r:1,c:2,text:'Z'}]));
         const arr=JSON.parse(localStorage.getItem(k)||'[]');
@@ -271,8 +310,9 @@
     })();
 
     //===========================
-    // Boot — load first map
+    // Boot — sync route and load
     //===========================
+    applyRouteToUI();
     loadSelectedMap(false).catch(err=>{
       console.warn('Initial map load failed:', err);
       // fallback to a blank grid if fetch fails (dev without server)
