@@ -126,12 +126,14 @@
       }
     }
 
-    // Per-map label store
+    // Per-map label store (local cache)
     const labelMap = new Map(); // key "r,c" -> text
     const keyFor = (r,c)=>`${r},${c}`;
-
     function getLSKey(){ return `labels:${mapSelect.value}`; } // per-map local storage (unchanged)
-    function saveLabels(){ const arr=[...labelMap].map(([k,t])=>{const [r,c]=k.split(',').map(Number); return {r,c,text:t};}); localStorage.setItem(getLSKey(), JSON.stringify(arr)); }
+    function saveLabels(){
+      const arr=[...labelMap].map(([k,t])=>{const [r,c]=k.split(',').map(Number); return {r,c,text:t};});
+      localStorage.setItem(getLSKey(), JSON.stringify(arr));
+    }
     function loadLabels(){
       labelMap.clear();
       try{
@@ -148,7 +150,6 @@
     }
 
     function makeMatrix(r,c,fill='empty'){ return Array.from({length:r},()=>Array.from({length:c},()=>fill)); }
-
     function keyToColor(key){ const p=PALETTE.find(p=>p.key===key); return p? p.color : '#f2f4f7'; }
 
     function paintAllFromMatrix(){
@@ -188,17 +189,118 @@
       }
     }
 
+    //===========================
+    // Firestore realtime (collaboration)
+    //===========================
+    // Your Firebase config (from your screenshot)
+    const FIREBASE_CONFIG = {
+      apiKey: "AIzaSyAiWSooaIsI5i4idE72ZzGejEQOIgyT6Kk",
+      authDomain: "mathom-house.firebaseapp.com",
+      projectId: "mathom-house",
+      storageBucket: "mathom-house.firebasestorage.app",
+      messagingSenderId: "625641799044",
+      appId: "1:625641799044:web:6339aa61d507e61072f1d1",
+      measurementId: "G-VL8NWB8KDB"
+    };
+
+    let _fbApp = null, _db = null, _unsubscribe = null;
+    const _FS_URL = 'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js';
+    const _APP_URL = 'https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js';
+
+    function composeMapId(){ return getRoute().map; } // "map5", "map6", etc.
+
+    async function initRealtime(){
+      // Guard if config is missing
+      if (!FIREBASE_CONFIG.apiKey) {
+        console.warn('[Firestore] Skipping init: FIREBASE_CONFIG not set');
+        return;
+      }
+      const appMod = await import(_APP_URL);
+      const fs     = await import(_FS_URL);
+
+      _fbApp = appMod.initializeApp(FIREBASE_CONFIG);
+      _db    = fs.getFirestore(_fbApp);
+
+      // Start listening to the current map
+      await _startMapChannel(composeMapId());
+
+      // If history changes (back/forward), restart the listener for the new map
+      window.addEventListener('popstate', ()=> _startMapChannel(composeMapId()));
+    }
+
+    async function _startMapChannel(mapId){
+      if (!_db) return;
+      if (_unsubscribe) { _unsubscribe(); _unsubscribe = null; }
+
+      const fs = await import(_FS_URL);
+      const colRef = fs.collection(_db, 'maps', mapId, 'labels');
+
+      _unsubscribe = fs.onSnapshot(colRef, (snap)=>{
+        const next = new Map();
+        snap.forEach(doc=>{
+          const id = doc.id;              // "r_c"
+          const data = doc.data();
+          if (data && data.text) {
+            const [r,c] = id.split('_').map(Number);
+            next.set(`${r},${c}`, String(data.text));
+          }
+        });
+        labelMap.clear();
+        for (const [k,v] of next) labelMap.set(k, v);
+        saveLabels();         // keep local cache in sync
+        paintAllLabels();     // reflect remote in UI
+      }, (err)=>{
+        console.error('[Firestore] onSnapshot error:', err);
+      });
+    }
+
+    async function saveLabelRemote(mapId, r, c, text){
+      if (!_db) return;
+      const fs = await import(_FS_URL);
+      const ref = fs.doc(_db, 'maps', mapId, 'labels', `${r}_${c}`);
+      if (text && text.trim()) {
+        await fs.setDoc(ref, { text: text.trim(), updatedAt: fs.serverTimestamp() }, { merge:true });
+      } else {
+        await fs.deleteDoc(ref).catch(()=>{ /* it's fine if already deleted */ });
+      }
+    }
+
+    async function clearRemoteLabels(mapId){
+      if (!_db) return;
+      const fs = await import(_FS_URL);
+      const col = fs.collection(_db, 'maps', mapId, 'labels');
+      let snap = await fs.getDocs(col);
+      while (!snap.empty) {
+        const batch = fs.writeBatch(_db);
+        snap.docs.forEach(d=> batch.delete(d.ref));
+        await batch.commit();
+        snap = await fs.getDocs(col);
+      }
+    }
+
+    //===========================
+    // Interactions
+    //===========================
     // Label interactions (left-click: set/rename; right-click: remove)
     gridEl.addEventListener('contextmenu', e=>e.preventDefault());
     gridEl.addEventListener('pointerdown', (e)=>{
       const t=e.target; if(!t.classList.contains('cell')) return; e.preventDefault();
       const r=+t.dataset.r, c=+t.dataset.c; const k=keyFor(r,c);
-      if(e.button===2){ labelMap.delete(k); updateCellLabelDOM(r,c); saveLabels(); renderLabelList(); return; }
+      if(e.button===2){
+        labelMap.delete(k);
+        updateCellLabelDOM(r,c); saveLabels(); renderLabelList();
+        saveLabelRemote(composeMapId(), r, c, '').catch(console.error);
+        return;
+      }
       const existing = labelMap.get(k)||''; const text = prompt('Label for this cell (blank to remove):', existing);
       if(text===null) return; // cancel
-      if(!text.trim()){ labelMap.delete(k); }
-      else{ labelMap.set(k, text.trim()); }
+      if(!text.trim()){
+        labelMap.delete(k);
+      }else{
+        labelMap.set(k, text.trim());
+      }
       updateCellLabelDOM(r,c); saveLabels(); renderLabelList();
+      saveLabelRemote(composeMapId(), r, c, labelMap.get(k) || '').catch(console.error);
     });
 
     function renderLabelList(){
@@ -220,12 +322,27 @@
       const btn=e.target.closest('button[data-act]'); if(!btn) return;
       const [r,c]=btn.dataset.k.split(',').map(Number); const act=btn.dataset.act; const k=keyFor(r,c);
       if(act==='jump'){
-        const idx=r*cols+c; const cell=gridEl.children[idx]; if(!cell) return; cell.classList.remove('flash'); cell.scrollIntoView({behavior:'smooth', block:'center', inline:'center'}); setTimeout(()=>cell.classList.add('flash'),200); setTimeout(()=>cell.classList.remove('flash'),1100); return;
+        const idx=r*cols+c; const cell=gridEl.children[idx]; if(!cell) return;
+        cell.classList.remove('flash');
+        cell.scrollIntoView({behavior:'smooth', block:'center', inline:'center'});
+        setTimeout(()=>cell.classList.add('flash'),200);
+        setTimeout(()=>cell.classList.remove('flash'),1100);
+        return;
       }
       if(act==='rename'){
-        const existing=labelMap.get(k)||''; const text=prompt('New label:', existing); if(text===null) return; if(!text.trim()) return; labelMap.set(k,text.trim()); updateCellLabelDOM(r,c); saveLabels(); renderLabelList(); return;
+        const existing=labelMap.get(k)||''; const text=prompt('New label:', existing);
+        if(text===null || !text.trim()) return;
+        labelMap.set(k,text.trim());
+        updateCellLabelDOM(r,c); saveLabels(); renderLabelList();
+        saveLabelRemote(composeMapId(), r, c, text).catch(console.error);
+        return;
       }
-      if(act==='del'){ labelMap.delete(k); updateCellLabelDOM(r,c); saveLabels(); renderLabelList(); return; }
+      if(act==='del'){
+        labelMap.delete(k);
+        updateCellLabelDOM(r,c); saveLabels(); renderLabelList();
+        saveLabelRemote(composeMapId(), r, c, '').catch(console.error);
+        return;
+      }
     });
 
     // PNG export (draw matrix + labels)
@@ -238,20 +355,27 @@
       canvas.toBlob((blob)=>{ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`${mapSelect.value}.png`; a.click(); URL.revokeObjectURL(a.href); });
     });
 
-    // Labels CSV export / clear
+    // Labels CSV export / clear (local + remote)
     document.getElementById('btnExportLabels').addEventListener('click', ()=>{
       const rowsCSV=[["label","row","col"]];
       for(const [k,text] of labelMap){ const [r,c]=k.split(',').map(Number); rowsCSV.push([text,r,c]); }
       const csv=rowsCSV.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(',')).join('\n');
       const blob=new Blob([csv],{type:'text/csv'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`${mapSelect.value}-labels.csv`; a.click(); URL.revokeObjectURL(a.href);
     });
-    document.getElementById('btnClearLabels').addEventListener('click', ()=>{ if(!labelMap.size) return; if(confirm('Remove all labels for this map?')){ labelMap.clear(); paintAllLabels(); saveLabels(); }});
+
+    document.getElementById('btnClearLabels').addEventListener('click', async ()=>{
+      if(!labelMap.size && !_db) return;
+      if(!confirm('Remove ALL labels (shared) for this map?')) return;
+      try{
+        await clearRemoteLabels(composeMapId()); // no-op if _db not inited
+      }catch(e){ console.warn('Remote clear failed or skipped:', e); }
+      labelMap.clear(); paintAllLabels(); saveLabels();
+    });
 
     // Load JSON helpers
     async function fetchJSON(url){ const rsp=await fetch(url, {cache:'no-store'}); if(!rsp.ok) throw new Error('Failed to load '+url); return await rsp.json(); }
     function fromJSON(obj){
       rows=obj.rows; cols=obj.cols; matrix=obj.matrix; PALETTE=obj.palette || [];
-      // normalize unknown keys to 'empty'
       const keys=new Set(PALETTE.map(p=>p.key));
       for(let r=0;r<rows;r++) for(let c=0;c<cols;c++) if(!keys.has(matrix[r][c])) matrix[r][c]='empty';
       renderLegend(); paintAllFromMatrix(); paintAllLabels();
@@ -271,12 +395,19 @@
       u.searchParams.set('map', mapSelect.value);
       history.replaceState(null, '', u);
       loadSelectedMap(false);
+      _startMapChannel(composeMapId()); // switch realtime to the new map (if Firestore is active)
     }
     mapSelect.addEventListener('change', onMapChange);
 
-    document.getElementById('btnReload').addEventListener('click', ()=> loadSelectedMap(true));
+    document.getElementById('btnReload').addEventListener('click', async ()=>{
+      const { map } = getRoute();
+      if (_db && confirm('Also clear shared labels for this map?')) {
+        try{ await clearRemoteLabels(map); }catch(e){ console.warn('Remote clear failed:', e); }
+      }
+      loadSelectedMap(true);
+    });
 
-    // Optional: upload custom JSON just for preview/labeling
+    // Optional: upload custom JSON for preview/labeling
     document.getElementById('btnUploadJson').addEventListener('click', ()=> document.getElementById('fileInput').click());
     document.getElementById('fileInput').addEventListener('change', async (e)=>{
       const file=e.target.files[0]; if(!file) return; const text=await file.text();
@@ -284,7 +415,6 @@
       finally{ e.target.value=''; }
     });
 
-    // Link to full editor (replace href to your actual editor URL)
     document.getElementById('btnEditor').addEventListener('click', ()=>{
       // TODO: swap this to your actual editor page path
       location.href = 'domainmapeditor.html';
@@ -296,29 +426,27 @@
     (function runSelfTests(){
       try{
         console.groupCollapsed('Map Labeler — self tests');
-        // 1) CSV newline
         const csv=[['a',1,2],['b',3,4]].map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(',')).join('\n');
         console.assert(csv.includes('\n'), 'CSV should include newline');
-        // 2) local label round-trip
         const k='labels:_test'; const before=localStorage.getItem(k);
         localStorage.setItem(k, JSON.stringify([{r:1,c:2,text:'Z'}]));
         const arr=JSON.parse(localStorage.getItem(k)||'[]');
         console.assert(arr[0].text==='Z' && arr[0].r===1 && arr[0].c===2, 'localStorage label round-trip');
         if(before===null) localStorage.removeItem(k); else localStorage.setItem(k,before);
-        // 3) DOM presence
         console.assert(document.getElementById('grid') && document.getElementById('legend'), 'core DOM nodes present');
         console.groupEnd();
       }catch(e){ console.error('Self tests failed', e); }
     })();
 
     //===========================
-    // Boot — load first map
+    // Boot — load map, then start realtime
     //===========================
     applyRouteToUI();
     loadSelectedMap(false).catch(err=>{
       console.warn('Initial map load failed:', err);
-      // fallback to a blank grid if fetch fails (dev without server)
       rows=30; cols=30; PALETTE=[{key:'empty', name:'Remaining Area', color:'#f2f4f7'}]; matrix=makeMatrix(rows,cols,'empty'); renderLegend(); paintAllFromMatrix();
+    }).finally(()=>{
+      initRealtime().catch(console.error);
     });
   </script>
 </body>
