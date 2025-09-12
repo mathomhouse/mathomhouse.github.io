@@ -54,6 +54,9 @@
 
     main{ grid-area:main; display:grid; place-items:center; overflow:auto; }
     .grid-wrap{ position:relative; padding:18px; }
+    /* Ensure zoomed content is clipped inside the frame */
+    .grid-wrap { overflow: hidden; }
+
     .grid{ --cols:50; display:grid; grid-template-columns: repeat(var(--cols), var(--cell)); grid-auto-rows: var(--cell); gap:var(--gap); background:#1c1c24; border:1px solid #2a2a34; padding:var(--gap); border-radius:14px; box-shadow:0 10px 30px #0006, inset 0 0 0 1px #ffffff10; image-rendering: pixelated; user-select:none; /* CHANGED: let touch scroll */ touch-action: pan-x pan-y; }
     /* CHANGED: allow label overflow + center text */
     .cell{ position:relative; width:var(--cell); height:var(--cell); background:#f2f4f7; border-radius:3px; box-shadow: inset 0 0 0 1px #00000011; overflow:visible; }
@@ -478,6 +481,132 @@
       if (saved === null){ setSidebarCollapsed(window.matchMedia('(max-width: 768px)').matches); }
       else { setSidebarCollapsed(saved === '1'); }
     })();
+    // ===========================
+// Pinch-to-zoom + pan (touch) and wheel zoom (desktop)
+// ===========================
+(() => {
+  // Transform state
+  let scale = 1, minScale = 0.6, maxScale = 4;
+  let offsetX = 0, offsetY = 0;
+
+  // Keep transforms stable relative to the top-left corner
+  gridEl.style.transformOrigin = '0 0';
+
+  function applyTransform() {
+    gridEl.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+    // When zoomed in, we handle panning ourselves; when at 1x, allow native scroll.
+    gridEl.style.touchAction = scale > 1 ? 'none' : 'pan-x pan-y';
+  }
+
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+  // Track active pointers (for pinch)
+  const ptrs = new Map(); // pointerId -> {x, y}
+  let pinch = { active: false, startDist: 0, startScale: 1, startMid: {x:0, y:0}, startOffset:{x:0,y:0} };
+
+  function getMidAndDist() {
+    const a = [...ptrs.values()][0];
+    const b = [...ptrs.values()][1];
+    const mid = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+    const dx = b.x - a.x, dy = b.y - a.y;
+    const dist = Math.hypot(dx, dy);
+    return { mid, dist };
+  }
+
+  // Convert a client (page) point to the grid's local coords BEFORE transform
+  function toLocal(x, y) {
+    return { x: (x - offsetX) / scale, y: (y - offsetY) / scale };
+  }
+
+  gridEl.addEventListener('pointerdown', (e) => {
+    if (e.pointerType !== 'touch') return;
+    ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+    if (ptrs.size === 2) {
+      // Begin pinch
+      const { mid, dist } = getMidAndDist();
+      pinch.active = true;
+      pinch.startDist = dist;
+      pinch.startScale = scale;
+      pinch.startMid = { ...mid };
+      pinch.startOffset = { x: offsetX, y: offsetY };
+      // Prevent the browser from page-zooming
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  gridEl.addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'touch') return;
+    if (!ptrs.has(e.pointerId)) return;
+    ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+    if (pinch.active && ptrs.size === 2) {
+      // Handle pinch scale + keep the midpoint stable under fingers
+      const { mid, dist } = getMidAndDist();
+      let nextScale = clamp(pinch.startScale * (dist / pinch.startDist), minScale, maxScale);
+
+      // Compute new offset so that the content under the initial pinch midpoint stays put
+      const localAtStart = toLocal(pinch.startMid.x, pinch.startMid.y); // where fingers anchored initially (in content coords)
+      offsetX = pinch.startMid.x - localAtStart.x * nextScale;
+      offsetY = pinch.startMid.y - localAtStart.y * nextScale;
+      scale   = nextScale;
+
+      applyTransform();
+      e.preventDefault();
+    } else if (scale > 1 && ptrs.size === 1) {
+      // Single-finger pan when zoomed-in
+      const prev = ptrs.get(e.pointerId);
+      offsetX += e.clientX - prev.x;
+      offsetY += e.clientY - prev.y;
+      ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      applyTransform();
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  function endPointer(e) {
+    if (ptrs.has(e.pointerId)) ptrs.delete(e.pointerId);
+    if (ptrs.size < 2 && pinch.active) {
+      pinch.active = false;
+    }
+  }
+  gridEl.addEventListener('pointerup', endPointer);
+  gridEl.addEventListener('pointercancel', endPointer);
+  gridEl.addEventListener('pointerleave', endPointer);
+
+  // Wheel zoom for desktop (Ctrl/trackpad pinch)
+  gridEl.addEventListener('wheel', (e) => {
+    // Zoom into the mouse position
+    const delta = e.deltaY;
+    const factor = Math.pow(1.0015, -delta); // smooth zoom
+    const newScale = clamp(scale * factor, minScale, maxScale);
+
+    if (newScale === scale) return;
+
+    const rect = gridEl.getBoundingClientRect();
+    const pt = { x: e.clientX, y: e.clientY };
+    const localBefore = toLocal(pt.x, pt.y);
+
+    // adjust offset so the point under cursor stays fixed
+    offsetX = pt.x - localBefore.x * newScale;
+    offsetY = pt.y - localBefore.y * newScale;
+    scale = newScale;
+
+    applyTransform();
+    e.preventDefault();
+  }, { passive: false });
+
+  // Guard: while pinching/dragging, ignore labeling logic
+  // (Your existing handlers attach to gridEl; early-out if a pinch is active)
+  gridEl.addEventListener('pointerdown', (e) => {
+    if (pinch.active || ptrs.size >= 2) {
+      e.stopPropagation();
+    }
+  }, true);
+
+  // Initialize transform
+  applyTransform();
+})();
 
     //===========================
     // Self tests (safe, non-destructive)
