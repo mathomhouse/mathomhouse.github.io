@@ -219,7 +219,12 @@
       const fs     = await import(_FS_URL);
 
       _fbApp = appMod.initializeApp(FIREBASE_CONFIG);
-      _db    = fs.getFirestore(_fbApp);
+      // Use auto-detected long-polling so it works behind strict proxies/Wi-Fi
+      _db = fs.initializeFirestore(_fbApp, {
+        experimentalAutoDetectLongPolling: true,
+        useFetchStreams: false
+      });
+
 
       // Start listening to the current map
       await _startMapChannel(composeMapId());
