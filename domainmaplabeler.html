@@ -121,6 +121,8 @@
         const labelEl = document.querySelector('label[for="mapSelect"]');
         if (labelEl) labelEl.style.display = 'none';
         mapSelect.style.display = 'none';
+        mapSelect.disabled = true;
+        mapSelect.tabIndex = -1;
       }
     }
 
@@ -129,10 +131,7 @@
     const keyFor = (r,c)=>`${r},${c}`;
 
     function getLSKey(){ return `labels:${mapSelect.value}`; } // per-map local storage (unchanged)
-    function saveLabels(){
-      const arr=[...labelMap].map(([k,t])=>{const [r,c]=k.split(',').map(Number); return {r,c,text:t};});
-      localStorage.setItem(getLSKey(), JSON.stringify(arr));
-    }
+    function saveLabels(){ const arr=[...labelMap].map(([k,t])=>{const [r,c]=k.split(',').map(Number); return {r,c,text:t};}); localStorage.setItem(getLSKey(), JSON.stringify(arr)); }
     function loadLabels(){
       labelMap.clear();
       try{
@@ -265,13 +264,16 @@
       else{ loadLabels(); paintAllLabels(); }
     }
 
-    // Keep URL in sync if the dropdown is visible
-    mapSelect.addEventListener('change', ()=>{
-      const u=new URL(location.href);
+    function onMapChange(){
+      const { locked } = getRoute();
+      if (locked) return; // ignore when locked
+      const u = new URL(location.href);
       u.searchParams.set('map', mapSelect.value);
-      history.pushState(null,'',u);
+      history.replaceState(null, '', u);
       loadSelectedMap(false);
-    });
+    }
+    mapSelect.addEventListener('change', onMapChange);
+
     document.getElementById('btnReload').addEventListener('click', ()=> loadSelectedMap(true));
 
     // Optional: upload custom JSON just for preview/labeling
@@ -310,7 +312,7 @@
     })();
 
     //===========================
-    // Boot — sync route and load
+    // Boot — load first map
     //===========================
     applyRouteToUI();
     loadSelectedMap(false).catch(err=>{
