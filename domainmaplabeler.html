@@ -97,31 +97,67 @@
         @media (min-width: 769px) {
           #toggleLegend { display: none; }
         }
+        :root{
+        --sidebar-w: 340px; /* default sidebar width */
+        }
+
+        body{
+        display:grid;
+        grid-template-columns: var(--sidebar-w) 1fr;
+        grid-template-rows:auto 1fr;
+        grid-template-areas:
+        "header header"
+        "sidebar main";
+        transition: grid-template-columns .25s ease;
+        }
+
+        aside{
+        grid-area:sidebar;
+        background:var(--panel);
+        border-right:1px solid #23232b;
+        padding:14px;
+        overflow:auto;
+        }
+
+        /* Collapsed state */
+        body.sidebar-collapsed{
+        --sidebar-w: 0px;
+        }
+        body.sidebar-collapsed aside{
+        padding:0;
+        border-right:0;
+        overflow:hidden;
+        }
+
+        /* Responsive toggle button */
+        @media (max-width: 768px){
+        #btnToggleSidebar{ display:inline-block; }
+        }
+        @media (min-width: 769px){
+        #btnToggleSidebar{ display:none; }
+        }
 
 
   </style>
 </head>
 <body>
   <header>
-    <h1>Map Labeler</h1>
-    <div class="sp sp1"></div>
-    <label for="mapSelect" class="note">Choose map</label>
-    <select id="mapSelect" title="Pick a map">
-      <!-- Replace data-src values with your hosted JSON URLs or paths -->
-      <option value="map1" data-src="maps/map1.json">Map 1 (N/A)</option>
-      <option value="map2" data-src="maps/map2.json">Map 2 (N/A)</option>
-      <option value="map3" data-src="maps/map3.json">Map 3 (N/A)</option>
-      <option value="map4" data-src="maps/map4.json">Map 4 (N/A)</option>
-      <option value="map5" data-src="domainmaps/round5map.json">Round 5 Map</option>
-      <option value="map6" data-src="domainmaps/round6map.json">Round 6 Map</option>
-    </select>
-    <button id="btnReload" title="Reload base map (discard local labels)">Reset Map</button>
-    <div class="sp"></div>
-    <button id="btnExportPNG" title="Download PNG of this map with labels">Export PNG</button>
-    <button id="btnUploadJson" title="Load a custom JSON (optional)">Load JSON</button>
-    <input id="fileInput" type="file" accept="application/json" hidden />
-    <button id="btnEditor" title="Create custom map in editor">Open Custom Editor</button>
-  </header>
+<h1>Map Labeler</h1>
+<div class="sp sp1"></div>
+<label for="mapSelect" class="note">Choose map</label>
+<select id="mapSelect" title="Pick a map">
+<!-- your map options here -->
+</select>
+<button id="btnReload" title="Reload base map (discard local labels)">Reset Map</button>
+<div class="sp"></div>
+<button id="btnExportPNG" title="Download PNG of this map with labels">Export PNG</button>
+<button id="btnUploadJson" title="Load a custom JSON (optional)">Load JSON</button>
+<input id="fileInput" type="file" accept="application/json" hidden />
+<button id="btnEditor" title="Create custom map in editor">Open Custom Editor</button>
+
+<!-- NEW: toggle sidebar button -->
+<button id="btnToggleSidebar" class="btn" title="Show/Hide legend & labels">Panel</button>
+</header>
 
   <aside>
   <!-- Mobile toggle -->
@@ -526,6 +562,27 @@
     document.getElementById('toggleLegend').addEventListener('click', () => {
     document.getElementById('legendContent').classList.toggle('collapsed');
     });
+    const bodyEl = document.body;
+    const SIDEBAR_KEY = 'maplabeler:sidebarCollapsed';
+
+    function setSidebarCollapsed(collapsed){
+    bodyEl.classList.toggle('sidebar-collapsed', collapsed);
+    localStorage.setItem(SIDEBAR_KEY, collapsed ? '1' : '0');
+    }
+
+    document.getElementById('btnToggleSidebar').addEventListener('click', ()=>{
+    setSidebarCollapsed(!bodyEl.classList.contains('sidebar-collapsed'));
+    });
+
+    (function initSidebar(){
+    const saved = localStorage.getItem(SIDEBAR_KEY);
+    if (saved === null){
+    // First visit: collapse on mobile
+    setSidebarCollapsed(window.matchMedia('(max-width: 768px)').matches);
+    } else {
+    setSidebarCollapsed(saved === '1');
+    }
+    })();
 
   </script>
 </body>
