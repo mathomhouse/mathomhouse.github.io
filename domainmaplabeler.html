@@ -75,6 +75,30 @@
 
     @keyframes flashRing{ 0%{outline-color:transparent;} 30%{outline-color:var(--accent);} 100%{outline-color:transparent;} }
     .flash{ outline:2px solid var(--accent); outline-offset:-2px; animation:flashRing .9s ease; }
+    #toggleLegend {
+      width: 100%;
+      margin-bottom: 10px;
+        }
+
+        #legendContent {
+          transition: max-height 0.3s ease;
+          overflow: hidden;
+        }
+
+        #legendContent.collapsed {
+          max-height: 0;
+          padding: 0;
+        }
+
+        /* Optional: show toggle only on small screens */
+        @media (max-width: 768px) {
+          #toggleLegend { display: block; }
+        }
+        @media (min-width: 769px) {
+          #toggleLegend { display: none; }
+        }
+
+
   </style>
 </head>
 <body>
@@ -100,6 +124,11 @@
   </header>
 
   <aside>
+  <!-- Mobile toggle -->
+  <button id="toggleLegend" class="btn">Toggle Legend</button>
+
+  <!-- Collapsible content -->
+  <div id="legendContent">
     <h2>Legend</h2>
     <div id="legend" class="legend"></div>
 
@@ -110,8 +139,13 @@
       <button id="btnClearLabels" class="btn" title="Remove all labels">Clear</button>
     </div>
 
-    <p class="note">This page is <strong>label-only</strong>: Left-click a cell to set/rename a label; right-click to remove. Painting and palette edits are disabled here.</p>
-  </aside>
+    <p class="note">
+      This page is <strong>label-only</strong>: Left-click a cell to set/rename a label;
+      right-click to remove. Painting and palette edits are disabled here.
+    </p>
+  </div>
+</aside>
+
 
   <main>
     <div class="grid-wrap">
@@ -489,6 +523,10 @@
     }).finally(()=>{
       initRealtime().catch(console.error);
     });
+    document.getElementById('toggleLegend').addEventListener('click', () => {
+    document.getElementById('legendContent').classList.toggle('collapsed');
+    });
+
   </script>
 </body>
 </html>
