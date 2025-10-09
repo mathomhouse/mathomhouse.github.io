@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Masters Store</title>
+  <link rel="stylesheet" href="styles/index.css" />
+  <script src="header.js" defer></script>
+  <style >
+    input[type="number"], select {
+      max-width: 100px;
+    }
+    .store-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .store-tile {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 16px;
+      background: var(--card-bg);
+      text-align: center;
+      transition: opacity 0.3s;
+    }
+
+    .store-tile.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .cart-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      padding: 10px 16px;
+      font-size: 16px;
+      border-radius: 50px;
+    }
+
+    .cart-panel {
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 320px;
+      background: var(--card-bg);
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 101;
+      overflow-y: auto;
+    }
+
+    .cart-panel.open {
+      transform: translateX(0);
+    }
+
+    .slider-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .slider-row input[type="range"] {
+      flex-grow: 1;
+    }
+
+    .cart-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid #ddd;
+      padding: 6px 0;
+    }
+
+    .item-name {
+      flex: 2;
+    }
+
+    .item-qty {
+      width: 50px;
+    }
+
+    .item-remove {
+      color: red;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 30px;
+    }
+
+    .item-cost {
+      flex: 1;
+      text-align: right;
+    }
+
+    @media (max-width: 768px) {
+      .store-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 12px;
+      }
+
+      .store-tile {
+        padding: 8px;
+        font-size: 0.85rem;
+      }
+
+      .store-tile h3 {
+        font-size: 1rem;
+      }
+
+      .slider-row button {
+        padding: 2px 6px;
+        font-size: 12px;
+      }
+
+      .store-tile button {
+        padding: 5px 8px;
+        font-size: 13px;
+      }
+
+      .cart-button {
+        font-size: 14px;
+        padding: 8px 14px;
+        border-radius: 30px;
+        width: auto;
+        right: 15px;
+      }
+
+      .cart-panel {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .store-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="header-placeholder"></header>
+  <h1 style="text-align:center">Masters Store</h1>
+
+  <div class="store-grid" id="storeContainer"></div>
+
+  <button class="cart-button" onclick="toggleCart()">🛒 Cart</button>
+
+  <div class="cart-panel" id="cartPanel">
+    <h2>Cart</h2>
+    <div id="cartItems"></div>
+    <hr>
+    <label>Your Points: <input type="number" id="availablePoints" value="0" min="0"></label>
+    <p id="cartTotal"></p>
+    <button onclick="updateCart()">Update Cart</button>
+    <button onclick="clearCart()">Clear Cart</button>
+    <button onclick="toggleCart()">Close</button>
+  </div>
+
+  <script>
+    /**
+     * ITEMS: one currency ("points").
+     * - name: string (display name)
+     * - price: number (cost in points per unit)
+     * - maxQty: number (per-item purchase cap)
+     *
+     * Edit freely to match your new page.
+     */
+    const items = [
+      // --- Example entries converted to "points" (adjust as you like) ---
+      { name: "Maglev Relay Skin Shard", price: 140,   maxQty: 50 },
+      { name: "Full Throttle Avatar Frame", price: 200,    maxQty: 1 },
+      { name: "Overload Nameplate", price: 200,    maxQty: 1 },
+      { name: "Top-tier Catalyst", price: 800,    maxQty: 4 },
+      { name: "Expert HT Chip Chest", price: 280,    maxQty: 4 },
+      { name: "Orange Universal Shard", price: 80,    maxQty: 10 },
+      { name: "Legendary Beast Chest Shard", price: 25,    maxQty: 300 },
+      { name: "Blue Material Choice Box", price: 150,    maxQty: 50 }, 
+      { name: "Top-tier Catalyst", price: 1600,    maxQty: 2 },
+      { name: "Advanced-tier Catalyst", price: 480,    maxQty: 10 },
+      { name: "Mid-tier Catalyst", price: 100,    maxQty: 20 },
+      { name: "Expert HT Chip Chest", price: 560,    maxQty: 2 },
+      { name: "Amazing HT Chip Chest", price: 110,    maxQty: 10 },
+      { name: "HT Chip Chest", price: 50,    maxQty: 20 },
+      { name: "Resonator Choice Chest", price: 480,    maxQty: 10 },
+      { name: "Hologram Choice Chest", price: 120,    maxQty: 20 },
+      { name: "Formation Supply Crate", price: 30,    maxQty: 50 },
+      { name: "Orange Universal Shard", price: 160,    maxQty: 20 },
+      { name: "Talent Item Choice Chest v3", price: 80,    maxQty: 30 },
+      { name: "Master Research", price: 40,    maxQty: 30 },
+      { name: "Lv. 3 CPNT Chest", price: 20,    maxQty: 50 },
+      { name: "1,000 Odinium", price: 120,    maxQty: 100 },
+      { name: "Universal Exclusive Skill Shard", price: 10,    maxQty: 100 },
+      
+      
+      
+      
+      
+
+      // Feel free to add more items here, all priced in points
+      // { name: "Some Item", price: 999, maxQty: 1 },
+    ];
+
+    const storeContainer = document.getElementById('storeContainer');
+    const cartPanel       = document.getElementById('cartPanel');
+    const cartItemsEl     = document.getElementById('cartItems');
+    const cartTotalEl     = document.getElementById('cartTotal');
+
+    // cart: { [itemIndex]: qty }
+    const cart = {};
+
+    function createStore() {
+      storeContainer.innerHTML = '';
+      items.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = 'store-tile';
+        div.id = `tile-${idx}`;
+
+        const currentQty = cart[idx] || 0;
+        if (currentQty >= item.maxQty) div.classList.add('disabled');
+
+        div.innerHTML = `
+          <h3>${item.name}</h3>
+          <p>Price: ${item.price} points</p>
+          <p>Max Qty: ${item.maxQty}</p>
+
+          <div class="slider-row">
+            <button type="button" onclick="changeQty(${idx}, -1)">-</button>
+            <input type="range" min="0" max="${item.maxQty}" value="0" id="slider-${idx}" onchange="syncInputs(${idx})">
+            <button type="button" onclick="changeQty(${idx}, 1)">+</button>
+          </div>
+
+          <input type="number" min="0" max="${item.maxQty}" value="0" id="qty-${idx}" onchange="syncSlider(${idx})" />
+          <br><br>
+          <button type="button" onclick="addToCart(${idx})">Add to Cart</button>
+        `;
+        storeContainer.appendChild(div);
+      });
+    }
+
+    function syncInputs(idx) {
+      document.getElementById(`qty-${idx}`).value =
+        document.getElementById(`slider-${idx}`).value;
+    }
+
+    function syncSlider(idx) {
+      const max = items[idx].maxQty;
+      const raw = parseInt(document.getElementById(`qty-${idx}`).value) || 0;
+      const val = Math.min(max, Math.max(0, raw));
+      document.getElementById(`qty-${idx}`).value = val;
+      document.getElementById(`slider-${idx}`).value = val;
+    }
+
+    function changeQty(idx, delta) {
+      const input = document.getElementById(`qty-${idx}`);
+      let val = (parseInt(input.value) || 0) + delta;
+      val = Math.max(0, Math.min(val, items[idx].maxQty));
+      input.value = val;
+      document.getElementById(`slider-${idx}`).value = val;
+    }
+
+    function addToCart(idx) {
+      const desired = parseInt(document.getElementById(`qty-${idx}`).value) || 0;
+      if (desired <= 0) return;
+
+      const have = cart[idx] || 0;
+      const max  = items[idx].maxQty;
+      const next = Math.min(max, have + desired);
+
+      cart[idx] = next;
+      updateCart();
+      createStore();
+    }
+
+    function editCart(idx, value) {
+      const max = items[idx].maxQty;
+      const qty = Math.max(0, Math.min(parseInt(value) || 0, max));
+      if (qty === 0) delete cart[idx];
+      else cart[idx] = qty;
+      updateCart();
+    }
+
+    function removeFromCart(idx) {
+      delete cart[idx];
+      updateCart();
+    }
+
+    function clearCart() {
+      Object.keys(cart).forEach(k => delete cart[k]);
+      updateCart();
+    }
+
+    function updateCart() {
+      cartItemsEl.innerHTML = '';
+
+      let totalPoints = 0;
+
+      for (const idx in cart) {
+        const item = items[idx];
+        const qty  = cart[idx];
+        const cost = item.price * qty;
+        totalPoints += cost;
+
+        const line = document.createElement('div');
+        line.className = 'cart-line';
+        line.innerHTML = `
+          <span class="item-name">${item.name}</span>
+          <input class="item-qty" type="number" min="0" max="${item.maxQty}" value="${qty}" onchange="editCart(${idx}, this.value)" />
+          <span class="item-remove" title="Remove" onclick="removeFromCart(${idx})">×</span>
+          <span class="item-cost">${cost} pts</span>
+        `;
+        cartItemsEl.appendChild(line);
+      }
+
+      const available = parseInt(document.getElementById('availablePoints').value) || 0;
+      const remaining = available - totalPoints;
+
+      cartTotalEl.innerHTML = `
+        Total: ${totalPoints} points<br>
+        Remaining: ${remaining} points
+      `;
+
+      // Refresh tiles’ disabled state after totals change
+      createStore();
+    }
+
+    function toggleCart() {
+      cartPanel.classList.toggle('open');
+    }
+
+    // Init
+    createStore();
+  </script>
+</body>
+</html>
