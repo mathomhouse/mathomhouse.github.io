@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rockfield March Tips</title>
+  <link rel="stylesheet" href="/styles/index.css" />
+  <script src="/header.js" defer></script>
+</head>
+<body>
+<header id="header-placeholder"></header>
+  <div class="container">
+    <h1 id="top">How Rockfield &amp; The March Work</h1>
+
+    <p>
+      This guide explains why the all-planes Rockfield march works, when to use it, and what actually affects its damage.
+      TL;DR: you <strong>MUST</strong> send a full Air Force march, and the only things that change Rockfield’s opening hit are
+      <em>unit level average</em> and <em>march size difference</em>.
+    </p>
+
+    <h2 id="most-important">MOST IMPORTANTLY: You <strong>MUST</strong> Use All Planes</h2>
+    <ul>
+      <li>If you put any other troop type in the march, it will <strong>not</strong> work.</li>
+      <li>For small players, this can chip away at a mega-whale sitting in a building when you otherwise wouldn’t kill a single troop.</li>
+      <li>Useful for defense as a Battle Round–filling march to help chip whales hitting the building so your bigs stand a better chance when the heavy hits land.</li>
+      <li>The mechanics: Rockfield performs a single attack that occurs after start-of-round buffs and <em>before</em> any Hero or HT triggers based on Attack Speed or High Rate of Fire.</li>
+    </ul>
+
+    <h3 id="key-to-taking-more">Key to Taking More Troops (for higher-level players)</h3>
+    <p>
+      The more troops the opponent has compared to you, the less effective Rockfield’s hit becomes. If the opponent uses higher troop level (e.g., 101 vs 103),
+      Rockfield’s effectiveness is reduced. For most players, the goal is a small suicide march that removes ~5–10 units per stack and slightly lowers the whale’s stack size so others can knock them out.
+    </p>
+
+    <h2 id="faq">FAQ for Rockfield March</h2>
+    <ol>
+      <li><strong>Do we have to send a full march?</strong><br/>
+        Yes. Full march. Avoid HT if you’re using Valhallas or 102 units since HT is level 101. Unit level average is most important. Valhallas do best; 101/102 are fine.
+      </li>
+      <li><strong>Do we have to send only planes?</strong><br/>
+        Yes. The march must be <strong>all planes</strong> or it will not work at all. Rockfield’s skill requires a full Air Force march.
+      </li>
+      <li><strong>Do the other two heroes matter?</strong><br/>
+        Not for the Rockfield hit itself. Ideally pick heroes that maximize <strong>march size</strong> (bigger march reduces the penalty). You can add 100% trigger-rate heroes to try for extra damage, but march size matters more.
+      </li>
+    </ol>
+
+    <h2 id="why-it-works">Why This Works</h2>
+    <p>
+      Rockfield’s skill executes a <strong>single massive blow</strong> at the start of the fight. It <em>cannot</em> be stopped, silenced, stunned, or mitigated in any way. It happens once, and only once.
+    </p>
+    <p>
+      The damage is based on a percentage of each enemy stack’s <em>maximum HP</em> (practically, it translates to a percentage of the full stack being instantly killed). Example: at 27%, a stack of 100 would instantly lose 27 units—<em>assuming perfect conditions</em>.
+    </p>
+
+    <h2 id="what-affects-damage">What Affects the Damage?</h2>
+    <p>Only two things affect Rockfield’s opening hit:</p>
+    <ol>
+      <li>
+        <strong>Your Unit Level Average vs Enemy Unit Level</strong><br/>
+        This has the biggest impact.
+        <ul>
+          <li>102 vs 103 (Valk) &rarr; damage is cut in half (e.g., 27% → 13.5% → ~13 units from a 100 stack).</li>
+          <li>101 vs 103 &rarr; cut in half, then in half again (27% → 13.5% → 6.75%). This is why you can still deal <em>some</em> damage 101 vs Valhallas.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Your March Size vs Enemy March Size</strong><br/>
+        Apply a percent penalty based on how much smaller your march is, calculated after the unit-level adjustment.
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Scenario</th>
+                <th>Step</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Base %</td>
+                <td>Base Rockfield %</td>
+                <td>27%</td>
+              </tr>
+              <tr>
+                <td>Level Penalty</td>
+                <td>102 vs 103</td>
+                <td>27% → 13.5%</td>
+              </tr>
+              <tr>
+                <td>March Size Penalty</td>
+                <td>300 vs 400 (−25%)</td>
+                <td>13.5% × (1 − 0.25) = 10.125% (~10.1 units from 100)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+    </ol>
+    <p>
+      These are the <strong>only</strong> two modifiers that make or break the Rockfield suicide march. Any additional heroes only contribute their own normal damage.
+    </p>
+
+    <h2 id="hero-ideas">Hero Ideas (independent of Rockfield’s blow)</h2>
+    <ol>
+      <li><strong>Maximo</strong> – High trigger on middle row; a bit outdated damage-wise now.</li>
+      <li><strong>Rey Ayanami ES 5+</strong> – Rage hero (starts with 7); first stack will always trigger; damage is modest but guaranteed.</li>
+      <li><strong>Mega / Gipsy / Po</strong> – Strong attack boosters and bomber skills; high damage when triggered.</li>
+      <li><strong>Any high trigger-rate, high-damage air hero</strong>.</li>
+      <li><strong>Any hero that works on Air</strong>.</li>
+    </ol>
+    <p>
+      Again, these do <em>not</em> boost Rockfield’s opening hit; they can only add their own damage after it.
+    </p>
+
+    <h2 id="quick-tips">Quick Tips</h2>
+    <ul>
+      <li>Send <strong>full planes</strong> or the march won’t work.</li>
+      <li>Prioritize <strong>unit level average</strong> and <strong>march size</strong> to maximize the opening hit.</li>
+      <li>Great as a low-count suicide march to peel 5–10 units per stack off whales in buildings.</li>
+      <li>Useful for defense Battle Round filler to soften incoming whale hits.</li>
+    </ul>
+
+    <div class="div-buffer"></div>
+    <p><a href="#top">Back to top</a></p>
+  </div>
+</body>
+</html>
