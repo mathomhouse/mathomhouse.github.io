@@ -32,42 +32,56 @@
   </p>
 
   <div class="container">
-    <div class="grid">
-      <div>
-        <label for="basePct">Base True Damage %</label>
-        <input id="basePct" type="number" min="1" max="100" step="0.1" value="27">
-        <div class="small muted">Defaults to 27%. Change to what is shown on your Rockfield skill (not exclusive skill)</div>
-      </div>
-      <div>
-        <label for="yourMarch">Your March Size</label>
-        <input id="yourMarch" type="number" min="1" placeholder="Enter march size">
-      </div>
-      <div>
-        <label for="enemyMarch">Enemy March Size</label>
-        <input id="enemyMarch" type="number" min="1" placeholder="Enter march size">
-      </div>
-      <div>
-        <label for="yourLvl">Your Average Unit Level</label>
+  <table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Your Input</th>
+      <th>Enemy Input</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <th scope="row">March Size</th>
+      <td><input id="yourMarch" type="number" min="1" placeholder="Enter your march size"></td>
+      <td><input id="enemyMarch" type="number" min="1" placeholder="Enter enemy march size"></td>
+    </tr>
+
+    <tr>
+      <th scope="row">Average Unit Level</th>
+      <td>
         <select id="yourLvl">
-          <option value="" disabled selected>Select option</option>
+          <option value="" disabled selected>Select</option>
           <option>101</option>
           <option>102</option>
           <option value="103">103 / Vals</option>
         </select>
-      </div>
-      <div>
-        <label for="enemyLvl">Enemy Average Unit Level</label>
+      </td>
+      <td>
         <select id="enemyLvl">
-          <option value="" disabled selected>Select option</option>
+          <option value="" disabled selected>Select</option>
           <option>101</option>
           <option>102</option>
           <option value="103">103 / Vals</option>
         </select>
-      </div>
-      <div>
-        <label for="skillLvl">Rockfield Skill Level</label>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Base True Damage %</th>
+      <td>
+        <input id="basePct" type="number" min="1" max="100" step="0.1" value="27">
+        <div class="small muted">Defaults to 27%. Change to what's shown on your Rockfield skill.</div>
+      </td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <th scope="row">Rockfield Exclusive Skill Level</th>
+      <td>
         <select id="skillLvl">
-          <option value="" disabled selected>Select option</option>
+          <option value="" disabled selected>Select</option>
           <option value="0">No ES (+0%)</option>
           <option value="1">ES 1 (+2%)</option>
           <option value="2">ES 2 (+4%)</option>
@@ -77,8 +91,12 @@
           <option value="6">ES 6 (+18%)</option>
           <option value="7">ES 7 (+22%)</option>
         </select>
-      </div>
-    </div>
+      </td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
 
     <div class="row">
       <button id="calcBtn" type="button">Calculate</button>
