@@ -1,67 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rockfield Open-Hit Calculator</title>
-  <link rel="stylesheet" href="/styles/index.css" />
+  <title>Rockfield Open-Hit Calculator (Simple)</title>
+  <link rel="stylesheet" href="/styles/index.css"/>
   <script src="/header.js" defer></script>
   <style>
-    .wrap{max-width:980px;margin:0 auto;padding:1rem;}
-    .calc-card { border: 1px solid rgba(0,0,0,.1); border-radius: 12px; padding: 1rem; margin: 1.25rem 0; box-shadow: 0 4px 10px rgba(0,0,0,.04); }
-    .calc-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: .9rem; }
-    .calc-grid label{ font-weight: 600; display:block; margin-bottom:.35rem;}
-    .calc-grid input, .calc-grid select { width:100%; padding:.55rem .6rem; border:1px solid rgba(0,0,0,.2); border-radius: 8px; }
-    .row{ display:flex; gap:.75rem; align-items:center; flex-wrap:wrap; }
-    .btn{ padding:.6rem .9rem; border-radius: 10px; border:1px solid rgba(0,0,0,.2); cursor:pointer; background:#fff; }
-    .btn.primary{ background:#111; color:#fff; }
-    .muted{ color:#555; font-size:.92rem;}
-    .result{ margin-top:1rem; padding:.9rem; border-radius:10px; background:rgba(0,0,0,.03); }
-    .result h3{ margin:.1rem 0 .5rem; }
-    .table-container{ overflow-x:auto; }
-    table{ width:100%; border-collapse: collapse; }
-    th, td{ padding:.5rem .6rem; border-bottom:1px solid rgba(0,0,0,.1); text-align:left; }
-    .small{ font-size:.9rem; }
-    code.kbd{ background:rgba(0,0,0,.06); padding:.12rem .4rem; border-radius:.35rem; }
+    .wrap{max-width:880px;margin:0 auto;padding:1rem;}
+    .card{border:1px solid rgba(0,0,0,.12);border-radius:12px;padding:1rem;box-shadow:0 4px 10px rgba(0,0,0,.05);}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.9rem;}
+    label{font-weight:600;display:block;margin-bottom:.35rem;}
+    input,select{width:100%;padding:.55rem .6rem;border:1px solid rgba(0,0,0,.2);border-radius:8px;}
+    .row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.8rem;}
+    .btn{padding:.6rem .9rem;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;cursor:pointer;}
+    .btn.primary{background:#111;color:#fff;}
+    .muted{color:#555;font-size:.92rem;}
+    .result{margin-top:1rem;padding:.9rem;border-radius:10px;background:rgba(0,0,0,.03);}
+    .result h3{margin:.1rem 0 .45rem}
+    .small{font-size:.9rem}
+    code.kbd{background:rgba(0,0,0,.06);padding:.1rem .4rem;border-radius:.35rem}
   </style>
 </head>
 <body>
 <header id="header-placeholder"></header>
 <div class="wrap">
-  <h1>Rockfield Open‑Hit Calculator</h1>
+  <h1>Rockfield Open-Hit Calculator (Simple)</h1>
   <p class="muted">
-    Description: “When all your units are Air Force, use a skill attack once before the battle round starts (only once), dealing true damage equal to
-    <strong>27%</strong> of their max HP to each enemy unit.
-    For every level that your units are lower than the enemy's average level, the damage is <strong>reduced by 50%</strong> (i.e., halved).
-    For every <strong>1%</strong> fewer units you have versus the enemy, the damage is reduced by <strong>1%</strong>.”
+    Uses multiplicative exclusive skill scaling, per your rule: if base were 30% and skill level is 3 (+6%), the new base is
+    <em>30% × 1.06 = 31.8%</em>. Default base here is the Rockfield description value <strong>27%</strong>.
   </p>
 
-  <div class="calc-card">
-    <div class="calc-grid">
+  <div class="card">
+    <div class="grid">
       <div>
-        <label for="skillLvl">Rockfield Skill Level</label>
-        <select id="skillLvl">
-          <option value="0">0</option>
-          <option value="1">1 (+2%)</option>
-          <option value="2">2 (+4%)</option>
-          <option value="3">3 (+6%)</option>
-          <option value="4">4 (+8%)</option>
-          <option value="5">5 (+10%)</option>
-          <option value="6">6 (+12%)</option>
-          <option value="7" selected>7 (+14%)</option>
-        </select>
-        <div class="small muted">Skill level increases the base “effect” by 2% per level.</div>
+        <label for="yourMarch">Your March Size</label>
+        <input id="yourMarch" type="number" min="1" value="300">
       </div>
-
       <div>
-        <label for="skillMode">Skill Scaling Mode</label>
-        <select id="skillMode">
-          <option value="mult" selected>Multiplicative (27% × (1+bonus))</option>
-          <option value="add">Additive (27% + bonus%)</option>
-        </select>
-        <div class="small muted">If wording says “improves by X%”, multiplicative is typical; choose additive if your tests show it’s flat +X%.</div>
+        <label for="enemyMarch">Enemy March Size</label>
+        <input id="enemyMarch" type="number" min="1" value="400">
       </div>
-
       <div>
         <label for="yourLvl">Your Average Unit Level</label>
         <select id="yourLvl">
@@ -71,7 +50,6 @@
           <option>104</option>
         </select>
       </div>
-
       <div>
         <label for="enemyLvl">Enemy Average Unit Level</label>
         <select id="enemyLvl">
@@ -81,152 +59,81 @@
           <option>104</option>
         </select>
       </div>
-
       <div>
-        <label for="yourMarch">Your March Size</label>
-        <input id="yourMarch" type="number" min="1" value="300">
-      </div>
-
-      <div>
-        <label for="enemyMarch">Enemy March Size</label>
-        <input id="enemyMarch" type="number" min="1" value="400">
-      </div>
-
-      <div>
-        <label for="stackSize">Enemy Stack Size (per stack)</label>
-        <input id="stackSize" type="number" min="1" value="100">
-        <div class="small muted">Used to translate % into unit kills per stack.</div>
-      </div>
-
-      <div>
-        <label for="numStacks"># of Stacks</label>
-        <input id="numStacks" type="number" min="1" value="3">
-      </div>
-
-      <div>
-        <label for="rounding">Rounding</label>
-        <select id="rounding">
-          <option value="floor" selected>Floor (game-like)</option>
-          <option value="round">Round</option>
-          <option value="ceil">Ceil</option>
+        <label for="skillLvl">Rockfield Skill Level</label>
+        <select id="skillLvl">
+          <option value="0">0 (+0%)</option>
+          <option value="1">1 (+2%)</option>
+          <option value="2">2 (+4%)</option>
+          <option value="3">3 (+6%)</option>
+          <option value="4">4 (+8%)</option>
+          <option value="5">5 (+10%)</option>
+          <option value="6">6 (+12%)</option>
+          <option value="7" selected>7 (+14%)</option>
         </select>
       </div>
     </div>
 
-    <div class="row" style="margin-top:.75rem;">
+    <div class="row">
       <button class="btn primary" id="calcBtn" type="button">Calculate</button>
       <button class="btn" id="resetBtn" type="button">Reset</button>
-      <span class="muted small">Assumptions: no bonus for being higher level; march-size only reduces damage when smaller.</span>
+      <span class="muted small">Formula shown below. No rounding options; output is a single %.</span>
     </div>
 
     <div class="result" id="resultBox" hidden>
-      <h3>Result</h3>
+      <h3>Effective Damage</h3>
       <div id="resultText"></div>
     </div>
   </div>
 
-  <h2>Formula Details</h2>
-  <div class="table-container small">
-    <table>
-      <thead><tr><th>Step</th><th>Formula</th></tr></thead>
-      <tbody>
-        <tr><td>Base</td><td><code class="kbd">base = 0.27</code></td></tr>
-        <tr><td>Skill bonus</td><td>
-          Multiplicative: <code class="kbd">base × (1 + 0.02 × skillLvl)</code> |
-          Additive: <code class="kbd">base + (0.02 × skillLvl)</code>
-        </td></tr>
-        <tr><td>Level penalty</td><td><code class="kbd">afterLevel = base × (0.5)^(max(0, enemyLvl - yourLvl))</code></td></tr>
-        <tr><td>March-size penalty</td><td><code class="kbd">afterMarch = afterLevel × min(1, yourMarch / enemyMarch)</code></td></tr>
-        <tr><td>Kills per stack</td><td><code class="kbd">kills = roundMode(afterMarch × stackSize)</code></td></tr>
-        <tr><td>Total kills</td><td><code class="kbd">total = kills × numStacks</code></td></tr>
-      </tbody>
-    </table>
-  </div>
-
+  <h2>Formula</h2>
+  <p class="small">
+    <code class="kbd">base = 0.27</code> (27%)<br/>
+    <code class="kbd">skillBonus = 0.02 × skillLvl</code><br/>
+    <code class="kbd">baseWithSkill = base × (1 + skillBonus)</code><br/>
+    <code class="kbd">afterLevel = baseWithSkill × (0.5)^(max(0, enemyLvl - yourLvl))</code><br/>
+    <code class="kbd">finalPct = afterLevel × min(1, yourMarch / enemyMarch)</code>
+  </p>
 </div>
 
 <script>
-function applyRounding(val, mode){
-  if(mode==='round') return Math.round(val);
-  if(mode==='ceil') return Math.ceil(val);
-  return Math.floor(val);
-}
-
 function compute(){
-  const skillLvl = parseInt(document.getElementById('skillLvl').value, 10);
-  const skillMode = document.getElementById('skillMode').value;
-  const yourLvl = parseInt(document.getElementById('yourLvl').value, 10);
-  const enemyLvl = parseInt(document.getElementById('enemyLvl').value, 10);
   const yourMarch = Math.max(1, parseFloat(document.getElementById('yourMarch').value || '1'));
   const enemyMarch = Math.max(1, parseFloat(document.getElementById('enemyMarch').value || '1'));
-  const stackSize = Math.max(1, parseFloat(document.getElementById('stackSize').value || '1'));
-  const numStacks = Math.max(1, parseInt(document.getElementById('numStacks').value || '1', 10));
-  const rounding = document.getElementById('rounding').value;
+  const yourLvl = parseInt(document.getElementById('yourLvl').value, 10);
+  const enemyLvl = parseInt(document.getElementById('enemyLvl').value, 10);
+  const skillLvl = parseInt(document.getElementById('skillLvl').value, 10);
 
-  // 1) Base (27%) with skill scaling
-  const base = 0.27;
-  const skillBonus = 0.02 * skillLvl;
-  const baseWithSkill = (skillMode === 'mult') ? base * (1 + skillBonus) : (base + skillBonus);
+  const base = 0.27; // 27%
+  const skillBonus = 0.02 * skillLvl; // +2% per level
+  const baseWithSkill = base * (1 + skillBonus); // multiplicative per your clarification
 
-  // 2) Level penalty: halve for each level you're below the enemy
   const levelDiff = Math.max(0, enemyLvl - yourLvl);
   const afterLevel = baseWithSkill * Math.pow(0.5, levelDiff);
 
-  // 3) March-size penalty: reduce only if you're smaller (no bonus if larger)
-  const sizeRatio = Math.min(1, yourMarch / enemyMarch);
+  const sizeRatio = Math.min(1, yourMarch / enemyMarch); // reduce if smaller, no bonus if larger
   const finalPct = Math.max(0, Math.min(1, afterLevel * sizeRatio));
 
-  // 4) Translate to kills
-  const killsPerStackRaw = finalPct * stackSize;
-  const killsPerStack = applyRounding(killsPerStackRaw, rounding);
-  const totalKilled = killsPerStack * numStacks;
+  const pctText = (finalPct * 100).toFixed(3) + '%';
+  const breakdown = [
+    `<div class="small">Base: ${(base*100).toFixed(2)}%</div>`,
+    `<div class="small">After Skill (×${(1+skillBonus).toFixed(3)}): ${(baseWithSkill*100).toFixed(3)}%</div>`,
+    `<div class="small">After Level (−${Math.max(0, enemyLvl-yourLvl)} level diff): ${(afterLevel*100).toFixed(3)}%</div>`,
+    `<div class="small">After March (×${sizeRatio.toFixed(3)}): ${(finalPct*100).toFixed(3)}%</div>`
+  ].join('');
 
-  // Build explanation text
-  const pctBaseStr = (base * 100).toFixed(2) + '%';
-  const baseWithSkillStr = (baseWithSkill * 100).toFixed(3) + '%';
-  const afterLevelStr = (afterLevel * 100).toFixed(3) + '%';
-  const finalPctStr = (finalPct * 100).toFixed(3) + '%';
-  const skillText = (skillMode === 'mult')
-    ? `Multiplicative: base × (1 + ${ (skillBonus*100).toFixed(0) }%)`
-    : `Additive: base + ${ (skillBonus*100).toFixed(0) }%`;
-
-  const levelNote = (enemyLvl - yourLvl) > 0
-    ? `You are ${(enemyLvl - yourLvl)} level(s) below → halved ${(enemyLvl - yourLvl)} time(s).`
-    : 'No level penalty applied.';
-
-  const marchNote = (yourMarch < enemyMarch)
-    ? `Your march is smaller by ${ ((1 - yourMarch/enemyMarch)*100).toFixed(1) }%.`
-    : 'No march-size penalty applied (no bonus for being larger).';
-
-  const lines = [
-    `<div><strong>Effective damage % per enemy stack:</strong> ${finalPctStr}</div>`,
-    `<div><strong>Kills per stack:</strong> ${killsPerStack} of ${stackSize}</div>`,
-    `<div><strong>Total across ${numStacks} stack(s):</strong> ${totalKilled}</div>`,
-    `<hr>`,
-    `<div class="small"><strong>Breakdown</strong></div>`,
-    `<div class="small">Base: ${pctBaseStr}</div>`,
-    `<div class="small">After skill (${skillText}): ${baseWithSkillStr}</div>`,
-    `<div class="small">After level penalty: ${afterLevelStr} • ${levelNote}</div>`,
-    `<div class="small">After march-size penalty: ${finalPctStr} • ${marchNote}</div>`
-  ];
-
-  const box = document.getElementById('resultBox');
   const text = document.getElementById('resultText');
-  text.innerHTML = lines.join('');
-  box.hidden = false;
+  text.innerHTML = `<div><strong>${pctText}</strong> of each enemy stack's max HP</div><hr/>${breakdown}`;
+  document.getElementById('resultBox').hidden = false;
 }
 
 document.getElementById('calcBtn').addEventListener('click', compute);
 document.getElementById('resetBtn').addEventListener('click', () => {
-  document.getElementById('skillLvl').value = '7';
-  document.getElementById('skillMode').value = 'mult';
-  document.getElementById('yourLvl').value = '102';
-  document.getElementById('enemyLvl').value = '103';
   document.getElementById('yourMarch').value = 300;
   document.getElementById('enemyMarch').value = 400;
-  document.getElementById('stackSize').value = 100;
-  document.getElementById('numStacks').value = 3;
-  document.getElementById('rounding').value = 'floor';
+  document.getElementById('yourLvl').value = '102';
+  document.getElementById('enemyLvl').value = '103';
+  document.getElementById('skillLvl').value = '7';
   document.getElementById('resultBox').hidden = true;
 });
 </script>
