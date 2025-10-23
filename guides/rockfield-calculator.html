@@ -95,7 +95,6 @@
     <div class="row">
       <button id="calcBtn" type="button">Calculate</button>
       <button id="resetBtn" type="button">Reset</button>
-      <span class="muted small">Output is a single effective % of each enemy stack’s max HP.</span>
     </div>
 
     <div class="result" id="resultBox" hidden>
@@ -134,7 +133,7 @@ function compute(){
   ].join('');
 
   const text = document.getElementById('resultText');
-  text.innerHTML = `<div><strong>${pctText}</strong> of each enemy stack's max HP</div><hr/>${breakdown}`;
+  text.innerHTML = `<div><strong>${pctText}</strong></div><hr/>${breakdown}`;
   document.getElementById('resultBox').hidden = false;
 }
 
