@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1' />
+  <title>Base Skins Comparator</title>
+  <link rel='stylesheet' href='/styles/index.css' />
+  <style>
+    .controls { display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:center; }
+    .controls input[type='search'], .controls select { max-width:320px; }
+    .badge { display:inline-block; padding:2px 8px; border-radius:999px; background:#eef3ff; color:#274a8c; font-size:12px; border:1px solid #cfe0ff; }
+    .row { display:flex; align-items:center; gap:8px; justify-content:space-between; }
+    .statlist { display:grid; gap:6px; margin-top:6px; text-align:left; }
+    .stat { display:flex; justify-content:space-between; gap:10px; border:1px solid #ddd; border-radius:8px; padding:6px 10px; background:#fafbfd; }
+    .muted { color:#666; }
+    .compare-bar { position:sticky; bottom:0; left:0; right:0; background:rgba(255,255,255,.9); backdrop-filter:saturate(1.2) blur(6px); border-top:1px solid #ddd; }
+    .compare-inner { max-width:1000px; margin:0 auto; padding:10px 20px; display:flex; gap:10px; align-items:center; }
+    .selection { display:flex; gap:8px; flex-wrap:wrap; }
+    .sel { background:#f1f4f8; border:1px solid #d9e1ec; border-radius:999px; padding:3px 8px; }
+    .sel button { background:none; border:none; cursor:pointer; color:#666; }
+    .info-pop { position:absolute; z-index:5; max-width:300px; background:var(--card-bg); border:1px solid #ddd; border-radius:8px; padding:10px; box-shadow:0 6px 24px rgba(0,0,0,.15); display:none; }
+    .icon-btn { width:28px; height:28px; display:inline-grid; place-items:center; border-radius:6px; }
+    .sticky-header { position:sticky; top:0; z-index:3; background:var(--bg-color); border-bottom:1px solid #ddd; }
+  </style>
+</head>
+<body>
+  <div class='sticky-header'>
+    <div class='container'>
+      <h1><a href='#'>Base Skins Comparator</a></h1>
+      <div class='controls'>
+        <input id='q' type='search' placeholder='Search bases or stats… (e.g. All units HP, Navy Attack)' />
+        <select id='filterTop'>
+          <option value='any'>All tiers</option>
+          <option value='top'>Only top-level</option>
+          <option value='non'>Only non-top</option>
+        </select>
+        <select id='sortBy'>
+          <option value='name'>Sort: Name (A→Z)</option>
+          <option value='atkDesc'>Sort: Highest Equipped Attack</option>
+          <option value='hpDesc'>Sort: Highest Equipped HP</option>
+        </select>
+        <button id='clearSel'>Clear selected</button>
+      </div>
+    </div>
+  </div>
+
+  <div class='container'>
+    <div id='grid' class='cards-grid' aria-live='polite'></div>
+  </div>
+
+  <div class='compare-bar'>
+    <div class='compare-inner'>
+      <div class='bold-text' id='selCount'>0 selected</div>
+      <div class='selection' id='selList'></div>
+      <div style='flex:1'></div>
+      <button id='compareBtn' disabled>Compare</button>
+    </div>
+  </div>
+
+  <div id='skillModal' class='modal hidden' role='dialog' aria-modal='true' aria-labelledby='skillTitle'>
+    <div class='modal-content'>
+      <h2 id='skillTitle'>Skill</h2>
+      <div id='skillBody'></div>
+      <div class='modal-buttons'>
+        <button id='skillClose'>Close</button>
+      </div>
+    </div>
+  </div>
+  <div id='skillBackdrop' class='modal-backdrop hidden'></div>
+
+  <div id='compareModal' class='modal hidden' role='dialog' aria-modal='true' aria-labelledby='compareTitle'>
+    <div class='modal-content'>
+      <h2 id='compareTitle'>Compare Selected Bases</h2>
+      <div class='table-container'>
+        <table id='compareTable'></table>
+      </div>
+      <div class='modal-buttons'>
+        <button id='compareClose'>Close</button>
+      </div>
+    </div>
+  </div>
+  <div id='compareBackdrop' class='modal-backdrop hidden'></div>
+
+<script>
+async function loadData(){
+  var endpoints=['base_skins.min.json','base_skins.json','csvjson.json'];
+  for(var i=0;i<endpoints.length;i++){
+    var url=endpoints[i];
+    try{
+      var r=await fetch(url,{cache:'no-store'});
+      if(r.ok){ var data=await r.json(); return Array.isArray(data) && data[0] && data[0].baseName ? data : normalizeFromCsvJson(data); }
+    }catch(e){}
+  }
+  throw new Error('Could not load any JSON data');
+}
+function parseValue(v){
+  if(v===null||v===undefined) return {value:null, unit:null, original:null};
+  var s=String(v).trim(); if(!s) return {value:null, unit:null, original:null};
+  if(/%/.test(s)){ var m=s.replace(/,/g,'').match(/[-+]?\d*\.?\d+/); return {value:m?Number(m[0]):null, unit:'%', original:s}; }
+  var n=Number(s.replace(/,/g,'')); if(!isNaN(n)) return {value:n, unit:'flat', original:s};
+  return {value:null, unit:'text', original:s};
+}
+function truthy(s){ if(s===true||s===false) return !!s; if(s==null) return false; var v=String(s).trim().toLowerCase(); return ['true','1','yes','y','top','max','highest'].includes(v); }
+function normalizeFromCsvJson(rows){
+  var out=[]; for(var i=0;i<rows.length;i++){
+    var r=rows[i]; var baseName=r['Base Skin Name']; if(!baseName) continue;
+    var equipped=[], holding=[];
+    for(var j=1;j<=4;j++){ var n=r['Equipped Stat '+j]; var v=r['Equipped Stat '+j+' Value']; if(n && String(n).trim()){ var p=(v!==undefined && String(v).trim()!=='')? parseValue(v):{value:null, unit:'text', original:null}; equipped.push({name:String(n).trim(), value:p.value, unit:p.unit, original:p.original}); } }
+    for(var k=1;k<=4;k++){ var n2=r['Holding In Stock Stat '+k]; var v2=r['Holding In Stock Stat '+k+' Value']; if(n2 && String(n2).trim()){ var p2=(v2!==undefined && String(v2).trim()!=='')? parseValue(v2):{value:null, unit:'text', original:null}; holding.push({name:String(n2).trim(), value:p2.value, unit:p2.unit, original:p2.original}); } }
+    out.push({ baseName:String(baseName).trim(), equippedStats:equipped, holdingStats:holding, skill:{hasSkill:truthy(r['Base Skill?']), description:(r['Skill Details']||'').toString()}, notes:(r['Notes']||'').toString(), isTopLevel:truthy(r['Highest Level?']) });
+  } return out;
+}
+var state={ data:[], filtered:[], selected:new Map() };
+function formatStat(s){ if(!s) return ''; if(s.original) return s.original; if(s.value==null) return ''; return s.unit==='%'? (s.value+'%') : String(s.value); }
+function render(){
+  var grid=document.getElementById('grid'); grid.innerHTML='';
+  for(var i=0;i<state.filtered.length;i++){
+    var item=state.filtered[i];
+    var card=document.createElement('div'); card.className='card';
+    var head=document.createElement('div'); head.className='row';
+    var title=document.createElement('h3'); title.textContent=item.baseName; head.appendChild(title);
+    if(item.isTopLevel){ var b=document.createElement('span'); b.className='badge'; b.textContent='Top Level'; head.appendChild(b); }
+    var actions=document.createElement('div');
+    if(item.notes && item.notes.trim()){
+      var wrap=document.createElement('span'); wrap.style.position='relative';
+      var info=document.createElement('button'); info.className='icon-btn'; info.title='Notes'; info.textContent='i';
+      var pop=document.createElement('div'); pop.className='info-pop'; pop.textContent=item.notes; wrap.appendChild(info); wrap.appendChild(pop);
+      info.addEventListener('click', function(e){ e.stopPropagation(); var d=this.nextSibling; d.style.display = (d.style.display==='block'?'none':'block'); });
+      document.addEventListener('click', function(){ var pops=document.querySelectorAll('.info-pop'); for(var z=0; z<pops.length; z++){ pops[z].style.display='none'; } });
+      actions.appendChild(wrap);
+    }
+    if(item.skill && item.skill.hasSkill){ var skill=document.createElement('button'); skill.className='icon-btn'; skill.title='Skill'; skill.textContent='⭐'; (function(it){ skill.addEventListener('click', function(){ showSkill(it); }); })(item); actions.appendChild(skill); }
+    head.appendChild(actions);
+    card.appendChild(head);
+    var eqH=document.createElement('div'); eqH.innerHTML='<strong>Equipped</strong>'; card.appendChild(eqH);
+    var eqList=document.createElement('div'); eqList.className='statlist';
+    if(item.equippedStats.length===0){ var none=document.createElement('div'); none.className='muted'; none.textContent='—'; eqList.appendChild(none); }
+    for(var e=0;e<item.equippedStats.length;e++){ var s=item.equippedStats[e]; var row=document.createElement('div'); row.className='stat'; var left=document.createElement('span'); left.textContent=s.name; var right=document.createElement('span'); right.textContent=formatStat(s); row.appendChild(left); row.appendChild(right); eqList.appendChild(row); }
+    card.appendChild(eqList);
+    var hH=document.createElement('div'); hH.innerHTML='<strong>Holding</strong>'; card.appendChild(hH);
+    var hList=document.createElement('div'); hList.className='statlist';
+    if(item.holdingStats.length===0){ var none2=document.createElement('div'); none2.className='muted'; none2.textContent='—'; hList.appendChild(none2); }
+    for(var h=0;h<item.holdingStats.length;h++){ var s2=item.holdingStats[h]; var row2=document.createElement('div'); row2.className='stat'; var left2=document.createElement('span'); left2.textContent=s2.name; var right2=document.createElement('span'); right2.textContent=formatStat(s2); row2.appendChild(left2); row2.appendChild(right2); hList.appendChild(row2); }
+    card.appendChild(hList);
+    var foot=document.createElement('div'); foot.className='row';
+    var cb=document.createElement('input'); cb.type='checkbox'; cb.id='pick-'+hash(item.baseName); cb.checked=state.selected.has(item.baseName); (function(it){ cb.addEventListener('change', function(){ toggleSelect(it); }); })(item);
+    var lbl=document.createElement('label'); lbl.setAttribute('for', cb.id); lbl.textContent='Compare';
+    foot.appendChild(cb); foot.appendChild(lbl);
+    card.appendChild(foot);
+    grid.appendChild(card);
+  }
+  updateSelectionUI();
+}
+function hash(s){ var h=0; for(var i=0;i<s.length;i++){ h=((h<<5)-h)+s.charCodeAt(i); h=h|0; } return Math.abs(h); }
+function toggleSelect(item){ if(state.selected.has(item.baseName)) state.selected.delete(item.baseName); else { if(state.selected.size>=4){ alert('You can compare up to 4 bases at a time.'); return; } state.selected.set(item.baseName, item); } render(); }
+function updateSelectionUI(){
+  var sel=document.getElementById('selList'); sel.innerHTML='';
+  state.selected.forEach(function(item, name){ var chip=document.createElement('span'); chip.className='sel';
+    var rm=document.createElement('button'); rm.setAttribute('aria-label','Remove'); rm.textContent='✕'; rm.addEventListener('click', function(){ state.selected.delete(name); render(); });
+    chip.appendChild(document.createTextNode(name+' ')); chip.appendChild(rm); sel.appendChild(chip);
+  });
+  var count=state.selected.size; document.getElementById('selCount').textContent=String(count)+' selected';
+  document.getElementById('compareBtn').disabled = count < 2;
+}
+function buildCompare(){
+  var table=document.getElementById('compareTable'); table.innerHTML='';
+  var selected=[]; state.selected.forEach(function(v){ selected.push(v); });
+  var equipNames={}, holdNames={};
+  for(var i=0;i<selected.length;i++){ var it=selected[i]; it.equippedStats.forEach(function(s){ if(s && s.name) equipNames[s.name]=true; }); it.holdingStats.forEach(function(s){ if(s && s.name) holdNames[s.name]=true; }); }
+  var equip=Object.keys(equipNames).sort(); var hold=Object.keys(holdNames).sort();
+  var thead=document.createElement('thead'); var hr=document.createElement('tr'); hr.appendChild(th('Stat'));
+  for(var j=0;j<selected.length;j++){ hr.appendChild(th(selected[j].baseName)); } thead.appendChild(hr); table.appendChild(thead);
+  var tbody=document.createElement('tbody');
+  tbody.appendChild(sectionRow('Equipped', selected.length+1));
+  for(var a=0;a<equip.length;a++){ var tr=document.createElement('tr'); tr.appendChild(td(equip[a])); for(var b=0;b<selected.length;b++){ tr.appendChild(cellFor(selected[b].equippedStats, equip[a])); } tbody.appendChild(tr); }
+  tbody.appendChild(sectionRow('Holding', selected.length+1));
+  for(var c=0;c<hold.length;c++){ var tr2=document.createElement('tr'); tr2.appendChild(td(hold[c])); for(var d=0;d<selected.length;d++){ tr2.appendChild(cellFor(selected[d].holdingStats, hold[c])); } tbody.appendChild(tr2); }
+  table.appendChild(tbody);
+}
+function th(txt){ var el=document.createElement('th'); el.textContent=txt; return el; }
+function td(txt){ var el=document.createElement('td'); el.textContent=txt; return el; }
+function sectionRow(title, span){ var tr=document.createElement('tr'); var thEl=document.createElement('th'); thEl.colSpan=span; thEl.textContent=title; thEl.style.background='var(--accent-color)'; thEl.style.color='#fff'; tr.appendChild(thEl); return tr; }
+function cellFor(stats, name){ var el=document.createElement('td'); var s=null; for(var i=0;i<stats.length;i++){ if(stats[i] && stats[i].name===name){ s=stats[i]; break; } } el.textContent = s ? (s.original || (s.unit==='%' ? (s.value+'%') : (s.value==null? '' : String(s.value)))) : '—'; return el; }
+function applyFilters(){
+  var q=document.getElementById('q').value.trim().toLowerCase();
+  var tier=document.getElementById('filterTop').value; var rows=state.data.slice();
+  if(q){ rows=rows.filter(function(r){ return r.baseName.toLowerCase().includes(q) || r.equippedStats.some(function(s){ return s.name.toLowerCase().includes(q); }) || r.holdingStats.some(function(s){ return s.name.toLowerCase().includes(q); }); }); }
+  if(tier==='top') rows=rows.filter(function(r){ return r.isTopLevel; }); else if(tier==='non') rows=rows.filter(function(r){ return !r.isTopLevel; });
+  var sortBy=document.getElementById('sortBy').value;
+  if(sortBy==='name') rows.sort(function(a,b){ return a.baseName.localeCompare(b.baseName); });
+  else if(sortBy==='atkDesc') rows.sort(function(a,b){ return maxStat(b,'All units Attack')-maxStat(a,'All units Attack'); });
+  else if(sortBy==='hpDesc') rows.sort(function(a,b){ return maxStat(b,'All units HP')-maxStat(a,'All units HP'); });
+  state.filtered=rows; render();
+}
+function maxStat(item, statName){ var all=item.equippedStats.concat(item.holdingStats); var best=-Infinity; for(var i=0;i<all.length;i++){ var s=all[i]; if(!s||!s.name) continue; if(s.name.toLowerCase()===statName.toLowerCase()){ var v=(s.unit==='%'||s.unit==='flat')? (Number(s.value)||0) : 0; if(v>best) best=v; } } return best===-Infinity? -9999 : best; }
+function showSkill(item){ document.getElementById('skillTitle').textContent = item.baseName+' — Skill'; document.getElementById('skillBody').textContent = (item.skill && item.skill.description) ? item.skill.description : 'No description provided.'; openModal('skill'); }
+function openModal(which){ document.getElementById(which+'Modal').classList.remove('hidden'); document.getElementById(which+'Backdrop').classList.remove('hidden'); }
+function closeModal(which){ document.getElementById(which+'Modal').classList.add('hidden'); document.getElementById(which+'Backdrop').classList.add('hidden'); }
+['q','filterTop','sortBy'].forEach(function(id){ document.getElementById(id).addEventListener('input', applyFilters); });
+document.getElementById('clearSel').addEventListener('click', function(){ state.selected.clear(); render(); });
+document.getElementById('compareBtn').addEventListener('click', function(){ buildCompare(); openModal('compare'); });
+document.getElementById('compareClose').addEventListener('click', function(){ closeModal('compare'); });
+document.getElementById('compareBackdrop').addEventListener('click', function(){ closeModal('compare'); });
+document.getElementById('skillClose').addEventListener('click', function(){ closeModal('skill'); });
+document.getElementById('skillBackdrop').addEventListener('click', function(){ closeModal('skill'); });
+(async function(){ try{ state.data = await loadData(); applyFilters(); } catch(err){ var grid=document.getElementById('grid'); grid.innerHTML = '<div class="card"><h3>Failed to load data</h3><p class="muted">'+err.message+'</p></div>'; } })();
+</script>
+</body>
+</html>
