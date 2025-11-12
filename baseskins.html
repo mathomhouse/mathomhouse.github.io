@@ -87,6 +87,7 @@
 </head>
 <body>
   <header id="header-placeholder"></header>
+
   <div class='sticky-header'>
     <div class='container'>
       <h1><a href='#'>Base Skins Comparator</a></h1>
@@ -117,7 +118,7 @@
 
   <div class='compare-bar'>
     <div class='compare-inner'>
-      <div class='bold-text' id='selCount'>0 selected</div>
+      <div class='bold-text' id='selCount'>Select 2–4 bases to compare</div>
       <div class='selection' id='selList'></div>
       <div style='flex:1'></div>
       <button id='compareBtn' disabled>Compare</button>
@@ -150,7 +151,7 @@
 
 <script>
 async function loadData(){
-  var endpoints=['base_skins.json','csvjson.json'];
+  var endpoints=['base_skins.min.json','base_skins.json','csvjson.json'];
   for(var i=0;i<endpoints.length;i++){
     var url=endpoints[i];
     try{
@@ -163,6 +164,7 @@ async function loadData(){
   }
   throw new Error('Could not load any JSON data');
 }
+
 function parseValue(v){
   if(v===null||v===undefined) return {value:null, unit:null, original:null};
   var s=String(v).trim(); if(!s) return {value:null, unit:null, original:null};
@@ -173,6 +175,7 @@ function parseValue(v){
   var n=Number(s.replace(/,/g,'')); if(!isNaN(n)) return {value:n, unit:'flat', original:s};
   return {value:null, unit:'text', original:s};
 }
+
 function truthy(s){
   if(s===true||s===false) return !!s;
   if(s==null) return false;
@@ -180,6 +183,7 @@ function truthy(s){
   if(!v) return false;
   return ['true','1','yes','y','top','max','highest'].includes(v);
 }
+
 function normalizeFromCsvJson(rows){
   var out=[];
   for(var i=0;i<rows.length;i++){
@@ -189,37 +193,43 @@ function normalizeFromCsvJson(rows){
     var equipped=[], holding=[];
     for(var j=1;j<=4;j++){
       var n=r['Equipped Stat '+j];
-      var v=r['Equipped Value '+j];
-      if(n){
-        var p=parseValue(v);
+      var v=r['Equipped Stat '+j+' Value'];
+      if(n && String(n).trim()){
+        var p=(v!==undefined && v!==null && String(v).trim()!=='') ? parseValue(v) : {value:null, unit:'text', original:null};
         equipped.push({ name:String(n).trim(), value:p.value, unit:p.unit, original:p.original });
       }
     }
     for(var k=1;k<=4;k++){
       var n2=r['Holding In Stock Stat '+k];
-      var v2=r['Holding In Stock Value '+k];
-      if(n2){
-        var p2=parseValue(v2);
+      var v2=r['Holding In Stock Stat '+k+' Value'];
+      if(n2 && String(n2).trim()){
+        var p2=(v2!==undefined && v2!==null && String(v2).trim()!=='') ? parseValue(v2) : {value:null, unit:'text', original:null};
         holding.push({ name:String(n2).trim(), value:p2.value, unit:p2.unit, original:p2.original });
       }
     }
-    var skillRaw=r['Skill?']||r['Skill'];
-    var skillText=r['Skill Explanation']||r['Skill Text']||'';
-    var notes=r['Notes']||'';
     out.push({
       baseName:String(baseName).trim(),
       equippedStats:equipped,
       holdingStats:holding,
-      skill:{ hasSkill:truthy(skillRaw), text:skillText },
-      notes:String(notes||'').trim(),
-      tier:String(r['Tier']||'').trim(),
-      highestLevel:truthy(r['Highest Level?']),
+      skill:{
+        hasSkill: truthy(r['Base Skill?']),
+        description: (r['Skill Details']||'').toString()
+      },
+      notes:(r['Notes']||'').toString(),
       isTopLevel:truthy(r['Highest Level?'])
     });
   }
   return out;
 }
+
 var state={ data:[], filtered:[], selected:new Map() };
+
+function formatStat(s){
+  if(!s) return '';
+  if(s.original) return s.original;
+  if(s.value==null) return '';
+  return s.unit==='%' ? (s.value+'%') : String(s.value);
+}
 
 function render(){
   var grid=document.getElementById('grid');
@@ -228,74 +238,78 @@ function render(){
     grid.innerHTML='<div class="card"><h3>No bases found</h3><p class="muted">Try changing your search or filters.</p></div>';
     return;
   }
-  state.filtered.forEach(function(item){
+  for(var i=0;i<state.filtered.length;i++){
+    var item=state.filtered[i];
     var card=document.createElement('article');
     card.className='card';
 
     var head=document.createElement('div');
     head.className='row';
-    var title=document.createElement('div');
-    var h=document.createElement('h3');
-    h.textContent=item.baseName;
-    title.appendChild(h);
+
+    var titleWrap=document.createElement('div');
+    var title=document.createElement('h3');
+    title.textContent=item.baseName;
+    titleWrap.appendChild(title);
+
     if(item.isTopLevel){
-      var badge=document.createElement('span');
-      badge.className='badge';
-      badge.textContent='Top Level';
-      title.appendChild(badge);
+      var b=document.createElement('span');
+      b.className='badge';
+      b.textContent='Top Level';
+      titleWrap.appendChild(b);
     }
-    head.appendChild(title);
+    head.appendChild(titleWrap);
 
     var actions=document.createElement('div');
     actions.style.display='flex';
-    actions.style.gap='6px';
     actions.style.alignItems='center';
+    actions.style.gap='6px';
 
     var cb=document.createElement('input');
     cb.type='checkbox';
     cb.checked=state.selected.has(item.baseName);
-    cb.addEventListener('change',function(){
-      if(cb.checked){
-        state.selected.set(item.baseName,item);
-      }else{
-        state.selected.delete(item.baseName);
-      }
-      renderSelection();
-    });
+    cb.addEventListener('change',function(it){
+      return function(){
+        if(cb.checked){
+          state.selected.set(it.baseName,it);
+        }else{
+          state.selected.delete(it.baseName);
+        }
+        renderSelection();
+      };
+    }(item));
     actions.appendChild(cb);
 
-    if(item.notes){
+    if(item.notes && item.notes.trim()){
+      var wrap=document.createElement('span');
+      wrap.style.position='relative';
       var info=document.createElement('button');
       info.className='icon-btn';
-      info.type='button';
-      info.textContent='i';
       info.title='Notes';
+      info.textContent='i';
       var pop=document.createElement('div');
       pop.className='info-pop';
       pop.innerHTML='<strong>Notes</strong><br>'+escapeHtml(item.notes);
-      var wrapper=document.createElement('div');
-      wrapper.style.position='relative';
-      wrapper.appendChild(info);
-      wrapper.appendChild(pop);
-      info.addEventListener('click',function(ev){
-        ev.stopPropagation();
-        var isVisible=pop.style.display==='block';
+      wrap.appendChild(info);
+      wrap.appendChild(pop);
+      info.addEventListener('click', function(e){
+        e.stopPropagation();
+        var isVisible = pop.style.display==='block';
         document.querySelectorAll('.info-pop').forEach(function(p){ p.style.display='none'; });
-        pop.style.display=isVisible?'none':'block';
+        pop.style.display = isVisible ? 'none' : 'block';
       });
-      actions.appendChild(wrapper);
+      actions.appendChild(wrap);
     }
 
     if(item.skill && item.skill.hasSkill){
-      var skill=document.createElement('button');
-      skill.className='icon-btn';
-      skill.type='button';
-      skill.title='View skill';
-      skill.textContent='⭐';
+      var skillBtn=document.createElement('button');
+      skillBtn.className='icon-btn';
+      skillBtn.type='button';
+      skillBtn.title='View skill';
+      skillBtn.textContent='⭐';
       (function(it){
-        skill.addEventListener('click',function(){ showSkill(it); });
+        skillBtn.addEventListener('click',function(){ showSkill(it); });
       })(item);
-      actions.appendChild(skill);
+      actions.appendChild(skillBtn);
     }
 
     head.appendChild(actions);
@@ -304,6 +318,7 @@ function render(){
     var statsWrap=document.createElement('div');
     statsWrap.className='stats-columns';
 
+    // Equipped
     var eqBlock=document.createElement('div');
     var eqH=document.createElement('div');
     eqH.innerHTML='<span class="stats-block-title">Equipped</span>';
@@ -316,23 +331,25 @@ function render(){
       none.className='muted';
       none.textContent='—';
       eqList.appendChild(none);
-    }
-    for(var e=0;e<item.equippedStats.length;e++){
-      var s=item.equippedStats[e];
-      if(!s || !s.name) continue;
-      var row=document.createElement('div');
-      row.className='stat';
-      var left=document.createElement('span');
-      left.textContent=s.name;
-      var right=document.createElement('span');
-      right.textContent=s.display || s.valueFormatted || s.original || '';
-      row.appendChild(left);
-      row.appendChild(right);
-      eqList.appendChild(row);
+    }else{
+      for(var e=0;e<item.equippedStats.length;e++){
+        var s=item.equippedStats[e];
+        if(!s || !s.name) continue;
+        var row=document.createElement('div');
+        row.className='stat';
+        var left=document.createElement('span');
+        left.textContent=s.name;
+        var right=document.createElement('span');
+        right.textContent=formatStat(s);
+        row.appendChild(left);
+        row.appendChild(right);
+        eqList.appendChild(row);
+      }
     }
     eqBlock.appendChild(eqList);
     statsWrap.appendChild(eqBlock);
 
+    // Holding
     var hBlock=document.createElement('div');
     var hH=document.createElement('div');
     hH.innerHTML='<span class="stats-block-title">Holding</span>';
@@ -345,27 +362,27 @@ function render(){
       none2.className='muted';
       none2.textContent='—';
       hList.appendChild(none2);
-    }
-    for(var h2=0;h2<item.holdingStats.length;h2++){
-      var s2=item.holdingStats[h2];
-      if(!s2 || !s2.name) continue;
-      var row2=document.createElement('div');
-      row2.className='stat';
-      var left2=document.createElement('span');
-      left2.textContent=s2.name;
-      var right2=document.createElement('span');
-      right2.textContent=s2.display || s2.valueFormatted || s2.original || '';
-      row2.appendChild(left2);
-      row2.appendChild(right2);
-      hList.appendChild(row2);
+    }else{
+      for(var h2=0;h2<item.holdingStats.length;h2++){
+        var s2=item.holdingStats[h2];
+        if(!s2 || !s2.name) continue;
+        var row2=document.createElement('div');
+        row2.className='stat';
+        var left2=document.createElement('span');
+        left2.textContent=s2.name;
+        var right2=document.createElement('span');
+        right2.textContent=formatStat(s2);
+        row2.appendChild(left2);
+        row2.appendChild(right2);
+        hList.appendChild(row2);
+      }
     }
     hBlock.appendChild(hList);
     statsWrap.appendChild(hBlock);
 
     card.appendChild(statsWrap);
-
     grid.appendChild(card);
-  });
+  }
 }
 
 function escapeHtml(str){
@@ -450,7 +467,7 @@ function buildCompare(){
     selected.forEach(function(item){
       var td=document.createElement('td');
       var s=statMap[statName][item.baseName];
-      td.textContent=s ? (s.display || s.valueFormatted || s.original || '') : '—';
+      td.textContent=s ? formatStat(s) : '—';
       row.appendChild(td);
     });
     table.appendChild(row);
@@ -458,15 +475,12 @@ function buildCompare(){
 }
 
 function showSkill(item){
+  var title=document.getElementById('skillTitle');
   var body=document.getElementById('skillBody');
-  body.innerHTML='';
-  if(item.skill && item.skill.text){
-    var p=document.createElement('p');
-    p.textContent=item.skill.text;
-    body.appendChild(p);
-  }else{
-    body.textContent='No skill information available.';
-  }
+  title.textContent = item.baseName + ' — Skill';
+  body.textContent = (item.skill && item.skill.description)
+    ? item.skill.description
+    : 'No skill information available.';
   openModal('skill');
 }
 
@@ -499,7 +513,7 @@ function applyFilters(){
         if(s.original && String(s.original).toLowerCase().includes(q)) return true;
       }
       if(r.notes && String(r.notes).toLowerCase().includes(q)) return true;
-      if(r.skill && r.skill.text && String(r.skill.text).toLowerCase().includes(q)) return true;
+      if(r.skill && r.skill.description && String(r.skill.description).toLowerCase().includes(q)) return true;
       return false;
     });
   }
@@ -543,10 +557,13 @@ function applyFilters(){
   var eventName=(el.tagName==='SELECT' || el.type==='checkbox')?'change':'input';
   el.addEventListener(eventName, applyFilters);
 });
+
 document.getElementById('clearSel').addEventListener('click',function(){
   state.selected.clear();
   renderSelection();
+  applyFilters();
 });
+
 document.getElementById('compareBtn').addEventListener('click',function(){
   buildCompare();
   openModal('compare');
