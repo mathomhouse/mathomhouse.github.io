@@ -76,6 +76,50 @@
       flex-shrink: 0;
     }
 
+    .bases-filters-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bases-filters {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bases-filter-pill {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      background: rgba(248, 250, 252, 0.9);
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .bases-filter-pill[aria-pressed="true"] {
+      background: rgba(59, 130, 246, 0.12);
+      border-color: rgba(59, 130, 246, 0.9);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
+    }
+
+    .bases-more-filters-btn {
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.9);
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      background: rgba(248, 250, 252, 0.9);
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .bases-more-filters-btn:hover {
+      border-color: rgba(59, 130, 246, 0.9);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
+    }
+
     .bases-search {
       flex: 1 1 180px;
       min-width: 0;
@@ -404,6 +448,36 @@
       gap: 8px;
     }
 
+        .bases-modal-help {
+      font-size: 0.8rem;
+      color: var(--bases-muted, #64748b);
+    }
+
+    .bases-stat-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      max-height: 260px;
+      overflow: auto;
+      padding: 2px 0;
+    }
+
+    .bases-stat-filter-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      background: rgba(248, 250, 252, 0.9);
+    }
+
+    .bases-stat-filter-pill input {
+      margin: 0;
+    }
+
     .bases-modal-table-shell {
       border-radius: 12px;
       border: 1px solid rgba(148, 163, 184, 0.7);
@@ -497,44 +571,7 @@
       font-size: 0.9rem;
       color: var(--bases-muted);
     }
-  
-    /* Mobile tweaks */
-    @media (max-width: 768px) {
-      .bases-sticky-header {
-        position: static;
-        border-bottom: none;
-        backdrop-filter: none;
-      }
-
-      .compare-inner {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 6px 12px 8px;
-      }
-
-      .compare-label {
-        font-size: 0.8rem;
-      }
-
-      .bases-chip-row {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: auto;
-      }
-
-      #clearSel {
-        align-self: flex-end;
-        padding: 4px 6px;
-        font-size: 0.8rem;
-      }
-
-      #compareBtn {
-        width: 100%;
-        white-space: nowrap;
-        text-align: center;
-      }
-    }
-</style>
+  </style>
 
   <script src="/header.js" defer></script>
 </head>
@@ -554,10 +591,19 @@
             <input id="q" type="search" placeholder="Search by base, stat, note, or skill…" />
           </div>
 
-          <select id="filterFlags" class="bases-select" multiple size="2" aria-label="Filters">
-            <option value="top">Top tier only</option>
-            <option value="skill">Has skill</option>
-          </select>
+          <div class="bases-filters-group">
+            <div class="bases-filters" aria-label="Filters">
+              <button type="button" class="bases-filter-pill" data-flag="top" aria-pressed="false">
+                Top tier
+              </button>
+              <button type="button" class="bases-filter-pill" data-flag="skill" aria-pressed="false">
+                Has skill
+              </button>
+            </div>
+            <button type="button" class="bases-more-filters-btn" id="moreFiltersBtn">
+              More filters
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -595,7 +641,28 @@
       </div>
     </div>
 
-    <!-- Compare modal -->
+        <!-- More filters modal -->
+    <div id="filtersBackdrop" class="bases-modal-backdrop hidden"></div>
+    <div id="filtersModal" class="bases-modal hidden" role="dialog" aria-modal="true" aria-labelledby="filtersTitle">
+      <div class="bases-modal-card">
+        <div class="bases-modal-header">
+          <h2 id="filtersTitle">More filters</h2>
+          <button class="bases-modal-close" id="filtersClose" aria-label="Close filters">✕</button>
+        </div>
+        <div class="bases-modal-body">
+          <p class="bases-modal-help">
+            Filter bases by specific stats. A base will match if it has at least one of the selected stats in either Equipped or Holding.
+          </p>
+          <div id="statFiltersList" class="bases-stat-filters"></div>
+        </div>
+        <div class="bases-modal-footer">
+          <button id="filtersClear" type="button">Clear stat filters</button>
+          <button id="filtersDone" type="button">Done</button>
+        </div>
+      </div>
+    </div>
+
+<!-- Compare modal -->
     <div id="compareBackdrop" class="bases-modal-backdrop hidden"></div>
     <div id="compareModal" class="bases-modal hidden" role="dialog" aria-modal="true" aria-labelledby="compareTitle">
       <div class="bases-modal-card">
@@ -767,7 +834,8 @@
     const state = {
       all: [],      // full dataset
       filtered: [], // current visible list
-      selected: new Map()
+      selected: new Map(),
+      statFilters: new Set()
     };
 
     /* -----------------------------------------------------
@@ -1182,16 +1250,12 @@
       const searchEl = document.getElementById("q");
       const q = searchEl ? searchEl.value.trim().toLowerCase() : "";
 
-      const filterEl = document.getElementById("filterFlags");
-
       const activeFlags = [];
-      if (filterEl && filterEl.options) {
-        for (const opt of filterEl.options) {
-          if (opt.selected) {
-            activeFlags.push(opt.value);
-          }
-        }
-      }
+      const pillEls = document.querySelectorAll(".bases-filter-pill[aria-pressed='true']");
+      pillEls.forEach((btn) => {
+        const flag = btn.dataset.flag;
+        if (flag) activeFlags.push(flag);
+      });
 
       let rows = state.all.slice();
 
@@ -1213,7 +1277,7 @@
         });
       }
 
-      // Apply multi-filters
+      // Pill filters
       if (activeFlags.includes("top")) {
         rows = rows.filter((r) => r.isTopLevel);
       }
@@ -1221,7 +1285,16 @@
         rows = rows.filter((r) => r.skill && r.skill.hasSkill);
       }
 
-      // Default sort: always alphabetical by base name
+      // Stat filters from More Filters modal
+      if (state.statFilters && state.statFilters.size > 0) {
+        const wanted = state.statFilters;
+        rows = rows.filter((r) => {
+          const stats = (r.equippedStats || []).concat(r.holdingStats || []);
+          return stats.some((s) => s && s.name && wanted.has(s.name));
+        });
+      }
+
+      // Default sort: name A → Z
       rows.sort((a, b) => a.baseName.localeCompare(b.baseName));
 
       state.filtered = rows;
@@ -1229,8 +1302,56 @@
       updateSelectionUI();
       updateCountLabel();
     }
+    
+    function buildStatFiltersUI() {
+      const container = document.getElementById("statFiltersList");
+      if (!container || !Array.isArray(state.all)) return;
 
-    function updateCountLabel() {
+      container.innerHTML = "";
+
+      const namesSet = new Set();
+      state.all.forEach((r) => {
+        const stats = (r.equippedStats || []).concat(r.holdingStats || []);
+        stats.forEach((s) => {
+          if (s && s.name) {
+            namesSet.add(s.name);
+          }
+        });
+      });
+
+      const names = Array.from(namesSet).sort((a, b) => a.localeCompare(b));
+
+      names.forEach((name) => {
+        const id = "statFilter_" + name.replace(/[^a-zA-Z0-9]+/g, "_");
+
+        const label = document.createElement("label");
+        label.className = "bases-stat-filter-pill";
+        label.setAttribute("for", id);
+
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.id = id;
+        input.value = name;
+
+        input.addEventListener("change", function () {
+          if (this.checked) {
+            state.statFilters.add(name);
+          } else {
+            state.statFilters.delete(name);
+          }
+          applyFilters();
+        });
+
+        const span = document.createElement("span");
+        span.textContent = name;
+
+        label.appendChild(input);
+        label.appendChild(span);
+        container.appendChild(label);
+      });
+    }
+
+function updateCountLabel() {
       const label = document.getElementById("basesCountLabel");
       if (!label) return;
       const total = state.all.length;
@@ -1263,25 +1384,25 @@
 
     (function init() {
       const searchEl = document.getElementById("q");
-      const filterEl = document.getElementById("filterFlags");
+      const filterPills = document.querySelectorAll(".bases-filter-pill");
+      const moreFiltersBtn = document.getElementById("moreFiltersBtn");
 
       if (searchEl) {
         searchEl.addEventListener("input", () => applyFilters());
       }
-      if (filterEl) {
-        // Normal change event for when selection changes
-        filterEl.addEventListener("change", () => applyFilters());
 
-        // Make multi-select behave like toggle buttons on desktop:
-        // single clicks toggle options without needing Ctrl/Cmd
-        filterEl.addEventListener("mousedown", (e) => {
-          const opt = e.target;
-          if (opt && opt.tagName === "OPTION") {
-            e.preventDefault();
-            opt.selected = !opt.selected;
-            filterEl.dispatchEvent(new Event("change"));
-          }
+      if (filterPills && filterPills.length) {
+        filterPills.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const pressed = btn.getAttribute("aria-pressed") === "true";
+            btn.setAttribute("aria-pressed", pressed ? "false" : "true");
+            applyFilters();
+          });
         });
+      }
+
+      if (moreFiltersBtn) {
+        moreFiltersBtn.addEventListener("click", () => openModal("filters"));
       }
 
       const clearBtn = document.getElementById("clearSel");
@@ -1301,19 +1422,47 @@
         });
       }
 
-      // Modal close buttons
+      // Compare modal close buttons
       document.getElementById("compareClose").addEventListener("click", () => closeModal("compare"));
       document.getElementById("compareClose2").addEventListener("click", () => closeModal("compare"));
       document.getElementById("compareBackdrop").addEventListener("click", () => closeModal("compare"));
 
+      // Skill modal close buttons
       document.getElementById("skillClose").addEventListener("click", () => closeModal("skill"));
       document.getElementById("skillClose2").addEventListener("click", () => closeModal("skill"));
       document.getElementById("skillBackdrop").addEventListener("click", () => closeModal("skill"));
+
+      // Filters modal close buttons
+      const filtersClose = document.getElementById("filtersClose");
+      const filtersDone = document.getElementById("filtersDone");
+      const filtersClear = document.getElementById("filtersClear");
+      const filtersBackdrop = document.getElementById("filtersBackdrop");
+
+      if (filtersClose) {
+        filtersClose.addEventListener("click", () => closeModal("filters"));
+      }
+      if (filtersDone) {
+        filtersDone.addEventListener("click", () => closeModal("filters"));
+      }
+      if (filtersBackdrop) {
+        filtersBackdrop.addEventListener("click", () => closeModal("filters"));
+      }
+      if (filtersClear) {
+        filtersClear.addEventListener("click", () => {
+          state.statFilters.clear();
+          const inputs = document.querySelectorAll("#statFiltersList input[type='checkbox']");
+          inputs.forEach((input) => {
+            input.checked = false;
+          });
+          applyFilters();
+        });
+      }
 
       // Initial data load
       loadBaseSkins()
         .then((data) => {
           state.all = data || [];
+          buildStatFiltersUI();
           applyFilters();
         })
         .catch((err) => {
