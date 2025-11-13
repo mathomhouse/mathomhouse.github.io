@@ -1,829 +1,1294 @@
 <!doctype html>
-<html lang='en'>
+<html lang="en">
 <head>
-  <meta charset='utf-8' />
-  <meta name='viewport' content='width=device-width, initial-scale=1' />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Base Skins Comparator</title>
-  <link rel='stylesheet' href='/styles/index.css' />
+
+  <!-- Site-wide styles -->
+  <link rel="stylesheet" href="/styles/index.css" />
+
+  <!-- Page-specific styles -->
   <style>
-    /* Layout for controls */
-    .controls {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      margin-top: 4px;
-      margin-bottom: 4px;
-    }
-    .controls input[type='search'],
-    .controls select {
-      max-width: 260px;
+    :root {
+      --bases-card-radius: 18px;
+      --bases-card-border: 1px solid rgba(15, 23, 42, 0.06);
+      --bases-muted: #64748b;
+      --bases-chip-bg: rgba(15, 23, 42, 0.04);
+      --bases-chip-border: rgba(148, 163, 184, 0.7);
+      --bases-modal-max-width: 960px;
     }
 
-    .badge {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #e6f3ff;
-      color: #274a8c;
-      font-size: 12px;
-      border: 1px solid #cfe0ff;
-      margin-left: 6px;
+    body {
+      scroll-behavior: smooth;
     }
 
-    .row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      justify-content: space-between;
+    main.page-shell {
+      padding-bottom: 96px; /* space for compare bar */
     }
 
-    .statlist {
-      display: grid;
-      gap: 6px;
-      margin-top: 6px;
-      text-align: left;
-    }
-    .stat {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      align-items: flex-start;
-      padding: 4px 0;
-      border-bottom: 1px dashed rgba(0,0,0,.05);
-    }
-    .stat:last-child {
-      border-bottom: none;
-    }
-    .stat span:first-child {
-      flex: 1;
-      font-size: 13px;
-    }
-    .stat span:last-child {
-      font-weight: 600;
-      font-size: 13px;
-      white-space: nowrap;
-    }
+    /* ---------------- Sticky filter bar ---------------- */
 
-    .muted { color: #666; }
-
-    .compare-bar {
-      position: sticky;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--bg-color);
-      backdrop-filter: saturate(1.2) blur(6px);
-      border-top: 1px solid #ddd;
-      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
-    }
-    .compare-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 6px 16px;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .selection {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .sel {
-      background: #f1f4f8;
-      border: 1px solid #d9e1ec;
-      border-radius: 999px;
-      padding: 3px 8px;
-      font-size: 13px;
-    }
-    .sel button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #666;
-      font-size: 13px;
-      padding-left: 4px;
-    }
-
-    .info-pop {
-      position: absolute;
-      z-index: 5;
-      max-width: 300px;
-      background: #fff;
-      border-radius: 8px;
-      padding: 10px;
-      box-shadow: 0 6px 24px rgba(0,0,0,.15);
-      display: none;
-      margin-top: 4px;
-      font-size: 0.85rem;
-      line-height: 1.3;
-    }
-
-    .icon-btn {
-      width: 28px;
-      height: 28px;
-      display: inline-grid;
-      place-items: center;
-      border-radius: 6px;
-    }
-
-    /* Sticky header tweaks: smaller & less tall */
-    .sticky-header {
+    .bases-sticky-header {
       position: sticky;
       top: 0;
-      z-index: 3;
-      background: var(--bg-color);
-      border-bottom: 1px solid #ddd;
-      backdrop-filter: saturate(1.2) blur(6px);
-    }
-    .sticky-header .container {
-      padding-top: 6px;
-      padding-bottom: 6px;
-    }
-    .sticky-header h1 {
-      font-size: 1.25rem;
-      margin: 2px 0;
-    }
-    .sticky-header h1 a {
-      text-decoration: none;
+      z-index: 5;
+      background: var(--bg-color, #f1f5f9);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+      backdrop-filter: blur(10px) saturate(1.2);
     }
 
-    /* Card styling enhancements */
-    .card {
-      border-radius: 12px;
-      padding: 10px 12px;
-      background: #ffffff;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-      transition: transform 0.12s ease, box-shadow 0.12s ease;
-    }
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    }
-    .card h3 {
-      font-size: 1.05rem;
+    .bases-sticky-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 8px 16px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
-    /* Equipped vs Holding side-by-side */
-    .stats-columns {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
-      margin-top: 8px;
-    }
-    .stats-block-title {
-      display: block;
-      margin-bottom: 4px;
-      font-weight: 600;
+    .bases-sticky-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
     }
 
-    /* Inline filter label */
-    .inline-filter {
+    .bases-sticky-title h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .bases-sticky-title small {
+      font-size: 0.8rem;
+      color: var(--bases-muted);
+    }
+
+    .bases-controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bases-controls-row > * {
+      flex-shrink: 0;
+    }
+
+    .bases-search {
+      flex: 1 1 180px;
+      min-width: 0;
+    }
+
+    .bases-search input[type="search"] {
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.9rem;
+    }
+
+    .bases-select,
+    .bases-inline-checkbox {
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.8rem;
+      background: rgba(248, 250, 252, 0.95);
+    }
+
+    .bases-inline-checkbox {
       display: inline-flex;
       align-items: center;
       gap: 4px;
+      cursor: pointer;
+    }
+
+    .bases-inline-checkbox input {
+      margin: 0;
+    }
+
+    #clearSel {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+    }
+
+    /* ---------------- Grid & cards ---------------- */
+
+    .bases-grid-shell {
+      max-width: 1100px;
+      margin: 16px auto 40px;
+      padding: 0 16px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .bases-card {
+      background: var(--card-bg, #ffffff);
+      border-radius: var(--bases-card-radius);
+      border: var(--bases-card-border);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+      padding: 12px 14px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .bases-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .bases-card-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .bases-card-title h3 {
+      margin: 0;
+      font-size: 1rem;
+      color: #0f172a;
+    }
+
+    .bases-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      background: rgba(59, 130, 246, 0.06);
+      font-size: 0.7rem;
+      color: #1d4ed8;
+      width: fit-content;
+    }
+
+    .bases-card-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bases-card-actions input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+    }
+
+    .bases-icon-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       font-size: 0.9rem;
+      background: rgba(37, 99, 235, 0.1);
+      color: #1d4ed8;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .bases-icon-btn:hover {
+      background: rgba(37, 99, 235, 0.18);
+    }
+
+    .bases-section-label {
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-top: 4px;
+      margin-bottom: 2px;
+      color: #0f172a;
+    }
+
+    .bases-stats-columns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 640px) {
+      .bases-stats-columns {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .bases-statlist {
+      border-radius: 12px;
+      background: rgba(248, 250, 252, 0.8);
+      padding: 6px 8px;
+    }
+
+    .bases-stat {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 0.82rem;
+      padding: 3px 0;
+      border-bottom: 1px dashed rgba(148, 163, 184, 0.5);
+    }
+
+    .bases-stat:last-child {
+      border-bottom: none;
+    }
+
+    .bases-stat-name {
+      flex: 1 1 auto;
+      color: #0f172a;
+    }
+
+    .bases-stat-value {
+      flex: 0 0 auto;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .bases-stat-muted {
+      color: var(--bases-muted);
+      font-style: italic;
+      padding: 4px 0;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+
+    .bases-notes-chip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .bases-info-pop {
+      position: absolute;
+      top: 115%;
+      right: 0;
+      z-index: 20;
+      max-width: 260px;
+      background: var(--card-bg, #ffffff);
+      border-radius: 10px;
+      padding: 8px 10px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
+      font-size: 0.8rem;
+      line-height: 1.35;
+      display: none;
+    }
+
+    .bases-info-pop strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* ---------------- Compare bar ---------------- */
+
+    .compare-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 10;
+      background: var(--bg-color, #f8fafc);
+      border-top: 1px solid rgba(148, 163, 184, 0.6);
+      backdrop-filter: blur(12px) saturate(1.1);
+    }
+
+    .compare-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .compare-label {
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .bases-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      max-width: 100%;
+    }
+
+    .bases-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: var(--bases-chip-bg);
+      border: 1px solid var(--bases-chip-border);
+      white-space: nowrap;
+    }
+
+    .bases-chip button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: 0;
+      font-size: 0.9rem;
+      line-height: 1;
+    }
+
+    #compareBtn {
+      white-space: nowrap;
+    }
+
+    /* ---------------- Modals ---------------- */
+
+    .bases-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      z-index: 40;
+    }
+
+    .bases-modal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 50;
+    }
+
+    .bases-modal.hidden,
+    .bases-modal-backdrop.hidden {
+      display: none;
+    }
+
+    .bases-modal-card {
+      width: 100%;
+      max-width: var(--bases-modal-max-width);
+      max-height: min(90vh, 800px);
+      border-radius: 18px;
+      background: var(--card-bg, #ffffff);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.4);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .bases-modal-header {
+      padding: 10px 16px;
+      background: #1d4ed8;
+      color: #eff6ff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .bases-modal-header h2 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .bases-modal-body {
+      padding: 10px 16px 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .bases-modal-table-shell {
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      overflow: hidden;
+      background: #ffffff;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    .bases-modal-table-scroll {
+      max-height: calc(90vh - 150px);
+      overflow: auto;
+    }
+
+    #compareTable {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    #compareTable thead th {
+      position: sticky;
+      top: 0;
+      background: #1d4ed8;
+      color: #eff6ff;
+      padding: 6px 8px;
+      text-align: left;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.3);
+    }
+
+    #compareTable th,
+    #compareTable td {
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+    }
+
+    #compareTable tbody tr:nth-child(even) {
+      background: rgba(248, 250, 252, 0.8);
+    }
+
+    #compareTable tbody tr.section-row th {
+      background: #1d4ed8;
+      color: #eff6ff;
+      font-weight: 700;
+    }
+
+    #compareTable tbody tr.section-row th span {
+      opacity: 0.9;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-left: 4px;
+    }
+
+    .bases-modal-footer {
+      padding: 10px 16px 12px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .bases-modal-footer button {
+      min-width: 80px;
+    }
+
+    .bases-modal-close {
+      border: none;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0 2px;
+    }
+
+    .bases-modal-close:hover {
+      opacity: 0.85;
+    }
+
+    /* Skill modal text */
+    #skillBody {
+      font-size: 0.9rem;
+      line-height: 1.45;
+      color: #0f172a;
+    }
+
+    /* Empty state */
+    .bases-empty {
+      padding: 18px 16px;
+      border-radius: 16px;
+      text-align: center;
+      background: rgba(248, 250, 252, 0.85);
+      border: 1px dashed rgba(148, 163, 184, 0.8);
+      font-size: 0.9rem;
+      color: var(--bases-muted);
     }
   </style>
+
   <script src="/header.js" defer></script>
 </head>
 <body>
   <header id="header-placeholder"></header>
 
-  <div class='sticky-header'>
-    <div class='container'>
-      <h1><a href='#'>Base Skins Comparator</a></h1>
-      <div class='controls'>
-        <input id='q' type='search' placeholder='Search bases or stats… (e.g. All units HP, Navy Attack)' />
-        <select id='filterTop'>
-          <option value='any'>All tiers</option>
-          <option value='top'>Only top-level</option>
-          <option value='non'>Only non-top</option>
-        </select>
-        <select id='sortBy'>
-          <option value='name'>Sort: Name (A→Z)</option>
-          <option value='atkDesc'>Sort: Highest Equipped Attack</option>
-          <option value='hpDesc'>Sort: Highest Equipped HP</option>
-        </select>
-        <label class='inline-filter'>
-          <input type='checkbox' id='filterSkill' />
-          Only bases with skills
-        </label>
-        <button id='clearSel'>Clear selected</button>
+  <main class="page-shell">
+    <!-- Sticky header with filters -->
+    <section class="bases-sticky-header">
+      <div class="bases-sticky-inner">
+        <div class="bases-sticky-title">
+          <h1>Base Skins Comparator</h1>
+          <small id="basesCountLabel"></small>
+        </div>
+        <div class="bases-controls-row">
+          <div class="bases-search">
+            <input id="q" type="search" placeholder="Search by base, stat, note, or skill…" />
+          </div>
+
+          <select id="filterTop" class="bases-select">
+            <option value="any">All tiers</option>
+            <option value="top">Only top level</option>
+            <option value="non">Only non-top</option>
+          </select>
+
+          <select id="sortBy" class="bases-select">
+            <option value="name">Sort: Name (A → Z)</option>
+            <option value="atkDesc">Sort: Highest Attack</option>
+            <option value="hpDesc">Sort: Highest HP</option>
+          </select>
+
+          <label class="bases-inline-checkbox">
+            <input type="checkbox" id="filterSkill" />
+            <span>Has skill</span>
+          </label>
+
+          <button id="clearSel" type="button">Clear selected</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards grid -->
+    <section class="bases-grid-shell">
+      <div id="grid" class="cards-grid" aria-live="polite"></div>
+    </section>
+
+    <!-- Compare bar -->
+    <section class="compare-bar">
+      <div class="compare-inner">
+        <div class="compare-label" id="selCount">Select 2–4 bases to compare</div>
+        <div class="bases-chip-row" id="selList"></div>
+        <div style="flex:1 1 auto;"></div>
+        <button id="compareBtn" type="button" disabled>Compare</button>
+      </div>
+    </section>
+
+    <!-- Skill modal -->
+    <div id="skillBackdrop" class="bases-modal-backdrop hidden"></div>
+    <div id="skillModal" class="bases-modal hidden" role="dialog" aria-modal="true" aria-labelledby="skillTitle">
+      <div class="bases-modal-card">
+        <div class="bases-modal-header">
+          <h2 id="skillTitle">Skill</h2>
+          <button class="bases-modal-close" id="skillClose" aria-label="Close skill details">✕</button>
+        </div>
+        <div class="bases-modal-body">
+          <div id="skillBody"></div>
+        </div>
+        <div class="bases-modal-footer">
+          <button id="skillClose2" type="button">Close</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class='container'>
-    <div id='grid' class='cards-grid' aria-live='polite'></div>
-  </div>
-
-  <div class='compare-bar'>
-    <div class='compare-inner'>
-      <div class='bold-text' id='selCount'>Select 2–4 bases to compare</div>
-      <div class='selection' id='selList'></div>
-      <div style='flex:1'></div>
-      <button id='compareBtn' disabled>Compare</button>
-    </div>
-  </div>
-
-  <!-- Skill modal -->
-  <div id='skillModal' class='modal hidden' role='dialog' aria-modal='true' aria-labelledby='skillTitle'>
-    <div class='modal-content'>
-      <h2 id='skillTitle'>Skill</h2>
-      <div id='skillBody'></div>
-      <div class='modal-buttons'>
-        <button id='skillClose'>Close</button>
+    <!-- Compare modal -->
+    <div id="compareBackdrop" class="bases-modal-backdrop hidden"></div>
+    <div id="compareModal" class="bases-modal hidden" role="dialog" aria-modal="true" aria-labelledby="compareTitle">
+      <div class="bases-modal-card">
+        <div class="bases-modal-header">
+          <h2 id="compareTitle">Compare Selected Bases</h2>
+          <button class="bases-modal-close" id="compareClose" aria-label="Close comparison">✕</button>
+        </div>
+        <div class="bases-modal-body">
+          <div class="bases-modal-table-shell">
+            <div class="bases-modal-table-scroll">
+              <table id="compareTable"></table>
+            </div>
+          </div>
+        </div>
+        <div class="bases-modal-footer">
+          <button id="compareClose2" type="button">Close</button>
+        </div>
       </div>
     </div>
-  </div>
-  <div id='skillBackdrop' class='modal-backdrop hidden'></div>
+  </main>
 
-  <!-- Compare modal -->
-  <div id='compareModal' class='modal hidden' role='dialog' aria-modal='true' aria-labelledby='compareTitle'>
-    <div class='modal-content'>
-      <h2 id='compareTitle'>Compare Selected Bases</h2>
-      <div class='table-container'>
-        <table id='compareTable'></table>
-      </div>
-      <div class='modal-buttons'>
-        <button id='compareClose'>Close</button>
-      </div>
-    </div>
-  </div>
-  <div id='compareBackdrop' class='modal-backdrop hidden'></div>
+  <!-- Page logic -->
+  <script>
+    /* -----------------------------------------------------
+       Data loading & normalization
+    ----------------------------------------------------- */
 
-<script>
-/* ---------- Data loading & normalization ---------- */
+    async function loadBaseSkins() {
+      const endpoints = [
+        "base_skins.min.json",
+        "base_skins.json",
+        "csvjson.json"
+      ];
 
-async function loadData(){
-  var endpoints = ['base_skins.min.json','base_skins.json','csvjson.json'];
-  for (var i = 0; i < endpoints.length; i++){
-    var url = endpoints[i];
-    try {
-      var r = await fetch(url, { cache:'no-store' });
-      if (r.ok){
-        var data = await r.json();
-        // If already normalized
-        if (Array.isArray(data) && data[0] && data[0].baseName) {
-          return data;
-        }
-        // Otherwise normalize from CSV-json shape
-        return normalizeFromCsvJson(data);
-      }
-    } catch(e) {
-      // ignore and try next
-    }
-  }
-  throw new Error('Could not load any JSON data');
-}
+      for (const url of endpoints) {
+        try {
+          const response = await fetch(url, { cache: "no-store" });
+          if (!response.ok) continue;
 
-function parseValue(v){
-  if (v === null || v === undefined) return { value:null, unit:null, original:null };
-  var s = String(v).trim();
-  if (!s) return { value:null, unit:null, original:null };
+          const data = await response.json();
 
-  // Percent values
-  if (/%/.test(s)) {
-    var m = s.replace(/,/g,'').match(/[-+]?\d*\.?\d+/);
-    return { value: m ? Number(m[0]) : null, unit:'%', original:s };
-  }
-
-  // Numeric flat
-  var n = Number(s.replace(/,/g,''));
-  if (!isNaN(n)) return { value:n, unit:'flat', original:s };
-
-  // Fallback text
-  return { value:null, unit:'text', original:s };
-}
-
-function truthy(s){
-  if (s === true || s === false) return !!s;
-  if (s == null) return false;
-  var v = String(s).trim().toLowerCase();
-  if (!v) return false;
-  return ['true','1','yes','y','top','max','highest'].includes(v);
-}
-
-function normalizeFromCsvJson(rows){
-  var out = [];
-  for (var i = 0; i < rows.length; i++){
-    var r = rows[i];
-    var baseName = r['Base Skin Name'];
-    if (!baseName) continue;
-
-    var equipped = [];
-    var holding = [];
-
-    // Equipped stats columns: "Equipped Stat 1" + "Equipped Stat 1 Value"
-    for (var j = 1; j <= 4; j++){
-      var n = r['Equipped Stat ' + j];
-      var v = r['Equipped Stat ' + j + ' Value'];
-      if (n && String(n).trim()){
-        var p = (v !== undefined && v !== null && String(v).trim() !== '')
-          ? parseValue(v)
-          : { value:null, unit:'text', original:null };
-        equipped.push({ name:String(n).trim(), value:p.value, unit:p.unit, original:p.original });
-      }
-    }
-
-    // Holding stats columns: "Holding In Stock Stat 1" + "Holding In Stock Stat 1 Value"
-    for (var k = 1; k <= 4; k++){
-      var n2 = r['Holding In Stock Stat ' + k];
-      var v2 = r['Holding In Stock Stat ' + k + ' Value'];
-      if (n2 && String(n2).trim()){
-        var p2 = (v2 !== undefined && v2 !== null && String(v2).trim() !== '')
-          ? parseValue(v2)
-          : { value:null, unit:'text', original:null };
-        holding.push({ name:String(n2).trim(), value:p2.value, unit:p2.unit, original:p2.original });
-      }
-    }
-
-    out.push({
-      baseName: String(baseName).trim(),
-      equippedStats: equipped,
-      holdingStats: holding,
-      skill: {
-        hasSkill: truthy(r['Base Skill?']),
-        description: (r['Skill Details'] || '').toString()
-      },
-      notes: (r['Notes'] || '').toString(),
-      isTopLevel: truthy(r['Highest Level?'])
-    });
-  }
-  return out;
-}
-
-/* ---------- State ---------- */
-
-var state = {
-  data: [],
-  filtered: [],
-  selected: new Map()
-};
-
-function formatStat(s){
-  if (!s) return '';
-  if (s.original) return s.original;
-  if (s.value == null) return '';
-  return s.unit === '%' ? (s.value + '%') : String(s.value);
-}
-
-/* ---------- Rendering ---------- */
-
-function renderGrid(){
-  var grid = document.getElementById('grid');
-  grid.innerHTML = '';
-
-  if (!state.filtered.length){
-    grid.innerHTML =
-      '<div class="card"><h3>No bases found</h3><p class="muted">Try changing your search or filters.</p></div>';
-    return;
-  }
-
-  for (var i = 0; i < state.filtered.length; i++){
-    var item = state.filtered[i];
-
-    var card = document.createElement('article');
-    card.className = 'card';
-
-    // Header row
-    var head = document.createElement('div');
-    head.className = 'row';
-
-    var titleWrap = document.createElement('div');
-    var title = document.createElement('h3');
-    title.textContent = item.baseName;
-    titleWrap.appendChild(title);
-
-    if (item.isTopLevel){
-      var badge = document.createElement('span');
-      badge.className = 'badge';
-      badge.textContent = 'Top Level';
-      titleWrap.appendChild(badge);
-    }
-
-    head.appendChild(titleWrap);
-
-    // Actions: checkbox, notes, skill
-    var actions = document.createElement('div');
-    actions.style.display = 'flex';
-    actions.style.alignItems = 'center';
-    actions.style.gap = '6px';
-
-    var cb = document.createElement('input');
-    cb.type = 'checkbox';
-    cb.checked = state.selected.has(item.baseName);
-    cb.addEventListener('change', (function(it, checkbox){
-      return function(){
-        if (checkbox.checked){
-          if (state.selected.size >= 4){
-            alert('You can compare up to 4 bases at a time.');
-            checkbox.checked = false;
-            return;
+          // If already in normalized format
+          if (Array.isArray(data) && data.length && data[0].baseName) {
+            return data;
           }
-          state.selected.set(it.baseName, it);
-        } else {
-          state.selected.delete(it.baseName);
+
+          // Otherwise treat as CSV-shaped JSON
+          return normalizeFromCsvJson(data || []);
+        } catch (e) {
+          // try next endpoint
         }
-        updateSelectionUI();
-      };
-    })(item, cb));
-    actions.appendChild(cb);
+      }
 
-    if (item.notes && item.notes.trim()){
-      var wrap = document.createElement('span');
-      wrap.style.position = 'relative';
+      throw new Error("Could not load base skins data.");
+    }
 
-      var info = document.createElement('button');
-      info.className = 'icon-btn';
-      info.title = 'Notes';
-      info.textContent = 'i';
+    function parseValue(raw) {
+      if (raw === null || raw === undefined) {
+        return { value: null, unit: null, original: null };
+      }
+      const s = String(raw).trim();
+      if (!s) return { value: null, unit: null, original: null };
 
-      var pop = document.createElement('div');
-      pop.className = 'info-pop';
-      pop.innerHTML = '<strong>Notes</strong><br>' + escapeHtml(item.notes);
+      // Percent values
+      if (/%/.test(s)) {
+        const m = s.replace(/,/g, "").match(/[-+]?\d*\.?\d+/);
+        return {
+          value: m ? Number(m[0]) : null,
+          unit: "%",
+          original: s
+        };
+      }
 
-      wrap.appendChild(info);
-      wrap.appendChild(pop);
+      // Flat numeric
+      const n = Number(s.replace(/,/g, ""));
+      if (!isNaN(n)) {
+        return { value: n, unit: "flat", original: s };
+      }
 
-      info.addEventListener('click', function(e){
-        e.stopPropagation();
-        var wasVisible = pop.style.display === 'block';
-        document.querySelectorAll('.info-pop').forEach(function(p){ p.style.display = 'none'; });
-        pop.style.display = wasVisible ? 'none' : 'block';
+      // Fallback text
+      return { value: null, unit: "text", original: s };
+    }
+
+    function normalizeFromCsvJson(rows) {
+      const result = [];
+
+      for (const row of rows) {
+        const baseName = row["Base Skin Name"];
+        if (!baseName) continue;
+
+        const equippedStats = [];
+        const holdingStats = [];
+
+        // Equipped stats: Equipped Stat 1 + Value ... 4
+        for (let i = 1; i <= 4; i++) {
+          const name = row["Equipped Stat " + i];
+          const value = row["Equipped Stat " + i + " Value"];
+          if (!name || !String(name).trim()) continue;
+
+          const parsed = parseValue(value);
+          equippedStats.push({
+            name: String(name).trim(),
+            value: parsed.value,
+            unit: parsed.unit,
+            original: parsed.original
+          });
+        }
+
+        // Holding stats: Holding In Stock Stat 1 + Value ... 4
+        for (let i = 1; i <= 4; i++) {
+          const name = row["Holding In Stock Stat " + i];
+          const value = row["Holding In Stock Stat " + i + " Value"];
+          if (!name || !String(name).trim()) continue;
+
+          const parsed = parseValue(value);
+          holdingStats.push({
+            name: String(name).trim(),
+            value: parsed.value,
+            unit: parsed.unit,
+            original: parsed.original
+          });
+        }
+
+        result.push({
+          baseName: String(baseName).trim(),
+          equippedStats,
+          holdingStats,
+          skill: {
+            hasSkill: truthy(row["Base Skill?"]),
+            description: (row["Skill Details"] || "").toString()
+          },
+          notes: (row["Notes"] || "").toString(),
+          isTopLevel: truthy(row["Highest Level?"])
+        });
+      }
+
+      return result;
+    }
+
+    function truthy(value) {
+      if (value === true || value === false) return !!value;
+      if (value == null) return false;
+
+      const v = String(value).trim().toLowerCase();
+      if (!v) return false;
+
+      return [
+        "true",
+        "1",
+        "yes",
+        "y",
+        "top",
+        "max",
+        "highest"
+      ].includes(v);
+    }
+
+    function formatStat(stat) {
+      if (!stat) return "";
+      if (stat.original) return stat.original;
+      if (stat.value == null) return "";
+      return stat.unit === "%" ? stat.value + "%" : String(stat.value);
+    }
+
+    /* -----------------------------------------------------
+       State
+    ----------------------------------------------------- */
+
+    const state = {
+      all: [],      // full dataset
+      filtered: [], // current visible list
+      selected: new Map()
+    };
+
+    /* -----------------------------------------------------
+       Rendering: grid & cards
+    ----------------------------------------------------- */
+
+    function renderGrid() {
+      const grid = document.getElementById("grid");
+      grid.innerHTML = "";
+
+      if (!state.filtered.length) {
+        const empty = document.createElement("div");
+        empty.className = "bases-empty";
+        empty.textContent =
+          "No base skins match your filters. Try adjusting your search or filters.";
+        grid.appendChild(empty);
+        return;
+      }
+
+      const frag = document.createDocumentFragment();
+
+      state.filtered.forEach((item) => {
+        const card = document.createElement("article");
+        card.className = "bases-card";
+
+        // ------ header row ------
+        const header = document.createElement("div");
+        header.className = "bases-card-header";
+
+        const titleWrap = document.createElement("div");
+        titleWrap.className = "bases-card-title";
+
+        const title = document.createElement("h3");
+        title.textContent = item.baseName;
+        titleWrap.appendChild(title);
+
+        if (item.isTopLevel) {
+          const badge = document.createElement("span");
+          badge.className = "bases-badge";
+          badge.textContent = "Top Level";
+          titleWrap.appendChild(badge);
+        }
+
+        header.appendChild(titleWrap);
+
+        const actions = document.createElement("div");
+        actions.className = "bases-card-actions";
+
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.checked = state.selected.has(item.baseName);
+        cb.setAttribute(
+          "aria-label",
+          "Select " + item.baseName + " for comparison"
+        );
+
+        cb.addEventListener("change", () => {
+          if (cb.checked) {
+            if (state.selected.size >= 4) {
+              alert("You can compare up to 4 bases at a time.");
+              cb.checked = false;
+              return;
+            }
+            state.selected.set(item.baseName, item);
+          } else {
+            state.selected.delete(item.baseName);
+          }
+          updateSelectionUI();
+        });
+
+        actions.appendChild(cb);
+
+        // Notes button
+        if (item.notes && item.notes.trim()) {
+          const notesWrap = document.createElement("span");
+          notesWrap.className = "bases-notes-chip";
+
+          const infoBtn = document.createElement("button");
+          infoBtn.type = "button";
+          infoBtn.className = "bases-icon-btn";
+          infoBtn.title = "Show notes";
+          infoBtn.textContent = "i";
+
+          const pop = document.createElement("div");
+          pop.className = "bases-info-pop";
+          pop.innerHTML =
+            "<strong>Notes</strong>" + escapeHtml(item.notes).replace(/\n/g, "<br />");
+
+          notesWrap.appendChild(infoBtn);
+          notesWrap.appendChild(pop);
+
+          infoBtn.addEventListener("click", (ev) => {
+            ev.stopPropagation();
+            const visible = pop.style.display === "block";
+            document
+              .querySelectorAll(".bases-info-pop")
+              .forEach((el) => (el.style.display = "none"));
+            pop.style.display = visible ? "none" : "block";
+          });
+
+          actions.appendChild(notesWrap);
+        }
+
+        // Skill button
+        if (item.skill && item.skill.hasSkill) {
+          const skillBtn = document.createElement("button");
+          skillBtn.type = "button";
+          skillBtn.className = "bases-icon-btn";
+          skillBtn.title = "View skill";
+          skillBtn.textContent = "⭐";
+          skillBtn.addEventListener("click", () => showSkill(item));
+          actions.appendChild(skillBtn);
+        }
+
+        header.appendChild(actions);
+        card.appendChild(header);
+
+        // ------ stats ------
+        const statsColumns = document.createElement("div");
+        statsColumns.className = "bases-stats-columns";
+
+        // Equipped
+        const eqBlock = document.createElement("div");
+        const eqLabel = document.createElement("div");
+        eqLabel.className = "bases-section-label";
+        eqLabel.textContent = "Equipped";
+        eqBlock.appendChild(eqLabel);
+
+        const eqList = document.createElement("div");
+        eqList.className = "bases-statlist";
+
+        if (!item.equippedStats.length) {
+          const none = document.createElement("div");
+          none.className = "bases-stat-muted";
+          none.textContent = "No equipped stats";
+          eqList.appendChild(none);
+        } else {
+          item.equippedStats.forEach((s) => {
+            if (!s || !s.name) return;
+            const row = document.createElement("div");
+            row.className = "bases-stat";
+
+            const left = document.createElement("span");
+            left.className = "bases-stat-name";
+            left.textContent = s.name;
+
+            const right = document.createElement("span");
+            right.className = "bases-stat-value";
+            right.textContent = formatStat(s);
+
+            row.appendChild(left);
+            row.appendChild(right);
+            eqList.appendChild(row);
+          });
+        }
+
+        eqBlock.appendChild(eqList);
+        statsColumns.appendChild(eqBlock);
+
+        // Holding
+        const hBlock = document.createElement("div");
+        const hLabel = document.createElement("div");
+        hLabel.className = "bases-section-label";
+        hLabel.textContent = "Holding";
+        hBlock.appendChild(hLabel);
+
+        const hList = document.createElement("div");
+        hList.className = "bases-statlist";
+
+        if (!item.holdingStats.length) {
+          const none = document.createElement("div");
+          none.className = "bases-stat-muted";
+          none.textContent = "No holding stats";
+          hList.appendChild(none);
+        } else {
+          item.holdingStats.forEach((s) => {
+            if (!s || !s.name) return;
+            const row = document.createElement("div");
+            row.className = "bases-stat";
+
+            const left = document.createElement("span");
+            left.className = "bases-stat-name";
+            left.textContent = s.name;
+
+            const right = document.createElement("span");
+            right.className = "bases-stat-value";
+            right.textContent = formatStat(s);
+
+            row.appendChild(left);
+            row.appendChild(right);
+            hList.appendChild(row);
+          });
+        }
+
+        hBlock.appendChild(hList);
+        statsColumns.appendChild(hBlock);
+
+        card.appendChild(statsColumns);
+        frag.appendChild(card);
       });
 
-      actions.appendChild(wrap);
+      grid.appendChild(frag);
     }
 
-    if (item.skill && item.skill.hasSkill){
-      var skillBtn = document.createElement('button');
-      skillBtn.className = 'icon-btn';
-      skillBtn.type = 'button';
-      skillBtn.title = 'View skill';
-      skillBtn.textContent = '⭐';
-      (function(it){
-        skillBtn.addEventListener('click', function(){ showSkill(it); });
-      })(item);
-      actions.appendChild(skillBtn);
-    }
+    /* -----------------------------------------------------
+       Selection UI & compare bar
+    ----------------------------------------------------- */
 
-    head.appendChild(actions);
-    card.appendChild(head);
+    function updateSelectionUI() {
+      const list = document.getElementById("selList");
+      const label = document.getElementById("selCount");
+      const btn = document.getElementById("compareBtn");
 
-    // Stats columns (Equipped / Holding)
-    var statsWrap = document.createElement('div');
-    statsWrap.className = 'stats-columns';
+      list.innerHTML = "";
 
-    // Equipped block
-    var eqBlock = document.createElement('div');
-    var eqH = document.createElement('div');
-    eqH.innerHTML = '<span class="stats-block-title">Equipped</span>';
-    eqBlock.appendChild(eqH);
+      state.selected.forEach((item, name) => {
+        const chip = document.createElement("span");
+        chip.className = "bases-chip";
 
-    var eqList = document.createElement('div');
-    eqList.className = 'statlist';
-    if (!item.equippedStats.length){
-      var noneEq = document.createElement('div');
-      noneEq.className = 'muted';
-      noneEq.textContent = '—';
-      eqList.appendChild(noneEq);
-    } else {
-      for (var e = 0; e < item.equippedStats.length; e++){
-        var s = item.equippedStats[e];
-        if (!s || !s.name) continue;
-        var row = document.createElement('div');
-        row.className = 'stat';
-        var left = document.createElement('span');
-        left.textContent = s.name;
-        var right = document.createElement('span');
-        right.textContent = formatStat(s);
-        row.appendChild(left);
-        row.appendChild(right);
-        eqList.appendChild(row);
+        const text = document.createTextNode(name);
+        chip.appendChild(text);
+
+        const closeBtn = document.createElement("button");
+        closeBtn.type = "button";
+        closeBtn.setAttribute(
+          "aria-label",
+          "Remove " + name + " from comparison"
+        );
+        closeBtn.textContent = "×";
+        closeBtn.addEventListener("click", () => {
+          state.selected.delete(name);
+          // Only update the chips & checkboxes without rebuilding everything
+          renderGrid();
+          updateSelectionUI();
+        });
+
+        chip.appendChild(closeBtn);
+        list.appendChild(chip);
+      });
+
+      const count = state.selected.size;
+      if (count === 0) {
+        label.textContent = "Select 2–4 bases to compare";
+      } else {
+        label.textContent = count + " selected";
       }
+
+      btn.disabled = count < 2;
     }
-    eqBlock.appendChild(eqList);
-    statsWrap.appendChild(eqBlock);
 
-    // Holding block
-    var hBlock = document.createElement('div');
-    var hH = document.createElement('div');
-    hH.innerHTML = '<span class="stats-block-title">Holding</span>';
-    hBlock.appendChild(hH);
+    /* -----------------------------------------------------
+       Compare modal
+    ----------------------------------------------------- */
 
-    var hList = document.createElement('div');
-    hList.className = 'statlist';
-    if (!item.holdingStats.length){
-      var noneH = document.createElement('div');
-      noneH.className = 'muted';
-      noneH.textContent = '—';
-      hList.appendChild(noneH);
-    } else {
-      for (var h2 = 0; h2 < item.holdingStats.length; h2++){
-        var s2 = item.holdingStats[h2];
-        if (!s2 || !s2.name) continue;
-        var row2 = document.createElement('div');
-        row2.className = 'stat';
-        var left2 = document.createElement('span');
-        left2.textContent = s2.name;
-        var right2 = document.createElement('span');
-        right2.textContent = formatStat(s2);
-        row2.appendChild(left2);
-        row2.appendChild(right2);
-        hList.appendChild(row2);
+    function maxStat(item, kind) {
+      const all = (item.equippedStats || []).concat(item.holdingStats || []);
+      let best = null;
+
+      for (const s of all) {
+        if (!s || !s.name || s.value == null) continue;
+        let name = s.name.toLowerCase();
+
+        // normalize prefixes like "All units", "Army", "Navy", "Air Force"
+        name = name
+          .replace(/all units/g, "")
+          .replace(/army/g, "")
+          .replace(/navy/g, "")
+          .replace(/air force/g, "")
+          .trim();
+
+        if (kind === "attack" && name.indexOf("attack") === -1) continue;
+        if (kind === "hp" && name.indexOf("hp") === -1 && name.indexOf("health") === -1) continue;
+
+        if (best == null || s.value > best) {
+          best = s.value;
+        }
       }
+
+      return best;
     }
-    hBlock.appendChild(hList);
-    statsWrap.appendChild(hBlock);
 
-    card.appendChild(statsWrap);
-    grid.appendChild(card);
-  }
-}
+    function buildCompareTable() {
+      const table = document.getElementById("compareTable");
+      table.innerHTML = "";
 
-/* ---------- Selection UI ---------- */
+      const selected = Array.from(state.selected.values());
+      if (selected.length < 2) return;
 
-function updateSelectionUI(){
-  var list = document.getElementById('selList');
-  list.innerHTML = '';
+      const equipNames = Object.create(null);
+      const holdNames = Object.create(null);
 
-  state.selected.forEach(function(item, name){
-    var chip = document.createElement('span');
-    chip.className = 'sel';
+      selected.forEach((item) => {
+        (item.equippedStats || []).forEach((s) => {
+          if (s && s.name) equipNames[s.name] = true;
+        });
+        (item.holdingStats || []).forEach((s) => {
+          if (s && s.name) holdNames[s.name] = true;
+        });
+      });
 
-    var label = document.createTextNode(name + ' ');
-    chip.appendChild(label);
+      const equipList = Object.keys(equipNames).sort();
+      const holdList = Object.keys(holdNames).sort();
 
-    var rm = document.createElement('button');
-    rm.setAttribute('aria-label','Remove ' + name + ' from comparison');
-    rm.textContent = '×';
-    rm.addEventListener('click', function(){
-      state.selected.delete(name);
-      // re-render grid so checkboxes reflect selection
+      const thead = document.createElement("thead");
+      const headerRow = document.createElement("tr");
+
+      const statTh = document.createElement("th");
+      statTh.textContent = "Stat";
+      headerRow.appendChild(statTh);
+
+      selected.forEach((item) => {
+        const th = document.createElement("th");
+        th.textContent = item.baseName;
+        headerRow.appendChild(th);
+      });
+
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+
+      const tbody = document.createElement("tbody");
+
+      function addSectionRow(title) {
+        const tr = document.createElement("tr");
+        tr.className = "section-row";
+        const th = document.createElement("th");
+        th.colSpan = selected.length + 1;
+        th.textContent = title;
+        tr.appendChild(th);
+        tbody.appendChild(tr);
+      }
+
+      function cellFor(stats, statName) {
+        const td = document.createElement("td");
+        let value = "—";
+        for (const s of stats) {
+          if (s && s.name === statName) {
+            value = formatStat(s) || "—";
+            break;
+          }
+        }
+        td.textContent = value;
+        return td;
+      }
+
+      if (equipList.length) {
+        addSectionRow("Equipped");
+        equipList.forEach((statName) => {
+          const tr = document.createElement("tr");
+
+          const nameTd = document.createElement("td");
+          nameTd.textContent = statName;
+          tr.appendChild(nameTd);
+
+          selected.forEach((item) => {
+            tr.appendChild(cellFor(item.equippedStats || [], statName));
+          });
+
+          tbody.appendChild(tr);
+        });
+      }
+
+      if (holdList.length) {
+        addSectionRow("Holding");
+        holdList.forEach((statName) => {
+          const tr = document.createElement("tr");
+
+          const nameTd = document.createElement("td");
+          nameTd.textContent = statName;
+          tr.appendChild(nameTd);
+
+          selected.forEach((item) => {
+            tr.appendChild(cellFor(item.holdingStats || [], statName));
+          });
+
+          tbody.appendChild(tr);
+        });
+      }
+
+      table.appendChild(tbody);
+    }
+
+    /* -----------------------------------------------------
+       Skill modal helpers
+    ----------------------------------------------------- */
+
+    function showSkill(item) {
+      const title = document.getElementById("skillTitle");
+      const body = document.getElementById("skillBody");
+
+      title.textContent = item.baseName + " — Skill";
+      const text = (item.skill && item.skill.description) || "No skill information available.";
+      body.textContent = text;
+
+      openModal("skill");
+    }
+
+    function openModal(which) {
+      document.getElementById(which + "Modal").classList.remove("hidden");
+      document.getElementById(which + "Backdrop").classList.remove("hidden");
+    }
+
+    function closeModal(which) {
+      document.getElementById(which + "Modal").classList.add("hidden");
+      document.getElementById(which + "Backdrop").classList.add("hidden");
+    }
+
+    /* -----------------------------------------------------
+       Filters & search
+    ----------------------------------------------------- */
+
+    function applyFilters() {
+      const q = document.getElementById("q").value.trim().toLowerCase();
+      const tier = document.getElementById("filterTop").value;
+      const hasSkill = document.getElementById("filterSkill").checked;
+      const sortBy = document.getElementById("sortBy").value;
+
+      let rows = state.all.slice();
+
+      if (q) {
+        rows = rows.filter((r) => {
+          if (r.baseName && r.baseName.toLowerCase().includes(q)) return true;
+
+          const stats = (r.equippedStats || []).concat(r.holdingStats || []);
+          for (const s of stats) {
+            if (!s) continue;
+            if (s.name && s.name.toLowerCase().includes(q)) return true;
+            if (s.original && String(s.original).toLowerCase().includes(q)) return true;
+          }
+
+          if (r.notes && String(r.notes).toLowerCase().includes(q)) return true;
+          if (r.skill && r.skill.description && String(r.skill.description).toLowerCase().includes(q)) return true;
+
+          return false;
+        });
+      }
+
+      if (tier === "top") {
+        rows = rows.filter((r) => r.isTopLevel);
+      } else if (tier === "non") {
+        rows = rows.filter((r) => !r.isTopLevel);
+      }
+
+      if (hasSkill) {
+        rows = rows.filter((r) => r.skill && r.skill.hasSkill);
+      }
+
+      if (sortBy === "name") {
+        rows.sort((a, b) => a.baseName.localeCompare(b.baseName));
+      } else if (sortBy === "atkDesc") {
+        rows.sort((a, b) => (maxStat(b, "attack") || 0) - (maxStat(a, "attack") || 0));
+      } else if (sortBy === "hpDesc") {
+        rows.sort((a, b) => (maxStat(b, "hp") || 0) - (maxStat(a, "hp") || 0));
+      }
+
+      state.filtered = rows;
       renderGrid();
       updateSelectionUI();
-    });
+      updateCountLabel();
+    }
 
-    chip.appendChild(rm);
-    list.appendChild(chip);
-  });
-
-  var count = state.selected.size;
-  document.getElementById('selCount').textContent =
-    count === 0 ? 'Select 2–4 bases to compare' : String(count) + ' selected';
-  document.getElementById('compareBtn').disabled = count < 2;
-}
-
-/* ---------- Compare table ---------- */
-
-function buildCompare(){
-  var table = document.getElementById('compareTable');
-  table.innerHTML = '';
-
-  var selected = Array.from(state.selected.values());
-  if (selected.length < 2) return;
-
-  // Gather stat names separately for Equipped and Holding
-  var equipNames = {};
-  var holdNames = {};
-
-  for (var i = 0; i < selected.length; i++){
-    var it = selected[i];
-    (it.equippedStats || []).forEach(function(s){
-      if (s && s.name) equipNames[s.name] = true;
-    });
-    (it.holdingStats || []).forEach(function(s){
-      if (s && s.name) holdNames[s.name] = true;
-    });
-  }
-
-  var equipList = Object.keys(equipNames).sort();
-  var holdList = Object.keys(holdNames).sort();
-
-  // Header
-  var thead = document.createElement('thead');
-  var hr = document.createElement('tr');
-  var thStat = document.createElement('th');
-  thStat.textContent = 'Stat';
-  hr.appendChild(thStat);
-
-  for (var j = 0; j < selected.length; j++){
-    var thBase = document.createElement('th');
-    thBase.textContent = selected[j].baseName;
-    hr.appendChild(thBase);
-  }
-  thead.appendChild(hr);
-  table.appendChild(thead);
-
-  var tbody = document.createElement('tbody');
-
-  // Section row helper
-  function sectionRow(title, span){
-    var tr = document.createElement('tr');
-    var th = document.createElement('th');
-    th.colSpan = span;
-    th.textContent = title;
-    th.style.textAlign = 'left';
-    th.style.background = 'var(--accent-color)';
-    th.style.color = '#fff';
-    tr.appendChild(th);
-    return tr;
-  }
-
-  function cellFor(stats, name){
-    var td = document.createElement('td');
-    var val = '—';
-    for (var x = 0; x < stats.length; x++){
-      var s = stats[x];
-      if (s && s.name === name){
-        val = formatStat(s) || '—';
-        break;
+    function updateCountLabel() {
+      const label = document.getElementById("basesCountLabel");
+      if (!label) return;
+      const total = state.all.length;
+      const visible = state.filtered.length;
+      if (!total) {
+        label.textContent = "";
+        return;
+      }
+      if (visible === total) {
+        label.textContent = total + " base skins";
+      } else {
+        label.textContent = visible + " of " + total + " base skins shown";
       }
     }
-    td.textContent = val;
-    return td;
-  }
 
-  // Equipped section
-  if (equipList.length){
-    tbody.appendChild(sectionRow('Equipped', selected.length + 1));
-    for (var a = 0; a < equipList.length; a++){
-      var trEq = document.createElement('tr');
-      var tdNameEq = document.createElement('td');
-      tdNameEq.textContent = equipList[a];
-      trEq.appendChild(tdNameEq);
-      for (var b = 0; b < selected.length; b++){
-        trEq.appendChild(cellFor(selected[b].equippedStats || [], equipList[a]));
-      }
-      tbody.appendChild(trEq);
+    /* -----------------------------------------------------
+       Utilities
+    ----------------------------------------------------- */
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
     }
-  }
 
-  // Holding section
-  if (holdList.length){
-    tbody.appendChild(sectionRow('Holding', selected.length + 1));
-    for (var c = 0; c < holdList.length; c++){
-      var trH = document.createElement('tr');
-      var tdNameH = document.createElement('td');
-      tdNameH.textContent = holdList[c];
-      trH.appendChild(tdNameH);
-      for (var d = 0; d < selected.length; d++){
-        trH.appendChild(cellFor(selected[d].holdingStats || [], holdList[c]));
+    /* -----------------------------------------------------
+       Wire-up & init
+    ----------------------------------------------------- */
+
+    (function init() {
+      const searchEl = document.getElementById("q");
+      const tierEl = document.getElementById("filterTop");
+      const sortEl = document.getElementById("sortBy");
+      const skillEl = document.getElementById("filterSkill");
+
+      if (searchEl) {
+        searchEl.addEventListener("input", () => applyFilters());
       }
-      tbody.appendChild(trH);
-    }
-  }
-
-  table.appendChild(tbody);
-}
-
-/* ---------- Modals ---------- */
-
-function showSkill(item){
-  var title = document.getElementById('skillTitle');
-  var body = document.getElementById('skillBody');
-  title.textContent = item.baseName + ' — Skill';
-  body.textContent = (item.skill && item.skill.description)
-    ? item.skill.description
-    : 'No skill information available.';
-  openModal('skill');
-}
-
-function openModal(which){
-  document.getElementById(which + 'Modal').classList.remove('hidden');
-  document.getElementById(which + 'Backdrop').classList.remove('hidden');
-}
-
-function closeModal(which){
-  document.getElementById(which + 'Modal').classList.add('hidden');
-  document.getElementById(which + 'Backdrop').classList.add('hidden');
-}
-
-/* ---------- Filters ---------- */
-
-function applyFilters(){
-  var q = document.getElementById('q').value.trim().toLowerCase();
-  var tierEl = document.getElementById('filterTop');
-  var tier = tierEl ? tierEl.value : 'any';
-  var skillEl = document.getElementById('filterSkill');
-  var hasSkill = skillEl ? skillEl.checked : false;
-
-  var rows = state.data.slice();
-
-  if (q){
-    rows = rows.filter(function(r){
-      if (r.baseName && r.baseName.toLowerCase().includes(q)) return true;
-
-      var stats = (r.equippedStats || []).concat(r.holdingStats || []);
-      for (var i = 0; i < stats.length; i++){
-        var s = stats[i];
-        if (!s) continue;
-        if (s.name && s.name.toLowerCase().includes(q)) return true;
-        if (s.original && String(s.original).toLowerCase().includes(q)) return true;
+      if (tierEl) {
+        tierEl.addEventListener("change", () => applyFilters());
       }
-      if (r.notes && String(r.notes).toLowerCase().includes(q)) return true;
-      if (r.skill && r.skill.description && String(r.skill.description).toLowerCase().includes(q)) return true;
-      return false;
-    });
-  }
+      if (sortEl) {
+        sortEl.addEventListener("change", () => applyFilters());
+      }
+      if (skillEl) {
+        skillEl.addEventListener("change", () => applyFilters());
+      }
 
-  if (tier === 'top'){
-    rows = rows.filter(function(r){ return r.isTopLevel; });
-  } else if (tier === 'non'){
-    rows = rows.filter(function(r){ return !r.isTopLevel; });
-  }
+      document.getElementById("clearSel").addEventListener("click", () => {
+        state.selected.clear();
+        renderGrid();
+        updateSelectionUI();
+      });
 
-  if (hasSkill){
-    rows = rows.filter(function(r){
-      return r.skill && r.skill.hasSkill;
-    });
-  }
+      document.getElementById("compareBtn").addEventListener("click", () => {
+        buildCompareTable();
+        openModal("compare");
+      });
 
-  var sortEl = document.getElementById('sortBy');
-  var sortBy = sortEl ? sortEl.value : 'name';
+      // Modal close buttons
+      document.getElementById("compareClose").addEventListener("click", () => closeModal("compare"));
+      document.getElementById("compareClose2").addEventListener("click", () => closeModal("compare"));
+      document.getElementById("compareBackdrop").addEventListener("click", () => closeModal("compare"));
 
-  if (sortBy === 'name'){
-    rows.sort(function(a,b){ return a.baseName.localeCompare(b.baseName); });
-  } else if (sortBy === 'atkDesc'){
-    rows.sort(function(a,b){
-      return (maxStat(b,'attack') || 0) - (maxStat(a,'attack') || 0);
-    });
-  } else if (sortBy === 'hpDesc'){
-    rows.sort(function(a,b){
-      return (maxStat(b,'hp') || 0) - (maxStat(a,'hp') || 0);
-    });
-  }
+      document.getElementById("skillClose").addEventListener("click", () => closeModal("skill"));
+      document.getElementById("skillClose2").addEventListener("click", () => closeModal("skill"));
+      document.getElementById("skillBackdrop").addEventListener("click", () => closeModal("skill"));
 
-  state.filtered = rows;
-  renderGrid();
-  updateSelectionUI(); // keep chips & button in sync
-}
-
-function maxStat(item, statName){
-  var all = (item.equippedStats || []).concat(item.holdingStats || []);
-  var best = null;
-  for (var i = 0; i < all.length; i++){
-    var s = all[i];
-    if (!s || !s.name || s.value == null) continue;
-    var nm = s.name.toLowerCase();
-    if (statName === 'attack' && nm.indexOf('attack') === -1) continue;
-    if (statName === 'hp' && nm.indexOf('hp') === -1 && nm.indexOf('health') === -1) continue;
-    if (best == null || s.value > best) best = s.value;
-  }
-  return best;
-}
-
-/* ---------- Utilities ---------- */
-
-function escapeHtml(str){
-  return String(str || '')
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;');
-}
-
-/* ---------- Wire up events & init ---------- */
-
-['q','filterTop','sortBy','filterSkill'].forEach(function(id){
-  var el = document.getElementById(id);
-  if (!el) return;
-  var eventName = (el.tagName === 'SELECT' || el.type === 'checkbox') ? 'change' : 'input';
-  el.addEventListener(eventName, applyFilters);
-});
-
-document.getElementById('clearSel').addEventListener('click', function(){
-  state.selected.clear();
-  renderGrid();
-  updateSelectionUI();
-});
-
-document.getElementById('compareBtn').addEventListener('click', function(){
-  buildCompare();
-  openModal('compare');
-});
-
-document.getElementById('compareClose').addEventListener('click', function(){ closeModal('compare'); });
-document.getElementById('compareBackdrop').addEventListener('click', function(){ closeModal('compare'); });
-
-document.getElementById('skillClose').addEventListener('click', function(){ closeModal('skill'); });
-document.getElementById('skillBackdrop').addEventListener('click', function(){ closeModal('skill'); });
-
-(async function(){
-  try {
-    state.data = await loadData();
-    applyFilters();
-  } catch(err){
-    var grid = document.getElementById('grid');
-    grid.innerHTML =
-      '<div class="card"><h3>Failed to load data</h3><p class="muted">' +
-      escapeHtml(err.message) + '</p></div>';
-  }
-})();
-</script>
+      // Initial data load
+      loadBaseSkins()
+        .then((data) => {
+          state.all = data || [];
+          applyFilters();
+        })
+        .catch((err) => {
+          const grid = document.getElementById("grid");
+          grid.innerHTML = "";
+          const error = document.createElement("div");
+          error.className = "bases-empty";
+          error.textContent = "Failed to load data: " + err.message;
+          grid.appendChild(error);
+        });
+    })();
+  </script>
 </body>
 </html>
