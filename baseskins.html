@@ -29,7 +29,7 @@
 
     /* ---------------- Sticky filter bar ---------------- */
 
-        .bases-sticky-header {
+    .bases-sticky-header {
       position: sticky;
       top: 0;
       z-index: 5;
@@ -41,10 +41,17 @@
     .bases-sticky-inner {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 6px 16px;
+      padding: 8px 16px 10px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 4px;
+    }
+
+    .bases-sticky-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
     }
 
     .bases-sticky-title h1 {
@@ -62,7 +69,7 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .bases-controls-row > * {
@@ -70,46 +77,19 @@
     }
 
     .bases-search {
-      flex: 1 1 220px;
+      flex: 1 1 180px;
       min-width: 0;
     }
 
     .bases-search input[type="search"] {
       width: 100%;
-      padding: 6px 10px;
+      padding: 6px 8px;
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.7);
       font-size: 0.9rem;
     }
 
-    @media (min-width: 768px) {
-      .bases-sticky-inner {
-        flex-direction: row;
-        align-items: center;
-        gap: 16px;
-      }
-
-      .bases-sticky-title {
-        flex: 0 0 auto;
-      }
-
-      .bases-controls-row {
-        flex: 1 1 auto;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .bases-sticky-inner {
-        padding: 4px 8px;
-        gap: 4px;
-      }
-
-      .bases-sticky-title {
-        display: none;
-      }
-    }
-
-.bases-select,
+    .bases-select,
     .bases-inline-checkbox {
       padding: 4px 8px;
       border-radius: 999px;
@@ -537,10 +517,9 @@
             <input id="q" type="search" placeholder="Search by base, stat, note, or skill…" />
           </div>
 
-          <select id="filterTop" class="bases-select">
-            <option value="any">All tiers</option>
-            <option value="top">Only top level</option>
-            <option value="non">Only non-top</option>
+          <select id="filterFlags" class="bases-select" multiple size="2" aria-label="Filters">
+            <option value="top">Top tier only</option>
+            <option value="skill">Has skill</option>
           </select>
 
           <select id="sortBy" class="bases-select">
@@ -548,13 +527,6 @@
             <option value="atkDesc">Sort: Highest Attack</option>
             <option value="hpDesc">Sort: Highest HP</option>
           </select>
-
-          <label class="bases-inline-checkbox">
-            <input type="checkbox" id="filterSkill" />
-            <span>Has skill</span>
-          </label>
-
-          <button id="clearSel" type="button">Clear selected</button>
         </div>
       </div>
     </section>
@@ -570,6 +542,7 @@
         <div class="compare-label" id="selCount">Select 2–4 bases to compare</div>
         <div class="bases-chip-row" id="selList"></div>
         <div style="flex:1 1 auto;"></div>
+        <button id="clearSel" type="button">Clear selected</button>
         <button id="compareBtn" type="button" disabled>Compare</button>
       </div>
     </section>
@@ -1175,10 +1148,21 @@
     ----------------------------------------------------- */
 
     function applyFilters() {
-      const q = document.getElementById("q").value.trim().toLowerCase();
-      const tier = document.getElementById("filterTop").value;
-      const hasSkill = document.getElementById("filterSkill").checked;
-      const sortBy = document.getElementById("sortBy").value;
+      const searchEl = document.getElementById("q");
+      const q = searchEl ? searchEl.value.trim().toLowerCase() : "";
+
+      const filterEl = document.getElementById("filterFlags");
+      const sortEl = document.getElementById("sortBy");
+      const sortBy = sortEl ? sortEl.value : "name";
+
+      const activeFlags = [];
+      if (filterEl && filterEl.options) {
+        for (const opt of filterEl.options) {
+          if (opt.selected) {
+            activeFlags.push(opt.value);
+          }
+        }
+      }
 
       let rows = state.all.slice();
 
@@ -1198,15 +1182,14 @@
 
           return false;
         });
+      
       }
 
-      if (tier === "top") {
+      // Apply multi-filters
+      if (activeFlags.includes("top")) {
         rows = rows.filter((r) => r.isTopLevel);
-      } else if (tier === "non") {
-        rows = rows.filter((r) => !r.isTopLevel);
       }
-
-      if (hasSkill) {
+      if (activeFlags.includes("skill")) {
         rows = rows.filter((r) => r.skill && r.skill.hasSkill);
       }
 
@@ -1218,6 +1201,7 @@
         rows.sort((a, b) => (maxStat(b, "hp") || 0) - (maxStat(a, "hp") || 0));
       }
 
+      
       state.filtered = rows;
       renderGrid();
       updateSelectionUI();
@@ -1257,33 +1241,47 @@
 
     (function init() {
       const searchEl = document.getElementById("q");
-      const tierEl = document.getElementById("filterTop");
+      const filterEl = document.getElementById("filterFlags");
       const sortEl = document.getElementById("sortBy");
-      const skillEl = document.getElementById("filterSkill");
 
       if (searchEl) {
         searchEl.addEventListener("input", () => applyFilters());
       }
-      if (tierEl) {
-        tierEl.addEventListener("change", () => applyFilters());
+      if (filterEl) {
+        // Normal change event for when selection changes
+        filterEl.addEventListener("change", () => applyFilters());
+
+        // Make multi-select behave like toggle buttons on desktop:
+        // single clicks toggle options without needing Ctrl/Cmd
+        filterEl.addEventListener("mousedown", (e) => {
+          const opt = e.target;
+          if (opt && opt.tagName === "OPTION") {
+            e.preventDefault();
+            opt.selected = !opt.selected;
+            filterEl.dispatchEvent(new Event("change"));
+          }
+        });
       }
       if (sortEl) {
         sortEl.addEventListener("change", () => applyFilters());
       }
-      if (skillEl) {
-        skillEl.addEventListener("change", () => applyFilters());
+
+      const clearBtn = document.getElementById("clearSel");
+      if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+          state.selected.clear();
+          renderGrid();
+          updateSelectionUI();
+        });
       }
 
-      document.getElementById("clearSel").addEventListener("click", () => {
-        state.selected.clear();
-        renderGrid();
-        updateSelectionUI();
-      });
-
-      document.getElementById("compareBtn").addEventListener("click", () => {
-        buildCompareTable();
-        openModal("compare");
-      });
+      const compareBtn = document.getElementById("compareBtn");
+      if (compareBtn) {
+        compareBtn.addEventListener("click", () => {
+          buildCompareTable();
+          openModal("compare");
+        });
+      }
 
       // Modal close buttons
       document.getElementById("compareClose").addEventListener("click", () => closeModal("compare"));
