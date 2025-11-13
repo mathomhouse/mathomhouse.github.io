@@ -27,6 +27,36 @@
       padding-bottom: 96px; /* space for compare bar */
     }
 
+    /* Page title header (non-sticky) */
+    .bases-page-header {
+      max-width: 1100px;
+      margin: 12px auto 4px;
+      padding: 0 16px;
+    }
+
+    .bases-page-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .bases-page-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .bases-page-subtitle {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--bases-muted);
+    }
+
+    .bases-count-label {
+      font-size: 0.8rem;
+      color: var(--bases-muted);
+    }
+
     /* ---------------- Sticky filter bar ---------------- */
 
     .bases-sticky-header {
@@ -41,7 +71,7 @@
     .bases-sticky-inner {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 8px 16px 10px;
+      padding: 4px 16px 6px;
       display: flex;
       flex-direction: column;
       gap: 4px;
@@ -75,6 +105,30 @@
     .bases-controls-row > * {
       flex-shrink: 0;
     }
+
+    .bases-filters {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bases-filter-pill {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      background: rgba(248, 250, 252, 0.9);
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .bases-filter-pill[aria-pressed="true"] {
+      background: rgba(59, 130, 246, 0.12);
+      border-color: rgba(59, 130, 246, 0.9);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
+    }
+
 
     .bases-search {
       flex: 1 1 180px;
@@ -111,7 +165,11 @@
 
     #clearSel {
       font-size: 0.8rem;
-      padding: 6px 12px;
+      padding: 4px 6px;
+      border: none;
+      background: none;
+      color: var(--bases-muted);
+      cursor: pointer;
     }
 
     /* ---------------- Grid & cards ---------------- */
@@ -296,12 +354,22 @@
       background: var(--bg-color, #f8fafc);
       border-top: 1px solid rgba(148, 163, 184, 0.6);
       backdrop-filter: blur(12px) saturate(1.1);
+      transform: translateY(100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+    }
+
+    .compare-bar.visible {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .compare-inner {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 6px 16px;
+      padding: 4px 16px;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -505,22 +573,31 @@
   <header id="header-placeholder"></header>
 
   <main class="page-shell">
+    <!-- Page title -->
+    <section class="bases-page-header">
+      <div class="bases-page-inner">
+        <h1 class="bases-page-title">Base Skins Comparator</h1>
+        <p class="bases-page-subtitle">Filter, search, and compare up to 4 base skins.</p>
+        <small id="basesCountLabel" class="bases-count-label"></small>
+      </div>
+    </section>
+
     <!-- Sticky header with filters -->
     <section class="bases-sticky-header">
       <div class="bases-sticky-inner">
-        <div class="bases-sticky-title">
-          <h1>Base Skins Comparator</h1>
-          <small id="basesCountLabel"></small>
-        </div>
         <div class="bases-controls-row">
           <div class="bases-search">
             <input id="q" type="search" placeholder="Search by base, stat, note, or skill…" />
           </div>
 
-          <select id="filterFlags" class="bases-select" multiple size="2" aria-label="Filters">
-            <option value="top">Top tier only</option>
-            <option value="skill">Has skill</option>
-          </select>
+          <div class="bases-filters" aria-label="Filters">
+            <button type="button" class="bases-filter-pill" data-flag="top" aria-pressed="false">
+              Top tier
+            </button>
+            <button type="button" class="bases-filter-pill" data-flag="skill" aria-pressed="false">
+              Has skill
+            </button>
+          </div>
 
           <select id="sortBy" class="bases-select">
             <option value="name">Sort: Name (A → Z)</option>
@@ -985,6 +1062,15 @@
       }
 
       btn.disabled = count < 2;
+
+      const bar = document.querySelector(".compare-bar");
+      if (bar) {
+        if (count === 0) {
+          bar.classList.remove("visible");
+        } else {
+          bar.classList.add("visible");
+        }
+      }
     }
 
     /* -----------------------------------------------------
@@ -1151,18 +1237,15 @@
       const searchEl = document.getElementById("q");
       const q = searchEl ? searchEl.value.trim().toLowerCase() : "";
 
-      const filterEl = document.getElementById("filterFlags");
       const sortEl = document.getElementById("sortBy");
       const sortBy = sortEl ? sortEl.value : "name";
 
       const activeFlags = [];
-      if (filterEl && filterEl.options) {
-        for (const opt of filterEl.options) {
-          if (opt.selected) {
-            activeFlags.push(opt.value);
-          }
-        }
-      }
+      const pillEls = document.querySelectorAll(".bases-filter-pill[aria-pressed='true']");
+      pillEls.forEach((btn) => {
+        const flag = btn.dataset.flag;
+        if (flag) activeFlags.push(flag);
+      });
 
       let rows = state.all.slice();
 
@@ -1241,29 +1324,23 @@
 
     (function init() {
       const searchEl = document.getElementById("q");
-      const filterEl = document.getElementById("filterFlags");
       const sortEl = document.getElementById("sortBy");
+      const filterPills = document.querySelectorAll(".bases-filter-pill");
 
       if (searchEl) {
         searchEl.addEventListener("input", () => applyFilters());
       }
-      if (filterEl) {
-        // Normal change event for when selection changes
-        filterEl.addEventListener("change", () => applyFilters());
-
-        // Make multi-select behave like toggle buttons on desktop:
-        // single clicks toggle options without needing Ctrl/Cmd
-        filterEl.addEventListener("mousedown", (e) => {
-          const opt = e.target;
-          if (opt && opt.tagName === "OPTION") {
-            e.preventDefault();
-            opt.selected = !opt.selected;
-            filterEl.dispatchEvent(new Event("change"));
-          }
-        });
-      }
       if (sortEl) {
         sortEl.addEventListener("change", () => applyFilters());
+      }
+      if (filterPills && filterPills.length) {
+        filterPills.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const pressed = btn.getAttribute("aria-pressed") === "true";
+            btn.setAttribute("aria-pressed", pressed ? "false" : "true");
+            applyFilters();
+          });
+        });
       }
 
       const clearBtn = document.getElementById("clearSel");
