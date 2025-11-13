@@ -31,7 +31,7 @@
 
     .bases-sticky-header {
       position: sticky;
-      top: 56px;
+      top: 0;
       z-index: 5;
       background: var(--bg-color, #f1f5f9);
       border-bottom: 1px solid rgba(148, 163, 184, 0.4);
@@ -41,7 +41,7 @@
     .bases-sticky-inner {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 6px 16px;
+      padding: 8px 16px 10px;
       display: flex;
       flex-direction: column;
       gap: 4px;
@@ -88,33 +88,6 @@
       border: 1px solid rgba(148, 163, 184, 0.7);
       font-size: 0.9rem;
     }
-
-    /* Desktop / larger screens: title left, controls right */
-    @media (min-width: 768px) {
-      .bases-sticky-inner {
-        flex-direction: row;
-        align-items: center;
-        gap: 16px;
-      }
-      .bases-sticky-title {
-        flex: 0 0 auto;
-      }
-      .bases-controls-row {
-        flex: 1 1 auto;
-      }
-    }
-
-    /* Small screens: hide title to shrink sticky bar */
-    @media (max-width: 640px) {
-      .bases-sticky-inner {
-        padding: 4px 8px;
-        gap: 4px;
-      }
-      .bases-sticky-title {
-        display: none;
-      }
-    }
-
 
     .bases-select,
     .bases-inline-checkbox {
@@ -453,7 +426,7 @@
 
     #compareTable thead th {
       position: sticky;
-      top: 56px;
+      top: 0;
       background: #1d4ed8;
       color: #eff6ff;
       padding: 6px 8px;
@@ -1175,15 +1148,20 @@
     ----------------------------------------------------- */
 
     function applyFilters() {
-      const q = document.getElementById("q").value.trim().toLowerCase();
-      const filterEl = document.getElementById("filterFlags");
-      const sortBy = document.getElementById("sortBy").value;
+      const searchEl = document.getElementById("q");
+      const q = searchEl ? searchEl.value.trim().toLowerCase() : "";
 
-      let activeFlags = [];
-      if (filterEl) {
-        activeFlags = Array.from(filterEl.options)
-          .filter((opt) => opt.selected)
-          .map((opt) => opt.value);
+      const filterEl = document.getElementById("filterFlags");
+      const sortEl = document.getElementById("sortBy");
+      const sortBy = sortEl ? sortEl.value : "name";
+
+      const activeFlags = [];
+      if (filterEl && filterEl.options) {
+        for (const opt of filterEl.options) {
+          if (opt.selected) {
+            activeFlags.push(opt.value);
+          }
+        }
       }
 
       let rows = state.all.slice();
@@ -1204,12 +1182,13 @@
 
           return false;
         });
+      
       }
 
+      // Apply multi-filters
       if (activeFlags.includes("top")) {
         rows = rows.filter((r) => r.isTopLevel);
       }
-
       if (activeFlags.includes("skill")) {
         rows = rows.filter((r) => r.skill && r.skill.hasSkill);
       }
@@ -1222,6 +1201,7 @@
         rows.sort((a, b) => (maxStat(b, "hp") || 0) - (maxStat(a, "hp") || 0));
       }
 
+      
       state.filtered = rows;
       renderGrid();
       updateSelectionUI();
@@ -1268,9 +1248,11 @@
         searchEl.addEventListener("input", () => applyFilters());
       }
       if (filterEl) {
+        // Normal change event for when selection changes
         filterEl.addEventListener("change", () => applyFilters());
 
-        // Make options act like toggle buttons on desktop
+        // Make multi-select behave like toggle buttons on desktop:
+        // single clicks toggle options without needing Ctrl/Cmd
         filterEl.addEventListener("mousedown", (e) => {
           const opt = e.target;
           if (opt && opt.tagName === "OPTION") {
@@ -1284,16 +1266,22 @@
         sortEl.addEventListener("change", () => applyFilters());
       }
 
-      document.getElementById("clearSel").addEventListener("click", () => {
-        state.selected.clear();
-        renderGrid();
-        updateSelectionUI();
-      });
+      const clearBtn = document.getElementById("clearSel");
+      if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+          state.selected.clear();
+          renderGrid();
+          updateSelectionUI();
+        });
+      }
 
-      document.getElementById("compareBtn").addEventListener("click", () => {
-        buildCompareTable();
-        openModal("compare");
-      });
+      const compareBtn = document.getElementById("compareBtn");
+      if (compareBtn) {
+        compareBtn.addEventListener("click", () => {
+          buildCompareTable();
+          openModal("compare");
+        });
+      }
 
       // Modal close buttons
       document.getElementById("compareClose").addEventListener("click", () => closeModal("compare"));
