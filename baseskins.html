@@ -29,7 +29,7 @@
 
     /* ---------------- Sticky filter bar ---------------- */
 
-    .bases-sticky-header {
+        .bases-sticky-header {
       position: sticky;
       top: 0;
       z-index: 5;
@@ -41,17 +41,10 @@
     .bases-sticky-inner {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 8px 16px 10px;
+      padding: 6px 16px;
       display: flex;
       flex-direction: column;
-      gap: 4px;
-    }
-
-    .bases-sticky-title {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 8px;
+      gap: 6px;
     }
 
     .bases-sticky-title h1 {
@@ -68,26 +61,52 @@
     .bases-controls-row {
       display: flex;
       flex-wrap: wrap;
+      gap: 8px;
       align-items: center;
-      gap: 6px;
-    }
-
-    .bases-controls-row > * {
-      flex-shrink: 0;
     }
 
     .bases-search {
-      flex: 1 1 180px;
+      flex: 1 1 220px;
       min-width: 0;
     }
 
     .bases-search input[type="search"] {
       width: 100%;
-      padding: 6px 8px;
+      padding: 6px 10px;
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.7);
       font-size: 0.9rem;
     }
+
+    /* Desktop / larger screens: title on the left, controls on the right */
+    @media (min-width: 768px) {
+      .bases-sticky-inner {
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .bases-sticky-title {
+        flex: 0 0 auto;
+      }
+
+      .bases-controls-row {
+        flex: 1 1 auto;
+      }
+    }
+
+    /* Small screens: hide title to shrink sticky bar */
+    @media (max-width: 640px) {
+      .bases-sticky-inner {
+        padding: 4px 8px;
+        gap: 4px;
+      }
+
+      .bases-sticky-title {
+        display: none;
+      }
+    }
+
 
     .bases-select,
     .bases-inline-checkbox {
