@@ -517,10 +517,10 @@
             <input id="q" type="search" placeholder="Search by base, stat, note, or skill…" />
           </div>
 
-          <select id="filterTop" class="bases-select">
-            <option value="any">All tiers</option>
-            <option value="top">Only top level</option>
-            <option value="non">Only non-top</option>
+          <!-- Multi-filter select: choose one or more filters -->
+          <select id="filterFlags" class="bases-select" multiple>
+            <option value="top">Top tier only</option>
+            <option value="skill">Has skill</option>
           </select>
 
           <select id="sortBy" class="bases-select">
@@ -528,11 +528,6 @@
             <option value="atkDesc">Sort: Highest Attack</option>
             <option value="hpDesc">Sort: Highest HP</option>
           </select>
-
-          <label class="bases-inline-checkbox">
-            <input type="checkbox" id="filterSkill" />
-            <span>Has skill</span>
-          </label>
 
         </div>
       </div>
@@ -1154,11 +1149,15 @@
        Filters & search
     ----------------------------------------------------- */
 
+    
     function applyFilters() {
       const q = document.getElementById("q").value.trim().toLowerCase();
-      const tier = document.getElementById("filterTop").value;
-      const hasSkill = document.getElementById("filterSkill").checked;
       const sortBy = document.getElementById("sortBy").value;
+
+      const flagsEl = document.getElementById("filterFlags");
+      const activeFlags = flagsEl
+        ? Array.from(flagsEl.selectedOptions || []).map((opt) => opt.value)
+        : [];
 
       let rows = state.all.slice();
 
@@ -1180,13 +1179,12 @@
         });
       }
 
-      if (tier === "top") {
+      // Apply filters from the multi-select
+      if (activeFlags.includes("top")) {
         rows = rows.filter((r) => r.isTopLevel);
-      } else if (tier === "non") {
-        rows = rows.filter((r) => !r.isTopLevel);
       }
 
-      if (hasSkill) {
+      if (activeFlags.includes("skill")) {
         rows = rows.filter((r) => r.skill && r.skill.hasSkill);
       }
 
@@ -1204,7 +1202,7 @@
       updateCountLabel();
     }
 
-    function updateCountLabel() {
+function updateCountLabel() {
       const label = document.getElementById("basesCountLabel");
       if (!label) return;
       const total = state.all.length;
@@ -1237,24 +1235,20 @@
 
     (function init() {
       const searchEl = document.getElementById("q");
-      const tierEl = document.getElementById("filterTop");
+      const flagsEl = document.getElementById("filterFlags");
       const sortEl = document.getElementById("sortBy");
-      const skillEl = document.getElementById("filterSkill");
 
       if (searchEl) {
         searchEl.addEventListener("input", () => applyFilters());
       }
-      if (tierEl) {
-        tierEl.addEventListener("change", () => applyFilters());
+      if (flagsEl) {
+        flagsEl.addEventListener("change", () => applyFilters());
       }
       if (sortEl) {
         sortEl.addEventListener("change", () => applyFilters());
       }
-      if (skillEl) {
-        skillEl.addEventListener("change", () => applyFilters());
-      }
 
-      document.getElementById("clearSel").addEventListener("click", () => {
+document.getElementById("clearSel").addEventListener("click", () => {
         state.selected.clear();
         renderGrid();
         updateSelectionUI();
