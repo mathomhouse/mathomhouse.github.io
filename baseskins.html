@@ -517,8 +517,7 @@
             <input id="q" type="search" placeholder="Search by base, stat, note, or skill…" />
           </div>
 
-          <!-- Multi-filter select: choose one or more filters -->
-          <select id="filterFlags" class="bases-select" multiple>
+          <select id="filterFlags" class="bases-select" multiple size="2" aria-label="Filters">
             <option value="top">Top tier only</option>
             <option value="skill">Has skill</option>
           </select>
@@ -528,7 +527,6 @@
             <option value="atkDesc">Sort: Highest Attack</option>
             <option value="hpDesc">Sort: Highest HP</option>
           </select>
-
         </div>
       </div>
     </section>
@@ -1149,15 +1147,22 @@
        Filters & search
     ----------------------------------------------------- */
 
-    
     function applyFilters() {
-      const q = document.getElementById("q").value.trim().toLowerCase();
-      const sortBy = document.getElementById("sortBy").value;
+      const searchEl = document.getElementById("q");
+      const q = searchEl ? searchEl.value.trim().toLowerCase() : "";
 
-      const flagsEl = document.getElementById("filterFlags");
-      const activeFlags = flagsEl
-        ? Array.from(flagsEl.selectedOptions || []).map((opt) => opt.value)
-        : [];
+      const filterEl = document.getElementById("filterFlags");
+      const sortEl = document.getElementById("sortBy");
+      const sortBy = sortEl ? sortEl.value : "name";
+
+      const activeFlags = [];
+      if (filterEl && filterEl.options) {
+        for (const opt of filterEl.options) {
+          if (opt.selected) {
+            activeFlags.push(opt.value);
+          }
+        }
+      }
 
       let rows = state.all.slice();
 
@@ -1177,13 +1182,13 @@
 
           return false;
         });
+      
       }
 
-      // Apply filters from the multi-select
+      // Apply multi-filters
       if (activeFlags.includes("top")) {
         rows = rows.filter((r) => r.isTopLevel);
       }
-
       if (activeFlags.includes("skill")) {
         rows = rows.filter((r) => r.skill && r.skill.hasSkill);
       }
@@ -1196,13 +1201,14 @@
         rows.sort((a, b) => (maxStat(b, "hp") || 0) - (maxStat(a, "hp") || 0));
       }
 
+      
       state.filtered = rows;
       renderGrid();
       updateSelectionUI();
       updateCountLabel();
     }
 
-function updateCountLabel() {
+    function updateCountLabel() {
       const label = document.getElementById("basesCountLabel");
       if (!label) return;
       const total = state.all.length;
@@ -1235,29 +1241,47 @@ function updateCountLabel() {
 
     (function init() {
       const searchEl = document.getElementById("q");
-      const flagsEl = document.getElementById("filterFlags");
+      const filterEl = document.getElementById("filterFlags");
       const sortEl = document.getElementById("sortBy");
 
       if (searchEl) {
         searchEl.addEventListener("input", () => applyFilters());
       }
-      if (flagsEl) {
-        flagsEl.addEventListener("change", () => applyFilters());
+      if (filterEl) {
+        // Normal change event for when selection changes
+        filterEl.addEventListener("change", () => applyFilters());
+
+        // Make multi-select behave like toggle buttons on desktop:
+        // single clicks toggle options without needing Ctrl/Cmd
+        filterEl.addEventListener("mousedown", (e) => {
+          const opt = e.target;
+          if (opt && opt.tagName === "OPTION") {
+            e.preventDefault();
+            opt.selected = !opt.selected;
+            filterEl.dispatchEvent(new Event("change"));
+          }
+        });
       }
       if (sortEl) {
         sortEl.addEventListener("change", () => applyFilters());
       }
 
-document.getElementById("clearSel").addEventListener("click", () => {
-        state.selected.clear();
-        renderGrid();
-        updateSelectionUI();
-      });
+      const clearBtn = document.getElementById("clearSel");
+      if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+          state.selected.clear();
+          renderGrid();
+          updateSelectionUI();
+        });
+      }
 
-      document.getElementById("compareBtn").addEventListener("click", () => {
-        buildCompareTable();
-        openModal("compare");
-      });
+      const compareBtn = document.getElementById("compareBtn");
+      if (compareBtn) {
+        compareBtn.addEventListener("click", () => {
+          buildCompareTable();
+          openModal("compare");
+        });
+      }
 
       // Modal close buttons
       document.getElementById("compareClose").addEventListener("click", () => closeModal("compare"));
@@ -1282,7 +1306,7 @@ document.getElementById("clearSel").addEventListener("click", () => {
           error.textContent = "Failed to load data: " + err.message;
           grid.appendChild(error);
         });
-    })();
+    }})();
   </script>
 </body>
 </html>
