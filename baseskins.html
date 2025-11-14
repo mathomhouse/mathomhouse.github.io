@@ -185,6 +185,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+      color: #0f172a; /* strong dark text for light mode */
     }
 
     .bases-card-header {
@@ -264,15 +265,7 @@
     }
 
     
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bases-text: #e5e7eb;
-        --bases-text-strong: #f9fafb;
-        --bases-muted: #94a3b8;
-      }
-    }
-
-@media (max-width: 640px) {
+    @media (max-width: 640px) {
       .bases-stats-columns {
         grid-template-columns: minmax(0, 1fr);
       }
@@ -300,14 +293,14 @@
 
     .bases-stat-name {
       flex: 1 1 auto;
-      color: var(--bases-text);
+      color: #0f172a;
     }
 
     .bases-stat-value {
       flex: 0 0 auto;
       font-weight: 600;
       white-space: nowrap;
-      color: var(--bases-text-strong);
+      color: #0f172a;
     }
 
     .bases-stat-muted {
@@ -637,37 +630,53 @@
     #skillBody {
       font-size: 0.9rem;
       line-height: 1.45;
-      color: var(--bases-text);
+      color: inherit;
     }
 
-    /* Ensure card titles use theme-aware colors */
+    /* Typography inside cards uses the card text color */
     .bases-card-title h3,
-    .bases-section-label {
-      color: var(--bases-text-strong);
+    .bases-section-label,
+    .bases-stat-name,
+    .bases-stat-value {
+      color: inherit;
     }
 
-    /* Dark theme overrides tied to the site theme toggle */
-    html[data-theme="dark"],
-    body[data-theme="dark"] {
-      --bases-text: #e5e7eb;
-      --bases-text-strong: #f9fafb;
-      --bases-muted: #94a3b8;
+    /* Dark theme overrides specifically for the base skins page */
+    html[data-theme="dark"] .bases-card,
+    body[data-theme="dark"] .bases-card {
+      background: #111827;
+      color: #e5e7eb;
+    }
+
+    html[data-theme="dark"] .bases-statlist {
+      background: #1f2933;
+    }
+
+    html[data-theme="dark"] .bases-modal-card {
+      background: #111827;
+      color: #e5e7eb;
+    }
+
+    html[data-theme="dark"] .bases-modal-table-shell {
+      background: #111827;
+      border-color: rgba(148, 163, 184, 0.7);
     }
 
     html[data-theme="dark"] .bases-filter-pill,
-    body[data-theme="dark"] .bases-filter-pill,
     html[data-theme="dark"] .bases-more-filters-btn,
+    body[data-theme="dark"] .bases-filter-pill,
     body[data-theme="dark"] .bases-more-filters-btn {
-      background: rgba(15, 23, 42, 0.85);
+      background: rgba(15, 23, 42, 0.9);
       border-color: rgba(148, 163, 184, 0.9);
+      color: #e5e7eb;
     }
 
     html[data-theme="dark"] .bases-filter-pill[aria-pressed="true"],
     body[data-theme="dark"] .bases-filter-pill[aria-pressed="true"] {
-      background: rgba(37, 99, 235, 0.45);
+      background: rgba(37, 99, 235, 0.5);
     }
 
-/* Empty state */
+    /* Empty state */
     .bases-empty {
       padding: 18px 16px;
       border-radius: 16px;
