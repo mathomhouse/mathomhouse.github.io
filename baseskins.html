@@ -635,14 +635,18 @@
     }
 
     /* Typography inside cards uses the card text color */
-    .bases-card-title h3 {
-      color: #e5e7eb;
-    }
     .bases-section-label,
     .bases-stat-name,
     .bases-stat-value {
       color: inherit;
     }
+
+    /* Dark mode: make base titles light */
+    html[data-theme="dark"] .bases-card-title h3,
+    body[data-theme="dark"] .bases-card-title h3 {
+      color: #e5e7eb;
+    }
+
 
     /* Dark theme overrides specifically for the base skins page */
     html[data-theme="dark"] .bases-card,
