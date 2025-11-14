@@ -688,6 +688,12 @@
       background: #111827;
       color: #e5e7eb;
     }
+    /* Dark mode – make "Equipped" / "Holding" labels match card title text */
+    html[data-theme="dark"] .bases-section-label,
+    body[data-theme="dark"] .bases-section-label {
+      color: #e5e7eb !important;  /* same feel as the card title in dark mode */
+    }
+
     /* Dark mode – improve readability of notes popup */
     html[data-theme="dark"] .bases-info-pop,
     body[data-theme="dark"] .bases-info-pop {
