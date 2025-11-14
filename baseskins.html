@@ -17,6 +17,8 @@
       --bases-chip-bg: rgba(15, 23, 42, 0.04);
       --bases-chip-border: rgba(148, 163, 184, 0.7);
       --bases-modal-max-width: 960px;
+      --bases-text: #0f172a;
+      --bases-text-strong: #020617;
     }
 
     body {
@@ -91,10 +93,11 @@
 
     .bases-filter-pill {
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
+      border: 1px solid var(--bases-chip-border);
       padding: 4px 10px;
       font-size: 0.8rem;
       background: rgba(248, 250, 252, 0.9);
+      color: var(--bases-text);
       cursor: pointer;
       transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
@@ -107,10 +110,11 @@
 
     .bases-more-filters-btn {
       border-radius: 999px;
-      border: 1px dashed rgba(148, 163, 184, 0.9);
+      border: 1px dashed var(--bases-chip-border);
       padding: 4px 10px;
       font-size: 0.8rem;
       background: rgba(248, 250, 252, 0.9);
+      color: var(--bases-text);
       cursor: pointer;
       transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
@@ -199,7 +203,7 @@
     .bases-card-title h3 {
       margin: 0;
       font-size: 1rem;
-      color: #0f172a;
+      color: var(--bases-text);
     }
 
     .bases-badge {
@@ -259,7 +263,16 @@
       margin-top: 6px;
     }
 
-    @media (max-width: 640px) {
+    
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bases-text: #e5e7eb;
+        --bases-text-strong: #f9fafb;
+        --bases-muted: #94a3b8;
+      }
+    }
+
+@media (max-width: 640px) {
       .bases-stats-columns {
         grid-template-columns: minmax(0, 1fr);
       }
@@ -340,6 +353,16 @@
       background: var(--bg-color, #f8fafc);
       border-top: 1px solid rgba(148, 163, 184, 0.6);
       backdrop-filter: blur(12px) saturate(1.1);
+      transform: translateY(100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+    }
+
+    .compare-bar.visible {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .compare-inner {
@@ -462,7 +485,7 @@
       padding: 2px 0;
     }
 
-    .bases-stat-filter-pill {
+    .bases-stat-filter-item {
       display: inline-flex;
       align-items: center;
       gap: 4px;
@@ -474,7 +497,7 @@
       background: rgba(248, 250, 252, 0.9);
     }
 
-    .bases-stat-filter-pill input {
+    .bases-stat-filter-item input {
       margin: 0;
     }
 
@@ -613,6 +636,29 @@
       font-size: 0.9rem;
       line-height: 1.45;
       color: #0f172a;
+
+    .bases-card-title h3,
+    .bases-section-label {
+      color: var(--bases-text-strong);
+    }
+
+    .bases-stat-name,
+    .bases-stat-value {
+      color: var(--bases-text);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .bases-filter-pill,
+      .bases-more-filters-btn {
+        background: rgba(15, 23, 42, 0.9);
+        border-color: rgba(148, 163, 184, 0.9);
+      }
+
+      .bases-filter-pill[aria-pressed="true"] {
+        background: rgba(37, 99, 235, 0.3);
+      }
+    }
+
     }
 
     /* Empty state */
@@ -1111,6 +1157,8 @@
       const label = document.getElementById("selCount");
       const btn = document.getElementById("compareBtn");
 
+      if (!list || !label || !btn) return;
+
       list.innerHTML = "";
 
       state.selected.forEach((item, name) => {
@@ -1129,7 +1177,6 @@
         closeBtn.textContent = "×";
         closeBtn.addEventListener("click", () => {
           state.selected.delete(name);
-          // Only update the chips & checkboxes without rebuilding everything
           renderGrid();
           updateSelectionUI();
         });
@@ -1139,11 +1186,24 @@
       });
 
       const count = state.selected.size;
+
       if (count === 0) {
         label.textContent = "Select 2–4 bases to compare";
       } else {
         label.textContent = count + " selected";
       }
+
+      btn.disabled = count < 2;
+
+      const bar = document.querySelector(".compare-bar");
+      if (bar) {
+        if (count === 0) {
+          bar.classList.remove("visible");
+        } else {
+          bar.classList.add("visible");
+        }
+      }
+    }
 
       btn.disabled = count < 2;
     }
