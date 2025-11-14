@@ -651,11 +651,12 @@
     html[data-theme="dark"] .bases-statlist {
       background: #1f2933;
     }
-    /* DARK MODE — Improve stat readability */
+    /* FINAL OVERRIDE — ensure stat text is dark on light tiles in dark mode */
     html[data-theme="dark"] .bases-statlist .bases-stat-name,
     html[data-theme="dark"] .bases-statlist .bases-stat-value {
-      color: #1e293b;
+      color: #1e293b !important;
     }
+
 
     html[data-theme="dark"] .bases-modal-card {
       background: #111827;
