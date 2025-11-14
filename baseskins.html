@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Base Skins Comparator</title>
+  <title>Base Skins Comparison</title>
 
   <!-- Site-wide styles -->
   <link rel="stylesheet" href="/styles/index.css" />
@@ -460,6 +460,22 @@
     .bases-modal-header h2 {
       color: #f8fafc !important;
     }
+    /* Dark mode — soften intense blues in compare modal */
+    html[data-theme="dark"] .bases-modal-header,
+    body[data-theme="dark"] .bases-modal-header {
+      background: #1e3a8a !important;
+    }
+
+    html[data-theme="dark"] #compareTable thead th,
+    body[data-theme="dark"] #compareTable thead th {
+      background: #1e3a8a !important;
+    }
+
+    html[data-theme="dark"] #compareTable tbody tr.section-row th,
+    body[data-theme="dark"] #compareTable tbody tr.section-row th {
+      background: #1e3a8a !important;
+    }
+
 
     .bases-modal-body {
       padding: 10px 16px 14px;
@@ -728,7 +744,7 @@
     <section class="bases-sticky-header">
       <div class="bases-sticky-inner">
         <div class="bases-sticky-title">
-          <h1>Base Skins Comparator</h1>
+          <h1>Base Skins Comparison</h1>
           <small id="basesCountLabel"></small>
         </div>
         <div class="bases-controls-row">
