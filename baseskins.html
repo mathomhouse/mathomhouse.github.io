@@ -553,6 +553,60 @@
     .bases-modal-close:hover {
       opacity: 0.85;
     }
+    .bases-stat-search {
+  margin-bottom: 8px;
+    }
+
+    .bases-stat-search input {
+      width: 100%;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .bases-stat-search input:focus {
+      border-color: rgba(59, 130, 246, 0.9);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.25);
+    }
+    @media (max-width: 768px) {
+    /* Header: don't fight the main Mathom House header on mobile */
+    .bases-sticky-header {
+      position: static;
+      border-bottom: none;
+      backdrop-filter: none;
+    }
+
+    /* Compare bar: stack instead of one long row */
+    .compare-inner {
+      flex-direction: column;
+      align-items: stretch;
+      padding: 6px 12px 8px;
+    }
+
+    .compare-label {
+      font-size: 0.8rem;
+    }
+
+    .bases-chip-row {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    #clearSel {
+      align-self: flex-end;
+      padding: 4px 6px;
+      font-size: 0.8rem;
+    }
+
+    #compareBtn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
 
     /* Skill modal text */
     #skillBody {
@@ -653,6 +707,14 @@
           <p class="bases-modal-help">
             Filter bases by specific stats. A base will match if it has at least one of the selected stats in either Equipped or Holding.
           </p>
+          <div class="bases-stat-search">
+            <input
+              type="search"
+              id="statFilterSearch"
+              placeholder="Search stats…"
+              autocomplete="off"
+            />
+          </div>
           <div id="statFiltersList" class="bases-stat-filters"></div>
         </div>
         <div class="bases-modal-footer">
@@ -1304,15 +1366,15 @@
     }
     
     function buildStatFiltersUI() {
-      const container = document.getElementById("statFiltersList");
-      if (!container || !Array.isArray(state.all)) return;
-
-      container.innerHTML = "";
+      const list = document.getElementById("statFiltersList");
+      if (!list) return;
+      list.innerHTML = "";
 
       const namesSet = new Set();
-      state.all.forEach((r) => {
-        const stats = (r.equippedStats || []).concat(r.holdingStats || []);
-        stats.forEach((s) => {
+
+      state.all.forEach((row) => {
+        const allStats = (row.equippedStats || []).concat(row.holdingStats || []);
+        allStats.forEach((s) => {
           if (s && s.name) {
             namesSet.add(s.name);
           }
@@ -1322,19 +1384,17 @@
       const names = Array.from(namesSet).sort((a, b) => a.localeCompare(b));
 
       names.forEach((name) => {
-        const id = "statFilter_" + name.replace(/[^a-zA-Z0-9]+/g, "_");
+        const item = document.createElement("label");
+        item.className = "bases-stat-filter-item";
+        item.dataset.label = name.toLowerCase();
 
-        const label = document.createElement("label");
-        label.className = "bases-stat-filter-pill";
-        label.setAttribute("for", id);
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.value = name;
+        cb.checked = state.statFilters.has(name);
 
-        const input = document.createElement("input");
-        input.type = "checkbox";
-        input.id = id;
-        input.value = name;
-
-        input.addEventListener("change", function () {
-          if (this.checked) {
+        cb.addEventListener("change", (e) => {
+          if (e.target.checked) {
             state.statFilters.add(name);
           } else {
             state.statFilters.delete(name);
@@ -1345,11 +1405,18 @@
         const span = document.createElement("span");
         span.textContent = name;
 
-        label.appendChild(input);
-        label.appendChild(span);
-        container.appendChild(label);
+        item.appendChild(cb);
+        item.appendChild(span);
+        list.appendChild(item);
       });
+
+      // Reset search when rebuilding
+      const searchInput = document.getElementById("statFilterSearch");
+      if (searchInput) {
+        searchInput.value = "";
+      }
     }
+
 
 function updateCountLabel() {
       const label = document.getElementById("basesCountLabel");
@@ -1382,15 +1449,15 @@ function updateCountLabel() {
        Wire-up & init
     ----------------------------------------------------- */
 
-    (function init() {
+        (function init() {
+      // Search box
       const searchEl = document.getElementById("q");
-      const filterPills = document.querySelectorAll(".bases-filter-pill");
-      const moreFiltersBtn = document.getElementById("moreFiltersBtn");
-
       if (searchEl) {
         searchEl.addEventListener("input", () => applyFilters());
       }
 
+      // Top tier / Has skill pills
+      const filterPills = document.querySelectorAll(".bases-filter-pill");
       if (filterPills && filterPills.length) {
         filterPills.forEach((btn) => {
           btn.addEventListener("click", () => {
@@ -1401,10 +1468,63 @@ function updateCountLabel() {
         });
       }
 
+      // "More filters" button (opens stat filters modal)
+      const moreFiltersBtn = document.getElementById("moreFiltersBtn");
       if (moreFiltersBtn) {
-        moreFiltersBtn.addEventListener("click", () => openModal("filters"));
+        moreFiltersBtn.addEventListener("click", () => {
+          openModal("filters");
+        });
       }
 
+      // Filters modal close / done / backdrop
+      const filtersClose = document.getElementById("filtersClose");
+      if (filtersClose) {
+        filtersClose.addEventListener("click", () => closeModal("filters"));
+      }
+
+      const filtersDone = document.getElementById("filtersDone");
+      if (filtersDone) {
+        filtersDone.addEventListener("click", () => closeModal("filters"));
+      }
+
+      const filtersBackdrop = document.getElementById("filtersBackdrop");
+      if (filtersBackdrop) {
+        filtersBackdrop.addEventListener("click", () => closeModal("filters"));
+      }
+
+      // Clear all stat filters
+      const filtersClearBtn = document.getElementById("filtersClear");
+      if (filtersClearBtn) {
+        filtersClearBtn.addEventListener("click", () => {
+          if (state.statFilters && typeof state.statFilters.clear === "function") {
+            state.statFilters.clear();
+          }
+
+          document
+            .querySelectorAll(".bases-stat-filter-item input[type='checkbox']")
+            .forEach((cb) => {
+              cb.checked = false;
+            });
+
+          applyFilters();
+        });
+      }
+
+      // Search inside stat filters modal
+      const statSearchInput = document.getElementById("statFilterSearch");
+      if (statSearchInput) {
+        statSearchInput.addEventListener("input", () => {
+          const q = statSearchInput.value.trim().toLowerCase();
+          document
+            .querySelectorAll(".bases-stat-filter-item")
+            .forEach((item) => {
+              const label = (item.dataset.label || "").toLowerCase();
+              item.style.display = label.includes(q) ? "" : "none";
+            });
+        });
+      }
+
+      // Clear selected bases (compare bar)
       const clearBtn = document.getElementById("clearSel");
       if (clearBtn) {
         clearBtn.addEventListener("click", () => {
@@ -1414,6 +1534,7 @@ function updateCountLabel() {
         });
       }
 
+      // Compare button
       const compareBtn = document.getElementById("compareBtn");
       if (compareBtn) {
         compareBtn.addEventListener("click", () => {
@@ -1422,58 +1543,62 @@ function updateCountLabel() {
         });
       }
 
-      // Compare modal close buttons
-      document.getElementById("compareClose").addEventListener("click", () => closeModal("compare"));
-      document.getElementById("compareClose2").addEventListener("click", () => closeModal("compare"));
-      document.getElementById("compareBackdrop").addEventListener("click", () => closeModal("compare"));
-
-      // Skill modal close buttons
-      document.getElementById("skillClose").addEventListener("click", () => closeModal("skill"));
-      document.getElementById("skillClose2").addEventListener("click", () => closeModal("skill"));
-      document.getElementById("skillBackdrop").addEventListener("click", () => closeModal("skill"));
-
-      // Filters modal close buttons
-      const filtersClose = document.getElementById("filtersClose");
-      const filtersDone = document.getElementById("filtersDone");
-      const filtersClear = document.getElementById("filtersClear");
-      const filtersBackdrop = document.getElementById("filtersBackdrop");
-
-      if (filtersClose) {
-        filtersClose.addEventListener("click", () => closeModal("filters"));
+      // Compare modal close + backdrop
+      const compareClose = document.getElementById("compareClose");
+      if (compareClose) {
+        compareClose.addEventListener("click", () => closeModal("compare"));
       }
-      if (filtersDone) {
-        filtersDone.addEventListener("click", () => closeModal("filters"));
+
+      const compareClose2 = document.getElementById("compareClose2");
+      if (compareClose2) {
+        compareClose2.addEventListener("click", () => closeModal("compare"));
       }
-      if (filtersBackdrop) {
-        filtersBackdrop.addEventListener("click", () => closeModal("filters"));
+
+      const compareBackdrop = document.getElementById("compareBackdrop");
+      if (compareBackdrop) {
+        compareBackdrop.addEventListener("click", () => closeModal("compare"));
       }
-      if (filtersClear) {
-        filtersClear.addEventListener("click", () => {
-          state.statFilters.clear();
-          const inputs = document.querySelectorAll("#statFiltersList input[type='checkbox']");
-          inputs.forEach((input) => {
-            input.checked = false;
-          });
-          applyFilters();
-        });
+
+      // Skill modal close + backdrop
+      const skillClose = document.getElementById("skillClose");
+      if (skillClose) {
+        skillClose.addEventListener("click", () => closeModal("skill"));
+      }
+
+      const skillClose2 = document.getElementById("skillClose2");
+      if (skillClose2) {
+        skillClose2.addEventListener("click", () => closeModal("skill"));
+      }
+
+      const skillBackdrop = document.getElementById("skillBackdrop");
+      if (skillBackdrop) {
+        skillBackdrop.addEventListener("click", () => closeModal("skill"));
       }
 
       // Initial data load
       loadBaseSkins()
         .then((data) => {
           state.all = data || [];
-          buildStatFiltersUI();
+
+          // Build the stat filters list for the "More filters" modal
+          if (typeof buildStatFiltersUI === "function") {
+            buildStatFiltersUI();
+          }
+
           applyFilters();
         })
         .catch((err) => {
           const grid = document.getElementById("grid");
-          grid.innerHTML = "";
-          const error = document.createElement("div");
-          error.className = "bases-empty";
-          error.textContent = "Failed to load data: " + err.message;
-          grid.appendChild(error);
+          if (grid) {
+            grid.innerHTML = "";
+            const error = document.createElement("div");
+            error.className = "bases-empty";
+            error.textContent = "Failed to load data: " + err.message;
+            grid.appendChild(error);
+          }
         });
     })();
+
   </script>
 </body>
 </html>
