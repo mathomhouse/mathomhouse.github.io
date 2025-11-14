@@ -651,12 +651,11 @@
     html[data-theme="dark"] .bases-statlist {
       background: #1f2933;
     }
-    /* FINAL OVERRIDE — ensure stat text is dark on light tiles in dark mode */
+    /* DARK MODE — Improve stat readability */
     html[data-theme="dark"] .bases-statlist .bases-stat-name,
     html[data-theme="dark"] .bases-statlist .bases-stat-value {
-      color: #1e293b !important;
+      color: #1e293b;
     }
-
 
     html[data-theme="dark"] .bases-modal-card {
       background: #111827;
@@ -692,7 +691,13 @@
       font-size: 0.9rem;
       color: var(--bases-muted);
     }
-  </style>
+  
+    /* FINAL OVERRIDE — ensure stat text is dark on light tiles in dark mode */
+    html[data-theme="dark"] .bases-statlist .bases-stat-name,
+    html[data-theme="dark"] .bases-statlist .bases-stat-value {
+      color: #1e293b !important;
+    }
+</style>
 
   <script src="/header.js" defer></script>
 </head>
