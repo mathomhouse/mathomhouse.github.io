@@ -570,6 +570,19 @@
       font-weight: 500;
       margin-left: 4px;
     }
+    /* Highlight best stat values in compare table */
+    #compareTable td.stat-best {
+      background: rgba(34, 197, 94, 0.16); /* soft green */
+      font-weight: 600;
+    }
+
+    /* Dark mode highlight */
+    html[data-theme="dark"] #compareTable td.stat-best,
+    body[data-theme="dark"] #compareTable td.stat-best {
+      background: rgba(34, 197, 94, 0.30);
+      font-weight: 600;
+    }
+
 
     .bases-modal-footer {
       padding: 10px 16px 12px;
@@ -1374,104 +1387,143 @@
     }
 
     function buildCompareTable() {
-      const table = document.getElementById("compareTable");
-      table.innerHTML = "";
+  const table = document.getElementById("compareTable");
+  table.innerHTML = "";
 
-      const selected = Array.from(state.selected.values());
-      if (selected.length < 2) return;
+  const selected = Array.from(state.selected.values());
+  if (selected.length < 2) return;
 
-      const equipNames = Object.create(null);
-      const holdNames = Object.create(null);
+  const equipNames = Object.create(null);
+  const holdNames = Object.create(null);
 
-      selected.forEach((item) => {
-        (item.equippedStats || []).forEach((s) => {
-          if (s && s.name) equipNames[s.name] = true;
-        });
-        (item.holdingStats || []).forEach((s) => {
-          if (s && s.name) holdNames[s.name] = true;
-        });
-      });
+  // Collect all stat names across selected bases
+  selected.forEach((item) => {
+    (item.equippedStats || []).forEach((s) => {
+      if (s && s.name) equipNames[s.name] = true;
+    });
+    (item.holdingStats || []).forEach((s) => {
+      if (s && s.name) holdNames[s.name] = true;
+    });
+  });
 
-      const equipList = Object.keys(equipNames).sort();
-      const holdList = Object.keys(holdNames).sort();
+  const equipList = Object.keys(equipNames).sort();
+  const holdList = Object.keys(holdNames).sort();
 
-      const thead = document.createElement("thead");
-      const headerRow = document.createElement("tr");
+  const thead = document.createElement("thead");
+  const headerRow = document.createElement("tr");
 
-      const statTh = document.createElement("th");
-      statTh.textContent = "Stat";
-      headerRow.appendChild(statTh);
+  const statTh = document.createElement("th");
+  statTh.textContent = "Stat";
+  headerRow.appendChild(statTh);
 
-      selected.forEach((item) => {
-        const th = document.createElement("th");
-        th.textContent = item.baseName;
-        headerRow.appendChild(th);
-      });
+  selected.forEach((item) => {
+    const th = document.createElement("th");
+    th.textContent = item.baseName;
+    headerRow.appendChild(th);
+  });
 
-      thead.appendChild(headerRow);
-      table.appendChild(thead);
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
 
-      const tbody = document.createElement("tbody");
+  const tbody = document.createElement("tbody");
 
-      function addSectionRow(title) {
-        const tr = document.createElement("tr");
-        tr.className = "section-row";
-        const th = document.createElement("th");
-        th.colSpan = selected.length + 1;
-        th.textContent = title;
-        tr.appendChild(th);
-        tbody.appendChild(tr);
-      }
+  function addSectionRow(title) {
+    const tr = document.createElement("tr");
+    tr.className = "section-row";
+    const th = document.createElement("th");
+    th.colSpan = selected.length + 1;
+    th.textContent = title;
+    tr.appendChild(th);
+    tbody.appendChild(tr);
+  }
 
-      function cellFor(stats, statName) {
-        const td = document.createElement("td");
-        let value = "—";
-        for (const s of stats) {
-          if (s && s.name === statName) {
-            value = formatStat(s) || "—";
-            break;
-          }
-        }
-        td.textContent = value;
-        return td;
-      }
-
-      if (equipList.length) {
-        addSectionRow("Equipped");
-        equipList.forEach((statName) => {
-          const tr = document.createElement("tr");
-
-          const nameTd = document.createElement("td");
-          nameTd.textContent = statName;
-          tr.appendChild(nameTd);
-
-          selected.forEach((item) => {
-            tr.appendChild(cellFor(item.equippedStats || [], statName));
-          });
-
-          tbody.appendChild(tr);
-        });
-      }
-
-      if (holdList.length) {
-        addSectionRow("Holding");
-        holdList.forEach((statName) => {
-          const tr = document.createElement("tr");
-
-          const nameTd = document.createElement("td");
-          nameTd.textContent = statName;
-          tr.appendChild(nameTd);
-
-          selected.forEach((item) => {
-            tr.appendChild(cellFor(item.holdingStats || [], statName));
-          });
-
-          tbody.appendChild(tr);
-        });
-      }
-
-      table.appendChild(tbody);
+  // Helper: find the stat object for a given name
+  function findStat(stats, statName) {
+    for (const s of stats) {
+      if (s && s.name === statName) return s;
     }
+    return null;
+  }
+
+  // Helper: get numeric value (percent or flat) or null
+  function getNumericValue(stat) {
+    if (!stat || stat.value == null) return null;
+    if (stat.unit === "%" || stat.unit === "flat") return stat.value;
+    return null; // don't try to rank text/non-numeric stats
+  }
+
+  // Build a section (Equipped or Holding)
+  function buildSectionRows(statNames, title, statsSelector) {
+    if (!statNames.length) return;
+
+    addSectionRow(title);
+
+    statNames.forEach((statName) => {
+      const tr = document.createElement("tr");
+
+      const nameTd = document.createElement("td");
+      nameTd.textContent = statName;
+      tr.appendChild(nameTd);
+
+      // Collect stat objects and numeric values for this row
+      const rowStats = selected.map((item) =>
+        findStat(statsSelector(item) || [], statName)
+      );
+      const numericValues = rowStats.map((s) => getNumericValue(s));
+
+      // Determine the best (max) numeric value in this row
+      let maxValue = null;
+      numericValues.forEach((v) => {
+        if (v == null) return;
+        if (maxValue == null || v > maxValue) {
+          maxValue = v;
+        }
+      });
+
+      // Build cells for each selected base
+      rowStats.forEach((statObj, idx) => {
+        const td = document.createElement("td");
+        let valueText = "—";
+
+        if (statObj) {
+          valueText = formatStat(statObj) || "—";
+        }
+
+        td.textContent = valueText;
+
+        // Highlight best value (only if there is a numeric max)
+        if (
+          maxValue != null &&
+          numericValues[idx] != null &&
+          numericValues[idx] === maxValue
+        ) {
+          td.classList.add("stat-best");
+        }
+
+        tr.appendChild(td);
+      });
+
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Equipped section
+  buildSectionRows(
+    equipList,
+    "Equipped",
+    (item) => item.equippedStats
+  );
+
+  // Holding section
+  buildSectionRows(
+    holdList,
+    "Holding",
+    (item) => item.holdingStats
+  );
+
+  table.appendChild(tbody);
+}
+
 
     /* -----------------------------------------------------
        Skill modal helpers
