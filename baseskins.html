@@ -757,6 +757,52 @@
       border-color: rgba(148, 163, 184, 0.25);
       color: #e5e7eb;
     }
+    .back-to-top {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: #1d4ed8;
+      color: white;
+      font-size: 1.3rem;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .back-to-top.show {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .back-to-top.hide {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .back-to-top:hover {
+      background: #2563eb;
+    }
+
+    /* Dark mode */
+    html[data-theme="dark"] .back-to-top,
+    body[data-theme="dark"] .back-to-top {
+      background: #334155;
+      color: #f1f5f9;
+    }
+
+    html[data-theme="dark"] .back-to-top:hover,
+    body[data-theme="dark"] .back-to-top:hover {
+      background: #475569;
+    }
 
 </style>
 
@@ -1599,155 +1645,175 @@ function updateCountLabel() {
     ----------------------------------------------------- */
 
         (function init() {
-      // Search box
-      const searchEl = document.getElementById("q");
-      if (searchEl) {
-        searchEl.addEventListener("input", () => applyFilters());
+  // Search box
+  const searchEl = document.getElementById("q");
+  if (searchEl) {
+    searchEl.addEventListener("input", () => applyFilters());
+  }
+
+  // Top tier / Has skill pills
+  const filterPills = document.querySelectorAll(".bases-filter-pill");
+  if (filterPills && filterPills.length) {
+    filterPills.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const pressed = btn.getAttribute("aria-pressed") === "true";
+        btn.setAttribute("aria-pressed", pressed ? "false" : "true");
+        applyFilters();
+      });
+    });
+  }
+
+  // "More filters" button (opens stat filters modal)
+  const moreFiltersBtn = document.getElementById("moreFiltersBtn");
+  if (moreFiltersBtn) {
+    moreFiltersBtn.addEventListener("click", () => {
+      openModal("filters");
+    });
+  }
+
+  // Filters modal close / done / backdrop
+  const filtersClose = document.getElementById("filtersClose");
+  if (filtersClose) {
+    filtersClose.addEventListener("click", () => closeModal("filters"));
+  }
+
+  const filtersDone = document.getElementById("filtersDone");
+  if (filtersDone) {
+    filtersDone.addEventListener("click", () => closeModal("filters"));
+  }
+
+  const filtersBackdrop = document.getElementById("filtersBackdrop");
+  if (filtersBackdrop) {
+    filtersBackdrop.addEventListener("click", () => closeModal("filters"));
+  }
+
+  // Clear all stat filters
+  const filtersClearBtn = document.getElementById("filtersClear");
+  if (filtersClearBtn) {
+    filtersClearBtn.addEventListener("click", () => {
+      if (state.statFilters && typeof state.statFilters.clear === "function") {
+        state.statFilters.clear();
       }
 
-      // Top tier / Has skill pills
-      const filterPills = document.querySelectorAll(".bases-filter-pill");
-      if (filterPills && filterPills.length) {
-        filterPills.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const pressed = btn.getAttribute("aria-pressed") === "true";
-            btn.setAttribute("aria-pressed", pressed ? "false" : "true");
-            applyFilters();
-          });
+      document
+        .querySelectorAll(".bases-stat-filter-item input[type='checkbox']")
+        .forEach((cb) => {
+          cb.checked = false;
         });
-      }
 
-      // "More filters" button (opens stat filters modal)
-      const moreFiltersBtn = document.getElementById("moreFiltersBtn");
-      if (moreFiltersBtn) {
-        moreFiltersBtn.addEventListener("click", () => {
-          openModal("filters");
+      applyFilters();
+    });
+  }
+
+  // Search inside stat filters modal
+  const statSearchInput = document.getElementById("statFilterSearch");
+  if (statSearchInput) {
+    statSearchInput.addEventListener("input", () => {
+      const q = statSearchInput.value.trim().toLowerCase();
+      document
+        .querySelectorAll(".bases-stat-filter-item")
+        .forEach((item) => {
+          const label = (item.dataset.label || "").toLowerCase();
+          item.style.display = label.includes(q) ? "" : "none";
         });
+    });
+  }
+
+  // Clear selected bases (compare bar)
+  const clearBtn = document.getElementById("clearSel");
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      state.selected.clear();
+      renderGrid();
+      updateSelectionUI();
+    });
+  }
+
+  // Compare button
+  const compareBtn = document.getElementById("compareBtn");
+  if (compareBtn) {
+    compareBtn.addEventListener("click", () => {
+      buildCompareTable();
+      openModal("compare");
+    });
+  }
+
+  // Compare modal close + backdrop
+  const compareClose = document.getElementById("compareClose");
+  if (compareClose) {
+    compareClose.addEventListener("click", () => closeModal("compare"));
+  }
+
+  const compareClose2 = document.getElementById("compareClose2");
+  if (compareClose2) {
+    compareClose2.addEventListener("click", () => closeModal("compare"));
+  }
+
+  const compareBackdrop = document.getElementById("compareBackdrop");
+  if (compareBackdrop) {
+    compareBackdrop.addEventListener("click", () => closeModal("compare"));
+  }
+
+  // Skill modal close + backdrop
+  const skillClose = document.getElementById("skillClose");
+  if (skillClose) {
+    skillClose.addEventListener("click", () => closeModal("skill"));
+  }
+
+  const skillClose2 = document.getElementById("skillClose2");
+  if (skillClose2) {
+    skillClose2.addEventListener("click", () => closeModal("skill"));
+  }
+
+  const skillBackdrop = document.getElementById("skillBackdrop");
+  if (skillBackdrop) {
+    skillBackdrop.addEventListener("click", () => closeModal("skill"));
+  }
+
+  /* ---------------- Back to Top button wiring ---------------- */
+
+  const backToTopBtn = document.getElementById("backToTop");
+  if (backToTopBtn) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 350) {
+        backToTopBtn.classList.add("show");
+        backToTopBtn.classList.remove("hide");
+      } else {
+        backToTopBtn.classList.add("hide");
+        backToTopBtn.classList.remove("show");
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  // Initial data load
+  loadBaseSkins()
+    .then((data) => {
+      state.all = data || [];
+
+      // Build the stat filters list for the "More filters" modal
+      if (typeof buildStatFiltersUI === "function") {
+        buildStatFiltersUI();
       }
 
-      // Filters modal close / done / backdrop
-      const filtersClose = document.getElementById("filtersClose");
-      if (filtersClose) {
-        filtersClose.addEventListener("click", () => closeModal("filters"));
+      applyFilters();
+    })
+    .catch((err) => {
+      const grid = document.getElementById("grid");
+      if (grid) {
+        grid.innerHTML = "";
+        const error = document.createElement("div");
+        error.className = "bases-empty";
+        error.textContent = "Failed to load data: " + err.message;
+        grid.appendChild(error);
       }
-
-      const filtersDone = document.getElementById("filtersDone");
-      if (filtersDone) {
-        filtersDone.addEventListener("click", () => closeModal("filters"));
-      }
-
-      const filtersBackdrop = document.getElementById("filtersBackdrop");
-      if (filtersBackdrop) {
-        filtersBackdrop.addEventListener("click", () => closeModal("filters"));
-      }
-
-      // Clear all stat filters
-      const filtersClearBtn = document.getElementById("filtersClear");
-      if (filtersClearBtn) {
-        filtersClearBtn.addEventListener("click", () => {
-          if (state.statFilters && typeof state.statFilters.clear === "function") {
-            state.statFilters.clear();
-          }
-
-          document
-            .querySelectorAll(".bases-stat-filter-item input[type='checkbox']")
-            .forEach((cb) => {
-              cb.checked = false;
-            });
-
-          applyFilters();
-        });
-      }
-
-      // Search inside stat filters modal
-      const statSearchInput = document.getElementById("statFilterSearch");
-      if (statSearchInput) {
-        statSearchInput.addEventListener("input", () => {
-          const q = statSearchInput.value.trim().toLowerCase();
-          document
-            .querySelectorAll(".bases-stat-filter-item")
-            .forEach((item) => {
-              const label = (item.dataset.label || "").toLowerCase();
-              item.style.display = label.includes(q) ? "" : "none";
-            });
-        });
-      }
-
-      // Clear selected bases (compare bar)
-      const clearBtn = document.getElementById("clearSel");
-      if (clearBtn) {
-        clearBtn.addEventListener("click", () => {
-          state.selected.clear();
-          renderGrid();
-          updateSelectionUI();
-        });
-      }
-
-      // Compare button
-      const compareBtn = document.getElementById("compareBtn");
-      if (compareBtn) {
-        compareBtn.addEventListener("click", () => {
-          buildCompareTable();
-          openModal("compare");
-        });
-      }
-
-      // Compare modal close + backdrop
-      const compareClose = document.getElementById("compareClose");
-      if (compareClose) {
-        compareClose.addEventListener("click", () => closeModal("compare"));
-      }
-
-      const compareClose2 = document.getElementById("compareClose2");
-      if (compareClose2) {
-        compareClose2.addEventListener("click", () => closeModal("compare"));
-      }
-
-      const compareBackdrop = document.getElementById("compareBackdrop");
-      if (compareBackdrop) {
-        compareBackdrop.addEventListener("click", () => closeModal("compare"));
-      }
-
-      // Skill modal close + backdrop
-      const skillClose = document.getElementById("skillClose");
-      if (skillClose) {
-        skillClose.addEventListener("click", () => closeModal("skill"));
-      }
-
-      const skillClose2 = document.getElementById("skillClose2");
-      if (skillClose2) {
-        skillClose2.addEventListener("click", () => closeModal("skill"));
-      }
-
-      const skillBackdrop = document.getElementById("skillBackdrop");
-      if (skillBackdrop) {
-        skillBackdrop.addEventListener("click", () => closeModal("skill"));
-      }
-
-      // Initial data load
-      loadBaseSkins()
-        .then((data) => {
-          state.all = data || [];
-
-          // Build the stat filters list for the "More filters" modal
-          if (typeof buildStatFiltersUI === "function") {
-            buildStatFiltersUI();
-          }
-
-          applyFilters();
-        })
-        .catch((err) => {
-          const grid = document.getElementById("grid");
-          if (grid) {
-            grid.innerHTML = "";
-            const error = document.createElement("div");
-            error.className = "bases-empty";
-            error.textContent = "Failed to load data: " + err.message;
-            grid.appendChild(error);
-          }
-        });
-    })();
+    });
+})();
 
   </script>
+  <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
 </body>
 </html>
