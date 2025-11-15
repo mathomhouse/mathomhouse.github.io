@@ -738,6 +738,24 @@
     html[data-theme="dark"] .bases-statlist .bases-stat-value {
       color: #1e293b !important;
     }
+        .bases-blurb {
+      margin: 0 0 16px;
+      padding: 12px 16px;
+      background: rgba(148, 163, 184, 0.10);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 12px;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      color: var(--bases-text);
+    }
+
+    html[data-theme="dark"] .bases-blurb,
+    body[data-theme="dark"] .bases-blurb {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(148, 163, 184, 0.25);
+      color: #e5e7eb;
+    }
+
 </style>
 
   <script src="/header.js" defer></script>
@@ -777,6 +795,10 @@
 
     <!-- Cards grid -->
     <section class="bases-grid-shell">
+      <div class="bases-blurb">
+        Browse every base skin and quickly compare their equipped and holding stats. 
+        You can filter by stats, skills, or by the highest level version of the base. You can view notes on the skin by clicking the "i" button and details about skills by clicking the "⭐" button (if applicable). Select up to four skins to see a full side-by-side comparison table. Shoutout to discord user <b>christine3069</b> for the suggestion! 
+      </div>
       <div id="grid" class="cards-grid" aria-live="polite"></div>
     </section>
 
