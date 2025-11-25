@@ -116,20 +116,6 @@
     text-shadow: 0 0 4px #000;
 }
 
-.talent-question {
-    width: 40px;
-    height: 40px;
-    border-radius: 6px;
-    border: 2px solid #60a5fa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 6px;
-    font-size: 18px;
-    color: #bfdbfe;
-    background: rgba(15, 23, 42, 0.9);
-}
-
 .talent-stat-text {
     margin-top: 4px;
     font-size: 11px;
@@ -283,7 +269,6 @@ function renderTree() {
         el.innerHTML = `
             <div class="talent-node-label">${node.perkName}</div>
             <div class="talent-node-inner">
-                <div class="talent-question">?</div>
                 <div class="talent-level-text">
                     <span class="current-level">0</span> / ${node.maxLevel}
                 </div>
