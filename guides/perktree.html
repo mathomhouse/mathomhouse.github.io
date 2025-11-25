@@ -262,6 +262,22 @@ body.light-mode .talent-node-label,
   color:#111827;
   text-shadow:none;
 }
+/* Force perk name text to be dark in light theme */
+html[data-theme="light"] .talent-node-label,
+body[data-theme="light"] .talent-node-label,
+html.light-mode .talent-node-label,
+body.light-mode .talent-node-label {
+  color: #111827 !important;
+  text-shadow: none !important;
+}
+
+/* If you *also* want it to react to OS light mode: */
+@media (prefers-color-scheme: light) {
+  .talent-node-label {
+    color: #111827 !important;
+    text-shadow: none !important;
+  }
+}
 
 </style>
 <script src="/header.js" defer></script>
