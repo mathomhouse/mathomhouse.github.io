@@ -55,21 +55,23 @@
   box-sizing:border-box;
 }
 
-/* NEW: normalize label height so hexes stay aligned in the row */
+/* Normalize label height so hexes stay aligned in the row
+   AND make the text readable on both light & dark backgrounds */
 .talent-node-label{
   margin-bottom:8px;
   font-size:15px;
-  font-weight:600;
-  color:#e5e7eb;
-  text-shadow:0 0 4px #000;
+  font-weight:700;
+  color:#2563eb;                 /* medium blue, readable on light & dark */
+  text-shadow:0 0 2px rgba(15,23,42,0.4);
   max-width:130px;
 
-  min-height: 36px;              /* enough for up to two lines */
+  min-height:36px;
   display:flex;
-  align-items:flex-end;          /* bottom-align the text within the label box */
+  align-items:flex-end;
   justify-content:center;
   text-align:center;
 }
+
 
 
   .talent-node-inner{
@@ -251,33 +253,6 @@
       right:10px;
     }
   }
-  @media (prefers-color-scheme: light) {
-  .talent-node-label {
-    color:#111827;  /* dark slate for light mode */
-    text-shadow:none;
-  }
-}
-body.light-mode .talent-node-label,
-[data-theme="light"] .talent-node-label {
-  color:#111827;
-  text-shadow:none;
-}
-/* Force perk name text to be dark in light theme */
-html[data-theme="light"] .talent-node-label,
-body[data-theme="light"] .talent-node-label,
-html.light-mode .talent-node-label,
-body.light-mode .talent-node-label {
-  color: #111827 !important;
-  text-shadow: none !important;
-}
-
-/* If you *also* want it to react to OS light mode: */
-@media (prefers-color-scheme: light) {
-  .talent-node-label {
-    color: #111827 !important;
-    text-shadow: none !important;
-  }
-}
 
 </style>
 <script src="/header.js" defer></script>
