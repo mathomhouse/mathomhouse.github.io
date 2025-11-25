@@ -17,6 +17,7 @@
     width:100%;
     height:100vh;
     overflow-y:auto;
+    overflow-x:hidden; /* no horizontal scroll */
     position:relative;
     padding-inline:12px;
     box-sizing:border-box;
@@ -43,30 +44,31 @@
   }
 
   .talent-node{
-  width:140px;
-  margin:auto;
-  cursor:pointer;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  padding:6px 0;
-  touch-action:manipulation;
-  box-sizing:border-box;
-}
+    width:140px;
+    margin:auto;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    padding:6px 0;
+    touch-action:manipulation;
+    box-sizing:border-box;
+  }
 
-.talent-node-label{
-  margin-bottom:8px;
-  font-size:15px;
-  font-weight:700;
-  max-width:130px;
+  /* Label: fixed height so hexes in same row stay aligned */
+  .talent-node-label{
+    margin-bottom:8px;
+    font-size:15px;
+    font-weight:700;
+    max-width:130px;
 
-  min-height:36px;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  text-align:center;
-}
+    min-height:36px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    text-align:center;
+  }
 
   .talent-node-inner{
     width:112px;
@@ -81,7 +83,7 @@
     flex-direction:column;
     justify-content:center; /* center vertically */
     align-items:center;
-    padding-bottom:0;       /* remove bottom bias */
+    padding-bottom:0;
     position:relative;
     overflow:hidden;
     transition:
@@ -139,7 +141,7 @@
     background:rgba(15,23,42,0.95);
     border:1px solid rgba(148,163,184,0.65);
     border-radius:14px;
-    padding:14px 16px 16px;
+    padding:18px 18px 16px; /* more top padding so title/X don’t collide */
     box-shadow:0 18px 40px rgba(0,0,0,0.65);
     font-size:14px;
     z-index:50;
@@ -152,8 +154,8 @@
 
   .node-details-close{
     position:absolute;
-    top:6px;
-    right:8px;
+    top:8px;
+    right:10px;
     border:none;
     background:transparent;
     color:#9ca3af;
@@ -168,7 +170,8 @@
   }
 
   .node-details h2{
-    margin:0 32px 6px 0;
+    margin:0 0 6px 0;
+    padding-right:40px; /* leave room for the X so text never flows under it */
     font-size:15px;
     font-weight:700;
     color:#e5e7eb;
@@ -197,24 +200,27 @@
   @media (max-width: 768px){
     .tree-wrapper{
       padding-inline:6px;
+      overflow-x:hidden; /* kill horizontal scroll on mobile too */
     }
 
     .tree-grid{
-      grid-template-columns:repeat(3, minmax(100px, 1fr));
+      /* keep 5 columns so existing col indices still center correctly */
+      grid-template-columns:repeat(5, 1fr);
       grid-auto-rows:140px;
-      padding-top:32px;
-      padding-bottom:180px;
+      padding-top:24px;
+      padding-bottom:160px;
     }
 
     .talent-node{
       width:100%;
+      max-width:140px;
       padding:4px 0;
     }
 
     .talent-node-label{
-    font-size:14px;
-    max-width:120px;
-    min-height: 34px;
+      font-size:14px;
+      max-width:120px;
+      min-height:34px;
     }
 
     .talent-node-inner{
@@ -228,12 +234,13 @@
       bottom:12px;
       max-width:none;
       border-radius:18px 18px 16px 16px;
-      padding:16px 18px 18px;
+      padding:18px 18px 18px;
     }
 
     .node-details h2{
       font-size:16px;
-      margin-right:36px;
+      margin-bottom:8px;
+      padding-right:44px;
     }
 
     .node-detail-line{
@@ -243,11 +250,10 @@
     .node-details-close{
       font-size:20px;
       padding:6px;
-      top:8px;
-      right:10px;
+      top:10px;
+      right:12px;
     }
   }
-
 </style>
 <script src="/header.js" defer></script>
 </head>
@@ -693,17 +699,34 @@
     panel.classList.remove("hidden");
   }
 
+  // Global click handler:
+  // - click X -> close
+  // - click node -> open/update
+  // - click outside panel & not a node -> close
   document.addEventListener("click", e => {
-    if (e.target.closest(".node-details-close")){
-      document.getElementById("node-details").classList.add("hidden");
+    const panel = document.getElementById("node-details");
+    const clickedClose = e.target.closest(".node-details-close");
+    const clickedNode  = e.target.closest(".talent-node");
+    const clickedPanel = panel.contains(e.target);
+
+    // 1) Close when clicking the X
+    if (clickedClose) {
+      panel.classList.add("hidden");
       return;
     }
-    const nodeEl = e.target.closest(".talent-node");
-    if (!nodeEl) return;
-    const node = talentTree.nodes.find(n => n.id === nodeEl.dataset.id);
-    showDetails(node);
-    // redraw lines after potential layout changes (esp. on mobile)
-    setTimeout(drawLines, 0);
+
+    // 2) Open / update when clicking a node
+    if (clickedNode) {
+      const node = talentTree.nodes.find(n => n.id === clickedNode.dataset.id);
+      showDetails(node);
+      setTimeout(drawLines, 0);
+      return;
+    }
+
+    // 3) Click elsewhere (not a node, not inside panel) -> close panel
+    if (!panel.classList.contains("hidden") && !clickedPanel) {
+      panel.classList.add("hidden");
+    }
   });
 
   window.addEventListener("resize", () => {
@@ -712,7 +735,7 @@
 
   window.addEventListener("load", () => {
     renderTree();
-    // Let layout settle before drawing lines so positions are correct
+    // Let layout settle before drawing lines
     setTimeout(drawLines, 50);
   });
   </script>
