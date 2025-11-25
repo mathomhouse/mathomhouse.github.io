@@ -74,9 +74,9 @@
       0 0 0 1px rgba(15, 23, 42, 0.9);
     display:flex;
     flex-direction:column;
-    justify-content:flex-end;
+    justify-content:center; /* center vertically */
     align-items:center;
-    padding-bottom:10px;
+    padding-bottom:0;       /* remove bottom bias */
     position:relative;
     overflow:hidden;
     transition:
@@ -621,10 +621,17 @@
       `;
       grid.appendChild(el);
     });
-    drawLines();
+  }
+
+  function resizeSVG(){
+    const grid = document.getElementById("tree");
+    const svg = document.getElementById("tree-lines");
+    if (!grid || !svg) return;
+    svg.style.height = grid.scrollHeight + "px";
   }
 
   function drawLines(){
+    resizeSVG();
     const svg = document.getElementById("tree-lines");
     svg.innerHTML = "";
     const svgRect = svg.getBoundingClientRect();
@@ -688,10 +695,19 @@
     if (!nodeEl) return;
     const node = talentTree.nodes.find(n => n.id === nodeEl.dataset.id);
     showDetails(node);
+    // redraw lines after potential layout changes (esp. on mobile)
+    setTimeout(drawLines, 0);
   });
 
-  window.addEventListener("resize", drawLines);
-  window.onload = renderTree;
+  window.addEventListener("resize", () => {
+    drawLines();
+  });
+
+  window.addEventListener("load", () => {
+    renderTree();
+    // Let layout settle before drawing lines so positions are correct
+    setTimeout(drawLines, 50);
+  });
   </script>
 </body>
 </html>
