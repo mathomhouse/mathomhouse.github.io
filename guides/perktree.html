@@ -152,10 +152,13 @@
     <div id="tree" class="tree-grid"></div>
 </div>
 
-<div class="points-display" style="top: 60px;">
+<div class="points-display">
+    Talent Points: <span id="points">500</span>
+    &nbsp;|&nbsp;
     Spent: <span id="points-spent">0</span>
     <button id="reset-tree" style="margin-left: 10px;">Reset</button>
 </div>
+
 
 
 <script>
@@ -589,14 +592,13 @@ function updateNodeStates() {
     // Calculate spent
     const spent = talentTree.nodes.reduce((sum, node) => {
         const level = levels[node.id] || 0;
-        // sum costPerLevel[0..level-1]
         for (let i = 0; i < level; i++) {
             sum += node.costPerLevel[i] || 0;
         }
         return sum;
     }, 0);
 
-    pointsDisplay.textContent = talentTree.pointsAvailable;
+    if (pointsDisplay) pointsDisplay.textContent = talentTree.pointsAvailable;
     if (spentDisplay) spentDisplay.textContent = spent;
 
     talentTree.nodes.forEach(node => {
