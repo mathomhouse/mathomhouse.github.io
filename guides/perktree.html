@@ -145,12 +145,12 @@
 // JSON: sample perk tree data (you can expand later)
 // ---------------------------------------------------------
 const talentTree = {
-    pointsAvailable: 50,
+    pointsAvailable: 500,
     nodes: [
         {
             id: "full_rest",
             perkName: "Full Rest",
-            stat: "All Units HP +2 per tier",
+            stat: "All Units HP +2%",
             maxLevel: 5,
             costPerLevel: [6, 6, 6, 6, 6],
             row: 1,
@@ -160,7 +160,7 @@ const talentTree = {
         {
             id: "army_atk",
             perkName: "Army Readiness",
-            stat: "Army ATK +2 per tier",
+            stat: "Army Attack +2%",
             maxLevel: 5,
             costPerLevel: [6, 6, 6, 6, 6],
             row: 2,
@@ -174,7 +174,7 @@ const talentTree = {
         {
             id: "navy_atk",
             perkName: "Naval Readiness",
-            stat: "Navy ATK +2 per tier",
+            stat: "Navy Attack +2%",
             maxLevel: 5,
             costPerLevel: [6, 6, 6, 6, 6],
             row: 2,
@@ -188,7 +188,7 @@ const talentTree = {
         {
             id: "air_atk",
             perkName: "Air Force Readiness",
-            stat: "Air ATK +2 per tier",
+            stat: "Air Force Attack +2%",
             maxLevel: 5,
             costPerLevel: [6, 6, 6, 6, 6],
             row: 2,
@@ -202,9 +202,9 @@ const talentTree = {
         {
             id: "coordinated_defense",
             perkName: "Coordinated Defense",
-            stat: "All Units DEF +2 per tier",
+            stat: "All Units DEF +2%",
             maxLevel: 5,
-            costPerLevel: [7, 7, 7, 7, 7],
+            costPerLevel: [6, 6, 6, 6, 6],
             row: 3,
             col: 3,
             prereq: {
@@ -214,9 +214,9 @@ const talentTree = {
             }
         },
         {
-            id: "special",
+            id: "shark/scorpion_tier+1",
             perkName: "Evolved Shark/Scorpion",
-            stat: "Special effect",
+            stat: "Shark/Scorpion Tier +1",
             maxLevel: 1,
             costPerLevel: [30],
             row: 4,
@@ -225,6 +225,48 @@ const talentTree = {
                 type: "all",
                 nodes: ["coordinated_defense"],
                 minCompleted: 1
+            }
+        }
+        {
+            id: "unified_assault",
+            perkName: "Unified Assault",
+            stat: "All Units Attack +2%",
+            maxLevel: 5,
+            costPerLevel: [7. 7. 7. 7. 7],
+            row: 4,
+            col: 2,
+            prereq: {
+                type: "all",
+                nodes: ["coordinated_defense"],
+                minCompleted: 1
+            }
+        }
+        {
+            id: "rapid_logistics",
+            perkName: "Rapid Logistics",
+            stat: "All Units HP +2%",
+            maxLevel: 5,
+            costPerLevel: [7. 7. 7. 7. 7],
+            row: 4,
+            col: 4,
+            prereq: {
+                type: "all",
+                nodes: ["coordinated_defense"],
+                minCompleted: 1
+            }
+        }
+        {
+            id: "ammo_amplifier",
+            perkName: "Ammo Amplifier",
+            stat: "All Units Attack +2%",
+            maxLevel: 5,
+            costPerLevel: [7. 7. 7. 7. 7],
+            row: 5,
+            col: 3,
+            prereq: {
+                type: "all",
+                nodes: ["unified_assault", "rapid_logistics"],
+                minCompleted: 2
             }
         }
     ]
