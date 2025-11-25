@@ -43,25 +43,34 @@
   }
 
   .talent-node{
-    width:140px;
-    margin:auto;
-    cursor:pointer;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    padding:6px 0;
-    touch-action:manipulation;
-  }
+  width:140px;
+  margin:auto;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding:6px 0;
+  touch-action:manipulation;
+  box-sizing:border-box;
+}
 
-  .talent-node-label{
-    margin-bottom:8px;
-    font-size:15px;
-    font-weight:600;
-    color:#e5e7eb;
-    text-shadow:0 0 4px #000;
-    max-width:130px;
-  }
+/* NEW: normalize label height so hexes stay aligned in the row */
+.talent-node-label{
+  margin-bottom:8px;
+  font-size:15px;
+  font-weight:600;
+  color:#e5e7eb;
+  text-shadow:0 0 4px #000;
+  max-width:130px;
+
+  min-height: 36px;              /* enough for up to two lines */
+  display:flex;
+  align-items:flex-end;          /* bottom-align the text within the label box */
+  justify-content:center;
+  text-align:center;
+}
+
 
   .talent-node-inner{
     width:112px;
@@ -207,8 +216,9 @@
     }
 
     .talent-node-label{
-      font-size:14px;
-      max-width:120px;
+    font-size:14px;
+    max-width:120px;
+    min-height: 34px;
     }
 
     .talent-node-inner{
@@ -241,6 +251,18 @@
       right:10px;
     }
   }
+  @media (prefers-color-scheme: light) {
+  .talent-node-label {
+    color:#111827;  /* dark slate for light mode */
+    text-shadow:none;
+  }
+}
+body.light-mode .talent-node-label,
+[data-theme="light"] .talent-node-label {
+  color:#111827;
+  text-shadow:none;
+}
+
 </style>
 <script src="/header.js" defer></script>
 </head>
