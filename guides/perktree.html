@@ -268,7 +268,204 @@ const talentTree = {
                 nodes: ["unified_assault", "rapid_logistics"],
                 minCompleted: 2
             }
+        },
+        {
+            id: "controlled_progression",
+            perkName: "Controlled Progression",
+            stat: "DEF increase when attacking buildings +2%",
+            maxLevel: 5,
+            costPerLevel: [7, 7, 7, 7, 7],
+            row: 6,
+            col: 2,
+            prereq: {
+                type: "all",
+                nodes: ["ammo_amplifier"],
+                minCompleted: 1
+            }
+        },
+        {
+            id: "dauntless_stand",
+            perkName: "Dauntless Stand",
+            stat: "DEF increase when defending buildings +2%",
+            maxLevel: 5,
+            costPerLevel: [7, 7, 7, 7, 7],
+            row: 6,
+            col: 4,
+            prereq: {
+                type: "all",
+                nodes: ["ammo_amplifier"],
+                minCompleted: 1
+            }
+        },
+        {
+            id: "incremental_resupply",
+            perkName: "Incremental Resupply",
+            stat: "All Units HP +2%",
+            maxLevel: 5,
+            costPerLevel: [7, 7, 7, 7, 7],
+            row: 7,
+            col: 3,
+            prereq: {
+                type: "all",
+                nodes: ["controlled_progression", "dauntless_stand"],
+                minCompleted: 2
+            }
+        },
+        {
+            id: "shark_scorpion_specialization_plus1",
+            perkName: "Shark Impact/Scorpion Sting",
+            stat: "Shark/Scorpion Specialization +1",
+            maxLevel: 1,
+            costPerLevel: [35],
+            row: 8,
+            col: 3,
+            prereq: {
+                type: "all",
+                nodes: ["incremental_resupply"],
+                minCompleted: 1
+            }
+        },
+        {
+            id: "caliber_enhancement",
+            perkName: "Caliber Enhancement",
+            stat: "DMG Decrease +1%",
+            maxLevel: 5,
+            costPerLevel: [17, 17, 17, 17, 17],
+            row: 8,
+            col: 2,
+            prereq: {
+                type: "all",
+                nodes: ["incremental_resupply"],
+                minCompleted: 1
+            }
+        },
+        {
+            id: "heavy_armor_layer",
+            perkName: "Heavy Armor Layer",
+            stat: "DMG Decrease +1%",
+            maxLevel: 5,
+            costPerLevel: [17, 17, 17, 17, 17],
+            row: 8,
+            col: 4,
+            prereq: {
+                type: "all",
+                nodes: ["incremental_resupply"],
+                minCompleted: 1
+            }
+        },
+        {
+            id: "all-out_focus",
+            perkName: "All-Out Focus",
+            stat: "All Units Attack +2%",
+            maxLevel: 5,
+            costPerLevel: [17, 17, 17, 17, 17],
+            row: 9,
+            col: 3,
+            prereq: {
+                type: "all",
+                nodes: ["caliber_enhancement", "heavy_armor_layer"],
+                minCompleted: 2
+            }
+        },
+        {
+            id: "sky_predator",
+            perkName: "Sky Predator",
+            stat: "Army - Air DMG Bonus +3%",
+            maxLevel: 5,
+            costPerLevel: [17, 17, 17, 17, 17],
+            row: 10,
+            col: 2,
+            prereq: {
+                type: "all",
+                nodes: ["all-out_focus"],
+                minCompleted: 1
+            }
+        },
+        {
+            id: "oceanic_predator",
+            perkName: "Oceanic Predator",
+            stat: "Air Force - Navy DMG Bonus +3%",
+            maxLevel: 5,
+            costPerLevel: [17, 17, 17, 17, 17],
+            row: 10,
+            col: 3,
+            prereq: {
+                type: "all",
+                nodes: ["all-out_focus"],
+                minCompleted: 1
+            }
+        },
+        {
+            id: "ground_predator",
+            perkName: "Ground Predator",
+            stat: "Navy - Army DMG Bonus +3%",
+            maxLevel: 5,
+            costPerLevel: [17, 17, 17, 17, 17],
+            row: 10,
+            col: 4,
+            prereq: {
+                type: "all",
+                nodes: ["all-out_focus"],
+                minCompleted: 1
+            }
+        },
+        {
+            id: "full_supply",
+            perkName: "Full Supply",
+            stat: "All Units HP +2%",
+            maxLevel: 5,
+            costPerLevel: [17, 17, 17, 17, 17],
+            row: 11,
+            col: 3,
+            prereq: {
+                type: "all",
+                nodes: ["sky_predator","oceanic_predator","ground_predator"],
+                minCompleted: 3
+            }
+        },
+        {
+            id: "shadow_of_the_shark",
+            perkName: "Shadow of the Shark",
+            stat: "Shark queue +1",
+            maxLevel: 1,
+            costPerLevel: [40],
+            row: 12,
+            col: 3,
+            prereq: {
+                type: "all",
+                nodes: ["full_supply"],
+                minCompleted: 1
+            }
+        },
+        {
+            id: "aim_calibration",
+            perkName: "Aim Calibration",
+            stat: "Damage Increase +4%",
+            maxLevel: 5,
+            costPerLevel: [17, 17, 17, 17, 17],
+            row: 12,
+            col: 2,
+            prereq: {
+                type: "all",
+                nodes: ["full_supply"],
+                minCompleted: 1
+            }
+        },
+        {
+            id: "light_armor_layer",
+            perkName: "Light Armor Layer",
+            stat: "Damage Decrease +4%",
+            maxLevel: 1,
+            costPerLevel: [17, 17, 17, 17, 17],
+            row: 12,
+            col: 4,
+            prereq: {
+                type: "all",
+                nodes: ["full_supply"],
+                minCompleted: 1
+            }
         }
+
     ]
 };
 
