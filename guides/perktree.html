@@ -81,12 +81,6 @@
     box-shadow: 0 0 20px rgba(26,212,107,0.8);
 }
 
-.talent-node-icon {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 8px;
-}
-
 .talent-level-text {
     font-size: 16px;
     font-weight: bold;
@@ -104,6 +98,46 @@
     box-shadow: 0 0 10px rgba(71,109,165,0.5);
     font-size: 18px;
 }
+.talent-node {
+    width: 140px;
+    margin: auto;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.talent-node-label {
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #e5e7eb;
+    text-shadow: 0 0 4px #000;
+}
+
+.talent-question {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    border: 2px solid #60a5fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+    font-size: 18px;
+    color: #bfdbfe;
+    background: rgba(15, 23, 42, 0.9);
+}
+
+.talent-stat-text {
+    margin-top: 4px;
+    font-size: 11px;
+    line-height: 1.2;
+    color: #9ca3af;
+    padding: 0 6px;
+}
+
 
 </style>
 <script src="/header.js" defer></script>
@@ -128,63 +162,63 @@ const talentTree = {
     pointsAvailable: 50,
     nodes: [
         {
-            id: "army_hp",
-            name: "Army HP",
-            icon: "https://via.placeholder.com/60x60/88f/000?text=HP",
+            id: "full_rest",
+            perkName: "Full Rest",
+            stat: "All Units HP +2 per tier",
             maxLevel: 5,
-            costPerLevel: [6,6,6,6,6],
+            costPerLevel: [6, 6, 6, 6, 6],
             row: 1,
             col: 3,
             prereq: null
         },
         {
             id: "army_atk",
-            name: "Army ATK",
-            icon: "https://via.placeholder.com/60x60/f88/000?text=ATK",
+            perkName: "Army Readiness",
+            stat: "Army ATK +2 per tier",
             maxLevel: 5,
-            costPerLevel: [6,6,6,6,6],
+            costPerLevel: [6, 6, 6, 6, 6],
             row: 2,
             col: 2,
             prereq: {
                 type: "all",
-                nodes: ["army_hp"],
+                nodes: ["full_rest"],
                 minCompleted: 1
             }
         },
         {
             id: "navy_atk",
-            name: "Navy ATK",
-            icon: "https://via.placeholder.com/60x60/8ff/000?text=NAV",
+            perkName: "Naval Readiness",
+            stat: "Navy ATK +2 per tier",
             maxLevel: 5,
-            costPerLevel: [6,6,6,6,6],
+            costPerLevel: [6, 6, 6, 6, 6],
             row: 2,
             col: 3,
             prereq: {
                 type: "all",
-                nodes: ["army_hp"],
+                nodes: ["full_rest"],
                 minCompleted: 1
             }
         },
         {
             id: "air_atk",
-            name: "Air ATK",
-            icon: "https://via.placeholder.com/60x60/ff8/000?text=AIR",
+            perkName: "Air Force Readiness",
+            stat: "Air ATK +2 per tier",
             maxLevel: 5,
-            costPerLevel: [6,6,6,6,6],
+            costPerLevel: [6, 6, 6, 6, 6],
             row: 2,
             col: 4,
             prereq: {
                 type: "all",
-                nodes: ["army_hp"],
+                nodes: ["full_rest"],
                 minCompleted: 1
             }
         },
         {
-            id: "defense_core",
-            name: "Defense Core",
-            icon: "https://via.placeholder.com/60x60/6cf/000?text=DEF",
+            id: "coordinated_defense",
+            perkName: "Coordinated Defense",
+            stat: "All Units DEF +2 per tier",
             maxLevel: 5,
-            costPerLevel: [7,7,7,7,7],
+            costPerLevel: [7, 7, 7, 7, 7],
             row: 3,
             col: 3,
             prereq: {
@@ -195,20 +229,21 @@ const talentTree = {
         },
         {
             id: "special",
-            name: "Special Node",
-            icon: "https://via.placeholder.com/60x60/f6f/000?text=SPC",
+            perkName: "Evolved Shark/Scorpion",
+            stat: "Special effect",
             maxLevel: 1,
             costPerLevel: [30],
             row: 4,
             col: 3,
             prereq: {
                 type: "all",
-                nodes: ["defense_core"],
+                nodes: ["coordinated_defense"],
                 minCompleted: 1
             }
         }
     ]
 };
+
 
 // Store current node levels
 const levels = {};
@@ -246,13 +281,16 @@ function renderTree() {
         el.style.gridColumn = node.col;
 
         el.innerHTML = `
+            <div class="talent-node-label">${node.perkName}</div>
             <div class="talent-node-inner">
-                <img src="${node.icon}" class="talent-node-icon">
+                <div class="talent-question">?</div>
                 <div class="talent-level-text">
                     <span class="current-level">0</span> / ${node.maxLevel}
                 </div>
+                <div class="talent-stat-text">${node.stat || ""}</div>
             </div>
         `;
+
 
         grid.appendChild(el);
     });
