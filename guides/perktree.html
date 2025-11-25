@@ -109,20 +109,36 @@
 }
 
 .talent-node-label {
-    margin-bottom: 6px;
-    font-size: 14px;
+    margin-bottom: 8px;     /* a bit more space */
+    font-size: 15px;        /* slightly larger */
     font-weight: 600;
     color: #e5e7eb;
     text-shadow: 0 0 4px #000;
 }
 
 .talent-stat-text {
-    margin-top: 4px;
-    font-size: 11px;
-    line-height: 1.2;
-    color: #9ca3af;
-    padding: 0 6px;
+    margin-top: 6px;
+    font-size: 12px;        /* up from 11 */
+    line-height: 1.3;
+    color: #cbd5f5;         /* a bit brighter than #9ca3af */
+    padding: 0 8px;
 }
+
+.tree-grid {
+    grid-auto-rows: 140px;  /* was 160px */
+    row-gap: 20px;          /* add this */
+}
+
+.talent-node.available .talent-node-inner {
+    border-color: #5cb3ff;
+    box-shadow: 0 0 16px rgba(92,179,255,0.9);
+    background: #111827;              /* slightly brighter */
+}
+
+.talent-node.locked .talent-node-inner {
+    opacity: 0.25;                    /* dim even more */
+}
+
 
 
 </style>
@@ -136,9 +152,11 @@
     <div id="tree" class="tree-grid"></div>
 </div>
 
-<div class="points-display">
-    Talent Points: <span id="points">50</span>
+<div class="points-display" style="top: 60px;">
+    Spent: <span id="points-spent">0</span>
+    <button id="reset-tree" style="margin-left: 10px;">Reset</button>
 </div>
+
 
 <script>
     // ---------------------------------------------------------
@@ -566,7 +584,20 @@ function drawLines() {
 // ---------------------------------------------------------------------
 function updateNodeStates() {
     const pointsDisplay = document.getElementById("points");
+    const spentDisplay = document.getElementById("points-spent");
+
+    // Calculate spent
+    const spent = talentTree.nodes.reduce((sum, node) => {
+        const level = levels[node.id] || 0;
+        // sum costPerLevel[0..level-1]
+        for (let i = 0; i < level; i++) {
+            sum += node.costPerLevel[i] || 0;
+        }
+        return sum;
+    }, 0);
+
     pointsDisplay.textContent = talentTree.pointsAvailable;
+    if (spentDisplay) spentDisplay.textContent = spent;
 
     talentTree.nodes.forEach(node => {
         const el = document.querySelector(`[data-id="${node.id}"]`);
@@ -586,6 +617,22 @@ function updateNodeStates() {
         el.querySelector(".current-level").textContent = level;
     });
 }
+// ---------------------------------------------------------
+// RESET TREE BUTTON
+// ---------------------------------------------------------
+document.getElementById("reset-tree")?.addEventListener("click", () => {
+    // Clear all levels
+    Object.keys(levels).forEach(k => delete levels[k]);
+
+    // Reset points
+    talentTree.pointsAvailable = 500; // or whatever your starting total is
+
+    // Redraw
+    updateNodeStates();
+    drawLines();
+});
+
+
 
 // ---------------------------------------------------------------------
 // Click Handler
@@ -607,6 +654,10 @@ document.addEventListener("click", e => {
     levels[node.id] = level + 1;
 
     updateNodeStates();
+});
+
+window.addEventListener("resize", () => {
+    drawLines();
 });
 
 // Initialize
