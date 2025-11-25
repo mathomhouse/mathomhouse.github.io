@@ -3,168 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perk Tree Prototype</title>
+<title>Perk Tree</title>
 <link rel="stylesheet" href="/styles/index.css" />
 <style>
-    body {
-    background: #0a0f1c;
-    color: white;
-    margin: 0;
-    font-family: sans-serif;
-}
-
-.tree-wrapper {
-    width: 100%;
-    height: 100vh;
-    overflow-y: auto;
-    position: relative;
-}
-
-#tree-lines {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.tree-grid {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(5, 140px);
-    grid-auto-rows: 160px;
-    justify-content: center;
-    padding-top: 50px;
-    padding-bottom: 200px;
-}
-
-.talent-node {
-    width: 110px;
-    height: 120px;
-    margin: auto;
-    cursor: pointer;
-}
-
-.talent-node-inner {
-    width: 100%;
-    height: 100%;
-    clip-path: polygon(
-        25% 0%, 75% 0%,
-        100% 50%,
-        75% 100%, 25% 100%,
-        0% 50%
-    );
-    background: #1d2333;
-    border: 3px solid #476da5;
-    box-shadow: 0 0 8px rgba(71,109,165,0.5);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    padding-bottom: 10px;
-}
-
-.talent-node.locked .talent-node-inner {
-    opacity: 0.35;
-    border-color: #2c2c2c;
-    box-shadow: none;
-}
-
-.talent-node.available .talent-node-inner {
-    border-color: #5cb3ff;
-    box-shadow: 0 0 12px rgba(92,179,255,0.6);
-}
-
-.talent-node.maxed .talent-node-inner {
-    border-color: #1ad46b;
-    box-shadow: 0 0 20px rgba(26,212,107,0.8);
-}
-
-.talent-level-text {
-    font-size: 16px;
-    font-weight: bold;
-    text-shadow: 0 0 5px black;
-}
-
-.points-display {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    background: #1d2333;
-    padding: 8px 12px;
-    border: 2px solid #476da5;
-    border-radius: 6px;
-    box-shadow: 0 0 10px rgba(71,109,165,0.5);
-    font-size: 18px;
-}
-.talent-node {
-    width: 140px;
-    margin: auto;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.talent-node-label {
-    margin-bottom: 8px;     /* a bit more space */
-    font-size: 15px;        /* slightly larger */
-    font-weight: 600;
-    color: #e5e7eb;
-    text-shadow: 0 0 4px #000;
-}
-
-.talent-stat-text {
-    margin-top: 6px;
-    font-size: 12px;        /* up from 11 */
-    line-height: 1.3;
-    color: #cbd5f5;         /* a bit brighter than #9ca3af */
-    padding: 0 8px;
-}
-
-.tree-grid {
-    grid-auto-rows: 140px;  /* was 160px */
-    row-gap: 20px;          /* add this */
-}
-
-.talent-node.available .talent-node-inner {
-    border-color: #5cb3ff;
-    box-shadow: 0 0 16px rgba(92,179,255,0.9);
-    background: #111827;              /* slightly brighter */
-}
-
-.talent-node.locked .talent-node-inner {
-    opacity: 0.25;                    /* dim even more */
-}
-
-
-
+body { background:#0a0f1c; color:#fff; margin:0; font-family:sans-serif;}
+.tree-wrapper{width:100%;height:100vh;overflow-y:auto;position:relative;}
+#tree-lines{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;}
+.tree-grid{position:relative;display:grid;grid-template-columns:repeat(5,140px);grid-auto-rows:160px;justify-content:center;padding-top:50px;padding-bottom:200px;}
+.talent-node{width:140px;margin:auto;cursor:pointer;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.talent-node-label{margin-bottom:8px;font-size:15px;font-weight:600;color:#e5e7eb;text-shadow:0 0 4px #000;}
+.talent-node-inner{width:110px;height:120px;clip-path:polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%);background:#1d2333;border:3px solid #476da5;box-shadow:0 0 8px rgba(71,109,165,0.5);display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding-bottom:10px;}
+.talent-level-text{font-size:14px;font-weight:600;}
+.talent-stat-text{margin-top:6px;font-size:12px;line-height:1.3;color:#cbd5f5;padding:0 8px;}
+.node-details{position:fixed;right:20px;bottom:20px;max-width:320px;background:#111827;border:1px solid #4b5563;border-radius:10px;padding:12px 16px 14px;box-shadow:0 12px 25px rgba(0,0,0,0.6);font-size:14px;z-index:50;}
+.hidden{display:none;}
+.node-details-close{position:absolute;top:4px;right:8px;border:none;background:transparent;color:#9ca3af;font-size:18px;cursor:pointer;}
 </style>
 <script src="/header.js" defer></script>
 </head>
 <body>
-    <header id="header-placeholder"></header>
+  <header id="header-placeholder"></header>
 
 <div class="tree-wrapper">
     <svg id="tree-lines"></svg>
     <div id="tree" class="tree-grid"></div>
 </div>
 
-<div class="points-display">
-    Talent Points: <span id="points">500</span>
-    &nbsp;|&nbsp;
-    Spent: <span id="points-spent">0</span>
-    <button id="reset-tree" style="margin-left: 10px;">Reset</button>
+<div id="node-details" class="node-details hidden">
+  <button class="node-details-close">×</button>
+  <h2 id="detail-name"></h2>
+  <p id="detail-stat"></p>
+  <p id="detail-tiers"></p>
+  <p id="detail-cost"></p>
+  <p id="detail-prereq"></p>
 </div>
 
-
-
 <script>
-    // ---------------------------------------------------------
-// JSON: sample perk tree data (you can expand later)
-// ---------------------------------------------------------
 const talentTree = {
     pointsAvailable: 500,
     nodes: [
@@ -490,181 +364,91 @@ const talentTree = {
     ]
 };
 
-
-
-// Store current node levels
-const levels = {};
-
-// ---------------------------------------------------------------------
-// Utility: Check prerequisite completion
-// ---------------------------------------------------------------------
-function isNodeMaxed(node) {
-    return (levels[node.id] || 0) >= node.maxLevel;
-}
-
-function checkPrereq(node) {
-    if (!node.prereq) return true;
-
-    const completed = node.prereq.nodes.filter(id => {
-        const n = talentTree.nodes.find(x => x.id === id);
-        return isNodeMaxed(n);
-    }).length;
-
-    return completed >= node.prereq.minCompleted;
-}
-
-// ---------------------------------------------------------------------
-// Rendering
-// ---------------------------------------------------------------------
-function renderTree() {
-    const grid = document.getElementById("tree");
-    grid.innerHTML = "";
-
-    talentTree.nodes.forEach(node => {
-        const el = document.createElement("div");
-        el.className = "talent-node locked";
-        el.dataset.id = node.id;
-        el.style.gridRow = node.row;
-        el.style.gridColumn = node.col;
-
-        el.innerHTML = `
+function renderTree(){
+    const grid=document.getElementById("tree");
+    grid.innerHTML="";
+    talentTree.nodes.forEach(node=>{
+        const el=document.createElement("div");
+        el.className="talent-node";
+        el.dataset.id=node.id;
+        el.style.gridRow=node.row;
+        el.style.gridColumn=node.col;
+        const tierLabel=node.maxLevel===1?"1 tier":node.maxLevel+" tiers";
+        el.innerHTML=`
             <div class="talent-node-label">${node.perkName}</div>
             <div class="talent-node-inner">
-                <div class="talent-level-text">
-                    <span class="current-level">0</span> / ${node.maxLevel}
-                </div>
-                <div class="talent-stat-text">${node.stat || ""}</div>
+                <div class="talent-level-text">${tierLabel}</div>
+                <div class="talent-stat-text">${node.stat}</div>
             </div>
         `;
-
-
         grid.appendChild(el);
     });
-
     drawLines();
-    updateNodeStates();
 }
 
-// ---------------------------------------------------------------------
-// Line Drawing using SVG
-// ---------------------------------------------------------------------
-function drawLines() {
-    const svg = document.getElementById("tree-lines");
-    svg.innerHTML = "";
-
-    talentTree.nodes.forEach(node => {
-        if (!node.prereq) return;
-
-        node.prereq.nodes.forEach(parentId => {
-            const parentEl = document.querySelector(`[data-id="${parentId}"]`);
-            const childEl = document.querySelector(`[data-id="${node.id}"]`);
-            if (!parentEl || !childEl) return;
-
-            const p = parentEl.getBoundingClientRect();
-            const c = childEl.getBoundingClientRect();
-            const svgRect = svg.getBoundingClientRect();
-
-            const x1 = p.left + p.width / 2 - svgRect.left;
-            const y1 = p.top + p.height / 2 - svgRect.top;
-            const x2 = c.left + c.width / 2 - svgRect.left;
-            const y2 = c.top + c.height / 2 - svgRect.top;
-
-            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-            line.setAttribute("x1", x1);
-            line.setAttribute("y1", y1);
-            line.setAttribute("x2", x2);
-            line.setAttribute("y2", y2);
-            line.setAttribute("stroke", "#3ea0ff");
-            line.setAttribute("stroke-width", "4");
-
+function drawLines(){
+    const svg=document.getElementById("tree-lines");
+    svg.innerHTML="";
+    const svgRect=svg.getBoundingClientRect();
+    talentTree.nodes.forEach(node=>{
+        if(!node.prereq||!node.prereq.nodes)return;
+        const child=document.querySelector(`[data-id="${node.id}"]`);
+        if(!child)return;
+        const c=child.getBoundingClientRect();
+        const x2=c.left+c.width/2-svgRect.left;
+        const y2=c.top+c.height/2-svgRect.top;
+        node.prereq.nodes.forEach(pid=>{
+            const parent=document.querySelector(`[data-id="${pid}"]`);
+            if(!parent)return;
+            const p=parent.getBoundingClientRect();
+            const x1=p.left+p.width/2-svgRect.left;
+            const y1=p.top+p.height/2-svgRect.top;
+            const line=document.createElementNS("http://www.w3.org/2000/svg","line");
+            line.setAttribute("x1",x1);
+            line.setAttribute("y1",y1);
+            line.setAttribute("x2",x2);
+            line.setAttribute("y2",y2);
+            line.setAttribute("stroke","#3ea0ff");
+            line.setAttribute("stroke-width","4");
             svg.appendChild(line);
         });
     });
 }
 
-// ---------------------------------------------------------------------
-// Node State Updates
-// ---------------------------------------------------------------------
-function updateNodeStates() {
-    const pointsDisplay = document.getElementById("points");
-    const spentDisplay = document.getElementById("points-spent");
-
-    // Calculate spent
-    const spent = talentTree.nodes.reduce((sum, node) => {
-        const level = levels[node.id] || 0;
-        for (let i = 0; i < level; i++) {
-            sum += node.costPerLevel[i] || 0;
-        }
-        return sum;
-    }, 0);
-
-    if (pointsDisplay) pointsDisplay.textContent = talentTree.pointsAvailable;
-    if (spentDisplay) spentDisplay.textContent = spent;
-
-    talentTree.nodes.forEach(node => {
-        const el = document.querySelector(`[data-id="${node.id}"]`);
-        if (!el) return;
-
-        const level = levels[node.id] || 0;
-        el.classList.remove("locked", "available", "maxed");
-
-        if (level >= node.maxLevel) {
-            el.classList.add("maxed");
-        } else if (checkPrereq(node)) {
-            el.classList.add("available");
-        } else {
-            el.classList.add("locked");
-        }
-
-        el.querySelector(".current-level").textContent = level;
-    });
+function showDetails(node){
+    const panel=document.getElementById("node-details");
+    document.getElementById("detail-name").textContent=node.perkName;
+    document.getElementById("detail-stat").textContent=node.stat;
+    document.getElementById("detail-tiers").textContent="Tiers: "+(node.maxLevel===1?"1 tier":node.maxLevel+" tiers");
+    const total=node.costPerLevel.reduce((a,b)=>a+b,0);
+    document.getElementById("detail-cost").textContent="Cost per tier: "+node.costPerLevel.join(", ")+" (Total "+total+")";
+    let prereq="Starting node (no prerequisites)";
+    if(node.prereq){
+        const names=node.prereq.nodes.map(id=>{
+            const n=talentTree.nodes.find(x=>x.id===id);
+            return n?n.perkName:id;
+        }).join(", ");
+        if(node.prereq.type==="any" && node.prereq.minCompleted<node.prereq.nodes.length)
+            prereq="Requires at least "+node.prereq.minCompleted+" of: "+names;
+        else prereq="Requires all of: "+names;
+    }
+    document.getElementById("detail-prereq").textContent=prereq;
+    panel.classList.remove("hidden");
 }
-// ---------------------------------------------------------
-// RESET TREE BUTTON
-// ---------------------------------------------------------
-document.getElementById("reset-tree")?.addEventListener("click", () => {
-    // Clear all levels
-    Object.keys(levels).forEach(k => delete levels[k]);
 
-    // Reset points
-    talentTree.pointsAvailable = 500; // or whatever your starting total is
-
-    // Redraw
-    updateNodeStates();
-    drawLines();
+document.addEventListener("click",e=>{
+    if(e.target.closest(".node-details-close")){
+        document.getElementById("node-details").classList.add("hidden");
+        return;
+    }
+    const nodeEl=e.target.closest(".talent-node");
+    if(!nodeEl)return;
+    const node=talentTree.nodes.find(n=>n.id===nodeEl.dataset.id);
+    showDetails(node);
 });
 
-
-
-// ---------------------------------------------------------------------
-// Click Handler
-// ---------------------------------------------------------------------
-document.addEventListener("click", e => {
-    const nodeEl = e.target.closest(".talent-node");
-    if (!nodeEl) return;
-
-    const node = talentTree.nodes.find(n => n.id === nodeEl.dataset.id);
-    const level = levels[node.id] || 0;
-
-    if (!checkPrereq(node)) return;
-    if (level >= node.maxLevel) return;
-
-    const cost = node.costPerLevel[level];
-    if (talentTree.pointsAvailable < cost) return;
-
-    talentTree.pointsAvailable -= cost;
-    levels[node.id] = level + 1;
-
-    updateNodeStates();
-});
-
-window.addEventListener("resize", () => {
-    drawLines();
-});
-
-// Initialize
-window.onload = renderTree;
-
+window.addEventListener("resize",drawLines);
+window.onload=renderTree;
 </script>
 </body>
 </html>
