@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perk Tree</title>
+<title>Perk Trees</title>
 <link rel="stylesheet" href="/styles/index.css" />
+<script src="/header.js" defer></script>
 <style>
   body {
     background:#0a0f1c;
@@ -13,17 +14,66 @@
     font-family:sans-serif;
   }
 
+  /* Tabs (from remould page) */
+  .tabs {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin:12px 0 4px;
+    gap:8px;
+  }
+  .tabs button {
+    padding:8px 18px;
+    font-size:15px;
+    border-radius:var(--border-radius);
+    border:2px solid transparent;
+    background:var(--accent-color);
+    color:white;
+    cursor:pointer;
+    margin:0;
+    transition:var(--transition-speed);
+  }
+  .tabs button:hover,
+  .tabs button.active {
+    background:var(--accent-hover);
+    transform:scale(1.05);
+  }
+  .tab-content {
+    display:none;
+  }
+  .tab-content.active {
+    display:block;
+  }
+
+  .page-container{
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 12px 24px;
+    box-sizing:border-box;
+  }
+
+  .page-container h1{
+    margin:12px 0 4px;
+    font-size:1.6rem;
+  }
+
+  .page-container p.page-intro{
+    margin:0 0 10px;
+    font-size:0.95rem;
+    color:#cbd5f5;
+  }
+
   .tree-wrapper{
     width:100%;
     height:100vh;
     overflow-y:auto;
-    overflow-x:hidden; /* no horizontal scroll */
+    overflow-x:hidden;
     position:relative;
     padding-inline:12px;
     box-sizing:border-box;
   }
 
-  #tree-lines{
+  svg[id^="tree-lines"]{
     position:absolute;
     top:0;
     left:0;
@@ -56,13 +106,11 @@
     box-sizing:border-box;
   }
 
-  /* Label: fixed height so hexes in same row stay aligned */
   .talent-node-label{
     margin-bottom:8px;
     font-size:15px;
     font-weight:700;
     max-width:130px;
-
     min-height:36px;
     display:flex;
     align-items:flex-end;
@@ -81,7 +129,7 @@
       0 0 0 1px rgba(15, 23, 42, 0.9);
     display:flex;
     flex-direction:column;
-    justify-content:center; /* center vertically */
+    justify-content:center;
     align-items:center;
     padding-bottom:0;
     position:relative;
@@ -132,7 +180,7 @@
     padding:0 10px;
   }
 
-  /* Detail panel (desktop default) */
+  /* Detail panel */
   .node-details{
     position:fixed;
     right:20px;
@@ -141,7 +189,7 @@
     background:rgba(15,23,42,0.95);
     border:1px solid rgba(148,163,184,0.65);
     border-radius:14px;
-    padding:18px 18px 16px; /* more top padding so title/X don’t collide */
+    padding:18px 18px 16px;
     box-shadow:0 18px 40px rgba(0,0,0,0.65);
     font-size:14px;
     z-index:50;
@@ -171,7 +219,7 @@
 
   .node-details h2{
     margin:0 0 6px 0;
-    padding-right:40px; /* leave room for the X so text never flows under it */
+    padding-right:40px;
     font-size:15px;
     font-weight:700;
     color:#e5e7eb;
@@ -198,13 +246,16 @@
 
   /* Mobile / small screens */
   @media (max-width: 768px){
+    .page-container{
+      padding-inline:8px;
+    }
+
     .tree-wrapper{
       padding-inline:6px;
-      overflow-x:hidden; /* kill horizontal scroll on mobile too */
+      overflow-x:hidden;
     }
 
     .tree-grid{
-      /* keep 5 columns so existing col indices still center correctly */
       grid-template-columns:repeat(5, 1fr);
       grid-auto-rows:140px;
       padding-top:24px;
@@ -255,489 +306,552 @@
     }
   }
 </style>
-<script src="/header.js" defer></script>
 </head>
 <body>
-  <header id="header-placeholder"></header>
+<header id="header-placeholder"></header>
 
-  <div class="tree-wrapper">
-    <svg id="tree-lines"></svg>
-    <div id="tree" class="tree-grid"></div>
+<div class="page-container">
+  <h1>Talent Trees</h1>
+  <p class="page-intro">
+    Tap a node to see its details. Use the tabs to switch between different trees.
+  </p>
+
+  <div class="tabs">
+    <button class="tab-button active" onclick="openTab('tree1-tab', this)">Tree 1</button>
+    <button class="tab-button" onclick="openTab('tree2-tab', this)">Tree 2</button>
   </div>
 
-  <div id="node-details" class="node-details hidden">
-    <button class="node-details-close">×</button>
-    <h2 id="detail-name"></h2>
-
-    <p class="node-detail-line">
-      <span class="node-detail-label">Stat</span>
-      <span id="detail-stat" class="node-detail-value"></span>
-    </p>
-
-    <p class="node-detail-line">
-      <span class="node-detail-label">Tiers</span>
-      <span id="detail-tiers" class="node-detail-value"></span>
-    </p>
-
-    <p class="node-detail-line">
-      <span class="node-detail-label">Cost</span>
-      <span id="detail-cost" class="node-detail-value"></span>
-    </p>
-
-    <p class="node-detail-line">
-      <span class="node-detail-label">Requirements</span>
-      <span id="detail-prereq" class="node-detail-value"></span>
-    </p>
+  <!-- Tree 1 tab -->
+  <div id="tree1-tab" class="tab-content active">
+    <div class="tree-wrapper">
+      <svg id="tree-lines-1"></svg>
+      <div id="tree-grid-1" class="tree-grid"></div>
+    </div>
   </div>
 
-  <script>
-  const talentTree = {
-    pointsAvailable: 500,
-    nodes: [
-      {
-        id: "full_rest",
-        perkName: "Full Rest",
-        stat: "All Units HP +2%",
-        maxLevel: 5,
-        costPerLevel: [6, 6, 6, 6, 6],
-        row: 1,
-        col: 3,
-        prereq: null
-      },
-      {
-        id: "army_atk",
-        perkName: "Army Readiness",
-        stat: "Army Attack +2%",
-        maxLevel: 5,
-        costPerLevel: [6, 6, 6, 6, 6],
-        row: 2,
-        col: 2,
-        prereq: {
-          type: "all",
-          nodes: ["full_rest"],
-          minCompleted: 1
-        }
-      },
-      {
-        id: "navy_atk",
-        perkName: "Naval Readiness",
-        stat: "Navy Attack +2%",
-        maxLevel: 5,
-        costPerLevel: [6, 6, 6, 6, 6],
-        row: 2,
-        col: 3,
-        prereq: {
-          type: "all",
-          nodes: ["full_rest"],
-          minCompleted: 1
-        }
-      },
-      {
-        id: "air_atk",
-        perkName: "Air Force Readiness",
-        stat: "Air Force Attack +2%",
-        maxLevel: 5,
-        costPerLevel: [6, 6, 6, 6, 6],
-        row: 2,
-        col: 4,
-        prereq: {
-          type: "all",
-          nodes: ["full_rest"],
-          minCompleted: 1
-        }
-      },
-      {
-        id: "coordinated_defense",
-        perkName: "Coordinated Defense",
-        stat: "All Units DEF +2%",
-        maxLevel: 5,
-        costPerLevel: [6, 6, 6, 6, 6],
-        row: 3,
-        col: 3,
-        prereq: {
-          type: "all",
-          nodes: ["army_atk", "navy_atk", "air_atk"],
-          minCompleted: 3
-        }
-      },
-      {
-        id: "shark_scorpion_tier_plus1",
-        perkName: "Evolved Shark/Scorpion",
-        stat: "Shark/Scorpion Tier +1",
-        maxLevel: 1,
-        costPerLevel: [30],
-        row: 4,
-        col: 3,
-        prereq: {
-          type: "all",
-          nodes: ["coordinated_defense"],
-          minCompleted: 1
-        }
-      },
-      {
-        id: "unified_assault",
-        perkName: "Unified Assault",
-        stat: "All Units Attack +2%",
-        maxLevel: 5,
-        costPerLevel: [7, 7, 7, 7, 7],
-        row: 4,
-        col: 2,
-        prereq: {
-          type: "all",
-          nodes: ["coordinated_defense"],
-          minCompleted: 1
-        }
-      },
-      {
-        id: "rapid_logistics",
-        perkName: "Rapid Logistics",
-        stat: "All Units HP +2%",
-        maxLevel: 5,
-        costPerLevel: [7, 7, 7, 7, 7],
-        row: 4,
-        col: 4,
-        prereq: {
-          type: "all",
-          nodes: ["coordinated_defense"],
-          minCompleted: 1
-        }
-      },
-      {
-        id: "ammo_amplifier",
-        perkName: "Ammo Amplifier",
-        stat: "All Units Attack +2%",
-        maxLevel: 5,
-        costPerLevel: [7, 7, 7, 7, 7],
-        row: 5,
-        col: 3,
-        prereq: {
-          type: "all",
-          nodes: ["unified_assault", "rapid_logistics"],
-          minCompleted: 2
-        }
-      },
-      {
-        id: "controlled_progression",
-        perkName: "Controlled Progression",
-        stat: "DEF increase when attacking buildings +2%",
-        maxLevel: 5,
-        costPerLevel: [7, 7, 7, 7, 7],
-        row: 6,
-        col: 2,
-        prereq: {
-          type: "all",
-          nodes: ["ammo_amplifier"],
-          minCompleted: 1
-        }
-      },
-      {
-        id: "dauntless_stand",
-        perkName: "Dauntless Stand",
-        stat: "DEF increase when defending buildings +2%",
-        maxLevel: 5,
-        costPerLevel: [7, 7, 7, 7, 7],
-        row: 6,
-        col: 4,
-        prereq: {
-          type: "all",
-          nodes: ["ammo_amplifier"],
-          minCompleted: 1
-        }
-      },
-      {
-        id: "incremental_resupply",
-        perkName: "Incremental Resupply",
-        stat: "All Units HP +2%",
-        maxLevel: 5,
-        costPerLevel: [7, 7, 7, 7, 7],
-        row: 7,
-        col: 3,
-        prereq: {
-          type: "all",
-          nodes: ["controlled_progression", "dauntless_stand"],
-          minCompleted: 2
-        }
-      },
-      {
-        id: "shark_scorpion_specialization_plus1",
-        perkName: "Shark Impact/Scorpion Sting",
-        stat: "Shark/Scorpion Specialization +1",
-        maxLevel: 1,
-        costPerLevel: [35],
-        row: 8,
-        col: 3,
-        prereq: {
-          type: "all",
-          nodes: ["incremental_resupply"],
-          minCompleted: 1
-        }
-      },
-      {
-        id: "caliber_enhancement",
-        perkName: "Caliber Enhancement",
-        stat: "DMG Decrease +1%",
-        maxLevel: 5,
-        costPerLevel: [17, 17, 17, 17, 17],
-        row: 8,
-        col: 2,
-        prereq: {
-          type: "all",
-          nodes: ["incremental_resupply"],
-          minCompleted: 1
-        }
-      },
-      {
-        id: "heavy_armor_layer",
-        perkName: "Heavy Armor Layer",
-        stat: "DMG Decrease +1%",
-        maxLevel: 5,
-        costPerLevel: [17, 17, 17, 17, 17],
-        row: 8,
-        col: 4,
-        prereq: {
-          type: "all",
-          nodes: ["incremental_resupply"],
-          minCompleted: 1
-        }
-      },
-      {
-        id: "all-out_focus",
-        perkName: "All-Out Focus",
-        stat: "All Units Attack +2%",
-        maxLevel: 5,
-        costPerLevel: [17, 17, 17, 17, 17],
-        row: 9,
-        col: 3,
-        prereq: {
-          type: "all",
-          nodes: ["caliber_enhancement", "heavy_armor_layer"],
-          minCompleted: 2
-        }
-      },
-      {
-        id: "sky_predator",
-        perkName: "Sky Predator",
-        stat: "Army - Air DMG Bonus +3%",
-        maxLevel: 5,
-        costPerLevel: [17, 17, 17, 17, 17],
-        row: 10,
-        col: 2,
-        prereq: {
-          type: "all",
-          nodes: ["all-out_focus"],
-          minCompleted: 1
-        }
-      },
-      {
-        id: "oceanic_predator",
-        perkName: "Oceanic Predator",
-        stat: "Air Force - Navy DMG Bonus +3%",
-        maxLevel: 5,
-        costPerLevel: [17, 17, 17, 17, 17],
-        row: 10,
-        col: 3,
-        prereq: {
-          type: "all",
-          nodes: ["all-out_focus"],
-          minCompleted: 1
-        }
-      },
-      {
-        id: "ground_predator",
-        perkName: "Ground Predator",
-        stat: "Navy - Army DMG Bonus +3%",
-        maxLevel: 5,
-        costPerLevel: [17, 17, 17, 17, 17],
-        row: 10,
-        col: 4,
-        prereq: {
-          type: "all",
-          nodes: ["all-out_focus"],
-          minCompleted: 1
-        }
-      },
-      {
-        id: "full_supply",
-        perkName: "Full Supply",
-        stat: "All Units HP +2%",
-        maxLevel: 5,
-        costPerLevel: [17, 17, 17, 17, 17],
-        row: 11,
-        col: 3,
-        prereq: {
-          type: "all",
-          nodes: ["sky_predator","oceanic_predator","ground_predator"],
-          minCompleted: 3
-        }
-      },
-      {
-        id: "shadow_of_the_shark",
-        perkName: "Shadow of the Shark",
-        stat: "Shark queue +1",
-        maxLevel: 1,
-        costPerLevel: [40],
-        row: 12,
-        col: 3,
-        prereq: {
-          type: "all",
-          nodes: ["full_supply"],
-          minCompleted: 1
-        }
-      },
-      {
-        id: "aim_calibration",
-        perkName: "Aim Calibration",
-        stat: "Damage Increase +4%",
-        maxLevel: 5,
-        costPerLevel: [17, 17, 17, 17, 17],
-        row: 12,
-        col: 2,
-        prereq: {
-          type: "all",
-          nodes: ["full_supply"],
-          minCompleted: 1
-        }
-      },
-      {
-        id: "light_armor_layer",
-        perkName: "Light Armor Layer",
-        stat: "Damage Decrease +4%",
-        maxLevel: 5,
-        costPerLevel: [17, 17, 17, 17, 17],
-        row: 12,
-        col: 4,
-        prereq: {
-          type: "all",
-          nodes: ["full_supply"],
-          minCompleted: 1
-        }
+  <!-- Tree 2 tab -->
+  <div id="tree2-tab" class="tab-content">
+    <div class="tree-wrapper">
+      <svg id="tree-lines-2"></svg>
+      <div id="tree-grid-2" class="tree-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Shared details panel for both trees -->
+<div id="node-details" class="node-details hidden">
+  <button class="node-details-close">×</button>
+  <h2 id="detail-name"></h2>
+
+  <p class="node-detail-line">
+    <span class="node-detail-label">Stat</span>
+    <span id="detail-stat" class="node-detail-value"></span>
+  </p>
+
+  <p class="node-detail-line">
+    <span class="node-detail-label">Tiers</span>
+    <span id="detail-tiers" class="node-detail-value"></span>
+  </p>
+
+  <p class="node-detail-line">
+    <span class="node-detail-label">Cost</span>
+    <span id="detail-cost" class="node-detail-value"></span>
+  </p>
+
+  <p class="node-detail-line">
+    <span class="node-detail-label">Requirements</span>
+    <span id="detail-prereq" class="node-detail-value"></span>
+  </p>
+</div>
+
+<script>
+/* ---------- DATA (Tree 1 & Tree 2) ---------- */
+
+const talentTree1 = {
+  pointsAvailable: 500,
+  nodes: [
+    {
+      id: "full_rest",
+      perkName: "Full Rest",
+      stat: "All Units HP +2%",
+      maxLevel: 5,
+      costPerLevel: [6, 6, 6, 6, 6],
+      row: 1,
+      col: 3,
+      prereq: null
+    },
+    {
+      id: "army_atk",
+      perkName: "Army Readiness",
+      stat: "Army Attack +2%",
+      maxLevel: 5,
+      costPerLevel: [6, 6, 6, 6, 6],
+      row: 2,
+      col: 2,
+      prereq: {
+        type: "all",
+        nodes: ["full_rest"],
+        minCompleted: 1
       }
-    ]
-  };
-
-  function renderTree(){
-    const grid = document.getElementById("tree");
-    grid.innerHTML = "";
-    talentTree.nodes.forEach(node => {
-      const el = document.createElement("div");
-      el.className = "talent-node";
-      el.dataset.id = node.id;
-      el.style.gridRow = node.row;
-      el.style.gridColumn = node.col;
-      const tierLabel = node.maxLevel === 1 ? "1 tier" : node.maxLevel + " tiers";
-      el.innerHTML = `
-        <div class="talent-node-label">${node.perkName}</div>
-        <div class="talent-node-inner">
-          <div class="talent-level-text">${tierLabel}</div>
-          <div class="talent-stat-text">${node.stat}</div>
-        </div>
-      `;
-      grid.appendChild(el);
-    });
-  }
-
-  function resizeSVG(){
-    const grid = document.getElementById("tree");
-    const svg = document.getElementById("tree-lines");
-    if (!grid || !svg) return;
-    svg.style.height = grid.scrollHeight + "px";
-  }
-
-  function drawLines(){
-    resizeSVG();
-    const svg = document.getElementById("tree-lines");
-    svg.innerHTML = "";
-    const svgRect = svg.getBoundingClientRect();
-    talentTree.nodes.forEach(node => {
-      if (!node.prereq || !node.prereq.nodes) return;
-      const child = document.querySelector(`[data-id="${node.id}"]`);
-      if (!child) return;
-      const c = child.getBoundingClientRect();
-      const x2 = c.left + c.width/2 - svgRect.left;
-      const y2 = c.top + c.height/2 - svgRect.top;
-      node.prereq.nodes.forEach(pid => {
-        const parent = document.querySelector(`[data-id="${pid}"]`);
-        if (!parent) return;
-        const p = parent.getBoundingClientRect();
-        const x1 = p.left + p.width/2 - svgRect.left;
-        const y1 = p.top + p.height/2 - svgRect.top;
-        const line = document.createElementNS("http://www.w3.org/2000/svg","line");
-        line.setAttribute("x1", x1);
-        line.setAttribute("y1", y1);
-        line.setAttribute("x2", x2);
-        line.setAttribute("y2", y2);
-        line.setAttribute("stroke", "#3ea0ff");
-        line.setAttribute("stroke-width", "4");
-        line.setAttribute("stroke-linecap", "round");
-        svg.appendChild(line);
-      });
-    });
-  }
-
-  function showDetails(node){
-    const panel = document.getElementById("node-details");
-    document.getElementById("detail-name").textContent = node.perkName;
-    document.getElementById("detail-stat").textContent = node.stat;
-    document.getElementById("detail-tiers").textContent =
-      node.maxLevel === 1 ? "1 tier" : `${node.maxLevel} tiers`;
-    const total = node.costPerLevel.reduce((a,b)=>a+b,0);
-    document.getElementById("detail-cost").textContent =
-      `Per tier: ${node.costPerLevel.join(", ")} (Total ${total})`;
-    let prereq = "Starting node (no prerequisites)";
-    if (node.prereq){
-      const names = node.prereq.nodes.map(id => {
-        const n = talentTree.nodes.find(x => x.id === id);
-        return n ? n.perkName : id;
-      }).join(", ");
-      if (node.prereq.type === "any" && node.prereq.minCompleted < node.prereq.nodes.length){
-        prereq = `Requires at least ${node.prereq.minCompleted} of: ${names}`;
-      } else {
-        prereq = `Requires all of: ${names}`;
+    },
+    {
+      id: "navy_atk",
+      perkName: "Naval Readiness",
+      stat: "Navy Attack +2%",
+      maxLevel: 5,
+      costPerLevel: [6, 6, 6, 6, 6],
+      row: 2,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["full_rest"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "air_atk",
+      perkName: "Air Force Readiness",
+      stat: "Air Force Attack +2%",
+      maxLevel: 5,
+      costPerLevel: [6, 6, 6, 6, 6],
+      row: 2,
+      col: 4,
+      prereq: {
+        type: "all",
+        nodes: ["full_rest"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "coordinated_defense",
+      perkName: "Coordinated Defense",
+      stat: "All Units DEF +2%",
+      maxLevel: 5,
+      costPerLevel: [6, 6, 6, 6, 6],
+      row: 3,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["army_atk", "navy_atk", "air_atk"],
+        minCompleted: 3
+      }
+    },
+    {
+      id: "shark_scorpion_tier_plus1",
+      perkName: "Evolved Shark/Scorpion",
+      stat: "Shark/Scorpion Tier +1",
+      maxLevel: 1,
+      costPerLevel: [30],
+      row: 4,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["coordinated_defense"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "unified_assault",
+      perkName: "Unified Assault",
+      stat: "All Units Attack +2%",
+      maxLevel: 5,
+      costPerLevel: [7, 7, 7, 7, 7],
+      row: 4,
+      col: 2,
+      prereq: {
+        type: "all",
+        nodes: ["coordinated_defense"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "rapid_logistics",
+      perkName: "Rapid Logistics",
+      stat: "All Units HP +2%",
+      maxLevel: 5,
+      costPerLevel: [7, 7, 7, 7, 7],
+      row: 4,
+      col: 4,
+      prereq: {
+        type: "all",
+        nodes: ["coordinated_defense"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "ammo_amplifier",
+      perkName: "Ammo Amplifier",
+      stat: "All Units Attack +2%",
+      maxLevel: 5,
+      costPerLevel: [7, 7, 7, 7, 7],
+      row: 5,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["unified_assault", "rapid_logistics"],
+        minCompleted: 2
+      }
+    },
+    {
+      id: "controlled_progression",
+      perkName: "Controlled Progression",
+      stat: "DEF increase when attacking buildings +2%",
+      maxLevel: 5,
+      costPerLevel: [7, 7, 7, 7, 7],
+      row: 6,
+      col: 2,
+      prereq: {
+        type: "all",
+        nodes: ["ammo_amplifier"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "dauntless_stand",
+      perkName: "Dauntless Stand",
+      stat: "DEF increase when defending buildings +2%",
+      maxLevel: 5,
+      costPerLevel: [7, 7, 7, 7, 7],
+      row: 6,
+      col: 4,
+      prereq: {
+        type: "all",
+        nodes: ["ammo_amplifier"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "incremental_resupply",
+      perkName: "Incremental Resupply",
+      stat: "All Units HP +2%",
+      maxLevel: 5,
+      costPerLevel: [7, 7, 7, 7, 7],
+      row: 7,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["controlled_progression", "dauntless_stand"],
+        minCompleted: 2
+      }
+    },
+    {
+      id: "shark_scorpion_specialization_plus1",
+      perkName: "Shark Impact/Scorpion Sting",
+      stat: "Shark/Scorpion Specialization +1",
+      maxLevel: 1,
+      costPerLevel: [35],
+      row: 8,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["incremental_resupply"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "caliber_enhancement",
+      perkName: "Caliber Enhancement",
+      stat: "DMG Decrease +1%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 8,
+      col: 2,
+      prereq: {
+        type: "all",
+        nodes: ["incremental_resupply"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "heavy_armor_layer",
+      perkName: "Heavy Armor Layer",
+      stat: "DMG Decrease +1%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 8,
+      col: 4,
+      prereq: {
+        type: "all",
+        nodes: ["incremental_resupply"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "all-out_focus",
+      perkName: "All-Out Focus",
+      stat: "All Units Attack +2%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 9,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["caliber_enhancement", "heavy_armor_layer"],
+        minCompleted: 2
+      }
+    },
+    {
+      id: "sky_predator",
+      perkName: "Sky Predator",
+      stat: "Army - Air DMG Bonus +3%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 10,
+      col: 2,
+      prereq: {
+        type: "all",
+        nodes: ["all-out_focus"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "oceanic_predator",
+      perkName: "Oceanic Predator",
+      stat: "Air Force - Navy DMG Bonus +3%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 10,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["all-out_focus"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "ground_predator",
+      perkName: "Ground Predator",
+      stat: "Navy - Army DMG Bonus +3%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 10,
+      col: 4,
+      prereq: {
+        type: "all",
+        nodes: ["all-out_focus"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "full_supply",
+      perkName: "Full Supply",
+      stat: "All Units HP +2%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 11,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["sky_predator","oceanic_predator","ground_predator"],
+        minCompleted: 3
+      }
+    },
+    {
+      id: "shadow_of_the_shark",
+      perkName: "Shadow of the Shark",
+      stat: "Shark queue +1",
+      maxLevel: 1,
+      costPerLevel: [40],
+      row: 12,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["full_supply"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "aim_calibration",
+      perkName: "Aim Calibration",
+      stat: "Damage Increase +4%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 12,
+      col: 2,
+      prereq: {
+        type: "all",
+        nodes: ["full_supply"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "light_armor_layer",
+      perkName: "Light Armor Layer",
+      stat: "Damage Decrease +4%",
+      maxLevel: 1,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 12,
+      col: 4,
+      prereq: {
+        type: "all",
+        nodes: ["full_supply"],
+        minCompleted: 1
       }
     }
-    document.getElementById("detail-prereq").textContent = prereq;
-    panel.classList.remove("hidden");
+  ]
+};
+
+/* Tree 2: currently a copy of Tree 1.
+   Replace talentTree2.nodes with your second tree when ready. */
+const talentTree2 = JSON.parse(JSON.stringify(talentTree1));
+
+/* Helper to render one tree into a specific grid */
+function renderTree(tree, gridId, treeKey){
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+  grid.innerHTML = "";
+  tree.nodes.forEach(node => {
+    const el = document.createElement("div");
+    el.className = "talent-node";
+    el.dataset.id = node.id;
+    el.dataset.tree = treeKey;
+    el.style.gridRow = node.row;
+    el.style.gridColumn = node.col;
+    const tierLabel = node.maxLevel === 1 ? "1 tier" : node.maxLevel + " tiers";
+    el.innerHTML = `
+      <div class="talent-node-label">${node.perkName}</div>
+      <div class="talent-node-inner">
+        <div class="talent-level-text">${tierLabel}</div>
+        <div class="talent-stat-text">${node.stat}</div>
+      </div>
+    `;
+    grid.appendChild(el);
+  });
+}
+
+/* Resize SVG to match its tree grid’s height */
+function resizeSVG(gridId, svgId){
+  const grid = document.getElementById(gridId);
+  const svg  = document.getElementById(svgId);
+  if (!grid || !svg) return;
+  svg.style.height = grid.scrollHeight + "px";
+}
+
+/* Draw lines for a single tree */
+function drawLinesFor(tree, treeKey, gridId, svgId){
+  const svg = document.getElementById(svgId);
+  const grid = document.getElementById(gridId);
+  if (!svg || !grid) return;
+
+  resizeSVG(gridId, svgId);
+  svg.innerHTML = "";
+  const svgRect = svg.getBoundingClientRect();
+
+  tree.nodes.forEach(node => {
+    if (!node.prereq || !node.prereq.nodes) return;
+    const child = grid.querySelector(`.talent-node[data-tree="${treeKey}"][data-id="${node.id}"]`);
+    if (!child) return;
+    const c = child.getBoundingClientRect();
+    const x2 = c.left + c.width/2 - svgRect.left;
+    const y2 = c.top + c.height/2 - svgRect.top;
+
+    node.prereq.nodes.forEach(pid => {
+      const parent = grid.querySelector(`.talent-node[data-tree="${treeKey}"][data-id="${pid}"]`);
+      if (!parent) return;
+      const p = parent.getBoundingClientRect();
+      const x1 = p.left + p.width/2 - svgRect.left;
+      const y1 = p.top + p.height/2 - svgRect.top;
+
+      const line = document.createElementNS("http://www.w3.org/2000/svg","line");
+      line.setAttribute("x1", x1);
+      line.setAttribute("y1", y1);
+      line.setAttribute("x2", x2);
+      line.setAttribute("y2", y2);
+      line.setAttribute("stroke", "#3ea0ff");
+      line.setAttribute("stroke-width", "4");
+      line.setAttribute("stroke-linecap", "round");
+      svg.appendChild(line);
+    });
+  });
+}
+
+/* Show node details (shared for both trees) */
+function showDetails(node){
+  const panel = document.getElementById("node-details");
+  document.getElementById("detail-name").textContent = node.perkName;
+  document.getElementById("detail-stat").textContent = node.stat;
+  document.getElementById("detail-tiers").textContent =
+    node.maxLevel === 1 ? "1 tier" : `${node.maxLevel} tiers`;
+  const total = node.costPerLevel.reduce((a,b)=>a+b,0);
+  document.getElementById("detail-cost").textContent =
+    `Per tier: ${node.costPerLevel.join(", ")} (Total ${total})`;
+  let prereq = "Starting node (no prerequisites)";
+  if (node.prereq){
+    const names = node.prereq.nodes.map(id => {
+      const n = [...talentTree1.nodes, ...talentTree2.nodes].find(x => x.id === id);
+      return n ? n.perkName : id;
+    }).join(", ");
+    if (node.prereq.type === "any" && node.prereq.minCompleted < node.prereq.nodes.length){
+      prereq = `Requires at least ${node.prereq.minCompleted} of: ${names}`;
+    } else {
+      prereq = `Requires all of: ${names}`;
+    }
+  }
+  document.getElementById("detail-prereq").textContent = prereq;
+  panel.classList.remove("hidden");
+}
+
+/* Tab switching (from remould, but calls drawLines for correct tree) */
+function openTab(tabId, btn){
+  document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+  document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  btn.classList.add('active');
+
+  if (tabId === "tree1-tab") {
+    setTimeout(() => drawLinesFor(talentTree1, "1", "tree-grid-1", "tree-lines-1"), 50);
+  } else if (tabId === "tree2-tab") {
+    setTimeout(() => drawLinesFor(talentTree2, "2", "tree-grid-2", "tree-lines-2"), 50);
+  }
+}
+
+/* Global click handler for nodes + panel close */
+document.addEventListener("click", e => {
+  const panel = document.getElementById("node-details");
+  const clickedClose = e.target.closest(".node-details-close");
+  const clickedNode  = e.target.closest(".talent-node");
+  const clickedPanel = panel.contains(e.target);
+
+  if (clickedClose) {
+    panel.classList.add("hidden");
+    return;
   }
 
-  // Global click handler:
-  // - click X -> close
-  // - click node -> open/update
-  // - click outside panel & not a node -> close
-  document.addEventListener("click", e => {
-    const panel = document.getElementById("node-details");
-    const clickedClose = e.target.closest(".node-details-close");
-    const clickedNode  = e.target.closest(".talent-node");
-    const clickedPanel = panel.contains(e.target);
-
-    // 1) Close when clicking the X
-    if (clickedClose) {
-      panel.classList.add("hidden");
-      return;
-    }
-
-    // 2) Open / update when clicking a node
-    if (clickedNode) {
-      const node = talentTree.nodes.find(n => n.id === clickedNode.dataset.id);
+  if (clickedNode) {
+    const treeKey = clickedNode.dataset.tree;
+    const tree = treeKey === "2" ? talentTree2 : talentTree1;
+    const node = tree.nodes.find(n => n.id === clickedNode.dataset.id);
+    if (node) {
       showDetails(node);
-      setTimeout(drawLines, 0);
-      return;
+      if (treeKey === "1") {
+        setTimeout(() => drawLinesFor(talentTree1, "1", "tree-grid-1", "tree-lines-1"), 0);
+      } else {
+        setTimeout(() => drawLinesFor(talentTree2, "2", "tree-grid-2", "tree-lines-2"), 0);
+      }
     }
+    return;
+  }
 
-    // 3) Click elsewhere (not a node, not inside panel) -> close panel
-    if (!panel.classList.contains("hidden") && !clickedPanel) {
-      panel.classList.add("hidden");
-    }
-  });
+  if (!panel.classList.contains("hidden") && !clickedPanel) {
+    panel.classList.add("hidden");
+  }
+});
 
-  window.addEventListener("resize", () => {
-    drawLines();
-  });
+/* Redraw lines for whichever tab is active on resize */
+window.addEventListener("resize", () => {
+  if (document.getElementById("tree1-tab").classList.contains("active")) {
+    drawLinesFor(talentTree1, "1", "tree-grid-1", "tree-lines-1");
+  } else if (document.getElementById("tree2-tab").classList.contains("active")) {
+    drawLinesFor(talentTree2, "2", "tree-grid-2", "tree-lines-2");
+  }
+});
 
-  window.addEventListener("load", () => {
-    renderTree();
-    // Let layout settle before drawing lines
-    setTimeout(drawLines, 50);
-  });
-  </script>
+/* Initial render */
+window.addEventListener("load", () => {
+  renderTree(talentTree1, "tree-grid-1", "1");
+  renderTree(talentTree2, "tree-grid-2", "2");
+  setTimeout(() => drawLinesFor(talentTree1, "1", "tree-grid-1", "tree-lines-1"), 50);
+});
+</script>
 </body>
 </html>
