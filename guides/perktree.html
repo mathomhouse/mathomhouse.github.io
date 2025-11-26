@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perk Trees</title>
+<title>Formation Talent Tree</title>
 <link rel="stylesheet" href="/styles/index.css" />
 <script src="/header.js" defer></script>
 <style>
@@ -311,14 +311,14 @@
 <header id="header-placeholder"></header>
 
 <div class="page-container">
-  <h1>Talent Trees</h1>
+  <h1>Formation Talent Trees</h1>
   <p class="page-intro">
-    Tap a node to see its details. Use the tabs to switch between different trees.
+    Tap a perk to see its details. Use the tabs to switch between different the trees on the Formation's "Perk" tab, 
   </p>
 
   <div class="tabs">
-    <button class="tab-button active" onclick="openTab('tree1-tab', this)">Tree 1</button>
-    <button class="tab-button" onclick="openTab('tree2-tab', this)">Tree 2</button>
+    <button class="tab-button active" onclick="openTab('tree1-tab', this)">Shark/Scorpion Tree</button>
+    <button class="tab-button" onclick="openTab('tree2-tab', this)">Eagle Tree</button>
   </div>
 
   <!-- Tree 1 tab -->
@@ -368,7 +368,6 @@
 /* ---------- DATA (Tree 1 & Tree 2) ---------- */
 
 const talentTree1 = {
-  pointsAvailable: 500,
   nodes: [
     {
       id: "full_rest",
@@ -691,9 +690,384 @@ const talentTree1 = {
   ]
 };
 
-/* Tree 2: currently a copy of Tree 1.
-   Replace talentTree2.nodes with your second tree when ready. */
-const talentTree2 = JSON.parse(JSON.stringify(talentTree1));
+const talentTree2 = {
+  nodes: [
+    {
+      id: "full_rest",
+      perkName: "Full Rest",
+      stat: "All Units HP +2%",
+      maxLevel: 5,
+      costPerLevel: [6, 6, 6, 6, 6],
+      row: 1,
+      col: 3,
+      prereq: null
+    },
+    {
+      id: "coordinated_defense",
+      perkName: "Coordinated Defense",
+      stat: "All Units DEF +2%",
+      maxLevel: 5,
+      costPerLevel: [6, 6, 6, 6, 6],
+      row: 2,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["full_rest"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "army_atk",
+      perkName: "Army Readiness",
+      stat: "Army Attack +2%",
+      maxLevel: 5,
+      costPerLevel: [6, 6, 6, 6, 6],
+      row: 3,
+      col: 2,
+      prereq: {
+        type: "all",
+        nodes: ["coordinated_defense"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "navy_atk",
+      perkName: "Naval Readiness",
+      stat: "Navy Attack +2%",
+      maxLevel: 5,
+      costPerLevel: [6, 6, 6, 6, 6],
+      row: 3,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["coordinated_defense"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "air_atk",
+      perkName: "Air Force Readiness",
+      stat: "Air Force Attack +2%",
+      maxLevel: 5,
+      costPerLevel: [6, 6, 6, 6, 6],
+      row: 3,
+      col: 4,
+      prereq: {
+        type: "all",
+        nodes: ["coordinated_defense"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "eagle_evolution",
+      perkName: "Eagle Evolution",
+      stat: "Eagle Tier +1",
+      maxLevel: 1,
+      costPerLevel: [25],
+      row: 4,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["navy_atk"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "unified_assault",
+      perkName: "Unified Assault",
+      stat: "All Units Attack +2%",
+      maxLevel: 5,
+      costPerLevel: [7, 7, 7, 7, 7],
+      row: 4,
+      col: 2,
+      prereq: {
+        type: "all",
+        nodes: ["army_atk"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "rapid_logistics",
+      perkName: "Rapid Logistics",
+      stat: "All Units HP +2%",
+      maxLevel: 5,
+      costPerLevel: [7, 7, 7, 7, 7],
+      row: 4,
+      col: 4,
+      prereq: {
+        type: "all",
+        nodes: ["air_atk"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "controlled_progression",
+      perkName: "Controlled Progression",
+      stat: "DEF increase when attacking buildings +2%",
+      maxLevel: 5,
+      costPerLevel: [7, 7, 7, 7, 7],
+      row: 5,
+      col: 2,
+      prereq: {
+        type: "all",
+        nodes: ["unified_assault"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "dauntless_stand",
+      perkName: "Dauntless Stand",
+      stat: "DEF increase when defending buildings +2%",
+      maxLevel: 5,
+      costPerLevel: [7, 7, 7, 7, 7],
+      row: 5,
+      col: 4,
+      prereq: {
+        type: "all",
+        nodes: ["rapid_logistics"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "ammo_amplifier",
+      perkName: "Ammo Amplifier",
+      stat: "All Units Attack +2%",
+      maxLevel: 5,
+      costPerLevel: [7, 7, 7, 7, 7],
+      row: 6,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["dauntless_stand", "controlled_progression"],
+        minCompleted: 2
+      }
+    },
+    {
+      id: "incremental_resupply",
+      perkName: "Incremental Resupply",
+      stat: "All Units HP +2%",
+      maxLevel: 5,
+      costPerLevel: [7, 7, 7, 7, 7],
+      row: 7,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["ammo_amplifier"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "eagle_watch",
+      perkName: "Eagle Watch",
+      stat: "Eagle Specialization +1",
+      maxLevel: 1,
+      costPerLevel: [30],
+      row: 8,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["incremental_resupply"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "all-out_focus",
+      perkName: "All-Out Focus",
+      stat: "All Units Attack +2%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 8,
+      col: 2,
+      prereq: {
+        type: "all",
+        nodes: ["incremental_resupply"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "full_supply",
+      perkName: "Full Supply",
+      stat: "All Units HP +2%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 8,
+      col: 4,
+      prereq: {
+        type: "all",
+        nodes: ["incremental_resupply"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "caliber_enhancement",
+      perkName: "Caliber Enhancement",
+      stat: "DMG Decrease +1%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 9,
+      col: 2,
+      prereq: {
+        type: "all",
+        nodes: ["all-out_focus"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "heavy_armor_layer",
+      perkName: "Heavy Armor Layer",
+      stat: "DMG Decrease +1%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 9,
+      col: 4,
+      prereq: {
+        type: "all",
+        nodes: ["full_supply"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "ammo_amplifier",
+      perkName: "Ammo Amplifier",
+      stat: "All Units Attack +2%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 10,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["caliber_enhancement", "heavy_armor_layer"],
+        minCompleted: 2
+      }
+    },
+    {
+      id: "sky_predator",
+      perkName: "Sky Predator",
+      stat: "Army - Air DMG Bonus +3%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 11,
+      col: 2,
+      prereq: {
+        type: "all",
+        nodes: ["ammo_amplifier"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "oceanic_predator",
+      perkName: "Oceanic Predator",
+      stat: "Air Force - Navy DMG Bonus +3%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 11,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["ammo_amplifier"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "ground_predator",
+      perkName: "Ground Predator",
+      stat: "Navy - Army DMG Bonus +3%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 11,
+      col: 4,
+      prereq: {
+        type: "all",
+        nodes: ["ammo_amplifier"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "caliber_enhancement",
+      perkName: "Caliber Enhancement",
+      stat: "DMG Decrease +1%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 12,
+      col: 2,
+      prereq: {
+        type: "all",
+        nodes: ["sky_predator"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "incremental_resupply",
+      perkName: "Incremental Resupply",
+      stat: "All Units HP +2%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 12,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["oceanic_predator"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "heavy_armor_layer",
+      perkName: "Heavy Armor Layer",
+      stat: "DMG Decrease +1%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 12,
+      col: 4,
+      prereq: {
+        type: "all",
+        nodes: ["ground_predator"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "caliber_enhancement",
+      perkName: "Caliber Enhancement",
+      stat: "DMG Decrease +1%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 13,
+      col: 2,
+      prereq: {
+        type: "all",
+        nodes: ["caliber_enhancement"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "ammo_amplifier",
+      perkName: "Ammo Amplifier",
+      stat: "All Units Attack +2%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 13,
+      col: 3,
+      prereq: {
+        type: "all",
+        nodes: ["incremental_resupply"],
+        minCompleted: 1
+      }
+    },
+    {
+      id: "heavy_armor_layer",
+      perkName: "Heavy Armor Layer",
+      stat: "DMG Decrease +1%",
+      maxLevel: 5,
+      costPerLevel: [17, 17, 17, 17, 17],
+      row: 13,
+      col: 4,
+      prereq: {
+        type: "all",
+        nodes: ["heavy_armor_layer"],
+        minCompleted: 1
+      }
+    },
+  ]
+};
 
 /* Helper to render one tree into a specific grid */
 function renderTree(tree, gridId, treeKey){
