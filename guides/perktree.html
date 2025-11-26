@@ -63,14 +63,14 @@
   }
 
   .tree-wrapper{
-    width:100%;
-    height:100vh;
-    overflow-y:auto;
-    overflow-x:hidden;
-    position:relative;
-    padding-inline:12px;
-    box-sizing:border-box;
-  }
+  width:100%;
+  /* let height be auto so it grows with the tree */
+  position:relative;
+  padding-inline:12px;
+  box-sizing:border-box;
+  overflow-x:hidden; /* keep this to avoid sideways scroll from lines */
+    }
+
 
   svg[id^="tree-lines"]{
     position:absolute;
