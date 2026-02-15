@@ -1,0 +1,23 @@
+{
+    "Base Skin Name": "",
+    "Equipped Stat 1": "",
+    "Equipped Stat 1 Value": "",
+    "Equipped Stat 2": "",
+    "Equipped Stat 2 Value": "",
+    "Equipped Stat 3": "",
+    "Equipped Stat 3 Value": "",
+    "Equipped Stat 4": "",
+    "Equipped Stat 4 Value": "",
+    "Holding In Stock Stat 1": "",
+    "Holding In Stock Stat 1 Value": "",
+    "Holding In Stock Stat 2": "",
+    "Holding In Stock Stat 2 Value": "",
+    "Holding In Stock Stat 3": "",
+    "Holding In Stock Stat 3 Value": "",
+    "Holding In Stock Stat 4": "",
+    "Holding In Stock Stat 4 Value": "",
+    "Base Skill?": "",
+    "Skill Details": "",
+    "Notes": "",
+    "Highest Level?": ""
+  }
