@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player Data</title>
+  <link rel="stylesheet" href="../styles/index.css">
+  <link rel="stylesheet" href="../styles/header.css">
+  <script src="../header.js" defer></script>
+  <style>
+    .playerdata-shell {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    .playerdata-card {
+      background: var(--card-bg, rgba(255, 255, 255, 0.8));
+      border: 1px solid var(--border-color, #d9d9d9);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .playerdata-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .playerdata-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .playerdata-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .playerdata-field input,
+    .playerdata-field textarea {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 8px;
+      border: 1px solid #bbb;
+      font: inherit;
+      box-sizing: border-box;
+    }
+
+    .playerdata-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .playerdata-actions button {
+      padding: 0.55rem 0.8rem;
+      border-radius: 8px;
+      border: 1px solid #888;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .section-stack {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .subcard {
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 10px;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .subcard h3,
+    .subcard h4 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    details.data-group {
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.45);
+      padding: 0.5rem 0.75rem;
+    }
+
+    details.data-group + details.data-group {
+      margin-top: 0.6rem;
+    }
+
+    details.data-group > summary {
+      cursor: pointer;
+      font-weight: 600;
+      padding: 0.2rem 0;
+    }
+
+    .details-body {
+      padding-top: 0.65rem;
+    }
+
+    .chip-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .chip-card {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .chip-card h4 {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+    }
+
+    .chip-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+
+    .stat-pair-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+
+    .gear-heroes {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .marches-stack {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .march-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .gear-slot-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+
+    .base-skins-toolbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      align-items: center;
+    }
+
+    .base-skins-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.4rem 0.75rem;
+      max-height: 320px;
+      overflow: auto;
+      padding: 0.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .base-skin-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      min-width: 0;
+    }
+
+    .base-skin-item label {
+      min-width: 0;
+      word-break: break-word;
+      cursor: pointer;
+    }
+
+    .status-line {
+      margin: 0.35rem 0;
+      font-size: 0.95rem;
+    }
+
+    .status-muted {
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+
+    .status-ok { color: #147a2b; }
+    .status-warn { color: #9a6700; }
+    .status-error { color: #b42318; }
+
+    code.inline-note {
+      padding: 0.1rem 0.3rem;
+      border-radius: 4px;
+      background: rgba(0, 0, 0, 0.07);
+    }
+
+    @media (max-width: 700px) {
+      .playerdata-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chip-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chip-fields,
+      .gear-slot-fields,
+      .stat-pair-grid,
+      .base-skins-toolbar,
+      .base-skins-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="header-placeholder"></header>
+
+  <main class="playerdata-shell">
+    <section class="playerdata-card">
+      <h1>Player Data (Draft)</h1>
+      <p>
+        This page stores player-specific data in the browser and can optionally sync to Firebase (Auth + Firestore).
+        It is designed for a static GitHub Pages site with no server-side code.
+      </p>
+      <p class="status-muted">
+        To enable cloud sync, add your Firebase config object in <code class="inline-note">test/playerdata.js</code>.
+      </p>
+    </section>
+
+    <section class="playerdata-card" aria-labelledby="auth-title">
+      <h2 id="auth-title">Account / Cloud Sync</h2>
+      <p id="firebaseStatus" class="status-line status-warn">Firebase not configured yet. Local-only mode is active.</p>
+      <p id="authStatus" class="status-line">Not signed in.</p>
+      <div class="playerdata-actions">
+        <button id="signInGuestBtn" type="button">Continue as Guest</button>
+        <button id="signOutBtn" type="button">Sign Out</button>
+      </div>
+      <p class="status-muted">
+        Anonymous auth is enabled for now. If you switch providers later, this page can be extended.
+      </p>
+    </section>
+
+    <section class="playerdata-card" aria-labelledby="data-title">
+      <h2 id="data-title">Player Profile</h2>
+      <form id="playerDataForm" novalidate>
+        <div class="section-stack">
+          <section class="subcard" aria-labelledby="profile-basic-title">
+            <h3 id="profile-basic-title">Profile</h3>
+            <div class="playerdata-grid">
+              <label class="playerdata-field">
+                <span>Player Name</span>
+                <input id="playerName" name="playerName" type="text" maxlength="100" placeholder="Gikey">
+              </label>
+
+              <label class="playerdata-field">
+                <span>Server</span>
+                <input id="serverName" name="serverName" type="text" maxlength="50" placeholder="s2698">
+              </label>
+
+              <label class="playerdata-field">
+                <span>Alliance</span>
+                <input id="alliance" name="alliance" type="text" maxlength="50" placeholder="TAG">
+              </label>
+
+              <label class="playerdata-field">
+                <span>Main Branch</span>
+                <input id="mainBranch" name="mainBranch" type="text" maxlength="50" placeholder="Army / Navy / Air Force">
+              </label>
+            </div>
+          </section>
+
+          <section class="subcard" aria-labelledby="marches-title">
+            <h3 id="marches-title">Marches (1-6)</h3>
+            <p class="status-muted" style="margin-top: 0;">
+              Main March is required. Marches 2-6 are optional.
+            </p>
+            <div id="marchesContainer" class="marches-stack"></div>
+          </section>
+
+          <details class="data-group" open>
+            <summary>HT Data (Chipsets)</summary>
+            <div class="details-body">
+              <div class="playerdata-grid" style="margin-bottom: 0.75rem;">
+                <label class="playerdata-field">
+                  <span>HT Name</span>
+                  <input id="htName" type="text" maxlength="100" placeholder="HT name">
+                </label>
+                <label class="playerdata-field">
+                  <span>Chipset Notes (optional)</span>
+                  <input id="htNotes" type="text" maxlength="200" placeholder="Anything important about this setup">
+                </label>
+              </div>
+              <div id="htChipGrid" class="chip-grid"></div>
+            </div>
+          </details>
+
+          <details class="data-group" open>
+            <summary>Titan Gear (3 Main March Heroes)</summary>
+            <div class="details-body">
+              <p class="status-muted" style="margin-top: 0;">Each hero has 6 gear slots. Expand only the slots you want to edit.</p>
+              <div id="titanGearHeroes" class="gear-heroes"></div>
+            </div>
+          </details>
+
+          <details class="data-group">
+            <summary>Base Skins Owned</summary>
+            <div class="details-body">
+              <p class="status-muted" style="margin-top: 0;">
+                Master list is loaded from the Base Skin guide data file. Check the skins the player owns.
+              </p>
+              <div class="base-skins-toolbar">
+                <input id="baseSkinSearch" type="text" placeholder="Search base skins..." aria-label="Search base skins">
+                <button id="clearBaseSkinSearchBtn" type="button">Clear Search</button>
+              </div>
+              <p id="baseSkinCount" class="status-line status-muted">Loading base skins...</p>
+              <div id="baseSkinsList" class="base-skins-list" aria-live="polite"></div>
+            </div>
+          </details>
+
+          <section class="subcard">
+            <h3>Notes</h3>
+            <label class="playerdata-field full">
+              <span>General Notes</span>
+              <textarea id="notes" name="notes" rows="4" maxlength="20000" placeholder="Any notes you want saved with your profile..."></textarea>
+            </label>
+          </section>
+        </div>
+      </form>
+
+      <div class="playerdata-actions">
+        <button id="saveCloudBtn" type="button">Save</button>
+      </div>
+
+      <p id="saveStatus" class="status-line">No changes saved yet.</p>
+      <p id="localMeta" class="status-line status-muted">Local draft: none</p>
+      <p id="cloudMeta" class="status-line status-muted">Cloud copy: unavailable</p>
+      <p id="sizeMeta" class="status-line status-muted">Estimated payload size: 0 KB</p>
+    </section>
+  </main>
+
+  <script type="module" src="playerdata.js"></script>
+</body>
+</html>
