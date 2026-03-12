@@ -1,6 +1,6 @@
 <meta name="description" content="PAGE DESCRIPTION">
 
-<meta property="og:title" content="PAGE TITLE • Mathom House">
+<meta property="og:title" content="Mathom House • PAGE TITLE">
 <meta property="og:description" content="PAGE DESCRIPTION">
 <meta property="og:url" content="https://mathomhouse.github.io/PAGE FILE">
 <meta property="og:type" content="website">
