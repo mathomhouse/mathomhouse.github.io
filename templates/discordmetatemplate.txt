@@ -1,8 +1,8 @@
-<meta name="description" content="PAGE DESCRIPTION">
+<meta name="description" content="Tools and calculators for Top War players.">
 
 <meta property="og:title" content="Mathom House • PAGE TITLE">
 <meta property="og:description" content="PAGE DESCRIPTION">
 <meta property="og:url" content="https://mathomhouse.github.io/PAGE FILE">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Mathom House">
+<meta property="og:site_name" content="From Artu and Gikey">
 <meta property="og:image" content="https://mathomhouse.github.io/images/PAGE IMAGE">
