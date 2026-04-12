@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(gh repo:*)",
-      "WebFetch(domain:texnottexas.github.io)",
-      "Bash(npm install:*)"
-    ]
-  }
-}
