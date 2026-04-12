@@ -214,8 +214,6 @@ button:hover {
 }
 
 .gear-box h2 {
-  color: var(--accent-color);
-  text-align: center;
   margin-bottom: 15px;
 }
 
@@ -401,14 +399,6 @@ button:hover {
   max-width: 500px;
   text-align: center;
 }
-.modal-content textarea {
-  width: 100%;
-  padding: 10px;
-  border-radius: var(--border-radius);
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  resize: vertical;
-}
 .modal-buttons {
   margin-top: 15px;
 }
@@ -444,7 +434,10 @@ button:hover {
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: var(--border-radius);
-  box-sizing: border-box;
+}
+
+.modal-content textarea {
+  resize: vertical;
 }
 
 .confirmation-message {
@@ -501,12 +494,9 @@ button:hover {
 
 .hero-blurb h1 {
   font-size: 32px;
-  color: var(--accent-color);
   margin-bottom: 10px;
 }
 
 .hero-blurb p {
   font-size: 18px;
-  line-height: 1.6;
-  color: var(--text-color);
 }

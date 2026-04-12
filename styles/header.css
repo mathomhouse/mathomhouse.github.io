@@ -35,13 +35,13 @@ header {
 
 .logo a {
   color: white;
-  text-decoration: none; /* optional, removes underline */
+  text-decoration: none;
   font-size: 28px;
   font-weight: bold;
 }
 
 .logo a:hover {
-  color: var(--accent-color); /* optional, adds hover effect */
+  color: var(--accent-color);
 }
 
 
@@ -136,10 +136,6 @@ nav a.active, nav a:hover {
 }
 .card-icon {
   margin-bottom: 0.5rem;
-}
-.card-icon img {
-  width: 64px;
-  height: 64px;
 }
 
 

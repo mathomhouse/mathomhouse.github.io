@@ -285,16 +285,19 @@
       if (qty === 0) delete cart[idx];
       else cart[idx] = qty;
       updateCart();
+      createStore();
     }
 
     function removeFromCart(idx) {
       delete cart[idx];
       updateCart();
+      createStore();
     }
 
     function clearCart() {
       for (const key in cart) delete cart[key];
       updateCart();
+      createStore();
     }
 
     function toggleCart() {
