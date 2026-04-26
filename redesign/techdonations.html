@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Technology Donation Calculator</title>
+  <!-- Anti-flash -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/mathomhouse.css">
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/calculators.css">
+  <script src="header.js" defer></script>
+  <style>
+    .form-aligned {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 15px 30px;
+      align-items: center;
+      margin-top: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 768px) {
+      .form-aligned {
+        grid-template-columns: 1fr;
+      }
+
+      .form-aligned label {
+        text-align: left;
+        padding-top: 10px;
+      }
+    }
+
+    #result {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Site Header -->
+  <header id="header-placeholder"></header>
+
+  <div class="container">
+    <h1>Technology Donation Calculator</h1>
+    <p>
+      Select the technology and level you're working on, enter how much XP has already been donated, how many players are contributing, and how many donations per player per day. The calculator will estimate how many days are needed and the expected finish date.
+    </p>
+
+    <form id="donationForm">
+      <div class="form-aligned">
+        <label for="techSelect">Technology:</label>
+        <select id="techSelect" required>
+          <option value="" disabled selected>Select tech...</option>
+          <option value="territory1">Territorial Expansion - Level 1</option>
+          <option value="territory2">Territorial Expansion - Level 2</option>
+          <option value="glory1">The New Era of Glory</option>
+        </select>
+
+        <label for="currentXP">Current XP Donated:</label>
+        <input type="number" id="currentXP" min="0" required />
+
+        <label for="people">Number of People Donating:</label>
+        <input type="number" id="people" min="1" required />
+
+        <label for="donationsPerPerson">Donations Per Player Per Day:</label>
+        <input type="number" id="donationsPerPerson" min="1" required />
+      </div>
+
+      <div class="calculate-btn">
+        <button type="button" onclick="calculateFinish()">Calculate</button>
+        <button type="reset" onclick="resetForm()">Reset</button>
+      </div>
+    </form>
+
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    const techData = {
+      territory1: { name: "Territorial Expansion - Level 1", totalXP: 3000000, xpPerDonation: 20 },
+      territory2: { name: "Territorial Expansion - Level 2", totalXP: 33600000, xpPerDonation: 30 },
+      glory1: { name: "The New Era of Glory - Level 1", totalXP: 12000000, xpPerDonation: 20 },
+    };
+
+    function calculateFinish() {
+      const techKey = document.getElementById("techSelect").value;
+      const currentXP = parseInt(document.getElementById("currentXP").value);
+      const people = parseInt(document.getElementById("people").value);
+      const donationsPerPerson = parseInt(document.getElementById("donationsPerPerson").value);
+      const resultEl = document.getElementById("result");
+
+      if (!techKey || isNaN(currentXP) || isNaN(people) || isNaN(donationsPerPerson)) {
+        resultEl.textContent = "Please fill in all fields.";
+        return;
+      }
+
+      const tech = techData[techKey];
+      const remainingXP = tech.totalXP - currentXP;
+
+      if (remainingXP <= 0) {
+        resultEl.textContent = `${tech.name} is already completed! 🎉`;
+        return;
+      }
+
+      const dailyXP = people * donationsPerPerson * tech.xpPerDonation;
+      const daysNeeded = Math.ceil(remainingXP / dailyXP);
+
+      const today = new Date();
+      const finishDate = new Date(today);
+      finishDate.setDate(today.getDate() + daysNeeded);
+
+      resultEl.textContent =
+        `Estimated completion in ${daysNeeded} day(s):\n${finishDate.toDateString()}`;
+    }
+
+    function resetForm() {
+      document.getElementById("donationForm").reset();
+      document.getElementById("result").textContent = "";
+    }
+  </script>
+<footer>&copy; 2025 Mathom House &middot; Not affiliated with Top War or Topjoy</footer>
+<a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rockfield Calculator </title>
+  <!-- Anti-flash -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/redesign/styles/mathomhouse.css">
+  <link rel="stylesheet" href="/redesign/styles/header.css">
+  <link rel="stylesheet" href="/redesign/styles/layout.css">
+  <link rel="stylesheet" href="/redesign/styles/calculators.css">
+  <script src="/redesign/header.js" defer></script>
+  <style>
+    .wrap{max-width:880px;margin:0 auto;padding:1rem;}
+    label{font-weight:600;display:block;margin-bottom:.35rem;}
+    input,select{width:100%;padding:.55rem .6rem;border:1px solid rgba(0,0,0,.2);border-radius:8px;}
+    .row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.8rem;}
+    .muted{color:#555;font-size:.92rem;}
+    .result{margin-top:1rem;padding:.9rem;border-radius:10px;background:rgba(0,0,0,.03);}
+    .result h3{margin:.1rem 0 .45rem}
+    .small{font-size:.9rem}
+  </style>
+</head>
+<body>
+<header id="header-placeholder"></header>
+
+  <section class="page-hero">
+    <p class="breadcrumb"><a href="/redesign/">Home</a> / <a href="/redesign/guides.html">Guides</a> / <a href="/redesign/guides/rockfield.html">Rockfield</a> / Calculator</p>
+    <h1>Rockfield Calculator</h1>
+    <p>Calculate Rockfield's effective damage based on march sizes, unit levels, and Exclusive Skill level.</p>
+  </section>
+
+<div class="wrap">
+
+  <div class="container">
+  <table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Your March</th>
+      <th>Enemy March</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <th scope="row">March Size</th>
+      <td><input id="yourMarch" type="number" min="1" placeholder="Enter your march size"></td>
+      <td><input id="enemyMarch" type="number" min="1" placeholder="Enter enemy march size"></td>
+    </tr>
+
+    <tr>
+      <th scope="row">Average Unit Level</th>
+      <td>
+        <select id="yourLvl">
+          <option value="" disabled selected>Select</option>
+          <option>101</option>
+          <option>102</option>
+          <option value="103">103 / Vals</option>
+        </select>
+      </td>
+      <td>
+        <select id="enemyLvl">
+          <option value="" disabled selected>Select</option>
+          <option>101</option>
+          <option>102</option>
+          <option value="103">103 / Vals</option>
+        </select>
+      </td>
+    </tr>
+
+    <tr>
+      <th scope="row">Base Damage %</th>
+      <td>
+        <input id="basePct" type="number" min="1" max="100" step="0.1" value="27">
+      </td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <th scope="row">Rockfield ES Level</th>
+      <td>
+        <select id="skillLvl">
+          <option value="" disabled selected>Select</option>
+          <option value="0">No ES (+0%)</option>
+          <option value="1">ES 1 (+2%)</option>
+          <option value="2">ES 2 (+4%)</option>
+          <option value="3">ES 3 (+6%)</option>
+          <option value="4">ES 4 (+8%)</option>
+          <option value="5">ES 5 (+11%)</option>
+          <option value="6">ES 6 (+18%)</option>
+          <option value="7">ES 7 (+22%)</option>
+        </select>
+      </td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+
+    <div class="row">
+      <button id="calcBtn" type="button">Calculate</button>
+      <button id="resetBtn" type="button">Reset</button>
+    </div>
+
+    <div class="result" id="resultBox" hidden>
+      <h3>Effective Damage</h3>
+      <div id="resultText"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function compute(){
+  const basePctInput = Math.max(0.0001, parseFloat(document.getElementById('basePct').value || '27'));
+  const base = basePctInput / 100.0;
+
+  const yourMarch = Math.max(1, parseFloat(document.getElementById('yourMarch').value || '1'));
+  const enemyMarch = Math.max(1, parseFloat(document.getElementById('enemyMarch').value || '1'));
+  const yourLvl = parseInt(document.getElementById('yourLvl').value, 10);
+  const enemyLvl = parseInt(document.getElementById('enemyLvl').value, 10);
+  const skillLvl = parseInt(document.getElementById('skillLvl').value, 10);
+
+  const skillBonus = 0.02 * skillLvl; // +2% per level
+  const baseWithSkill = base * (1 + skillBonus); // multiplicative
+
+  const levelDiff = Math.max(0, enemyLvl - yourLvl);
+  const afterLevel = baseWithSkill * Math.pow(0.5, levelDiff);
+
+  const sizeRatio = Math.min(1, yourMarch / enemyMarch); // reduce if smaller, no bonus if larger
+  const finalPct = Math.max(0, Math.min(1, afterLevel * sizeRatio));
+
+  const pctText = (finalPct * 100).toFixed(3) + '%';
+  const breakdown = [
+    `<div class="small">Base: ${(base*100).toFixed(3)}%</div>`,
+    `<div class="small">After Skill (×${(1+skillBonus).toFixed(3)}): ${(baseWithSkill*100).toFixed(3)}%</div>`,
+    `<div class="small">After Level (−${Math.max(0, enemyLvl-yourLvl)} level diff): ${(afterLevel*100).toFixed(3)}%</div>`,
+    `<div class="small">After March (×${sizeRatio.toFixed(3)}): ${(finalPct*100).toFixed(3)}%</div>`
+  ].join('');
+
+  const text = document.getElementById('resultText');
+  text.innerHTML = `<div><strong>${pctText}</strong></div><hr/>${breakdown}`;
+  document.getElementById('resultBox').hidden = false;
+}
+
+document.getElementById('calcBtn').addEventListener('click', compute);
+document.getElementById('resetBtn').addEventListener('click', () => {
+  document.getElementById('basePct').value = 27;
+  document.getElementById('yourMarch').value = 300;
+  document.getElementById('enemyMarch').value = 400;
+  document.getElementById('yourLvl').value = '102';
+  document.getElementById('enemyLvl').value = '103';
+  document.getElementById('skillLvl').value = '7';
+  document.getElementById('resultBox').hidden = true;
+});
+</script>
+</body>
+</html>

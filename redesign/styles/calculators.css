@@ -1,0 +1,218 @@
+/* ───────────────────────────────────────────────────────────────
+   MATHOM HOUSE — Calculator Pages
+   Requires: mathomhouse.css, layout.css
+   ─────────────────────────────────────────────────────────────── */
+
+/* ─── CONTAINER (legacy compat) ──────────────────────────────── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+/* ─── TABLES ──────────────────────────────────────────────────── */
+.table-container {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin: 24px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.92rem;
+}
+
+thead th {
+  background: var(--surface2);
+  color: var(--gold);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+th {
+  background: var(--surface2);
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: middle;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+tr:hover td { background: var(--surface2); }
+
+/* ─── NUMBER INPUTS ───────────────────────────────────────────── */
+input[type="number"] {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  max-width: 120px;
+}
+input[type="number"]:focus {
+  border-color: var(--gold-dim);
+  box-shadow: 0 0 0 3px var(--gold-glow);
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; }
+
+/* ─── CHECKBOXES ──────────────────────────────────────────────── */
+input[type="checkbox"] {
+  accent-color: var(--gold);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* ─── CALC LABELS ─────────────────────────────────────────────── */
+.equip-label,
+.calc-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  text-transform: none;
+  margin-bottom: 0;
+}
+
+/* ─── SELECT ELEMENT ──────────────────────────────────────────── */
+select {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 7px 12px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%237a8099' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+select:focus {
+  border-color: var(--gold-dim);
+  box-shadow: 0 0 0 3px var(--gold-glow);
+}
+
+/* ─── RESULT / OUTPUT PANELS ──────────────────────────────────── */
+.result-panel,
+.output-panel,
+#result,
+#output {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold-dim);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 24px 0;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.8;
+}
+.result-panel h3,
+.output-panel h3 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+/* ─── CALC BUTTONS ────────────────────────────────────────────── */
+button.calc-btn,
+button[onclick]:not(.hamburger):not(.theme-toggle-btn):not(.mobile-group-btn):not(.close-btn):not(.remove-btn):not(.qty-btn):not(.add-btn):not(.cart-fab):not(.cart-button):not(.mobile-theme-btn) {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 9px 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--gold-dim);
+  background: rgba(201,168,76,0.12);
+  color: var(--gold);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+button.calc-btn:hover,
+button[onclick]:not(.hamburger):not(.theme-toggle-btn):not(.mobile-group-btn):not(.close-btn):not(.remove-btn):not(.qty-btn):not(.add-btn):not(.cart-fab):not(.cart-button):not(.mobile-theme-btn):hover {
+  background: rgba(201,168,76,0.22);
+  box-shadow: 0 0 14px var(--gold-glow);
+}
+
+/* ─── CALC DESCRIPTION (intro text) ──────────────────────────── */
+.calc-desc,
+.container > p:first-of-type {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+/* ─── SECTION HEADERS INSIDE CALCS ───────────────────────────── */
+.container h1,
+.page-wrap h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.container h2,
+.page-wrap h2 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin: 28px 0 12px;
+}
+
+/* ─── RESPONSIVE ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .container { padding: 20px 16px 48px; }
+  table { font-size: 0.82rem; }
+  th, td { padding: 8px 10px; }
+  input[type="number"] { max-width: 90px; }
+}

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pet Comparison Calculator</title>
+  <link rel="stylesheet" href="index.css">
+  <style>
+    .gear-box form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+    .gear-box select {
+      max-width: none;
+      width: 100%;
+    }
+    .gear-box {
+      width: 450px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Pet Comparison Calculator</h1>
+        <p>Find out what any pet's max stats will be depending on its potential.<br>
+            Use the dropdowns to select the species/rarity, main stat, and 3 sub stats.
+            <br>
+            Input the potential of the beasts you want to compare. 
+            <br>
+            The Reset button will clear all fields if you want to start over.
+            <br><br> Credit to Tex (s2864) for the data used to make this! <b><a href="./tzupgif.gif">Reference: Diminishing Returns</a></b>
+        </p>
+
+  <div class="gear-container">
+    <!-- Pet 1 -->
+    <div class="gear-box">
+      <h2 style="text-align: center;">Pet 1</h2>
+      <form>
+        <label>Species + Rarity:</label>
+        <select id="species1">
+          <option value="" disabled selected>Select option</option>
+          <option value="gold">Gold Bear</option>
+          <option value="purple">Purple Bear</option>
+          <option value="gold">Gold Eagle</option>
+          <option value="purple">Purple Eagle</option>
+          <option value="gold">Gold Deer</option>
+          <option value="purple">Purple Deer</option>
+          <option value="gold">Gold Ray</option>
+          <option value="purple">Purple Ray</option>
+        </select>
+
+        <label>Main Stat:</label>
+        <select id="mainStat1">
+          <option value="" disabled selected>Select option</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Sub Stat 1:</label>
+        <select id="subStat1_1">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Sub Stat 2:</label>
+        <select id="subStat1_2">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Sub Stat 3:</label>
+        <select id="subStat1_3">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Potential:</label>
+        <input type="number" id="potential1" placeholder="e.g. 15000">
+
+        <label>Star Level:</label>
+        <select id="starLevel1">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <label>XP Level:</label>
+        <select id="xpLevel1">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option><option value="32">32</option><option value="33">33</option><option value="34">34</option><option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option><option value="40">40</option><option value="41">41</option><option value="42">42</option><option value="43">43</option><option value="44">44</option><option value="45">45</option><option value="46">46</option><option value="47">47</option><option value="48">48</option><option value="49">49</option><option value="50">50</option><option value="51">51</option><option value="52">52</option><option value="53">53</option><option value="54">54</option><option value="55">55</option><option value="56">56</option><option value="57">57</option><option value="58">58</option><option value="59">59</option><option value="60">60</option><option value="61">61</option><option value="62">62</option><option value="63">63</option><option value="64">64</option><option value="65">65</option><option value="66">66</option><option value="67">67</option><option value="68">68</option><option value="69">69</option><option value="70">70</option><option value="71">71</option><option value="72">72</option><option value="73">73</option><option value="74">74</option><option value="75">75</option><option value="76">76</option><option value="77">77</option><option value="78">78</option><option value="79">79</option><option value="80">80</option><option value="81">81</option><option value="82">82</option><option value="83">83</option><option value="84">84</option><option value="85">85</option><option value="86">86</option><option value="87">87</option><option value="88">88</option><option value="89">89</option><option value="90">90</option><option value="91">91</option><option value="92">92</option><option value="93">93</option><option value="94">94</option><option value="95">95</option><option value="96">96</option><option value="97">97</option><option value="98">98</option><option value="99">99</option><option value="100">100</option>
+        </select>
+    
+      </form>
+    </div>
+
+    <!-- Pet 2 -->
+    <div class="gear-box">
+      <h2 style="text-align: center;">Pet 2</h2>
+      <form>
+        <label>Species + Rarity:</label>
+        <select id="species2">
+          <option value="" disabled selected>Select option</option>
+          <option value="gold">Gold Bear</option>
+          <option value="purple">Purple Bear</option>
+          <option value="gold">Gold Eagle</option>
+          <option value="purple">Purple Eagle</option>
+          <option value="gold">Gold Deer</option>
+          <option value="purple">Purple Deer</option>
+          <option value="gold">Gold Ray</option>
+          <option value="purple">Purple Ray</option>
+        </select>
+
+        <label>Main Stat:</label>
+        <select id="mainStat2">
+          <option value="" disabled selected>Select option</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Sub Stat 1:</label>
+        <select id="subStat2_1">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Sub Stat 2:</label>
+        <select id="subStat2_2">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Sub Stat 3:</label>
+        <select id="subStat2_3">
+          <option value="" disabled selected>Select option</option>
+          <option value="Suppression">Suppression Defense Bonus</option>
+          <option value="DMGInc">Damage Increase</option>
+          <option value="DMGDec">Damage Decrease</option>
+          <option value="DEF">Defense</option>
+          <option value="ATK">Attack</option>
+          <option value="HP">HP</option>
+          <option value="Elemental">Elemental</option>
+        </select>
+
+        <label>Potential:</label>
+        <input type="number" id="potential2" placeholder="e.g. 15000">
+
+        <label>Star Level:</label>
+        <select id="starLevel2">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <label>XP Level:</label>
+        <select id="xpLevel2">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option><option value="32">32</option><option value="33">33</option><option value="34">34</option><option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option><option value="40">40</option><option value="41">41</option><option value="42">42</option><option value="43">43</option><option value="44">44</option><option value="45">45</option><option value="46">46</option><option value="47">47</option><option value="48">48</option><option value="49">49</option><option value="50">50</option><option value="51">51</option><option value="52">52</option><option value="53">53</option><option value="54">54</option><option value="55">55</option><option value="56">56</option><option value="57">57</option><option value="58">58</option><option value="59">59</option><option value="60">60</option><option value="61">61</option><option value="62">62</option><option value="63">63</option><option value="64">64</option><option value="65">65</option><option value="66">66</option><option value="67">67</option><option value="68">68</option><option value="69">69</option><option value="70">70</option><option value="71">71</option><option value="72">72</option><option value="73">73</option><option value="74">74</option><option value="75">75</option><option value="76">76</option><option value="77">77</option><option value="78">78</option><option value="79">79</option><option value="80">80</option><option value="81">81</option><option value="82">82</option><option value="83">83</option><option value="84">84</option><option value="85">85</option><option value="86">86</option><option value="87">87</option><option value="88">88</option><option value="89">89</option><option value="90">90</option><option value="91">91</option><option value="92">92</option><option value="93">93</option><option value="94">94</option><option value="95">95</option><option value="96">96</option><option value="97">97</option><option value="98">98</option><option value="99">99</option><option value="100">100</option>
+        </select>
+    
+      </form>
+    </div>
+  </div>
+
+  <div class="calculate-btn">
+    <button onclick="calculate()">Compare</button>
+    <button onclick="resetForm()" style="background-color: #FF0000;">Reset</button>
+</div>
+
+  <div class="gear-container">
+    <div id="comparison-result1" class="gear-box" style="display:none">
+      <div id="result1"></div>
+    </div>
+     <div id="comparison-result2" class="gear-box" style="display:none">
+      <div id="result2"></div>
+    </div>
+  </div>
+
+
+<script>
+  const subMaxMultipliers = {
+    gold: {
+      "ATK": 0.000937,
+      "HP": 0.000937,
+      "Elemental": 0.001875,
+      "DMG Inc": 0.000312,
+      "DMG Dec": 0.000312,
+      "Suppression": 0.000137
+    },
+    purple: {
+      "ATK": 0.000863,
+      "HP": 0.000863,
+      "Elemental": 0.001725,
+      "DMG Inc": 0.000287,
+      "DMG Dec": 0.000287,
+      "Suppression": 0.000127
+    }
+  };
+
+  const subScalingFactors = {
+    gold: {
+      "ATK": 251,
+      "HP": 251,
+      "Elemental": 261,
+      "DMG Inc": 261,
+      "DMG Dec": 261,
+      "Suppression": 216  // Derived from 1.95% at 14194
+    },
+    purple: {
+      "ATK": 251,
+      "HP": 251,
+      "Elemental": 261,
+      "DMG Inc": 261,
+      "DMG Dec": 261,
+      "Suppression": 216
+    }
+  };
+
+  const mainMultipliers = {
+    "ATK": 0.000375,
+    "HP": 0.000375,
+    "DEF": 0.000050,
+    "DMG Dec": 0.000125,
+    "DMG Inc": 0.000125
+  };
+
+  const labelToKey = {
+    "Attack": "ATK",
+    "HP": "HP",
+    "Defense": "DEF",
+    "Damage Decrease": "DMG Dec",
+    "Damage Increase": "DMG Inc",
+    "Suppression Defense Bonus": "Suppression",
+    "Elemental": "Elemental"
+  };
+
+  function calculatePet(petNumber) {
+    const species = document.getElementById(`species${petNumber}`).value;
+    const starLevel = parseInt(document.getElementById(`starLevel${petNumber}`).value) || 1;
+    const xpLevel = parseInt(document.getElementById(`xpLevel${petNumber}`).value) || 1;
+    const maxXPPerStar = (species === "gold") ? 100 : 80;
+    const totalLevels = (species === "gold") ? 104 : 84;
+    const currentLevel = (starLevel - 1) * maxXPPerStar + (xpLevel - 1);
+    const levelRatio = currentLevel / (totalLevels - 1);
+    const potential = parseFloat(document.getElementById(`potential${petNumber}`).value) || 0;
+
+    const mainStat = document.getElementById(`mainStat${petNumber}`);
+    const mainLabel = mainStat.options[mainStat.selectedIndex].text;
+    const mainKey = labelToKey[mainLabel] || mainLabel;
+    const mainMultiplier = mainMultipliers[mainKey] || 0;
+    const mainStatValue = potential * mainMultiplier * starLevel;
+
+    const subStats = [];
+    for (let i = 1; i <= 3; i++) {
+      const subStatElem = document.getElementById(`subStat${petNumber}_${i}`);
+      const subLabel = subStatElem.options[subStatElem.selectedIndex].text;
+      const subKey = labelToKey[subLabel] || subLabel;
+
+      const maxMultiplier = (subMaxMultipliers[species] || {})[subKey] || 0;
+      const scalingFactor = (subScalingFactors[species] || {})[subKey] || 1;
+
+      const maxSubStat = potential * maxMultiplier;
+      const baseSubStat = maxSubStat / scalingFactor;
+      const interpolated = baseSubStat + (maxSubStat - baseSubStat) * levelRatio;
+
+      subStats.push({ type: subLabel, max: interpolated });
+    }
+
+    return {
+      mainStatType: mainLabel,
+      mainMax: mainStatValue.toFixed(3),
+      subStats
+    };
+  }
+
+  function calculate() {
+    const pet1 = calculatePet(1);
+    const pet2 = calculatePet(2);
+
+    const resultText1 = `
+    Pet 1:<br>
+    Main Stat (${pet1.mainStatType}): ${pet1.mainMax}%<br><br>
+    Sub Stats:<br>
+      1. ${pet1.subStats[0].type}: ${pet1.subStats[0].max.toFixed(3)}%<br>
+      2. ${pet1.subStats[1].type}: ${pet1.subStats[1].max.toFixed(3)}%<br>
+      3. ${pet1.subStats[2].type}: ${pet1.subStats[2].max.toFixed(3)}%<br>
+    `;
+    const resultText2 = `
+    Pet 2:<br>
+    Main Stat (${pet2.mainStatType}): ${pet2.mainMax}%<br><br>
+    Sub Stats:<br>
+      1. ${pet2.subStats[0].type}: ${pet2.subStats[0].max.toFixed(3)}%<br>
+      2. ${pet2.subStats[1].type}: ${pet2.subStats[1].max.toFixed(3)}%<br>
+      3. ${pet2.subStats[2].type}: ${pet2.subStats[2].max.toFixed(3)}%<br>
+    `;
+    document.getElementById("result1").innerHTML = resultText1;
+    document.getElementById("result2").innerHTML = resultText2;
+
+    document.getElementById("comparison-result1").style.display = "block";
+    document.getElementById("comparison-result2").style.display = "block";
+  }
+
+  function resetForm() {
+    document.querySelectorAll('input[type="number"]').forEach(input => input.value = '');
+    document.querySelectorAll('select').forEach(select => select.selectedIndex = 0);
+    document.getElementById("result1").textContent = '';
+    document.getElementById("result2").textContent = '';
+    document.getElementById("comparison-result1").style.display = "none";
+    document.getElementById("comparison-result2").style.display = "none";
+  }
+</script>
+
+
+</body>
+</html>

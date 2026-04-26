@@ -1,0 +1,1877 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Base Skins Comparison</title>
+
+  <!-- Anti-flash -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/redesign/styles/mathomhouse.css">
+  <link rel="stylesheet" href="/redesign/styles/header.css">
+  <link rel="stylesheet" href="/redesign/styles/layout.css">
+  <link rel="stylesheet" href="/redesign/styles/calculators.css">
+
+  <!-- Page-specific styles -->
+  <style>
+    :root {
+      --bases-card-radius: 18px;
+      --bases-card-border: 1px solid rgba(15, 23, 42, 0.06);
+      --bases-muted: #64748b;
+      --bases-chip-bg: rgba(15, 23, 42, 0.04);
+      --bases-chip-border: rgba(148, 163, 184, 0.7);
+      --bases-modal-max-width: 960px;
+      --bases-text: #0f172a;
+      --bases-text-strong: #020617;
+    }
+
+    body {
+      scroll-behavior: smooth;
+    }
+
+    main.page-shell {
+      padding-bottom: 96px; /* space for compare bar */
+    }
+
+    /* ---------------- Sticky filter bar ---------------- */
+
+    .bases-sticky-header {
+      position: static;
+      background: var(--bg-color, #f1f5f9);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+      backdrop-filter: blur(10px) saturate(1.2);
+      z-index: 1; /* optional, keeps it above card background layers */
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+
+    .bases-sticky-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 8px 16px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .bases-sticky-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .bases-sticky-title h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .bases-sticky-title small {
+      font-size: 0.8rem;
+      color: var(--bases-muted);
+    }
+
+    .bases-controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bases-controls-row > * {
+      flex-shrink: 0;
+    }
+
+    .bases-filters-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bases-filters {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bases-filter-pill {
+      border-radius: 999px;
+      border: 1px solid var(--bases-chip-border);
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      background: rgba(248, 250, 252, 0.9);
+      color: var(--bases-text);
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .bases-filter-pill[aria-pressed="true"] {
+      background: rgba(59, 130, 246, 0.12);
+      border-color: rgba(59, 130, 246, 0.9);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
+    }
+
+    .bases-more-filters-btn {
+      border-radius: 999px;
+      border: 1px dashed var(--bases-chip-border);
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      background: rgba(248, 250, 252, 0.9);
+      color: var(--bases-text);
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .bases-more-filters-btn:hover {
+      border-color: rgba(59, 130, 246, 0.9);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
+    }
+
+    .bases-search {
+      flex: 1 1 180px;
+      min-width: 0;
+    }
+
+    .bases-search input[type="search"] {
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.9rem;
+    }
+
+    .bases-select,
+    .bases-inline-checkbox {
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.8rem;
+      background: rgba(248, 250, 252, 0.95);
+    }
+
+    .bases-inline-checkbox {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .bases-inline-checkbox input {
+      margin: 0;
+    }
+
+    #clearSel {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+    }
+
+    /* ---------------- Grid & cards ---------------- */
+
+    .bases-grid-shell {
+      max-width: 1100px;
+      margin: 16px auto 40px;
+      padding: 0 16px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .bases-card {
+      background: var(--card-bg, #ffffff);
+      border-radius: var(--bases-card-radius);
+      border: var(--bases-card-border);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+      padding: 12px 14px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: #0f172a; /* strong dark text for light mode */
+    }
+
+    .bases-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .bases-card-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .bases-card-title h3 {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--bases-text);
+    }
+
+    .bases-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      background: rgba(59, 130, 246, 0.06);
+      font-size: 0.7rem;
+      color: #1d4ed8;
+      width: fit-content;
+    }
+
+    .bases-card-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bases-card-actions input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+    }
+
+    .bases-icon-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      background: rgba(37, 99, 235, 0.1);
+      color: #1d4ed8;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .bases-icon-btn:hover {
+      background: rgba(37, 99, 235, 0.18);
+    }
+
+    .bases-section-label {
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-top: 4px;
+      margin-bottom: 2px;
+      color: #0f172a;
+    }
+
+    .bases-stats-columns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    
+    @media (max-width: 640px) {
+      .bases-stats-columns {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .bases-statlist {
+      border-radius: 12px;
+      background: rgba(248, 250, 252, 0.8);
+      padding: 6px 8px;
+    }
+
+    .bases-stat {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 0.82rem;
+      padding: 3px 0;
+      border-bottom: 1px dashed rgba(148, 163, 184, 0.5);
+    }
+
+    .bases-stat:last-child {
+      border-bottom: none;
+    }
+
+    .bases-stat-name {
+      flex: 1 1 auto;
+      color: #0f172a;
+    }
+
+    .bases-stat-value {
+      flex: 0 0 auto;
+      font-weight: 600;
+      white-space: nowrap;
+      color: #0f172a;
+    }
+
+    .bases-stat-muted {
+      color: var(--bases-muted);
+      font-style: italic;
+      padding: 4px 0;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+
+    .bases-notes-chip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .bases-info-pop {
+      position: absolute;
+      top: 115%;
+      right: 0;
+      z-index: 20;
+      max-width: 260px;
+      background: var(--card-bg, #ffffff);
+      border-radius: 10px;
+      padding: 8px 10px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
+      font-size: 0.8rem;
+      line-height: 1.35;
+      display: none;
+    }
+
+    .bases-info-pop strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* ---------------- Compare bar ---------------- */
+
+    .compare-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 10;
+      background: var(--bg-color, #f8fafc);
+      border-top: 1px solid rgba(148, 163, 184, 0.6);
+      backdrop-filter: blur(12px) saturate(1.1);
+      transform: translateY(100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+    }
+
+    .compare-bar.visible {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .compare-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .compare-label {
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .bases-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      max-width: 100%;
+    }
+
+    .bases-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: var(--bases-chip-bg);
+      border: 1px solid var(--bases-chip-border);
+      white-space: nowrap;
+    }
+
+    .bases-chip button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: 0;
+      font-size: 0.9rem;
+      line-height: 1;
+    }
+
+    #compareBtn {
+      white-space: nowrap;
+    }
+
+    /* ---------------- Modals ---------------- */
+
+    .bases-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      z-index: 40;
+    }
+
+    .bases-modal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 50;
+    }
+
+    .bases-modal.hidden,
+    .bases-modal-backdrop.hidden {
+      display: none;
+    }
+
+    .bases-modal-card {
+      width: 100%;
+      max-width: var(--bases-modal-max-width);
+      max-height: min(90vh, 800px);
+      border-radius: 18px;
+      background: var(--card-bg, #ffffff);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.4);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .bases-modal-header {
+      padding: 10px 16px;
+      background: #1d4ed8;
+      color: #eff6ff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .bases-modal-header h2 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    /* Ensure compare modal title is readable */
+    .bases-modal-header h2 {
+      color: #f8fafc !important;
+    }
+    /* Dark mode — soften intense blues in compare modal */
+    html[data-theme="dark"] .bases-modal-header,
+    body[data-theme="dark"] .bases-modal-header {
+      background: #1e3a8a !important;
+    }
+
+    html[data-theme="dark"] #compareTable thead th,
+    body[data-theme="dark"] #compareTable thead th {
+      background: #1e3a8a !important;
+    }
+
+    html[data-theme="dark"] #compareTable tbody tr.section-row th,
+    body[data-theme="dark"] #compareTable tbody tr.section-row th {
+      background: #1e3a8a !important;
+    }
+
+
+    .bases-modal-body {
+      padding: 10px 16px 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+        .bases-modal-help {
+      font-size: 0.8rem;
+      color: var(--bases-muted, #64748b);
+    }
+
+    .bases-stat-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      max-height: 260px;
+      overflow: auto;
+      padding: 2px 0;
+    }
+
+    .bases-stat-filter-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      background: rgba(248, 250, 252, 0.9);
+      color: #0f172a;
+    }
+
+    .bases-stat-filter-item input {
+      margin: 0;
+    }
+
+    .bases-modal-table-shell {
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      overflow: hidden;
+      background: #ffffff;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    .bases-modal-table-scroll {
+      max-height: calc(90vh - 150px);
+      overflow: auto;
+    }
+
+    #compareTable {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    #compareTable thead th {
+      position: sticky;
+      top: 0;
+      background: #1d4ed8;
+      color: #eff6ff;
+      padding: 6px 8px;
+      text-align: left;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.3);
+    }
+
+    #compareTable th,
+    #compareTable td {
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+    }
+
+    #compareTable tbody tr:nth-child(even) {
+      background: rgba(248, 250, 252, 0.8);
+    }
+
+    #compareTable tbody tr.section-row th {
+      background: #1d4ed8;
+      color: #eff6ff;
+      font-weight: 700;
+    }
+
+    #compareTable tbody tr.section-row th span {
+      opacity: 0.9;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-left: 4px;
+    }
+    /* Highlight best stat values in compare table */
+    #compareTable td.stat-best {
+      background: rgba(34, 197, 94, 0.16); /* soft green */
+      font-weight: 600;
+    }
+
+    /* Dark mode highlight */
+    html[data-theme="dark"] #compareTable td.stat-best,
+    body[data-theme="dark"] #compareTable td.stat-best {
+      background: rgba(34, 197, 94, 0.30);
+      font-weight: 600;
+    }
+
+
+    .bases-modal-footer {
+      padding: 10px 16px 12px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .bases-modal-footer button {
+      min-width: 80px;
+    }
+
+    .bases-modal-close {
+      border: none;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0 2px;
+    }
+
+    .bases-modal-close:hover {
+      opacity: 0.85;
+    }
+    .bases-stat-search {
+  margin-bottom: 8px;
+    }
+
+    .bases-stat-search input {
+      width: 100%;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .bases-stat-search input:focus {
+      border-color: rgba(59, 130, 246, 0.9);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.25);
+    }
+    @media (max-width: 768px) {
+    /* Header: don't fight the main Mathom House header on mobile */
+    .bases-sticky-header {
+      position: static;
+      border-bottom: none;
+      backdrop-filter: none;
+    }
+
+    /* Compare bar: stack instead of one long row */
+    .compare-inner {
+      flex-direction: column;
+      align-items: stretch;
+      padding: 6px 12px 8px;
+    }
+
+    .compare-label {
+      font-size: 0.8rem;
+    }
+
+    .bases-chip-row {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    #clearSel {
+      align-self: flex-end;
+      padding: 4px 6px;
+      font-size: 0.8rem;
+    }
+
+    #compareBtn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+
+    
+    /* Skill modal text */
+    #skillBody {
+      font-size: 0.9rem;
+      line-height: 1.45;
+      color: inherit;
+    }
+
+    /* Typography inside cards uses the card text color */
+    .bases-section-label,
+    .bases-stat-name,
+    .bases-stat-value {
+      color: inherit;
+    }
+
+    /* Dark mode: make base titles light */
+    html[data-theme="dark"] .bases-card-title h3,
+    body[data-theme="dark"] .bases-card-title h3 {
+      color: #e5e7eb;
+    }
+
+
+    /* Dark theme overrides specifically for the base skins page */
+    html[data-theme="dark"] .bases-card,
+    body[data-theme="dark"] .bases-card {
+      background: #111827;
+    }
+
+    html[data-theme="dark"] .bases-statlist {
+      background: #111827 !important;
+    }
+
+    /* DARK MODE — Improve stat readability */
+    html[data-theme="dark"] .bases-statlist .bases-stat-name,
+    html[data-theme="dark"] .bases-statlist .bases-stat-value {
+      color: #dde0e8;
+    }
+
+    html[data-theme="dark"] .bases-modal-card {
+      background: #111827;
+      color: #e5e7eb;
+    }
+    /* Dark mode – make "Equipped" / "Holding" labels match card title text */
+    html[data-theme="dark"] .bases-section-label,
+    body[data-theme="dark"] .bases-section-label {
+      color: #e5e7eb !important;  /* same feel as the card title in dark mode */
+    }
+
+    /* Dark mode – improve readability of notes popup */
+    html[data-theme="dark"] .bases-info-pop,
+    body[data-theme="dark"] .bases-info-pop {
+      background: #111827 !important;
+      color: #e5e7eb !important;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+
+    html[data-theme="dark"] .bases-modal-table-shell {
+      background: #111827;
+      border-color: rgba(148, 163, 184, 0.7);
+    }
+
+    html[data-theme="dark"] .bases-filter-pill,
+    html[data-theme="dark"] .bases-more-filters-btn,
+    body[data-theme="dark"] .bases-filter-pill,
+    body[data-theme="dark"] .bases-more-filters-btn {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: rgba(148, 163, 184, 0.9);
+      color: #e5e7eb;
+    }
+
+    html[data-theme="dark"] .bases-filter-pill[aria-pressed="true"],
+    body[data-theme="dark"] .bases-filter-pill[aria-pressed="true"] {
+      background: rgba(37, 99, 235, 0.5);
+    }
+
+    /* Empty state */
+    .bases-empty {
+      padding: 18px 16px;
+      border-radius: 16px;
+      text-align: center;
+      background: rgba(248, 250, 252, 0.85);
+      border: 1px dashed rgba(148, 163, 184, 0.8);
+      font-size: 0.9rem;
+      color: var(--bases-muted);
+    }
+  
+    /* Stat text: light in dark mode, dark in light mode */
+    html[data-theme="dark"] .bases-statlist .bases-stat-name,
+    html[data-theme="dark"] .bases-statlist .bases-stat-value {
+      color: #dde0e8 !important;
+    }
+    .bases-blurb {
+      margin: 0 0 20px;
+      padding: 12px 16px;
+      background: rgba(148, 163, 184, 0.10);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 12px;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      color: var(--bases-text);
+    }
+
+    html[data-theme="dark"] .bases-blurb,
+    body[data-theme="dark"] .bases-blurb {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(148, 163, 184, 0.25);
+      color: #e5e7eb;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: #1d4ed8;
+      color: white;
+      font-size: 1.3rem;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .back-to-top.show {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .back-to-top.hide {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .back-to-top:hover {
+      background: #2563eb;
+    }
+
+    /* Dark mode */
+    html[data-theme="dark"] .back-to-top,
+    body[data-theme="dark"] .back-to-top {
+      background: #334155;
+      color: #f1f5f9;
+    }
+
+    html[data-theme="dark"] .back-to-top:hover,
+    body[data-theme="dark"] .back-to-top:hover {
+      background: #475569;
+    }
+
+</style>
+
+  <script src="/redesign/header.js" defer></script>
+</head>
+<body>
+  <header id="header-placeholder"></header>
+
+  <main class="page-shell">
+    <!-- Sticky header with filters -->
+    <section class="bases-sticky-header">
+      <div class="bases-sticky-inner">
+        <div class="bases-sticky-title">
+          <h1>Base Skins Comparison</h1>
+          <small id="basesCountLabel"></small>
+        </div>
+        <div class="bases-controls-row">
+          <div class="bases-search">
+            <input id="q" type="search" placeholder="Search by base, stat, note, or skill…" />
+          </div>
+
+          <div class="bases-filters-group">
+            <div class="bases-filters" aria-label="Filters">
+              <button type="button" class="bases-filter-pill" data-flag="top" aria-pressed="false">
+                Top Level Base
+              </button>
+              <button type="button" class="bases-filter-pill" data-flag="skill" aria-pressed="false">
+                Has skill
+              </button>
+            </div>
+            <button type="button" class="bases-more-filters-btn" id="moreFiltersBtn">
+              More filters
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards grid -->
+    <section class="bases-grid-shell">
+      <div class="bases-blurb">
+        Browse every base skin and quickly compare their equipped and holding stats. 
+        You can filter by stats, skills, or by the highest level version of the base. You can view notes on the skin by clicking the "i" button and details about skills by clicking the "⭐" button (if applicable). Select up to four skins to see a full side-by-side comparison table. Shoutout to discord user <b>christine3069</b> for the suggestion! 
+      </div>
+      <div id="grid" class="cards-grid" aria-live="polite"></div>
+    </section>
+
+    <!-- Compare bar -->
+    <section class="compare-bar">
+      <div class="compare-inner">
+        <div class="compare-label" id="selCount">Select 2–4 bases to compare</div>
+        <div class="bases-chip-row" id="selList"></div>
+        <div style="flex:1 1 auto;"></div>
+        <button id="clearSel" type="button">Clear selected</button>
+        <button id="compareBtn" type="button" disabled>Compare</button>
+      </div>
+    </section>
+
+    <!-- Skill modal -->
+    <div id="skillBackdrop" class="bases-modal-backdrop hidden"></div>
+    <div id="skillModal" class="bases-modal hidden" role="dialog" aria-modal="true" aria-labelledby="skillTitle">
+      <div class="bases-modal-card">
+        <div class="bases-modal-header">
+          <h2 id="skillTitle">Skill</h2>
+          <button class="bases-modal-close" id="skillClose" aria-label="Close skill details">✕</button>
+        </div>
+        <div class="bases-modal-body">
+          <div id="skillBody"></div>
+        </div>
+        <div class="bases-modal-footer">
+          <button id="skillClose2" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+
+        <!-- More filters modal -->
+    <div id="filtersBackdrop" class="bases-modal-backdrop hidden"></div>
+    <div id="filtersModal" class="bases-modal hidden" role="dialog" aria-modal="true" aria-labelledby="filtersTitle">
+      <div class="bases-modal-card">
+        <div class="bases-modal-header">
+          <h2 id="filtersTitle">More filters</h2>
+          <button class="bases-modal-close" id="filtersClose" aria-label="Close filters">✕</button>
+        </div>
+        <div class="bases-modal-body">
+          <p class="bases-modal-help">
+            Filter bases by specific stats. A base will match if it has at least one of the selected stats in either Equipped or Holding.
+          </p>
+          <div class="bases-stat-search">
+            <input
+              type="search"
+              id="statFilterSearch"
+              placeholder="Search stats…"
+              autocomplete="off"
+            />
+          </div>
+          <div id="statFiltersList" class="bases-stat-filters"></div>
+        </div>
+        <div class="bases-modal-footer">
+          <button id="filtersClear" type="button">Clear stat filters</button>
+          <button id="filtersDone" type="button">Done</button>
+        </div>
+      </div>
+    </div>
+
+<!-- Compare modal -->
+    <div id="compareBackdrop" class="bases-modal-backdrop hidden"></div>
+    <div id="compareModal" class="bases-modal hidden" role="dialog" aria-modal="true" aria-labelledby="compareTitle">
+      <div class="bases-modal-card">
+        <div class="bases-modal-header">
+          <h2 id="compareTitle">Compare Selected Bases</h2>
+          <button class="bases-modal-close" id="compareClose" aria-label="Close comparison">✕</button>
+        </div>
+        <div class="bases-modal-body">
+          <div class="bases-modal-table-shell">
+            <div class="bases-modal-table-scroll">
+              <table id="compareTable"></table>
+            </div>
+          </div>
+        </div>
+        <div class="bases-modal-footer">
+          <button id="compareClose2" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+
+  <!-- Page logic -->
+  <script>
+    /* -----------------------------------------------------
+       Data loading & normalization
+    ----------------------------------------------------- */
+
+    async function loadBaseSkins() {
+      const endpoints = [
+        "base_skins.json",
+        "csvjson.json"
+      ];
+
+      for (const url of endpoints) {
+        try {
+          const response = await fetch(url, { cache: "no-store" });
+          if (!response.ok) continue;
+
+          const data = await response.json();
+
+          // If already in normalized format
+          if (Array.isArray(data) && data.length && data[0].baseName) {
+            return data;
+          }
+
+          // Otherwise treat as CSV-shaped JSON
+          return normalizeFromCsvJson(data || []);
+        } catch (e) {
+          // try next endpoint
+        }
+      }
+
+      throw new Error("Could not load base skins data.");
+    }
+
+    function parseValue(raw) {
+      if (raw === null || raw === undefined) {
+        return { value: null, unit: null, original: null };
+      }
+      const s = String(raw).trim();
+      if (!s) return { value: null, unit: null, original: null };
+
+      // Percent values
+      if (/%/.test(s)) {
+        const m = s.replace(/,/g, "").match(/[-+]?\d*\.?\d+/);
+        return {
+          value: m ? Number(m[0]) : null,
+          unit: "%",
+          original: s
+        };
+      }
+
+      // Flat numeric
+      const n = Number(s.replace(/,/g, ""));
+      if (!isNaN(n)) {
+        return { value: n, unit: "flat", original: s };
+      }
+
+      // Fallback text
+      return { value: null, unit: "text", original: s };
+    }
+
+    function normalizeFromCsvJson(rows) {
+      const result = [];
+
+      for (const row of rows) {
+        const baseName = row["Base Skin Name"];
+        if (!baseName) continue;
+
+        const equippedStats = [];
+        const holdingStats = [];
+
+        // Equipped stats: Equipped Stat 1 + Value ... 4
+        for (let i = 1; i <= 4; i++) {
+          const name = row["Equipped Stat " + i];
+          const value = row["Equipped Stat " + i + " Value"];
+          if (!name || !String(name).trim()) continue;
+
+          const parsed = parseValue(value);
+          equippedStats.push({
+            name: String(name).trim(),
+            value: parsed.value,
+            unit: parsed.unit,
+            original: parsed.original
+          });
+        }
+
+        // Holding stats: Holding In Stock Stat 1 + Value ... 4
+        for (let i = 1; i <= 4; i++) {
+          const name = row["Holding In Stock Stat " + i];
+          const value = row["Holding In Stock Stat " + i + " Value"];
+          if (!name || !String(name).trim()) continue;
+
+          const parsed = parseValue(value);
+          holdingStats.push({
+            name: String(name).trim(),
+            value: parsed.value,
+            unit: parsed.unit,
+            original: parsed.original
+          });
+        }
+
+        result.push({
+          baseName: String(baseName).trim(),
+          equippedStats,
+          holdingStats,
+          skill: {
+            hasSkill: truthy(row["Base Skill?"]),
+            description: (row["Skill Details"] || "").toString()
+          },
+          notes: (row["Notes"] || "").toString(),
+          isTopLevel: truthy(row["Highest Level?"])
+        });
+      }
+
+      return result;
+    }
+
+    function truthy(value) {
+      if (value === true || value === false) return !!value;
+      if (value == null) return false;
+
+      const v = String(value).trim().toLowerCase();
+      if (!v) return false;
+
+      return [
+        "true",
+        "1",
+        "yes",
+        "y",
+        "top",
+        "max",
+        "highest"
+      ].includes(v);
+    }
+
+    function formatStat(stat) {
+      if (!stat) return "";
+      if (stat.original) return stat.original;
+      if (stat.value == null) return "";
+      return stat.unit === "%" ? stat.value + "%" : String(stat.value);
+    }
+
+    /* -----------------------------------------------------
+       State
+    ----------------------------------------------------- */
+
+    const state = {
+      all: [],      // full dataset
+      filtered: [], // current visible list
+      selected: new Map(),
+      statFilters: new Set()
+    };
+
+    /* -----------------------------------------------------
+       Rendering: grid & cards
+    ----------------------------------------------------- */
+
+    function renderGrid() {
+      const grid = document.getElementById("grid");
+      grid.innerHTML = "";
+
+      if (!state.filtered.length) {
+        const empty = document.createElement("div");
+        empty.className = "bases-empty";
+        empty.textContent =
+          "No base skins match your filters. Try adjusting your search or filters.";
+        grid.appendChild(empty);
+        return;
+      }
+
+      const frag = document.createDocumentFragment();
+
+      state.filtered.forEach((item) => {
+        const card = document.createElement("article");
+        card.className = "bases-card";
+
+        // ------ header row ------
+        const header = document.createElement("div");
+        header.className = "bases-card-header";
+
+        const titleWrap = document.createElement("div");
+        titleWrap.className = "bases-card-title";
+
+        const title = document.createElement("h3");
+        title.textContent = item.baseName;
+        titleWrap.appendChild(title);
+
+        if (item.isTopLevel) {
+          const badge = document.createElement("span");
+          badge.className = "bases-badge";
+          badge.textContent = "Top Level";
+          titleWrap.appendChild(badge);
+        }
+
+        header.appendChild(titleWrap);
+
+        const actions = document.createElement("div");
+        actions.className = "bases-card-actions";
+
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.checked = state.selected.has(item.baseName);
+        cb.setAttribute(
+          "aria-label",
+          "Select " + item.baseName + " for comparison"
+        );
+
+        cb.addEventListener("change", () => {
+          if (cb.checked) {
+            if (state.selected.size >= 4) {
+              alert("You can compare up to 4 bases at a time.");
+              cb.checked = false;
+              return;
+            }
+            state.selected.set(item.baseName, item);
+          } else {
+            state.selected.delete(item.baseName);
+          }
+          updateSelectionUI();
+        });
+
+        actions.appendChild(cb);
+
+        // Notes button
+        if (item.notes && item.notes.trim()) {
+          const notesWrap = document.createElement("span");
+          notesWrap.className = "bases-notes-chip";
+
+          const infoBtn = document.createElement("button");
+          infoBtn.type = "button";
+          infoBtn.className = "bases-icon-btn";
+          infoBtn.title = "Show notes";
+          infoBtn.textContent = "i";
+
+          const pop = document.createElement("div");
+          pop.className = "bases-info-pop";
+          pop.innerHTML =
+            "<strong>Notes</strong>" + escapeHtml(item.notes).replace(/\n/g, "<br />");
+
+          notesWrap.appendChild(infoBtn);
+          notesWrap.appendChild(pop);
+
+          infoBtn.addEventListener("click", (ev) => {
+            ev.stopPropagation();
+            const visible = pop.style.display === "block";
+            document
+              .querySelectorAll(".bases-info-pop")
+              .forEach((el) => (el.style.display = "none"));
+            pop.style.display = visible ? "none" : "block";
+          });
+
+          actions.appendChild(notesWrap);
+        }
+
+        // Skill button
+        if (item.skill && item.skill.hasSkill) {
+          const skillBtn = document.createElement("button");
+          skillBtn.type = "button";
+          skillBtn.className = "bases-icon-btn";
+          skillBtn.title = "View skill";
+          skillBtn.textContent = "⭐";
+          skillBtn.addEventListener("click", () => showSkill(item));
+          actions.appendChild(skillBtn);
+        }
+
+        header.appendChild(actions);
+        card.appendChild(header);
+
+        // ------ stats ------
+        const statsColumns = document.createElement("div");
+        statsColumns.className = "bases-stats-columns";
+
+        // Equipped
+        const eqBlock = document.createElement("div");
+        const eqLabel = document.createElement("div");
+        eqLabel.className = "bases-section-label";
+        eqLabel.textContent = "Equipped";
+        eqBlock.appendChild(eqLabel);
+
+        const eqList = document.createElement("div");
+        eqList.className = "bases-statlist";
+
+        if (!item.equippedStats.length) {
+          const none = document.createElement("div");
+          none.className = "bases-stat-muted";
+          none.textContent = "No equipped stats";
+          eqList.appendChild(none);
+        } else {
+          item.equippedStats.forEach((s) => {
+            if (!s || !s.name) return;
+            const row = document.createElement("div");
+            row.className = "bases-stat";
+
+            const left = document.createElement("span");
+            left.className = "bases-stat-name";
+            left.textContent = s.name;
+
+            const right = document.createElement("span");
+            right.className = "bases-stat-value";
+            right.textContent = formatStat(s);
+
+            row.appendChild(left);
+            row.appendChild(right);
+            eqList.appendChild(row);
+          });
+        }
+
+        eqBlock.appendChild(eqList);
+        statsColumns.appendChild(eqBlock);
+
+        // Holding
+        const hBlock = document.createElement("div");
+        const hLabel = document.createElement("div");
+        hLabel.className = "bases-section-label";
+        hLabel.textContent = "Holding";
+        hBlock.appendChild(hLabel);
+
+        const hList = document.createElement("div");
+        hList.className = "bases-statlist";
+
+        if (!item.holdingStats.length) {
+          const none = document.createElement("div");
+          none.className = "bases-stat-muted";
+          none.textContent = "No holding stats";
+          hList.appendChild(none);
+        } else {
+          item.holdingStats.forEach((s) => {
+            if (!s || !s.name) return;
+            const row = document.createElement("div");
+            row.className = "bases-stat";
+
+            const left = document.createElement("span");
+            left.className = "bases-stat-name";
+            left.textContent = s.name;
+
+            const right = document.createElement("span");
+            right.className = "bases-stat-value";
+            right.textContent = formatStat(s);
+
+            row.appendChild(left);
+            row.appendChild(right);
+            hList.appendChild(row);
+          });
+        }
+
+        hBlock.appendChild(hList);
+        statsColumns.appendChild(hBlock);
+
+        card.appendChild(statsColumns);
+        frag.appendChild(card);
+      });
+
+      grid.appendChild(frag);
+    }
+
+    /* -----------------------------------------------------
+       Selection UI & compare bar
+    ----------------------------------------------------- */
+
+    function updateSelectionUI() {
+      const list = document.getElementById("selList");
+      const label = document.getElementById("selCount");
+      const btn = document.getElementById("compareBtn");
+
+      if (!list || !label || !btn) return;
+
+      list.innerHTML = "";
+
+      state.selected.forEach((item, name) => {
+        const chip = document.createElement("span");
+        chip.className = "bases-chip";
+
+        const text = document.createTextNode(name);
+        chip.appendChild(text);
+
+        const closeBtn = document.createElement("button");
+        closeBtn.type = "button";
+        closeBtn.setAttribute(
+          "aria-label",
+          "Remove " + name + " from comparison"
+        );
+        closeBtn.textContent = "×";
+        closeBtn.addEventListener("click", () => {
+          state.selected.delete(name);
+          renderGrid();
+          updateSelectionUI();
+        });
+
+        chip.appendChild(closeBtn);
+        list.appendChild(chip);
+      });
+
+      const count = state.selected.size;
+
+      if (count === 0) {
+        label.textContent = "Select 2–4 bases to compare";
+      } else {
+        label.textContent = count + " selected";
+      }
+
+      btn.disabled = count < 2;
+
+      const bar = document.querySelector(".compare-bar");
+      if (bar) {
+        if (count === 0) {
+          bar.classList.remove("visible");
+        } else {
+          bar.classList.add("visible");
+        }
+      }
+    }
+
+    /* -----------------------------------------------------
+       Compare modal
+    ----------------------------------------------------- */
+
+    function maxStat(item, kind) {
+      const all = (item.equippedStats || []).concat(item.holdingStats || []);
+      let best = null;
+
+      for (const s of all) {
+        if (!s || !s.name || s.value == null) continue;
+        let name = s.name.toLowerCase();
+
+        // normalize prefixes like "All units", "Army", "Navy", "Air Force"
+        name = name
+          .replace(/all units/g, "")
+          .replace(/army/g, "")
+          .replace(/navy/g, "")
+          .replace(/air force/g, "")
+          .trim();
+
+        if (kind === "attack" && name.indexOf("attack") === -1) continue;
+        if (kind === "hp" && name.indexOf("hp") === -1 && name.indexOf("health") === -1) continue;
+
+        if (best == null || s.value > best) {
+          best = s.value;
+        }
+      }
+
+      return best;
+    }
+
+    function buildCompareTable() {
+  const table = document.getElementById("compareTable");
+  table.innerHTML = "";
+
+  const selected = Array.from(state.selected.values());
+  if (selected.length < 2) return;
+
+  const equipNames = Object.create(null);
+  const holdNames = Object.create(null);
+
+  // Collect all stat names across selected bases
+  selected.forEach((item) => {
+    (item.equippedStats || []).forEach((s) => {
+      if (s && s.name) equipNames[s.name] = true;
+    });
+    (item.holdingStats || []).forEach((s) => {
+      if (s && s.name) holdNames[s.name] = true;
+    });
+  });
+
+  const equipList = Object.keys(equipNames).sort();
+  const holdList = Object.keys(holdNames).sort();
+
+  const thead = document.createElement("thead");
+  const headerRow = document.createElement("tr");
+
+  const statTh = document.createElement("th");
+  statTh.textContent = "Stat";
+  headerRow.appendChild(statTh);
+
+  selected.forEach((item) => {
+    const th = document.createElement("th");
+    th.textContent = item.baseName;
+    headerRow.appendChild(th);
+  });
+
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+
+  const tbody = document.createElement("tbody");
+
+  function addSectionRow(title) {
+    const tr = document.createElement("tr");
+    tr.className = "section-row";
+    const th = document.createElement("th");
+    th.colSpan = selected.length + 1;
+    th.textContent = title;
+    tr.appendChild(th);
+    tbody.appendChild(tr);
+  }
+
+  // Helper: find the stat object for a given name
+  function findStat(stats, statName) {
+    for (const s of stats) {
+      if (s && s.name === statName) return s;
+    }
+    return null;
+  }
+
+  // Helper: get numeric value (percent or flat) or null
+  function getNumericValue(stat) {
+    if (!stat || stat.value == null) return null;
+    if (stat.unit === "%" || stat.unit === "flat") return stat.value;
+    return null; // don't try to rank text/non-numeric stats
+  }
+
+  // Build a section (Equipped or Holding)
+  function buildSectionRows(statNames, title, statsSelector) {
+    if (!statNames.length) return;
+
+    addSectionRow(title);
+
+    statNames.forEach((statName) => {
+      const tr = document.createElement("tr");
+
+      const nameTd = document.createElement("td");
+      nameTd.textContent = statName;
+      tr.appendChild(nameTd);
+
+      // Collect stat objects and numeric values for this row
+      const rowStats = selected.map((item) =>
+        findStat(statsSelector(item) || [], statName)
+      );
+      const numericValues = rowStats.map((s) => getNumericValue(s));
+
+      // Determine the best (max) numeric value in this row
+      let maxValue = null;
+      numericValues.forEach((v) => {
+        if (v == null) return;
+        if (maxValue == null || v > maxValue) {
+          maxValue = v;
+        }
+      });
+
+      // Build cells for each selected base
+      rowStats.forEach((statObj, idx) => {
+        const td = document.createElement("td");
+        let valueText = "—";
+
+        if (statObj) {
+          valueText = formatStat(statObj) || "—";
+        }
+
+        td.textContent = valueText;
+
+        // Highlight best value (only if there is a numeric max)
+        if (
+          maxValue != null &&
+          numericValues[idx] != null &&
+          numericValues[idx] === maxValue
+        ) {
+          td.classList.add("stat-best");
+        }
+
+        tr.appendChild(td);
+      });
+
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Equipped section
+  buildSectionRows(
+    equipList,
+    "Equipped",
+    (item) => item.equippedStats
+  );
+
+  // Holding section
+  buildSectionRows(
+    holdList,
+    "Holding",
+    (item) => item.holdingStats
+  );
+
+  table.appendChild(tbody);
+}
+
+
+    /* -----------------------------------------------------
+       Skill modal helpers
+    ----------------------------------------------------- */
+
+    function showSkill(item) {
+      const title = document.getElementById("skillTitle");
+      const body = document.getElementById("skillBody");
+
+      title.textContent = item.baseName + " — Skill";
+      const text = (item.skill && item.skill.description) || "No skill information available.";
+      // Render line breaks
+      body.innerHTML = escapeHtml(text).replace(/\n/g, "<br>");
+
+      openModal("skill");
+    }
+
+    function openModal(which) {
+      document.getElementById(which + "Modal").classList.remove("hidden");
+      document.getElementById(which + "Backdrop").classList.remove("hidden");
+    }
+
+    function closeModal(which) {
+      document.getElementById(which + "Modal").classList.add("hidden");
+      document.getElementById(which + "Backdrop").classList.add("hidden");
+    }
+
+    /* -----------------------------------------------------
+       Filters & search
+    ----------------------------------------------------- */
+
+    function applyFilters() {
+      const searchEl = document.getElementById("q");
+      const q = searchEl ? searchEl.value.trim().toLowerCase() : "";
+
+      const activeFlags = [];
+      const pillEls = document.querySelectorAll(".bases-filter-pill[aria-pressed='true']");
+      pillEls.forEach((btn) => {
+        const flag = btn.dataset.flag;
+        if (flag) activeFlags.push(flag);
+      });
+
+      let rows = state.all.slice();
+
+      if (q) {
+        rows = rows.filter((r) => {
+          if (r.baseName && r.baseName.toLowerCase().includes(q)) return true;
+
+          const stats = (r.equippedStats || []).concat(r.holdingStats || []);
+          for (const s of stats) {
+            if (!s) continue;
+            if (s.name && s.name.toLowerCase().includes(q)) return true;
+            if (s.original && String(s.original).toLowerCase().includes(q)) return true;
+          }
+
+          if (r.notes && String(r.notes).toLowerCase().includes(q)) return true;
+          if (r.skill && r.skill.description && String(r.skill.description).toLowerCase().includes(q)) return true;
+
+          return false;
+        });
+      }
+
+      // Pill filters
+      if (activeFlags.includes("top")) {
+        rows = rows.filter((r) => r.isTopLevel);
+      }
+      if (activeFlags.includes("skill")) {
+        rows = rows.filter((r) => r.skill && r.skill.hasSkill);
+      }
+
+      // Stat filters from More Filters modal
+      if (state.statFilters && state.statFilters.size > 0) {
+        const wanted = state.statFilters;
+        rows = rows.filter((r) => {
+          const stats = (r.equippedStats || []).concat(r.holdingStats || []);
+          return stats.some((s) => s && s.name && wanted.has(s.name));
+        });
+      }
+
+      // Default sort: name A → Z
+      rows.sort((a, b) => a.baseName.localeCompare(b.baseName));
+
+      state.filtered = rows;
+      renderGrid();
+      updateSelectionUI();
+      updateCountLabel();
+    }
+    
+    function buildStatFiltersUI() {
+      const list = document.getElementById("statFiltersList");
+      if (!list) return;
+      list.innerHTML = "";
+
+      const namesSet = new Set();
+
+      state.all.forEach((row) => {
+        const allStats = (row.equippedStats || []).concat(row.holdingStats || []);
+        allStats.forEach((s) => {
+          if (s && s.name) {
+            namesSet.add(s.name);
+          }
+        });
+      });
+
+      const names = Array.from(namesSet).sort((a, b) => a.localeCompare(b));
+
+      names.forEach((name) => {
+        const item = document.createElement("label");
+        item.className = "bases-stat-filter-item";
+        item.dataset.label = name.toLowerCase();
+
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.value = name;
+        cb.checked = state.statFilters.has(name);
+
+        cb.addEventListener("change", (e) => {
+          if (e.target.checked) {
+            state.statFilters.add(name);
+          } else {
+            state.statFilters.delete(name);
+          }
+          applyFilters();
+        });
+
+        const span = document.createElement("span");
+        span.textContent = name;
+
+        item.appendChild(cb);
+        item.appendChild(span);
+        list.appendChild(item);
+      });
+
+      // Reset search when rebuilding
+      const searchInput = document.getElementById("statFilterSearch");
+      if (searchInput) {
+        searchInput.value = "";
+      }
+    }
+
+
+function updateCountLabel() {
+      const label = document.getElementById("basesCountLabel");
+      if (!label) return;
+      const total = state.all.length;
+      const visible = state.filtered.length;
+      if (!total) {
+        label.textContent = "";
+        return;
+      }
+      if (visible === total) {
+        label.textContent = total + " base skins";
+      } else {
+        label.textContent = visible + " of " + total + " base skins shown";
+      }
+    }
+
+    /* -----------------------------------------------------
+       Utilities
+    ----------------------------------------------------- */
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    /* -----------------------------------------------------
+       Wire-up & init
+    ----------------------------------------------------- */
+
+        (function init() {
+  // Search box
+  const searchEl = document.getElementById("q");
+  if (searchEl) {
+    searchEl.addEventListener("input", () => applyFilters());
+  }
+
+  // Top tier / Has skill pills
+  const filterPills = document.querySelectorAll(".bases-filter-pill");
+  if (filterPills && filterPills.length) {
+    filterPills.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const pressed = btn.getAttribute("aria-pressed") === "true";
+        btn.setAttribute("aria-pressed", pressed ? "false" : "true");
+        applyFilters();
+      });
+    });
+  }
+
+  // "More filters" button (opens stat filters modal)
+  const moreFiltersBtn = document.getElementById("moreFiltersBtn");
+  if (moreFiltersBtn) {
+    moreFiltersBtn.addEventListener("click", () => {
+      openModal("filters");
+    });
+  }
+
+  // Filters modal close / done / backdrop
+  const filtersClose = document.getElementById("filtersClose");
+  if (filtersClose) {
+    filtersClose.addEventListener("click", () => closeModal("filters"));
+  }
+
+  const filtersDone = document.getElementById("filtersDone");
+  if (filtersDone) {
+    filtersDone.addEventListener("click", () => closeModal("filters"));
+  }
+
+  const filtersBackdrop = document.getElementById("filtersBackdrop");
+  if (filtersBackdrop) {
+    filtersBackdrop.addEventListener("click", () => closeModal("filters"));
+  }
+
+  // Clear all stat filters
+  const filtersClearBtn = document.getElementById("filtersClear");
+  if (filtersClearBtn) {
+    filtersClearBtn.addEventListener("click", () => {
+      if (state.statFilters && typeof state.statFilters.clear === "function") {
+        state.statFilters.clear();
+      }
+
+      document
+        .querySelectorAll(".bases-stat-filter-item input[type='checkbox']")
+        .forEach((cb) => {
+          cb.checked = false;
+        });
+
+      applyFilters();
+    });
+  }
+
+  // Search inside stat filters modal
+  const statSearchInput = document.getElementById("statFilterSearch");
+  if (statSearchInput) {
+    statSearchInput.addEventListener("input", () => {
+      const q = statSearchInput.value.trim().toLowerCase();
+      document
+        .querySelectorAll(".bases-stat-filter-item")
+        .forEach((item) => {
+          const label = (item.dataset.label || "").toLowerCase();
+          item.style.display = label.includes(q) ? "" : "none";
+        });
+    });
+  }
+
+  // Clear selected bases (compare bar)
+  const clearBtn = document.getElementById("clearSel");
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      state.selected.clear();
+      renderGrid();
+      updateSelectionUI();
+    });
+  }
+
+  // Compare button
+  const compareBtn = document.getElementById("compareBtn");
+  if (compareBtn) {
+    compareBtn.addEventListener("click", () => {
+      buildCompareTable();
+      openModal("compare");
+    });
+  }
+
+  // Compare modal close + backdrop
+  const compareClose = document.getElementById("compareClose");
+  if (compareClose) {
+    compareClose.addEventListener("click", () => closeModal("compare"));
+  }
+
+  const compareClose2 = document.getElementById("compareClose2");
+  if (compareClose2) {
+    compareClose2.addEventListener("click", () => closeModal("compare"));
+  }
+
+  const compareBackdrop = document.getElementById("compareBackdrop");
+  if (compareBackdrop) {
+    compareBackdrop.addEventListener("click", () => closeModal("compare"));
+  }
+
+  // Skill modal close + backdrop
+  const skillClose = document.getElementById("skillClose");
+  if (skillClose) {
+    skillClose.addEventListener("click", () => closeModal("skill"));
+  }
+
+  const skillClose2 = document.getElementById("skillClose2");
+  if (skillClose2) {
+    skillClose2.addEventListener("click", () => closeModal("skill"));
+  }
+
+  const skillBackdrop = document.getElementById("skillBackdrop");
+  if (skillBackdrop) {
+    skillBackdrop.addEventListener("click", () => closeModal("skill"));
+  }
+
+  /* ---------------- Back to Top button wiring ---------------- */
+
+  const backToTopBtn = document.getElementById("backToTop");
+  if (backToTopBtn) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 350) {
+        backToTopBtn.classList.add("show");
+        backToTopBtn.classList.remove("hide");
+      } else {
+        backToTopBtn.classList.add("hide");
+        backToTopBtn.classList.remove("show");
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  // Initial data load
+  loadBaseSkins()
+    .then((data) => {
+      state.all = data || [];
+
+      // Build the stat filters list for the "More filters" modal
+      if (typeof buildStatFiltersUI === "function") {
+        buildStatFiltersUI();
+      }
+
+      applyFilters();
+    })
+    .catch((err) => {
+      const grid = document.getElementById("grid");
+      if (grid) {
+        grid.innerHTML = "";
+        const error = document.createElement("div");
+        error.className = "bases-empty";
+        error.textContent = "Failed to load data: " + err.message;
+        grid.appendChild(error);
+      }
+    });
+})();
+
+  </script>
+</body>
+</html>
