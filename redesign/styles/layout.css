@@ -6,6 +6,7 @@
 /* ─── HERO (homepage) ─────────────────────────────────────────── */
 .hero {
   position: relative;
+  z-index: 0;
   padding: 72px 24px 60px;
   text-align: center;
   overflow: hidden;
