@@ -50,11 +50,14 @@ nav::before {
   display: flex;
   gap: 2px;
   list-style: none;
-  align-items: center;
+  align-items: stretch;
   flex: 1;
   flex-wrap: nowrap;
 }
-.nav-links > li { position: relative; }
+.nav-links > li { position: relative; display: flex; align-items: center; }
+
+/* Raise active dropdown above sibling li items */
+.has-dropdown:hover { z-index: 1; }
 
 .nav-links a,
 .nav-group-btn {
@@ -106,6 +109,17 @@ nav::before {
   box-shadow: 0 8px 24px rgba(0,0,0,0.3);
 }
 .has-dropdown:hover .dropdown-panel { display: flex; }
+
+/* Invisible bridge fills the 6px gap so hover isn't lost moving cursor into the panel */
+.has-dropdown::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 10px;
+  z-index: 1;
+}
 
 .dropdown-panel a {
   padding: 8px 16px;

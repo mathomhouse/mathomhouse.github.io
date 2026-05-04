@@ -13,10 +13,10 @@
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 18px 16px;
+  padding: 14px 12px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .store-tile:not(.maxed):hover {
@@ -113,6 +113,7 @@
   cursor: pointer;
   transition: background 0.2s, box-shadow 0.2s;
   width: 100%;
+  margin-top: auto;
 }
 .add-btn:hover   { background: rgba(201,168,76,0.2); box-shadow: 0 0 14px var(--gold-glow); }
 .add-btn:disabled { opacity: 0.4; cursor: not-allowed; }
@@ -459,6 +460,7 @@ h1 {
   cursor: pointer;
   transition: background 0.2s, box-shadow 0.2s;
   width: 100%;
+  margin-top: auto;
 }
 .store-tile > button:last-of-type:hover {
   background: rgba(201,168,76,0.2);

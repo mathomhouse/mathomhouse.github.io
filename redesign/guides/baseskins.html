@@ -40,7 +40,7 @@
 
     .bases-sticky-header {
       position: static;
-      background: var(--bg-color, #f1f5f9);
+      background: var(--bg);
       border-bottom: 1px solid rgba(148, 163, 184, 0.4);
       backdrop-filter: blur(10px) saturate(1.2);
       z-index: 1; /* optional, keeps it above card background layers */
@@ -353,7 +353,7 @@
       right: 0;
       bottom: 0;
       z-index: 10;
-      background: var(--bg-color, #f8fafc);
+      background: var(--bg);
       border-top: 1px solid rgba(148, 163, 184, 0.6);
       backdrop-filter: blur(12px) saturate(1.1);
       transform: translateY(100%);
@@ -694,6 +694,17 @@
     html[data-theme="dark"] .bases-card,
     body[data-theme="dark"] .bases-card {
       background: #111827;
+      color: #e5e7eb;
+    }
+
+    html[data-theme="dark"] #compareTable tbody tr:nth-child(even) {
+      background: rgba(30, 41, 59, 0.8);
+    }
+
+    html[data-theme="dark"] .bases-stat-filter-item {
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      border-color: rgba(148, 163, 184, 0.4);
     }
 
     html[data-theme="dark"] .bases-statlist {

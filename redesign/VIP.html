@@ -29,7 +29,7 @@
     <br><br>
     <button onclick="startCalculation()">Calculate</button>
     <button class="reset" onclick="resetFields()">Reset</button><br><br>
-    <div id="result"></div>
+    <div id="result" style="display:none"></div>
 </div>
 
 <script>
@@ -99,12 +99,16 @@
             resultMessage += `<br>You are at the highest VIP level! Congratulations! You are a whale!<br><br> Click <b><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">here</a></b> to claim your prize! `;
         }
 
-        document.getElementById('result').innerHTML = resultMessage;
+        const resultEl = document.getElementById('result');
+        resultEl.style.display = 'block';
+        resultEl.innerHTML = resultMessage;
     }
 
     function resetFields() {
         document.getElementById('vipPoints').value = '';
-        document.getElementById('result').innerText = '';
+        const resultEl = document.getElementById('result');
+        resultEl.innerText = '';
+        resultEl.style.display = 'none';
     }
 </script>
 <footer>&copy; 2025 Mathom House &middot; Not affiliated with Top War or Topjoy</footer>
