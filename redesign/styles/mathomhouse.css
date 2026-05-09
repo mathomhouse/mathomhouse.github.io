@@ -63,6 +63,13 @@ body::before {
 
 img { display: block; max-width: 100%; }
 a   { color: inherit; text-decoration: none; }
+button, input, select, textarea { font-family: inherit; }
+p {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.7;
+}
 
 /* ─── BUTTONS ─────────────────────────────────────────────────── */
 .btn {

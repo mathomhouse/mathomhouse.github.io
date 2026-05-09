@@ -186,6 +186,7 @@ button[onclick]:not(.hamburger):not(.theme-toggle-btn):not(.mobile-group-btn):no
 /* ─── CALC DESCRIPTION (intro text) ──────────────────────────── */
 .calc-desc,
 .container > p:first-of-type {
+  font-family: 'Rajdhani', sans-serif;
   font-size: 0.95rem;
   color: var(--text-dim);
   line-height: 1.7;
