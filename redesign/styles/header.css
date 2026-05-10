@@ -8,7 +8,6 @@
   top: 0;
   z-index: 1000;
   background: var(--surface);
-  overflow: hidden;
 }
 
 /* ─── NAV BAR ─────────────────────────────────────────────────── */
@@ -43,7 +42,7 @@ nav::before {
   font-family: 'Rajdhani', sans-serif;
   font-size: 1.3rem;
   font-weight: 700;
-  color: var(--green);
+  color: var(--red);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
