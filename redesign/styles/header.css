@@ -13,8 +13,7 @@
 
 /* ─── NAV BAR ─────────────────────────────────────────────────── */
 nav {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 100;
   border-bottom: 1px solid var(--border);
   padding: 0 24px;
@@ -44,7 +43,7 @@ nav::before {
   font-family: 'Rajdhani', sans-serif;
   font-size: 1.3rem;
   font-weight: 700;
-  color: var(--gold);
+  color: var(--green);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
