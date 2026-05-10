@@ -3,6 +3,12 @@
    Requires: mathomhouse.css (design tokens)
    ─────────────────────────────────────────────────────────────── */
 
+#header-placeholder {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
 /* ─── NAV BAR ─────────────────────────────────────────────────── */
 nav {
   position: sticky;
