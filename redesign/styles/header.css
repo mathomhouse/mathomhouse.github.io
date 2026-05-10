@@ -8,6 +8,8 @@
   top: 0;
   z-index: 1000;
   background: var(--surface);
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
   isolation: isolate; 
   transform: translateZ(0);
 }
