@@ -8,6 +8,8 @@
   top: 0;
   z-index: 1000;
   background: var(--surface);
+  isolation: isolate; 
+  transform: translateZ(0);
 }
 
 /* ─── NAV BAR ─────────────────────────────────────────────────── */
