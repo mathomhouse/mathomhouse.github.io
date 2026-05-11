@@ -7,15 +7,12 @@ const buildingData = [
     { name: 'Research Facility', max: 12, points: 50 },
 ];
 const eternalCity = { name: 'Eternal City', max: 1, points: 300 };
-
 const serverColors = ['#c9a84c', '#4ade80', '#f87171', '#3b82f6', '#a78bfa', '#fb923c', '#2dd4bf', '#e879f9'];
 
 let hpmChart, projectionChart;
+const state = { servers: [] };
 
-// Start with an empty array of servers
-const state = {
-    servers: []
-};
+/** --- UI CORE --- **/
 
 function addAlliance() {
     state.servers.push({
@@ -74,20 +71,19 @@ function renderCards() {
     calculatePoints();
 }
 
-// Logic to check if the total buildings across all teams exceeds the map max
+/** --- LOGIC & LIMITS --- **/
+
 function getGlobalTotal(buildingIndex) {
     return state.servers.reduce((sum, s) => sum + s.buildingCounts[buildingIndex], 0);
 }
 
 function adjustBuilding(sIndex, bIndex, delta) {
     const currentGlobal = getGlobalTotal(bIndex);
-    const currentVal = state.servers[sIndex].buildingCounts[bIndex];
-    
     if (delta > 0 && currentGlobal >= buildingData[bIndex].max) {
-        alert(`Limit reached! Only ${buildingData[bIndex].max} ${buildingData[bIndex].name}s exist on the map.`);
+        alert(`Limit reached! Max ${buildingData[bIndex].max} on map.`);
         return;
     }
-    
+    const currentVal = state.servers[sIndex].buildingCounts[bIndex];
     if (currentVal + delta >= 0) {
         state.servers[sIndex].buildingCounts[bIndex] += delta;
         renderCards();
@@ -95,26 +91,23 @@ function adjustBuilding(sIndex, bIndex, delta) {
 }
 
 function manualBuildingEntry(sIndex, bIndex, value) {
-    const val = parseInt(value) || 0;
-    const currentOtherTeams = getGlobalTotal(bIndex) - state.servers[sIndex].buildingCounts[bIndex];
-    
-    if (val + currentOtherTeams > buildingData[bIndex].max) {
-        alert(`Invalid amount. Max remaining on map: ${buildingData[bIndex].max - currentOtherTeams}`);
-        state.servers[sIndex].buildingCounts[bIndex] = Math.max(0, buildingData[bIndex].max - currentOtherTeams);
+    const val = Math.max(0, parseInt(value) || 0);
+    const otherTeams = getGlobalTotal(bIndex) - state.servers[sIndex].buildingCounts[bIndex];
+    if (val + otherTeams > buildingData[bIndex].max) {
+        state.servers[sIndex].buildingCounts[bIndex] = buildingData[bIndex].max - otherTeams;
     } else {
-        state.servers[sIndex].buildingCounts[bIndex] = Math.max(0, val);
+        state.servers[sIndex].buildingCounts[bIndex] = val;
     }
     renderCards();
 }
 
-function updateCurrentPoints(sIndex, val) {
-    state.servers[sIndex].currentPoints = parseInt(val) || 0;
+function toggleEternal(sIndex, checked) {
+    state.servers[sIndex].hasEternal = checked;
     calculatePoints();
 }
 
-function toggleEternal(sIndex, checked) {
-    // Optional: Add logic here to ensure only one team can hold Eternal City
-    state.servers[sIndex].hasEternal = checked;
+function updateCurrentPoints(sIndex, val) {
+    state.servers[sIndex].currentPoints = parseInt(val) || 0;
     calculatePoints();
 }
 
@@ -125,7 +118,7 @@ function removeServer(index) {
 
 function resetAll() {
     state.servers = [];
-    addAlliance(); // Restart with one fresh card
+    addAlliance();
 }
 
 function calculatePoints() {
@@ -137,22 +130,76 @@ function calculatePoints() {
     state.servers.forEach((s, i) => {
         let hpm = s.buildingCounts.reduce((sum, count, bIndex) => sum + count * buildingData[bIndex].points, 0);
         if (s.hasEternal) hpm += eternalCity.points;
-        
         const projected = s.currentPoints + (hpm * minutesRemaining);
         
-        const hpmEl = document.getElementById(`hpm-${i}`);
-        const projEl = document.getElementById(`proj-${i}`);
-        if (hpmEl) hpmEl.textContent = hpm.toLocaleString();
-        if (projEl) projEl.textContent = Math.round(projected).toLocaleString();
+        document.getElementById(`hpm-${i}`).textContent = hpm.toLocaleString();
+        document.getElementById(`proj-${i}`).textContent = Math.round(projected).toLocaleString();
     });
     updateCharts();
 }
 
+/** --- CHART LOGIC --- **/
+
 function updateCharts() {
-    // Placeholder for your chart logic
+    const labels = state.servers.map(s => s.label || "Unnamed");
+    const hpmData = state.servers.map(s => {
+        let hpm = s.buildingCounts.reduce((sum, count, idx) => sum + count * buildingData[idx].points, 0);
+        return s.hasEternal ? hpm + 300 : hpm;
+    });
+
+    // 1. HPM Bar Chart
+    if (hpmChart) hpmChart.destroy();
+    const ctxHpm = document.getElementById('hpmChart').getContext('2d');
+    hpmChart = new Chart(ctxHpm, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Points Per Minute (HPM)',
+                data: hpmData,
+                backgroundColor: serverColors.slice(0, state.servers.length),
+                borderColor: 'rgba(255,255,255,0.1)',
+                borderWidth: 1
+            }]
+        },
+        options: { responsive: true, plugins: { legend: { display: false } } }
+    });
+
+    // 2. Projection Line Chart
+    const endTimeValue = document.getElementById("endTimeInput").value;
+    if (!endTimeValue) return;
+
+    const now = new Date();
+    const end = new Date(endTimeValue);
+    const minutesRemaining = Math.floor((end - now) / 60000);
+    if (minutesRemaining <= 0) return;
+
+    const timeLabels = [];
+    const projectionDatasets = state.servers.map((s, i) => ({
+        label: s.label,
+        data: [],
+        borderColor: serverColors[i % serverColors.length],
+        fill: false,
+        tension: 0.1
+    }));
+
+    // Generate data points every 10 mins to prevent lag
+    for (let m = 0; m <= minutesRemaining; m += 10) {
+        timeLabels.push(new Date(now.getTime() + m * 60000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+        state.servers.forEach((s, i) => {
+            let hpm = s.buildingCounts.reduce((sum, count, idx) => sum + count * buildingData[idx].points, 0);
+            if (s.hasEternal) hpm += 300;
+            projectionDatasets[i].data.push(s.currentPoints + (hpm * m));
+        });
+    }
+
+    if (projectionChart) projectionChart.destroy();
+    const ctxProj = document.getElementById('projectionChart').getContext('2d');
+    projectionChart = new Chart(ctxProj, {
+        type: 'line',
+        data: { labels: timeLabels, datasets: projectionDatasets },
+        options: { responsive: true, scales: { x: { display: true }, y: { beginAtZero: false } } }
+    });
 }
 
-// Startup
-document.addEventListener("DOMContentLoaded", () => {
-    addAlliance();
-});
+document.addEventListener("DOMContentLoaded", () => addAlliance());

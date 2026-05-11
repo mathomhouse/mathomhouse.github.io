@@ -316,3 +316,23 @@ button[onclick]:not(.hamburger):not(.theme-toggle-btn):not(.mobile-group-btn):no
     -webkit-appearance: none; /* Removes arrows in Chrome/Safari */
     margin: 0;
 }
+
+.chart-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.chart-box {
+    flex: 1 1 400px; /* Allows charts to stack on mobile */
+    background: var(--surface2);
+    padding: 20px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+canvas {
+    width: 100% !important;
+    height: auto !important;
+}
