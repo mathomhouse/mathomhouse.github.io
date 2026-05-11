@@ -232,6 +232,7 @@ button[onclick]:not(.hamburger):not(.theme-toggle-btn):not(.mobile-group-btn):no
     width: 100%;
 }
 
+/* --- ALLIANCE CARD WRAPPER --- */
 .alliance-card {
     background: var(--surface2);
     border: 1px solid var(--border);
@@ -239,26 +240,51 @@ button[onclick]:not(.hamburger):not(.theme-toggle-btn):not(.mobile-group-btn):no
     padding: 16px;
     display: flex;
     flex-direction: column;
-    box-sizing: border-box; /* Fixes mobile overflow */
+    box-sizing: border-box;
     width: 100%;
     transition: all 0.3s ease;
-    overflow: hidden;
+    position: relative; /* For the absolute X button */
 }
 
-/* Highlight the team with the Eternal City */
+/* Restore the Gold Outline for Eternal City owners */
 .alliance-card.has-eternal {
     border-color: var(--gold);
-    box-shadow: 0 0 15px var(--gold-glow);
-    background: linear-gradient(180deg, var(--surface2) 0%, rgba(201,168,76,0.05) 100%);
+    box-shadow: 0 0 20px var(--gold-glow);
+    background: linear-gradient(180deg, var(--surface2) 0%, rgba(201,168,76,0.08) 100%);
 }
 
+/* --- CARD HEADER & DELETE BUTTON --- */
 .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 12px;
     margin-bottom: 12px;
+    padding-right: 30px; /* Room for the X button */
+}
+
+.remove-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px; /* Larger hit area */
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(248, 113, 113, 0.1);
+    border: 1px solid rgba(248, 113, 113, 0.3);
+    color: var(--red);
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.remove-btn:hover {
+    background: var(--red);
+    color: white;
+    transform: scale(1.1);
 }
 
 .card-header input {

@@ -31,17 +31,24 @@ function renderCards() {
 
     state.servers.forEach((server, sIndex) => {
         const card = document.createElement("div");
-        card.className = "alliance-card";
+        
+        // FIX 1: Add the 'has-eternal' class to trigger the gold glow/border
+        card.className = `alliance-card ${server.hasEternal ? 'has-eternal' : ''}`;
+        
         card.innerHTML = `
+            /* FIX 2: Move X button to the top for absolute positioning */
+            <button class="remove-btn" onclick="removeServer(${sIndex})">×</button>
+            
             <div class="card-header">
                 <input type="text" value="${server.label}" oninput="state.servers[${sIndex}].label = this.value; updateCharts();">
-                <button class="remove-btn" onclick="removeServer(${sIndex})">×</button>
             </div>
+
             <div class="card-body">
-                <div class="stat-row">
+                <div class="stat-row main-input">
                     <label>Current Points</label>
                     <input type="number" value="${server.currentPoints}" oninput="updateCurrentPoints(${sIndex}, this.value)">
                 </div>
+
                 <div class="buildings-grid">
                     ${buildingData.map((b, bIndex) => `
                         <div class="building-control">
@@ -54,16 +61,21 @@ function renderCards() {
                             </div>
                         </div>
                     `).join('')}
-                    <div class="building-control">
-                        <span>Eternal City (300)</span>
+                </div>
+
+                /* Moved outside buildings-grid for better styling */
+                <div class="eternal-control">
+                    <label class="eternal-label">
                         <input type="checkbox" ${server.hasEternal ? 'checked' : ''} 
                                onchange="toggleEternal(${sIndex}, this.checked)">
-                    </div>
+                        <span>Eternal City (300)</span>
+                    </label>
                 </div>
             </div>
+
             <div class="card-footer">
-                <div>HPM: <span class="gold-text" id="hpm-${sIndex}">0</span></div>
-                <div>Proj: <span class="gold-text" id="proj-${sIndex}">0</span></div>
+                <div class="footer-stat">HPM: <span class="gold-text" id="hpm-${sIndex}">0</span></div>
+                <div class="footer-stat">PROJ: <span class="gold-text" id="proj-${sIndex}">0</span></div>
             </div>
         `;
         container.appendChild(card);
