@@ -32,11 +32,10 @@ function renderCards() {
     state.servers.forEach((server, sIndex) => {
         const card = document.createElement("div");
         
-        // FIX 1: Add the 'has-eternal' class to trigger the gold glow/border
+        // This line applies the gold glow when the checkbox is hit
         card.className = `alliance-card ${server.hasEternal ? 'has-eternal' : ''}`;
         
         card.innerHTML = `
-            /* FIX 2: Move X button to the top for absolute positioning */
             <button class="remove-btn" onclick="removeServer(${sIndex})">×</button>
             
             <div class="card-header">
@@ -63,7 +62,6 @@ function renderCards() {
                     `).join('')}
                 </div>
 
-                /* Moved outside buildings-grid for better styling */
                 <div class="eternal-control">
                     <label class="eternal-label">
                         <input type="checkbox" ${server.hasEternal ? 'checked' : ''} 
