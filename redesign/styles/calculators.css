@@ -223,113 +223,198 @@ button[onclick]:not(.hamburger):not(.theme-toggle-btn):not(.mobile-group-btn):no
   input[type="number"] { max-width: 90px; }
 }
 
+/* --- ALLIANCE GRID & CARD LAYOUT --- */
 .alliance-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+    width: 100%;
 }
 
 .alliance-card {
     background: var(--surface2);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 12px;
     padding: 16px;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box; /* Fixes mobile overflow */
+    width: 100%;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+/* Highlight the team with the Eternal City */
+.alliance-card.has-eternal {
+    border-color: var(--gold);
+    box-shadow: 0 0 15px var(--gold-glow);
+    background: linear-gradient(180deg, var(--surface2) 0%, rgba(201,168,76,0.05) 100%);
 }
 
 .card-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid var(--border);
-    padding-bottom: 10px;
-    margin-bottom: 15px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
 }
 
 .card-header input {
     background: transparent;
     border: none;
     color: var(--gold);
-    font-weight: bold;
+    font-weight: 700;
     font-family: 'Rajdhani', sans-serif;
     font-size: 1.1rem;
+    width: 80%;
 }
 
+/* --- BUILDING CONTROLS (Single column for mobile fit) --- */
 .buildings-grid {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 15px;
+    gap: 10px;
+    padding: 10px 0;
 }
 
 .building-control {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.85rem;
+    gap: 8px;
 }
 
+.building-control span {
+    font-size: 0.85rem;
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--text-dim);
+    flex: 1; 
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Prevents long names from breaking the card */
+}
+
+/* Stepper refinement */
 .stepper {
     display: flex;
     align-items: center;
-    gap: 10px;
     background: var(--bg);
-    border-radius: 4px;
-    padding: 2px 8px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    height: 32px;
+    flex-shrink: 0;
 }
 
 .stepper button {
+    width: 30px;
+    height: 100%;
     background: none;
     border: none;
     color: var(--gold);
     cursor: pointer;
-    font-size: 1.2rem;
-    padding: 0 5px;
+    font-size: 1.1rem;
 }
-
-.card-footer {
-    margin-top: auto;
-    padding-top: 10px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-}
-
-.gold-text { color: var(--gold); }
 
 .manual-entry {
-    width: 40px;
-    background: transparent;
-    border: none;
-    color: var(--text);
+    width: 35px !important;
+    background: transparent !important;
+    border: none !important;
     text-align: center;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1rem;
-    -moz-appearance: textfield; /* Removes arrows in Firefox */
+    color: var(--text);
+    font-weight: 600;
+    padding: 0 !important;
+    margin: 0 !important;
+    -moz-appearance: textfield;
 }
 
 .manual-entry::-webkit-outer-spin-button,
 .manual-entry::-webkit-inner-spin-button {
-    -webkit-appearance: none; /* Removes arrows in Chrome/Safari */
+    -webkit-appearance: none;
     margin: 0;
 }
 
+/* Current Points Input */
+.stat-row.main-input {
+    margin-bottom: 10px;
+}
+
+.stat-row label {
+    font-size: 0.7rem;
+    color: var(--gold);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.stat-row input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-family: 'Rajdhani', sans-serif;
+    box-sizing: border-box;
+}
+
+/* --- ETERNAL CITY SPECIAL SECTION --- */
+.eternal-control {
+    margin-top: 10px;
+    padding: 12px;
+    background: rgba(201, 168, 76, 0.05);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+}
+
+.eternal-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--gold);
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Card Footer Stats */
+.card-footer {
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-stat {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+}
+
+.gold-text {
+    color: var(--gold);
+}
+
+/* --- CHART LAYOUT --- */
 .chart-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 20px;
     margin-top: 40px;
 }
 
 .chart-box {
-    flex: 1 1 400px; /* Allows charts to stack on mobile */
+    flex: 1 1 400px;
     background: var(--surface2);
     padding: 20px;
     border-radius: var(--radius);
     border: 1px solid var(--border);
+    box-sizing: border-box;
 }
 
 canvas {
@@ -337,59 +422,12 @@ canvas {
     height: auto !important;
 }
 
-/* Better Card UI */
-.alliance-card {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-/* Highlight the team with the Eternal City */
-.alliance-card:has(input[type="checkbox"]:checked) {
-    border-color: var(--gold);
-    box-shadow: 0 0 15px var(--gold-glow);
-}
-
-.buildings-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Split into two columns for cleanliness */
-    gap: 12px;
-    margin-top: 15px;
-    border-top: 1px solid var(--border);
-    padding-top: 15px;
-}
-
-/* Make Eternal City span full width at the bottom of the grid */
-.building-control:last-child {
-    grid-column: span 2;
-    background: rgba(201, 168, 76, 0.05);
-    padding: 8px;
-    border-radius: 4px;
-}
-
-.stat-row label {
-    font-size: 0.7rem;
-    color: var(--gold);
-    margin-bottom: 4px;
-}
-
-.stat-row input {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 10px;
-    border-radius: 4px;
-    width: 100%;
-    font-family: 'Rajdhani', sans-serif;
-}
-
-/* Responsive fix for cards on very small screens */
+/* Mobile Tweak */
 @media (max-width: 480px) {
-    .buildings-grid {
-        grid-template-columns: 1fr; /* Back to 1 column on tiny phones */
+    .alliance-grid {
+        grid-template-columns: 1fr;
+    }
+    .building-control span {
+        font-size: 0.78rem;
     }
 }
