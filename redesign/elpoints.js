@@ -138,28 +138,36 @@ function resetAll() {
 }
 
 function calculatePoints() {
-    const endTimeValue = document.getElementById("endTimeInput").value;
     const now = new Date();
+    const endTimeValue = document.getElementById("endTimeInput").value;
     const end = new Date(endTimeValue);
-    const minutesRemaining = (endTimeValue && end > now) ? Math.floor((end - now) / 60000) : 0;
+    
+    // Define these clearly so the charts can see them
+    const validEndTime = endTimeValue && end > now;
+    const minutesRemaining = validEndTime ? Math.floor((end - now) / 60000) : 0;
 
     state.servers.forEach((s, i) => {
-        let hpm = s.buildingCounts.reduce((sum, count, bIndex) => sum + count * buildingData[bIndex].points, 0);
-        if (s.hasEternal) hpm += eternalCity.points;
+        // 1. Calculate HPM
+        let hpm = s.buildingCounts.reduce((sum, count, bIdx) => sum + count * buildingData[bIdx].points, 0);
+        if (s.hasEternal) hpm += 300;
+
+        // 2. Calculate Projection
         const projected = s.currentPoints + (hpm * minutesRemaining);
-        
-        document.getElementById(`hpm-${i}`).textContent = hpm.toLocaleString();
-        document.getElementById(`proj-${i}`).textContent = Math.round(projected).toLocaleString();
+
+        // 3. Update UI Labels in the cards
+        const hpmEl = document.getElementById(`hpm-${i}`);
+        const projEl = document.getElementById(`proj-${i}`);
+        if (hpmEl) hpmEl.textContent = hpm.toLocaleString();
+        if (projEl) projEl.textContent = Math.round(projected).toLocaleString();
     });
-    updateCharts();
+
+    updateCharts(validEndTime, minutesRemaining);
 }
 
-/** --- CHART LOGIC --- **/
-
-function updateCharts() {
-    const labels = state.servers.map(s => s.label || "Unnamed");
+function updateCharts(validEndTime, minutesRemaining) {
+    const labels = state.servers.map((s, i) => s.label || `Alliance ${i + 1}`);
     const hpmData = state.servers.map(s => {
-        let hpm = s.buildingCounts.reduce((sum, count, idx) => sum + count * buildingData[idx].points, 0);
+        let hpm = s.buildingCounts.reduce((sum, count, bIdx) => sum + count * buildingData[bIdx].points, 0);
         return s.hasEternal ? hpm + 300 : hpm;
     });
 
@@ -171,85 +179,55 @@ function updateCharts() {
         data: {
             labels: labels,
             datasets: [{
-                label: 'Points Per Minute (HPM)',
+                label: 'Points Per Minute',
                 data: hpmData,
                 backgroundColor: serverColors.slice(0, state.servers.length),
-                borderColor: 'rgba(255,255,255,0.1)',
                 borderWidth: 1
             }]
         },
-        options: { responsive: true, plugins: { legend: { display: false } } }
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } }
+        }
     });
 
-    // --- PROJECTED FINAL TOTALS CHART ---
-  const endTimeValue = document.getElementById("endTimeInput").value;
-  const now = new Date();
-  const end = new Date(endTimeValue);
-  const validEndTime = endTimeValue && end > now;
-  const minutesRemaining = validEndTime ? Math.floor((end - now) / 60000) : 0;
-
-  if (!validEndTime) {
-    if (projectionChart) projectionChart.destroy();
-    projectionChart = null; // Clear chart if no time is set
-    return;
-  }
-
-  // Calculate the projected final score for each alliance
-  const projectedFinalData = state.servers.map(s => {
-    let hpm = s.buildingCounts.reduce((sum, count, idx) => sum + count * buildingData[idx].points, 0);
-    if (s.hasEternal) hpm += 300;
-    return s.currentPoints + (hpm * minutesRemaining);
-  });
-
-  const labels = state.servers.map((s, i) => s.label || `Alliance ${i + 1}`);
-
-  if (projectionChart) projectionChart.destroy();
-  const ctxProj = document.getElementById('projectionChart').getContext('2d');
-  
-  projectionChart = new Chart(ctxProj, {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: 'Projected Final Score',
-        data: projectedFinalData,
-        backgroundColor: serverColors.slice(0, state.servers.length).map(c => c + 'AA'), // Match card colors with 66% opacity
-        borderColor: serverColors.slice(0, state.servers.length),
-        borderWidth: 2
-      }]
-    },
-    options: {
-      indexAxis: 'y', // This makes the bars horizontal
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: (context) => `Total: ${Math.round(context.raw).toLocaleString()} pts`
-          }
-        }
-      },
-      scales: {
-        x: {
-          beginAtZero: true,
-          grid: { color: 'rgba(255, 255, 255, 0.1)' },
-          ticks: { 
-            color: '#7a8099', 
-            font: { family: 'Rajdhani' },
-            callback: (value) => value.toLocaleString() // Adds commas to thousands
-          }
-        },
-        y: {
-          grid: { display: false },
-          ticks: { 
-            color: '#c9a84c', 
-            font: { family: 'Rajdhani', weight: 'bold', size: 14 } 
-          }
-        }
-      }
+    // 2. Projected Final Totals Chart
+    if (!validEndTime) {
+        if (projectionChart) projectionChart.destroy();
+        return;
     }
-  });
+
+    const projectedFinalData = state.servers.map(s => {
+        let hpm = s.buildingCounts.reduce((sum, count, bIdx) => sum + count * buildingData[bIdx].points, 0);
+        if (s.hasEternal) hpm += 300;
+        return s.currentPoints + (hpm * minutesRemaining);
+    });
+
+    if (projectionChart) projectionChart.destroy();
+    const ctxProj = document.getElementById('projectionChart').getContext('2d');
+    projectionChart = new Chart(ctxProj, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Projected Final Score',
+                data: projectedFinalData,
+                backgroundColor: serverColors.slice(0, state.servers.length).map(c => c + 'AA'),
+                borderColor: serverColors.slice(0, state.servers.length),
+                borderWidth: 2
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: { beginAtZero: true, ticks: { color: '#7a8099' } },
+                y: { ticks: { color: '#c9a84c', font: { weight: 'bold' } } }
+            },
+            plugins: { legend: { display: false } }
+        }
+    });
 }
 
 document.addEventListener("DOMContentLoaded", () => addAlliance());
