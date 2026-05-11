@@ -299,3 +299,20 @@ button[onclick]:not(.hamburger):not(.theme-toggle-btn):not(.mobile-group-btn):no
 }
 
 .gold-text { color: var(--gold); }
+
+.manual-entry {
+    width: 40px;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    text-align: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    -moz-appearance: textfield; /* Removes arrows in Firefox */
+}
+
+.manual-entry::-webkit-outer-spin-button,
+.manual-entry::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Removes arrows in Chrome/Safari */
+    margin: 0;
+}
