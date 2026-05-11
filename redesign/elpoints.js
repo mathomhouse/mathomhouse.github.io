@@ -102,8 +102,14 @@ function manualBuildingEntry(sIndex, bIndex, value) {
 }
 
 function toggleEternal(sIndex, checked) {
+    // If checking this one, uncheck all others first
+    if (checked) {
+        state.servers.forEach((s, idx) => {
+            if (idx !== sIndex) s.hasEternal = false;
+        });
+    }
     state.servers[sIndex].hasEternal = checked;
-    calculatePoints();
+    renderCards(); // Re-render to update the UI and checkboxes
 }
 
 function updateCurrentPoints(sIndex, val) {

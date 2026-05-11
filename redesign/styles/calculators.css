@@ -336,3 +336,60 @@ canvas {
     width: 100% !important;
     height: auto !important;
 }
+
+/* Better Card UI */
+.alliance-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Highlight the team with the Eternal City */
+.alliance-card:has(input[type="checkbox"]:checked) {
+    border-color: var(--gold);
+    box-shadow: 0 0 15px var(--gold-glow);
+}
+
+.buildings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Split into two columns for cleanliness */
+    gap: 12px;
+    margin-top: 15px;
+    border-top: 1px solid var(--border);
+    padding-top: 15px;
+}
+
+/* Make Eternal City span full width at the bottom of the grid */
+.building-control:last-child {
+    grid-column: span 2;
+    background: rgba(201, 168, 76, 0.05);
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.stat-row label {
+    font-size: 0.7rem;
+    color: var(--gold);
+    margin-bottom: 4px;
+}
+
+.stat-row input {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px;
+    border-radius: 4px;
+    width: 100%;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/* Responsive fix for cards on very small screens */
+@media (max-width: 480px) {
+    .buildings-grid {
+        grid-template-columns: 1fr; /* Back to 1 column on tiny phones */
+    }
+}
