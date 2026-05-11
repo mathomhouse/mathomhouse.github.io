@@ -435,7 +435,7 @@ button[onclick]:not(.hamburger):not(.theme-toggle-btn):not(.mobile-group-btn):no
 }
 
 .chart-box {
-    flex: 1 1 400px;
+    min-height: 350px; /* Gives the bars room to breathe */
     background: var(--surface2);
     padding: 20px;
     border-radius: var(--radius);

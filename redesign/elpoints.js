@@ -181,41 +181,75 @@ function updateCharts() {
         options: { responsive: true, plugins: { legend: { display: false } } }
     });
 
-    // 2. Projection Line Chart
-    const endTimeValue = document.getElementById("endTimeInput").value;
-    if (!endTimeValue) return;
+    // --- PROJECTED FINAL TOTALS CHART ---
+  const endTimeValue = document.getElementById("endTimeInput").value;
+  const now = new Date();
+  const end = new Date(endTimeValue);
+  const validEndTime = endTimeValue && end > now;
+  const minutesRemaining = validEndTime ? Math.floor((end - now) / 60000) : 0;
 
-    const now = new Date();
-    const end = new Date(endTimeValue);
-    const minutesRemaining = Math.floor((end - now) / 60000);
-    if (minutesRemaining <= 0) return;
-
-    const timeLabels = [];
-    const projectionDatasets = state.servers.map((s, i) => ({
-        label: s.label,
-        data: [],
-        borderColor: serverColors[i % serverColors.length],
-        fill: false,
-        tension: 0.1
-    }));
-
-    // Generate data points every 10 mins to prevent lag
-    for (let m = 0; m <= minutesRemaining; m += 10) {
-        timeLabels.push(new Date(now.getTime() + m * 60000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-        state.servers.forEach((s, i) => {
-            let hpm = s.buildingCounts.reduce((sum, count, idx) => sum + count * buildingData[idx].points, 0);
-            if (s.hasEternal) hpm += 300;
-            projectionDatasets[i].data.push(s.currentPoints + (hpm * m));
-        });
-    }
-
+  if (!validEndTime) {
     if (projectionChart) projectionChart.destroy();
-    const ctxProj = document.getElementById('projectionChart').getContext('2d');
-    projectionChart = new Chart(ctxProj, {
-        type: 'line',
-        data: { labels: timeLabels, datasets: projectionDatasets },
-        options: { responsive: true, scales: { x: { display: true }, y: { beginAtZero: false } } }
-    });
+    projectionChart = null; // Clear chart if no time is set
+    return;
+  }
+
+  // Calculate the projected final score for each alliance
+  const projectedFinalData = state.servers.map(s => {
+    let hpm = s.buildingCounts.reduce((sum, count, idx) => sum + count * buildingData[idx].points, 0);
+    if (s.hasEternal) hpm += 300;
+    return s.currentPoints + (hpm * minutesRemaining);
+  });
+
+  const labels = state.servers.map((s, i) => s.label || `Alliance ${i + 1}`);
+
+  if (projectionChart) projectionChart.destroy();
+  const ctxProj = document.getElementById('projectionChart').getContext('2d');
+  
+  projectionChart = new Chart(ctxProj, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Projected Final Score',
+        data: projectedFinalData,
+        backgroundColor: serverColors.slice(0, state.servers.length).map(c => c + 'AA'), // Match card colors with 66% opacity
+        borderColor: serverColors.slice(0, state.servers.length),
+        borderWidth: 2
+      }]
+    },
+    options: {
+      indexAxis: 'y', // This makes the bars horizontal
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (context) => `Total: ${Math.round(context.raw).toLocaleString()} pts`
+          }
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          grid: { color: 'rgba(255, 255, 255, 0.1)' },
+          ticks: { 
+            color: '#7a8099', 
+            font: { family: 'Rajdhani' },
+            callback: (value) => value.toLocaleString() // Adds commas to thousands
+          }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { 
+            color: '#c9a84c', 
+            font: { family: 'Rajdhani', weight: 'bold', size: 14 } 
+          }
+        }
+      }
+    }
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => addAlliance());
