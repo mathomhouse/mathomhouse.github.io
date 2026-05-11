@@ -266,3 +266,79 @@ const buildingData = [
 
 
   buildTable();
+
+  // ... existing buildingData and state variables ...
+
+function addAlliance() {
+    state.servers.push({
+        buildingCounts: Array(buildingData.length).fill(0),
+        hasEternal: false,
+        label: '',
+        currentPoints: 0,
+    });
+    renderCards();
+}
+
+function renderCards() {
+    const container = document.getElementById("allianceContainer");
+    container.innerHTML = "";
+
+    state.servers.forEach((server, sIndex) => {
+        const card = document.createElement("div");
+        card.className = "alliance-card";
+        
+        // Header Area
+        card.innerHTML = `
+            <div class="card-header">
+                <input type="text" placeholder="Alliance/Server Name" 
+                       value="${server.label}" 
+                       oninput="state.servers[${sIndex}].label = this.value; updateCharts();">
+                <button class="remove-btn" onclick="removeServer(${sIndex})">×</button>
+            </div>
+            
+            <div class="card-body">
+                <div class="stat-row main-stat">
+                    <label>Current Points</label>
+                    <input type="number" value="${server.currentPoints}" 
+                           oninput="updatePoints(${sIndex}, this.value)">
+                </div>
+
+                <div class="buildings-grid">
+                    ${buildingData.map((b, bIndex) => `
+                        <div class="building-control">
+                            <span>${b.name} (${b.points})</span>
+                            <div class="stepper">
+                                <button onclick="adjustBuilding(${sIndex}, ${bIndex}, -1)">-</button>
+                                <span>${server.buildingCounts[bIndex]}</span>
+                                <button onclick="adjustBuilding(${sIndex}, ${bIndex}, 1)">+</button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="special-building">
+                   <label>
+                     <input type="checkbox" ${server.hasEternal ? 'checked' : ''} 
+                            onchange="state.servers[${sIndex}].hasEternal = this.checked; calculatePoints();">
+                     Eternal City (300)
+                   </label>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <div>HPM: <span class="gold-text" id="hpm-${sIndex}">0</span></div>
+                <div>Projected: <span class="gold-text" id="proj-${sIndex}">0</span></div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+    calculatePoints();
+}
+
+function adjustBuilding(sIndex, bIndex, delta) {
+    const newVal = state.servers[sIndex].buildingCounts[bIndex] + delta;
+    if (newVal >= 0 && newVal <= buildingData[bIndex].max) {
+        state.servers[sIndex].buildingCounts[bIndex] = newVal;
+        renderCards();
+    }
+}
