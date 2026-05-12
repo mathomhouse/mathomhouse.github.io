@@ -457,3 +457,21 @@ canvas {
         font-size: 0.78rem;
     }
 }
+
+/* Container for the two pet boxes */
+.gear-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap; /* Allows stacking if the screen gets too narrow */
+  margin-bottom: 30px;
+}
+
+/* Mobile override to keep the vertical stack you like */
+@media (max-width: 768px) {
+  .gear-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
