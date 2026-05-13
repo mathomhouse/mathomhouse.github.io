@@ -367,3 +367,54 @@ footer a:hover { color: var(--gold); }
 @media (min-width: 769px) and (max-width: 1024px) {
   .card-grid  { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* Styling for the "NEW" indicator */
+.hero-btn.new-badge {
+  position: relative;
+}
+
+.hero-btn.new-badge::after {
+  content: 'NEW';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--red); /* Uses your existing red token */
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 2px 5px;
+  border-radius: 4px;
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(248, 113, 113, 0.4);
+}
+
+.card-featured {
+  display: flex;
+  align-items: center; /* Centers icon and text horizontally */
+  padding: 32px;
+  background: linear-gradient(145deg, var(--surface), var(--bg));
+  border-color: var(--gold-dim);
+  box-shadow: 0 0 30px var(--gold-glow);
+}
+
+.card-featured:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+}
+
+.featured-icon {
+  width: 80px; /* Bigger than the standard 48px */
+  height: 80px;
+  margin-right: 12px;
+}
+
+.btn-text {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
