@@ -63,10 +63,13 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 12px 10px; /* Added vertical gap for wrapped rows */
   margin-top: 36px;
   position: relative;
   animation: fadeUp 0.5s 0.3s ease both;
+  max-width: 400px; /* Keeps them contained on mobile */
+  margin-left: auto;
+  margin-right: auto;
 }
 .hero-btn {
   font-family: 'Rajdhani', sans-serif;
@@ -359,7 +362,13 @@ footer a:hover { color: var(--gold); }
 
 /* ─── RESPONSIVE ──────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .hero            { padding: 48px 20px 44px; }
+  .hero            { padding: 80px 20px 60px;
+                    height:auto; 
+                    min-height: 450px; 
+                  }
+  #armory {
+    margin-top: 20px;
+  }
   .section         { padding: 40px 16px; }
   .card-grid       { grid-template-columns: 1fr; }
   .feedback-section { grid-template-columns: 1fr; }
