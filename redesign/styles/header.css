@@ -15,7 +15,7 @@
 }
 
 /* ─── NAV BAR ─────────────────────────────────────────────────── */
-nav {
+.main-site-nav {
   position: relative;
   z-index: 100;
   border-bottom: 1px solid var(--border);
@@ -26,7 +26,7 @@ nav {
   gap: 16px;
 }
 
-nav::before {
+.main-site-nav::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -37,7 +37,7 @@ nav::before {
   pointer-events: none;
 }
 
-[data-theme="light"] nav::before {
+[data-theme="light"] .main-site-nav::before {
   background: rgba(244,245,248,0.95);
 }
 

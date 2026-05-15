@@ -36,7 +36,7 @@ function initHeader() {
 // ── Active page highlighting ───────────────────────────────────
 function markActivePage() {
   var path = window.location.pathname;
-  document.querySelectorAll('nav a, .mobile-menu a, .dropdown-panel a, .mobile-group-links a').forEach(function(a){
+  document.querySelectorAll('.main-site-nav a, .mobile-menu a, .dropdown-panel a, .mobile-group-links a').forEach(function(a){
     try {
       var href = a.getAttribute('href');
       if (!href) return;
