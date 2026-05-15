@@ -18,7 +18,7 @@ function addAlliance() {
     state.servers.push({
         buildingCounts: Array(buildingData.length).fill(0),
         hasEternal: false,
-        label: `Alliance ${state.servers.length + 1}`,
+        label: `Alliance/Server ${state.servers.length + 1}`,
         currentPoints: 0,
     });
     renderCards();

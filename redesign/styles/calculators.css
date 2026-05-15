@@ -290,7 +290,6 @@ button[onclick]:not(.hamburger):not(.theme-toggle-btn):not(.mobile-group-btn):no
 
 .card-header input {
     background: transparent;
-    border: none;
     color: var(--gold);
     font-weight: 700;
     font-family: 'Rajdhani', sans-serif;
