@@ -1,5 +1,6 @@
 #results .gear-box {
   width: 300px;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 .gear-grid {
@@ -16,6 +17,7 @@
   justify-items: center;
   text-align: center;
   height: 160px;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 .gear-slot p {
@@ -69,6 +71,7 @@
   font-weight: bold;
   margin-bottom: 10px;
   font-size: 1.1em;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 .ht-icon-row {

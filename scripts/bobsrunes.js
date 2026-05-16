@@ -17,8 +17,6 @@ fetch(liveUrl)
     heavyTrooperData = data.heavyTroopers || {};
     console.log("Heavy Troopers:", heavyTrooperData);
     filterHeroesByRole();
-      document.getElementById('results').innerHTML = ''; // Clear Rune Loadouts skeleton
-      document.getElementById('comboResults').innerHTML = ''; // Clear Suggested Marches skeleton
     updateMarchOptions();
   })
   .catch(err => {
@@ -49,10 +47,6 @@ fetch(liveUrl)
       heavyTrooperData = data.heavyTroopers || {};
       console.log("Heavy Troopers (fallback):", heavyTrooperData);
       filterHeroesByRole();
-
-      // Clear Skeletons for both sections
-      document.getElementById('results').innerHTML = '';
-      document.getElementById('comboResults').innerHTML = '';
     });
 });
 ;
@@ -111,6 +105,7 @@ function showGear() {
   ];
 
   const resultsDiv = document.getElementById('results');
+  resultsDiv.style.display = '';
   resultsDiv.innerHTML = '';
 
   selections.forEach(({ role, id }) => {
@@ -210,6 +205,7 @@ function renderHeroCombos() {
   const skillLevel = document.getElementById('skillLevel').value;
   const marchType = document.getElementById('marchType').value;
   const resultsDiv = document.getElementById('comboResults');
+  resultsDiv.style.display = '';
   resultsDiv.innerHTML = '';
 
   const heroes = suggestedCombosData[skillLevel]?.[marchType] || [];
