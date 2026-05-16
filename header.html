@@ -1,20 +1,73 @@
-<link rel="stylesheet" href="/styles/header.css">
-<link rel="icon" href="/cutelogo.ico" type="image/x-icon">
-<div id="hamburger" class="menu-toggle" onclick="toggleDropdown()">
-  <div class="bar"></div>
-  <div class="bar"></div>
-  <div class="bar"></div>
-</div>
-<div class="logo" style="color: white"><a href="/index.html">Mathom House</a></div>
-<div class="header-right">
-  <div class="theme-toggle" id="themeToggle">🌓</div>
-</div>
-<nav id="nav">
+<nav class="main-site-nav">
+  <a class="nav-logo" href="/index.html">Mathom House <span>· Top War Tools</span></a>
+
+  <ul class="nav-links">
+    <li><a href="/index.html">Home</a></li>
+
+   <!-- <li><a href="/armory.html">Armory</a></li> -->
+
+    <li class="has-dropdown">
+      <button class="nav-group-btn">Calculators <span class="chevron">▾</span></button>
+      <div class="dropdown-panel">
+        <a href="/equipment.html">Equipment</a>
+        <a href="/vit.html">VIT</a>
+        <a href="/gems.html">Gems</a>
+        <a href="/components.html">Components</a>
+        <a href="/exclusives.html">Exclusive Skills</a>
+        <a href="/gear.html">Stat Comparisons</a>
+        <a href="/resources.html">Resources</a>
+        <a href="/VIP.html">VIP</a>
+        <a href="/pets.html">Pets</a>
+        <a href="/techdonations.html">Tech Donations</a>
+      </div>
+    </li>
+
+    <li class="has-dropdown">
+      <button class="nav-group-btn">Events <span class="chevron">▾</span></button>
+      <div class="dropdown-panel">
+        <a href="/ssc-store.html">Seal Stone Chaos</a>
+        <a href="/mastersstore.html">Masters</a>
+        <a href="/rankedmatchstore.html">Ranked Match</a>
+        <a href="/elstore.html">EL Store</a>
+        <a href="/elpoints.html">EL Rankings Simulator</a>
+        <a href="/archive/EnigmaDominators.html">ED 2025 Map</a>
+        <a href="/archive/edstore.html">ED Store</a>
+      </div>
+    </li>
+
+    <li class="has-dropdown">
+      <button class="nav-group-btn">Guides <span class="chevron">▾</span></button>
+      <div class="dropdown-panel">
+        <a href="/guides/baseskins.html">Base Skins</a>
+        <a href="/guides/bobstitaneffects.html">Rune Reccomendation</a>
+        <a href="/guides/chaoscrafting.html">Chaos Crafting</a>
+        <a href="/guides/enigmaplatforms.html">Pet Platforms</a>
+        <a href="/guides/mastery.html">Mastery</a>
+        <a href="/guides/passiveheroskills.html">Passive Hero Skills</a>
+        <a href="/guides/perktree.html">Formation Perk Tree</a>
+        <a href="/guides/remould.html">Remould</a>
+        <a href="/guides/rockfield.html">Rockfield</a>
+      </div>
+    </li>
+
+  </ul>
+
+  <div class="nav-right">
+    <button class="theme-toggle-btn" id="themeToggle">☀️ Light</button>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
   <a href="/index.html">Home</a>
 
-  <div class="submenu-container">
-    <a href="#">Calculators ▸</a>
-    <div class="submenu">
+ <!-- <a href="/armory.html">Armory</a> -->
+
+  <div class="mobile-group">
+    <button class="mobile-group-btn">Calculators <span class="chevron">▾</span></button>
+    <div class="mobile-group-links">
       <a href="/equipment.html">Equipment</a>
       <a href="/vit.html">VIT</a>
       <a href="/gems.html">Gems</a>
@@ -27,29 +80,35 @@
       <a href="/techdonations.html">Tech Donations</a>
     </div>
   </div>
-  <div class="submenu-container">
-    <a href="#">Stores ▸</a>
-    <div class="submenu">
+
+  <div class="mobile-group">
+    <button class="mobile-group-btn">Events <span class="chevron">▾</span></button>
+    <div class="mobile-group-links">
       <a href="/ssc-store.html">Seal Stone Chaos</a>
       <a href="/mastersstore.html">Masters</a>
       <a href="/rankedmatchstore.html">Ranked Match</a>
-      <a href="/elstore.html">Eternal Land</a>
-      <a href="/archive/edstore.html">Enigma Dominators</a>
-    </div>
-  </div>
-    <a href="/guides.html">Guides</a>
-  <div class="submenu-container">
-    <a href="#">Eternal Land ▸</a>
-    <div class="submenu">
       <a href="/elstore.html">EL Store</a>
       <a href="/elpoints.html">EL Rankings Simulator</a>
+      <a href="/archive/EnigmaDominators.html">ED 2025 Map</a>
+      <a href="/archive/edstore.html">ED Store</a>
     </div>
   </div>
-  <div class="submenu-container">
-    <a href="#">Enigma Dominators ▸</a>
-    <div class="submenu">
-      <a href="/archive/EnigmaDominators.html">ED Map</a>
-        <a href="/archive/edstore.html">ED Store</a>
+
+  <div class="mobile-group">
+    <button class="mobile-group-btn">Guides <span class="chevron">▾</span></button>
+    <div class="mobile-group-links">
+      <a href="/guides/baseskins.html">Base Skins</a>
+      <a href="/guides/bobstitaneffects.html">Rune Reccomendation</a>
+      <a href="/guides/chaoscrafting.html">Chaos Crafting</a>
+      <a href="/guides/enigmaplatforms.html">Pet Platforms</a>
+      <a href="/guides/mastery.html">Mastery</a>
+      <a href="/guides/passiveheroskills.html">Passive Hero Skills</a>
+      <a href="/guides/perktree.html">Formation Perk Tree</a>
+      <a href="/guides/remould.html">Remould</a>
+      <a href="/guides/rockfield.html">Rockfield</a>
     </div>
   </div>
-</nav>
+
+
+  <button class="theme-toggle-btn mobile-theme-btn" id="mobileThemeToggle">☀️ Light</button>
+</div>

@@ -5,20 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Base Skins Comparison</title>
 
-  <!-- Site-wide styles -->
-  <link rel="stylesheet" href="/styles/index.css" />
+  <!-- Anti-flash -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles/mathomhouse.css">
+  <link rel="stylesheet" href="/styles/header.css">
+  <link rel="stylesheet" href="/styles/layout.css">
 
   <!-- Page-specific styles -->
   <style>
     :root {
       --bases-card-radius: 18px;
-      --bases-card-border: 1px solid rgba(15, 23, 42, 0.06);
-      --bases-muted: #64748b;
-      --bases-chip-bg: rgba(15, 23, 42, 0.04);
-      --bases-chip-border: rgba(148, 163, 184, 0.7);
+      --bases-card-border: 1px solid var(--border);
+      --bases-muted: var(--text-dim);
+      --bases-chip-bg: var(--surface2);
+      --bases-chip-border: var(--border);
       --bases-modal-max-width: 960px;
-      --bases-text: #0f172a;
-      --bases-text-strong: #020617;
+      --bases-text: var(--text);
+      --bases-text-strong: var(--text);
     }
 
     body {
@@ -33,12 +39,11 @@
 
     .bases-sticky-header {
       position: static;
-      background: var(--bg-color, #f1f5f9);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
       backdrop-filter: blur(10px) saturate(1.2);
       z-index: 1; /* optional, keeps it above card background layers */
       margin-bottom: 12px;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
     }
 
 
@@ -62,11 +67,12 @@
       font-size: 1.2rem;
       font-weight: 700;
       margin: 0;
+      font-family: 'Rajdhani', sans-serif;
     }
 
     .bases-sticky-title small {
       font-size: 0.8rem;
-      color: var(--bases-muted);
+      color: var(--text-dim);
     }
 
     .bases-controls-row {
@@ -95,35 +101,37 @@
 
     .bases-filter-pill {
       border-radius: 999px;
-      border: 1px solid var(--bases-chip-border);
+      border: 1px solid var(--border);
       padding: 4px 10px;
       font-size: 0.8rem;
-      background: rgba(248, 250, 252, 0.9);
-      color: var(--bases-text);
+      font-family: 'Rajdhani', sans-serif;
+      background: var(--surface);
+      color: var(--text);
       cursor: pointer;
       transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
     .bases-filter-pill[aria-pressed="true"] {
-      background: rgba(59, 130, 246, 0.12);
-      border-color: rgba(59, 130, 246, 0.9);
-      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
+      background: var(--surface2);
+      border-color: var(--gold-dim);
+      box-shadow: 0 0 0 1px var(--gold-dim);
     }
 
     .bases-more-filters-btn {
       border-radius: 999px;
-      border: 1px dashed var(--bases-chip-border);
+      border: 1px dashed var(--border);
       padding: 4px 10px;
       font-size: 0.8rem;
-      background: rgba(248, 250, 252, 0.9);
-      color: var(--bases-text);
+      font-family: 'Rajdhani', sans-serif;
+      background: var(--surface);
+      color: var(--text);
       cursor: pointer;
       transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
     .bases-more-filters-btn:hover {
-      border-color: rgba(59, 130, 246, 0.9);
-      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
+      border-color: var(--gold-dim);
+      box-shadow: 0 0 0 1px var(--gold-dim);
     }
 
     .bases-search {
@@ -135,17 +143,19 @@
       width: 100%;
       padding: 6px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
+      border: 1px solid var(--border);
       font-size: 0.9rem;
+      font-family: 'Rajdhani', sans-serif;
     }
 
     .bases-select,
     .bases-inline-checkbox {
       padding: 4px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
+      border: 1px solid var(--border);
       font-size: 0.8rem;
-      background: rgba(248, 250, 252, 0.95);
+      font-family: 'Rajdhani', sans-serif;
+      background: var(--surface);
     }
 
     .bases-inline-checkbox {
@@ -153,6 +163,7 @@
       align-items: center;
       gap: 4px;
       cursor: pointer;
+      font-family: 'Rajdhani', sans-serif;
     }
 
     .bases-inline-checkbox input {
@@ -179,15 +190,15 @@
     }
 
     .bases-card {
-      background: var(--card-bg, #ffffff);
+      background: var(--surface);
       border-radius: var(--bases-card-radius);
-      border: var(--bases-card-border);
+      border: 1px solid var(--border);
       box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
       padding: 12px 14px 14px;
       display: flex;
       flex-direction: column;
       gap: 8px;
-      color: #0f172a; /* strong dark text for light mode */
+      color: var(--text);
     }
 
     .bases-card-header {
@@ -206,7 +217,8 @@
     .bases-card-title h3 {
       margin: 0;
       font-size: 1rem;
-      color: var(--bases-text);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
     }
 
     .bases-badge {
@@ -214,10 +226,10 @@
       align-items: center;
       padding: 2px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      background: rgba(59, 130, 246, 0.06);
+      border: 1px solid var(--gold-dim);
+      background: var(--surface2);
       font-size: 0.7rem;
-      color: #1d4ed8;
+      color: var(--gold);
       width: fit-content;
     }
 
@@ -241,14 +253,15 @@
       align-items: center;
       justify-content: center;
       font-size: 0.9rem;
-      background: rgba(37, 99, 235, 0.1);
-      color: #1d4ed8;
+      background: var(--surface2);
+      color: var(--gold);
       cursor: pointer;
       padding: 0;
     }
 
     .bases-icon-btn:hover {
-      background: rgba(37, 99, 235, 0.18);
+      background: var(--surface2);
+      opacity: 0.8;
     }
 
     .bases-section-label {
@@ -256,7 +269,8 @@
       font-size: 0.85rem;
       margin-top: 4px;
       margin-bottom: 2px;
-      color: #0f172a;
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
     }
 
     .bases-stats-columns {
@@ -275,7 +289,7 @@
 
     .bases-statlist {
       border-radius: 12px;
-      background: rgba(248, 250, 252, 0.8);
+      background: var(--surface);
       padding: 6px 8px;
     }
 
@@ -286,7 +300,7 @@
       gap: 6px;
       font-size: 0.82rem;
       padding: 3px 0;
-      border-bottom: 1px dashed rgba(148, 163, 184, 0.5);
+      border-bottom: 1px dashed var(--border);
     }
 
     .bases-stat:last-child {
@@ -295,22 +309,25 @@
 
     .bases-stat-name {
       flex: 1 1 auto;
-      color: #0f172a;
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
     }
 
     .bases-stat-value {
       flex: 0 0 auto;
       font-weight: 600;
       white-space: nowrap;
-      color: #0f172a;
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
     }
 
     .bases-stat-muted {
-      color: var(--bases-muted);
+      color: var(--text-dim);
       font-style: italic;
       padding: 4px 0;
       text-align: center;
       font-size: 0.8rem;
+      font-family: 'Rajdhani', sans-serif;
     }
 
     .bases-notes-chip {
@@ -324,7 +341,7 @@
       right: 0;
       z-index: 20;
       max-width: 260px;
-      background: var(--card-bg, #ffffff);
+      background: var(--surface);
       border-radius: 10px;
       padding: 8px 10px;
       box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
@@ -346,8 +363,8 @@
       right: 0;
       bottom: 0;
       z-index: 10;
-      background: var(--bg-color, #f8fafc);
-      border-top: 1px solid rgba(148, 163, 184, 0.6);
+      background: var(--bg);
+      border-top: 1px solid var(--border);
       backdrop-filter: blur(12px) saturate(1.1);
       transform: translateY(100%);
       opacity: 0;
@@ -373,6 +390,7 @@
     .compare-label {
       font-weight: 600;
       font-size: 0.85rem;
+      font-family: 'Rajdhani', sans-serif;
     }
 
     .bases-chip-row {
@@ -389,9 +407,10 @@
       padding: 3px 8px;
       border-radius: 999px;
       font-size: 0.8rem;
-      background: var(--bases-chip-bg);
-      border: 1px solid var(--bases-chip-border);
+      background: var(--surface2);
+      border: 1px solid var(--border);
       white-space: nowrap;
+      font-family: 'Rajdhani', sans-serif;
     }
 
     .bases-chip button {
@@ -401,6 +420,7 @@
       padding: 0;
       font-size: 0.9rem;
       line-height: 1;
+      font-family: 'Rajdhani', sans-serif;
     }
 
     #compareBtn {
@@ -436,7 +456,7 @@
       max-width: var(--bases-modal-max-width);
       max-height: min(90vh, 800px);
       border-radius: 18px;
-      background: var(--card-bg, #ffffff);
+      background: var(--surface);
       box-shadow: 0 24px 60px rgba(15, 23, 42, 0.4);
       display: flex;
       flex-direction: column;
@@ -445,8 +465,8 @@
 
     .bases-modal-header {
       padding: 10px 16px;
-      background: #1d4ed8;
-      color: #eff6ff;
+      background: var(--surface2);
+      color: var(--gold);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -457,25 +477,6 @@
       margin: 0;
       font-size: 1rem;
       font-weight: 700;
-    }
-    /* Ensure compare modal title is readable */
-    .bases-modal-header h2 {
-      color: #f8fafc !important;
-    }
-    /* Dark mode — soften intense blues in compare modal */
-    html[data-theme="dark"] .bases-modal-header,
-    body[data-theme="dark"] .bases-modal-header {
-      background: #1e3a8a !important;
-    }
-
-    html[data-theme="dark"] #compareTable thead th,
-    body[data-theme="dark"] #compareTable thead th {
-      background: #1e3a8a !important;
-    }
-
-    html[data-theme="dark"] #compareTable tbody tr.section-row th,
-    body[data-theme="dark"] #compareTable tbody tr.section-row th {
-      background: #1e3a8a !important;
     }
 
 
@@ -489,7 +490,7 @@
 
         .bases-modal-help {
       font-size: 0.8rem;
-      color: var(--bases-muted, #64748b);
+      color: var(--text-dim);
     }
 
     .bases-stat-filters {
@@ -506,12 +507,12 @@
       align-items: center;
       gap: 4px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
+      border: 1px solid var(--border);
       padding: 4px 8px;
       font-size: 0.8rem;
       cursor: pointer;
-      background: rgba(248, 250, 252, 0.9);
-      color: #0f172a;
+      background: var(--surface);
+      color: var(--text);
     }
 
     .bases-stat-filter-item input {
@@ -520,9 +521,9 @@
 
     .bases-modal-table-shell {
       border-radius: 12px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
+      border: 1px solid var(--border);
       overflow: hidden;
-      background: #ffffff;
+      background: var(--surface);
       flex: 1 1 auto;
       min-height: 0;
     }
@@ -541,26 +542,26 @@
     #compareTable thead th {
       position: sticky;
       top: 0;
-      background: #1d4ed8;
-      color: #eff6ff;
+      background: var(--surface2);
+      color: var(--gold);
       padding: 6px 8px;
       text-align: left;
-      border-bottom: 1px solid rgba(15, 23, 42, 0.3);
+      border-bottom: 1px solid var(--border);
     }
 
     #compareTable th,
     #compareTable td {
       padding: 6px 8px;
-      border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+      border-bottom: 1px solid var(--border);
     }
 
     #compareTable tbody tr:nth-child(even) {
-      background: rgba(248, 250, 252, 0.8);
+      background: var(--surface);
     }
 
     #compareTable tbody tr.section-row th {
-      background: #1d4ed8;
-      color: #eff6ff;
+      background: var(--surface2);
+      color: var(--gold);
       font-weight: 700;
     }
 
@@ -575,14 +576,6 @@
       background: rgba(34, 197, 94, 0.16); /* soft green */
       font-weight: 600;
     }
-
-    /* Dark mode highlight */
-    html[data-theme="dark"] #compareTable td.stat-best,
-    body[data-theme="dark"] #compareTable td.stat-best {
-      background: rgba(34, 197, 94, 0.30);
-      font-weight: 600;
-    }
-
 
     .bases-modal-footer {
       padding: 10px 16px 12px;
@@ -614,14 +607,14 @@
       width: 100%;
       padding: 6px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
+      border: 1px solid var(--border);
       font-size: 0.85rem;
       outline: none;
     }
 
     .bases-stat-search input:focus {
-      border-color: rgba(59, 130, 246, 0.9);
-      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.25);
+      border-color: var(--gold-dim);
+      box-shadow: 0 0 0 1px var(--gold-dim);
     }
     @media (max-width: 768px) {
     /* Header: don't fight the main Mathom House header on mobile */
@@ -676,145 +669,27 @@
       color: inherit;
     }
 
-    /* Dark mode: make base titles light */
-    html[data-theme="dark"] .bases-card-title h3,
-    body[data-theme="dark"] .bases-card-title h3 {
-      color: #e5e7eb;
-    }
-
-
-    /* Dark theme overrides specifically for the base skins page */
-    html[data-theme="dark"] .bases-card,
-    body[data-theme="dark"] .bases-card {
-      background: #111827;
-    }
-
-    html[data-theme="dark"] .bases-statlist {
-      background: #111827 !important;
-    }
-
-    /* DARK MODE — Improve stat readability */
-    html[data-theme="dark"] .bases-statlist .bases-stat-name,
-    html[data-theme="dark"] .bases-statlist .bases-stat-value {
-      color: #1e293b;
-    }
-
-    html[data-theme="dark"] .bases-modal-card {
-      background: #111827;
-      color: #e5e7eb;
-    }
-    /* Dark mode – make "Equipped" / "Holding" labels match card title text */
-    html[data-theme="dark"] .bases-section-label,
-    body[data-theme="dark"] .bases-section-label {
-      color: #e5e7eb !important;  /* same feel as the card title in dark mode */
-    }
-
-    /* Dark mode – improve readability of notes popup */
-    html[data-theme="dark"] .bases-info-pop,
-    body[data-theme="dark"] .bases-info-pop {
-      background: #111827 !important;
-      color: #e5e7eb !important;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-    }
-
-
-    html[data-theme="dark"] .bases-modal-table-shell {
-      background: #111827;
-      border-color: rgba(148, 163, 184, 0.7);
-    }
-
-    html[data-theme="dark"] .bases-filter-pill,
-    html[data-theme="dark"] .bases-more-filters-btn,
-    body[data-theme="dark"] .bases-filter-pill,
-    body[data-theme="dark"] .bases-more-filters-btn {
-      background: rgba(15, 23, 42, 0.9);
-      border-color: rgba(148, 163, 184, 0.9);
-      color: #e5e7eb;
-    }
-
-    html[data-theme="dark"] .bases-filter-pill[aria-pressed="true"],
-    body[data-theme="dark"] .bases-filter-pill[aria-pressed="true"] {
-      background: rgba(37, 99, 235, 0.5);
-    }
-
     /* Empty state */
     .bases-empty {
       padding: 18px 16px;
       border-radius: 16px;
       text-align: center;
-      background: rgba(248, 250, 252, 0.85);
-      border: 1px dashed rgba(148, 163, 184, 0.8);
+      background: var(--surface);
+      border: 1px dashed var(--border);
       font-size: 0.9rem;
-      color: var(--bases-muted);
+      color: var(--text-dim);
     }
-  
-    /* FINAL OVERRIDE — ensure stat text is dark on light tiles in dark mode */
-    html[data-theme="dark"] .bases-statlist .bases-stat-name,
-    html[data-theme="dark"] .bases-statlist .bases-stat-value {
-      color: #1e293b !important;
-    }
+
     .bases-blurb {
       margin: 0 0 20px;
       padding: 12px 16px;
-      background: rgba(148, 163, 184, 0.10);
-      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: var(--surface2);
+      border: 1px solid var(--border);
       border-radius: 12px;
       font-size: 0.9rem;
+      font-family: 'Rajdhani', sans-serif;
       line-height: 1.45;
-      color: var(--bases-text);
-    }
-
-    html[data-theme="dark"] .bases-blurb,
-    body[data-theme="dark"] .bases-blurb {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(148, 163, 184, 0.25);
-      color: #e5e7eb;
-    }
-    .back-to-top {
-      position: fixed;
-      bottom: 22px;
-      right: 22px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: none;
-      background: #1d4ed8;
-      color: white;
-      font-size: 1.3rem;
-      cursor: pointer;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 50;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-
-    .back-to-top.show {
-      display: flex;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .back-to-top.hide {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    .back-to-top:hover {
-      background: #2563eb;
-    }
-
-    /* Dark mode */
-    html[data-theme="dark"] .back-to-top,
-    body[data-theme="dark"] .back-to-top {
-      background: #334155;
-      color: #f1f5f9;
-    }
-
-    html[data-theme="dark"] .back-to-top:hover,
-    body[data-theme="dark"] .back-to-top:hover {
-      background: #475569;
+      color: var(--text);
     }
 
 </style>
@@ -869,8 +744,8 @@
         <div class="compare-label" id="selCount">Select 2–4 bases to compare</div>
         <div class="bases-chip-row" id="selList"></div>
         <div style="flex:1 1 auto;"></div>
-        <button id="clearSel" type="button">Clear selected</button>
-        <button id="compareBtn" type="button" disabled>Compare</button>
+        <button id="clearSel" type="button" class="btn btn-ghost">Clear selected</button>
+        <button id="compareBtn" type="button" class="btn btn-gold" disabled>Compare</button>
       </div>
     </section>
 
@@ -886,7 +761,7 @@
           <div id="skillBody"></div>
         </div>
         <div class="bases-modal-footer">
-          <button id="skillClose2" type="button">Close</button>
+          <button id="skillClose2" type="button" class="btn btn-gold">Close</button>
         </div>
       </div>
     </div>
@@ -914,8 +789,8 @@
           <div id="statFiltersList" class="bases-stat-filters"></div>
         </div>
         <div class="bases-modal-footer">
-          <button id="filtersClear" type="button">Clear stat filters</button>
-          <button id="filtersDone" type="button">Done</button>
+          <button id="filtersClear" type="button" class="btn btn-ghost">Clear stat filters</button>
+          <button id="filtersDone" type="button" class="btn btn-gold">Done</button>
         </div>
       </div>
     </div>
@@ -936,12 +811,13 @@
           </div>
         </div>
         <div class="bases-modal-footer">
-          <button id="compareClose2" type="button">Close</button>
+          <button id="compareClose2" type="button" class="btn btn-gold">Close</button>
         </div>
       </div>
     </div>
   </main>
-  <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+  <footer>&copy; 2024 Mathom House &middot; Not affiliated with TopWar</footer>
+  <a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
 
   <!-- Page logic -->
   <script>
@@ -1820,25 +1696,6 @@ function updateCountLabel() {
   const skillBackdrop = document.getElementById("skillBackdrop");
   if (skillBackdrop) {
     skillBackdrop.addEventListener("click", () => closeModal("skill"));
-  }
-
-  /* ---------------- Back to Top button wiring ---------------- */
-
-  const backToTopBtn = document.getElementById("backToTop");
-  if (backToTopBtn) {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 350) {
-        backToTopBtn.classList.add("show");
-        backToTopBtn.classList.remove("hide");
-      } else {
-        backToTopBtn.classList.add("hide");
-        backToTopBtn.classList.remove("show");
-      }
-    });
-
-    backToTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
   }
 
   // Initial data load

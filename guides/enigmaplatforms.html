@@ -4,17 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Enigma Platform Guide</title>
-  <link rel="stylesheet" href="/styles/index.css" />
+  <!-- Anti-flash -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles/mathomhouse.css">
+  <link rel="stylesheet" href="/styles/header.css">
+  <link rel="stylesheet" href="/styles/layout.css">
+  <link rel="stylesheet" href="/styles/calculators.css">
   <script src="/header.js" defer></script>
 </head>
 <body>
 <header id="header-placeholder"></header>
-  <div class="container">
-    <h1>Enigma Platform Upgrade</h1>
 
-    <p>
-      The following is a table of the enigma repeater cost of each platform and what the upgrade does. Use the dropdown to select which tab you want to see.
-    </p>
+  <section class="page-hero">
+    <p class="breadcrumb"><a href="/">Home</a> / <a href="/guides.html">Guides</a> / Enigma Platform Upgrades</p>
+    <h1>Enigma Platform Upgrades</h1>
+    <p>Repeater cost for upgrading each enigma platform and their stat boosts. Use the dropdown to select a category.</p>
+  </section>
+
+  <div class="container">
     <select id="enigmaSelect" onchange="showTable()">
             <option value="">Select</option>
             <option value="enigmaComponent">Component</option>

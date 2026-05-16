@@ -4,14 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Formation Talent Tree</title>
-<link rel="stylesheet" href="/styles/index.css" />
+<!-- Anti-flash -->
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/styles/mathomhouse.css">
+<link rel="stylesheet" href="/styles/header.css">
+<link rel="stylesheet" href="/styles/layout.css">
 <script src="/header.js" defer></script>
 <style>
   body {
     background:#0a0f1c;
     color:#fff;
     margin:0;
-    font-family:sans-serif;
   }
 
   /* Tabs (from remould page) */
@@ -309,11 +315,13 @@
 <body>
 <header id="header-placeholder"></header>
 
+  <section class="page-hero">
+    <p class="breadcrumb"><a href="/">Home</a> / <a href="/guides.html">Guides</a> / Formation Perk Tree</p>
+    <h1>Formation Perk Tree</h1>
+    <p>Tap a perk to see its details. Use the tabs to switch between trees.</p>
+  </section>
+
 <div class="page-container">
-  <h1>Formation Talent Trees</h1>
-  <p class="page-intro">
-    Tap a perk to see its details. Use the tabs to switch between different the trees on the Formation's "Perk" tab, 
-  </p>
 
   <div class="tabs">
     <button class="tab-button active" onclick="openTab('tree1-tab', this)">Shark/Scorpion Tree</button>

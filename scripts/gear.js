@@ -54,13 +54,13 @@
 
         if (gear1Offense > gear2Offense) {
             result += 'Gear 1 has better offense\n\n';
-            document.getElementById('gear1-box').style.backgroundColor = '#d4edda';
+            document.getElementById('gear1-box').style.backgroundColor = '#9fc5a8';
             document.getElementById('gear1-box').style.color = 'black';
             document.getElementById('gear2-box').style.backgroundColor = '';
             document.getElementById('gear2-box').style.color = '';
         } else if (gear2Offense > gear1Offense) {
             result += 'Gear 2 has better offense\n\n';
-            document.getElementById('gear2-box').style.backgroundColor = '#d4edda';
+            document.getElementById('gear2-box').style.backgroundColor = '#9fc5a8';
             document.getElementById('gear2-box').style.color = 'black';
             document.getElementById('gear1-box').style.backgroundColor = '';
             document.getElementById('gear1-box').style.color = '';
@@ -80,13 +80,13 @@
 
         if (gear1DefenseScore > gear2DefenseScore) {
             result += 'Gear 1 has better defense\n';
-            document.getElementById('gear1-box').style.backgroundColor = '#d4edda';
+            document.getElementById('gear1-box').style.backgroundColor = '#9fc5a8';
             document.getElementById('gear1-box').style.color = 'black';
             document.getElementById('gear2-box').style.backgroundColor = '';
             document.getElementById('gear2-box').style.color = '';
         } else if (gear2DefenseScore > gear1DefenseScore) {
             result += 'Gear 2 has better defense\n';
-            document.getElementById('gear2-box').style.backgroundColor = '#d4edda';
+            document.getElementById('gear2-box').style.backgroundColor = '#9fc5a8';
             document.getElementById('gear2-box').style.color = 'black';
             document.getElementById('gear1-box').style.backgroundColor = '';
             document.getElementById('gear1-box').style.color = '';
@@ -152,13 +152,13 @@ function compareHTChips() {
 
     if (score1 > score2) {
         result += 'HT Chip 1 has the higher score.';
-        document.getElementById('ht-chips1-box').style.backgroundColor = '#d4edda';
+        document.getElementById('ht-chips1-box').style.backgroundColor = '#9fc5a8';
         document.getElementById('ht-chips1-box').style.color = 'black';
         document.getElementById('ht-chips2-box').style.backgroundColor = '';
         document.getElementById('ht-chips2-box').style.color = '';
     } else if (score2 > score1) {
         result += 'HT Chip 2 has the higher score.';
-        document.getElementById('ht-chips2-box').style.backgroundColor = '#d4edda';
+        document.getElementById('ht-chips2-box').style.backgroundColor = '#9fc5a8';
         document.getElementById('ht-chips2-box').style.color = 'black';
         document.getElementById('ht-chips1-box').style.backgroundColor = '';
         document.getElementById('ht-chips1-box').style.color = '';

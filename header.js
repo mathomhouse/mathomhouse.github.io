@@ -1,102 +1,121 @@
-// Google Analytics - Add this at the top of header.js
-const gaScript1 = document.createElement('script');
-gaScript1.setAttribute('async', '');
-gaScript1.src = 'https://www.googletagmanager.com/gtag/js?id=G-4R1NPM39PL';
-document.head.appendChild(gaScript1);
+// ── Google Analytics ──────────────────────────────────────────
+(function(){
+  var s1 = document.createElement('script');
+  s1.async = true;
+  s1.src = 'https://www.googletagmanager.com/gtag/js?id=G-4R1NPM39PL';
+  document.head.appendChild(s1);
 
-const gaScript2 = document.createElement('script');
-gaScript2.innerHTML = `
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-4R1NPM39PL');
-`;
-document.head.appendChild(gaScript2);
+  var s2 = document.createElement('script');
+  s2.innerHTML = 'window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-4R1NPM39PL");';
+  document.head.appendChild(s2);
+})();
 
-// Function to dynamically add the favicon
-function addFavicon() {
-    const link = document.createElement('link');
-    link.rel = 'icon';
-    link.href = '/cutelogo.ico'; // Make sure the path is correct
-    link.type = 'image/x-icon';
-    
-    document.head.appendChild(link);
-}
-
-function loadHeader(){
+// ── Header loader ─────────────────────────────────────────────
+function loadHeader() {
   fetch('/header.html')
-  .then(res => res.text())
-  .then(html => {
-    // Inject header HTML
-    const placeholder = document.getElementById('header-placeholder');
-    placeholder.innerHTML = html; 
-    initializeHeader();
-  })
-  .catch(err => console.error('Header load error:', err));
-}
-
-function initializeHeader(){
-    // Now that the header exists, wire up the buttons and behavior
-    const hamburger = document.getElementById("hamburger");
-    const dropdown =  document.getElementById("nav");
-
-    // Theme toggle setup
-    const toggleButton = document.getElementById('themeToggle');
-    const savedTheme = localStorage.getItem('theme');
-
-    if (savedTheme === 'dark') {
-      document.body.dataset.theme = 'dark';
-      toggleButton.textContent = '☀️';
-    }
-
-    toggleButton.addEventListener('click', () => {
-      const isDark = document.body.dataset.theme === 'dark';
-      document.body.dataset.theme = isDark ? '' : 'dark';
-      localStorage.setItem('theme', isDark ? 'light' : 'dark');
-      toggleButton.textContent = isDark ? '🌓' : '☀️';
-    });
-
-    // Hide dropdown when clicking outside of it
-    document.addEventListener("click", function(event) {
-      if (!dropdown.contains(event.target) && !hamburger.contains(event.target)) {
-          dropdown.style.display = "none";
-          // Close any open submenus
-          document.querySelectorAll('.submenu-container.open').forEach(el => el.classList.remove('open'));
+    .then(function(res){ return res.text(); })
+    .then(function(html){
+      var ph = document.getElementById('header-placeholder');
+      if (ph) {
+        ph.innerHTML = html;
+        initHeader();
       }
-    });
+    })
+    .catch(function(err){ console.error('Header load error:', err); });
+}
 
-    // Mobile menu toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.getElementById('nav');
-    if (menuToggle && nav) {
-      menuToggle.addEventListener('click', () => {
-        nav.classList.toggle('active');
-      });
+// ── Init (called after header HTML is injected) ───────────────
+function initHeader() {
+  markActivePage();
+  initThemeToggle();
+  initHamburger();
+  initMobileAccordion();
+  initBackToTop();
+}
+
+// ── Active page highlighting ───────────────────────────────────
+function markActivePage() {
+  var path = window.location.pathname;
+  document.querySelectorAll('.main-site-nav a, .mobile-menu a, .dropdown-panel a, .mobile-group-links a').forEach(function(a){
+    try {
+      var href = a.getAttribute('href');
+      if (!href) return;
+      // Resolve relative href against current origin
+      var url = new URL(href, window.location.origin);
+      if (url.pathname === path || (path === '/' && url.pathname === '/index.html')) {
+        a.classList.add('active');
+      }
+    } catch(e){}
+  });
+}
+
+// ── Theme toggle ───────────────────────────────────────────────
+function initThemeToggle() {
+  // Theme is pre-applied by the anti-flash script; just wire up buttons
+  var buttons = document.querySelectorAll('.theme-toggle-btn');
+
+  function updateButtons() {
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    buttons.forEach(function(btn){
+      btn.innerHTML = isLight ? '🌙 Dark' : '☀️ Light';
+    });
+  }
+
+  updateButtons(); // sync initial state
+
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var current = document.documentElement.getAttribute('data-theme');
+      var next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateButtons();
+    });
+  });
+}
+
+// ── Hamburger / mobile menu ────────────────────────────────────
+function initHamburger() {
+  var hamburger  = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  if (!hamburger || !mobileMenu) return;
+
+  hamburger.addEventListener('click', function(){
+    var isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+  });
+
+  // Close on outside click
+  document.addEventListener('click', function(e){
+    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
     }
+  });
+}
 
-    // === Submenu support ===
-    document.querySelectorAll('.submenu-container > a').forEach(trigger => {
-      trigger.addEventListener("click", function (e) {
-        e.preventDefault();
-        const container = this.closest('.submenu-container');
-
-        // Close all other open submenus
-        document.querySelectorAll('.submenu-container.open').forEach(open => {
-          if (open !== container) open.classList.remove('open');
-        });
-
-        container.classList.toggle("open");
-      });
+// ── Mobile accordion ──────────────────────────────────────────
+function initMobileAccordion() {
+  document.querySelectorAll('.mobile-group-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var links = btn.nextElementSibling;
+      if (!links) return;
+      var isOpen = links.classList.toggle('open');
+      btn.classList.toggle('open', isOpen);
     });
+  });
 }
 
-function toggleDropdown() {
-  const hamburger = document.getElementById("hamburger");
-  const dropdown =  document.getElementById("nav");
-  const rect = hamburger.getBoundingClientRect();
-  dropdown.style.top = rect.bottom + "px";
-  dropdown.style.left = rect.left + "px";
-  dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
+// ── Back-to-top ───────────────────────────────────────────────
+function initBackToTop() {
+  var btn = document.getElementById('backToTop');
+  if (!btn) return;
+  window.addEventListener('scroll', function(){
+    btn.classList.toggle('visible', window.scrollY > 300);
+  });
+  btn.addEventListener('click', function(){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 }
 
-document.addEventListener("DOMContentLoaded", loadHeader);
+document.addEventListener('DOMContentLoaded', loadHeader);

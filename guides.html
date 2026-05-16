@@ -4,125 +4,109 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guides</title>
-  <link rel="stylesheet" href="/styles/index.css">
+  <!-- Anti-flash -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles/mathomhouse.css">
+  <link rel="stylesheet" href="/styles/header.css">
+  <link rel="stylesheet" href="/styles/layout.css">
+  <link rel="stylesheet" href="/styles/calculators.css">
   <style>
-    /* For fade/slide effect */
-    .section,
-    .card {
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    /* Hidden class for smooth hiding */
-    .hidden {
-      opacity: 0;
-      transform: scaleY(0);
-      height: 0;
-      overflow: hidden;
-      padding: 0;
-      margin: 0;
-      pointer-events: none;
-    }
+    .hidden { display: none; }
   </style>
   <script src="/header.js" defer></script>
 </head>
 <body>
   <header id="header-placeholder"></header>
-  <section class="hero-blurb">
-    <div class="blurb-container">
-      <p>New guides will be gradually added at our convenience. If you have any suggestions for guides or information you think would be useful, please submit that feedback <a href="/index.html#feedback">here</a>! 
-      </p>
+
+  <section class="page-hero">
+    <p class="breadcrumb"><a href="/">Home</a> / Guides</p>
+    <h1>Guides</h1>
+    <p>New guides will be gradually added at our convenience. Suggestions welcome — submit feedback <a href="/index.html#feedback">here</a>!</p>
+  </section>
+
+  <section id="home" class="section">
+    <div class="search-bar">
+      <input type="text" id="guideSearch" placeholder="Filter guides..." oninput="filterGuides()">
     </div>
   </section>
 
-<section id="home" class="section">
-  <!--<div class="main-links">
-    <a href="#allguides">All Guides</a>
-  </div> -->
-  <div class="search-bar">
-    <input type="text" id="guideSearch" placeholder="Filter guides..." oninput="filterGuides()">
-  </div>
-</section>
+  <section id="allguides" class="section">
+    <div class="section-header">
+      <h2>Guides</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="card-grid">
+      <a href="/guides/bobstitaneffects.html" class="card" data-keywords="runes, recommended, march, marches, loadouts, titan gear, Bobgrif, effects">
+        <img class="card-icon" src="/images/bobgrif-icon.png" alt="Bobgrif Icon">
+        <div class="card-body">
+          <div class="card-title">Bobgrif's Titan Effect Recommendations</div>
+          <div class="card-desc">Various Titan Gear effect setups and recommended marches. All data from Bobgrif</div>
+        </div>
+      </a>
+      <a href="/guides/chaoscrafting.html" class="card" data-keywords="chaos, crafting, titan gear, blessing, catalysts, runes, Tex">
+        <img class="card-icon" src="/images/chaoscrafting-icon.jpeg" alt="Chaos Crafting Icon">
+        <div class="card-body">
+          <div class="card-title">Tex's Chaos Crafting</div>
+          <div class="card-desc">Guide to "Chaos Crafting", a method for chasing runes during Titan Blessing. Created by Tex (s2864)</div>
+        </div>
+      </a>
+      <a href="/guides/baseskins.html" class="card" data-keywords="base skins, base, skins, comparison, stats">
+        <img class="card-icon" src="/cutelogo.jpg" alt="Placeholder Icon">
+        <div class="card-body">
+          <div class="card-title">Base Skin Comparison</div>
+          <div class="card-desc">List of all base skins and tool to compare them w/ various filters</div>
+        </div>
+      </a>
+      <a href="/guides/perktree.html" class="card" data-keywords="formation, perk, tree, points, shark, scorpion, eagle">
+        <img class="card-icon" src="/cutelogo.jpg" alt="Placeholder Icon">
+        <div class="card-body">
+          <div class="card-title">Formation Perk Tree</div>
+          <div class="card-desc">Formation perk tree(s) to see points needed to progress. Interactive version in progress</div>
+        </div>
+      </a>
+      <a href="/guides/enigmaplatforms.html" class="card" data-keywords="repeater, platform, enigma">
+        <img class="card-icon" src="/images/repeater-icon.png" alt="Repeater Icon">
+        <div class="card-body">
+          <div class="card-title">Enigma Platform Upgrades</div>
+          <div class="card-desc">Repeater cost for upgrading each enigma platform and their stat boosts</div>
+        </div>
+      </a>
+      <a href="/guides/passiveheroskills.html" class="card" data-keywords="hero skills, passive, gathering, combat, heroes return">
+        <img class="card-icon" src="/images/shard-icon.png" alt="Shard Icon">
+        <div class="card-body">
+          <div class="card-title">Passive Hero Skills</div>
+          <div class="card-desc">List of heroes and their skills that passively increase various stats</div>
+        </div>
+      </a>
+      <a href="/guides/remould.html" class="card" data-keywords="remould, crafting, gold, materials, stat boost, blueprint">
+        <img class="card-icon" src="/images/remould-icon.png" alt="Remould Icon">
+        <div class="card-body">
+          <div class="card-title">Equipment Remoulds</div>
+          <div class="card-desc">Cost for remoulding equipment as well as their stat boosts</div>
+        </div>
+      </a>
+      <a href="/guides/mastery.html" class="card" data-keywords="mastery, components, stat boosts, mastery paper">
+        <img class="card-icon" src="/images/mastery-icon.png" alt="Mastery Icon">
+        <div class="card-body">
+          <div class="card-title">Component Mastery</div>
+          <div class="card-desc">Charts detailing the requirements for each mastery level and the stat boosts that come from them</div>
+        </div>
+      </a>
+      <a href="/guides/rockfield.html" class="card" data-keywords="rockfield, whales, air force">
+        <img class="card-icon" src="/images/rockfield-icon.png" alt="Rockfield Icon">
+        <div class="card-body">
+          <div class="card-title">Rockfield</div>
+          <div class="card-desc">Guide detailing the the hero Rockfield and his usefulness against whales. Calculator included!</div>
+        </div>
+      </a>
+    </div>
+  </section>
 
-<section id="allguides" class="section">
-  <h2 class="section-title">Guides</h2>
-  <div class="cards-grid">
-    <a href="/guides/bobstitaneffects.html" class="card-link">
-      <div class="card" data-keywords="runes, recommended, march, marches, loadouts, titan gear, Bobgrif, effects">
-        <div class="card-icon">
-            <img src="/images/bobgrif-icon.png" alt="Bobgrif Icon">
-        </div>
-        <h3>Bobgrif's Titan Effect Recommendations</h3> <p>Various Titan Gear effect setups and recommended marches. All data from Bobgrif</p>
-      </div>
-    </a>
-    <a href="/guides/chaoscrafting.html" class="card-link">
-      <div class="card" data-keywords="chaos, crafting, titan gear, blessing, catalysts, runes, Tex">
-        <div class="card-icon">
-            <img src="/images/chaoscrafting-icon.jpeg" alt="Chaos Crafting Icon">
-        </div>
-        <h3>Tex's Chaos Crafting</h3> <p>Guide to "Chaos Crafting", a method for chasing runes during Titan Blessing. Created by Tex (s2864)</p>
-      </div>
-    </a>
-    <a href="/guides/baseskins.html" class="card-link">
-      <div class="card" data-keywords="base skins, base, skins, comparison, stats">
-        <div class="card-icon">
-            <img src="/cutelogo.jpg" alt="Placeholder Icon">
-        </div>
-        <h3>Base Skin Comparison</h3> <p>List of all base skins and tool to compare them w/ various filters</p>
-      </div>
-    </a>
-    <a href="/guides/perktree.html" class="card-link">
-      <div class="card" data-keywords="formation, perk, tree, points, shark, scorpion, eagle">
-        <div class="card-icon">
-            <img src="/cutelogo.jpg" alt="Placeholder Icon">
-        </div>
-        <h3>Formation Perk Tree</h3> <p>Formation perk tree(s) to see points needed to progress. Interactive version in progress</p>
-      </div>
-    </a>
-    <a href="/guides/enigmaplatforms.html" class="card-link">
-      <div class="card" data-keywords="repeater, platform, enigma">
-        <div class="card-icon">
-            <img src="/images/repeater-icon.png" alt="Repeater Icon">
-        </div>
-        <h3>Enigma Platform Upgrades</h3> <p>Repeater cost for upgrading each enigma platform and their stat boosts</p>
-      </div>
-    </a>
-    <a href="/guides/passiveheroskills.html" class="card-link">
-      <div class="card" data-keywords="hero skills, passive, gathering, combat, heroes return">
-        <div class="card-icon">
-            <img src="/images/shard-icon.png" alt="Shard Icon">
-        </div>
-        <h3>Passive Hero Skills</h3> <p>List of heroes and their skills that passively increase various stats</p>
-      </div>
-    </a>
-    <a href="/guides/remould.html" class="card-link">
-      <div class="card" data-keywords="remould, crafting, gold, materials, stat boost, blueprint">
-        <div class="card-icon">
-            <img src="/images/remould-icon.png" alt="Remould Icon">
-        </div>
-        <h3>Equipment Remoulds</h3> <p>Cost for remoulding equipment as well as their stat boosts</p>
-      </div>
-    </a>
-    <a href="/guides/mastery.html" class="card-link">
-      <div class="card" data-keywords="mastery, components, stat boosts, mastery paper">
-        <div class="card-icon">
-            <img src="/images/mastery-icon.png" alt="Mastery Icon">
-        </div>
-        <h3>Component Mastery</h3> <p>Charts detailing the requirements for each mastery level and the stat boosts that come from them</p>
-      </div>
-    </a>
-    <a href="/guides/rockfield.html" class="card-link">
-      <div class="card" data-keywords="rockfield, whales, air force">
-        <div class="card-icon">
-            <img src="/images/rockfield-icon.png" alt="Rockfield Icon">
-        </div>
-        <h3>Rockfield</h3> <p>Guide detailing the the hero Rockfield and his usefulness against whales. Calculator included!</p>
-      </div>
-    </a>
-  </div>
-</section>
+  <a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
 
-<button id="backToTop" onclick="scrollToTop()">↑</button>
-
-<script src="guides.js"></script>
+  <script src="guides.js"></script>
 </body>
 </html>

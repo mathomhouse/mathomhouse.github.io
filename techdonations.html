@@ -5,7 +5,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Technology Donation Calculator</title>
-  <link rel="stylesheet" href="styles/index.css" />
+  <!-- Anti-flash -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/mathomhouse.css">
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/calculators.css">
   <script src="header.js" defer></script>
   <style>
     .form-aligned {
@@ -32,6 +40,9 @@
 
     #result {
       margin-top: 30px;
+    }
+    .calculate-btn{
+      padding-top: 20px;
     }
   </style>
 </head>
@@ -72,7 +83,7 @@
       </div>
     </form>
 
-    <div id="result" class="result"></div>
+    <div id="result" class="result" style="display:none"></div>
   </div>
 
   <script>
@@ -90,6 +101,7 @@
       const resultEl = document.getElementById("result");
 
       if (!techKey || isNaN(currentXP) || isNaN(people) || isNaN(donationsPerPerson)) {
+        resultEl.style.display = 'block';
         resultEl.textContent = "Please fill in all fields.";
         return;
       }
@@ -98,6 +110,7 @@
       const remainingXP = tech.totalXP - currentXP;
 
       if (remainingXP <= 0) {
+        resultEl.style.display = 'block';
         resultEl.textContent = `${tech.name} is already completed! 🎉`;
         return;
       }
@@ -109,14 +122,19 @@
       const finishDate = new Date(today);
       finishDate.setDate(today.getDate() + daysNeeded);
 
+      resultEl.style.display = 'block';
       resultEl.textContent =
         `Estimated completion in ${daysNeeded} day(s):\n${finishDate.toDateString()}`;
     }
 
     function resetForm() {
       document.getElementById("donationForm").reset();
-      document.getElementById("result").textContent = "";
+      const resultEl = document.getElementById("result");
+      resultEl.textContent = "";
+      resultEl.style.display = 'none';
     }
   </script>
+<footer>&copy; 2024 Mathom House &middot; Not affiliated with TopWar</footer>
+<a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
 </body>
 </html>

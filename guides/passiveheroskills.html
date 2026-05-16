@@ -5,21 +5,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Passive Hero Buffs</title>
-    <link rel="stylesheet" href="/styles/index.css" />
+    <!-- Anti-flash -->
+    <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles/mathomhouse.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/layout.css">
+    <link rel="stylesheet" href="/styles/calculators.css">
     <script src="/header.js" defer></script>
 </head>
 
 <body>
     <header id="header-placeholder"></header>
+
+    <section class="page-hero">
+      <p class="breadcrumb"><a href="/">Home</a> / <a href="/guides.html">Guides</a> / Passive Hero Skills</p>
+      <h1>Passive Hero Skills</h1>
+      <p>Heroes that provide passive buffs at specific star or exclusive skill levels. Originally by Maymi, updated by artu.</p>
+    </section>
+
     <div class="container">
-        <h1>Passive Hero Buffs</h1>
-        <p>
-            Some heroes provide passive buffs at specific star or exclusive skill levels. Choose a skill category to
-            view
-            the list of heroes that provide buffs within that category.<br>
-            This guide was born from an idea by lexisdoll. It was originally made by Maymi, and has since been updated
-            by artu.
-        </p>
 
         <label for="skillsSelect">Select a skill category: </label>
         <select id="skillsSelect" onchange="showTable()">

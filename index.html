@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Mathom House</title>
-
   <meta name="description" content="Tools and calculators for Top War players.">
-
   <meta property="og:title" content="Mathom House">
   <meta property="og:description" content="Tools and calculators for Top War players.">
   <meta property="og:image" content="https://mathomhouse.github.io/cutelogo.jpg">
@@ -16,315 +12,255 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="From Artu and Gikey">
 
-  <link rel="stylesheet" href="styles/index.css">
+  <!-- Anti-flash -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles/mathomhouse.css">
   <link rel="stylesheet" href="styles/header.css">
-  <script src="index.js"></script>
-  <script src="header.js" defer></script>
+  <link rel="stylesheet" href="styles/layout.css">
 
   <link rel="icon" href="/cutelogo.ico" type="image/x-icon">
+  <script src="header.js" defer></script>
+  <script src="index.js" defer></script>
 </head>
-
 <body>
   <header id="header-placeholder"></header>
-  <section class="hero-blurb">
-    <div class="blurb-container">
-      <h1>Welcome to Mathom House v2.0</h1>
-      <p>
-        A collection of tools and calculators for Top War players, created by <strong>Gikey (s2698/3355)</strong> and <strong>artu (s2698)</strong> with help from friends around the community. <br><br>
-        If you have any suggestions for current or future tools or the site in general, please let us know <a href="#feedback">here</a>!
-      </p>
-    </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="hero-eyebrow">Top War Player Companion</p>
+    <h1>Mathom House</h1>
+    <p class="hero-sub">
+      Calculators, stores, and guides for <strong>Top War</strong> players —<br>
+      created by <strong>Gikey</strong> &amp; <strong>Artu</strong> (s2698) with help from the community.
+    </p>
+    <nav class="hero-nav">
+      <!--<a href="#armory" class="hero-btn primary new-badge">Armory</a>-->
+      <a href="#calculators" class="hero-btn">Calculators</a>
+      <a href="#events"      class="hero-btn">Events</a>
+      <a href="/guides.html" class="hero-btn">Guides</a>
+      <a href="#feedback"    class="hero-btn">Feedback</a>
+    </nav>
   </section>
 
-  <section id="home" class="section">
-    <div class="main-links">
-      <a href="#calculators">Calculators</a>
-      <a href="#stores">Stores</a>
-      <a href="#eternalland">Eternal Land</a>
-      <a href="#enigmadominators">Enigma Dominators</a>
-      <a href="#feedback">Feedback<br>+<br>Support</a>
-      <a href="/guides.html">Guides <br>(Under Construction)</a>
+  <!--<section id="armory" class="section">
+  <div class="section-header">
+    <h2>The Armory</h2>
+    <div class="section-line"></div>
+  </div>
+  
+  <a href="/armory.html" class="card card-featured">
+    <img class="card-icon featured-icon" src="/images/armory-main-icon.png" alt="Armory">
+    <div class="card-body">
+      <div class="card-title">Armory Dashboard</div>
+      <p class="card-desc">Your central hub for equipment management and unit optimization. Track your gear progression and calculate your power ceiling.</p>
+      <span class="btn-text">Enter the Armory →</span>
     </div>
-  </section>
+  </a>
+</section>
+
+<div class="section-divider"></div>-->
+
+  <!-- Calculators -->
   <section id="calculators" class="section">
-    <h2 class="section-title">Calculators</h2>
-    <div class="cards-grid">
-      <a href="/exclusives.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/shard-icon.png" alt="Shard Icon">
-          </div>
-          <h3>ES Calculator</h3>
-          <p>Figure out how many ES shards you need for an ES 7!</p>
-        </div>
-      </a>
-      <a href="/gems.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/gems-icon.png" alt="Gems Icon">
-          </div>
-          <h3>Gem Calculator</h3>
-          <p>Add up how many gems you've been hoarding!</p>
-        </div>
-      </a>
-      <a href="/equipment.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/equipment-icon.png" alt="Equipment Icon">
-          </div>
-          <h3>Equipment Calculator</h3>
-          <p>Calculate how long until your equipment can be crafted</p>
-        </div>
-      </a>
-      <a href="/components.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/components-icon.png" alt="Components Icon">
-          </div>
-          <h3>Components Calculator</h3>
-          <p>How close are you to ROF 10?</p>
-        </div>
-      </a>
-      <a href="/resources.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/resources-icon.png" alt="Resources Icon">
-          </div>
-          <h3>Resources Calculator</h3>
-          <p>How much Food, Oil, and Odinium do you have saved?</p>
-        </div>
-      </a>
-      <a href="/gear.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img id="ht-icon" src="/images/yellow-ht-icon.png" alt="HT Icon">
-          </div>
-          <h3>Gear Calculator</h3>
-          <p>Compare the stats between two gear</p>
-        </div>
-      </a>
-      <a href="/vit.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/vit-icon.png" alt="VIT Icon">
-          </div>
-          <h3>VIT Calculator</h3>
-          <p>How much VIT do I have saved up?</p>
-        </div>
-      </a>
-      <a href="/VIP.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/VIP-icon.png" alt="VIP Icon">
-          </div>
-          <h3>VIP Calculator</h3>
-          <p>Do you <strong>really</strong> want to know how much you've spent?</p>
-        </div>
-      </a>
-      <a href="/pets.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/pets-icon.png" alt="Pets Icon">
-          </div>
-          <h3>Pets Calculator</h3>
-          <p>Find out the max stats for gold or purple pets! Made in collaboration with Tex (s2864)</p>
-        </div>
-      </a>
-      <a href="/techdonations.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/expansion-icon.png" alt="Expansion Icon">
-          </div>
-          <h3>Tech Donation Calculator</h3>
-          <p>Calculate how long it will take you to complete Territorial Expansion or A New Era of Glory!</p>
-        </div>
-      </a>
+    <div class="section-header">
+      <h2>Calculators</h2>
+      <div class="section-line"></div>
     </div>
-  </section>
-  <section id="stores" class="section">
-    <h2 class="section-title">Stores</h2>
-    <div class="cards-grid">
-      <a href="/ssc-store.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/sscstore-icon.png" alt="Seal Stone Chaos Store Icon">
-          </div>
-          <h3>Seal Stone Chaos Store</h3>
-          <p>Figure out what you want to buy from the Seal Stone chaos Store</p>
+    <div class="card-grid">
+      <a href="/exclusives.html" class="card">
+        <img class="card-icon" src="/images/shard-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">ES Calculator</div>
+          <div class="card-desc">Figure out how many ES shards you need for an ES 7!</div>
         </div>
       </a>
-      <a href="/mastersstore.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/rankedmatchstore-icon.png" alt="Ranked Match Store Icon">
-          </div>
-          <h3>Masters Store</h3>
-          <p>Figure out what you want to buy from the Masters Store</p>
+      <a href="/gems.html" class="card">
+        <img class="card-icon" src="/images/gems-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">Gem Calculator</div>
+          <div class="card-desc">Add up how many gems you've been hoarding!</div>
         </div>
       </a>
-      <a href="/rankedmatchstore.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/rankedmatchstore-icon.png" alt="Ranked Match Store Icon">
-          </div>
-          <h3>Ranked Match Store</h3>
-          <p>Figure out what you want to buy from the Ranked Match Store</p>
+      <a href="/equipment.html" class="card">
+        <img class="card-icon" src="/images/equipment-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">Equipment Calculator</div>
+          <div class="card-desc">Calculate how long until your equipment can be crafted.</div>
         </div>
       </a>
-      <a href="/elstore.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/powerstation-icon.png" alt="Power Station Icon">
-          </div>
-          <h3>EL Store</h3>
-          <p>Figure out what you want to buy from the EL Store</p>
+      <a href="/components.html" class="card">
+        <img class="card-icon" src="/images/components-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">Components Calculator</div>
+          <div class="card-desc">How close are you to ROF 10?</div>
         </div>
       </a>
-      <a href="archive/edstore.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/ED-icon.png" alt="ED Icon">
-          </div>
-          <h3>ED Store</h3>
-          <p>Figure out what you want to buy from the ED Store</p>
+      <a href="/resources.html" class="card">
+        <img class="card-icon" src="/images/resources-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">Resources Calculator</div>
+          <div class="card-desc">How much Food, Oil, and Odinium do you have saved?</div>
         </div>
       </a>
-    </div>
-  </section>
-  <section id="eternalland" class="section">
-    <h2 class="section-title">Eternal Land</h2>
-    <div class="cards-grid">
-      <a href="/elstore.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/powerstation-icon.png" alt="Power Station Icon">
-          </div>
-          <h3>EL Store</h3>
-          <p>Figure out what you want to buy from the EL Store</p>
+      <a href="/gear.html" class="card">
+        <img class="card-icon" src="/images/yellow-ht-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">Gear Calculator</div>
+          <div class="card-desc">Compare the stats between two pieces of gear.</div>
         </div>
       </a>
-      <a href="/elpoints.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/eternalcity-icon.png" alt="Eternal City Icon">
-          </div>
-          <h3>EL Rankings Simulator</h3>
-          <p>Simulate the rankings for your EL</p>
+      <a href="/vit.html" class="card">
+        <img class="card-icon" src="/images/vit-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">VIT Calculator</div>
+          <div class="card-desc">How much VIT do you have saved up?</div>
         </div>
       </a>
-      <a href="/vit.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/vit-icon.png" alt="VIT Icon">
-          </div>
-          <h3>VIT Calculator</h3>
-          <p>Use the VIT calculator to calculate your EL individual points!</p>
+      <a href="/VIP.html" class="card">
+        <img class="card-icon" src="/images/VIP-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">VIP Calculator</div>
+          <div class="card-desc">Do you <em>really</em> want to know how much you've spent?</div>
         </div>
       </a>
-    </div>
-  </section>
-  <section id="enigmadominators" class="section">
-    <h2 class="section-title">Enigma Dominators</h2>
-    <div class="cards-grid">
-      <a href="archive/edstore.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/ED-icon.png" alt="ED Icon">
-          </div>
-          <h3>ED Store</h3>
-          <p>Figure out what you want to buy from the ED Store</p>
+      <a href="/pets.html" class="card">
+        <img class="card-icon" src="/images/pets-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">Pets Calculator</div>
+          <div class="card-desc">Max stats for gold or purple pets. Made with Tex (s2864).</div>
         </div>
       </a>
-      <a href="archive/EnigmaDominators.html" class="card-link">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/ED-icon.png" alt="ED Icon">
-          </div>
-          <h3>ED Map</h3>
-          <p>Interactive map from ED 2025.</p>
-        </div>
-      </a>
-    </div>
-  </section>
-  <section id="feedback" class="section">
-    <h2 class="section-title">Feedback / Support</h2>
-    <div class="cards-grid">
-      <a href="#" class="card-link" onclick="openFeedbackModal(); return false;">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/feedback-icon.png" alt="Feedback Icon">
-          </div>
-          <h3>Submit Feedback</h3>
-          <p>Found a bug? Got an idea? Let us know what you'd like to see!</p>
-        </div>
-      </a>
-      <a href="#" class="card-link" onclick="openSupportModal(); return false;">
-        <div class="card">
-          <div class="card-icon">
-            <img src="/images/coffee-icon.png" alt="Coffee Icon" />
-          </div>
-          <h3>Support / Buy Me a Coffee</h3>
-          <p>If this site has helped you, consider supporting it's creators!</p>
+      <a href="/techdonations.html" class="card">
+        <img class="card-icon" src="/images/expansion-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">Tech Donation Calculator</div>
+          <div class="card-desc">How long to complete Territorial Expansion or A New Era of Glory?</div>
         </div>
       </a>
     </div>
   </section>
 
-  <button id="backToTop" onclick="scrollToTop()">↑</button>
+  <div class="section-divider"></div>
 
-  <div id="feedback-modal" class="modal hidden">
-    <div class="modal-content">
-      <h2>Send Feedback</h2>
+  <!-- Stores -->
+  <section id="events" class="section">
+    <div class="section-header">
+      <h2>Events</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="card-grid">
+      <a href="/ssc-store.html" class="card">
+        <img class="card-icon" src="/images/sscstore-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">Seal Stone Chaos Store</div>
+          <div class="card-desc">Plan your Seal Stone Chaos Store purchases.</div>
+        </div>
+      </a>
+      <a href="/mastersstore.html" class="card">
+        <img class="card-icon" src="/images/rankedmatchstore-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">Masters Store</div>
+          <div class="card-desc">Plan your Masters Store purchases.</div>
+        </div>
+      </a>
+      <a href="/rankedmatchstore.html" class="card">
+        <img class="card-icon" src="/images/rankedmatchstore-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">Ranked Match Store</div>
+          <div class="card-desc">Plan your Ranked Match Store purchases.</div>
+        </div>
+      </a>
+      <a href="/elstore.html" class="card">
+        <img class="card-icon" src="/images/powerstation-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">EL Store</div>
+          <div class="card-desc">Plan your Eternal Land Store purchases.</div>
+        </div>
+      </a>
+      <a href="/elpoints.html" class="card">
+        <img class="card-icon" src="/images/eternalcity-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">EL Rankings Simulator</div>
+          <div class="card-desc">Simulate the rankings for your EL.</div>
+        </div>
+      </a>
+      <a href="/vit.html" class="card">
+        <img class="card-icon" src="/images/vit-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">VIT Calculator</div>
+          <div class="card-desc">Use VIT to calculate EL individual points!</div>
+        </div>
+      </a>
+      <a href="archive/edstore.html" class="card">
+        <img class="card-icon" src="/images/ED-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">ED Store</div>
+          <div class="card-desc">Plan your Enigma Dominator Store purchases.</div>
+        </div>
+      </a>
+      <a href="archive/EnigmaDominators.html" class="card">
+        <img class="card-icon" src="/images/ED-icon.png" alt="">
+        <div class="card-body">
+          <div class="card-title">ED Map</div>
+          <div class="card-desc">Interactive map from Enigma Dominators 2025.</div>
+        </div>
+      </a>
+    </div>
+  </section>
 
-      <label for="feedback-type">Type of Feedback:</label>
+  <div class="section-divider"></div>
+
+  <!-- Feedback & Support -->
+  <section id="feedback" class="feedback-section">
+    <div class="feedback-form-wrap">
+      <h3>Send Feedback</h3>
+      <label for="feedback-type">Type</label>
       <select id="feedback-type">
         <option value="General">General</option>
         <option value="Guides">Guides</option>
         <option value="Bug Report">Bug Report</option>
         <option value="Feature Request">Feature Request</option>
-        <option value="Design/UI">Design/UI</option>
+        <option value="Design/UI">Design / UI</option>
       </select>
-
-      <label for="modal-feedback-input">Your Feedback:</label>
-      <textarea id="modal-feedback-input" placeholder="Let us know what you're thinking..." rows="5"
-        maxlength="500"></textarea>
-      <small><span id="char-count">0</span>/500</small>
-
-      <label for="discord-name">Discord Username (optional):</label>
-      <input type="text" id="discord-name" placeholder="e.g., .gikey" />
-
-      <div class="modal-buttons">
-        <button onclick="submitModalFeedback()">Submit</button>
-        <button onclick="closeFeedbackModal()">Cancel</button>
+      <label for="modal-feedback-input">Your Feedback</label>
+      <textarea id="modal-feedback-input" placeholder="Let us know what you're thinking…" rows="5" maxlength="500"></textarea>
+      <div class="char-count"><span id="char-count">0</span> / 500</div>
+      <label for="discord-name">Discord Username <span style="font-weight:400;text-transform:none">(optional)</span></label>
+      <input type="text" id="discord-name" placeholder="e.g. .gikey">
+      <div class="btn-row">
+        <button class="btn btn-gold" onclick="submitModalFeedback()">Submit</button>
+        <button class="btn btn-ghost" onclick="document.getElementById('modal-feedback-input').value='';document.getElementById('char-count').textContent='0'">Clear</button>
       </div>
-
-      <div id="feedback-confirmation" class="confirmation-message hidden">✅ Feedback sent! Thank you!</div>
+      <div class="success-msg" id="feedback-confirmation">✅ Feedback sent! Thank you!</div>
     </div>
-  </div>
-  <div id="modal-backdrop" class="modal-backdrop hidden" onclick="closeFeedbackModal()"></div>
 
-  <div id="modal-backdrop" class="modal-backdrop hidden" onclick="closeFeedbackModal()"></div>
-  <div id="toast" class="toast">✅ Feedback submitted!</div>
-  <div id="support-modal" class="modal hidden">
-    <div class="modal-content">
-      <h2>☕ Support This Site</h2>
-      <p>If you enjoy using these tools and wish to support its creators, please do so here via 'Buy Me a Coffee.' </p>
-      <a href="https://www.buymeacoffee.com/gikey" target="_blank" rel="noopener" class="coffee-btn">Buy Me a Coffee</a>
-      <div class="modal-buttons">
-        <button onclick="closeSupportModal()">Close</button>
-      </div>
+    <div class="support-card">
+      <h3>Support This Site</h3>
+      <p>If these tools have saved you time, consider supporting the creators via Buy Me a Coffee.</p>
+      <a href="https://www.buymeacoffee.com/gikey" target="_blank" rel="noopener" class="coffee-btn">☕ Buy Me a Coffee</a>
     </div>
+  </section>
+
+  <!-- Credits -->
+  <div class="credits">
+    Special thanks to:<br>
+    <strong>Tex (s2864)</strong> — data for the <a href="/pets.html">Pets Calculator</a> and <a href="/guides/chaoscrafting.html">Chaos Crafting Guide</a>.<br>
+    <strong>Bobgrif</strong> — data used to make various guides.<br>
+    <strong>tzup</strong> — data for the <a href="https://mathomhouse.github.io/archive/EnigmaDominators.html">Enigma Dominator 2025 Map</a>.<br>
+    <strong>Mischief</strong> — inspiration for Mathom House. Visit her site <a href="https://alexilys.github.io/index.html" target="_blank" rel="noopener">here</a>.
   </div>
-  <div id="support-backdrop" class="modal-backdrop hidden" onclick="closeSupportModal()"></div>
 
-<footer style="text-align:left; padding: 20px; font-size: 0.9em; color: #999;">
-  <p>Special thanks to:<br>
-    <strong>Tex (s2864)</strong> for data used to make the <a href="/pets.html">Pets Calculator</a> and <a href="/guides/chaoscrafting.html">Chaos Crafting Guide</a>!<br>
-    <strong>Bobgrif</strong> for the data used to make various guides<br>
-    <strong>tzup</strong> for the data used to populate the <a href="https://mathomhouse.github.io/archive/EnigmaDominators.html">Enigma Dominator 2025 Map</a>! <br>
-    <strong>Mischief</strong> for the inspiration to develop Mathom House in the first place. Please visit her site <a href="https://alexilys.github.io/index.html">here</a>!
-  </p>
-</footer>
+  <footer>
+    &copy; 2024 Mathom House · Gikey &amp; Artu · Not affiliated with Top War
+  </footer>
 
+  <a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
+
+  <div id="toast" class="toast" style="display:none">✅ Feedback submitted!</div>
 </body>
 </html>

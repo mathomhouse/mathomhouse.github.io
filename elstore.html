@@ -4,7 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eternal Land Store</title>
-  <link rel="stylesheet" href="styles/index.css">
+  <!-- Anti-flash -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/mathomhouse.css">
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/layout.css">
   <link rel="stylesheet" href="styles/store.css">
   <script src="header.js" defer></script>
 </head>
@@ -98,7 +105,6 @@
             <button onclick="changeQty(${idx}, 1)">+</button>
           </div>
           <input type="number" min="0" max="${item.maxQty}" value="0" id="qty-${idx}" onchange="syncSlider(${idx})">
-          <br><br>
           <button onclick="addToCart(${idx})">Add to Cart</button>
         `;
         storeContainer.appendChild(div);
@@ -189,5 +195,7 @@
 
     createStore();
   </script>
+<footer>&copy; 2024 Mathom House &middot; Not affiliated with TopWar</footer>
+<a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
 </body>
 </html>

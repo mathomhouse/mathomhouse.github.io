@@ -4,23 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rockfield March Tips</title>
-  <link rel="stylesheet" href="/styles/index.css" />
+  <!-- Anti-flash -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles/mathomhouse.css">
+  <link rel="stylesheet" href="/styles/header.css">
+  <link rel="stylesheet" href="/styles/layout.css">
   <script src="/header.js" defer></script>
 </head>
 <body>
 <header id="header-placeholder"></header>
-  <div class="container">
-    <h1 id="top">Rockfield &amp; You</h1>
 
-    <p>
-      This guide explains why the all-planes Rockfield march works, when to use it, and what actually affects its damage.
-      TL;DR: you <strong>MUST</strong> send a full Air Force march, and the only things that change Rockfield’s opening hit are
-      <em>unit level average</em> and <em>march size difference</em>.
-      <br><br>
-      Click <a href="/guides/rockfield-calculator.html">here</a> to visit the rockfield calculator! 
-      <br><br>
-      Credit to tzup and Bobgrif, who provided most of the text for this guide.
-    </p>
+  <section id="top" class="page-hero">
+    <p class="breadcrumb"><a href="/">Home</a> / <a href="/guides.html">Guides</a> / Rockfield</p>
+    <h1>Rockfield &amp; You</h1>
+    <p>How the all-planes Rockfield march works, when to use it, and what affects its damage. Credit to tzup and Bobgrif. <a href="/guides/rockfield-calculator.html">Calculator here.</a></p>
+  </section>
+
+  <div class="container">
 
     <h2 id="most-important">MOST IMPORTANTLY: You <strong>MUST</strong> Use All Planes</h2>
     <ul>
@@ -71,7 +74,7 @@
       <li>
         <strong>Your March Size vs Enemy March Size</strong><br/>
         Apply a percent penalty based on how much smaller your march is, calculated after the unit-level adjustment.
-        <div class="table-container">
+        <div class="table-container" style="width:100%">
           <table>
             <thead>
               <tr>

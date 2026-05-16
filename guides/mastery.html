@@ -4,18 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Component Mastery</title>
-  <link rel="stylesheet" href="/styles/index.css" />
+  <!-- Anti-flash -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles/mathomhouse.css">
+  <link rel="stylesheet" href="/styles/header.css">
+  <link rel="stylesheet" href="/styles/layout.css">
   <script src="/header.js" defer></script>
 </head>
 <body>
 <header id="header-placeholder"></header>
-  <div class="container">
+
+  <section class="page-hero">
+    <p class="breadcrumb"><a href="/">Home</a> / <a href="/guides.html">Guides</a> / Component Mastery</p>
     <h1>Component Mastery</h1>
+    <p>Charts detailing the requirements for each mastery level and the stat boosts that come from them.</p>
+  </section>
 
-    <p>
-      Below are charts detailing the requirements for each mastery level and the stat boosts you get for upgrading. There are also charts detailing which components give double XP for each level and how much XP it gives.
-    </p>
-
+  <div class="container">
     <h2>Component Mastery Table</h2>
     <div class="table-container">
     <table>
