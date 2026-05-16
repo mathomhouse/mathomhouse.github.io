@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pet Comparison Calculator</title>
 
-        <meta name="description" content="Tools and calculators for Top War players.">
+  <meta name="description" content="Tools and calculators for Top War players.">
 
-        <meta property="og:title" content="Mathom House • Pets Calculator">
-        <meta property="og:description" content="Compare the max stats of your pets!">
-        <meta property="og:url" content="https://mathomhouse.github.io/pets.html">
-        <meta property="og:type" content="website">
-        <meta property="og:site_name" content="From Artu and Gikey">
-        
-        <meta property="og:image" content="https://mathomhouse.github.io/images/pets-icon.png">
-  
+  <meta property="og:title" content="Mathom House • Pets Calculator">
+  <meta property="og:description" content="Compare the max stats of your pets!">
+  <meta property="og:url" content="https://mathomhouse.github.io/pets.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="From Artu and Gikey">
+
+  <meta property="og:image" content="https://mathomhouse.github.io/images/pets-icon.png">
+
   <!-- Anti-flash -->
-  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+  <script>(function () { var t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); })()</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="styles/mathomhouse.css">
   <link rel="stylesheet" href="styles/header.css">
   <link rel="stylesheet" href="styles/layout.css">
@@ -32,177 +35,181 @@
       gap: 10px;
       align-items: center;
     }
+
     .gear-box select {
       max-width: none;
       width: 100%;
     }
+
     .gear-box {
       font-family: 'Rajdhani', sans-serif;
       width: 350px;
     }
   </style>
 </head>
+
 <body>
-<header id="header-placeholder"></header>
-<div class="container">
-  <h1>Pet Comparison Calculator</h1>
-        <p>Find out what any pet's max stats will be depending on its potential.<br>
-            Use the dropdowns to select the species/rarity, main stat, and 3 sub stats.
-            <br>
-            Input the potential of the beasts you want to compare. 
-            <br>
-            The Reset button will clear all fields if you want to start over.
-            <br><br> Credit to Tex (s2864) for the data used to make this!
-        </p>
+  <header id="header-placeholder"></header>
+  <div class="container">
+    <h1>Pet Comparison Calculator</h1>
+    <p>Find out what any pet's max stats will be depending on its potential.<br>
+      Use the dropdowns to select the species/rarity, main stat, and 3 sub stats.
+      <br>
+      Input the potential of the beasts you want to compare.
+      <br>
+      The Reset button will clear all fields if you want to start over.
+      <br><br> Credit to Tex (s2864) for the data used to make this!
+    </p>
 
-  <div class="gear-container">
-    <!-- Pet 1 -->
-    <div class="gear-box">
-      <h2 style="text-align: center;">Pet 1</h2>
-      <form>
-        <label>Species + Rarity:</label>
-        <select id="species1">
-          <option value="" disabled selected>Select option</option>
-          <option value="gold">Gold Bear</option>
-          <option value="purple">Purple Bear</option>
-          <option value="gold">Gold Eagle</option>
-          <option value="purple">Purple Eagle</option>
-          <option value="gold">Gold Deer</option>
-          <option value="purple">Purple Deer</option>
-          <option value="gold">Gold Ray</option>
-          <option value="purple">Purple Ray</option>
-        </select>
+    <div class="gear-container">
+      <!-- Pet 1 -->
+      <div class="gear-box">
+        <h2 style="text-align: center;">Pet 1</h2>
+        <form>
+          <label>Species + Rarity:</label>
+          <select id="species1">
+            <option value="" disabled selected>Select option</option>
+            <option value="gold">Gold Bear</option>
+            <option value="purple">Purple Bear</option>
+            <option value="gold">Gold Eagle</option>
+            <option value="purple">Purple Eagle</option>
+            <option value="gold">Gold Deer</option>
+            <option value="purple">Purple Deer</option>
+            <option value="gold">Gold Ray</option>
+            <option value="purple">Purple Ray</option>
+          </select>
 
-        <label>Main Stat:</label>
-        <select id="mainStat1">
-          <option value="" disabled selected>Select option</option>
-          <option value="DMGInc">Damage Increase</option>
-          <option value="DMGDec">Damage Decrease</option>
-          <option value="DEF">Defense</option>
-          <option value="ATK">Attack</option>
-          <option value="HP">HP</option>
-        </select>
+          <label>Main Stat:</label>
+          <select id="mainStat1">
+            <option value="" disabled selected>Select option</option>
+            <option value="DMGInc">Damage Increase</option>
+            <option value="DMGDec">Damage Decrease</option>
+            <option value="DEF">Defense</option>
+            <option value="ATK">Attack</option>
+            <option value="HP">HP</option>
+          </select>
 
-        <label>Sub Stat 1:</label>
-        <select id="subStat1_1">
-          <option value="" disabled selected>Select option</option>
-          <option value="Suppression">Suppression Defense Bonus</option>
-          <option value="DMGInc">Damage Increase</option>
-          <option value="DMGDec">Damage Decrease</option>
-          <option value="ATK">Attack</option>
-          <option value="HP">HP</option>
-          <option value="Elemental">Elemental</option>
-        </select>
+          <label>Sub Stat 1:</label>
+          <select id="subStat1_1">
+            <option value="" disabled selected>Select option</option>
+            <option value="Suppression">Suppression Defense Bonus</option>
+            <option value="DMGInc">Damage Increase</option>
+            <option value="DMGDec">Damage Decrease</option>
+            <option value="ATK">Attack</option>
+            <option value="HP">HP</option>
+            <option value="Elemental">Elemental</option>
+          </select>
 
-        <label>Sub Stat 2:</label>
-        <select id="subStat1_2">
-          <option value="" disabled selected>Select option</option>
-          <option value="Suppression">Suppression Defense Bonus</option>
-          <option value="DMGInc">Damage Increase</option>
-          <option value="DMGDec">Damage Decrease</option>
-          <option value="ATK">Attack</option>
-          <option value="HP">HP</option>
-          <option value="Elemental">Elemental</option>
-        </select>
+          <label>Sub Stat 2:</label>
+          <select id="subStat1_2">
+            <option value="" disabled selected>Select option</option>
+            <option value="Suppression">Suppression Defense Bonus</option>
+            <option value="DMGInc">Damage Increase</option>
+            <option value="DMGDec">Damage Decrease</option>
+            <option value="ATK">Attack</option>
+            <option value="HP">HP</option>
+            <option value="Elemental">Elemental</option>
+          </select>
 
-        <label>Sub Stat 3:</label>
-        <select id="subStat1_3">
-          <option value="" disabled selected>Select option</option>
-          <option value="Suppression">Suppression Defense Bonus</option>
-          <option value="DMGInc">Damage Increase</option>
-          <option value="DMGDec">Damage Decrease</option>
-          <option value="ATK">Attack</option>
-          <option value="HP">HP</option>
-          <option value="Elemental">Elemental</option>
-        </select>
+          <label>Sub Stat 3:</label>
+          <select id="subStat1_3">
+            <option value="" disabled selected>Select option</option>
+            <option value="Suppression">Suppression Defense Bonus</option>
+            <option value="DMGInc">Damage Increase</option>
+            <option value="DMGDec">Damage Decrease</option>
+            <option value="ATK">Attack</option>
+            <option value="HP">HP</option>
+            <option value="Elemental">Elemental</option>
+          </select>
 
-        <label>Potential:</label>
-        <input type="number" id="potential1" placeholder="e.g. 15000">
-      </form>
+          <label>Potential:</label>
+          <input type="number" id="potential1" placeholder="e.g. 15000">
+        </form>
+      </div>
+
+      <!-- Pet 2 -->
+      <div class="gear-box">
+        <h2 style="text-align: center;">Pet 2</h2>
+        <form>
+          <label>Species + Rarity:</label>
+          <select id="species2">
+            <option value="" disabled selected>Select option</option>
+            <option value="gold">Gold Bear</option>
+            <option value="purple">Purple Bear</option>
+            <option value="gold">Gold Eagle</option>
+            <option value="purple">Purple Eagle</option>
+            <option value="gold">Gold Deer</option>
+            <option value="purple">Purple Deer</option>
+            <option value="gold">Gold Ray</option>
+            <option value="purple">Purple Ray</option>
+          </select>
+
+          <label>Main Stat:</label>
+          <select id="mainStat2">
+            <option value="" disabled selected>Select option</option>
+            <option value="DMGInc">Damage Increase</option>
+            <option value="DMGDec">Damage Decrease</option>
+            <option value="DEF">Defense</option>
+            <option value="ATK">Attack</option>
+            <option value="HP">HP</option>
+          </select>
+
+          <label>Sub Stat 1:</label>
+          <select id="subStat2_1">
+            <option value="" disabled selected>Select option</option>
+            <option value="Suppression">Suppression Defense Bonus</option>
+            <option value="DMGInc">Damage Increase</option>
+            <option value="DMGDec">Damage Decrease</option>
+            <option value="ATK">Attack</option>
+            <option value="HP">HP</option>
+            <option value="Elemental">Elemental</option>
+          </select>
+
+          <label>Sub Stat 2:</label>
+          <select id="subStat2_2">
+            <option value="" disabled selected>Select option</option>
+            <option value="Suppression">Suppression Defense Bonus</option>
+            <option value="DMGInc">Damage Increase</option>
+            <option value="DMGDec">Damage Decrease</option>
+            <option value="ATK">Attack</option>
+            <option value="HP">HP</option>
+            <option value="Elemental">Elemental</option>
+          </select>
+
+          <label>Sub Stat 3:</label>
+          <select id="subStat2_3">
+            <option value="" disabled selected>Select option</option>
+            <option value="Suppression">Suppression Defense Bonus</option>
+            <option value="DMGInc">Damage Increase</option>
+            <option value="DMGDec">Damage Decrease</option>
+            <option value="ATK">Attack</option>
+            <option value="HP">HP</option>
+            <option value="Elemental">Elemental</option>
+          </select>
+
+          <label>Potential:</label>
+          <input type="number" id="potential2" placeholder="e.g. 15000">
+        </form>
+      </div>
     </div>
 
-    <!-- Pet 2 -->
-    <div class="gear-box">
-      <h2 style="text-align: center;">Pet 2</h2>
-      <form>
-        <label>Species + Rarity:</label>
-        <select id="species2">
-          <option value="" disabled selected>Select option</option>
-          <option value="gold">Gold Bear</option>
-          <option value="purple">Purple Bear</option>
-          <option value="gold">Gold Eagle</option>
-          <option value="purple">Purple Eagle</option>
-          <option value="gold">Gold Deer</option>
-          <option value="purple">Purple Deer</option>
-          <option value="gold">Gold Ray</option>
-          <option value="purple">Purple Ray</option>
-        </select>
-
-        <label>Main Stat:</label>
-        <select id="mainStat2">
-          <option value="" disabled selected>Select option</option>
-          <option value="DMGInc">Damage Increase</option>
-          <option value="DMGDec">Damage Decrease</option>
-          <option value="DEF">Defense</option>
-          <option value="ATK">Attack</option>
-          <option value="HP">HP</option>
-        </select>
-
-        <label>Sub Stat 1:</label>
-        <select id="subStat2_1">
-          <option value="" disabled selected>Select option</option>
-          <option value="Suppression">Suppression Defense Bonus</option>
-          <option value="DMGInc">Damage Increase</option>
-          <option value="DMGDec">Damage Decrease</option>
-          <option value="ATK">Attack</option>
-          <option value="HP">HP</option>
-          <option value="Elemental">Elemental</option>
-        </select>
-
-        <label>Sub Stat 2:</label>
-        <select id="subStat2_2">
-          <option value="" disabled selected>Select option</option>
-          <option value="Suppression">Suppression Defense Bonus</option>
-          <option value="DMGInc">Damage Increase</option>
-          <option value="DMGDec">Damage Decrease</option>
-          <option value="ATK">Attack</option>
-          <option value="HP">HP</option>
-          <option value="Elemental">Elemental</option>
-        </select>
-
-        <label>Sub Stat 3:</label>
-        <select id="subStat2_3">
-          <option value="" disabled selected>Select option</option>
-          <option value="Suppression">Suppression Defense Bonus</option>
-          <option value="DMGInc">Damage Increase</option>
-          <option value="DMGDec">Damage Decrease</option>
-          <option value="ATK">Attack</option>
-          <option value="HP">HP</option>
-          <option value="Elemental">Elemental</option>
-        </select>
-
-        <label>Potential:</label>
-        <input type="number" id="potential2" placeholder="e.g. 15000">
-      </form>
+    <div class="calculate-btn">
+      <button onclick="calculate()">Compare</button>
+      <button onclick="resetForm()" style="background-color: #FF0000;">Reset</button>
     </div>
-  </div>
-
-  <div class="calculate-btn">
-    <button onclick="calculate()">Compare</button>
-    <button onclick="resetForm()" style="background-color: #FF0000;">Reset</button>
-</div>
-<br>
-  <div class="gear-container">
-    <div id="comparison-result1" class="gear-box" style="display:none">
-      <div id="result1"></div>
+    <br>
+    <div class="gear-container">
+      <div id="comparison-result1" class="gear-box" style="display:none">
+        <div id="result1"></div>
+      </div>
+      <div id="comparison-result2" class="gear-box" style="display:none">
+        <div id="result2"></div>
+      </div>
     </div>
-     <div id="comparison-result2" class="gear-box" style="display:none">
-      <div id="result2"></div>
-    </div>
-  </div>
 
-  <script src="scripts/pets.js"></script>
-<footer>&copy; 2024 Mathom House &middot; Not affiliated with TopWar</footer>
-<a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
+    <script src="scripts/pets.js"></script>
+    <footer>&copy; 2024 Mathom House &middot; Not affiliated with TopWar</footer>
+    <a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
 </body>
+
 </html>

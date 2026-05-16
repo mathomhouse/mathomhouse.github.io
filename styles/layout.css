@@ -504,6 +504,13 @@ tr:hover td { background: var(--surface2); }
 }
 
 /* ─── TAB BUTTONS ─────────────────────────────────────────────── */
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+
 .tab-button {
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.85rem;

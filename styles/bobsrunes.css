@@ -1,0 +1,124 @@
+#results .gear-box {
+  width: 300px;
+}
+
+.gear-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.gear-slot {
+  display: grid;
+  grid-template-rows: auto 48px auto;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  height: 160px;
+}
+
+.gear-slot p {
+  margin: 4px 0;
+  line-height: 1.2;
+  max-width: 120px;
+  word-wrap: break-word;
+}
+
+.gear-slot p:nth-child(1),
+.gear-slot p:nth-child(3) {
+  min-height: 2.2em;
+}
+
+.gear-slot img {
+  height: 64px;
+  margin: 4px 0;
+}
+
+#comboResults {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+#comboResults .gear-box {
+  flex: 1 1 300px;
+  max-width: 300px;
+}
+
+#comboResults .gear-box:last-child {
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#comboResults .gear-box:last-child .gear-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.ht-slot {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.ht-icon-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.ht-icon-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ht-icon-column img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.chip-name,
+.ht-name {
+  font-size: 0.9em;
+  margin-top: 4px;
+  text-align: center;
+}
+
+.skeleton-box {
+  background: linear-gradient(90deg, #eee 25%, #ddd 50%, #eee 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite linear;
+  border-radius: 12px;
+  width: 300px;
+  height: 200px;
+  margin: 10px;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (max-width: 768px) {
+  #comboResults {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #comboResults .gear-box {
+    max-width: 100%;
+  }
+}
