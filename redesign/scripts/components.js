@@ -27,7 +27,7 @@ function generateTable() {
     // Add the Calculate button below the table
     table += `<button id="calculateButton" onclick="calculateTotal()">Calculate</button>`;
     //add reset button
-    table += `<button id="resetButton" onclick="resetPage()">Reset</button>`;
+    table += `<button id="resetButton" onclick="resetPage()" style="margin-left: 3px">Reset</button>`;
     document.getElementById('tableContainer').innerHTML = table;
 }
 
