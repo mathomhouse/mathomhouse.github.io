@@ -304,3 +304,20 @@
   .hamburger    { display: flex; }
   .theme-toggle-btn:not(.mobile-theme-btn) { display: none; }
 }
+
+/* ─── TABLET OPTIMIZATION (Fixes minor horizontal scroll) ─── */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .main-site-nav {
+    padding: 0 16px; /* Reduced from 24px (Saves 16px total) */
+    gap: 12px;       /* Reduced from 16px */
+  }
+
+  .nav-links a,
+  .nav-group-btn {
+    padding: 6px 8px; /* Reduced from 10px horizontal padding */
+  }
+
+  .theme-toggle-btn {
+    padding: 6px 8px; /* Slightly tighter theme button */
+  }
+}
