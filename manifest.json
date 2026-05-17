@@ -1,0 +1,21 @@
+{
+  "name": "Mathom House",
+  "short_name": "Mathom House",
+  "description": "Tools and calculators for Top War players.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#1a1a2e",
+  "theme_color": "#1a1a2e",
+  "icons": [
+    {
+      "src": "/mathomhouselogo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/mathomhouselogo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
