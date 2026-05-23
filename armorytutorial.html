@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Armory Tutorial | Mathom House</title>
+
+  <meta name="description" content="Learn how to upload battle reports, review account snapshots, and use the inventory scanner." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+
+  <!-- Your Existing CSS -->
+    <link rel="stylesheet" href="styles/mathomhouse.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/calculators.css">
+
+  <style>
+    /* ─────────────────────────────────────
+       TUTORIAL PAGE STYLES
+    ───────────────────────────────────── */
+
+    .tutorial-tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 24px 0 36px;
+    }
+
+    .tutorial-content {
+      display: none;
+      animation: fadeUp 0.3s ease;
+    }
+
+    .tutorial-content.active {
+      display: block;
+    }
+
+    .tutorial-step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid var(--gold-dim);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-content h3 {
+      font-size: 1.1rem;
+      color: var(--gold);
+      margin-bottom: 10px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .step-content p {
+      color: var(--text-dim);
+      margin-bottom: 18px;
+    }
+
+    .tutorial-media {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--surface2);
+    }
+
+    .tutorial-media img,
+    .tutorial-media video {
+      width: 100%;
+      display: block;
+    }
+
+    .tutorial-tip {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--text);
+      font-size: 0.92rem;
+    }
+
+    .tutorial-warning {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      background: rgba(248,113,113,0.08);
+      border: 1px solid rgba(248,113,113,0.2);
+      color: #ffb4b4;
+      font-size: 0.92rem;
+    }
+
+    .coming-soon {
+      margin-top: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    @media (max-width: 768px) {
+      .tutorial-step {
+        flex-direction: column;
+      }
+
+      .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+
+      .tutorial-tabs {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 6px;
+      }
+
+      .tutorial-tabs::-webkit-scrollbar {
+        height: 6px;
+      }
+    }
+  </style>
+  <script src="header.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Header Placeholder -->
+  <div id="header-placeholder"></div>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a> / Tutorial
+    </div>
+
+    <h1>Battle Report Tutorial</h1>
+
+    <p>
+      Learn how to upload battle reports, analyze account snapshots,
+      and use advanced inventory scanning tools.
+    </p>
+  </section>
+
+  <!-- CONTENT -->
+  <main class="container">
+
+    <!-- TABS -->
+    <div class="tutorial-tabs">
+      <button class="tab-button active" data-tab="overview">Overview</button>
+      <button class="tab-button" data-tab="upload">Upload Reports</button>
+      <button class="tab-button" data-tab="snapshot">Account Snapshot</button>
+      <button class="tab-button" data-tab="inventory">Inventory Scan</button>
+      <button class="tab-button" data-tab="faq">FAQ</button>
+    </div>
+
+    <!-- OVERVIEW -->
+    <section class="tutorial-content active" id="overview">
+
+      <div class="tutorial-step">
+        <div class="step-number">1</div>
+
+        <div class="step-content">
+          <h3>What This Tool Does</h3>
+
+          <p>
+            This feature allows players to upload battle reports and
+            automatically generate a detailed snapshot of an account's
+            stats, equipment, and progression.
+          </p>
+
+          <div class="tutorial-media">
+            <img src="images/tutorials/overview-placeholder.jpg" alt="Overview Screenshot">
+          </div>
+
+          <div class="tutorial-tip">
+            Some advanced features may require multiple battle reports
+            for more accurate analysis.
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- UPLOAD -->
+    <section class="tutorial-content" id="upload">
+
+      <div class="tutorial-step">
+        <div class="step-number">1</div>
+
+        <div class="step-content">
+          <h3>Locate Your Battle Report</h3>
+
+          <p>
+            Open the battle report inside the game and prepare the report
+            you would like to upload.
+          </p>
+
+          <div class="tutorial-media">
+            <img src="images/tutorials/upload-step1.jpg" alt="Upload Step 1">
+          </div>
+        </div>
+      </div>
+
+      <div class="tutorial-step">
+        <div class="step-number">2</div>
+
+        <div class="step-content">
+          <h3>Upload the Report</h3>
+
+          <p>
+            Drag and drop the report file into the uploader or select it
+            manually using the upload button.
+          </p>
+
+          <div class="tutorial-media">
+            <video controls>
+              <source src="images/tutorials/upload-demo.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="tutorial-warning">
+            Invalid or cropped screenshots may prevent proper parsing.
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SNAPSHOT -->
+    <section class="tutorial-content" id="snapshot">
+
+      <div class="tutorial-step">
+        <div class="step-number">1</div>
+
+        <div class="step-content">
+          <h3>Review Account Stats</h3>
+
+          <p>
+            Once processed, the system will generate a complete overview
+            of the account including stats, equipped gear, and other
+            important information.
+          </p>
+
+          <div class="tutorial-media">
+            <img src="images/tutorials/snapshot.jpg" alt="Account Snapshot">
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- INVENTORY -->
+    <section class="tutorial-content" id="inventory">
+
+      <div class="tutorial-step">
+        <div class="step-number">1</div>
+
+        <div class="step-content">
+          <h3>Advanced Inventory Collection</h3>
+
+          <p>
+            The inventory scanner can collect detailed information about
+            stored items, equipment, and materials.
+          </p>
+
+          <div class="coming-soon">
+            Coming Soon
+          </div>
+
+          <div class="tutorial-tip">
+            This feature is more advanced and may require multiple uploads
+            depending on inventory size.
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- FAQ -->
+    <section class="tutorial-content" id="faq">
+
+      <div class="tutorial-step">
+        <div class="step-number">?</div>
+
+        <div class="step-content">
+          <h3>Frequently Asked Questions</h3>
+
+          <p>
+            <strong>Q:</strong> Are uploads stored permanently?<br>
+            <strong>A:</strong> TBD
+          </p>
+
+          <p>
+            <strong>Q:</strong> Can reports be shared?<br>
+            <strong>A:</strong> TBD
+          </p>
+
+          <p>
+            <strong>Q:</strong> Why is some equipment missing?<br>
+            <strong>A:</strong> Incomplete or cropped reports may not parse correctly.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    © Mathom House
+  </footer>
+
+  <!-- TAB SCRIPT -->
+  <script>
+    const buttons = document.querySelectorAll('.tab-button');
+    const tabs = document.querySelectorAll('.tutorial-content');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+
+        buttons.forEach(btn => btn.classList.remove('active'));
+        tabs.forEach(tab => tab.classList.remove('active'));
+
+        button.classList.add('active');
+
+        const target = button.dataset.tab;
+        document.getElementById(target).classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
