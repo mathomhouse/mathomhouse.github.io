@@ -1,0 +1,1670 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://translate.googleapis.com https://www.gstatic.com; font-src https://fonts.gstatic.com; img-src https://raw.githubusercontent.com https://knight-cdn.akamaized.net https://h5.topwargame.com data: https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://fight-report-va.oss-accelerate.aliyuncs.com https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://*.clarity.ms https://c.bing.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'self'; frame-src https://translate.google.com;">
+<title>Enigma Beast Viewer | Mathom House</title>
+<style>
+  :root {
+    --card: #1c2128;
+    --muted: #8b949e;
+    --yellow: #d29922;
+    --navy: #388bfd;
+    --fire: #f97583; --wind: #56d364; --water: #6cb6ff; --ground: #e3b341;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+  div, span, button { font-family: 'Rajdhani', sans-serif; }
+
+  /* Header */
+  .header { background: var(--surface); border-bottom: 1px solid var(--border); padding: .75rem 1rem; display: flex; align-items: center; gap: .75rem; }
+  .header h1 { font-size: 1rem; font-weight: 600; flex: 1; }
+  .home-btn { display: flex; align-items: center; justify-content: center; background: var(--card); border: 1px solid var(--border); color: var(--muted); border-radius: 8px; padding: .4rem .6rem; text-decoration: none; transition: all .15s; }
+  .home-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Search */
+  .search-bar { max-width: 700px; margin: 1.5rem auto .75rem; padding: 0 1rem; width: 100%; }
+  .search-row { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .search-row input { flex: 1; min-width: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: .6rem .75rem; color: var(--text); font-size: .95rem; outline: none; }
+  .search-row input:focus { border-color: var(--accent); }
+  .search-row input::placeholder { color: var(--muted); }
+  .search-row button { background: var(--accent); color: var(--bg); border: none; border-radius: 6px; padding: .6rem 1.2rem; font-weight: 600; cursor: pointer; font-size: .9rem; white-space: nowrap; flex-shrink: 0; }
+  .search-row button:hover { opacity: .9; }
+  .search-row button:disabled { opacity: .5; cursor: not-allowed; }
+  .search-hint { font-size: .75rem; color: var(--muted); margin-top: .4rem; }
+
+  /* Status */
+  .status { text-align: center; padding: .5rem 1rem; color: var(--muted); font-size: .9rem; }
+  .status.error { color: var(--red); }
+  .status.success { color: var(--green); }
+
+  /* Player selection modal */
+  .select-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,.7); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+  .select-modal { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; max-width: 500px; width: 100%; padding: 1.25rem; }
+  .select-title { text-align: center; font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+  .select-cards { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+  .select-card { background: var(--card); border: 2px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center; cursor: pointer; transition: all .15s; }
+  .select-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.3); }
+  .select-card img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; background: var(--surface); margin: 0 auto .5rem; display: block; }
+  .select-card-name { font-weight: 600; font-size: .9rem; word-break: break-all; }
+  .select-card-role { font-size: .7rem; color: var(--muted); text-transform: uppercase; margin-top: .3rem; }
+
+  /* Player banner */
+  .player-banner { max-width: 900px; margin: 0 auto .75rem; padding: 0 1rem; width: 100%; }
+  .player-banner-inner { background: var(--surface); border: 1px solid var(--green); border-radius: 8px; padding: .6rem 1rem; display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+  .player-banner-info { flex: 1; }
+  .player-banner-name { font-weight: 600; font-size: .9rem; }
+  .player-banner-detail { font-size: .75rem; color: var(--muted); }
+  .player-banner-clear { background: none; border: 1px solid var(--border); border-radius: 6px; padding: .3rem .7rem; color: var(--muted); font-size: .75rem; cursor: pointer; }
+  .player-banner-clear:hover { border-color: var(--red); color: var(--red); }
+
+  /* Summary stats */
+  .summary-bar { max-width: 900px; margin: 0 auto .75rem; padding: 0 1rem; width: 100%; }
+  .summary-inner { display: flex; gap: .75rem; flex-wrap: wrap; }
+  .summary-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: .5rem .75rem; flex: 1; min-width: 100px; text-align: center; }
+  .summary-stat .label { font-size: .65rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .summary-stat .value { font-size: 1.1rem; font-weight: 700; margin-top: .15rem; }
+
+  /* Filter bar */
+  .filter-bar { max-width: 900px; margin: 0 auto .75rem; padding: 0 1rem; width: 100%; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .filter-pills { display: flex; gap: .3rem; flex-wrap: wrap; }
+  .fpill { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: .25rem .65rem; font-size: .75rem; color: var(--muted); cursor: pointer; white-space: nowrap; transition: all .15s; user-select: none; }
+  .fpill:hover { border-color: var(--accent); color: var(--accent); }
+  .fpill.active { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 600; }
+  .fpill.fire.active { background: var(--fire); border-color: var(--fire); }
+  .fpill.wind.active { background: var(--wind); border-color: var(--wind); }
+  .fpill.water.active { background: var(--water); border-color: var(--water); }
+  .fpill.ground.active { background: var(--ground); border-color: var(--ground); }
+  .filter-sep { width: 1px; height: 20px; background: var(--border); margin: 0 .15rem; }
+  .filter-count { font-size: .75rem; color: var(--muted); margin-left: auto; white-space: nowrap; }
+
+  /* Tab bar */
+  .tab-bar { max-width: 900px; margin: 0 auto .75rem; padding: 0 1rem; width: 100%; display: flex; gap: .4rem; flex-wrap: wrap; }
+  .tab-btn { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: .4rem .8rem; font-size: .8rem; color: var(--muted); cursor: pointer; transition: all .15s; font-family: inherit; }
+  .tab-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .tab-btn.active { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 600; }
+
+  /* Content */
+  #content { max-width: 900px; margin: 0 auto 2rem; padding: 0 1rem; width: 100%; }
+
+  /* Beast cards grid */
+  .beast-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: .6rem; }
+  .beast-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: .65rem; cursor: pointer; transition: all .15s; position: relative; }
+  .beast-card:hover { border-color: var(--accent); transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,.3); }
+  .beast-card.gold { border-color: var(--yellow); }
+  .beast-card.gold:hover { border-color: #e8c547; }
+  .beast-card.purple { border-color: #a371f7; }
+  .beast-card.purple:hover { border-color: #c69bf7; }
+  .beast-head { display: flex; align-items: center; gap: .5rem; margin-bottom: .4rem; }
+  .beast-icon-wrap { position: relative; flex-shrink: 0; width: 44px; height: 44px; }
+  .beast-icon { width: 44px; height: 44px; border-radius: 6px; object-fit: cover; background: var(--surface); }
+  .beast-icon.q5 { border: 2px solid var(--yellow); }
+  .beast-icon.q4 { border: 2px solid #a371f7; }
+  .beast-elem-overlay { position: absolute; bottom: -2px; right: -2px; width: 18px; height: 18px; border-radius: 3px; background: var(--card); pointer-events: none; }
+  .beast-info { flex: 1; min-width: 0; }
+  .beast-name { font-weight: 700; font-size: .85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .beast-meta { font-size: .7rem; color: var(--muted); display: flex; gap: .5rem; flex-wrap: wrap; }
+  .beast-stars { color: var(--yellow); letter-spacing: -1px; }
+  .beast-field-badge { font-size: .6rem; background: rgba(121,192,255,.1); border: 1px solid rgba(121,192,255,.2); color: var(--accent); padding: .1rem .4rem; border-radius: 4px; }
+  .beast-slot-badge { font-size: .6rem; background: rgba(63,185,80,.1); border: 1px solid rgba(63,185,80,.2); color: var(--green); padding: .1rem .35rem; border-radius: 4px; font-weight: 700; }
+  .beast-slotlv-badge { font-size: .6rem; background: rgba(210,153,34,.1); border: 1px solid rgba(210,153,34,.2); color: var(--yellow); padding: .1rem .4rem; border-radius: 4px; font-weight: 600; }
+
+  /* Buff rows */
+  .buff-section { margin-top: .35rem; }
+  .buff-row { display: flex; justify-content: space-between; align-items: center; padding: .15rem 0; font-size: .75rem; }
+  .buff-row + .buff-row { border-top: 1px solid rgba(48,54,61,.5); }
+  .buff-label { font-size: .6rem; color: var(--accent); text-transform: uppercase; font-weight: 700; margin-bottom: .1rem; }
+  .buff-name { color: var(--text); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .buff-val { font-weight: 600; color: var(--green); margin-left: .5rem; flex-shrink: 0; }
+
+  /* Potential bar */
+  .potential-row { margin-top: .35rem; }
+  .potential-meta { display: flex; justify-content: space-between; font-size: .65rem; margin-bottom: .15rem; }
+  .potential-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .potential-fill { height: 100%; border-radius: 2px; transition: width .3s; }
+
+  /* Platform / Field view */
+  .field-section { margin-bottom: 1.25rem; }
+  .field-header { display: flex; align-items: center; gap: .5rem; padding-bottom: .5rem; border-bottom: 1px solid var(--border); margin-bottom: .6rem; cursor: pointer; user-select: none; }
+  .field-header h2 { font-size: .85rem; font-weight: 700; flex: 1; }
+  .field-status { font-size: .7rem; padding: .15rem .5rem; border-radius: 4px; font-weight: 600; }
+  .field-status.active { background: rgba(63,185,80,.1); color: var(--green); border: 1px solid rgba(63,185,80,.25); }
+  .field-status.inactive { background: rgba(248,81,73,.1); color: var(--red); border: 1px solid rgba(248,81,73,.25); }
+  .field-toggle { font-size: .65rem; color: var(--muted); transition: transform .15s; }
+  .field-header.collapsed .field-toggle { transform: rotate(-90deg); }
+  .field-body { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .5rem; }
+  .field-body.collapsed { display: none; }
+  .slot-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: .5rem; position: relative; cursor: pointer; }
+  .slot-card.empty { opacity: .55; border-style: dashed; }
+  .slot-card.has-buffs { border-color: var(--green); }
+  .slot-num { position: absolute; top: .3rem; right: .3rem; font-size: .55rem; color: var(--muted); font-weight: 700; }
+  .slot-beast-name { font-weight: 600; font-size: .78rem; margin-bottom: .2rem; }
+  .slot-beast-meta { font-size: .65rem; color: var(--muted); margin-bottom: .2rem; }
+  .slot-level { font-size: .6rem; color: var(--accent); margin-bottom: .15rem; }
+  .slot-buff { display: flex; justify-content: space-between; font-size: .7rem; padding: .1rem 0; }
+  .slot-buff + .slot-buff { border-top: 1px solid rgba(48,54,61,.4); }
+  .slot-buff-name { color: var(--muted); }
+  .slot-buff-val { color: var(--green); font-weight: 600; }
+
+  /* Conditions */
+  .field-conditions { margin-top: .5rem; padding: .4rem .6rem; background: var(--surface); border-radius: 6px; font-size: .7rem; }
+  .field-conditions .cond-label { color: var(--accent); font-weight: 700; font-size: .6rem; text-transform: uppercase; margin-bottom: .2rem; }
+  .field-conditions .cond-list { color: var(--muted); }
+  .slot-cond-badge { font-size: .55rem; background: rgba(56,139,253,.1); color: var(--navy); padding: .15rem .4rem; border-radius: 3px; border: 1px solid rgba(56,139,253,.2); display: inline-block; margin-top: .2rem; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .fpill-icon { display: flex; align-items: center; justify-content: center; padding: .2rem .4rem; }
+  .fpill-icon img { width: 20px; height: 20px; object-fit: contain; }
+
+  /* Stat filter selects */
+  .fselect-wrap { display: inline-flex; align-items: center; gap: .25rem; flex-wrap: wrap; }
+  .fselect-label { font-size: .65rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .fselect { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: .2rem .4rem; color: var(--text); font-size: .72rem; font-family: inherit; cursor: pointer; max-width: 160px; }
+  .fselect:hover, .fselect:focus { border-color: var(--accent); outline: none; }
+  .fselect.active { border-color: var(--accent); color: var(--accent); }
+  .freset { font-size: .7rem; color: var(--muted); cursor: pointer; padding: .25rem .5rem; border-radius: 4px; }
+  .freset:hover { color: var(--accent); background: var(--surface); }
+
+  /* Detail modal */
+  .detail-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,.7); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+  .detail-modal { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; max-width: 420px; width: 100%; max-height: 85vh; overflow-y: auto; }
+  .detail-modal-header { display: flex; align-items: center; gap: .75rem; padding: 1rem 1rem .5rem; }
+  .detail-modal-icon { width: 64px; height: 64px; border-radius: 8px; object-fit: cover; background: var(--card); }
+  .detail-modal-icon.q5 { border: 2px solid var(--yellow); }
+  .detail-modal-icon.q4 { border: 2px solid #a371f7; }
+  .detail-modal-info { flex: 1; min-width: 0; }
+  .detail-modal-name { font-weight: 700; font-size: 1rem; }
+  .detail-modal-meta { font-size: .78rem; color: var(--muted); margin-top: .15rem; }
+  .detail-modal-section { padding: .5rem 1rem; }
+  .detail-modal-section + .detail-modal-section { border-top: 1px solid var(--border); }
+  .detail-modal-section .buff-label { margin-bottom: .2rem; }
+  .detail-modal-close { position: absolute; top: .75rem; right: .75rem; background: none; border: 1px solid var(--border); border-radius: 6px; color: var(--muted); cursor: pointer; padding: .2rem .5rem; font-size: .85rem; }
+  .detail-modal-close:hover { border-color: var(--accent); color: var(--accent); }
+  .detail-deploy-info { font-size: .78rem; color: var(--muted); }
+  .detail-deploy-info .badge { display: inline-block; padding: .1rem .4rem; border-radius: 4px; font-size: .65rem; font-weight: 600; margin-right: .3rem; }
+  .detail-deploy-info .badge-field { background: rgba(121,192,255,.1); border: 1px solid rgba(121,192,255,.2); color: var(--accent); }
+  .detail-deploy-info .badge-slot { background: rgba(63,185,80,.1); border: 1px solid rgba(63,185,80,.2); color: var(--green); }
+  .detail-deploy-info .badge-lv { background: rgba(210,153,34,.1); border: 1px solid rgba(210,153,34,.2); color: var(--yellow); }
+
+  /* No data */
+  .no-data { text-align: center; padding: 3rem 1rem; color: var(--muted); }
+  .no-data h2 { font-size: 1.1rem; margin-bottom: .5rem; color: var(--text); }
+
+  /* Footer */
+  .footer { text-align: center; padding: 2rem 1rem; font-size: .7rem; color: var(--muted); margin-top: auto; }
+  .footer a { color: var(--accent); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    .beast-grid { grid-template-columns: 1fr; }
+    .field-body { grid-template-columns: 1fr; }
+    .summary-inner { gap: .4rem; }
+    .summary-stat { min-width: 70px; padding: .35rem .5rem; }
+    .summary-stat .value { font-size: .9rem; }
+    .select-cards { grid-template-columns: 1fr; }
+  }
+
+  /* Beta nav popover */
+  .bnp-wrap { position:relative; display:inline-flex; }
+  #bnpBtn { background:none; border:1px solid var(--border,#30363d); border-radius:8px; padding:.3rem .45rem; color:var(--muted,#8b949e); cursor:pointer; display:flex; align-items:center; }
+  #bnpBtn:hover { border-color:var(--accent,#79c0ff); color:var(--accent,#79c0ff); }
+  #bnpPop { display:none; position:absolute; top:calc(100% + 6px); left:0; background:var(--surface,#161b22); border:1px solid var(--border,#30363d); border-radius:10px; padding:.4rem; z-index:500; min-width:168px; box-shadow:0 8px 24px rgba(0,0,0,.5); }
+  #bnpPop.open { display:block; }
+  .bnp-link { display:block; padding:.35rem .6rem; font-size:.78rem; color:var(--muted,#8b949e); text-decoration:none; border-radius:6px; white-space:nowrap; }
+  .bnp-link:hover { background:rgba(121,192,255,.08); color:var(--text,#e6edf3); }
+  .bnp-link.bnp-cur { color:var(--accent,#79c0ff); font-weight:600; pointer-events:none; }
+
+  /* Light theme */
+  :root[data-theme="light"] {
+    --bg: #f6f8fa; --surface: #ffffff; --card: #ffffff;
+    --border: #d0d7de; --text: #1f2328; --muted: #656d76;
+    --accent: #1f75d4; --green: #1a7f37; --yellow: #9a6700;
+    --red: #cf222e; --fire: #cf222e; --wind: #1a7f37; --water: #1f75d4; --ground: #9a6700;
+  }
+  body { transition: background .2s, color .2s; }
+  .theme-btn { background: none; border: 1px solid var(--border); border-radius: 8px; padding: .3rem .45rem; color: var(--muted); cursor: pointer; display: flex; align-items: center; font-size: .95rem; transition: border-color .15s, color .15s; }
+  .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .icon-light { display: none; }
+  body { top: 0 !important; }
+  body > .skiptranslate { display: none !important; }
+  #google_translate_element { position: absolute; left: -9999px; opacity: 0; pointer-events: none; }
+  .lang-btn { background: none; border: 1px solid var(--border); border-radius: 8px; padding: .3rem .6rem; cursor: pointer; font-size: .82rem; display: flex; align-items: center; gap: .3rem; font-family: inherit; font-weight: 600; color: var(--muted); white-space: nowrap; transition: border-color .15s, color .15s; }
+  .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .lang-modal-overlay { display: none; position: fixed; inset: 0; z-index: 400; background: rgba(0,0,0,0.6); align-items: center; justify-content: center; padding: 1rem; }
+  .lang-modal-overlay.active { display: flex; }
+  .lang-modal { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; max-width: 400px; width: 100%; max-height: 80vh; overflow-y: auto; }
+  .lang-modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .lang-modal-title { font-size: 15px; font-weight: 700; color: var(--text); }
+  .lang-modal-close { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.2rem; padding: .2rem; }
+  .lang-modal-close:hover { color: var(--text); }
+  .lang-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .lang-option { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px; border: 1px solid transparent; background: var(--surface); cursor: pointer; font-size: 13px; color: var(--text); font-family: inherit; transition: border-color .15s; }
+  .lang-option:hover { border-color: var(--accent); }
+  .lang-option.active { border-color: var(--accent); background: rgba(121,192,255,.08); }
+  .lang-option .lang-flag { font-size: 1.1rem; }
+  @media (max-width: 480px) { .lang-grid { grid-template-columns: 1fr; } }
+</style>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "won9zormpi");
+</script>
+
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/mathomhouse.css">
+<link rel="stylesheet" href="styles/header.css">
+<link rel="stylesheet" href="styles/layout.css">
+<script src="header.js" defer></script>
+</head>
+<body>
+<header id="header-placeholder"></header>
+
+<div class="search-bar">
+  <div class="search-row">
+    <input type="text" id="report-id" placeholder="Battle Report ID..." autocomplete="off">
+    <button id="load-btn">Load Report</button>
+  </div>
+  <div class="search-hint">Paste a PvP battle report ID to view Enigma Beast data for attacker &amp; defender</div>
+</div>
+
+<div id="status" class="status"></div>
+<div id="player-banner" class="player-banner" style="display:none"></div>
+<div id="summary-bar" class="summary-bar" style="display:none"></div>
+
+<div id="view-tabs" class="tab-bar" style="display:none">
+  <button class="tab-btn active" data-view="fields">Platforms / Fields</button>
+  <button class="tab-btn" data-view="beasts">Beast Collection</button>
+</div>
+
+<div id="filters" class="filter-bar" style="display:none"></div>
+<div id="content"></div>
+
+<div class="footer">
+  <a href="https://github.com/texnottexas/landing-page">Brought to you by supporters of the fk boats movement</a>
+</div>
+
+<div class="lang-modal-overlay" id="langModal">
+  <div class="lang-modal">
+    <div class="lang-modal-header">
+      <span class="lang-modal-title">Select Language</span>
+      <button class="lang-modal-close" id="langModalClose" aria-label="Close">&#10005;</button>
+    </div>
+    <div class="lang-grid" id="langGrid"></div>
+  </div>
+</div>
+
+<script>
+/* ── Constants & Mappings ── */
+var CDN_BASE = 'https://fight-report-va.oss-accelerate.aliyuncs.com/prod/';
+
+var BEAST_TYPES = {
+  1: 'Gleamdeer', 2: 'Dreadray', 3: 'Tornadeagle', 4: 'Grizzroar',
+  5: 'Fluffynx', 6: 'Bounceroo', 7: 'Swiftsteed', 8: 'Dusklion', 9: 'Crestegret'
+};
+
+var BEAST_TYPES_5STAR = {
+  1: 'Lumideer', 2: 'Doomray', 3: 'Stormpeagle', 4: 'Ironclaw',
+  5: 'Shadowlynx', 6: 'Thunderoo', 7: 'Blazesteed', 8: 'Dawnlion', 9: 'Royalegret'
+};
+
+var ELEMENTS = { 1: 'Fire', 2: 'Water', 3: 'Wind', 4: 'Ground' };
+var ICON_BASE = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/beast-icons/';
+function beastIconUrl(type, faction, star) {
+  var name = BEAST_TYPES[type] || 'Unknown';
+  var elem = ELEMENTS[faction] || 'Unknown';
+  var tier = star >= 5 ? 'evolved' : 'base';
+  return ICON_BASE + name + '_' + elem + '_' + tier + '.png';
+}
+var ELEMENT_COLORS = { Fire: 'var(--fire)', Wind: 'var(--wind)', Water: 'var(--water)', Ground: 'var(--ground)' };
+var ELEMENT_SVG = {
+  Fire: '<svg width="16" height="16" viewBox="0 0 24 24" fill="var(--fire)"><path d="M12 23c-4.97 0-9-3.58-9-8 0-3.19 2.13-6.12 4-8l1 5 3-3c0 3 2 5 2 5s3-2.5 3-6c2.5 3 3 5 3 6 0 4.42-4.03 9-7 9z"/></svg>',
+  Wind: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--wind)" stroke-width="2"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>',
+  Water: '<svg width="16" height="16" viewBox="0 0 24 24" fill="var(--water)"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>',
+  Ground: '<svg width="16" height="16" viewBox="0 0 24 24" fill="var(--ground)"><path d="M12 2L2 19h20L12 2zm0 4l6.9 11H5.1L12 6z"/></svg>'
+};
+
+var FIELD_NAMES = { 1: 'CPNT Mastery', 2: 'Formation', 3: 'Equip', 4: 'Defense', 5: 'Offense' };
+var FIELD_SLOT_COUNTS = { 1: 5, 2: 7, 3: 6, 4: 9, 5: 9 };
+
+// Buff names verified against in-game effect_buff TABLE + LocalManager.getText() (2026-05-04).
+// 520050-073 = main-buff variants (conditional on offensive/defensive). 520110-143 = base-buff stats:
+// 520110-113 = ATK, 520120-123 = HP Boost, 520130-133 = Elemental Enhance (type 601),
+// 520140-143 = Elemental RES (type 602).
+var BUFF_NAMES = {
+  520000: 'March Size',
+  520010: 'All DMG Increase', 520011: 'Army DMG Increase', 520012: 'Navy DMG Increase', 520013: 'Air DMG Increase',
+  520020: 'All Decreased DMG Taken', 520021: 'Army Decreased DMG Taken', 520022: 'Navy Decreased DMG Taken', 520023: 'Air Decreased DMG Taken',
+  520030: 'All DEF Increase', 520031: 'Army DEF Increase', 520032: 'Navy DEF Increase', 520033: 'Air DEF Increase',
+  520040: 'All ATK (offensive)', 520041: 'Army ATK (offensive)', 520042: 'Navy ATK (offensive)', 520043: 'Air ATK (offensive)',
+  520050: 'All HP Boost (offensive)', 520051: 'Army HP Boost (offensive)', 520052: 'Navy HP Boost (offensive)', 520053: 'Air HP Boost (offensive)',
+  520060: 'All ATK (defensive)', 520061: 'Army ATK (defensive)', 520062: 'Navy ATK (defensive)', 520063: 'Air ATK (defensive)',
+  520070: 'All HP Boost (defensive)', 520071: 'Army HP Boost (defensive)', 520072: 'Navy HP Boost (defensive)', 520073: 'Air HP Boost (defensive)',
+  520100: 'All Forces Suppression DEF Bonus', 520101: 'Navy DEF vs Army', 520102: 'Air DEF vs Navy', 520103: 'Army DEF vs Air',
+  520110: 'All ATK', 520111: 'Army ATK', 520112: 'Navy ATK', 520113: 'Air ATK',
+  520120: 'All HP Boost', 520121: 'Army HP Boost', 520122: 'Navy HP Boost', 520123: 'Air HP Boost',
+  520130: 'All Elemental Enhance', 520131: 'Army Elemental Enhance', 520132: 'Navy Elemental Enhance', 520133: 'Air Elemental Enhance',
+  520140: 'All Elemental RES', 520141: 'Army Elemental RES', 520142: 'Navy Elemental RES', 520143: 'Air Elemental RES'
+};
+
+var FIELD_BUFF_NAMES = {
+  9301160: 'All ATK (field)', 9301161: 'Army ATK (field)', 9301162: 'Navy ATK (field)', 9301163: 'Air ATK (field)',
+  9301170: 'All HP (field)', 9301171: 'Army HP (field)', 9301172: 'Navy HP (field)', 9301173: 'Air HP (field)',
+  1131001: 'All Units DMG Increase', 1131002: 'All Units Decreased DMG Taken',
+  980101: 'Army DMG Increase', 980102: 'Navy DMG Increase', 980103: 'Air Force DMG Increase',
+  990203: 'Army DEF Increase', 990204: 'Navy DEF Increase', 990205: 'Air Force DEF Increase',
+  1101015: 'Army Decreased DMG Taken', 1101016: 'Navy Decreased DMG Taken', 1101017: 'Air Force Decreased DMG Taken',
+  1000021: 'Formation Bonus', 1000022: 'Formation Bonus',
+  990202: 'Combat Bonus'
+};
+
+var FIELD_CONDITIONS = {
+  1: ['Fill All Slots', 'Deploy 1 Legendary', 'Deploy 2 Legendary', 'Deploy 3 Legendary', 'Deploy 4 Legendary'],
+  2: ['Fill All Slots', 'Deploy 2 Legendary', 'Deploy 3 Legendary', 'Deploy 4 Legendary', 'Deploy 5 at 2+ stars', 'Deploy 6 at 2+ stars', 'Deploy 7 at 2+ stars'],
+  3: ['Fill All Slots', 'Deploy 1 Legendary', 'Deploy 2 Legendary', 'Deploy 5 at 2+ stars', 'Deploy 5 at 2+ stars', 'Deploy 5 at 2+ stars', 'Deploy 7 at 3+ stars', 'Deploy 8 at 3+ stars', 'Deploy 9 at 3+ stars'],
+  4: ['Fill All Slots', 'Deploy 1 Legendary', 'Deploy 2 Legendary', 'Deploy 4 at 2+ stars', 'Deploy 5 at 2+ stars', 'Deploy 6 at 2+ stars', 'Deploy 7 at 3+ stars', 'Deploy 8 at 3+ stars', 'Deploy 9 at 3+ stars'],
+  5: ['Fill All Slots', 'Deploy 1 Legendary', 'Deploy 2 Legendary', 'Deploy 4 at 2+ stars', 'Deploy 5 at 2+ stars', 'Deploy 6 at 2+ stars', 'Deploy 7 at 3+ stars', 'Deploy 8 at 3+ stars', 'Deploy 9 at 3+ stars']
+};
+
+/* ── Buff value computation ── */
+function computeBuffValue(buffId, star, level, potential, isMain) {
+  var cat = getBuffCategory(buffId);
+  if (!cat) return null;
+  if (isMain) {
+    var smv = cat.mainStarMax[star - 1] || 0;
+    if (cat.key === 'march') return smv; // additive integer
+    return (smv / 100) * (potential / 16000);
+  } else {
+    var lmv = cat.baseLvMax || 0;
+    var bsmv = cat.baseStarMax[star - 1] || 0;
+    return ((level * lmv / 100) + (bsmv / 100)) * (potential / 16000);
+  }
+}
+
+function getBuffCategory(buffId) {
+  var id = Number(buffId);
+  // Main buff categories
+  if (id >= 520040 && id <= 520073) return { key: 'atkhp', mainStarMax: [600,1200,1800,2400,3000], baseLvMax: 0, baseStarMax: [0,0,0,0,0] };
+  if (id >= 520010 && id <= 520013) return { key: 'dmg', mainStarMax: [200,400,600,800,1000], baseLvMax: 2, baseStarMax: [0,75,150,225,300] };
+  if (id >= 520020 && id <= 520023) return { key: 'decdmg', mainStarMax: [200,400,600,800,1000], baseLvMax: 2, baseStarMax: [0,75,150,225,300] };
+  if (id >= 520030 && id <= 520033) return { key: 'def', mainStarMax: [80,160,240,320,400], baseLvMax: 0, baseStarMax: [0,0,0,0,0] };
+  if (id === 520000) return { key: 'march', mainStarMax: [1,1,2,2,3], baseLvMax: 0, baseStarMax: [0,0,0,0,0] };
+  // Base buff categories (not used as main)
+  if (id >= 520110 && id <= 520123) return { key: 'atkoff', mainStarMax: [600,1200,1800,2400,3000], baseLvMax: 6, baseStarMax: [0,225,450,675,900] };
+  if (id >= 520130 && id <= 520143) return { key: 'atkdef', mainStarMax: [600,1200,1800,2400,3000], baseLvMax: 12, baseStarMax: [0,450,900,1350,1800] };
+  // 520100 base-buff coefficients are HALF the standard suppress/dmg curve (verified vs game UI 2026-05-04).
+  if (id >= 520100 && id <= 520103) return { key: 'suppdef', mainStarMax: [200,400,600,800,1000], baseLvMax: 1, baseStarMax: [0,30,60,90,120] };
+  return null;
+}
+
+function formatBuffValue(val, buffId) {
+  if (Number(buffId) === 520000) return '+' + Math.round(val);
+  return '+' + val.toFixed(3) + '%';
+}
+
+/* ── State ── */
+var reportData = null;
+var currentSide = null;
+var currentView = 'fields';
+var activeElements = new Set(['all']);
+var activeField = 'all';
+var activePrimary = 'all';
+var activeSecondary = 'all';
+
+/* ── Decode cfg → type/element/quality ── */
+function decodeCfg(cfg) {
+  for (var t = 1; t <= 9; t++) {
+    for (var f = 1; f <= 4; f++) {
+      var q5 = (t - 1) * 20 + f * 5;
+      if (q5 === cfg) return { type: t, faction: f, quality: 5 };
+      if (q5 - 1 === cfg) return { type: t, faction: f, quality: 4 };
+    }
+  }
+  return { type: 0, faction: 0, quality: 5 };
+}
+
+function beastName(type, star) {
+  if (star >= 5 && BEAST_TYPES_5STAR[type]) return BEAST_TYPES_5STAR[type];
+  return BEAST_TYPES[type] || ('Beast #' + type);
+}
+
+function elementName(faction) { return ELEMENTS[faction] || 'Unknown'; }
+function buffName(id) { return BUFF_NAMES[id] || FIELD_BUFF_NAMES[id] || ('Buff #' + id); }
+function fieldNameFn(cfg) { return FIELD_NAMES[cfg] || ('Field ' + cfg); }
+
+function starStr(n) {
+  var s = '';
+  for (var i = 0; i < n; i++) s += '\u2605';
+  for (var j = n; j < 5; j++) s += '\u2606';
+  return s;
+}
+
+function esc(str) {
+  if (!str) return '';
+  var d = document.createElement('div');
+  d.textContent = String(str);
+  return d.innerHTML;
+}
+
+function potColor(pct) {
+  if (pct >= 85) return 'var(--green)';
+  if (pct >= 65) return 'var(--yellow)';
+  return 'var(--red)';
+}
+
+/* ── Resolve beasts from battle report enigma data ── */
+function resolveBeasts(enigmas) {
+  if (!enigmas || !enigmas.beastDatas) return { beasts: [], fields: [] };
+
+  var beastMap = {};
+  var beasts = enigmas.beastDatas.map(function(b) {
+    var info = decodeCfg(b.cfg);
+    var resolved = {
+      id: b.id, cfg: b.cfg, type: info.type, faction: info.faction,
+      quality: info.quality, element: elementName(info.faction),
+      name: beastName(info.type, b.star), star: b.star, level: b.level,
+      potential: b.potential, maxPotential: info.quality === 4 ? 8000 : 16000,
+      power: b.power, mainBuff: b.mainBuff, mainBuffName: buffName(b.mainBuff),
+      baseBuff: (b.baseBuff || []).map(function(id) { return { id: id, name: buffName(id) }; }),
+      fieldCfg: null, fieldName: null, slotId: null, fieldSlotNum: null, slotLevel: null, slotBuffs: []
+    };
+    beastMap[b.id] = resolved;
+    return resolved;
+  });
+
+  var fields = (enigmas.fields || []).map(function(f) {
+    var slots = (f.slots || []).map(function(s, idx) {
+      var fieldSlotNum = idx + 1;
+      var beast = beastMap[s.beastId];
+      if (beast && s.beastId !== '0') {
+        beast.fieldCfg = f.cfg;
+        beast.fieldName = fieldNameFn(f.cfg);
+        beast.slotId = s.id;
+        beast.fieldSlotNum = fieldSlotNum;
+        beast.slotLevel = s.level;
+        beast.slotBuffs = (s.buffs || []).map(function(sb) {
+          return { id: sb.id, name: buffName(sb.id), val: sb.val };
+        });
+      }
+      return {
+        id: s.id, fieldSlotNum: fieldSlotNum, beastId: s.beastId, level: s.level, potential: s.potential,
+        buffs: (s.buffs || []).map(function(sb) { return { id: sb.id, name: buffName(sb.id), val: sb.val }; }),
+        beast: (s.beastId !== '0' && beast) ? beast : null
+      };
+    });
+    return {
+      cfg: f.cfg, name: fieldNameFn(f.cfg), active: f.active,
+      conditions: f.conditions || [], expectedSlots: FIELD_SLOT_COUNTS[f.cfg] || slots.length,
+      slots: slots, deployedCount: slots.filter(function(s) { return s.beast; }).length
+    };
+  });
+
+  return { beasts: beasts, fields: fields };
+}
+
+/* ── CDN fetch ── */
+function loadReport(id) {
+  var statusEl = document.getElementById('status');
+  var btn = document.getElementById('load-btn');
+  btn.disabled = true;
+  statusEl.className = 'status';
+  statusEl.textContent = 'Loading report\u2026';
+  hideAll();
+
+  var prefix = id.substring(0, 4);
+  var url = CDN_BASE + prefix + '/' + id + '.json';
+
+  fetch(url).then(function(r) {
+    if (!r.ok) throw new Error('Report not found (HTTP ' + r.status + ')');
+    return r.json();
+  }).then(function(data) {
+    if (!data.battle) throw new Error('Invalid report format');
+    reportData = data;
+    statusEl.textContent = '';
+    showPlayerSelect(data);
+  }).catch(function(e) {
+    statusEl.className = 'status error';
+    statusEl.textContent = e.message;
+  }).finally(function() { btn.disabled = false; });
+}
+
+/* ── Player selection ── */
+function makeAvatarFallback(size) {
+  return 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '"><rect fill="#161b22" width="' + size + '" height="' + size + '" rx="' + (size / 2) + '"/></svg>');
+}
+
+function parsePlayerInfo(player) {
+  try { var pi = JSON.parse(player.playerInfo || '{}'); } catch(e) { pi = {}; }
+  var avatarUrl = null;
+  var raw = pi.headimgurl_custom || pi.avatarurl || '';
+  if (raw) {
+    avatarUrl = raw.indexOf('http') === 0 ? raw : 'https://h5.topwargame.com/DynRes/images/headpic/' + raw + '.png?t=21.jpg';
+  }
+  return { name: pi.username || 'Unknown', avatar: avatarUrl, flag: pi.nationalflag || 0 };
+}
+
+function showPlayerSelect(data) {
+  var att = data.battle.attacker.players[0];
+  var def = data.battle.defender.players[0];
+  var attCount = att.enigmas && att.enigmas.beastDatas ? att.enigmas.beastDatas.length : 0;
+  var defCount = def.enigmas && def.enigmas.beastDatas ? def.enigmas.beastDatas.length : 0;
+  var attInfo = parsePlayerInfo(att);
+  var defInfo = parsePlayerInfo(def);
+
+  var overlay = document.createElement('div');
+  overlay.className = 'select-overlay';
+
+  var modal = document.createElement('div');
+  modal.className = 'select-modal';
+
+  var title = document.createElement('div');
+  title.className = 'select-title';
+  title.textContent = 'Select Player';
+  modal.appendChild(title);
+
+  var cards = document.createElement('div');
+  cards.className = 'select-cards';
+
+  [{ info: attInfo, side: 'attacker', count: attCount, role: 'Attacker' },
+   { info: defInfo, side: 'defender', count: defCount, role: 'Defender' }].forEach(function(p) {
+    var card = document.createElement('div');
+    card.className = 'select-card';
+    card.dataset.side = p.side;
+
+    var img = document.createElement('img');
+    img.src = p.info.avatar || makeAvatarFallback(48);
+    img.onerror = function() { this.src = makeAvatarFallback(48); };
+    card.appendChild(img);
+
+    var nameEl = document.createElement('div');
+    nameEl.className = 'select-card-name';
+    nameEl.textContent = p.info.name;
+    card.appendChild(nameEl);
+
+    var roleEl = document.createElement('div');
+    roleEl.className = 'select-card-role';
+    roleEl.textContent = p.role;
+    card.appendChild(roleEl);
+
+    var countEl = document.createElement('div');
+    countEl.style.cssText = 'font-size:.7rem;color:var(--muted);margin-top:.3rem';
+    countEl.textContent = p.count + ' beasts';
+    card.appendChild(countEl);
+
+    card.onclick = function() {
+      currentSide = p.side;
+      overlay.remove();
+      renderSide();
+    };
+    cards.appendChild(card);
+  });
+
+  modal.appendChild(cards);
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+}
+
+/* ── Render selected side ── */
+function renderSide() {
+  var player = reportData.battle[currentSide].players[0];
+  var pInfo = parsePlayerInfo(player);
+  var resolved = resolveBeasts(player.enigmas);
+  window._beasts = resolved.beasts;
+  window._fields = resolved.fields;
+
+  // Banner
+  var bannerEl = document.getElementById('player-banner');
+  bannerEl.style.display = '';
+  bannerEl.textContent = '';
+
+  var inner = document.createElement('div');
+  inner.className = 'player-banner-inner';
+
+  var img = document.createElement('img');
+  img.src = pInfo.avatar || makeAvatarFallback(36);
+  img.onerror = function() { this.src = makeAvatarFallback(36); };
+  img.style.cssText = 'width:36px;height:36px;border-radius:50%;object-fit:cover;background:var(--card)';
+  inner.appendChild(img);
+
+  var info = document.createElement('div');
+  info.className = 'player-banner-info';
+  var nameDiv = document.createElement('div');
+  nameDiv.className = 'player-banner-name';
+  nameDiv.textContent = pInfo.name;
+  info.appendChild(nameDiv);
+  var detailDiv = document.createElement('div');
+  detailDiv.className = 'player-banner-detail';
+  detailDiv.textContent = (currentSide.charAt(0).toUpperCase() + currentSide.slice(1)) + ' \u00B7 ' + resolved.beasts.length + ' beasts \u00B7 ' + resolved.fields.length + ' fields';
+  info.appendChild(detailDiv);
+  inner.appendChild(info);
+
+  var switchBtn = document.createElement('button');
+  switchBtn.className = 'player-banner-clear';
+  switchBtn.textContent = 'Switch Player';
+  switchBtn.onclick = switchPlayer;
+  inner.appendChild(switchBtn);
+
+  bannerEl.appendChild(inner);
+
+  renderSummary(resolved);
+  document.getElementById('view-tabs').style.display = '';
+  activeElements = new Set(['all']);
+  activeField = 'all';
+  currentView = 'fields';
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.toggle('active', b.dataset.view === 'fields'); });
+  renderFilters();
+  renderContent();
+}
+
+function renderSummary(resolved) {
+  var bar = document.getElementById('summary-bar');
+  bar.style.display = '';
+  bar.textContent = '';
+
+  var totalPower = 0, totalPotential = 0, starCounts = {}, activeFields = 0;
+  resolved.beasts.forEach(function(b) {
+    totalPower += b.power;
+    totalPotential += b.potential;
+    starCounts[b.star] = (starCounts[b.star] || 0) + 1;
+  });
+  resolved.fields.forEach(function(f) { if (f.active) activeFields++; });
+
+  var inner = document.createElement('div');
+  inner.className = 'summary-inner';
+
+  var stats = [
+    { label: 'Total Power', value: totalPower.toLocaleString() },
+    { label: '5-Star', value: String(starCounts[5] || 0), color: 'var(--yellow)' },
+    { label: 'Active Fields', value: activeFields + '/' + resolved.fields.length },
+    { label: 'Avg Potential', value: resolved.beasts.length ? Math.round(totalPotential / resolved.beasts.length).toLocaleString() : '0' }
+  ];
+
+  stats.forEach(function(s) {
+    var stat = document.createElement('div');
+    stat.className = 'summary-stat';
+    var lbl = document.createElement('div');
+    lbl.className = 'label';
+    lbl.textContent = s.label;
+    stat.appendChild(lbl);
+    var val = document.createElement('div');
+    val.className = 'value';
+    val.textContent = s.value;
+    if (s.color) val.style.color = s.color;
+    stat.appendChild(val);
+    inner.appendChild(stat);
+  });
+
+  bar.appendChild(inner);
+}
+
+function renderFilters() {
+  var el = document.getElementById('filters');
+  el.style.display = '';
+  el.textContent = '';
+
+  // If on fields view and activeField is 'bench', reset to 'all'
+  if (currentView === 'fields' && activeField === 'bench') {
+    activeField = 'all';
+  }
+
+  // Element pills — only show in beasts view
+  if (currentView === 'beasts') {
+    var elemDiv = document.createElement('div');
+    elemDiv.className = 'filter-pills';
+    elemDiv.id = 'elem-pills';
+
+    // "All" pill stays as text
+    var allPill = document.createElement('span');
+    allPill.className = 'fpill' + (activeElements.has('all') ? ' active' : '');
+    allPill.textContent = 'All';
+    allPill.dataset.elem = 'all';
+    elemDiv.appendChild(allPill);
+
+    // Element pills with icons
+    ['Fire', 'Wind', 'Water', 'Ground'].forEach(function(e) {
+      var p = document.createElement('span');
+      p.className = 'fpill fpill-icon ' + e.toLowerCase() + (activeElements.has(e) ? ' active' : '');
+      p.dataset.elem = e;
+      p.title = e;
+      var img = document.createElement('img');
+      img.src = ICON_BASE + 'element_' + e + '.png';
+      img.alt = e;
+      img.width = 20;
+      img.height = 20;
+      p.appendChild(img);
+      elemDiv.appendChild(p);
+    });
+    el.appendChild(elemDiv);
+
+    var sep = document.createElement('div');
+    sep.className = 'filter-sep';
+    el.appendChild(sep);
+  }
+
+  // Field pills
+  var fieldDiv = document.createElement('div');
+  fieldDiv.className = 'filter-pills';
+  fieldDiv.id = 'field-pills';
+
+  function makeFieldPill(label, key) {
+    var p = document.createElement('span');
+    p.className = 'fpill' + (activeField === key ? ' active' : '');
+    p.textContent = label;
+    p.dataset.field = key;
+    return p;
+  }
+
+  fieldDiv.appendChild(makeFieldPill('All Fields', 'all'));
+  (window._fields || []).forEach(function(f) {
+    fieldDiv.appendChild(makeFieldPill(f.name, String(f.cfg)));
+  });
+  // Bench pill only in beasts view
+  if (currentView === 'beasts') {
+    fieldDiv.appendChild(makeFieldPill('Bench', 'bench'));
+  }
+  el.appendChild(fieldDiv);
+
+  // Stat filters — only in beasts view
+  if (currentView === 'beasts') {
+    var sep2 = document.createElement('div');
+    sep2.className = 'filter-sep';
+    el.appendChild(sep2);
+
+    var beastsSrc = window._beasts || [];
+
+    function buildStatSelect(label, id, value, options) {
+      var wrap = document.createElement('div');
+      wrap.className = 'fselect-wrap';
+      var lab = document.createElement('span');
+      lab.className = 'fselect-label';
+      lab.textContent = label;
+      wrap.appendChild(lab);
+      var sel = document.createElement('select');
+      sel.className = 'fselect' + (value !== 'all' ? ' active' : '');
+      sel.id = id;
+      var allOpt = document.createElement('option');
+      allOpt.value = 'all';
+      allOpt.textContent = 'All';
+      sel.appendChild(allOpt);
+      options.forEach(function(o) {
+        var opt = document.createElement('option');
+        opt.value = String(o.id);
+        opt.textContent = o.name;
+        sel.appendChild(opt);
+      });
+      sel.value = value;
+      wrap.appendChild(sel);
+      return wrap;
+    }
+
+    // Distinct primary stat IDs from beasts present
+    var primaryMap = {};
+    var secondaryMap = {};
+    beastsSrc.forEach(function(b) {
+      if (b.mainBuff != null && BUFF_NAMES[b.mainBuff]) primaryMap[b.mainBuff] = BUFF_NAMES[b.mainBuff];
+      (b.baseBuff || []).forEach(function(bb) {
+        if (BUFF_NAMES[bb.id]) secondaryMap[bb.id] = BUFF_NAMES[bb.id];
+      });
+    });
+    function sortBuffs(map) {
+      return Object.keys(map).map(function(k) { return { id: +k, name: map[k] }; })
+        .sort(function(a, b) { return a.id - b.id; });
+    }
+
+    el.appendChild(buildStatSelect('Primary', 'primary-select', activePrimary, sortBuffs(primaryMap)));
+    el.appendChild(buildStatSelect('Secondary', 'secondary-select', activeSecondary, sortBuffs(secondaryMap)));
+
+    // Reset
+    if (!activeElements.has('all') || activeField !== 'all' || activePrimary !== 'all' || activeSecondary !== 'all') {
+      var reset = document.createElement('span');
+      reset.className = 'freset';
+      reset.textContent = '✕ Reset';
+      reset.onclick = function() {
+        activeElements = new Set(['all']);
+        activeField = 'all';
+        activePrimary = 'all';
+        activeSecondary = 'all';
+        renderFilters();
+        renderContent();
+      };
+      el.appendChild(reset);
+    }
+  }
+
+  // Count
+  var countEl = document.createElement('div');
+  countEl.className = 'filter-count';
+  countEl.id = 'filter-count';
+  el.appendChild(countEl);
+
+  // Bind clicks
+  el.querySelectorAll('.fpill').forEach(function(p) {
+    p.onclick = function() {
+      if (p.dataset.elem !== undefined) {
+        if (p.dataset.elem === 'all') {
+          activeElements = new Set(['all']);
+        } else {
+          activeElements.delete('all');
+          if (activeElements.has(p.dataset.elem)) {
+            activeElements.delete(p.dataset.elem);
+            if (activeElements.size === 0) activeElements.add('all');
+          } else {
+            activeElements.add(p.dataset.elem);
+          }
+        }
+        el.querySelectorAll('#elem-pills .fpill').forEach(function(pp) {
+          pp.classList.toggle('active', activeElements.has(pp.dataset.elem));
+        });
+        renderFilters();
+      } else if (p.dataset.field !== undefined) {
+        activeField = p.dataset.field;
+        el.querySelectorAll('.fpill[data-field]').forEach(function(pp) {
+          pp.classList.toggle('active', activeField === pp.dataset.field);
+        });
+        renderFilters();
+      }
+      renderContent();
+    };
+  });
+
+  var primarySel = el.querySelector('#primary-select');
+  if (primarySel) {
+    primarySel.onchange = function() {
+      activePrimary = primarySel.value;
+      renderFilters();
+      renderContent();
+    };
+  }
+  var secondarySel = el.querySelector('#secondary-select');
+  if (secondarySel) {
+    secondarySel.onchange = function() {
+      activeSecondary = secondarySel.value;
+      renderFilters();
+      renderContent();
+    };
+  }
+}
+
+/* ── Render content ── */
+function renderContent() {
+  var el = document.getElementById('content');
+  if (currentView === 'beasts') {
+    renderBeastGrid(el);
+  } else {
+    renderFieldView(el);
+  }
+}
+
+function filterBeasts() {
+  return (window._beasts || []).filter(function(b) {
+    if (!activeElements.has('all') && !activeElements.has(b.element)) return false;
+    if (activeField === 'bench' && b.fieldCfg) return false;
+    if (activeField !== 'all' && activeField !== 'bench' && b.fieldCfg !== +activeField) return false;
+    if (activePrimary !== 'all' && Number(b.mainBuff) !== Number(activePrimary)) return false;
+    if (activeSecondary !== 'all') {
+      var hasSec = (b.baseBuff || []).some(function(bb) { return Number(bb.id) === Number(activeSecondary); });
+      if (!hasSec) return false;
+    }
+    return true;
+  });
+}
+
+function buildBeastIconWrap(b, size) {
+  var wrap = document.createElement('div');
+  wrap.className = 'beast-icon-wrap';
+  if (size) { wrap.style.width = size + 'px'; wrap.style.height = size + 'px'; }
+  var iconImg = document.createElement('img');
+  iconImg.className = 'beast-icon' + (b.quality === 5 ? ' q5' : ' q4');
+  iconImg.src = beastIconUrl(b.type, b.faction, b.star);
+  iconImg.alt = b.name;
+  if (size) { iconImg.style.width = size + 'px'; iconImg.style.height = size + 'px'; }
+  iconImg.onerror = function() { this.style.display = 'none'; };
+  wrap.appendChild(iconImg);
+  var elemIcon = document.createElement('img');
+  elemIcon.className = 'beast-elem-overlay';
+  elemIcon.src = ICON_BASE + 'element_' + b.element + '.png';
+  elemIcon.alt = b.element;
+  wrap.appendChild(elemIcon);
+  return wrap;
+}
+
+function buildBeastCard(b) {
+  var card = document.createElement('div');
+  card.className = 'beast-card' + (b.quality === 4 ? ' purple' : ' gold');
+
+  // Head
+  var head = document.createElement('div');
+  head.className = 'beast-head';
+  head.appendChild(buildBeastIconWrap(b));
+
+  var info = document.createElement('div');
+  info.className = 'beast-info';
+  var nameEl = document.createElement('div');
+  nameEl.className = 'beast-name notranslate';
+  nameEl.setAttribute('translate', 'no');
+  nameEl.textContent = b.name;
+  info.appendChild(nameEl);
+
+  var meta = document.createElement('div');
+  meta.className = 'beast-meta';
+  var starsSpan = document.createElement('span');
+  starsSpan.className = 'beast-stars';
+  starsSpan.textContent = starStr(b.star);
+  meta.appendChild(starsSpan);
+  var lvSpan = document.createElement('span');
+  lvSpan.textContent = 'Lv.' + b.level;
+  meta.appendChild(lvSpan);
+  var elemSpan = document.createElement('span');
+  elemSpan.textContent = b.element;
+  elemSpan.style.color = ELEMENT_COLORS[b.element] || 'var(--muted)';
+  meta.appendChild(elemSpan);
+
+  if (b.fieldName) {
+    var fb = document.createElement('span');
+    fb.className = 'beast-field-badge';
+    fb.textContent = b.fieldName;
+    meta.appendChild(fb);
+  }
+  if (b.fieldSlotNum) {
+    var sb = document.createElement('span');
+    sb.className = 'beast-slot-badge';
+    sb.textContent = '#' + b.fieldSlotNum;
+    meta.appendChild(sb);
+  }
+  if (b.slotLevel) {
+    var slvBadge = document.createElement('span');
+    slvBadge.className = 'beast-slotlv-badge';
+    slvBadge.textContent = 'Level ' + b.slotLevel;
+    meta.appendChild(slvBadge);
+  }
+  info.appendChild(meta);
+  head.appendChild(info);
+  card.appendChild(head);
+
+  // Main buff with value
+  var mainSec = document.createElement('div');
+  mainSec.className = 'buff-section';
+  var mainLabel = document.createElement('div');
+  mainLabel.className = 'buff-label';
+  mainLabel.textContent = 'Main Buff';
+  mainSec.appendChild(mainLabel);
+  var mainRow = document.createElement('div');
+  mainRow.className = 'buff-row';
+  var mainName = document.createElement('span');
+  mainName.className = 'buff-name';
+  mainName.textContent = b.mainBuffName;
+  mainRow.appendChild(mainName);
+  var mainVal = computeBuffValue(b.mainBuff, b.star, b.level, b.potential, true);
+  if (mainVal !== null) {
+    var mvSpan = document.createElement('span');
+    mvSpan.className = 'buff-val';
+    mvSpan.textContent = formatBuffValue(mainVal, b.mainBuff);
+    mainRow.appendChild(mvSpan);
+  }
+  mainSec.appendChild(mainRow);
+  card.appendChild(mainSec);
+
+  // Base buffs with values
+  if (b.baseBuff.length) {
+    var baseSec = document.createElement('div');
+    baseSec.className = 'buff-section';
+    var baseLabel = document.createElement('div');
+    baseLabel.className = 'buff-label';
+    baseLabel.textContent = 'Base Buffs';
+    baseSec.appendChild(baseLabel);
+    b.baseBuff.forEach(function(bb) {
+      var row = document.createElement('div');
+      row.className = 'buff-row';
+      var nm = document.createElement('span');
+      nm.className = 'buff-name';
+      nm.textContent = bb.name;
+      row.appendChild(nm);
+      var bv = computeBuffValue(bb.id, b.star, b.level, b.potential, false);
+      if (bv !== null) {
+        var bvSpan = document.createElement('span');
+        bvSpan.className = 'buff-val';
+        bvSpan.textContent = formatBuffValue(bv, bb.id);
+        row.appendChild(bvSpan);
+      }
+      baseSec.appendChild(row);
+    });
+    card.appendChild(baseSec);
+  }
+
+  // Potential
+  var potPct = Math.round(b.potential / b.maxPotential * 100);
+  var pc = potColor(potPct);
+  var potRow = document.createElement('div');
+  potRow.className = 'potential-row';
+  var potMeta = document.createElement('div');
+  potMeta.className = 'potential-meta';
+  var potLabel = document.createElement('span');
+  potLabel.textContent = 'Potential';
+  potMeta.appendChild(potLabel);
+  var potVal = document.createElement('span');
+  potVal.textContent = b.potential.toLocaleString() + ' / ' + b.maxPotential.toLocaleString();
+  potVal.style.color = pc;
+  potMeta.appendChild(potVal);
+  potRow.appendChild(potMeta);
+  var potBar = document.createElement('div');
+  potBar.className = 'potential-bar';
+  var potFill = document.createElement('div');
+  potFill.className = 'potential-fill';
+  potFill.style.width = potPct + '%';
+  potFill.style.background = pc;
+  potBar.appendChild(potFill);
+  potRow.appendChild(potBar);
+  card.appendChild(potRow);
+
+  // Power
+  var powerDiv = document.createElement('div');
+  powerDiv.style.cssText = 'font-size:.65rem;color:var(--muted);margin-top:.2rem;text-align:right';
+  powerDiv.textContent = 'Power: ' + b.power.toLocaleString();
+  card.appendChild(powerDiv);
+
+  card.onclick = function() { showBeastDetailModal(b, 'collection'); };
+
+  return card;
+}
+
+/* ── Detail Modal ── */
+function showBeastDetailModal(b, context) {
+  var overlay = document.createElement('div');
+  overlay.className = 'detail-overlay';
+  overlay.onclick = function(e) { if (e.target === overlay) overlay.remove(); };
+
+  var modal = document.createElement('div');
+  modal.className = 'detail-modal';
+  modal.style.position = 'relative';
+
+  var closeBtn = document.createElement('button');
+  closeBtn.className = 'detail-modal-close';
+  closeBtn.textContent = '\u2715';
+  closeBtn.onclick = function() { overlay.remove(); };
+  modal.appendChild(closeBtn);
+
+  // Header with icon + name
+  var header = document.createElement('div');
+  header.className = 'detail-modal-header';
+  var iconWrap = buildBeastIconWrap(b, 64);
+  header.appendChild(iconWrap);
+  var info = document.createElement('div');
+  info.className = 'detail-modal-info';
+  var nameEl = document.createElement('div');
+  nameEl.className = 'detail-modal-name notranslate';
+  nameEl.setAttribute('translate', 'no');
+  nameEl.textContent = b.name;
+  info.appendChild(nameEl);
+  var metaEl = document.createElement('div');
+  metaEl.className = 'detail-modal-meta';
+  var starsSpan = document.createElement('span');
+  starsSpan.style.color = 'var(--yellow)';
+  starsSpan.textContent = starStr(b.star);
+  metaEl.appendChild(starsSpan);
+  metaEl.appendChild(document.createTextNode(' \u00B7 Lv.' + b.level + ' \u00B7 '));
+  var elemSpan = document.createElement('span');
+  elemSpan.textContent = b.element;
+  elemSpan.style.color = ELEMENT_COLORS[b.element] || 'var(--muted)';
+  metaEl.appendChild(elemSpan);
+  if (b.quality === 4) {
+    metaEl.appendChild(document.createTextNode(' \u00B7 '));
+    var qSpan = document.createElement('span');
+    qSpan.textContent = 'Epic';
+    qSpan.style.color = '#a371f7';
+    metaEl.appendChild(qSpan);
+  }
+  info.appendChild(metaEl);
+  header.appendChild(info);
+  modal.appendChild(header);
+
+  // Main buff section
+  var mainSec = document.createElement('div');
+  mainSec.className = 'detail-modal-section';
+  var mainLabel = document.createElement('div');
+  mainLabel.className = 'buff-label';
+  mainLabel.textContent = 'Main Buff';
+  mainSec.appendChild(mainLabel);
+  var mainRow = document.createElement('div');
+  mainRow.className = 'buff-row';
+  var mainName = document.createElement('span');
+  mainName.className = 'buff-name';
+  mainName.textContent = b.mainBuffName;
+  mainRow.appendChild(mainName);
+  var mainVal = computeBuffValue(b.mainBuff, b.star, b.level, b.potential, true);
+  if (mainVal !== null) {
+    var mvSpan = document.createElement('span');
+    mvSpan.className = 'buff-val';
+    mvSpan.textContent = formatBuffValue(mainVal, b.mainBuff);
+    mainRow.appendChild(mvSpan);
+  }
+  mainSec.appendChild(mainRow);
+  modal.appendChild(mainSec);
+
+  // Base buffs section
+  if (b.baseBuff.length) {
+    var baseSec = document.createElement('div');
+    baseSec.className = 'detail-modal-section';
+    var baseLabel = document.createElement('div');
+    baseLabel.className = 'buff-label';
+    baseLabel.textContent = 'Base Buffs';
+    baseSec.appendChild(baseLabel);
+    b.baseBuff.forEach(function(bb) {
+      var row = document.createElement('div');
+      row.className = 'buff-row';
+      var nm = document.createElement('span');
+      nm.className = 'buff-name';
+      nm.textContent = bb.name;
+      row.appendChild(nm);
+      var bv = computeBuffValue(bb.id, b.star, b.level, b.potential, false);
+      if (bv !== null) {
+        var bvSpan = document.createElement('span');
+        bvSpan.className = 'buff-val';
+        bvSpan.textContent = formatBuffValue(bv, bb.id);
+        row.appendChild(bvSpan);
+      }
+      baseSec.appendChild(row);
+    });
+    modal.appendChild(baseSec);
+  }
+
+  // Context-specific section
+  if (context === 'collection' && b.fieldCfg) {
+    // Show deployment info + field slot buffs
+    var deploySec = document.createElement('div');
+    deploySec.className = 'detail-modal-section';
+    var deployLabel = document.createElement('div');
+    deployLabel.className = 'buff-label';
+    deployLabel.textContent = 'Deployment';
+    deploySec.appendChild(deployLabel);
+    var deployInfo = document.createElement('div');
+    deployInfo.className = 'detail-deploy-info';
+    var fieldBadge = document.createElement('span');
+    fieldBadge.className = 'badge badge-field';
+    fieldBadge.textContent = b.fieldName;
+    deployInfo.appendChild(fieldBadge);
+    var slotBadge = document.createElement('span');
+    slotBadge.className = 'badge badge-slot';
+    slotBadge.textContent = 'Slot #' + b.fieldSlotNum;
+    deployInfo.appendChild(slotBadge);
+    var lvBadge = document.createElement('span');
+    lvBadge.className = 'badge badge-lv';
+    lvBadge.textContent = 'Level ' + b.slotLevel;
+    deployInfo.appendChild(lvBadge);
+    deploySec.appendChild(deployInfo);
+
+    if (b.slotBuffs.length) {
+      var slotBuffLabel = document.createElement('div');
+      slotBuffLabel.className = 'buff-label';
+      slotBuffLabel.style.marginTop = '.5rem';
+      slotBuffLabel.textContent = 'Field Slot Buffs';
+      deploySec.appendChild(slotBuffLabel);
+      b.slotBuffs.forEach(function(sb) {
+        var row = document.createElement('div');
+        row.className = 'buff-row';
+        var nm = document.createElement('span');
+        nm.className = 'buff-name';
+        nm.textContent = sb.name;
+        row.appendChild(nm);
+        if (sb.val) {
+          var vl = document.createElement('span');
+          vl.className = 'buff-val';
+          vl.textContent = '+' + (sb.val / 100).toFixed(2) + '%';
+          row.appendChild(vl);
+        }
+        deploySec.appendChild(row);
+      });
+    }
+    modal.appendChild(deploySec);
+  } else if (context === 'collection' && !b.fieldCfg) {
+    var benchSec = document.createElement('div');
+    benchSec.className = 'detail-modal-section';
+    var benchLabel = document.createElement('div');
+    benchLabel.className = 'buff-label';
+    benchLabel.textContent = 'Deployment';
+    benchSec.appendChild(benchLabel);
+    var benchText = document.createElement('div');
+    benchText.style.cssText = 'font-size:.78rem;color:var(--muted)';
+    benchText.textContent = 'Not deployed (bench)';
+    benchSec.appendChild(benchText);
+    modal.appendChild(benchSec);
+  }
+
+  // Potential in modal
+  var potSec = document.createElement('div');
+  potSec.className = 'detail-modal-section';
+  var potPct = Math.round(b.potential / b.maxPotential * 100);
+  var pc = potColor(potPct);
+  var potMeta = document.createElement('div');
+  potMeta.className = 'potential-meta';
+  var potLbl = document.createElement('span');
+  potLbl.textContent = 'Potential';
+  potMeta.appendChild(potLbl);
+  var potValEl = document.createElement('span');
+  potValEl.textContent = b.potential.toLocaleString() + ' / ' + b.maxPotential.toLocaleString() + ' (' + potPct + '%)';
+  potValEl.style.color = pc;
+  potMeta.appendChild(potValEl);
+  potSec.appendChild(potMeta);
+  var potBar = document.createElement('div');
+  potBar.className = 'potential-bar';
+  var potFill = document.createElement('div');
+  potFill.className = 'potential-fill';
+  potFill.style.width = potPct + '%';
+  potFill.style.background = pc;
+  potBar.appendChild(potFill);
+  potSec.appendChild(potBar);
+  var powerLine = document.createElement('div');
+  powerLine.style.cssText = 'font-size:.75rem;color:var(--muted);margin-top:.3rem;text-align:right';
+  powerLine.textContent = 'Power: ' + b.power.toLocaleString();
+  potSec.appendChild(powerLine);
+  modal.appendChild(potSec);
+
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+}
+
+function renderBeastGrid(el) {
+  var beasts = filterBeasts();
+  beasts.sort(function(a, b) {
+    if (a.quality !== b.quality) return b.quality - a.quality;
+    if (a.potential !== b.potential) return b.potential - a.potential;
+    if (a.star !== b.star) return b.star - a.star;
+    return b.level - a.level;
+  });
+
+  var countEl = document.getElementById('filter-count');
+  if (countEl) countEl.textContent = beasts.length + ' beast' + (beasts.length !== 1 ? 's' : '');
+
+  el.textContent = '';
+  if (beasts.length === 0) {
+    var nd = document.createElement('div');
+    nd.className = 'no-data';
+    var h = document.createElement('h2');
+    h.textContent = 'No beasts match filters';
+    nd.appendChild(h);
+    el.appendChild(nd);
+    return;
+  }
+
+  var grid = document.createElement('div');
+  grid.className = 'beast-grid';
+  beasts.forEach(function(b) { grid.appendChild(buildBeastCard(b)); });
+  el.appendChild(grid);
+}
+
+function renderFieldView(el) {
+  var fields = window._fields || [];
+  if (activeField !== 'all' && activeField !== 'bench') {
+    fields = fields.filter(function(f) { return f.cfg === +activeField; });
+  }
+  if (activeField === 'bench') fields = [];
+
+  var countEl = document.getElementById('filter-count');
+  if (countEl) countEl.textContent = fields.length + ' field' + (fields.length !== 1 ? 's' : '');
+
+  el.textContent = '';
+  if (fields.length === 0) {
+    var nd = document.createElement('div');
+    nd.className = 'no-data';
+    var h = document.createElement('h2');
+    h.textContent = activeField === 'bench' ? 'Switch to Beast Collection to see bench' : 'No fields to display';
+    nd.appendChild(h);
+    el.appendChild(nd);
+    return;
+  }
+
+  fields.forEach(function(f) {
+    var section = document.createElement('div');
+    section.className = 'field-section';
+
+    // Header
+    var header = document.createElement('div');
+    header.className = 'field-header';
+    var toggle = document.createElement('span');
+    toggle.className = 'field-toggle';
+    toggle.textContent = '\u25BC';
+    header.appendChild(toggle);
+    var h2 = document.createElement('h2');
+    h2.textContent = f.name;
+    header.appendChild(h2);
+    var countSpan = document.createElement('span');
+    countSpan.style.cssText = 'font-size:.7rem;color:var(--muted)';
+    countSpan.textContent = f.deployedCount + '/' + f.expectedSlots + ' deployed';
+    header.appendChild(countSpan);
+    var status = document.createElement('span');
+    status.className = 'field-status ' + (f.active ? 'active' : 'inactive');
+    status.textContent = f.active ? 'Active' : 'Inactive';
+    header.appendChild(status);
+
+    header.onclick = function() {
+      header.classList.toggle('collapsed');
+      body.classList.toggle('collapsed');
+    };
+    section.appendChild(header);
+
+    // Body (slots grid) — sorted by field-relative slot number
+    var body = document.createElement('div');
+    body.className = 'field-body';
+
+    var sortedSlots = f.slots.slice().sort(function(a, b) { return a.fieldSlotNum - b.fieldSlotNum; });
+    var fieldConds = FIELD_CONDITIONS[f.cfg] || [];
+
+    sortedSlots.forEach(function(s) {
+      var slotCard = document.createElement('div');
+      var isEmpty = !s.beast;
+      var hasBuff = s.buffs.length > 0;
+      slotCard.className = 'slot-card' + (isEmpty ? ' empty' : '') + (hasBuff ? ' has-buffs' : '');
+
+      var slotNum = document.createElement('div');
+      slotNum.className = 'slot-num';
+      slotNum.textContent = 'Slot ' + s.fieldSlotNum;
+      slotCard.appendChild(slotNum);
+
+      if (isEmpty) {
+        var emptyName = document.createElement('div');
+        emptyName.className = 'slot-beast-name';
+        emptyName.style.color = 'var(--muted)';
+        emptyName.textContent = 'Empty';
+        slotCard.appendChild(emptyName);
+
+        var emptyLvRow = document.createElement('div');
+        emptyLvRow.className = 'slot-level';
+        var emptyLvPill = document.createElement('span');
+        emptyLvPill.className = 'beast-slotlv-badge';
+        emptyLvPill.textContent = 'Level ' + s.level;
+        emptyLvRow.appendChild(emptyLvPill);
+        slotCard.appendChild(emptyLvRow);
+
+        // Placeholder buff lines
+        var placeholderBuffs = ['ATK Bonus', 'HP Bonus'];
+        placeholderBuffs.forEach(function(pName) {
+          var buffDiv = document.createElement('div');
+          buffDiv.className = 'slot-buff';
+          var nm = document.createElement('span');
+          nm.className = 'slot-buff-name';
+          nm.textContent = pName;
+          buffDiv.appendChild(nm);
+          var vl = document.createElement('span');
+          vl.className = 'slot-buff-val';
+          vl.style.color = 'var(--muted)';
+          vl.textContent = '0.00%';
+          buffDiv.appendChild(vl);
+          slotCard.appendChild(buffDiv);
+        });
+
+        // Condition badge for empty slot
+        var emptyCondIdx = s.fieldSlotNum - 1;
+        if (emptyCondIdx >= 0 && emptyCondIdx < fieldConds.length) {
+          var emptyCondBadge = document.createElement('div');
+          emptyCondBadge.className = 'slot-cond-badge';
+          emptyCondBadge.textContent = fieldConds[emptyCondIdx];
+          emptyCondBadge.title = fieldConds[emptyCondIdx];
+          slotCard.appendChild(emptyCondBadge);
+        }
+      } else {
+        var b = s.beast;
+
+        // Beast icon + name head
+        var headDiv = document.createElement('div');
+        headDiv.className = 'beast-head';
+        headDiv.appendChild(buildBeastIconWrap(b));
+        var infoDiv = document.createElement('div');
+        infoDiv.className = 'beast-info';
+        var nameDiv = document.createElement('div');
+        nameDiv.className = 'beast-name notranslate';
+        nameDiv.setAttribute('translate', 'no');
+        nameDiv.textContent = b.name;
+        infoDiv.appendChild(nameDiv);
+        var metaDiv = document.createElement('div');
+        metaDiv.className = 'beast-meta';
+        var starsSpan = document.createElement('span');
+        starsSpan.className = 'beast-stars';
+        starsSpan.textContent = starStr(b.star);
+        metaDiv.appendChild(starsSpan);
+        var elemTxt = document.createElement('span');
+        elemTxt.textContent = b.element;
+        elemTxt.style.color = ELEMENT_COLORS[b.element] || 'var(--muted)';
+        metaDiv.appendChild(elemTxt);
+        infoDiv.appendChild(metaDiv);
+        headDiv.appendChild(infoDiv);
+        slotCard.appendChild(headDiv);
+
+        var lvRow = document.createElement('div');
+        lvRow.className = 'slot-level';
+        var lvPill = document.createElement('span');
+        lvPill.className = 'beast-slotlv-badge';
+        lvPill.textContent = 'Level ' + s.level;
+        lvRow.appendChild(lvPill);
+        slotCard.appendChild(lvRow);
+
+        // Field slot buffs WITH values (field attribute contributions)
+        s.buffs.forEach(function(sb) {
+          var buffDiv = document.createElement('div');
+          buffDiv.className = 'slot-buff';
+          var nm = document.createElement('span');
+          nm.className = 'slot-buff-name';
+          nm.textContent = sb.name;
+          buffDiv.appendChild(nm);
+          if (sb.val) {
+            var vl = document.createElement('span');
+            vl.className = 'slot-buff-val';
+            vl.textContent = '+' + (sb.val / 100).toFixed(2) + '%';
+            buffDiv.appendChild(vl);
+          }
+          slotCard.appendChild(buffDiv);
+        });
+
+        // Potential bar
+        var potPct = Math.round(b.potential / b.maxPotential * 100);
+        var pc = potColor(potPct);
+        var potRow = document.createElement('div');
+        potRow.className = 'potential-row';
+        potRow.style.marginTop = '.25rem';
+        var potMeta = document.createElement('div');
+        potMeta.className = 'potential-meta';
+        var potLbl = document.createElement('span');
+        potLbl.textContent = 'Potential';
+        potMeta.appendChild(potLbl);
+        var potValEl = document.createElement('span');
+        potValEl.textContent = potPct + '%';
+        potValEl.style.color = pc;
+        potMeta.appendChild(potValEl);
+        potRow.appendChild(potMeta);
+        var potBar = document.createElement('div');
+        potBar.className = 'potential-bar';
+        var potFill = document.createElement('div');
+        potFill.className = 'potential-fill';
+        potFill.style.width = potPct + '%';
+        potFill.style.background = pc;
+        potBar.appendChild(potFill);
+        potRow.appendChild(potBar);
+        slotCard.appendChild(potRow);
+
+        // Click handler — show beast stat buffs in modal
+        (function(beast) {
+          slotCard.onclick = function() { showBeastDetailModal(beast, 'field'); };
+        })(b);
+      }
+
+      // Slot condition badge (only for filled slots — empty slots get their own above)
+      if (!isEmpty) {
+        var condIdx = s.fieldSlotNum - 1;
+        if (condIdx >= 0 && condIdx < fieldConds.length) {
+          var condBadge = document.createElement('div');
+          condBadge.className = 'slot-cond-badge';
+          condBadge.textContent = fieldConds[condIdx];
+          condBadge.title = fieldConds[condIdx];
+          slotCard.appendChild(condBadge);
+        }
+      }
+
+      body.appendChild(slotCard);
+    });
+
+    section.appendChild(body);
+
+    // Conditions summary
+    var condDiv = document.createElement('div');
+    condDiv.className = 'field-conditions';
+    var condLabel = document.createElement('div');
+    condLabel.className = 'cond-label';
+    condLabel.textContent = 'Unlock Conditions';
+    condDiv.appendChild(condLabel);
+    var condList = document.createElement('div');
+    condList.className = 'cond-list';
+    if (fieldConds.length) {
+      condList.textContent = fieldConds.map(function(c, i) { return 'Slot ' + (i + 1) + ': ' + c; }).join(' \u00B7 ');
+    } else {
+      condList.textContent = 'No conditions data';
+    }
+    condDiv.appendChild(condList);
+    section.appendChild(condDiv);
+
+    el.appendChild(section);
+  });
+}
+
+/* ── Helpers ── */
+function hideAll() {
+  document.getElementById('player-banner').style.display = 'none';
+  document.getElementById('summary-bar').style.display = 'none';
+  document.getElementById('view-tabs').style.display = 'none';
+  document.getElementById('filters').style.display = 'none';
+  document.getElementById('content').textContent = '';
+}
+
+function switchPlayer() {
+  hideAll();
+  showPlayerSelect(reportData);
+}
+
+/* ── Tab switching ── */
+document.querySelectorAll('.tab-btn').forEach(function(btn) {
+  btn.onclick = function() {
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    currentView = btn.dataset.view;
+    renderFilters();
+    renderContent();
+  };
+});
+
+/* ── Load button + URL param ── */
+document.getElementById('load-btn').onclick = function() {
+  var id = document.getElementById('report-id').value.trim();
+  if (!id) return;
+  loadReport(id);
+  var url = new URL(window.location);
+  url.searchParams.set('id', id);
+  history.replaceState(null, '', url);
+};
+
+document.getElementById('report-id').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') document.getElementById('load-btn').click();
+});
+
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get('id');
+  if (id) {
+    document.getElementById('report-id').value = id;
+    loadReport(id);
+  }
+})();
+
+/* ── Theme toggle ── */
+(function() {
+  var saved = localStorage.getItem('theme');
+  if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
+
+  document.getElementById('themeBtn').onclick = function() {
+    var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+    document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    document.querySelectorAll('.icon-dark').forEach(function(e) { e.style.display = isDark ? 'none' : 'inline'; });
+    document.querySelectorAll('.icon-light').forEach(function(e) { e.style.display = isDark ? 'inline' : 'none'; });
+  };
+
+  if (saved === 'light') {
+    document.querySelectorAll('.icon-dark').forEach(function(e) { e.style.display = 'none'; });
+    document.querySelectorAll('.icon-light').forEach(function(e) { e.style.display = 'inline'; });
+  }
+})();
+
+/* ── Language switcher ── */
+var LANGUAGES = [
+  { code: 'en', flag: '\uD83C\uDDFA\uD83C\uDDF8', label: 'English' },
+  { code: 'zh-CN', flag: '\uD83C\uDDE8\uD83C\uDDF3', label: '\u4E2D\u6587' },
+  { code: 'ja', flag: '\uD83C\uDDEF\uD83C\uDDF5', label: '\u65E5\u672C\u8A9E' },
+  { code: 'ko', flag: '\uD83C\uDDF0\uD83C\uDDF7', label: '\uD55C\uAD6D\uC5B4' },
+  { code: 'ru', flag: '\uD83C\uDDF7\uD83C\uDDFA', label: '\u0420\u0443\u0441\u0441\u043A\u0438\u0439' },
+  { code: 'de', flag: '\uD83C\uDDE9\uD83C\uDDEA', label: 'Deutsch' },
+  { code: 'fr', flag: '\uD83C\uDDEB\uD83C\uDDF7', label: 'Fran\u00E7ais' },
+  { code: 'es', flag: '\uD83C\uDDEA\uD83C\uDDF8', label: 'Espa\u00F1ol' },
+  { code: 'pt', flag: '\uD83C\uDDE7\uD83C\uDDF7', label: 'Portugu\u00EAs' },
+  { code: 'tr', flag: '\uD83C\uDDF9\uD83C\uDDF7', label: 'T\u00FCrk\u00E7e' },
+  { code: 'ar', flag: '\uD83C\uDDF8\uD83C\uDDE6', label: '\u0627\u0644\u0639\u0631\u0628\u064A\u0629' },
+  { code: 'vi', flag: '\uD83C\uDDFB\uD83C\uDDF3', label: 'Ti\u1EBFng Vi\u1EC7t' },
+  { code: 'th', flag: '\uD83C\uDDF9\uD83C\uDDED', label: '\u0E44\u0E17\u0E22' },
+  { code: 'id', flag: '\uD83C\uDDEE\uD83C\uDDE9', label: 'Indonesia' }
+];
+
+function openLangModal() {
+  var grid = document.getElementById('langGrid');
+  grid.textContent = '';
+  LANGUAGES.forEach(function(l) {
+    var btn = document.createElement('button');
+    btn.className = 'lang-option';
+    btn.dataset.code = l.code;
+    var flag = document.createElement('span');
+    flag.className = 'lang-flag';
+    flag.textContent = l.flag;
+    btn.appendChild(flag);
+    btn.appendChild(document.createTextNode(l.label));
+    btn.onclick = function() {
+      var frame = document.querySelector('.goog-te-combo');
+      if (frame) { frame.value = l.code; frame.dispatchEvent(new Event('change')); }
+      document.getElementById('langModal').classList.remove('active');
+      document.getElementById('langFlag').textContent = l.flag;
+      document.getElementById('langCode').textContent = '/' + l.code;
+    };
+    grid.appendChild(btn);
+  });
+  document.getElementById('langModal').classList.add('active');
+}
+
+document.getElementById('langBtn').onclick = openLangModal;
+document.getElementById('langModalClose').onclick = function() { document.getElementById('langModal').classList.remove('active'); };
+document.getElementById('langModal').onclick = function(e) { if (e.target === this) this.classList.remove('active'); };
+
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({ pageLanguage: 'en', autoDisplay: false }, 'google_translate_element');
+}
+
+/* Close beta nav on outside click */
+document.addEventListener('click', function(e) {
+  var pop = document.getElementById('bnpPop');
+  if (pop && pop.classList.contains('open') && !e.target.closest('.bnp-wrap')) pop.classList.remove('open');
+});
+
+/* Pass ?id= param to pages that support battle report IDs */
+(function() {
+  var rid = new URLSearchParams(window.location.search).get('id');
+  if (!rid) return;
+  var idPages = {'battle-report.html':1,'decor-index.html':1,'enigma-viewer.html':1,'ht-chips.html':1};
+  document.querySelectorAll('#bnpPop .bnp-link').forEach(function(a) {
+    var href = a.getAttribute('href');
+    if (href && idPages[href]) a.setAttribute('href', href + '?id=' + encodeURIComponent(rid));
+  });
+})();
+
+</script>
+<script src="https://translate.googleapis.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<footer>&copy; 2024 Mathom House &middot; Not affiliated with TopWar</footer>
+<a href="#" class="back-top" id="backToTop" aria-label="Back to top">&#8593;</a>
+</body>
+</html>
