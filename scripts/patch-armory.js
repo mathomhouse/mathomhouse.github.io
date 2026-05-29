@@ -49,8 +49,8 @@ const MATHOMHOUSE_WORKER = 'https://mathomhouse-tw-worker.mathomhouse-tw.workers
 content = content.replace(/((?:var|const|let)\s+PUSH_WORKER\s*=\s*)(['"])[^'"]*\2/g, (_, prefix) => `${prefix}'${MATHOMHOUSE_WORKER}'`);
 content = content.replace(/((?:var|const|let)\s+SUPPLEMENT_WORKER\s*=\s*)(['"])[^'"]*\2/g, (_, prefix) => `${prefix}'${MATHOMHOUSE_WORKER}'`);
 
-// 6. ASSET_BASE → '/' so game assets resolve against GitHub Pages root
-content = content.replace(/((?:var|const|let)\s+ASSET_BASE\s*=\s*)(['"])[^'"]*\2/, `$1'/'`);
+// 6. ASSET_BASE → raw GitHub URL so game assets resolve from the repo
+content = content.replace(/((?:var|const|let)\s+ASSET_BASE\s*=\s*)(['"])[^'"]*\2/, `$1'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/'`);
 
 // 7. ASSET URL → mathomhouse.github.io
 content = content.replace(
