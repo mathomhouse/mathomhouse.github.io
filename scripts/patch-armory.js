@@ -55,7 +55,7 @@ content = content.replace(/((?:var|const|let)\s+ASSET_BASE\s*=\s*)(['"])[^'"]*\2
 // 7. ASSET URL → mathomhouse.github.io
 content = content.replace(
   /((?:var|const|let)\s+ASSET\s*=\s*)(['"])https:\/\/raw\.githubusercontent\.com\/texnottexas\/landing-page\/main\/assets\/\2/g,
-  `$1'https://raw.githubusercontent.com/mathomhouse.github.io/main/assets/'`
+  `$1'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/'`
 );
 
 // 8. Replace all 2864tw.com references with mathomhouse.github.io
