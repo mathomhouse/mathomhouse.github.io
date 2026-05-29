@@ -36,7 +36,7 @@ jobs:
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "182830298+mathomhouse@users.noreply.github.com"
+          git config user.email "132933401+kimho2@users.noreply.github.com"
           git add armory-report.html
           git diff --staged --quiet || git commit -S -m "chore: patch armory-report for mathomhouse"
           git push
