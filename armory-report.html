@@ -6,9 +6,9 @@
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://translate.googleapis.com https://www.gstatic.com; img-src https://knight-cdn.akamaized.net https://h5.topwargame.com https://raw.githubusercontent.com data: https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://fonts.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://fight-report-va.oss-accelerate.aliyuncs.com https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev https://*.clarity.ms https://c.bing.com; font-src https://fonts.gstatic.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'self'; frame-src https://translate.google.com https://www.youtube-nocookie.com;">
 <title>Armory Report | Mathom House</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+
+
 <link rel="stylesheet" href="styles/mathomhouse.css">
 <link rel="stylesheet" href="styles/header.css">
 <link rel="stylesheet" href="styles/layout.css">
@@ -3257,6 +3257,8 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "won9zormpi");
 </script>
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)})();</script>
+<script src="armory-auth-override.js" defer></script>
 </head>
 <body>
 <header id="header-placeholder"></header>
@@ -3304,7 +3306,7 @@
 <footer>&copy; 2024 Mathom House &middot; Not affiliated with TopWar</footer>
 <script>
   var CDN_BASE = 'https://fight-report-va.oss-accelerate.aliyuncs.com/prod/';
-  var ASSET_BASE = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/';
+  var ASSET_BASE = '/';
   var PUSH_WORKER = 'https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev';
 
   // ── Flag utilities ────────────────────────────────────────────────────────
@@ -5166,7 +5168,7 @@
   }
 
   function copyShareLink(code) {
-    var url = 'https://2864tw.com/armory-report.html?code=' + code;
+    var url = 'https://mathomhouse.github.io/armory-report.html?code=' + code;
     navigator.clipboard.writeText(url).then(function() {
       showToastMessage('Link copied!');
     }).catch(function() {
@@ -5216,7 +5218,7 @@
     copyLinkBtn.className = 'btn-secondary';
     copyLinkBtn.textContent = 'Copy Link';
     copyLinkBtn.onclick = function() {
-      var url = 'https://2864tw.com/armory-report.html?code=' + code;
+      var url = 'https://mathomhouse.github.io/armory-report.html?code=' + code;
       navigator.clipboard.writeText(url).then(function() {
         copiedEl.textContent = 'Link copied!';
         setTimeout(function() { copiedEl.textContent = ''; }, 2000);
@@ -6838,7 +6840,7 @@
     left.className = 'rh-left';
 
     var homeLink = document.createElement('a');
-    homeLink.href = 'https://2864tw.com';
+    homeLink.href = 'https://mathomhouse.github.io';
     homeLink.className = 'rh-btn';
     homeLink.title = 'Home';
     var homeSvg = document.createElementNS(svgNS, 'svg');
@@ -7648,7 +7650,7 @@
         copyBtn.className = 'rh-prefs-btn';
         copyBtn.textContent = 'Copy Link';
         copyBtn.addEventListener('click', function() {
-          navigator.clipboard.writeText('https://2864tw.com/armory-report.html?code=' + shortcode).then(function() {
+          navigator.clipboard.writeText('https://mathomhouse.github.io/armory-report.html?code=' + shortcode).then(function() {
             copyBtn.textContent = 'Copied!';
             setTimeout(function() { copyBtn.textContent = 'Copy Link'; }, 1500);
           });
@@ -7819,7 +7821,7 @@
             cpBtn.style.fontSize = '.7rem';
             (function(code) {
               cpBtn.addEventListener('click', function() {
-                navigator.clipboard.writeText('https://2864tw.com/armory-report.html?code=' + code).then(function() {
+                navigator.clipboard.writeText('https://mathomhouse.github.io/armory-report.html?code=' + code).then(function() {
                   cpBtn.textContent = '\u2713';
                   setTimeout(function() { cpBtn.textContent = 'Copy'; }, 1200);
                 });
@@ -22524,8 +22526,8 @@
     // the matching plan card. Advisor side: ?advise=<code> bootstraps advisor
     // view-only mode against the player's report.
     openBtn.href = isOwner
-      ? ('https://2864tw.com/armory-report.html?plan=' + rec.code)
-      : ('https://2864tw.com/armory-report.html?advise=' + rec.code);
+      ? ('https://mathomhouse.github.io/armory-report.html?plan=' + rec.code)
+      : ('https://mathomhouse.github.io/armory-report.html?advise=' + rec.code);
     openBtn.target = '_self';
     actions.appendChild(openBtn);
 
@@ -22537,7 +22539,7 @@
       copyBtn.className = 'asr-action';
       copyBtn.textContent = 'Copy link';
       copyBtn.title = 'Copy the advisor URL for code ' + rec.code;
-      var shareUrl = 'https://2864tw.com/armory-report.html?advise=' + rec.code;
+      var shareUrl = 'https://mathomhouse.github.io/armory-report.html?advise=' + rec.code;
       copyBtn.addEventListener('click', async function() {
         var prev = copyBtn.textContent;
         try {
@@ -25091,7 +25093,7 @@
         if (entry.status === 'open') {
           var openHelp = document.createElement('div');
           openHelp.className = 'adv-plan-card-open';
-          var url = 'https://2864tw.com/armory-report.html?advise=' + entry.code;
+          var url = 'https://mathomhouse.github.io/armory-report.html?advise=' + entry.code;
           openHelp.appendChild(document.createTextNode('Share this link with your advisor: '));
           var a = document.createElement('a');
           a.href = url; a.textContent = url;
@@ -28095,7 +28097,7 @@
           copyBtn.title = 'Copy share link';
           (function(sc) {
             copyBtn.addEventListener('click', function() {
-              navigator.clipboard.writeText('https://2864tw.com/armory-report.html?code=' + sc);
+              navigator.clipboard.writeText('https://mathomhouse.github.io/armory-report.html?code=' + sc);
               copyBtn.textContent = 'Copied!';
               setTimeout(function() { copyBtn.textContent = 'Copy'; }, 1500);
             });
