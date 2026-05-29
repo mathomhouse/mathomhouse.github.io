@@ -52,16 +52,22 @@ content = content.replace(/((?:var|const|let)\s+SUPPLEMENT_WORKER\s*=\s*)(['"])[
 // 6. ASSET_BASE → '/' so game assets resolve against GitHub Pages root
 content = content.replace(/((?:var|const|let)\s+ASSET_BASE\s*=\s*)(['"])[^'"]*\2/, `$1'/'`);
 
-// 7. Replace all 2864tw.com references with mathomhouse.github.io
+// 7. ASSET URL → mathomhouse.github.io
+content = content.replace(
+  /((?:var|const|let)\s+ASSET\s*=\s*)(['"])https:\/\/raw\.githubusercontent\.com\/texnottexas\/landing-page\/main\/assets\/\2/g,
+  `$1'https://raw.githubusercontent.com/mathomhouse.github.io/main/assets/'`
+);
+
+// 8. Replace all 2864tw.com references with mathomhouse.github.io
 content = content.replace(/https:\/\/2864tw\.com\b/g, 'https://mathomhouse.github.io');
 
-// 8. Remove :root color variable block (site tokens take over)
+// 9. Remove :root color variable block (site tokens take over)
 content = content.replace(/:root\s*\{[\s\S]*?--bg:[\s\S]*?\}/s, '');
 
-// 9. Replace Google Fonts with site canonical set
+// 10. Replace Google Fonts with site canonical set
 content = content.replace(/<link[^>]*fonts\.googleapis\.com[^>]*>/g, '');
 content = content.replace(/<link[^>]*fonts\.gstatic\.com[^>]*>/g, '');
-if (!content.includes('Rajdhani')) {
+if (!content.includes('fonts.googleapis.com/css2?family=Rajdhani')) {
   const fontsLink = '<link rel="preconnect" href="https://fonts.googleapis.com">'
     + '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
     + '<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">';

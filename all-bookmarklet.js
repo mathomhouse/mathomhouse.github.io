@@ -959,7 +959,7 @@
     bg.appendChild(ta);
     var status = document.createElement('div');
     status.style.cssText = 'color:#8b949e;font-size:12px;margin-top:10px;text-align:center;min-height:1.4em;';
-    status.textContent = 'Tap Copy. Then paste at 2864tw.com → armory-report.';
+    status.textContent = 'Tap Copy. Then paste at mathomhouse.github.io → armory-report.';
     bg.appendChild(status);
     var row = document.createElement('div');
     row.style.cssText = 'display:flex;gap:8px;margin-top:8px;';
@@ -972,7 +972,7 @@
         copyBtn.style.background = '#2ea043';
         copyBtn.disabled = true;
         status.style.color = '#3fb950';
-        status.textContent = 'Done. Paste at 2864tw.com → armory-report → use this snapshot. Tap Close to dismiss.';
+        status.textContent = 'Done. Paste at mathomhouse.github.io → armory-report → use this snapshot. Tap Close to dismiss.';
         closeBtn.textContent = 'Close';
         closeBtn.style.background = '#3fb950';
         closeBtn.style.color = '#0d1117';
