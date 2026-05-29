@@ -3260,6 +3260,7 @@
 <script src="armory-auth-override.js" defer></script>
 
 
+
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -5456,7 +5457,7 @@
   var EB_ELEMENTS = {1:'Fire',2:'Water',3:'Wind',4:'Ground'};
   var EB_FIELD_NAMES = {1:'CPNT Mastery',2:'Formation',3:'Equip',4:'Defense',5:'Offense'};
   var EB_FIELD_SLOT_COUNTS = {1:5,2:7,3:6,4:9,5:9};
-  var EB_ICON_BASE = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/beast-icons/';
+  var EB_ICON_BASE = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/beast-icons/';
 
   // Buff names verified against in-game effect_buff TABLE + LocalManager.getText() (2026-05-04).
   // 520110-113 = ATK, 520120-123 = HP Boost, 520130-133 = Elemental Enhance, 520140-143 = Elemental RES.
@@ -13953,7 +13954,7 @@
     var head = _adv_mk('div', { cls: 'advisor-rec-head' });
     if (r.iconPath) {
       var sanitizedName = _adv_sanitizeDecorNameForIcon(r.name);
-      var iconUrl = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/decor-icons/' +
+      var iconUrl = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/decor-icons/' +
                     r.group + '_' + sanitizedName + '.png';
       var img = _adv_mk('img', { attrs: { src: iconUrl, loading: 'lazy', alt: '' } });
       img.onerror = function() { img.style.display = 'none'; };
@@ -20132,7 +20133,7 @@
         var odBar = document.createElement('div');
         odBar.style.cssText = 'display:flex;align-items:center;gap:.6rem;padding:10px 16px;margin:0 16px 6px;background:linear-gradient(135deg, rgba(210,153,34,0.14), rgba(240,198,116,0.08));border:1px solid rgba(210,153,34,0.4);border-radius:8px;flex-wrap:wrap;';
         var odIcon = document.createElement('img');
-        odIcon.src = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/inventory-icons/image__item__item_940001.png';
+        odIcon.src = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/inventory-icons/image__item__item_940001.png';
         odIcon.alt = '';
         odIcon.style.cssText = 'width:20px;height:20px;object-fit:contain;flex-shrink:0;';
         odIcon.onerror = function() { odIcon.style.display = 'none'; };
@@ -20844,9 +20845,9 @@
   // Synthetic aggregate cell (Gems / Odinium / Food / Oil). Click → modal
   // showing every contributing pack with per-pack value × amount × total.
   function _ar_buildAggregateCell(kind, data) {
-    var TR = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/treasury-icons/';
+    var TR = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/treasury-icons/';
     var META = {
-      gem:     { name: 'Gems',     iconUrl: 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/inventory-icons/image__item__item_1000000.png', q: 5 },
+      gem:     { name: 'Gems',     iconUrl: 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/inventory-icons/image__item__item_1000000.png', q: 5 },
       odinium: { name: 'Odinium',  iconUrl: TR + 'odinium.png', q: 5 },
       food:    { name: 'Food',     iconUrl: TR + 'food.png',    q: 4 },
       oil:     { name: 'Oil',      iconUrl: TR + 'oil.png',     q: 4 }
