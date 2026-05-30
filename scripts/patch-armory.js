@@ -44,27 +44,38 @@ if (!content.includes('id="backToTop"')) {
   content = content.replace('</body>', '<a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>\n</body>');
 }
 
-// 5. Worker URL replacements
+// 5. Remove frame-ancestors from CSP meta (ignored by browsers; self-bust handles it at runtime)
+content = content.replace(/\s*frame-ancestors[^;]*;/g, '');
+
+// 5b. Add googletagmanager.com to CSP script-src (needed for header.js GA snippet)
+if (!content.includes('https://www.googletagmanager.com')) {
+  content = content.replace(
+    /(script-src\s[^"]*?)(https:\/\/c\.bing\.com)/,
+    '$1$2 https://www.googletagmanager.com'
+  );
+}
+
+// 6. Worker URL replacements
 const MATHOMHOUSE_WORKER = 'https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev';
 content = content.replace(/((?:var|const|let)\s+PUSH_WORKER\s*=\s*)(['"])[^'"]*\2/g, (_, prefix) => `${prefix}'${MATHOMHOUSE_WORKER}'`);
 content = content.replace(/((?:var|const|let)\s+SUPPLEMENT_WORKER\s*=\s*)(['"])[^'"]*\2/g, (_, prefix) => `${prefix}'${MATHOMHOUSE_WORKER}'`);
 
-// 6. ASSET_BASE → raw GitHub URL so game assets resolve from the repo
+// 7. ASSET_BASE → raw GitHub URL so game assets resolve from the repo
 content = content.replace(/((?:var|const|let)\s+ASSET_BASE\s*=\s*)(['"])[^'"]*\2/, `$1'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/'`);
 
-// 7. ASSET URL → mathomhouse.github.io
+// 8. ASSET URL → mathomhouse.github.io
 content = content.replace(
   /https:\/\/raw\.githubusercontent\.com\/texnottexas\/landing-page\/main\/assets\//g,
   'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/'
 );
 
-// 8. Replace all 2864tw.com references with mathomhouse.github.io
+// 9. Replace all 2864tw.com references with mathomhouse.github.io
 content = content.replace(/https:\/\/2864tw\.com\b/g, 'https://mathomhouse.github.io');
 
-// 9. Remove :root color variable block (site tokens take over)
+// 10. Remove :root color variable block (site tokens take over)
 content = content.replace(/:root\s*\{[\s\S]*?--bg:[\s\S]*?\}/s, '');
 
-// 10. Replace Google Fonts with site canonical set
+// 11. Replace Google Fonts with site canonical set
 content = content.replace(/<link[^>]*fonts\.googleapis\.com[^>]*>/g, '');
 content = content.replace(/<link[^>]*fonts\.gstatic\.com[^>]*>/g, '');
 if (!content.includes('fonts.googleapis.com/css2?family=Rajdhani')) {

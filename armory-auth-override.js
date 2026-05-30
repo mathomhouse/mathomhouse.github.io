@@ -1,4 +1,6 @@
 (function() {
+  if (window.top !== window.self) { window.top.location = window.self.location; return; }
+
   const _WORKER = window.SUPPLEMENT_WORKER
     || 'https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev';
 
