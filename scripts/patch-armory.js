@@ -108,21 +108,11 @@ if (!content.includes('// MATHOMHOUSE: inS2864 heroesTab')) {
   );
 }
 
-// 5e_c. _ar_ensureSupplementToken — bypass UID hash check; set local token so all
-//       callers (upload, runepool delete, advisor) get a token without re-entering UID.
-if (!content.includes('// MATHOMHOUSE: local token')) {
+// 5e_c. _ar_ensureSupplementToken — bypass UID hash; call worker handshake with siteKey directly.
+if (!content.includes('// MATHOMHOUSE: siteKey handshake')) {
   content = content.replace(
     /async function _ar_ensureSupplementToken\(siteKey\) \{[\s\S]*?await _ar_handshake\(hash\);\r?\n  \}/,
-    'async function _ar_ensureSupplementToken(siteKey) { // MATHOMHOUSE: local token\n    _ar_supplementToken = \'local\';\n    _ar_supplementTokenExpires = Date.now() + 864e7;\n  }'
-  );
-}
-
-// 5e_d. _ar_supplementUpload — skip worker fetch; data is already in localStorage.
-//       Returning normally (no throw) lets _ar_processEnvelopeSection report 'ok'.
-if (!content.includes('// MATHOMHOUSE: local-only upload')) {
-  content = content.replace(
-    /async function _ar_supplementUpload\(kind, json, siteKey\) \{[\s\S]*?return await r\.json\(\);\r?\n  \}/,
-    'async function _ar_supplementUpload(kind, json, siteKey) { // MATHOMHOUSE: local-only upload\n    return { ok: true, local: true };\n  }'
+    'async function _ar_ensureSupplementToken(siteKey) { // MATHOMHOUSE: siteKey handshake\n    if (_ar_supplementToken && _ar_supplementToken !== \'local\' && _ar_supplementTokenExpires > Date.now()) return;\n    var r = await fetch(SUPPLEMENT_WORKER + \'/supplement/handshake\', {\n      method: \'POST\',\n      headers: { \'Content-Type\': \'application/json\' },\n      body: JSON.stringify({ siteKey: siteKey })\n    });\n    var d = await r.json();\n    _ar_supplementToken = d.token;\n    _ar_supplementTokenExpires = Date.now() + 864e7;\n  }'
   );
 }
 

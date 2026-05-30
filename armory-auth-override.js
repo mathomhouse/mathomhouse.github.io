@@ -37,11 +37,6 @@
       if (path.startsWith('/feedback/')) {
         return Promise.resolve(new Response(JSON.stringify({ ok: true }), { status: 200, headers: { 'Content-Type': 'application/json' } }));
       }
-      if (path === '/report-config') {
-        const sk = window.ArmoryIdentity && window.ArmoryIdentity.get ? window.ArmoryIdentity.get()?.siteKey : null;
-        const shortcode = sk ? sk.slice(0, 8).toUpperCase() : 'LOCAL000';
-        return Promise.resolve(new Response(JSON.stringify({ ok: true, shortcode }), { status: 200, headers: { 'Content-Type': 'application/json' } }));
-      }
     }
     return _baseFetch(url, opts);
   };
@@ -76,22 +71,7 @@
   window.ArmoryIdentity.setUidHash = () => {};
   window.ArmoryIdentity.removeUidHash = () => {};
 
-  // 2. Handshake → no-op fake token
-  window._ar_handshake = async () => ({ token: 'local', expires: Date.now() + 864e7 });
-  window._ar_ensureSupplementToken = async () => {
-    window._ar_supplementToken = 'local';
-    window._ar_supplementTokenExpires = Date.now() + 864e7;
-    return 'local';
-  };
-  // Set synchronously so raw token-check guards pass before any async call
-  window._ar_supplementToken = 'local';
-  window._ar_supplementTokenExpires = Date.now() + 864e7;
-
-  // 3. Supplement upload → local only
-  window._ar_supplementUpload = async () => ({ ok: false, local: true });
-  window._ar_backgroundSyncSupplement = async () => 'local-only';
-
-  // 4. Unlock modal → auto-approve
+  // 2. Unlock modal → auto-approve
   window._ar_openUnlockModal = function(siteKey, playerName, onUnlock) {
     if (onUnlock) onUnlock();
   };
