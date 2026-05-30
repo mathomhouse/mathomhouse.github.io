@@ -61,6 +61,30 @@ if (!content.includes('https://www.google-analytics.com')) {
   );
 }
 
+// 5c. Expose ArmoryIdentity on window — it's var-scoped inside the page IIFE, not on window
+if (!content.includes('window.ArmoryIdentity = ArmoryIdentity')) {
+  content = content.replace(
+    '// ── Shortcode sharing helpers',
+    'window.ArmoryIdentity = ArmoryIdentity;\n\n  // ── Shortcode sharing helpers'
+  );
+}
+
+// 5e. Add mathomhouse.github.io to style-src (needed for injected stylesheets)
+if (!content.match(/style-src[^"]*mathomhouse\.github\.io/)) {
+  content = content.replace(
+    /(style-src\s[^"]*?)(https:\/\/translate\.googleapis\.com)/,
+    '$1https://mathomhouse.github.io $2'
+  );
+}
+
+// 5f. Add mathomhouse worker to connect-src
+if (!content.match(/connect-src[^"]*mathomhouse-tw-worker/)) {
+  content = content.replace(
+    /(connect-src\s[^"]*?)('self')/,
+    `$1'self' https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev`
+  );
+}
+
 // 6. Worker URL replacements
 const MATHOMHOUSE_WORKER = 'https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev';
 content = content.replace(/((?:var|const|let)\s+PUSH_WORKER\s*=\s*)(['"])[^'"]*\2/g, (_, prefix) => `${prefix}'${MATHOMHOUSE_WORKER}'`);
