@@ -4,15 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com; style-src 'unsafe-inline' https://translate.googleapis.com https://www.gstatic.com; img-src https://knight-cdn.akamaized.net https://h5.topwargame.com https://raw.githubusercontent.com data: https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://fonts.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://fight-report-va.oss-accelerate.aliyuncs.com https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://push-worker.27tb8s6fct.workers.dev https://*.clarity.ms https://c.bing.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'self'; frame-src https://translate.google.com https://www.youtube-nocookie.com;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com https://www.googletagmanager.com; style-src 'unsafe-inline' https://mathomhouse.github.io https://fonts.googleapis.com https://translate.googleapis.com https://www.gstatic.com; img-src https://knight-cdn.akamaized.net https://h5.topwargame.com https://raw.githubusercontent.com data: https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://fonts.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev https://fight-report-va.oss-accelerate.aliyuncs.com https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://push-worker.27tb8s6fct.workers.dev https://*.clarity.ms https://c.bing.com https://www.google-analytics.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://translate.google.com https://www.youtube-nocookie.com; font-src https://fonts.gstatic.com;">
 <title>Armory Report — Server 2864</title>
 <style>
-  :root {
-    --bg: #0d1117; --surface: #161b22; --card: #1c2128; --border: #30363d;
-    --text: #e6edf3; --muted: #8b949e; --accent: #79c0ff;
-    --green: #3fb950; --red: #f85149; --yellow: #d29922; --blue: #388bfd;
-    --army: #56d364; --navy: #6cb6ff; --air: #e3b341;
-  }
+  
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; margin: 0; padding: 0; }
 
@@ -3341,8 +3336,16 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "won9zormpi");
 </script>
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)})();</script>
+<link rel="stylesheet" href="styles/mathomhouse.css">
+<link rel="stylesheet" href="styles/header.css">
+<link rel="stylesheet" href="styles/layout.css">
+<script src="header.js" defer></script>
+<script src="armory-auth-override.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 </head>
 <body>
+<header id="header-placeholder"></header>
 
 <div id="google_translate_element"></div>
 
@@ -3388,8 +3391,8 @@
 <script>
   (function () {
   var CDN_BASE = 'https://fight-report-va.oss-accelerate.aliyuncs.com/prod/';
-  var ASSET_BASE = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/';
-  var PUSH_WORKER = 'https://push-worker.27tb8s6fct.workers.dev';
+  var ASSET_BASE = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/';
+  var PUSH_WORKER = 'https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev';
 
   // ── Flag utilities ────────────────────────────────────────────────────────
   var SVG_NS = 'http://www.w3.org/2000/svg';
@@ -3556,6 +3559,8 @@
   // ── Shortcode sharing helpers ─────────────────────────────────────────────
   // Back-compat alias so existing call sites keep working without migration.
   // New code should prefer `ArmoryIdentity.get()`.
+  window.ArmoryIdentity = ArmoryIdentity;
+
   function getStoredIdentity() {
     return ArmoryIdentity.get();
   }
@@ -3961,7 +3966,7 @@
     setTimeout(function() { input.focus(); }, 50);
   }
 
-  var SUPPLEMENT_WORKER = 'https://push-worker.27tb8s6fct.workers.dev';
+  var SUPPLEMENT_WORKER = 'https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev';
   var _ar_supplementToken = null;
   var _ar_supplementTokenExpires = 0;
 
@@ -4756,7 +4761,7 @@
   }
 
   function _ar_rehydrateInv(raw, lk) {
-    var ASSET = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/';
+    var ASSET = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/';
     var out = {
       meta: raw.meta || {}, resources: raw.resources || {},
       tabs: { item: [], unit: [], decor: [], hero: [], cpnt: [] },
@@ -5229,7 +5234,7 @@
   }
 
   function copyShareLink(code) {
-    var url = 'https://2864tw.com/armory-report.html?code=' + code;
+    var url = 'https://mathomhouse.github.io/armory-report.html?code=' + code;
     navigator.clipboard.writeText(url).then(function() {
       showToastMessage('Link copied!');
     }).catch(function() {
@@ -5279,7 +5284,7 @@
     copyLinkBtn.className = 'btn-secondary';
     copyLinkBtn.textContent = 'Copy Link';
     copyLinkBtn.onclick = function() {
-      var url = 'https://2864tw.com/armory-report.html?code=' + code;
+      var url = 'https://mathomhouse.github.io/armory-report.html?code=' + code;
       navigator.clipboard.writeText(url).then(function() {
         copiedEl.textContent = 'Link copied!';
         setTimeout(function() { copiedEl.textContent = ''; }, 2000);
@@ -5534,7 +5539,7 @@
   var EB_ELEMENTS = {1:'Fire',2:'Water',3:'Wind',4:'Ground'};
   var EB_FIELD_NAMES = {1:'CPNT Mastery',2:'Formation',3:'Equip',4:'Defense',5:'Offense'};
   var EB_FIELD_SLOT_COUNTS = {1:5,2:7,3:6,4:9,5:9};
-  var EB_ICON_BASE = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/beast-icons/';
+  var EB_ICON_BASE = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/beast-icons/';
 
   // Buff names verified against in-game effect_buff TABLE + LocalManager.getText() (2026-05-04).
   // 520110-113 = ATK, 520120-123 = HP Boost, 520130-133 = Elemental Enhance, 520140-143 = Elemental RES.
@@ -6952,7 +6957,7 @@
     left.className = 'rh-left';
 
     var homeLink = document.createElement('a');
-    homeLink.href = 'https://2864tw.com';
+    homeLink.href = 'https://mathomhouse.github.io';
     homeLink.className = 'rh-btn';
     homeLink.title = 'Home';
     homeLink.appendChild(svgIcon({ children: [['path', { 'd': 'M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z' }], ['polyline', { 'points': '9 22 9 12 15 12 15 22' }]] }));
@@ -7679,7 +7684,7 @@
         copyBtn.className = 'rh-prefs-btn';
         copyBtn.textContent = 'Copy Link';
         copyBtn.addEventListener('click', function() {
-          navigator.clipboard.writeText('https://2864tw.com/armory-report.html?code=' + shortcode).then(function() {
+          navigator.clipboard.writeText('https://mathomhouse.github.io/armory-report.html?code=' + shortcode).then(function() {
             copyBtn.textContent = 'Copied!';
             setTimeout(function() { copyBtn.textContent = 'Copy Link'; }, 1500);
           });
@@ -7850,7 +7855,7 @@
             cpBtn.style.fontSize = '.7rem';
             (function(code) {
               cpBtn.addEventListener('click', function() {
-                navigator.clipboard.writeText('https://2864tw.com/armory-report.html?code=' + code).then(function() {
+                navigator.clipboard.writeText('https://mathomhouse.github.io/armory-report.html?code=' + code).then(function() {
                   cpBtn.textContent = '\u2713';
                   setTimeout(function() { cpBtn.textContent = 'Copy'; }, 1200);
                 });
@@ -8245,7 +8250,7 @@
     bmWrap.appendChild(_ar_buildPowerToolCard({
       title: 'Skill Dismantle (standalone)',
       desc: 'Same bulk-dismantle wizard available inside Import TopWar Data. Use this when you only want to scrap skill items and skip the full snapshot extract.',
-      url: 'javascript:(function(){var s=document.createElement(\'script\');s.src=\'https://2864tw.com/dismantle-bookmarklet.js?_=\'+Date.now();s.onerror=function(){alert(\'Bookmarklet load failed. Check internet + try again.\');};document.body.appendChild(s);})();'
+      url: 'javascript:(function(){var s=document.createElement(\'script\');s.src=\'https://mathomhouse.github.io/dismantle-bookmarklet.js?_=\'+Date.now();s.onerror=function(){alert(\'Bookmarklet load failed. Check internet + try again.\');};document.body.appendChild(s);})();'
     }));
   }
 
@@ -15340,7 +15345,7 @@
     var head = _adv_mk('div', { cls: 'advisor-rec-head' });
     if (r.iconPath) {
       var sanitizedName = _adv_sanitizeDecorNameForIcon(r.name);
-      var iconUrl = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/decor-icons/' +
+      var iconUrl = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/decor-icons/' +
                     r.group + '_' + sanitizedName + '.png';
       var img = _adv_mk('img', { attrs: { src: iconUrl, loading: 'lazy', alt: '' } });
       img.onerror = function() { img.style.display = 'none'; };
@@ -21552,7 +21557,7 @@
         var odBar = document.createElement('div');
         odBar.style.cssText = 'display:flex;align-items:center;gap:.6rem;padding:10px 16px;margin:0 16px 6px;background:linear-gradient(135deg, rgba(210,153,34,0.14), rgba(240,198,116,0.08));border:1px solid rgba(210,153,34,0.4);border-radius:8px;flex-wrap:wrap;';
         var odIcon = document.createElement('img');
-        odIcon.src = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/inventory-icons/image__item__item_940001.png';
+        odIcon.src = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/inventory-icons/image__item__item_940001.png';
         odIcon.alt = '';
         odIcon.style.cssText = 'width:20px;height:20px;object-fit:contain;flex-shrink:0;';
         odIcon.onerror = function() { odIcon.style.display = 'none'; };
@@ -22252,9 +22257,9 @@
   // Synthetic aggregate cell (Gems / Odinium / Food / Oil). Click → modal
   // showing every contributing pack with per-pack value × amount × total.
   function _ar_buildAggregateCell(kind, data) {
-    var TR = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/treasury-icons/';
+    var TR = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/treasury-icons/';
     var META = {
-      gem:     { name: 'Gems',     iconUrl: 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/inventory-icons/image__item__item_1000000.png', q: 5 },
+      gem:     { name: 'Gems',     iconUrl: 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/inventory-icons/image__item__item_1000000.png', q: 5 },
       odinium: { name: 'Odinium',  iconUrl: TR + 'odinium.png', q: 5 },
       food:    { name: 'Food',     iconUrl: TR + 'food.png',    q: 4 },
       oil:     { name: 'Oil',      iconUrl: TR + 'oil.png',     q: 4 }
@@ -23931,8 +23936,8 @@
     // the matching plan card. Advisor side: ?advise=<code> bootstraps advisor
     // view-only mode against the player's report.
     openBtn.href = isOwner
-      ? ('https://2864tw.com/armory-report.html?plan=' + rec.code)
-      : ('https://2864tw.com/armory-report.html?advise=' + rec.code);
+      ? ('https://mathomhouse.github.io/armory-report.html?plan=' + rec.code)
+      : ('https://mathomhouse.github.io/armory-report.html?advise=' + rec.code);
     openBtn.target = '_self';
     actions.appendChild(openBtn);
 
@@ -23944,7 +23949,7 @@
       copyBtn.className = 'asr-action';
       copyBtn.textContent = 'Copy link';
       copyBtn.title = 'Copy the advisor URL for code ' + rec.code;
-      var shareUrl = 'https://2864tw.com/armory-report.html?advise=' + rec.code;
+      var shareUrl = 'https://mathomhouse.github.io/armory-report.html?advise=' + rec.code;
       copyBtn.addEventListener('click', async function() {
         var prev = copyBtn.textContent;
         try {
@@ -26490,7 +26495,7 @@
         if (entry.status === 'open') {
           var openHelp = document.createElement('div');
           openHelp.className = 'adv-plan-card-open';
-          var url = 'https://2864tw.com/armory-report.html?advise=' + entry.code;
+          var url = 'https://mathomhouse.github.io/armory-report.html?advise=' + entry.code;
           openHelp.appendChild(document.createTextNode('Share this link with your advisor: '));
           var a = document.createElement('a');
           a.href = url; a.textContent = url;
@@ -29469,7 +29474,7 @@
           copyBtn.title = 'Copy share link';
           (function(sc) {
             copyBtn.addEventListener('click', function() {
-              navigator.clipboard.writeText('https://2864tw.com/armory-report.html?code=' + sc);
+              navigator.clipboard.writeText('https://mathomhouse.github.io/armory-report.html?code=' + sc);
               copyBtn.textContent = 'Copied!';
               setTimeout(function() { copyBtn.textContent = 'Copy'; }, 1500);
             });
@@ -31971,5 +31976,6 @@
 </script>
 <script src="https://translate.googleapis.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script src="feedback-widget.js"></script>
+<a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
 </body>
 </html>
