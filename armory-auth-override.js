@@ -1,6 +1,20 @@
 (function() {
   if (window.top !== window.self) { window.top.location = window.self.location; return; }
 
+  // Hide source-site header buttons not relevant to mathomhouse.
+  // buildReportHeader is closure-scoped so window override doesn't fire;
+  // CSS is the reliable removal path.
+  (function() {
+    var s = document.createElement('style');
+    s.id = 'ar-mh-header-hide';
+    s.textContent = [
+      '.report-header a.rh-btn[title="Home"]',
+      '.report-header .bnp-wrap',
+      '.report-header .whats-new-pill'
+    ].join(',') + '{display:none!important}';
+    document.head.appendChild(s);
+  })();
+
   const _WORKER = window.SUPPLEMENT_WORKER
     || 'https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev';
 
@@ -22,6 +36,11 @@
       }
       if (path.startsWith('/feedback/')) {
         return Promise.resolve(new Response(JSON.stringify({ ok: true }), { status: 200, headers: { 'Content-Type': 'application/json' } }));
+      }
+      if (path === '/report-config') {
+        const sk = window.ArmoryIdentity && window.ArmoryIdentity.get ? window.ArmoryIdentity.get()?.siteKey : null;
+        const shortcode = sk ? sk.slice(0, 8).toUpperCase() : 'LOCAL000';
+        return Promise.resolve(new Response(JSON.stringify({ ok: true, shortcode }), { status: 200, headers: { 'Content-Type': 'application/json' } }));
       }
     }
     return _baseFetch(url, opts);
@@ -330,28 +349,4 @@
     });
   }
 
-  // 1d. Report header cleanup — remove buttons that belong to the source site
-  const _origBuildReportHeader = window.buildReportHeader;
-  if (_origBuildReportHeader) {
-    window.buildReportHeader = function() {
-      const result = _origBuildReportHeader.apply(this, arguments);
-      const hdr = document.querySelector('header.report-header');
-      if (!hdr) return result;
-
-      const homeLink = hdr.querySelector('a.rh-btn[title="Home"]');
-      if (homeLink) homeLink.remove();
-      const bnpWrap = hdr.querySelector('.bnp-wrap');
-      if (bnpWrap) bnpWrap.remove();
-      const wnBtn = hdr.querySelector('button.whats-new-pill');
-      if (wnBtn) wnBtn.remove();
-
-      // #fw-hdr-btn inserted via setTimeout(..., 100) in source — remove after it lands
-      setTimeout(function() {
-        const fwBtn = hdr.querySelector('#fw-hdr-btn') || document.getElementById('fw-hdr-btn');
-        if (fwBtn) fwBtn.remove();
-      }, 200);
-
-      return result;
-    };
-  }
 })();
