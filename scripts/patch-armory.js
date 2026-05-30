@@ -91,6 +91,14 @@ if (!content.match(/connect-src[^"]*mathomhouse-tw-worker/)) {
   );
 }
 
+// 5g. Add font-src (no such directive in original — default-src 'none' blocks woff2)
+if (!content.match(/font-src/)) {
+  content = content.replace(
+    /(frame-src\s[^;]*;)(")/,
+    '$1 font-src https://fonts.gstatic.com;$2'
+  );
+}
+
 // 6. Worker URL replacements
 const MATHOMHOUSE_WORKER = 'https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev';
 content = content.replace(/((?:var|const|let)\s+PUSH_WORKER\s*=\s*)(['"])[^'"]*\2/g, (_, prefix) => `${prefix}'${MATHOMHOUSE_WORKER}'`);
