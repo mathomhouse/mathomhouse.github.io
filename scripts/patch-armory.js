@@ -47,11 +47,17 @@ if (!content.includes('id="backToTop"')) {
 // 5. Remove frame-ancestors from CSP meta (ignored by browsers; self-bust handles it at runtime)
 content = content.replace(/\s*frame-ancestors[^;]*;/g, '');
 
-// 5b. Add googletagmanager.com to CSP script-src (needed for header.js GA snippet)
+// 5b. Add GA domains to CSP (needed for header.js GA snippet)
 if (!content.includes('https://www.googletagmanager.com')) {
   content = content.replace(
     /(script-src\s[^"]*?)(https:\/\/c\.bing\.com)/,
     '$1$2 https://www.googletagmanager.com'
+  );
+}
+if (!content.includes('https://www.google-analytics.com')) {
+  content = content.replace(
+    /(connect-src\s[^"]*?)(https:\/\/c\.bing\.com)/,
+    '$1$2 https://www.google-analytics.com'
   );
 }
 
