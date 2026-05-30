@@ -39,6 +39,9 @@ if (!content.includes('id="header-placeholder"')) {
 // 3. Replace footer with site footer
 content = content.replace(/<footer>[\s\S]*?<\/footer>/s, '<footer>&copy; 2024 Mathom House &middot; Not affiliated with TopWar</footer>');
 
+// 3b. Set page title
+content = content.replace(/<title>[^<]*<\/title>/, '<title>Armory Report | Mathom House</title>');
+
 // 4. Inject back-to-top before </body>
 if (!content.includes('id="backToTop"')) {
   content = content.replace('</body>', '<a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>\n</body>');
