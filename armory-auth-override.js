@@ -12,6 +12,7 @@
       '.report-header .bnp-wrap',
       '.report-header .whats-new-pill'
     ].join(',') + '{display:none!important}';
+    s.textContent += '.rh-prefs-modal{background:#1c2128!important}';
     document.head.appendChild(s);
   })();
 

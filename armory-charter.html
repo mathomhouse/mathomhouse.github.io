@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Armory Report — Project Charter</title>
+<style>
+:root {
+  --bg: #0d1117; --surface: #161b22; --card: #1c2128; --border: #30363d;
+  --text: #e6edf3; --muted: #8b949e; --accent: #79c0ff;
+  --green: #3fb950; --red: #f85149; --yellow: #d29922; --blue: #388bfd;
+  --orange: #e3956a; --purple: #bc8cff;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg); color: var(--text);
+  height: 100vh; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+
+/* ── Nav ── */
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.5rem 1.5rem; background: var(--surface);
+  border-bottom: 1px solid var(--border); flex-shrink: 0; gap: 1rem;
+}
+nav .title { font-size: 0.85rem; color: var(--muted); white-space: nowrap; }
+.nav-controls { display: flex; align-items: center; gap: 0.75rem; }
+.nav-controls button {
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--text); padding: 0.3rem 0.8rem; border-radius: 5px;
+  cursor: pointer; font-size: 0.85rem; transition: background 0.15s;
+}
+.nav-controls button:hover { background: var(--border); }
+.nav-controls button:disabled { opacity: 0.35; cursor: default; }
+.slide-counter { font-size: 0.8rem; color: var(--muted); min-width: 5ch; text-align: center; }
+
+/* ── Slide container ── */
+.deck { flex: 1; overflow: hidden; position: relative; }
+.slide {
+  position: absolute; inset: 0; display: none;
+  flex-direction: column; justify-content: center; align-items: center;
+  padding: 2.5rem 3rem; overflow-y: auto;
+}
+.slide.active { display: flex; }
+
+/* ── Progress bar ── */
+.progress-bar {
+  height: 3px; background: var(--border); flex-shrink: 0;
+}
+.progress-fill {
+  height: 100%; background: var(--accent); transition: width 0.3s ease;
+}
+
+/* ── Slide types ── */
+.slide-inner {
+  width: 100%; max-width: 900px; animation: slideIn 0.25s ease both;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Title slide */
+.slide-title { text-align: center; }
+.slide-title .eyebrow {
+  font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1rem;
+}
+.slide-title h1 { font-size: 2.8rem; font-weight: 700; line-height: 1.2; }
+.slide-title h1 span { color: var(--accent); }
+.slide-title .subtitle { color: var(--muted); margin-top: 1rem; font-size: 1.1rem; }
+.slide-title .meta { margin-top: 2rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+.slide-title .meta-item { text-align: center; }
+.slide-title .meta-item .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.slide-title .meta-item .value { font-size: 1rem; color: var(--text); margin-top: 0.2rem; }
+
+/* Section heading */
+.slide-section { text-align: center; }
+.slide-section h2 { font-size: 2rem; font-weight: 700; }
+.slide-section p { color: var(--muted); margin-top: 0.75rem; font-size: 1.1rem; max-width: 600px; }
+
+/* Content slides */
+.slide-content h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; }
+.slide-content h2 .tag {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+  background: var(--card); border: 1px solid var(--border);
+  padding: 0.15rem 0.5rem; border-radius: 4px; color: var(--muted);
+  vertical-align: middle; margin-right: 0.6rem;
+}
+
+/* Cards / grid */
+.card-grid { display: grid; gap: 1rem; }
+.card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+.card-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 1rem 1.2rem;
+}
+.card .card-label {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--muted); margin-bottom: 0.4rem;
+}
+.card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+.card p { font-size: 0.875rem; color: var(--muted); line-height: 1.5; }
+
+.card.green  { border-left: 3px solid var(--green); }
+.card.yellow { border-left: 3px solid var(--yellow); }
+.card.red    { border-left: 3px solid var(--red); }
+.card.blue   { border-left: 3px solid var(--blue); }
+.card.accent { border-left: 3px solid var(--accent); }
+.card.purple { border-left: 3px solid var(--purple); }
+.card.orange { border-left: 3px solid var(--orange); }
+
+/* Pill list */
+.pill-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.pill {
+  font-size: 0.78rem; padding: 0.25rem 0.65rem;
+  border-radius: 20px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--text);
+}
+.pill.done { background: rgba(63,185,80,0.15); border-color: var(--green); color: var(--green); }
+.pill.gap  { background: rgba(248,81,73,0.12); border-color: var(--red); color: var(--red); }
+.pill.todo { background: rgba(210,153,34,0.12); border-color: var(--yellow); color: var(--yellow); }
+
+/* Check/cross list */
+.check-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+.check-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9rem; line-height: 1.5; }
+.check-list li .icon { flex-shrink: 0; margin-top: 0.1rem; font-size: 1rem; }
+.check-list li.done .icon::before { content: '✓'; color: var(--green); }
+.check-list li.gap  .icon::before { content: '✗'; color: var(--red); }
+.check-list li.todo .icon::before { content: '○'; color: var(--yellow); }
+.check-list li.info .icon::before { content: '·'; color: var(--muted); }
+
+/* Comparison table */
+.compare-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.compare-table th, .compare-table td {
+  padding: 0.6rem 0.8rem; text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.compare-table th { color: var(--muted); font-weight: 600; background: var(--surface); }
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table td.y { color: var(--green); }
+.compare-table td.n { color: var(--red); }
+.compare-table td.p { color: var(--yellow); }
+.compare-table .rec { background: rgba(121,192,255,0.07); }
+.compare-table .rec td:first-child { border-left: 3px solid var(--accent); }
+
+/* Timeline / roadmap */
+.roadmap { display: flex; flex-direction: column; gap: 0; }
+.roadmap-phase {
+  display: flex; gap: 1rem;
+  padding: 0.8rem 0; border-left: 2px solid var(--border);
+  padding-left: 1.2rem; position: relative;
+}
+.roadmap-phase::before {
+  content: ''; position: absolute; left: -6px; top: 50%;
+  transform: translateY(-50%); width: 10px; height: 10px;
+  border-radius: 50%; background: var(--border); border: 2px solid var(--bg);
+}
+.roadmap-phase.p1::before { background: var(--green); }
+.roadmap-phase.p2::before { background: var(--yellow); }
+.roadmap-phase.p3::before { background: var(--accent); }
+.roadmap-phase .phase-label {
+  min-width: 80px; font-size: 0.75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em; padding-top: 0.1rem;
+}
+.roadmap-phase.p1 .phase-label { color: var(--green); }
+.roadmap-phase.p2 .phase-label { color: var(--yellow); }
+.roadmap-phase.p3 .phase-label { color: var(--accent); }
+.roadmap-phase .phase-body { flex: 1; }
+.roadmap-phase .phase-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.2rem; }
+.roadmap-phase .phase-items { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+/* Divider */
+.divider { height: 1px; background: var(--border); margin: 1rem 0; }
+
+/* Code inline */
+code {
+  font-family: 'SF Mono', Consolas, monospace; font-size: 0.82em;
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 0.1em 0.4em; border-radius: 4px; color: var(--accent);
+}
+
+/* highlight boxes */
+.highlight-box {
+  background: rgba(121,192,255,0.07); border: 1px solid rgba(121,192,255,0.25);
+  border-radius: 8px; padding: 0.9rem 1.1rem; font-size: 0.875rem; line-height: 1.6;
+}
+.highlight-box.green {
+  background: rgba(63,185,80,0.07); border-color: rgba(63,185,80,0.25);
+}
+.highlight-box.yellow {
+  background: rgba(210,153,34,0.07); border-color: rgba(210,153,34,0.3);
+}
+.highlight-box.red {
+  background: rgba(248,81,73,0.07); border-color: rgba(248,81,73,0.25);
+}
+.highlight-box strong { color: var(--text); }
+
+/* two-col layout helper */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+
+/* persona cards */
+.persona {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 1rem;
+}
+.persona .persona-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.persona h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; }
+.persona p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+.persona .needs { margin-top: 0.6rem; }
+.persona .need-item {
+  font-size: 0.78rem; padding: 0.15rem 0;
+  border-top: 1px solid var(--border); color: var(--text);
+}
+.persona .need-item:first-child { border-top: none; }
+
+/* rec badge */
+.rec-badge {
+  display: inline-block; font-size: 0.7rem; font-weight: 700;
+  background: var(--accent); color: var(--bg);
+  padding: 0.1rem 0.5rem; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  vertical-align: middle; margin-left: 0.5rem;
+}
+
+/* small muted text */
+.muted { color: var(--muted); font-size: 0.82rem; }
+
+/* table of contents dots */
+.toc-dots {
+  display: flex; gap: 0.4rem; flex-wrap: wrap;
+  justify-content: center; margin-top: 1rem;
+}
+.toc-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--border); cursor: pointer; transition: background 0.15s;
+  border: none; padding: 0;
+}
+.toc-dot.active { background: var(--accent); }
+.toc-dot:hover { background: var(--muted); }
+
+/* Keyboard hint */
+.key-hint {
+  position: fixed; bottom: 1rem; right: 1rem;
+  font-size: 0.72rem; color: var(--muted);
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 6px; padding: 0.35rem 0.65rem;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="title">Armory Report — mathomhouse.github.io</span>
+  <div class="nav-controls">
+    <button id="btn-prev" disabled>← Prev</button>
+    <span class="slide-counter" id="counter">1 / 1</span>
+    <button id="btn-next">Next →</button>
+  </div>
+</nav>
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+<div class="deck" id="deck"></div>
+<div class="key-hint">← → arrow keys to navigate</div>
+
+<script>
+const slides = [
+
+// ── 1. TITLE ─────────────────────────────────────────────────────────────────
+{
+  id: 'title',
+  html: `
+  <div class="slide-inner slide-title">
+    <div class="eyebrow">Project Charter</div>
+    <h1>Armory Report on<br><span>Mathomhouse</span></h1>
+    <p class="subtitle">Bringing player armory reports, advisor tools, and<br>cross-device identity to a static GitHub Pages site.</p>
+    <div class="meta">
+      <div class="meta-item"><div class="label">Site</div><div class="value">mathomhouse.github.io</div></div>
+      <div class="meta-item"><div class="label">Backend</div><div class="value">Cloudflare Workers + KV</div></div>
+      <div class="meta-item"><div class="label">Auth today</div><div class="value">Random siteKey + Recovery Code</div></div>
+      <div class="meta-item"><div class="label">Status</div><div class="value">Feature planning</div></div>
+    </div>
+  </div>`
+},
+
+// ── 2. WHAT ARE WE BUILDING ──────────────────────────────────────────────────
+{
+  id: 'what',
+  html: `
+  <div class="slide-inner slide-content">
+    <h2><span class="tag">Overview</span>What We're Building</h2>
+    <div class="card-grid cols-2">
+      <div class="card accent">
+        <div class="card-label">Core feature</div>
+        <h3>Armory Report</h3>
+        <p>A player's full gear, formation, and troop power snapshot. Data pulled from the Top War game API via a bookmarklet. Currently live on <code>2864tw.com/armory-report.html</code> — we're porting it to Mathomhouse.</p>
+      </div>
+      <div class="card blue">
+        <div class="card-label">Sharing</div>
+        <h3>Share Links (4-char code)</h3>
+        <p>Player generates a public-view link using a short code. Anyone with the link can view that player's report snapshot. No auth required for the viewer.</p>
+      </div>
+      <div class="card purple">
+        <div class="card-label">Advisor access</div>
+        <h3>Advisory Links (6-char code)</h3>
+        <p>Player grants a named advisor read access to their live report. The advisor can leave a structured plan. The player sees the advisor's name next to the plan.</p>
+      </div>
+      <div class="card green">
+        <div class="card-label">Cross-device</div>
+        <h3>Profile Continuity</h3>
+        <p>A player should be able to access their own report on any device without re-running the bookmarklet and without needing their share or advisory links.</p>
+      </div>
+    </div>
+  </div>`
+},
+
+// ── 3. SITE CONSTRAINTS ───────────────────────────────────────────────────────
+{
+  id: 'constraints',
+  html: `
+  <div class="slide-inner slide-content">
+    <h2><span class="tag">Constraints</span>What We're Working With</h2>
+    <div class="two-col">
+      <div>
+        <div class="card" style="margin-bottom:0.8rem">
+          <div class="card-label">Infrastructure</div>
+          <ul class="check-list">
+            <li class="done"><span class="icon"></span>Static GitHub Pages — no server-side rendering</li>
+            <li class="done"><span class="icon"></span>Cloudflare Workers + KV for all stateful operations</li>
+            <li class="done"><span class="icon"></span>CORS locked to <code>mathomhouse.github.io</code></li>
+            <li class="done"><span class="icon"></span>Game data pulled via bookmarklet (client-side only)</li>
+          </ul>
+        </div>
+        <div class="card yellow">
+          <div class="card-label">The stateless challenge</div>
+          <p style="font-size:0.875rem;line-height:1.6">The site itself cannot set cookies, manage sessions, or run server logic. Any "session" is a token in <code>localStorage</code> + a KV lookup. All "auth" is just ownership of a secret key.</p>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <div class="card-label">Player expectations</div>
+          <ul class="check-list" style="margin-top:0.25rem">
+            <li class="info"><span class="icon"></span>Mobile game audience — low tech friction tolerance</li>
+            <li class="info"><span class="icon"></span>Many players use multiple devices (phone + PC)</li>
+            <li class="info"><span class="icon"></span>No one wants another username + password</li>
+            <li class="info"><span class="icon"></span>Gaming culture: Discord is already universal identity</li>
+            <li class="info"><span class="icon"></span>Players share tips in alliance chats, not email</li>
+          </ul>
+        </div>
+        <div class="card" style="margin-top:0.8rem">
+          <div class="card-label">Existing source</div>
+          <p style="font-size:0.875rem;line-height:1.6">The upstream <code>armory-report.html</code> has its own identity system built for the S2864 community. We patch over it with <code>armory-auth-override.js</code> — we must stay compatible with the structure that script expects.</p>
+        </div>
+      </div>
+    </div>
+  </div>`
+},
+
+// ── 4. PERSONAS ───────────────────────────────────────────────────────────────
+{
+  id: 'personas',
+  html: `
+  <div class="slide-inner slide-content">
+    <h2><span class="tag">Users</span>Who Uses This</h2>
+    <div class="three-col">
+      <div class="persona">
+        <div class="persona-icon">🪖</div>
+        <h3>The Player</h3>
+        <p>Wants to know how their gear and troops measure up. Generates their report once with the bookmarklet. Might share with an alliance mate to get advice.</p>
+        <div class="needs">
+          <div class="need-item">✓ Generate report easily</div>
+          <div class="need-item">✓ View it on any device</div>
+          <div class="need-item">✓ Share with someone they trust</div>
+          <div class="need-item">✗ Does NOT want to sign up for anything</div>
+        </div>
+      </div>
+      <div class="persona">
+        <div class="persona-icon">🔗</div>
+        <h3>The Viewer</h3>
+        <p>A friend, alliance mate, or anyone with a share link. Just wants to see the player's stats. No interest in creating an account.</p>
+        <div class="needs">
+          <div class="need-item">✓ Open link, see report</div>
+          <div class="need-item">✗ No account or login</div>
+          <div class="need-item">✗ No ability to see report without link</div>
+        </div>
+      </div>
+      <div class="persona">
+        <div class="persona-icon">🎖️</div>
+        <h3>The Advisor</h3>
+        <p>Experienced player who guides others. Wants to review a player's report in depth and leave an actionable plan. Expects their name to appear on the plan.</p>
+        <div class="needs">
+          <div class="need-item">✓ Receive advisory link from player</div>
+          <div class="need-item">✓ View full live report</div>
+          <div class="need-item">✓ Leave a named plan</div>
+          <div class="need-item">✓ Have a persistent identity / display name</div>
+        </div>
+      </div>
+    </div>
+    <div class="highlight-box" style="margin-top:1rem">
+      <strong>Key insight:</strong> Only advisors need a persistent, named identity. Players and viewers need zero friction — no accounts, no login required.
+    </div>
+  </div>`
+},
+
+// ── 5. CURRENT STATE ──────────────────────────────────────────────────────────
+{
+  id: 'current',
+  html: `
+  <div class="slide-inner slide-content">
+    <h2><span class="tag">Current State</span>What's Already Built</h2>
+    <div class="two-col">
+      <div>
+        <div class="card green" style="margin-bottom:0.8rem">
+          <div class="card-label">Done</div>
+          <ul class="check-list">
+            <li class="done"><span class="icon"></span>Random <code>siteKey</code> (16-char hex) generated locally — no login needed</li>
+            <li class="done"><span class="icon"></span>HMAC token proves siteKey ownership to worker (no password, no session)</li>
+            <li class="done"><span class="icon"></span>4-char share codes → stored in KV, 7-day TTL</li>
+            <li class="done"><span class="icon"></span>12-char recovery code → restores siteKey identity on new device</li>
+            <li class="done"><span class="icon"></span>Export / Import JSON → manual full profile transfer between devices</li>
+            <li class="done"><span class="icon"></span>Supplement data (gear, bench, chips…) stored per-siteKey in KV</li>
+            <li class="done"><span class="icon"></span>Per-kind privacy flags — can hide individual supplement sections</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="card red">
+          <div class="card-label">Not yet done</div>
+          <ul class="check-list">
+            <li class="gap"><span class="icon"></span>6-char advisory links — stubbed out, returns 404/503</li>
+            <li class="gap"><span class="icon"></span>Advisor identity — no concept of named advisors</li>
+            <li class="gap"><span class="icon"></span>Advisor plan creation + display</li>
+            <li class="gap"><span class="icon"></span>Cross-device: recovery code restores identity only — supplement data lost, requires re-running bookmarklet</li>
+            <li class="gap"><span class="icon"></span>Report privacy: supplement GET has no auth — anyone who knows a <code>siteKey</code> can read data</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>`
+},
+
+// ── 6. THE GAPS ────────────────────────────────────────────────────────────────
+{
+  id: 'gaps',
+  html: `
+  <div class="slide-inner slide-content">
+    <h2><span class="tag">Gaps</span>What Needs to Be Solved</h2>
+    <div class="card-grid cols-2">
+      <div class="card red">
+        <div class="card-label">Gap 1 — Privacy</div>
+        <h3>Supplement data is open by default</h3>
+        <p>The worker's <code>GET /supplement/:kind/:siteKey</code> requires no auth. Anyone who discovers a <code>siteKey</code> can read that player's data. Privacy is opt-in per field — but should be opt-out (private by default, unlocked by shortcode).</p>
+      </div>
+      <div class="card yellow">
+        <div class="card-label">Gap 2 — Cross-device</div>
+        <h3>Recovery only restores identity</h3>
+        <p>The 12-char recovery code restores the <code>siteKey</code> — but NOT the supplement data stored in KV. Player still needs to re-run the bookmarklet or use Export/Import. A returning player on a new device has an empty report.</p>
+      </div>
+      <div class="card purple">
+        <div class="card-label">Gap 3 — Advisory system</div>
+        <h3>6-char codes not implemented</h3>
+        <p>Advisory links are completely stubbed in <code>armory-auth-override.js</code>. The worker has no <code>/advisor/</code> routes. No advisor role, no plan storage, no named attribution.</p>
+      </div>
+      <div class="card orange">
+        <div class="card-label">Gap 4 — Advisor identity</div>
+        <h3>No way for advisor to have a name</h3>
+        <p>When an advisor creates a plan, the player should see "Plan by <strong>YourName</strong>" — but we have no persistent named identity for advisors. This requires some form of verifiable display name.</p>
+      </div>
+    </div>
+  </div>`
+},
+
+// ── 7. AUTH OPTIONS — PLAYERS ─────────────────────────────────────────────────
+{
+  id: 'auth-players',
+  html: `
+  <div class="slide-inner slide-content">
+    <h2><span class="tag">Identity</span>Player Auth — Options</h2>
+    <p class="muted" style="margin-bottom:1rem">Goal: player sees their own report on any device without re-importing and without needing any link.</p>
+    <table class="compare-table">
+      <thead><tr>
+        <th>Option</th>
+        <th>Cross-device</th>
+        <th>Friction</th>
+        <th>Works today</th>
+        <th>Notes</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>A — Export/Import JSON</strong></td>
+          <td class="p">Manual</td>
+          <td class="p">Medium</td>
+          <td class="y">✓</td>
+          <td class="muted">File transfer awkward on phone</td>
+        </tr>
+        <tr>
+          <td><strong>B — Recovery code (current)</strong></td>
+          <td class="p">Identity only</td>
+          <td class="y">Low</td>
+          <td class="p">Partial</td>
+          <td class="muted">Restores siteKey, not report data</td>
+        </tr>
+        <tr class="rec">
+          <td><strong>C — Enhanced recovery</strong> <span class="rec-badge">Recommended</span></td>
+          <td class="y">Full</td>
+          <td class="y">Low</td>
+          <td class="p">Needs build</td>
+          <td class="muted">Recovery code also triggers KV data restore</td>
+        </tr>
+        <tr>
+          <td><strong>D — Passphrase-protected KV</strong></td>
+          <td class="y">Full</td>
+          <td class="p">Medium</td>
+          <td class="n">Needs build</td>
+          <td class="muted">Extra step, no meaningful security gain</td>
+        </tr>
+        <tr>
+          <td><strong>E — OAuth (Google/Discord)</strong></td>
+          <td class="y">Full</td>
+          <td class="n">High</td>
+          <td class="n">Major build</td>
+          <td class="muted">Overkill for players who just want a report</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="highlight-box green" style="margin-top:1rem">
+      <strong>Option C detail:</strong> When a player hits "Get recovery code," the worker also backs up their current supplement data under that code. On restore, it fetches supplement data from KV in addition to the siteKey — full report available immediately, no bookmarklet re-run needed.
+    </div>
+  </div>`
+},
+
+// ── 8. AUTH OPTIONS — ADVISORS ────────────────────────────────────────────────
+{
+  id: 'auth-advisors',
+  html: `
+  <div class="slide-inner slide-content">
+    <h2><span class="tag">Identity</span>Advisor Auth — Options</h2>
+    <p class="muted" style="margin-bottom:1rem">Goal: advisor has a persistent display name that appears on plans they create. Player must be able to trust the name shown.</p>
+    <table class="compare-table">
+      <thead><tr>
+        <th>Option</th>
+        <th>Name verified</th>
+        <th>Friction</th>
+        <th>Implementation</th>
+        <th>Notes</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>A — Claimed display name</strong></td>
+          <td class="n">No</td>
+          <td class="y">Zero</td>
+          <td class="y">Simple</td>
+          <td class="muted">Anyone can claim any name; name squatting possible</td>
+        </tr>
+        <tr class="rec">
+          <td><strong>B — Discord OAuth</strong> <span class="rec-badge">Recommended</span></td>
+          <td class="y">Yes</td>
+          <td class="y">Low</td>
+          <td class="p">Medium</td>
+          <td class="muted">Players already use Discord; one-click login</td>
+        </tr>
+        <tr>
+          <td><strong>C — Email magic link</strong></td>
+          <td class="y">Yes</td>
+          <td class="p">Medium</td>
+          <td class="p">Medium</td>
+          <td class="muted">Familiar but slower; requires email provider</td>
+        </tr>
+        <tr>
+          <td><strong>D — GitHub OAuth</strong></td>
+          <td class="y">Yes</td>
+          <td class="p">Medium</td>
+          <td class="p">Medium</td>
+          <td class="muted">Not universal for this audience</td>
+        </tr>
+        <tr>
+          <td><strong>E — Same siteKey system</strong></td>
+          <td class="n">No</td>
+          <td class="y">Zero</td>
+          <td class="y">Already built</td>
+          <td class="muted">Name is self-reported, unverified — advisor could impersonate anyone</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="highlight-box" style="margin-top:1rem">
+      <strong>Option B detail:</strong> Advisor clicks "Sign in as Advisor" → Discord OAuth flow → worker receives Discord user ID + display name → stored as advisor profile in KV. The Cloudflare Worker handles the OAuth callback. Advisor siteKey is tied to their Discord ID. Works with the existing static-site architecture.
+    </div>
+  </div>`
+},
+
+// ── 9. HOW ADVISORY LINKS WORK ────────────────────────────────────────────────
+{
+  id: 'advisory-flow',
+  html: `
+  <div class="slide-inner slide-content">
+    <h2><span class="tag">Feature Design</span>Advisory Link Flow</h2>
+    <div class="two-col">
+      <div>
+        <div class="card accent" style="margin-bottom:0.8rem">
+          <div class="card-label">Step 1 — Player</div>
+          <h3>Generate advisory link</h3>
+          <p>Player clicks "Create Advisory Link" on their report. Worker generates a 6-char code (e.g. <code>XK9P4R</code>) with the player's <code>siteKey</code> and a flag: <em>advisory=true</em>. Player shares code with their advisor (Discord, alliance chat).</p>
+        </div>
+        <div class="card purple" style="margin-bottom:0.8rem">
+          <div class="card-label">Step 2 — Advisor</div>
+          <h3>Load the advisory link</h3>
+          <p>Advisor opens <code>mathomhouse.github.io/armory-report.html?advisory=XK9P4R</code>. Site fetches the player's report data. If advisor is not signed in (Discord), prompts them to — once. Advisory code stored in their browser for that player.</p>
+        </div>
+        <div class="card green">
+          <div class="card-label">Step 3 — Plan</div>
+          <h3>Advisor creates a plan</h3>
+          <p>Advisor writes plan (upgrade priority, gear targets, troop composition). On save, worker stores plan in KV keyed to advisory code, with advisor's Discord display name attached. Player's report page shows "Plan by <strong>[DiscordName]</strong>".</p>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:0.8rem">
+          <div class="card-label">Privacy model</div>
+          <ul class="check-list">
+            <li class="done"><span class="icon"></span>Player's data visible only to: player + anyone with share OR advisory code</li>
+            <li class="done"><span class="icon"></span>Advisory code grants read-only + write-plan; share code grants read-only</li>
+            <li class="done"><span class="icon"></span>Player can revoke advisory codes</li>
+            <li class="done"><span class="icon"></span>No raw siteKey access without auth token</li>
+          </ul>
+        </div>
+        <div class="card yellow">
+          <div class="card-label">KV structure (advisory)</div>
+          <p style="font-size:0.82rem;line-height:1.7;font-family:monospace">
+            <code>advisory:XK9P4R</code> → <code>{siteKey, advisorId, created}</code><br>
+            <code>plan:XK9P4R</code> → <code>{text, advisorName, updatedAt}</code><br>
+            <code>advisor:discord:123456</code> → <code>{siteKey, name, avatar}</code>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>`
+},
+
+// ── 10. SECURITY FIX ──────────────────────────────────────────────────────────
+{
+  id: 'security',
+  html: `
+  <div class="slide-inner slide-content">
+    <h2><span class="tag">Security</span>Privacy Fix Needed</h2>
+    <div class="highlight-box red" style="margin-bottom:1rem">
+      <strong>Current issue:</strong> <code>GET /supplement/:kind/:siteKey</code> in the Cloudflare Worker has no authentication. Anyone who knows — or guesses — a player's 16-char <code>siteKey</code> can read their supplement data. The privacy flags exist but default to public.
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="card red">
+          <div class="card-label">Current behavior</div>
+          <ul class="check-list">
+            <li class="gap"><span class="icon"></span>siteKey in URL = open read access</li>
+            <li class="gap"><span class="icon"></span>Privacy is opt-in (must flip flags manually)</li>
+            <li class="gap"><span class="icon"></span>siteKey could be extracted from a bookmarklet paste, share link, or logs</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="card green">
+          <div class="card-label">What we should build</div>
+          <ul class="check-list">
+            <li class="done"><span class="icon"></span>Supplement GET requires either: valid HMAC token (player), OR a valid share/advisory shortcode that maps to that siteKey</li>
+            <li class="done"><span class="icon"></span>Default: all data private unless a shortcode is presented</li>
+            <li class="done"><span class="icon"></span>Share code grants read access to specific data; advisory code grants read + plan-write</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="highlight-box yellow" style="margin-top:1rem">
+      <strong>Migration note:</strong> Changing GET behavior will break the existing report viewer that fetches supplement data with only a siteKey. The viewer needs to pass a shortcode token instead. This is a breaking change and requires coordinating the worker update with a page update.
+    </div>
+  </div>`
+},
+
+// ── 11. RECOMMENDATION ────────────────────────────────────────────────────────
+{
+  id: 'recommendation',
+  html: `
+  <div class="slide-inner slide-content">
+    <h2><span class="tag">Recommendation</span>Proposed Auth Architecture</h2>
+    <div class="card-grid cols-3" style="margin-bottom:1rem">
+      <div class="card green">
+        <div class="card-label">Players (no login)</div>
+        <h3>Random siteKey + Enhanced Recovery</h3>
+        <p>Keep zero-friction flow. Recovery code now backs up supplement data too. Player enters 12-char code on new device → full report restored, no bookmarklet re-run.</p>
+      </div>
+      <div class="card accent">
+        <div class="card-label">Advisors (Discord)</div>
+        <h3>"Sign in as Advisor" via Discord OAuth</h3>
+        <p>One-time click for advisors. Worker OAuth callback stores Discord display name in KV. Advisor's identity persists across devices automatically via Discord session.</p>
+      </div>
+      <div class="card purple">
+        <div class="card-label">Viewers (no auth)</div>
+        <h3>Share code = access token</h3>
+        <p>4-char code IS the auth. Present the code when fetching supplement data. No login, no friction. Code expires after 7 days unless refreshed.</p>
+      </div>
+    </div>
+    <div class="card yellow">
+      <div class="card-label">Why this works</div>
+      <ul class="check-list">
+        <li class="done"><span class="icon"></span><strong>Players never log in</strong> — siteKey is auto-generated, recovery code is the only "credential"</li>
+        <li class="done"><span class="icon"></span><strong>Advisors use Discord</strong> — already in their pocket for Top War; one click, persistent identity</li>
+        <li class="done"><span class="icon"></span><strong>Viewers need nothing</strong> — share code is self-contained, works for any link recipient</li>
+        <li class="done"><span class="icon"></span><strong>Privacy fixed</strong> — supplement data requires a code or HMAC token; no anonymous reads</li>
+        <li class="done"><span class="icon"></span><strong>Static site compatible</strong> — all OAuth/token logic lives in the Cloudflare Worker; GitHub Pages just serves HTML</li>
+      </ul>
+    </div>
+  </div>`
+},
+
+// ── 12. ROADMAP ───────────────────────────────────────────────────────────────
+{
+  id: 'roadmap',
+  html: `
+  <div class="slide-inner slide-content">
+    <h2><span class="tag">Roadmap</span>Implementation Phases</h2>
+    <div class="two-col">
+      <div class="roadmap">
+        <div class="roadmap-phase p1">
+          <div class="phase-label">Phase 1</div>
+          <div class="phase-body">
+            <div class="phase-title">Privacy + Full Cross-Device</div>
+            <div class="phase-items">
+              Worker: lock supplement GET behind code or HMAC token<br>
+              Worker: recovery save backs up supplement data<br>
+              Worker: recovery load restores supplement data<br>
+              Override: recovery banner triggers full backup on "Get code"<br>
+              Override: recovery restore fetches and writes supplement KV data
+            </div>
+          </div>
+        </div>
+        <div class="roadmap-phase p2">
+          <div class="phase-label">Phase 2</div>
+          <div class="phase-body">
+            <div class="phase-title">Advisory Links</div>
+            <div class="phase-items">
+              Worker: <code>POST /advisory/create</code> → 6-char code<br>
+              Worker: <code>GET /advisory/:code</code> → resolve to siteKey<br>
+              Worker: <code>POST /plan/:code</code> → store advisor plan<br>
+              Worker: <code>GET /plan/:code</code> → read plan + advisor name<br>
+              Override: "Create Advisory Link" button on player's own report<br>
+              Override: render plan panel when advisory code present
+            </div>
+          </div>
+        </div>
+        <div class="roadmap-phase p3">
+          <div class="phase-label">Phase 3</div>
+          <div class="phase-body">
+            <div class="phase-title">Advisor Identity (Discord OAuth)</div>
+            <div class="phase-items">
+              Register Discord OAuth app (mathomhouse as developer)<br>
+              Worker: <code>GET /auth/discord</code> → OAuth redirect<br>
+              Worker: <code>GET /auth/discord/callback</code> → exchange code, store advisor profile<br>
+              Worker: issue signed advisor token (like HMAC token for players)<br>
+              Override: "Sign in as Advisor" button → redirect to Discord OAuth<br>
+              Override: plan creation shows advisor name, plan saved with attribution
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:0.8rem">
+          <div class="card-label">Dependencies</div>
+          <ul class="check-list">
+            <li class="info"><span class="icon"></span>Phase 2 can start independently of Phase 3 with unverified advisor name (display name only)</li>
+            <li class="info"><span class="icon"></span>Phase 3 Discord OAuth requires registering a Discord application</li>
+            <li class="info"><span class="icon"></span>Phase 1 privacy change is a breaking change — must ship worker + override together</li>
+          </ul>
+        </div>
+        <div class="card yellow">
+          <div class="card-label">Deferred</div>
+          <ul class="check-list">
+            <li class="todo"><span class="icon"></span>Advisory code revocation UI</li>
+            <li class="todo"><span class="icon"></span>Multiple advisors per player</li>
+            <li class="todo"><span class="icon"></span>Share code TTL extension / refresh</li>
+            <li class="todo"><span class="icon"></span>Advisor plan history / versioning</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>`
+},
+
+// ── 13. OPEN QUESTIONS ────────────────────────────────────────────────────────
+{
+  id: 'questions',
+  html: `
+  <div class="slide-inner slide-content">
+    <h2><span class="tag">Open Questions</span>Decisions Needed</h2>
+    <div class="card-grid cols-2">
+      <div class="card yellow">
+        <div class="card-label">Q1 — Advisor auth</div>
+        <h3>Discord OAuth vs. claimed display name?</h3>
+        <p>Discord requires registering an OAuth app and handling a callback route in the worker. Claimed name is simpler but unverified — anyone could claim to be "TopWarCoach" or impersonate a known advisor.</p>
+      </div>
+      <div class="card yellow">
+        <div class="card-label">Q2 — Advisory code TTL</div>
+        <h3>How long should advisory codes live?</h3>
+        <p>Share codes expire after 7 days. Advisory codes represent an ongoing relationship — should they be permanent, or expire if the advisor hasn't visited in 90 days?</p>
+      </div>
+      <div class="card yellow">
+        <div class="card-label">Q3 — Supplement data backup scope</div>
+        <h3>What goes in the recovery backup?</h3>
+        <p>Full supplement data (gear, bench, chips, heroes, skins, formation) could be large. Should the backup include everything, or only the core armory data? Trade-off: storage vs. restore completeness.</p>
+      </div>
+      <div class="card yellow">
+        <div class="card-label">Q4 — Privacy migration</div>
+        <h3>How do we handle existing open reports?</h3>
+        <p>Players who generated a report before the privacy lockdown will lose access to their own data if we change the GET auth requirement. Need a migration path — possibly re-issue tokens automatically on next page load.</p>
+      </div>
+    </div>
+  </div>`
+},
+
+// ── 14. SUMMARY ───────────────────────────────────────────────────────────────
+{
+  id: 'summary',
+  html: `
+  <div class="slide-inner slide-content">
+    <h2><span class="tag">Summary</span>Project Goals</h2>
+    <div class="card-grid cols-2" style="margin-bottom:1rem">
+      <div class="card green">
+        <div class="card-label">Goal 1</div>
+        <h3>Any player can generate a report</h3>
+        <p>Zero signup. Run bookmarklet once. siteKey auto-generated. No account required.</p>
+      </div>
+      <div class="card green">
+        <div class="card-label">Goal 2</div>
+        <h3>Cross-device without re-importing</h3>
+        <p>Enhanced recovery code backs up and restores full supplement data — not just identity. Enter 12-char code on new device, done.</p>
+      </div>
+      <div class="card green">
+        <div class="card-label">Goal 3</div>
+        <h3>Reports private by default</h3>
+        <p>No one sees your data without a share or advisory link. Raw siteKey access removed from public supplement endpoints.</p>
+      </div>
+      <div class="card green">
+        <div class="card-label">Goal 4</div>
+        <h3>Advisors have a named identity</h3>
+        <p>Advisors sign in once via Discord. Plans show "Plan by [DiscordName]". Player trusts the attribution.</p>
+      </div>
+    </div>
+    <div class="highlight-box">
+      <strong>The north star:</strong> A player opens the site for the first time, runs the bookmarklet, and has a full armory report. They grab a recovery code if they want cross-device. They share a link if they want feedback. They give an advisory link if they want a plan from a trusted advisor. At no point are they asked to create an account.
+    </div>
+  </div>`
+}
+
+]; // end slides
+
+// ── Render engine ─────────────────────────────────────────────────────────────
+const deck = document.getElementById('deck');
+const btnPrev = document.getElementById('btn-prev');
+const btnNext = document.getElementById('btn-next');
+const counter = document.getElementById('counter');
+const progress = document.getElementById('progress');
+
+let current = 0;
+
+function buildDeck() {
+  slides.forEach((s, i) => {
+    const el = document.createElement('div');
+    el.className = 'slide' + (i === 0 ? ' active' : '');
+    el.dataset.index = i;
+    el.innerHTML = s.html;
+    deck.appendChild(el);
+  });
+  buildDots();
+  updateNav();
+}
+
+function buildDots() {
+  const nav = document.querySelector('.nav-controls');
+  const dots = document.createElement('div');
+  dots.className = 'toc-dots';
+  dots.style.display = 'none'; // shown on request
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'toc-dot' + (i === 0 ? ' active' : '');
+    d.title = slides[i].id;
+    d.addEventListener('click', () => goTo(i));
+    dots.appendChild(d);
+  });
+  // insert into nav
+  const navEl = document.querySelector('nav');
+  navEl.insertBefore(dots, navEl.querySelector('.nav-controls'));
+  dots.style.display = 'flex';
+}
+
+function updateDots() {
+  document.querySelectorAll('.toc-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+  });
+}
+
+function goTo(n) {
+  document.querySelectorAll('.slide')[current].classList.remove('active');
+  current = Math.max(0, Math.min(n, slides.length - 1));
+  document.querySelectorAll('.slide')[current].classList.add('active');
+  updateNav();
+  updateDots();
+}
+
+function updateNav() {
+  counter.textContent = `${current + 1} / ${slides.length}`;
+  btnPrev.disabled = current === 0;
+  btnNext.disabled = current === slides.length - 1;
+  progress.style.width = `${((current + 1) / slides.length) * 100}%`;
+}
+
+btnPrev.addEventListener('click', () => goTo(current - 1));
+btnNext.addEventListener('click', () => goTo(current + 1));
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+    e.preventDefault(); goTo(current + 1);
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    e.preventDefault(); goTo(current - 1);
+  }
+});
+
+buildDeck();
+</script>
+</body>
+</html>
