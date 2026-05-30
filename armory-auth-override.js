@@ -2,6 +2,29 @@
   const _WORKER = window.SUPPLEMENT_WORKER
     || 'https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev';
 
+  // Suppress calls to unimplemented routes (advisor, feedback) to avoid 404 noise.
+  // Note: /flag-overrides is handled server-side — its fetch fires before this defer script runs.
+  const _baseFetch = window.fetch.bind(window);
+  window.fetch = function(url, opts) {
+    if (typeof url === 'string' && url.startsWith(_WORKER)) {
+      const path = url.slice(_WORKER.length).replace(/\?.*$/, '');
+      if (path.startsWith('/advisor/')) {
+        const method = (opts && opts.method) ? opts.method.toUpperCase() : 'GET';
+        if (/^\/advisor\/index\//.test(path)) {
+          return Promise.resolve(new Response(JSON.stringify({ entries: [] }), { status: 200, headers: { 'Content-Type': 'application/json' } }));
+        }
+        if (method === 'POST' || method === 'DELETE') {
+          return Promise.resolve(new Response(JSON.stringify({ ok: false, error: 'not available' }), { status: 503, headers: { 'Content-Type': 'application/json' } }));
+        }
+        return Promise.resolve(new Response(null, { status: 404 }));
+      }
+      if (path.startsWith('/feedback/')) {
+        return Promise.resolve(new Response(JSON.stringify({ ok: true }), { status: 200, headers: { 'Content-Type': 'application/json' } }));
+      }
+    }
+    return _baseFetch(url, opts);
+  };
+
   if (!window.ArmoryIdentity) {
     console.error('armory-auth-override: ArmoryIdentity not found — source update may have renamed it');
     return;
