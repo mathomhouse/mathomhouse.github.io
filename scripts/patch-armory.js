@@ -78,6 +78,19 @@ if (!content.includes('// MATHOMHOUSE: member gate')) {
   );
 }
 
+// 5e_a_pre. wizardState.player.siteKey fallback — roster name lookup uses closure-scoped
+//           _ar_rosterByName (CDN, empty for mathomhouse). Without a match, siteKey stays null
+//           → inS2864 = false → Inventory/Rune Pool tabs never render. Fall back to local identity.
+if (!content.includes('// MATHOMHOUSE: siteKey fallback')) {
+  content = content.replace(
+    /if \(rosterMatch && rosterMatch\.siteKey\) wizardState\.player\.siteKey = rosterMatch\.siteKey;\r?\n(\s*)\}/,
+    (_, indent) =>
+      `if (rosterMatch && rosterMatch.siteKey) wizardState.player.siteKey = rosterMatch.siteKey;\n` +
+      `      if (!wizardState.player.siteKey) { try { var _li = window.ArmoryIdentity && window.ArmoryIdentity.get && window.ArmoryIdentity.get(); if (_li && _li.siteKey) wizardState.player.siteKey = _li.siteKey; } catch(_e){} } // MATHOMHOUSE: siteKey fallback\n` +
+      `${indent}}`
+  );
+}
+
 // 5e_a. inS2864 (renderFullReport) — original checks _ar_rosterMap (closure var); our override
 //       writes window._ar_rosterMap, so it never matches. Use siteKey presence instead.
 if (!content.includes('// MATHOMHOUSE: inS2864 renderFullReport')) {
