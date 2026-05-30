@@ -69,6 +69,32 @@ if (!content.includes('window.ArmoryIdentity = ArmoryIdentity')) {
   );
 }
 
+// 5d. isVerifiedS2864Member — remove id.name requirement (closure-scoped; window override can't reach it).
+//     On mathomhouse fork every visitor with a siteKey is a member.
+if (!content.includes('// MATHOMHOUSE: member gate')) {
+  content = content.replace(
+    'return !!(id && id.name && id.siteKey && !id.guest);',
+    'return !!(id && id.siteKey && !id.guest); // MATHOMHOUSE: member gate'
+  );
+}
+
+// 5e_a. inS2864 (renderFullReport) — original checks _ar_rosterMap (closure var); our override
+//       writes window._ar_rosterMap, so it never matches. Use siteKey presence instead.
+if (!content.includes('// MATHOMHOUSE: inS2864 renderFullReport')) {
+  content = content.replace(
+    /var inS2864 = false;\r?\n\s*if \(siteKey && _ar_rosterMap && _ar_rosterMap\[siteKey\]\) inS2864 = true;/,
+    'var inS2864 = !!siteKey; // MATHOMHOUSE: inS2864 renderFullReport'
+  );
+}
+
+// 5e_b. inS2864 (renderHeroesTab) — same root cause, different call site.
+if (!content.includes('// MATHOMHOUSE: inS2864 heroesTab')) {
+  content = content.replace(
+    'var inS2864 = siteKey && _ar_rosterMap && _ar_rosterMap[siteKey];',
+    'var inS2864 = !!siteKey; // MATHOMHOUSE: inS2864 heroesTab'
+  );
+}
+
 // 5e. Add mathomhouse.github.io and fonts.googleapis.com to style-src
 if (!content.match(/style-src[^"]*mathomhouse\.github\.io/)) {
   content = content.replace(
@@ -127,6 +153,15 @@ if (!content.includes('fonts.googleapis.com/css2?family=Rajdhani')) {
     + '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
     + '<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">';
   content = content.replace('</head>', `${fontsLink}\n</head>`);
+}
+
+// 12. Font override — mathomhouse.css body sets Crimson Pro (prose site font) but armory
+//     is a dense data UI; restore sans-serif. Injected last so it wins over mathomhouse.css.
+if (!content.includes('id="armory-font-fix"')) {
+  content = content.replace(
+    '</head>',
+    '<style id="armory-font-fix">body,button,input,select,textarea,.tab-btn{font-family:Rajdhani,-apple-system,BlinkMacSystemFont,sans-serif;font-size:15px;}</style>\n</head>'
+  );
 }
 
 fs.writeFileSync(filePath, content, 'utf8');
