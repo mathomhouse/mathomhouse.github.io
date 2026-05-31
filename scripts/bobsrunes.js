@@ -3,7 +3,7 @@ let suggestedCombosData = {};
 let heavyTrooperData = {};
 
 const liveUrl = 'https://script.google.com/macros/s/AKfycbw5qdmm2p_5lCMlfWlxAWfWy6jcZwsBt5RSDXttvWxfag150xb-hPJlceEs6mcyrNvJgQ/exec';
-const fallbackUrl = 'titan-gear-data.json';
+const fallbackUrl = 'data/titan-gear-data.json';
 
 fetch(liveUrl)
   .then(res => {

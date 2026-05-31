@@ -3,7 +3,7 @@
 // ==========================
 const API_URLS = {
   live: 'https://script.google.com/macros/s/AKfycbw5qdmm2p_5lCMlfWlxAWfWy6jcZwsBt5RSDXttvWxfag150xb-hPJlceEs6mcyrNvJgQ/exec',
-  fallback: '/titan-gear-data.json'
+  fallback: '/data/titan-gear-data.json'
 };
 
 const htIconMap = {

@@ -25,7 +25,7 @@ if (!content.includes('"header.js"')) {
   toInject.push('<script src="header.js" defer></script>');
 }
 if (!content.includes('armory-auth-override.js')) {
-  toInject.push('<script src="armory-auth-override.js" defer></script>');
+  toInject.push('<script src="scripts/armory-auth-override.js" defer></script>');
 }
 if (toInject.length > 0) {
   content = content.replace('</head>', `${toInject.join('\n')}\n</head>`);
