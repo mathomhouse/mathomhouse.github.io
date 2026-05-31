@@ -18,6 +18,9 @@
     ].join(',') + '{display:none!important}';
     s.textContent += '.rh-prefs-modal{background:#1c2128!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}';
     s.textContent += '.saved-configs-section{display:none!important}';
+    if (new URLSearchParams(window.location.search).get('code')) {
+      s.textContent += 'button.reports-badge{display:none!important}';
+    }
     document.head.appendChild(s);
   })();
 
