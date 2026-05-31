@@ -18,6 +18,7 @@
     ].join(',') + '{display:none!important}';
     s.textContent += '.rh-prefs-modal{background:#1c2128!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}';
     s.textContent += '.saved-configs-section{display:none!important}';
+    s.textContent += '#advisor-modal.show{padding-top:calc(60px + 1rem)}.advisor-modal-card{max-height:calc(100vh - 60px - 2rem)}';
     if (new URLSearchParams(window.location.search).get('code')) {
       s.textContent += 'button.reports-badge{display:none!important}';
     }
