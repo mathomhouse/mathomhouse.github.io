@@ -188,5 +188,11 @@ if (content.includes('id="armory-font-fix"')) {
   content = content.replace('</head>', `${fontFixStyle}\n</head>`);
 }
 
+// 13. Remove walkthrough video card from Import modal
+content = content.replace(
+  /\s*\/\/ Bookmarklet walkthrough videos[\s\S]*?modal\.appendChild\(_ar_buildWalkthroughVideoCard\(\)\);/,
+  ''
+);
+
 fs.writeFileSync(filePath, content, 'utf8');
 console.log(`Patched ${filePath}`);
