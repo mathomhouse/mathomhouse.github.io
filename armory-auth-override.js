@@ -13,8 +13,10 @@
       '.report-header .whats-new-pill',
       '.tab-btn[data-tab="myadvisorplans"]',
       '.tab-btn[data-tab="advisorplan"]',
-      '.runepool-advice-btn'
+      '.runepool-advice-btn',
+      '#rh-prefs-btn'
     ].join(',') + '{display:none!important}';
+    s.textContent += '.rh-prefs-modal{background:#1c2128!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}';
     document.head.appendChild(s);
   })();
 
@@ -47,6 +49,22 @@
             }
           }
         }
+      }
+
+      // Reuse existing shortcode on Save — inject cached code into POST body so
+      // the worker updates the existing entry rather than generating a new one.
+      if (path === '/report-config' && opts && (opts.method || '').toUpperCase() === 'POST') {
+        try {
+          var cached = JSON.parse(localStorage.getItem('playerReport') || '{}').shortcode;
+          if (cached) {
+            var bodyObj = JSON.parse(opts.body);
+            if (!bodyObj.shortcode) {
+              bodyObj.shortcode = cached;
+              var newOpts = Object.assign({}, opts, { body: JSON.stringify(bodyObj) });
+              return _baseFetch(url, newOpts);
+            }
+          }
+        } catch (_) {}
       }
 
       if (path.startsWith('/advisor/')) {
