@@ -27,6 +27,28 @@
   window.fetch = function(url, opts) {
     if (typeof url === 'string' && url.startsWith(_WORKER)) {
       const path = url.slice(_WORKER.length).replace(/\?.*$/, '');
+
+      // Inject auth on supplement GET reads — owner HMAC token or viewer shortcode
+      if (/^\/supplement\/[^/]+\/[0-9a-f]{16}$/.test(path)) {
+        const method = (opts && opts.method) ? opts.method.toUpperCase() : 'GET';
+        if (method === 'GET') {
+          const hasAuth = opts && opts.headers && (opts.headers['Authorization'] || opts.headers['authorization']);
+          if (!hasAuth) {
+            const token = window._ar_supplementToken;
+            const code = new URLSearchParams(window.location.search).get('code');
+            if (token) {
+              const newOpts = Object.assign({}, opts, {
+                headers: Object.assign({}, opts && opts.headers, { 'Authorization': 'Bearer ' + token })
+              });
+              return _baseFetch(url, newOpts);
+            } else if (code) {
+              const sep = url.includes('?') ? '&' : '?';
+              return _baseFetch(url + sep + 'code=' + encodeURIComponent(code), opts);
+            }
+          }
+        }
+      }
+
       if (path.startsWith('/advisor/')) {
         const method = (opts && opts.method) ? opts.method.toUpperCase() : 'GET';
         if (/^\/advisor\/index\//.test(path)) {
@@ -201,10 +223,29 @@
       importInput.addEventListener('change', e => { if (e.target.files[0]) importProfile(e.target.files[0]); });
       importLabel.appendChild(importInput);
 
+      // Task 3 — Sync from Cloud button (commented out)
+      // const syncBtn = document.createElement('button');
+      // syncBtn.className = 'btn-secondary';
+      // syncBtn.textContent = 'Sync from Cloud';
+      // syncBtn.addEventListener('click', async () => {
+      //   syncBtn.disabled = true;
+      //   syncBtn.textContent = 'Syncing…';
+      //   const sk = window.ArmoryIdentity.get()?.siteKey;
+      //   if (sk) {
+      //     ['inv','bench','chips','gear','runepool','heroes','formation','enigma','decor','skin']
+      //       .forEach(kind => localStorage.removeItem('armory_lastSync_' + kind + '_' + sk));
+      //   }
+      //   if (window._ar_hydrateSupplementsFromWorker) {
+      //     await window._ar_hydrateSupplementsFromWorker(sk);
+      //   }
+      //   location.reload();
+      // });
+
       const wrapper = document.createElement('span');
       wrapper.id = 'ar-profile-btns';
       wrapper.appendChild(exportBtn);
       wrapper.appendChild(importLabel);
+      // wrapper.appendChild(syncBtn); // Task 3
       btnRow.appendChild(wrapper);
     };
   }
@@ -322,8 +363,8 @@
           siteKey: data.siteKey, name: data.name || '', alliance: data.alliance || ''
         }));
         localStorage.setItem('armory_recovery_code', code);
-        // Supplement data is not in recovery — must re-import via bookmarklet after reload
-        alert('Profile restored.\n\nNote: supplement data (inventory, bench, chips) is not included — re-import via bookmarklet after reload.');
+        // Task 4 — remove incorrect alert (commented out; supplement data loads from KV automatically)
+        // alert('Profile restored.\n\nNote: supplement data (inventory, bench, chips) is not included — re-import via bookmarklet after reload.');
         location.reload();
       } catch {
         errEl.textContent = 'Network error — try again.';
