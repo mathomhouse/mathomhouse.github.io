@@ -188,7 +188,10 @@ if (content.includes('id="armory-font-fix"')) {
   content = content.replace('</head>', `${fontFixStyle}\n</head>`);
 }
 
-// 13. Remove walkthrough video card from Import modal
+// 13. Replace S2864-specific login prompt with generic text
+content = content.replace(/log in to your S2864 account/g, 'log in to your account');
+
+// 14. Remove walkthrough video card from Import modal
 content = content.replace(
   /\s*\/\/ Bookmarklet walkthrough videos[\s\S]*?modal\.appendChild\(_ar_buildWalkthroughVideoCard\(\)\);/,
   ''
