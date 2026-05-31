@@ -32,7 +32,9 @@ Additional specialized sheets: `styles/store.css`, `styles/calculators.css`, `st
 Page-specific JS lives in `scripts/` and is loaded via `<script src="scripts/foo.js" defer>`. Data files live in `data/` as JSON.
 
 ### Armory patch workflow
-`armory-report.html` is a third-party file (from 2864tw.com's armory tool) that gets patched to work on mathomhouse. The patch script is `scripts/patch-armory.js` — a Node.js CLI:
+**NEVER directly edit `armory-report.html`.** It is a third-party file (from 2864tw.com's armory tool) that gets replaced from source. All changes must go in `scripts/patch-armory.js` or `scripts/armory-auth-override.js`. Do not run the patch script either — the user runs it.
+
+The patch script is `scripts/patch-armory.js` — a Node.js CLI:
 ```
 node scripts/patch-armory.js armory-report.html
 ```
