@@ -26,6 +26,25 @@
   // Suppress calls to unimplemented routes (advisor, feedback) to avoid 404 noise.
   // Note: /flag-overrides is handled server-side — its fetch fires before this defer script runs.
   const _baseFetch = window.fetch.bind(window);
+
+  // Eager handshake — caches a single token promise so supplement GETs never race the handshake.
+  // Called immediately after ArmoryIdentity is patched; all concurrent GETs await the same promise.
+  let _tokenPromise = null;
+  function _ensureToken() {
+    if (_tokenPromise) return _tokenPromise;
+    const sk = window.ArmoryIdentity && window.ArmoryIdentity.get && window.ArmoryIdentity.get()?.siteKey;
+    if (!sk) return Promise.resolve(null);
+    _tokenPromise = _baseFetch(_WORKER + '/supplement/handshake', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ siteKey: sk })
+    }).then(r => r.json()).then(d => {
+      if (d.token) window._ar_supplementToken = d.token;
+      return d.token || null;
+    }).catch(() => null);
+    return _tokenPromise;
+  }
+
   window.fetch = function(url, opts) {
     if (typeof url === 'string' && url.startsWith(_WORKER)) {
       const path = url.slice(_WORKER.length).replace(/\?.*$/, '');
@@ -36,16 +55,21 @@
         if (method === 'GET') {
           const hasAuth = opts && opts.headers && (opts.headers['Authorization'] || opts.headers['authorization']);
           if (!hasAuth) {
-            const token = window._ar_supplementToken;
             const code = new URLSearchParams(window.location.search).get('code');
-            if (token) {
-              const newOpts = Object.assign({}, opts, {
-                headers: Object.assign({}, opts && opts.headers, { 'Authorization': 'Bearer ' + token })
-              });
-              return _baseFetch(url, newOpts);
-            } else if (code) {
+            if (code) {
+              // Viewer path — shortcode is the access credential
               const sep = url.includes('?') ? '&' : '?';
               return _baseFetch(url + sep + 'code=' + encodeURIComponent(code), opts);
+            } else {
+              // Owner path — wait for handshake token (may already be resolved)
+              const _url = url, _opts = opts;
+              return _ensureToken().then(function(token) {
+                if (!token) return _baseFetch(_url, _opts);
+                const newOpts = Object.assign({}, _opts, {
+                  headers: Object.assign({}, _opts && _opts.headers, { 'Authorization': 'Bearer ' + token })
+                });
+                return _baseFetch(_url, newOpts);
+              });
             }
           }
         }
@@ -113,6 +137,9 @@
   window.ArmoryIdentity.getUidHash = () => null;
   window.ArmoryIdentity.setUidHash = () => {};
   window.ArmoryIdentity.removeUidHash = () => {};
+
+  // Pre-fire handshake now that ArmoryIdentity.get() returns a valid siteKey
+  _ensureToken();
 
   // 2. Unlock modal → auto-approve
   window._ar_openUnlockModal = function(siteKey, playerName, onUnlock) {

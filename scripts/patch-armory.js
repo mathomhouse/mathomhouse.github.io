@@ -181,11 +181,11 @@ if (!content.includes('fonts.googleapis.com/css2?family=Rajdhani')) {
 
 // 12. Font override — mathomhouse.css body sets Crimson Pro (prose site font) but armory
 //     is a dense data UI; restore sans-serif. Injected last so it wins over mathomhouse.css.
-if (!content.includes('id="armory-font-fix"')) {
-  content = content.replace(
-    '</head>',
-    '<style id="armory-font-fix">body,button,input,select,textarea,.tab-btn{font-family:Rajdhani,-apple-system,BlinkMacSystemFont,sans-serif;font-size:15px;}</style>\n</head>'
-  );
+const fontFixStyle = '<style id="armory-font-fix">body,button,.tab-btn{font-family:Rajdhani,-apple-system,BlinkMacSystemFont,sans-serif;font-size:15px;}input,select,textarea{font-family:Rajdhani,-apple-system,BlinkMacSystemFont,sans-serif!important;font-size:15px!important;}</style>';
+if (content.includes('id="armory-font-fix"')) {
+  content = content.replace(/<style id="armory-font-fix">[\s\S]*?<\/style>/, fontFixStyle);
+} else {
+  content = content.replace('</head>', `${fontFixStyle}\n</head>`);
 }
 
 fs.writeFileSync(filePath, content, 'utf8');
