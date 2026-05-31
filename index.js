@@ -79,66 +79,36 @@ document.addEventListener('DOMContentLoaded', function () {
     };
   
     window.submitModalFeedback = function () {
-      const type = document.getElementById('feedback-type').value;
-      const feedback = document.getElementById('modal-feedback-input').value.trim();
-      const discord = document.getElementById('discord-name').value.trim();
-      const pageURL = window.location.href;
-  
-      if (!feedback) {
-        alert("Please enter your feedback.");
-        return;
-      }
-  
-      const localTime = new Date().toLocaleString('en-US', {
-        timeZone: 'America/Los_Angeles',
-        dateStyle: 'medium',
-        timeStyle: 'short'
-      });
-  
-      const userLang = navigator.language || navigator.userLanguage;
-  
-      const formURL = 'https://docs.google.com/forms/d/e/1FAIpQLSerJUAkcskPE5sDyrMarZoskzm6wpN2HvHzPeKxjnFmPZHddg/formResponse';
-      const formData = new FormData();
-      formData.append('entry.1593678335', type);
-      formData.append('entry.486773277', feedback);
-      formData.append('entry.1545987824', discord);
-  
-      fetch(formURL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: formData
-      });
-  
-      const discordWebhookUrl = 'https://discord.com/api/webhooks/1372702749145436160/T2Up9M6X6ZkgAU10Yw5zFTR6XBDiSs7cU33So9McJZp7SP504koGAIbQ7APYS9jx9TEN';
-      const discordPayload = {
-        embeds: [{
-          title: "📬 New Feedback Submitted",
-          color: 3447003,
-          fields: [
-            { name: "🗂️ Type", value: type, inline: true },
-            { name: "👤 Discord", value: discord || "N/A", inline: true },
-            { name: "📝 Message", value: feedback },
-            { name: "📍 Page", value: pageURL },
-            { name: "🌐 Language", value: userLang, inline: true },
-            { name: "🕒 Local Time (PST)", value: localTime, inline: true }
-          ],
-          timestamp: new Date().toISOString()
-        }]
-      };
-  
-      fetch(discordWebhookUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(discordPayload)
-      });
-  
-      document.getElementById('modal-feedback-input').value = '';
-      document.getElementById('discord-name').value = '';
-      charCount.textContent = '0';
-  
-      showToast("✅ Feedback submitted!");
-      setTimeout(() => closeFeedbackModal(), 3000);
-    };
+    const type = document.getElementById('feedback-type').value;
+    const feedback = document.getElementById('modal-feedback-input').value.trim();
+    const discord = document.getElementById('discord-name').value.trim();
+
+    if (!feedback) {
+      alert("Please enter your feedback.");
+      return;
+    }
+
+    const formURL = 'https://docs.google.com/forms/d/e/1FAIpQLSerJUAkcskPE5sDyrMarZoskzm6wpN2HvHzPeKxjnFmPZHddg/formResponse';
+    const formData = new FormData();
+    formData.append('entry.1593678335', type);
+    formData.append('entry.486773277', feedback);
+    formData.append('entry.1545987824', discord);
+
+    // Submit payload safely to Google Forms
+    fetch(formURL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: formData
+    });
+
+    // Clear the form inputs for the user
+    document.getElementById('modal-feedback-input').value = '';
+    document.getElementById('discord-name').value = '';
+    charCount.textContent = '0';
+
+    // Show confirmation toast notification
+    showToast("✅ Feedback submitted!");
+  };
   
     function showToast(message) {
       const toast = document.getElementById('toast');
