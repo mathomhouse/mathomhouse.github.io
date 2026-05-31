@@ -27,6 +27,9 @@ if (!content.includes('"header.js"')) {
 if (!content.includes('armory-auth-override.js')) {
   toInject.push('<script src="scripts/armory-auth-override.js" defer></script>');
 }
+if (!content.includes('scripts/feedback-modal.js')) {
+  toInject.push('<script src="scripts/feedback-modal.js" defer></script>');
+}
 if (toInject.length > 0) {
   content = content.replace('</head>', `${toInject.join('\n')}\n</head>`);
 }
@@ -141,6 +144,14 @@ if (!content.match(/connect-src[^"]*mathomhouse-tw-worker/)) {
   );
 }
 
+// 5h. Add docs.google.com to connect-src (feedback modal Google Forms POST)
+if (!content.match(/connect-src[^"]*docs\.google\.com/)) {
+  content = content.replace(
+    /(connect-src\s[^"]*?)('self')/,
+    "$1'self' https://docs.google.com"
+  );
+}
+
 // 5g. Add font-src (no such directive in original — default-src 'none' blocks woff2)
 if (!content.match(/font-src/)) {
   content = content.replace(
@@ -227,6 +238,35 @@ if (!content.includes('// MATHOMHOUSE: tex-credit-welcome')) {
   content = content.replace(
     "h2.textContent = 'Welcome Back';\r\n    container.appendChild(h2);\r\n\r\n    var sub = document.createElement('p');",
     `h2.textContent = 'Welcome Back';\r\n    container.appendChild(h2);\r\n\r\n    var _texCreditWB = document.createElement('p');\r\n    _texCreditWB.className = 'landing-credit';\r\n    _texCreditWB.textContent = '${CREDIT_TEXT}';\r\n    container.appendChild(_texCreditWB); // MATHOMHOUSE: tex-credit-welcome\r\n\r\n    var sub = document.createElement('p');`
+  );
+}
+
+// 16. Reinstate Feedback button — replaces dead feedback-widget.js block
+if (!content.includes('// MATHOMHOUSE: feedback-btn')) {
+  content = content.replace(
+    /\/\/ Feedback: handled by feedback-widget\.js \(auto-appends to <header>\)[\s\S]*?}, 100\);/,
+    `// MATHOMHOUSE: feedback-btn
+    var _mhFbBtn = document.createElement('button');
+    _mhFbBtn.className = 'rh-btn';
+    _mhFbBtn.type = 'button';
+    _mhFbBtn.title = 'Send Feedback';
+    var _mhFbSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    _mhFbSvg.setAttribute('width', '14'); _mhFbSvg.setAttribute('height', '14');
+    _mhFbSvg.setAttribute('viewBox', '0 0 24 24'); _mhFbSvg.setAttribute('fill', 'none');
+    _mhFbSvg.setAttribute('stroke', 'currentColor'); _mhFbSvg.setAttribute('stroke-width', '2');
+    _mhFbSvg.setAttribute('stroke-linecap', 'round'); _mhFbSvg.setAttribute('stroke-linejoin', 'round');
+    var _mhFbPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    _mhFbPath.setAttribute('d', 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z');
+    _mhFbSvg.appendChild(_mhFbPath);
+    _mhFbBtn.appendChild(_mhFbSvg);
+    var _mhFbLbl = document.createElement('span');
+    _mhFbLbl.className = 'rh-label';
+    _mhFbLbl.textContent = 'Feedback';
+    _mhFbBtn.appendChild(_mhFbLbl);
+    _mhFbBtn.addEventListener('click', function () {
+      if (typeof openFeedbackModal === 'function') openFeedbackModal();
+    });
+    right.insertBefore(_mhFbBtn, right.firstChild);`
   );
 }
 

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com https://www.googletagmanager.com; style-src 'unsafe-inline' https://mathomhouse.github.io https://fonts.googleapis.com https://translate.googleapis.com https://www.gstatic.com; img-src 'self' https://knight-cdn.akamaized.net https://h5.topwargame.com https://raw.githubusercontent.com data: https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://fonts.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev https://fight-report-va.oss-accelerate.aliyuncs.com https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://push-worker.27tb8s6fct.workers.dev https://*.clarity.ms https://c.bing.com https://www.google-analytics.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://translate.google.com https://www.youtube-nocookie.com; font-src https://fonts.gstatic.com;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com https://www.googletagmanager.com; style-src 'unsafe-inline' https://mathomhouse.github.io https://fonts.googleapis.com https://translate.googleapis.com https://www.gstatic.com; img-src 'self' https://knight-cdn.akamaized.net https://h5.topwargame.com https://raw.githubusercontent.com data: https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://fonts.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://docs.google.com https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev https://fight-report-va.oss-accelerate.aliyuncs.com https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://push-worker.27tb8s6fct.workers.dev https://*.clarity.ms https://c.bing.com https://www.google-analytics.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://translate.google.com https://www.youtube-nocookie.com; font-src https://fonts.gstatic.com;">
 <title>Armory Report | Mathom House</title>
 <style>
   
@@ -3342,9 +3342,11 @@
 <link rel="stylesheet" href="styles/layout.css">
 <script src="header.js" defer></script>
 <script src="scripts/armory-auth-override.js" defer></script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<script src="scripts/feedback-modal.js" defer></script>
+
 <style id="armory-font-fix">body,button,.tab-btn{font-family:Rajdhani,-apple-system,BlinkMacSystemFont,sans-serif;font-size:15px;}input,select,textarea{font-family:Rajdhani,-apple-system,BlinkMacSystemFont,sans-serif!important;font-size:15px!important;}</style>
 <style id="armory-tex-credit-css">.landing-credit{font-size:.78rem;color:var(--muted);text-align:center;margin:0 auto .5rem;opacity:.7;}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 </head>
 <body>
 <header id="header-placeholder"></header>
@@ -5815,6 +5817,11 @@
     h2.textContent = 'Welcome Back';
     container.appendChild(h2);
 
+    var _texCreditWB = document.createElement('p');
+    _texCreditWB.className = 'landing-credit';
+    _texCreditWB.textContent = 'Credit for implementation of the armory report goes to Tex (S2864).';
+    container.appendChild(_texCreditWB); // MATHOMHOUSE: tex-credit-welcome
+
     var sub = document.createElement('p');
     sub.style.marginBottom = '1.5rem';
     sub.textContent = 'You have a saved report configuration.';
@@ -7178,16 +7185,28 @@
     langBtn.addEventListener('click', function() { openLangPicker(); });
     right.appendChild(langBtn);
 
-    // Feedback: handled by feedback-widget.js (auto-appends to <header>)
-    // Move floating widget button into header (may have been hidden on landing or floating)
-    setTimeout(function() {
-      var fwBtn = document.getElementById('fw-hdr-btn');
-      if (fwBtn) {
-        fwBtn.style.cssText = ''; // Clear any display:none or position:fixed
-        fwBtn.style.display = '';
-        if (fwBtn.parentNode !== right) right.insertBefore(fwBtn, right.firstChild);
-      }
-    }, 100);
+    // MATHOMHOUSE: feedback-btn
+    var _mhFbBtn = document.createElement('button');
+    _mhFbBtn.className = 'rh-btn';
+    _mhFbBtn.type = 'button';
+    _mhFbBtn.title = 'Send Feedback';
+    var _mhFbSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    _mhFbSvg.setAttribute('width', '14'); _mhFbSvg.setAttribute('height', '14');
+    _mhFbSvg.setAttribute('viewBox', '0 0 24 24'); _mhFbSvg.setAttribute('fill', 'none');
+    _mhFbSvg.setAttribute('stroke', 'currentColor'); _mhFbSvg.setAttribute('stroke-width', '2');
+    _mhFbSvg.setAttribute('stroke-linecap', 'round'); _mhFbSvg.setAttribute('stroke-linejoin', 'round');
+    var _mhFbPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    _mhFbPath.setAttribute('d', 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z');
+    _mhFbSvg.appendChild(_mhFbPath);
+    _mhFbBtn.appendChild(_mhFbSvg);
+    var _mhFbLbl = document.createElement('span');
+    _mhFbLbl.className = 'rh-label';
+    _mhFbLbl.textContent = 'Feedback';
+    _mhFbBtn.appendChild(_mhFbLbl);
+    _mhFbBtn.addEventListener('click', function () {
+      if (typeof openFeedbackModal === 'function') openFeedbackModal();
+    });
+    right.insertBefore(_mhFbBtn, right.firstChild);
 
     // Settings / Identity button
     var prefsBtn = document.createElement('button');
@@ -31595,6 +31614,11 @@
     title.className = 'landing-title';
     title.textContent = 'My Armory Report';
     hero.appendChild(title);
+
+    var _texCreditL = document.createElement('p');
+    _texCreditL.className = 'landing-credit';
+    _texCreditL.textContent = 'Credit for implementation of the armory report goes to Tex (S2864).'; // MATHOMHOUSE: tex-credit-landing-js
+    hero.appendChild(_texCreditL);
 
     // Description
     var desc = document.createElement('p');
