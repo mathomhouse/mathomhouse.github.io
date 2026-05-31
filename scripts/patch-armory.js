@@ -197,5 +197,38 @@ content = content.replace(
   ''
 );
 
+// 15. Tex credit — CSS
+const creditCSS = '<style id="armory-tex-credit-css">.landing-credit{font-size:.78rem;color:var(--muted);text-align:center;margin:0 auto .5rem;opacity:.7;}</style>';
+if (content.includes('id="armory-tex-credit-css"')) {
+  content = content.replace(/<style id="armory-tex-credit-css">[\s\S]*?<\/style>/, creditCSS);
+} else {
+  content = content.replace('</head>', `${creditCSS}\n</head>`);
+}
+
+// 15a. Tex credit — static HTML landing (between h2 title and landing-desc paragraph)
+const CREDIT_TEXT = 'Credit for implementation of the armory report goes to Tex (S2864).';
+if (!content.includes('<!-- MATHOMHOUSE: tex-credit-landing -->')) {
+  content = content.replace(
+    '<p class="landing-desc">Paste your battle report IDs',
+    `<p class="landing-credit">${CREDIT_TEXT}</p>\n    <!-- MATHOMHOUSE: tex-credit-landing -->\n    <p class="landing-desc">Paste your battle report IDs`
+  );
+}
+
+// 15b. Tex credit — JS-rendered landing page (after title appended, before description)
+if (!content.includes('// MATHOMHOUSE: tex-credit-landing-js')) {
+  content = content.replace(
+    "// Description\r\n    var desc = document.createElement('p');",
+    `var _texCreditL = document.createElement('p');\r\n    _texCreditL.className = 'landing-credit';\r\n    _texCreditL.textContent = '${CREDIT_TEXT}'; // MATHOMHOUSE: tex-credit-landing-js\r\n    hero.appendChild(_texCreditL);\r\n\r\n    // Description\r\n    var desc = document.createElement('p');`
+  );
+}
+
+// 15c. Tex credit — Welcome Back dialog (before "You have a saved report configuration")
+if (!content.includes('// MATHOMHOUSE: tex-credit-welcome')) {
+  content = content.replace(
+    "h2.textContent = 'Welcome Back';\r\n    container.appendChild(h2);\r\n\r\n    var sub = document.createElement('p');",
+    `h2.textContent = 'Welcome Back';\r\n    container.appendChild(h2);\r\n\r\n    var _texCreditWB = document.createElement('p');\r\n    _texCreditWB.className = 'landing-credit';\r\n    _texCreditWB.textContent = '${CREDIT_TEXT}';\r\n    container.appendChild(_texCreditWB); // MATHOMHOUSE: tex-credit-welcome\r\n\r\n    var sub = document.createElement('p');`
+  );
+}
+
 fs.writeFileSync(filePath, content, 'utf8');
 console.log(`Patched ${filePath}`);

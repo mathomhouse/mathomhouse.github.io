@@ -19,7 +19,7 @@
     s.textContent += '.rh-prefs-modal{background:#1c2128!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}';
     s.textContent += '.saved-configs-section{display:none!important}';
     s.textContent += '#advisor-modal.show{padding-top:calc(60px + 1rem)}.advisor-modal-card{max-height:calc(100vh - 60px - 2rem)}';
-    s.textContent += '.modal-bg:has(.sup-unlock-modal){padding-top:calc(20px + 1rem)}.sup-unlock-modal{max-height:calc(100vh - 20px - 2rem);overflow-y:auto}';
+    s.textContent += '.modal-bg:has(.sup-unlock-modal){padding-top:calc(20px + 1rem)}.sup-unlock-modal{max-height:calc(100vh - 20px - 2rem);overflow-y:auto}.sup-unlock-modal>h2:first-child{margin-top:0}';
     if (new URLSearchParams(window.location.search).get('code')) {
       s.textContent += 'button.reports-badge{display:none!important}';
     }
