@@ -10,9 +10,11 @@
     s.textContent = [
       '.report-header a.rh-btn[title="Home"]',
       '.report-header .bnp-wrap',
-      '.report-header .whats-new-pill'
+      '.report-header .whats-new-pill',
+      '.tab-btn[data-tab="myadvisorplans"]',
+      '.tab-btn[data-tab="advisorplan"]',
+      '.runepool-advice-btn'
     ].join(',') + '{display:none!important}';
-    s.textContent += '.rh-prefs-modal{background:#1c2128!important}';
     document.head.appendChild(s);
   })();
 
