@@ -165,7 +165,7 @@ if (!content.includes('fonts.googleapis.com/css2?family=Rajdhani')) {
 //     mathomhouse.css sets body to Crimson Pro (prose font); battle-report is a dense data UI.
 //     Form elements don't inherit font-family by default, hence !important on those.
 //     Always strip and re-inject so the position stays correct on re-runs.
-const fontFixStyle = '<style id="br-font-fix">body,p,th,td,li,h1,h2,h3,h4,h5,h6,button{font-family:\'Rajdhani\',-apple-system,BlinkMacSystemFont,sans-serif;}input,select,textarea{font-family:\'Rajdhani\',-apple-system,BlinkMacSystemFont,sans-serif!important;}</style>';
+const fontFixStyle = '<style id="br-font-fix">body,p,th,td,li,h1,h2,h3,h4,h5,h6,button{font-family:\'Rajdhani\',-apple-system,BlinkMacSystemFont,sans-serif;}input,select,textarea{font-family:\'Rajdhani\',-apple-system,BlinkMacSystemFont,sans-serif!important;}.home-btn,#bnpBtn,#bnpPop,.theme-btn{display:none!important;}</style>';
 content = content.replace(/<style id="br-font-fix">[\s\S]*?<\/style>\n?/, '');
 content = content.replace('</head>', `${fontFixStyle}\n</head>`);
 
