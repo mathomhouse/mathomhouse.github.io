@@ -14,8 +14,10 @@ if (!content.includes('fonts.googleapis.com/css2?family=Rajdhani')) {
   content = content.replace('</head>', `${fontsLink}\n</head>`);
 }
 
-// 2. Font override — ensure inputs/selects/textareas use Rajdhani (browsers don't inherit font-family into form elements by default)
-const fontFixStyle = '<style id="br-font-fix">input,select,textarea{font-family:\'Rajdhani\',-apple-system,BlinkMacSystemFont,sans-serif!important;}</style>';
+// 2. Font override — mathomhouse.css sets body to Crimson Pro (prose font); battle-report is a dense
+//    data UI so restore Rajdhani everywhere. Injected after mathomhouse.css so it wins.
+//    Form elements don't inherit font-family by default, so they get !important separately.
+const fontFixStyle = '<style id="br-font-fix">body,p,th,td,li,h1,h2,h3,h4,h5,h6,button{font-family:\'Rajdhani\',-apple-system,BlinkMacSystemFont,sans-serif;}input,select,textarea{font-family:\'Rajdhani\',-apple-system,BlinkMacSystemFont,sans-serif!important;}</style>';
 if (content.includes('id="br-font-fix"')) {
   content = content.replace(/<style id="br-font-fix">[\s\S]*?<\/style>/, fontFixStyle);
 } else {
@@ -32,12 +34,7 @@ if (content.includes('fk boats')) {
   );
 }
 
-// 4. Inject header placeholder after <body> (if not already present)
-if (!content.includes('id="header-placeholder"')) {
-  content = content.replace(/(<body[^>]*>)/s, '$1\n<header id="header-placeholder"></header>');
-}
-
-// 5. Inject site assets into </head> (each guarded against duplicates)
+// 4. Inject site assets into </head> — same set armory uses, each guarded against duplicates
 const toInject = [];
 if (!content.includes('localStorage.getItem(\'theme\')')) {
   toInject.push('<script>(function(){var t=localStorage.getItem(\'theme\');if(t)document.documentElement.setAttribute(\'data-theme\',t)})();</script>');
@@ -48,11 +45,19 @@ if (!content.includes('styles/mathomhouse.css')) {
 if (!content.includes('styles/header.css')) {
   toInject.push('<link rel="stylesheet" href="styles/header.css">');
 }
+if (!content.includes('styles/layout.css')) {
+  toInject.push('<link rel="stylesheet" href="styles/layout.css">');
+}
 if (!content.includes('"header.js"')) {
   toInject.push('<script src="header.js" defer></script>');
 }
 if (toInject.length > 0) {
   content = content.replace('</head>', `${toInject.join('\n')}\n</head>`);
+}
+
+// 5. Inject header placeholder after <body> (if not already present)
+if (!content.includes('id="header-placeholder"')) {
+  content = content.replace(/(<body[^>]*>)/s, '$1\n<header id="header-placeholder"></header>');
 }
 
 // 6. Ensure mathomhouse site footer exists (before </body>)
