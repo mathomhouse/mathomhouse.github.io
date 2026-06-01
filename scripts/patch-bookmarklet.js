@@ -66,6 +66,16 @@ content = content.replace(
   ''
 );
 
+// 5. Replace 2864tw.com status messages with mathomhouse URL.
+content = content.replace(
+  'Tap Copy. Then paste at 2864tw.com → armory-report.',
+  'Tap Copy. Then paste at https://mathomhouse.github.io/armory-report.html.'
+);
+content = content.replace(
+  'Done. Paste at 2864tw.com → armory-report → use this snapshot. Tap Close to dismiss.',
+  'Paste at https://mathomhouse.github.io/armory-report.html → Paste from clipboard. Tap Close to dismiss.'
+);
+
 if (content === original) {
   console.log('WARNING: Dismantle section marker found but no changes were applied. Check patterns.');
   process.exit(1);
