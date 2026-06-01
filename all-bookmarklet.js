@@ -9,7 +9,8 @@
 // Output envelope: { v: 2, ts, inventory, beasts, chips, gear, heroes, errors }
 // Each section preserves the v=1 shape produced by the existing single-purpose
 // bookmarklets so the wizard's existing handlers can route them unchanged.
-(function () {
+(function () {
+
   function buildDump(stepHook) {
     var req = window.__require;
     if (!req) throw new Error('Game not loaded — wait for the game to finish loading, then retry');
@@ -96,6 +97,8 @@
     }
 
     // ─── Inventory ────────────────────────────────────────────────────────
+    // Reference exposed to the dismantle wizard via sharedExtractInventory
+    // so it can refresh the snapshot's inventory section in place.
     async function extractInventory() {
       stepHook && stepHook('Inventory…');
       var UD = req('UserData').default;
@@ -153,9 +156,9 @@
       };
       await closePanel(UIDataInfo.BagPanel, bagPath);
       return dump;
-    }
+    }
 
-    // ─── Bench beasts (Q3+ unplaced) ──────────────────────────────────────
+    // ─── Bench beasts (Q4+ purple/gold unplaced) ─────────────────────────
     async function extractBeasts() {
       stepHook && stepHook('Beasts…');
       var beastPath = 'UICanvas/PopLayer/UIFrameScreenWithBottom/CONTENT/EnigmaBeastListPanel';
@@ -185,7 +188,13 @@
       for (var k = 0; k < arr.length; k++) {
         var w = arr[k];
         if (!w || !w.data || !w._cfg) continue;
-        if ((w._cfg.quality || 0) < 3) continue;
+        // Purple (Q4) + Gold (Q5) only. Q3 (blue) and below were dropped
+        // because heavy spenders carry 1000-1400+ Q3+ bench beasts, which
+        // overflowed the receiver's 800-beast cap on the enigmaState section
+        // and bloated localStorage / KV payloads. Lower-quality beasts are
+        // not real platform candidates anyway, so the optimizer doesn't miss
+        // anything by ignoring them.
+        if ((w._cfg.quality || 0) < 4) continue;
         if (deployed[w.strId]) { skipped++; continue; }
         var b = w.data;
         out.push({
@@ -619,9 +628,11 @@
       for (var bi = 0; bi < bArr.length; bi++) {
         var w = bArr[bi];
         if (!w || !w.data) continue;
-        // Skip very-low-quality beasts (matches existing extractBeasts threshold).
+        // Keep only purple (Q4) + gold (Q5), matching extractBeasts. Blue
+        // and below would push heavy spenders past the receiver's 800-beast
+        // cap and bloat the supplement payload for no real optimizer value.
         var q = (w._cfg && w._cfg.quality != null) ? w._cfg.quality : (w.data && w.data.quality);
-        if (q != null && q < 3) continue;
+        if (q != null && q < 4) continue;
         var d = w.data;
         beasts.push({
           id: w.strId != null ? String(w.strId) : (d.id != null ? String(d.id) : null),
@@ -949,17 +960,48 @@
     return (n / (1024 * 1024)).toFixed(2) + ' MB';
   }
 
-  function attachCopyUI(overlay, text, summary) {
+  // ───────────────────────────────────────────────────────────────────────
+  // Builds the human-readable "summary" line (Y inv · N chips · …) from a
+  // dump + JSON byte size. Extracted so the dismantle refresh path can
+  // recompute it after mutating dump.inventory in place.
+  function summarizeDump(dump, jsonLength) {
+    var sections = [];
+    if (dump.inventory) sections.push((dump.inventory.tabs ? Object.keys(dump.inventory.tabs).reduce(function (s, k) { return s + (dump.inventory.tabs[k] || []).length; }, 0) : 0) + ' inv');
+    if (dump.enigmaState) {
+      var deployedHoles = (dump.enigmaState.fields || []).reduce(function (s, f) {
+        return s + ((f && f.holes) || []).filter(function (h) { return h && h.beastId; }).length;
+      }, 0);
+      sections.push(deployedHoles + ' deployed / ' + (dump.enigmaState.beasts ? dump.enigmaState.beasts.length : 0) + ' beasts');
+    } else if (dump.beasts) {
+      sections.push(dump.beasts.kept + ' beasts');
+    }
+    if (dump.chips) sections.push(dump.chips.total + ' chips');
+    if (dump.gear) sections.push(dump.gear.summary.goldCount + ' gold gear');
+    if (dump.heroes) sections.push(dump.heroes.list.length + ' heroes');
+    if (dump.decorations) sections.push((dump.decorations.active ? dump.decorations.active.length : 0) + ' decor');
+    if (dump.baseSkin && dump.baseSkin.activeSkinId) sections.push('skin ' + dump.baseSkin.activeSkinId);
+    if (dump.formation) {
+      sections.push((dump.formation.talents ? dump.formation.talents.length : 0) + ' formation talents');
+      var presetCount = (dump.formation.presets || []).filter(function (p) { return p && p.slots && p.slots.some(function (s) { return s.armyId; }); }).length;
+      if (presetCount) sections.push(presetCount + ' march presets');
+    }
+    var summary = sections.join(' · ') + ' — ' + fmtBytes(jsonLength);
+    if (dump.errors && dump.errors.length) summary += ' · ' + dump.errors.length + ' section(s) failed';
+    return summary;
+  }
+
+  function attachCopyUI(overlay, dump) {
     var bg = overlay.root;
-    overlay.sub.textContent = summary;
+    var currentText = JSON.stringify(dump);
+    overlay.sub.textContent = summarizeDump(dump, currentText.length);
     var ta = document.createElement('textarea');
-    ta.value = text;
+    ta.value = currentText;
     ta.readOnly = true;
     ta.style.cssText = 'flex:1;width:100%;background:#0d1117;color:#e6edf3;border:1px solid #30363d;border-radius:6px;padding:8px;font-family:monospace;font-size:11px;min-height:160px;box-sizing:border-box;';
     bg.appendChild(ta);
     var status = document.createElement('div');
     status.style.cssText = 'color:#8b949e;font-size:12px;margin-top:10px;text-align:center;min-height:1.4em;';
-    status.textContent = 'Tap Copy. Then paste at mathomhouse.github.io → armory-report.';
+    status.textContent = 'Tap Copy. Then paste at 2864tw.com → armory-report.';
     bg.appendChild(status);
     var row = document.createElement('div');
     row.style.cssText = 'display:flex;gap:8px;margin-top:8px;';
@@ -972,7 +1014,7 @@
         copyBtn.style.background = '#2ea043';
         copyBtn.disabled = true;
         status.style.color = '#3fb950';
-        status.textContent = 'Done. Paste at mathomhouse.github.io → armory-report → use this snapshot. Tap Close to dismiss.';
+        status.textContent = 'Done. Paste at 2864tw.com → armory-report → use this snapshot. Tap Close to dismiss.';
         closeBtn.textContent = 'Close';
         closeBtn.style.background = '#3fb950';
         closeBtn.style.color = '#0d1117';
@@ -987,21 +1029,21 @@
         status.style.color = '#f85149';
         status.textContent = 'Couldn’t auto-copy' + (reason ? ' (' + reason + ')' : '') + '. Long-press the JSON above → Select All → Copy.';
         // Pre-select so manual copy is one tap easier
-        try { ta.readOnly = false; ta.focus(); ta.select(); ta.setSelectionRange(0, text.length); ta.readOnly = true; } catch (_) {}
+        try { ta.readOnly = false; ta.focus(); ta.select(); ta.setSelectionRange(0, currentText.length); ta.readOnly = true; } catch (_) {}
       }
       function execFallback() {
         try {
           ta.readOnly = false;
           ta.focus();
           ta.select();
-          ta.setSelectionRange(0, text.length);
+          ta.setSelectionRange(0, currentText.length);
           var did = document.execCommand('copy');
           ta.readOnly = true;
           if (did) ok(); else fail('execCommand returned false');
         } catch (e) { fail(e && e.message); }
       }
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text)
+        navigator.clipboard.writeText(currentText)
           .then(ok)
           .catch(function (e) {
             // Fall back to execCommand path on permission/secure-context refusal
@@ -1012,12 +1054,13 @@
       }
     };
     var closeBtn = document.createElement('button');
-    closeBtn.textContent = 'Close without copying';
+    closeBtn.textContent = 'Close';
     closeBtn.style.cssText = 'padding:14px 18px;background:transparent;color:#8b949e;border:1px solid #30363d;border-radius:6px;font-size:13px;';
     closeBtn.onclick = function () { try { document.body.removeChild(bg); } catch (_) {} };
     row.appendChild(copyBtn);
     row.appendChild(closeBtn);
     bg.appendChild(row);
+
   }
 
   function showError(message, diagText) {
@@ -1094,37 +1137,13 @@
     // UI fails to render, the snapshot itself is already in `dump`, so we
     // fall back to alert with the JSON exposed via window.__snapshot.
     try {
-      var json = JSON.stringify(dump);
-      var sections = [];
-      if (dump.inventory) sections.push((dump.inventory.tabs ? Object.keys(dump.inventory.tabs).reduce(function (s, k) { return s + (dump.inventory.tabs[k] || []).length; }, 0) : 0) + ' inv');
-      if (dump.enigmaState) {
-        var deployedHoles = (dump.enigmaState.fields || []).reduce(function (s, f) {
-          return s + ((f && f.holes) || []).filter(function (h) { return h && h.beastId; }).length;
-        }, 0);
-        sections.push(deployedHoles + ' deployed / ' + (dump.enigmaState.beasts ? dump.enigmaState.beasts.length : 0) + ' beasts');
-      } else if (dump.beasts) {
-        sections.push(dump.beasts.kept + ' beasts');
-      }
-      if (dump.chips) sections.push(dump.chips.total + ' chips');
-      if (dump.gear) sections.push(dump.gear.summary.goldCount + ' gold gear');
-      if (dump.heroes) sections.push(dump.heroes.list.length + ' heroes');
-      if (dump.decorations) sections.push((dump.decorations.active ? dump.decorations.active.length : 0) + ' decor');
-      if (dump.baseSkin && dump.baseSkin.activeSkinId) sections.push('skin ' + dump.baseSkin.activeSkinId);
-      if (dump.formation) {
-        sections.push((dump.formation.talents ? dump.formation.talents.length : 0) + ' formation talents');
-        var presetCount = (dump.formation.presets || []).filter(function (p) { return p && p.slots && p.slots.some(function (s) { return s.armyId; }); }).length;
-        if (presetCount) sections.push(presetCount + ' march presets');
-      }
-      var summary = sections.join(' · ') + ' — ' + fmtBytes(json.length);
-      if (dump.errors && dump.errors.length) {
-        summary += ' · ' + dump.errors.length + ' section(s) failed';
-      }
       if (overlay) {
         overlay.setHeader(dump.errors && dump.errors.length ? 'Partial snapshot' : 'Snapshot ready');
         overlay.setHeaderColor(dump.errors && dump.errors.length ? '#d29922' : '#3fb950');
-        attachCopyUI(overlay, json, summary);
+        attachCopyUI(overlay, dump);
       } else {
-        try { alert('Snapshot: ' + summary); } catch (_) {}
+        var jsonAlt = JSON.stringify(dump);
+        try { alert('Snapshot: ' + summarizeDump(dump, jsonAlt.length)); } catch (_) {}
       }
     } catch (uiErr) {
       // Last-ditch surface — still expose the JSON so the run isn't wasted
