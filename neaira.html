@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top War Calculators</title>
+    <!-- Anti-flash -->
+    <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/mathomhouse.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/calculators.css">
+    <script src="header.js" defer></script>
+    <link rel="icon" href="/cutelogo.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/cutelogo.ico">
+    <link rel="apple-touch-icon" sizes="167x167" href="/cutelogo.ico">
+    <link rel="apple-touch-icon" sizes="120x120" href="/cutelogo.ico">
+    <link rel="apple-touch-icon" sizes="76x76" href="/cutelogo.ico">
+<style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        /* The Spinner Arrow */
+        .arrow {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 30px solid #ff4757;
+            z-index: 10;
+        }
+
+        /* The Visual Wheel */
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 8px solid #333;
+            background: conic-gradient(
+                #ff6b6b 0deg 60deg, 
+                #4bcff6 60deg 120deg, 
+                #1dd1a1 120deg 180deg, 
+                #feca57 180deg 240deg, 
+                #5f27cd 240deg 300deg, 
+                #00d2d3 300deg 360deg
+            );
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); /* Smooth deceleration */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Center pin */
+        .wheel::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        button {
+            margin-top: 30px;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background-color: #1dd1a1;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(29, 209, 161, 0.4);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #10ac84;
+            transform: scale(1.05);
+        }
+
+        button:disabled {
+            background-color: #57606f;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .result {
+            margin-top: 25px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            min-height: 36px; /* Prevents layout shift */
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header-placeholder"></header>
+
+    <h1>Official Account Value Calculator</h1>
+    
+    <div class="wheel-container">
+        <div class="arrow"></div>
+        <div class="wheel" id="wheel"></div>
+    </div>
+
+    <button id="spinBtn" onclick="spinWheel()">Spin for Value!</button>
+
+    <div class="result" id="resultDisplay"></div>
+
+    <script>
+        let currentRotation = 0;
+        const wheel = document.getElementById('wheel');
+        const spinBtn = document.getElementById('spinBtn');
+        const resultDisplay = document.getElementById('resultDisplay');
+
+        function spinWheel() {
+            // 1. Disable button so they can't spam spin
+            spinBtn.disabled = true;
+            resultDisplay.innerText = "Calculating value...";
+
+            // 2. Generate a truly random number joke prize
+            // Math.random() * (max - min) + min
+            const randomPrize = (Math.random() * (10000 - 1) + 1).toFixed(2);
+
+            // 3. Calculate a random spin rotation
+            // We add 1440 degrees (4 full spins) so it looks like it's spinning fast,
+            // plus a extra random degrees so it lands on a random visual spot.
+            const extraDegrees = Math.floor(Math.random() * 360);
+            currentRotation += 1440 + extraDegrees; 
+
+            // 4. Apply the rotation to the CSS
+            wheel.style.transform = `rotate(${currentRotation}deg)`;
+
+            // 5. Wait for the 4-second CSS transition to finish before showing the price
+            setTimeout(() => {
+                resultDisplay.innerText = `Your account is worth: $${parseFloat(randomPrize).toLocaleString()}`;
+                spinBtn.disabled = false;
+            }, 4000); // Must match the 4s in the CSS transition
+        }
+    </script>
+
+</body>
+</html>
