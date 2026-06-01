@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top War Calculators</title>
+    <title>Account Valuation Wheel — Mathom House</title>
     <!-- Anti-flash -->
     <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,31 +16,29 @@
     <link rel="stylesheet" href="styles/calculators.css">
     <script src="header.js" defer></script>
     <link rel="icon" href="/cutelogo.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="/cutelogo.ico">
-    <link rel="apple-touch-icon" sizes="167x167" href="/cutelogo.ico">
-    <link rel="apple-touch-icon" sizes="120x120" href="/cutelogo.ico">
-    <link rel="apple-touch-icon" sizes="76x76" href="/cutelogo.ico">
-<style>
+    
+    <style>
+        /* Fixes the flex layout bug by letting the body flow naturally */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a1a1a;
-            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Dedicated layout wrapper to cleanly stack and center content */
+        .wheel-page-center {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        h1 {
-            margin-bottom: 20px;
+            text-align: center;
+            margin-top: 40px;
         }
 
         .wheel-container {
             position: relative;
             width: 300px;
             height: 300px;
+            margin: 20px 0;
         }
 
         /* The Spinner Arrow */
@@ -53,7 +51,7 @@
             height: 0;
             border-left: 15px solid transparent;
             border-right: 15px solid transparent;
-            border-top: 30px solid #ff4757;
+            border-top: 30px solid var(--red); /* Using system design token */
             z-index: 10;
         }
 
@@ -62,7 +60,7 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            border: 8px solid #333;
+            border: 8px solid var(--border); /* Using system design token */
             background: conic-gradient(
                 #ff6b6b 0deg 60deg, 
                 #4bcff6 60deg 120deg, 
@@ -71,7 +69,7 @@
                 #5f27cd 240deg 300deg, 
                 #00d2d3 300deg 360deg
             );
-            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); /* Smooth deceleration */
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); 
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
@@ -84,42 +82,17 @@
             transform: translate(-50%, -50%);
             width: 30px;
             height: 30px;
-            background-color: #fff;
+            background-color: var(--surface); /* Match site theme */
+            border: 2px solid var(--border);
             border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-        }
-
-        button {
-            margin-top: 30px;
-            padding: 12px 30px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            background-color: #1dd1a1;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(29, 209, 161, 0.4);
-            transition: transform 0.2s, background-color 0.2s;
-        }
-
-        button:hover {
-            background-color: #10ac84;
-            transform: scale(1.05);
-        }
-
-        button:disabled {
-            background-color: #57606f;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
         }
 
         .result {
             margin-top: 25px;
             font-size: 1.5rem;
             font-weight: bold;
-            min-height: 36px; /* Prevents layout shift */
+            min-height: 36px;
+            font-family: 'Rajdhani', sans-serif;
         }
     </style>
 </head>
@@ -127,16 +100,22 @@
 <body>
     <header id="header-placeholder"></header>
 
-    <h1>Official Account Value Calculator</h1>
-    
-    <div class="wheel-container">
-        <div class="arrow"></div>
-        <div class="wheel" id="wheel"></div>
+    <!-- Wrapped inside a standard system container to enforce layout consistency -->
+    <div class="container">
+        <div class="wheel-page-center">
+            <h1>Official Account Value Calculator</h1>
+            <p class="calc-desc">Calculate your exact, mathematically verified market value down to the penny.</p>
+            
+            <div class="wheel-container">
+                <div class="arrow"></div>
+                <div class="wheel" id="wheel"></div>
+            </div>
+
+            <button id="spinBtn" class="calc-btn" onclick="spinWheel()">Spin for Value!</button>
+
+            <div class="result" id="resultDisplay"></div>
+        </div>
     </div>
-
-    <button id="spinBtn" onclick="spinWheel()">Spin for Value!</button>
-
-    <div class="result" id="resultDisplay"></div>
 
     <script>
         let currentRotation = 0;
@@ -144,31 +123,65 @@
         const spinBtn = document.getElementById('spinBtn');
         const resultDisplay = document.getElementById('resultDisplay');
 
+        // The pool of insult/joke prizes
+        const jokePrizes = [
+            "One half-eaten taco",
+            "$0.03",
+            "A single base skin voucher",
+            "Negative $4.50 (You owe us money for hosting this)",
+            "A firm handshake from an R1",
+            "3 Pennies and a piece of lint",
+            "Pocket change found under the seat"
+        ];
+
+        // Comedic loading steps that swap out while spinning
+        const loadingPhrases = [
+            "Scanning Armory builds...",
+            "Evaluating component logic...",
+            "Checking hero layout parameters...",
+            "Laughing at your server rank...",
+            "Calculating precise emotional damage...",
+            "Finalizing appraisal..."
+        ];
+
         function spinWheel() {
-            // 1. Disable button so they can't spam spin
+            // Disable button and clear previous results
             spinBtn.disabled = true;
-            resultDisplay.innerText = "Calculating value...";
+            
+            // Cycle through loading phrases while spinning to build tension
+            let phraseIndex = 0;
+            resultDisplay.innerText = loadingPhrases[phraseIndex];
+            
+            const phraseInterval = setInterval(() => {
+                phraseIndex++;
+                if (phraseIndex < loadingPhrases.length) {
+                    resultDisplay.innerText = loadingPhrases[phraseIndex];
+                }
+            }, 650); // Shifts text slightly faster than once every half second
 
-            // 2. Generate a truly random number joke prize
-            // Math.random() * (max - min) + min
-            const randomPrize = (Math.random() * (10000 - 1) + 1).toFixed(2);
+            // Calculate the result immediately, but don't show it yet
+            let finalOutput = "";
+            const isJoke = Math.random() < 0.15; // 15% probability
 
-            // 3. Calculate a random spin rotation
-            // We add 1440 degrees (4 full spins) so it looks like it's spinning fast,
-            // plus a extra random degrees so it lands on a random visual spot.
+            if (isJoke) {
+                const randomJoke = jokePrizes[Math.floor(Math.random() * jokePrizes.length)];
+                finalOutput = `Your account is worth: <span style="color: var(--red); font-weight: bold;">${randomJoke}</span>`;
+            } else {
+                // Regular math estimation ($1 to $10,000)
+                const randomPrize = (Math.random() * (10000 - 1) + 1).toFixed(2);
+                finalOutput = `Your account value is officially: <span class="gold-text">$${parseFloat(randomPrize).toLocaleString()}</span>`;
+            }
+
+            // Spin the wheel visually (at least 4 full rotations + random offset)
             const extraDegrees = Math.floor(Math.random() * 360);
             currentRotation += 1440 + extraDegrees; 
-
-            // 4. Apply the rotation to the CSS
             wheel.style.transform = `rotate(${currentRotation}deg)`;
 
-            // 5. Wait for the 4-second CSS transition to finish before showing the price
+            // Reveal the outcome when the 4-second animation stops
             setTimeout(() => {
-                resultDisplay.innerText = `Your account is worth: $${parseFloat(randomPrize).toLocaleString()}`;
+                clearInterval(phraseInterval);
+                resultDisplay.innerHTML = finalOutput;
                 spinBtn.disabled = false;
-            }, 4000); // Must match the 4s in the CSS transition
+            }, 4000);
         }
     </script>
-
-</body>
-</html>
