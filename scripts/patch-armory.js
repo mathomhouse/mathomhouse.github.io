@@ -30,6 +30,27 @@ if (!content.includes('armory-auth-override.js')) {
 if (!content.includes('scripts/feedback-modal.js')) {
   toInject.push('<script src="scripts/feedback-modal.js" defer></script>');
 }
+if (!content.includes('name="description"')) {
+  toInject.push('<meta name="description" content="Tools and calculators for Top War players.">');
+}
+if (!content.includes('og:title')) {
+  toInject.push('<meta property="og:title" content="Mathom House • Armory Report">');
+}
+if (!content.includes('og:description')) {
+  toInject.push('<meta property="og:description" content="Check out your armory report.">');
+}
+if (!content.includes('og:image')) {
+  toInject.push('<meta property="og:image" content="https://mathomhouse.github.io/mathomhouselogo.png">');
+}
+if (!content.includes('og:url')) {
+  toInject.push('<meta property="og:url" content="https://mathomhouse.github.io/armory-report.html">');
+}
+if (!content.includes('og:type')) {
+  toInject.push('<meta property="og:type" content="website">');
+}
+if (!content.includes('og:site_name')) {
+  toInject.push('<meta property="og:site_name" content="From Artu, Gikey, and Tex">');
+}
 if (toInject.length > 0) {
   content = content.replace('</head>', `${toInject.join('\n')}\n</head>`);
 }
