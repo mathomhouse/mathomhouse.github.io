@@ -123,5 +123,19 @@ if (content.includes('id="ha-font-fix"')) {
   content = content.replace('</head>', `${fontFixStyle}\n</head>`);
 }
 
+// 15. Remove home button (2864tw-specific — mathomhouse nav provides home link via header.js)
+if (!content.includes('<!-- MATHOMHOUSE: removed-home-btn -->')) {
+  content = content.replace(/<a[^>]*class="home"[^>]*>[\s\S]*?<\/a>/, '<!-- MATHOMHOUSE: removed-home-btn -->');
+}
+
+// 16. Add feedback button to appbar-pills, left of lang-btn
+if (!content.includes('ha-feedback-btn')) {
+  const feedbackBtn = '<button class="lang-btn ha-feedback-btn" type="button" title="Send Feedback" onclick="if(typeof openFeedbackModal===\'function\')openFeedbackModal()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Feedback</button>';
+  content = content.replace(/<button class="lang-btn notranslate"/, `${feedbackBtn}\n    <button class="lang-btn notranslate"`);
+}
+
+// 17. Update Phase I server reference — page is now on mathomhouse (all servers), not just Server 2864
+content = content.replace('Phase I is live on Server 2864.', 'Phase I is live on all servers.');
+
 fs.writeFileSync(filePath, content, 'utf8');
 console.log(`Patched ${filePath}`);
