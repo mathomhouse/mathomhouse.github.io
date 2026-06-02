@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com; style-src 'unsafe-inline' https://translate.googleapis.com https://www.gstatic.com; img-src 'self' https://knight-cdn.akamaized.net https://h5.topwargame.com https://raw.githubusercontent.com data: https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://fight-report-va.oss-accelerate.aliyuncs.com https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://push-worker.27tb8s6fct.workers.dev https://*.clarity.ms https://c.bing.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://translate.google.com;">
-<title>Battle Report Viewer — 2864</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com https://www.googletagmanager.com; style-src 'unsafe-inline' https://mathomhouse.github.io https://fonts.googleapis.com https://translate.googleapis.com https://www.gstatic.com; img-src 'self' https://knight-cdn.akamaized.net https://h5.topwargame.com https://raw.githubusercontent.com data: https://translate.google.com https://translate.googleapis.com https://fonts.gstatic.com https://www.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://docs.google.com https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev https://fight-report-va.oss-accelerate.aliyuncs.com https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://push-worker.27tb8s6fct.workers.dev https://*.clarity.ms https://c.bing.com https://www.google-analytics.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://translate.google.com; font-src https://fonts.gstatic.com;">
+<title>Battle Report | Mathom House</title>
 <style>
   :root {
     --bg: #0d1117; --surface: #161b22; --card: #1c2128; --border: #30363d;
@@ -535,8 +535,23 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "won9zormpi");
 </script>
+<link rel="stylesheet" href="styles/mathomhouse.css">
+<link rel="stylesheet" href="styles/header.css">
+<link rel="stylesheet" href="styles/layout.css">
+<script src="header.js" defer></script>
+<script src="scripts/feedback-modal.js" defer></script>
+<meta name="description" content="Tools and calculators for Top War players.">
+<meta property="og:title" content="Mathom House • Battle Report">
+<meta property="og:description" content="Look at battle report details!">
+<meta property="og:image" content="https://mathomhouse.github.io/mathomhouselogo.png">
+<meta property="og:url" content="https://mathomhouse.github.io/battle-report.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="From Artu, Gikey, and Tex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style id="br-font-fix">body,p,th,td,li,h1,h2,h3,h4,h5,h6,button{font-family:'Rajdhani',-apple-system,BlinkMacSystemFont,sans-serif;}input,select,textarea{font-family:'Rajdhani',-apple-system,BlinkMacSystemFont,sans-serif!important;}.home-btn,#bnpBtn,#bnpPop,.theme-btn{display:none!important;}.br-feedback-btn{display:inline-flex;align-items:center;gap:.3rem;padding:.25rem .55rem;background:transparent;border:1px solid currentColor;border-radius:4px;cursor:pointer;font-size:.82rem;color:inherit;opacity:.9;font-family:inherit;}.br-feedback-btn:hover{opacity:1;}.raw-json{display:none!important;}.header{position:relative;}.bnp-wrap{position:static!important;}#br-header-right{position:absolute;right:1rem;top:50%;transform:translateY(-50%);margin-left:0!important;}</style>
 </head>
 <body>
+<header id="header-placeholder"></header>
 
 <div class="header">
   <a href="https://2864tw.com" class="home-btn" title="Back to 2864tw.com"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></a>
@@ -554,8 +569,9 @@
       <a href="ssc-map.html" class="bnp-link">UD Sector Map</a>
       <a href="treasury.html" class="bnp-link">UD Treasury</a>
     </div>
-  <div style="margin-left:auto;display:flex;align-items:center;gap:.4rem;">
+  <div id="br-header-right" style="margin-left:auto;display:flex;align-items:center;gap:.4rem;">
     <button class="theme-btn notranslate" id="themeBtn" aria-label="Toggle theme"><span class="icon-dark">&#9790;</span><span class="icon-light">&#9728;</span></button>
+    <!-- MATHOMHOUSE: br-feedback-btn --><button class="br-feedback-btn" type="button" title="Send Feedback" onclick="if(typeof openFeedbackModal==='function')openFeedbackModal()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Feedback</span></button>
     <button class="lang-btn notranslate" id="langBtn" aria-label="Change language"><span id="langFlag">&#127482;&#127480;</span><span id="langCode">/en</span></button>
   </div>
 <div id="google_translate_element"></div>
@@ -574,10 +590,7 @@
 <div id="status" class="status"></div>
 <div id="report"></div>
 
-<div class="footer">
-  <a href="https://github.com/texnottexas/landing-page">Brought to you by supporters of the fk boats movement</a>
-  <div style="margin-top:.4rem"><a href="#" onclick="event.preventDefault();location.reload(true)" style="color:#8b949e;font-size:.6rem;text-decoration:none">Refresh Page</a></div>
-</div>
+<footer>&copy; 2024 Mathom House &middot; Not affiliated with TopWar</footer>
 
 <script>
 (function() {
@@ -590,7 +603,7 @@
     return fetch('data/hero-awakening-skills.json').then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) { _awakeningRef = j; return j; }).catch(function () { return null; });
   }
-  var ASSET_BASE = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/';
+  var ASSET_BASE = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/';
 
   // 1-indexed, alphabetically sorted ISO 3166-1 alpha-2 codes (249 total)
   var ISO_CODES = 'AD,AE,AF,AG,AI,AL,AM,AO,AQ,AR,AS,AT,AU,AW,AX,AZ,BA,BB,BD,BE,BF,BG,BH,BI,BJ,BL,BM,BN,BO,BQ,BR,BS,BT,BV,BW,BY,BZ,CA,CC,CD,CF,CG,CH,CI,CK,CL,CM,CN,CO,CR,CU,CV,CW,CX,CY,CZ,DE,DJ,DK,DM,DO,DZ,EC,EE,EG,EH,ER,ES,ET,FI,FJ,FK,FM,FO,FR,GA,GB,GD,GE,GF,GG,GH,GI,GL,GM,GN,GP,GQ,GR,GS,GT,GU,GW,GY,HK,HM,HN,HR,HT,HU,ID,IE,IL,IM,IN,IO,IQ,IR,IS,IT,JE,JM,JO,JP,KE,KG,KH,KI,KM,KN,KP,KR,KW,KY,KZ,LA,LB,LC,LI,LK,LR,LS,LT,LU,LV,LY,MA,MC,MD,ME,MF,MG,MH,MK,ML,MM,MN,MO,MP,MQ,MR,MS,MT,MU,MV,MW,MX,MY,MZ,NA,NC,NE,NF,NG,NI,NL,NO,NP,NR,NU,NZ,OM,PA,PE,PF,PG,PH,PK,PL,PM,PN,PR,PS,PT,PW,PY,QA,RE,RO,RS,RU,RW,SA,SB,SC,SD,SE,SG,SH,SI,SJ,SK,SL,SM,SN,SO,SR,SS,ST,SV,SX,SY,SZ,TC,TD,TF,TG,TH,TJ,TK,TL,TM,TN,TO,TR,TT,TV,TW,TZ,UA,UG,UM,US,UY,UZ,VA,VC,VE,VG,VI,VN,VU,WF,WS,YE,YT,ZA,ZM,ZW'.split(',');
@@ -2392,7 +2405,7 @@
   var EB_ELEMENTS = {1:'Fire',2:'Water',3:'Wind',4:'Ground'};
   var EB_FIELD_NAMES = {1:'CPNT Mastery',2:'Formation',3:'Equip',4:'Defense',5:'Offense'};
   var EB_FIELD_SLOT_COUNTS = {1:5,2:7,3:6,4:9,5:9};
-  var EB_ICON_BASE = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/beast-icons/';
+  var EB_ICON_BASE = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/beast-icons/';
   var EB_ELEM_CHARS = {1:'\uD83D\uDD25',2:'\uD83C\uDF2C\uFE0F',3:'\uD83D\uDCA7',4:'\u26F0\uFE0F'};
 
   var EB_BUFF_NAMES = {
@@ -3082,7 +3095,7 @@
           loadAwakeningRef().then(function (ref) {
             if (!ref || awPanel) return;
             awPanel = renderHeroAwakening(hero.id, hero.awakenLevel, !!hero.fullAwaken, awLevels, ref,
-              'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/hero-awake-skills/');
+              'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/hero-awake-skills/');
             if (awPanel) portrait.appendChild(awPanel);
           });
         });
@@ -4042,7 +4055,7 @@
     var CHIP_SETS={101:{b:SET_BONUS_HP,descs:['HT HP','All units HP','All units HP']},102:{b:SET_BONUS_ATK,descs:['HT ATK','All units ATK','All units ATK']},103:{b:SET_BONUS_ATK,descs:['HT ATK','All units ATK','All units ATK']},104:{b:SET_BONUS_HP,descs:['HT HP','All units HP','All units HP']},105:{b:SET_BONUS_ATK,descs:['HT ATK','All units ATK','All units ATK']},106:{b:SET_BONUS_ATK,descs:['HT ATK','All units ATK','All units ATK']},108:{b:SET_BONUS_HP,descs:['HT HP','All units HP','All units HP']},109:{b:SET_BONUS_ATK,descs:['HT ATK','All units ATK','All units ATK']},110:{b:SET_BONUS_ROC,descs:['HT ATK','All units ATK','All units DMG Inc']},111:{b:SET_BONUS_SCA,descs:['Shield Lv1','Shield Lv2','Shield Lv3']}};
     var RARITY={1:'Common',2:'Uncommon',3:'Rare',4:'Epic',5:'Legendary'};
     var SLOT_LABELS=['Core','1','2','3','4','5','6'];
-    var ICON_BASE='https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/ht-chip-icons/';
+    var ICON_BASE='https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/ht-chip-icons/';
 
     function getPool(pos) { return pos===0?RND_CORE:pos<=3?RND_REG:RND_GLO; }
     function decodeRnd(str, pos) {
@@ -4354,7 +4367,6 @@
   }
 })();
 </script>
-<script src="feedback-widget.js"></script>
 <script>  // Beta nav: close on outside click
   document.addEventListener('click', function(e) {
     var pop = document.getElementById('bnpPop');
@@ -4391,13 +4403,17 @@
   function updateLangBtn(code){var d=getLangData(code);var f=document.getElementById('langFlag');var c=document.getElementById('langCode');if(d&&f){f.textContent=d.flag;c.textContent='/'+d.code;}else if(f){f.textContent='\uD83C\uDF10';c.textContent='/'+code;}document.querySelectorAll('.lang-option').forEach(function(o){o.classList.toggle('active',o.dataset.lang===code);});}
   function applyLangToCombo(code,delay){var a=0;var p=setInterval(function(){var c=document.querySelector('.goog-te-combo');if(c){c.value=code;c.dispatchEvent(new Event('change'));clearInterval(p);updateLangBtn(code);}if(++a>30)clearInterval(p);},delay||200);}
   function selectLanguage(code){if(code==='en'){sessionStorage.removeItem('pendingLang');document.cookie='googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=Lax; Secure';document.cookie='googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.2864tw.com; SameSite=Lax; Secure';closeLangModal();location.reload();return;}sessionStorage.setItem('pendingLang',code);applyLangToCombo(code,200);closeLangModal();}
-  var langModalEl=document.getElementById('langModal');
+  var langModalEl=null; // MATHOMHOUSE: lang-init-fix
   function openLangModal(){if(langModalEl)langModalEl.classList.add('active');}
   function closeLangModal(){if(langModalEl)langModalEl.classList.remove('active');}
-  (function(){var g=document.getElementById('langGrid');if(!g)return;var det=detectCurrentLang();LANGUAGES.forEach(function(l){var b=document.createElement('button');b.className='lang-option'+(l.code===det?' active':'');b.dataset.lang=l.code;b.innerHTML='<span class="lang-flag">'+l.flag+'</span><span class="lang-name">'+esc(l.name)+'</span>';b.addEventListener('click',function(){selectLanguage(l.code);});g.appendChild(b);});updateLangBtn(det);})();
-  var lb=document.getElementById('langBtn');if(lb)lb.addEventListener('click',openLangModal);
-  var lmc=document.getElementById('langModalClose');if(lmc)lmc.addEventListener('click',closeLangModal);
-  if(langModalEl)langModalEl.addEventListener('click',function(e){if(e.target===langModalEl)closeLangModal();});
+  document.addEventListener('DOMContentLoaded',function(){
+    langModalEl=document.getElementById('langModal');
+    var g=document.getElementById('langGrid');
+    if(g){var det=detectCurrentLang();LANGUAGES.forEach(function(l){var b=document.createElement('button');b.className='lang-option'+(l.code===det?' active':'');b.dataset.lang=l.code;b.innerHTML='<span class="lang-flag">'+l.flag+'</span><span class="lang-name">'+esc(l.name)+'</span>';b.addEventListener('click',function(){selectLanguage(l.code);});g.appendChild(b);});updateLangBtn(det);}
+    var lb=document.getElementById('langBtn');if(lb)lb.addEventListener('click',openLangModal);
+    var lmc=document.getElementById('langModalClose');if(lmc)lmc.addEventListener('click',closeLangModal);
+    if(langModalEl)langModalEl.addEventListener('click',function(e){if(e.target===langModalEl)closeLangModal();});
+  });
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&langModalEl&&langModalEl.classList.contains('active')){closeLangModal();e.stopPropagation();}});
   setTimeout(function(){if(!window._gtLoaded){var b=document.getElementById('langBtn');if(b){b.style.opacity='0.5';b.title='Translation unavailable';}}},15000);
   function googleTranslateElementInit(){window._gtLoaded=true;new google.translate.TranslateElement({pageLanguage:'en',autoDisplay:false},'google_translate_element');var p=sessionStorage.getItem('pendingLang');if(p){sessionStorage.removeItem('pendingLang');applyLangToCombo(p,250);}else{var lo=localStorage.getItem('langOverride');if(lo&&lo!=='en')applyLangToCombo(lo,250);var d=detectCurrentLang();if(d!=='en')updateLangBtn(d);}}
@@ -4413,5 +4429,6 @@
     <div class="lang-grid" id="langGrid"></div>
   </div>
 </div>
+<a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
 </body>
 </html>
