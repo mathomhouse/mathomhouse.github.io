@@ -227,6 +227,14 @@ if (!content.includes('// MATHOMHOUSE: telemetry-disabled')) {
   );
 }
 
+// 21. Add credit line above search hint
+if (!content.includes('Credit for the battle report viewer goes to Tex')) {
+  content = content.replace(
+    '<div class="search-hint">Paste a report ID from in-game battle mail</div>',
+    '<div class="search-hint">Credit for the battle report viewer goes to Tex (S2864)<br>Paste a report ID from in-game battle mail</div>'
+  );
+}
+
 // 17. Fix lang modal init — #langModal is rendered after the init script (~line 4407),
 //     so getElementById returns null at parse time. Defer all modal setup to DOMContentLoaded.
 if (!content.includes('// MATHOMHOUSE: lang-init-fix')) {
