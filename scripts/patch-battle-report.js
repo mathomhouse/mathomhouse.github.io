@@ -199,5 +199,26 @@ if (!content.includes('<!-- MATHOMHOUSE: br-feedback-btn -->')) {
   );
 }
 
+// 17. Fix lang modal init — #langModal is rendered after the init script (~line 4407),
+//     so getElementById returns null at parse time. Defer all modal setup to DOMContentLoaded.
+if (!content.includes('// MATHOMHOUSE: lang-init-fix')) {
+  content = content.replace(
+    "var langModalEl=document.getElementById('langModal');",
+    "var langModalEl=null; // MATHOMHOUSE: lang-init-fix"
+  );
+  // Replace the IIFE + lb/lmc/overlay wiring block with a single DOMContentLoaded handler
+  content = content.replace(
+    /\(function\(\)\{var g=document\.getElementById\('langGrid'\);[\s\S]*?if\(langModalEl\)langModalEl\.addEventListener\('click',function\(e\)\{if\(e\.target===langModalEl\)closeLangModal\(\);\}\);/,
+    `document.addEventListener('DOMContentLoaded',function(){\n`
+    + `    langModalEl=document.getElementById('langModal');\n`
+    + `    var g=document.getElementById('langGrid');\n`
+    + `    if(g){var det=detectCurrentLang();LANGUAGES.forEach(function(l){var b=document.createElement('button');b.className='lang-option'+(l.code===det?' active':'');b.dataset.lang=l.code;b.innerHTML='<span class="lang-flag">'+l.flag+'</span><span class="lang-name">'+esc(l.name)+'</span>';b.addEventListener('click',function(){selectLanguage(l.code);});g.appendChild(b);});updateLangBtn(det);}\n`
+    + `    var lb=document.getElementById('langBtn');if(lb)lb.addEventListener('click',openLangModal);\n`
+    + `    var lmc=document.getElementById('langModalClose');if(lmc)lmc.addEventListener('click',closeLangModal);\n`
+    + `    if(langModalEl)langModalEl.addEventListener('click',function(e){if(e.target===langModalEl)closeLangModal();});\n`
+    + `  });`
+  );
+}
+
 fs.writeFileSync(filePath, content, 'utf8');
 console.log(`Patched ${filePath}`);
