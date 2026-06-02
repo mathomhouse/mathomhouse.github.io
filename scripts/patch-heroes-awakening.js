@@ -82,7 +82,12 @@ if (!content.includes('https://www.google-analytics.com')) {
   );
 }
 
-// 11. Add fonts.googleapis.com to style-src (needed for Google Fonts <link>)
+// 11a. Add 'self' to style-src (missing in original — blocks /styles/*.css from same origin)
+if (!content.match(/style-src[^"]*'self'/)) {
+  content = content.replace(/(style-src\s)/, "$1'self' ");
+}
+
+// 11b. Add fonts.googleapis.com to style-src (needed for Google Fonts <link>)
 if (!content.match(/style-src[^"]*fonts\.googleapis\.com/)) {
   content = content.replace(
     /(style-src\s[^"]*?)(https:\/\/translate\.googleapis\.com)/,
