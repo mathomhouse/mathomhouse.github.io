@@ -211,6 +211,14 @@ if (!content.includes('<!-- MATHOMHOUSE: br-feedback-btn -->')) {
 content = content.replace('<script src="feedback-widget.js"></script>\n', '');
 content = content.replace('<script src="feedback-widget.js"></script>', '');
 
+// 20. Hide "No Alliance" placeholder — show alliance tag only when one exists
+if (!content.includes('// MATHOMHOUSE: alliance-hide')) {
+  content = content.replace(
+    "tagEl.textContent = alTag ? '[' + alTag + ']' : 'No Alliance';\n    if (!alTag) tagEl.style.color = 'var(--muted)';",
+    "// MATHOMHOUSE: alliance-hide\n    if (alTag) { tagEl.textContent = '[' + alTag + ']'; } else { tagEl.style.display = 'none'; }"
+  );
+}
+
 // 19. Comment out original developer's telemetry worker call (CORS fails from mathomhouse.github.io)
 if (!content.includes('// MATHOMHOUSE: telemetry-disabled')) {
   content = content.replace(
