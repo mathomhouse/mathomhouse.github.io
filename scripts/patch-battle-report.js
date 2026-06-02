@@ -165,7 +165,7 @@ if (!content.includes('fonts.googleapis.com/css2?family=Rajdhani')) {
 //     mathomhouse.css sets body to Crimson Pro (prose font); battle-report is a dense data UI.
 //     Form elements don't inherit font-family by default, hence !important on those.
 //     Always strip and re-inject so the position stays correct on re-runs.
-const fontFixStyle = '<style id="br-font-fix">body,p,th,td,li,h1,h2,h3,h4,h5,h6,button{font-family:\'Rajdhani\',-apple-system,BlinkMacSystemFont,sans-serif;}input,select,textarea{font-family:\'Rajdhani\',-apple-system,BlinkMacSystemFont,sans-serif!important;}.home-btn,#bnpBtn,#bnpPop,.theme-btn{display:none!important;}</style>';
+const fontFixStyle = '<style id="br-font-fix">body,p,th,td,li,h1,h2,h3,h4,h5,h6,button{font-family:\'Rajdhani\',-apple-system,BlinkMacSystemFont,sans-serif;}input,select,textarea{font-family:\'Rajdhani\',-apple-system,BlinkMacSystemFont,sans-serif!important;}.home-btn,#bnpBtn,#bnpPop,.theme-btn{display:none!important;}.br-feedback-btn{display:inline-flex;align-items:center;gap:.3rem;padding:.25rem .55rem;background:transparent;border:1px solid currentColor;border-radius:4px;cursor:pointer;font-size:.82rem;color:inherit;opacity:.9;font-family:inherit;}.br-feedback-btn:hover{opacity:1;}.header{position:relative;}.bnp-wrap{position:static!important;}#br-header-right{position:absolute;right:1rem;top:50%;transform:translateY(-50%);margin-left:0!important;}</style>';
 content = content.replace(/<style id="br-font-fix">[\s\S]*?<\/style>\n?/, '');
 content = content.replace('</head>', `${fontFixStyle}\n</head>`);
 
@@ -174,6 +174,29 @@ content = content.replace('</head>', `${fontFixStyle}\n</head>`);
 // 8. Inject back-to-top before </body>
 if (!content.includes('id="backToTop"')) {
   content = content.replace('</body>', '<a href="#" class="back-top" id="backToTop" aria-label="Back to top">&#8593;</a>\n</body>');
+}
+
+// 16a. Tag right-side button container for CSS positioning
+if (!content.includes('id="br-header-right"')) {
+  content = content.replace(
+    '<div style="margin-left:auto;display:flex;align-items:center;gap:.4rem;">',
+    '<div id="br-header-right" style="margin-left:auto;display:flex;align-items:center;gap:.4rem;">'
+  );
+}
+
+// 16. Inject feedback button before lang button
+if (!content.includes('<!-- MATHOMHOUSE: br-feedback-btn -->')) {
+  const feedbackBtn = '<!-- MATHOMHOUSE: br-feedback-btn -->'
+    + '<button class="br-feedback-btn" type="button" title="Send Feedback"'
+    + ' onclick="if(typeof openFeedbackModal===\'function\')openFeedbackModal()">'
+    + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"'
+    + ' stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+    + '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'
+    + '</svg><span>Feedback</span></button>';
+  content = content.replace(
+    '<button class="lang-btn notranslate" id="langBtn"',
+    `${feedbackBtn}\n    <button class="lang-btn notranslate" id="langBtn"`
+  );
 }
 
 fs.writeFileSync(filePath, content, 'utf8');
