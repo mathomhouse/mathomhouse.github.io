@@ -1,0 +1,84 @@
+name: Patch All
+
+on:
+  push:
+    paths:
+      - 'armory-report.html'
+      - 'battle-report.html'
+      - 'scripts/patch-battle-report.js'
+      - 'scripts/patch-armory.js'
+      - 'scripts/patch-bookmarklet.js'
+      - 'all-bookmarklet.js'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Apply armory patch
+        run: node scripts/patch-armory.js armory-report.html
+
+      - name: Verify armory patch
+        run: |
+          grep -q 'armory-auth-override\.js' armory-report.html && \
+          grep -q 'mathomhouse-tw-worker' armory-report.html || echo "ARMORY_PATCH_FAILED=true" >> $GITHUB_ENV
+
+      - name: Rollback armory on failure
+        if: env.ARMORY_PATCH_FAILED == 'true'
+        run: |
+          git checkout HEAD^ -- armory-report.html
+          echo "::error::Armory patch verification failed — source update incompatible with patch script. Restored previous version."
+          exit 1
+
+      - name: Apply battle-report patch
+        run: node scripts/patch-battle-report.js battle-report.html
+
+      - name: Verify battle-report patch
+        run: |
+          grep -q 'br-font-fix' battle-report.html && \
+          ! grep -q 'fk boats' battle-report.html || echo "BATTLE_PATCH_FAILED=true" >> $GITHUB_ENV
+
+      - name: Rollback battle-report on failure
+        if: env.BATTLE_PATCH_FAILED == 'true'
+        run: |
+          git checkout HEAD^ -- battle-report.html
+          echo "::error::Battle-report patch verification failed — source update incompatible with patch script. Restored previous version."
+          exit 1
+
+      - name: Apply bookmarklet patch
+        run: node scripts/patch-bookmarklet.js all-bookmarklet.js
+
+      - name: Verify bookmarklet patch
+        run: |
+          if grep -q 'Skill Dismantle wizard' all-bookmarklet.js; then
+            echo "BOOKMARKLET_PATCH_FAILED=true" >> $GITHUB_ENV
+          fi
+
+      - name: Rollback bookmarklet on failure
+        if: env.BOOKMARKLET_PATCH_FAILED == 'true'
+        run: |
+          git checkout HEAD^ -- all-bookmarklet.js
+          echo "::error::Bookmarklet patch verification failed — dismantle section still present. Restored previous version."
+          exit 1
+
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.BOT_GPG_PRIVATE_KEY }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "132933401+kimho2@users.noreply.github.com"
+          git add armory-report.html battle-report.html all-bookmarklet.js
+          git diff --staged --quiet || git commit -S -m "chore: patch files for mathomhouse"
+          git push
