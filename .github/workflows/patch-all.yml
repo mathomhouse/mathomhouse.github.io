@@ -9,6 +9,8 @@ on:
       - 'scripts/patch-armory.js'
       - 'scripts/patch-bookmarklet.js'
       - 'all-bookmarklet.js'
+      - 'guides/heroes-awakening.html'
+      - 'scripts/patch-heroes-awakening.js'
   workflow_dispatch:
 
 permissions:
@@ -68,6 +70,21 @@ jobs:
           echo "::error::Bookmarklet patch verification failed — dismantle section still present. Restored previous version."
           exit 1
 
+      - name: Apply heroes-awakening patch
+        run: node scripts/patch-heroes-awakening.js guides/heroes-awakening.html
+
+      - name: Verify heroes-awakening patch
+        run: |
+          grep -q 'header-placeholder' guides/heroes-awakening.html && \
+          grep -q 'mathomhouse' guides/heroes-awakening.html || echo "HA_PATCH_FAILED=true" >> $GITHUB_ENV
+
+      - name: Rollback heroes-awakening on failure
+        if: env.HA_PATCH_FAILED == 'true'
+        run: |
+          git checkout HEAD^ -- guides/heroes-awakening.html
+          echo "::error::Heroes-awakening patch verification failed — source update incompatible with patch script. Restored previous version."
+          exit 1
+
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v6
         with:
@@ -79,6 +96,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "132933401+kimho2@users.noreply.github.com"
-          git add armory-report.html battle-report.html all-bookmarklet.js
+          git add armory-report.html battle-report.html all-bookmarklet.js guides/heroes-awakening.html
           git diff --staged --quiet || git commit -S -m "chore: patch files for mathomhouse"
           git push
