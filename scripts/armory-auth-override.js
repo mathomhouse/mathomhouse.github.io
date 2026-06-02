@@ -111,6 +111,9 @@
         return Promise.resolve(new Response(JSON.stringify({ ok: true }), { status: 200, headers: { 'Content-Type': 'application/json' } }));
       }
     }
+    if (typeof url === 'string' && (url === 'player-data.json' || url.endsWith('/player-data.json'))) {
+      return Promise.resolve(new Response(JSON.stringify([]), { status: 200, headers: { 'Content-Type': 'application/json' } }));
+    }
     return _baseFetch(url, opts);
   };
 

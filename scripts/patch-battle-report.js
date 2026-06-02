@@ -211,6 +211,14 @@ if (!content.includes('<!-- MATHOMHOUSE: br-feedback-btn -->')) {
 content = content.replace('<script src="feedback-widget.js"></script>\n', '');
 content = content.replace('<script src="feedback-widget.js"></script>', '');
 
+// 19. Comment out original developer's telemetry worker call (CORS fails from mathomhouse.github.io)
+if (!content.includes('// MATHOMHOUSE: telemetry-disabled')) {
+  content = content.replace(
+    "// Passive collect — fire-and-forget, never blocks the UI\n        fetch('https://push-worker.27tb8s6fct.workers.dev/collect-report', {\n          method: 'POST', headers: {'Content-Type':'application/json'},\n          body: JSON.stringify({id: id})\n        }).catch(function(){});",
+    "// MATHOMHOUSE: telemetry-disabled\n        /* fetch('https://push-worker.27tb8s6fct.workers.dev/collect-report', {\n          method: 'POST', headers: {'Content-Type':'application/json'},\n          body: JSON.stringify({id: id})\n        }).catch(function(){}); */"
+  );
+}
+
 // 17. Fix lang modal init — #langModal is rendered after the init script (~line 4407),
 //     so getElementById returns null at parse time. Defer all modal setup to DOMContentLoaded.
 if (!content.includes('// MATHOMHOUSE: lang-init-fix')) {

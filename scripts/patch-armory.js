@@ -291,5 +291,13 @@ if (!content.includes('// MATHOMHOUSE: feedback-btn')) {
   );
 }
 
+// 17. Remove dead feedback-widget.js script tag
+if (!content.includes('<!-- MATHOMHOUSE: removed-feedback-widget-script -->')) {
+  content = content.replace(
+    '<script src="feedback-widget.js"></script>',
+    '<!-- MATHOMHOUSE: removed-feedback-widget-script -->'
+  );
+}
+
 fs.writeFileSync(filePath, content, 'utf8');
 console.log(`Patched ${filePath}`);
