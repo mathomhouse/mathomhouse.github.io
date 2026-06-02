@@ -44,7 +44,7 @@ content = content.replace(/<title>[^<]*<\/title>/, '<title>Heroes Awakening | Ma
 
 // 4. Update og: meta tags — replace each individually (idempotent: regex matches any value).
 content = content.replace(/<meta property="og:type"[^>]*>/, '<meta property="og:type" content="website">');
-content = content.replace(/<meta property="og:site_name"[^>]*>/, '<meta property="og:site_name" content="mathomhouse.github.io">');
+content = content.replace(/<meta property="og:site_name"[^>]*>/, '<meta property="og:site_name" content="From Artu, Gikey, and Tex">');
 content = content.replace(/<meta property="og:url"[^>]*>/, '<meta property="og:url" content="https://mathomhouse.github.io/guides/heroes-awakening.html">');
 content = content.replace(/<meta property="og:title"[^>]*>/, '<meta property="og:title" content="Heroes Awakening • Mathom House">');
 content = content.replace(/<meta property="og:description"[^>]*>/, '<meta property="og:description" content="Heroes Awakening Guide.">');
@@ -113,9 +113,10 @@ if (!content.includes('fonts.googleapis.com/css2?family=Rajdhani')) {
 }
 
 // 14. Font override — mathomhouse.css body sets Crimson Pro (serif prose font) but
-//     heroes-awakening is a dense data UI; restore system sans-serif.
+//     heroes-awakening uses Rajdhani (site UI font) as body font so inherit-based elements
+//     (buttons, appbar, tabs) match the rest of the site rather than falling back to system-ui.
 //     Injected last so it wins over mathomhouse.css.
-const fontFixStyle = '<style id="ha-font-fix">html,body{font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',system-ui,sans-serif!important;font-size:14px!important;}button,input,select,textarea{font-family:inherit!important;}</style>';
+const fontFixStyle = '<style id="ha-font-fix">html,body{font-family:\'Rajdhani\',BlinkMacSystemFont,\'Segoe UI\',sans-serif!important;font-size:14px!important;}button,input,select,textarea{font-family:inherit!important;}</style>';
 if (content.includes('id="ha-font-fix"')) {
   content = content.replace(/<style id="ha-font-fix">[\s\S]*?<\/style>/, fontFixStyle);
 } else {
