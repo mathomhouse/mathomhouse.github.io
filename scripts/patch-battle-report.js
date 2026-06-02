@@ -128,6 +128,14 @@ if (!content.match(/connect-src[^"]*docs\.google\.com/)) {
   );
 }
 
+// 5i. Add fonts.gstatic.com to img-src (Google Translate widget icon)
+if (!content.match(/img-src[^"]*fonts\.gstatic\.com/)) {
+  content = content.replace(
+    /(img-src\s[^"]*?)(https:\/\/www\.gstatic\.com)/,
+    '$1https://fonts.gstatic.com $2'
+  );
+}
+
 // 5g. Add font-src (no such directive in original — default-src 'none' blocks woff2)
 if (!content.match(/font-src/)) {
   content = content.replace(
@@ -198,6 +206,10 @@ if (!content.includes('<!-- MATHOMHOUSE: br-feedback-btn -->')) {
     `${feedbackBtn}\n    <button class="lang-btn notranslate" id="langBtn"`
   );
 }
+
+// 18. Remove third-party feedback widget (replaced by mathomhouse feedback-modal.js)
+content = content.replace('<script src="feedback-widget.js"></script>\n', '');
+content = content.replace('<script src="feedback-widget.js"></script>', '');
 
 // 17. Fix lang modal init — #langModal is rendered after the init script (~line 4407),
 //     so getElementById returns null at parse time. Defer all modal setup to DOMContentLoaded.

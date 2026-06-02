@@ -31,20 +31,34 @@ Additional specialized sheets: `styles/store.css`, `styles/calculators.css`, `st
 ### Scripts
 Page-specific JS lives in `scripts/` and is loaded via `<script src="scripts/foo.js" defer>`. Data files live in `data/` as JSON.
 
-### Armory patch workflow
-**NEVER directly edit `armory-report.html`.** It is a third-party file (from 2864tw.com's armory tool) that gets replaced from source. All changes must go in `scripts/patch-armory.js` or `scripts/armory-auth-override.js`. Do not run the patch script either — the user runs it.
+### Patch workflow (third-party files)
 
-The patch script is `scripts/patch-armory.js` — a Node.js CLI:
+Three files are third-party sources that get replaced from upstream. **NEVER edit them directly.** All changes must go in their respective patch scripts. Do not run the patch scripts — the user runs them.
+
+All patch scripts are idempotent (each step guarded by a marker comment or string check).
+
+#### `armory-report.html`
+**NEVER directly edit `armory-report.html`.** All changes go in `scripts/patch-armory.js` or `scripts/armory-auth-override.js`.
 ```
 node scripts/patch-armory.js armory-report.html
 ```
-It is idempotent (each step guarded by a marker comment or string check). `scripts/armory-auth-override.js` is injected by the patch and handles auth bridging to the mathomhouse Cloudflare Worker (`mathomhouse-tw-worker.mathomhouse-tw.workers.dev`).
+`scripts/armory-auth-override.js` is injected by the patch and handles auth bridging to the mathomhouse Cloudflare Worker (`mathomhouse-tw-worker.mathomhouse-tw.workers.dev`).
 
-`scripts/patch-bookmarklet.js` similarly patches `all-bookmarklet.js` for deployment.
+#### `battle-report.html`
+**NEVER directly edit `battle-report.html`.** All changes go in `scripts/patch-battle-report.js`.
+```
+node scripts/patch-battle-report.js battle-report.html
+```
+
+#### `all-bookmarklet.js`
+**NEVER directly edit `all-bookmarklet.js`.** All changes go in `scripts/patch-bookmarklet.js`.
+```
+node scripts/patch-bookmarklet.js all-bookmarklet.js
+```
 
 ## Key Notes
 
 - No local dev server needed — open HTML files directly in browser (or via `file://`)
 - `archive/` and `old files/` are kept for reference; don't edit them
 - When adding a new page to the nav, update both the desktop and mobile sections of `header.html` (they are separate DOM blocks)
-- The armory pages (`armory-report.html`, `bobgriftest.html`) are patched third-party files — edit with care and re-run the patch script if re-patching from source
+- `armory-report.html`, `battle-report.html`, and `all-bookmarklet.js` are patched third-party files — never edit directly, see patch workflow above
