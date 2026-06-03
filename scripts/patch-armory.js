@@ -291,6 +291,15 @@ if (!content.includes('// MATHOMHOUSE: feedback-btn')) {
   );
 }
 
+// 18. Dark mode — fix unreadable select/dropdown elements
+const darkSelectStyle = '<style id="armory-dark-select">[data-theme="dark"] select{background-color:#1e2235;color:#e0e0e0;border-color:#444;}'
+  + '[data-theme="dark"] select option{background-color:#1e2235;color:#e0e0e0;}</style>';
+if (content.includes('id="armory-dark-select"')) {
+  content = content.replace(/<style id="armory-dark-select">[\s\S]*?<\/style>/, darkSelectStyle);
+} else {
+  content = content.replace('</head>', `${darkSelectStyle}\n</head>`);
+}
+
 // 17. Remove dead feedback-widget.js script tag
 if (!content.includes('<!-- MATHOMHOUSE: removed-feedback-widget-script -->')) {
   content = content.replace(
