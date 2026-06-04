@@ -4,10 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com https://www.googletagmanager.com; style-src 'unsafe-inline' https://mathomhouse.github.io https://fonts.googleapis.com https://translate.googleapis.com https://www.gstatic.com; img-src 'self' https://knight-cdn.akamaized.net https://h5.topwargame.com https://raw.githubusercontent.com data: https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://fonts.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://docs.google.com https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev https://fight-report-va.oss-accelerate.aliyuncs.com https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://push-worker.27tb8s6fct.workers.dev https://*.clarity.ms https://c.bing.com https://www.google-analytics.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://translate.google.com https://www.youtube-nocookie.com; font-src https://fonts.gstatic.com;">
-<title>Armory Report | Mathom House</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com; style-src 'unsafe-inline' https://translate.googleapis.com https://www.gstatic.com; img-src 'self' https://knight-cdn.akamaized.net https://h5.topwargame.com https://raw.githubusercontent.com data: https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://fonts.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://fight-report-va.oss-accelerate.aliyuncs.com https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://push-worker.27tb8s6fct.workers.dev https://*.clarity.ms https://c.bing.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://translate.google.com https://www.youtube-nocookie.com;">
+<title>Armory Report — Server 2864</title>
 <style>
-  
+  :root {
+    --bg: #0d1117; --surface: #161b22; --card: #1c2128; --border: #30363d;
+    --text: #e6edf3; --muted: #8b949e; --accent: #79c0ff;
+    --green: #3fb950; --red: #f85149; --yellow: #d29922; --blue: #388bfd;
+    --army: #56d364; --navy: #6cb6ff; --air: #e3b341;
+  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; margin: 0; padding: 0; }
 
@@ -3358,27 +3363,8 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "won9zormpi");
 </script>
-<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)})();</script>
-<link rel="stylesheet" href="styles/mathomhouse.css">
-<link rel="stylesheet" href="styles/header.css">
-<link rel="stylesheet" href="styles/layout.css">
-<script src="header.js" defer></script>
-<script src="scripts/armory-auth-override.js" defer></script>
-<script src="scripts/feedback-modal.js" defer></script>
-<meta name="description" content="Tools and calculators for Top War players.">
-<meta property="og:title" content="Mathom House • Armory Report">
-<meta property="og:description" content="Check out your armory report.">
-<meta property="og:image" content="https://mathomhouse.github.io/mathomhouselogo.png">
-<meta property="og:url" content="https://mathomhouse.github.io/armory-report.html">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="From Artu, Gikey, and Tex">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-<style id="armory-font-fix">body,button,.tab-btn{font-family:Rajdhani,-apple-system,BlinkMacSystemFont,sans-serif;font-size:15px;}input,select,textarea{font-family:Rajdhani,-apple-system,BlinkMacSystemFont,sans-serif!important;font-size:15px!important;}</style>
-<style id="armory-tex-credit-css">.landing-credit{font-size:.78rem;color:var(--muted);text-align:center;margin:0 auto .5rem;opacity:.7;}</style>
-<style id="armory-dark-select">[data-theme="dark"] select{background-color:#1e2235;color:#e0e0e0;border-color:#444;}[data-theme="dark"] select option{background-color:#1e2235;color:#e0e0e0;}</style>
 </head>
 <body>
-<header id="header-placeholder"></header>
 
 <div id="google_translate_element"></div>
 
@@ -3402,8 +3388,6 @@
       </div>
     </div>
     <h2 class="landing-title">My Armory Report</h2>
-    <p class="landing-credit">Credit for implementation of the armory report goes to Tex (S2864).</p>
-    <!-- MATHOMHOUSE: tex-credit-landing -->
     <p class="landing-desc">Paste your battle report IDs to generate a comprehensive personal account report. View your heroes, gear, decorations, base skins, enigma beasts, and HT chips — all in one place.</p>
     <div class="landing-features">
       <div class="landing-feature">6 Reports<span>Merge up to 6 battle reports</span></div>
@@ -3426,8 +3410,286 @@
 <script>
   (function () {
   var CDN_BASE = 'https://fight-report-va.oss-accelerate.aliyuncs.com/prod/';
-  var ASSET_BASE = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/';
-  var PUSH_WORKER = 'https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev';
+  var ASSET_BASE = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/';
+  var PUSH_WORKER = 'https://push-worker.27tb8s6fct.workers.dev';
+
+  // ── Advisor "on-behalf" impersonation session (in-memory only; never persisted) ──
+  // When active, the advisor acts as `targetSiteKey` using a short-lived delegated
+  // token, and wizardState._viewOnly stays true so NONE of the advisor's own
+  // localStorage (playerReport/playerIdentity) is ever written.
+  window._impersonation = null; // { active, targetSiteKey, targetName, delegatedToken, advisorName, expires }
+  function _imp() { return (window._impersonation && window._impersonation.active) ? window._impersonation : null; }
+  // Authorization header for on-behalf calls: delegated token while impersonating, else the owner token.
+  function _imp_authHeader() {
+    var i = _imp();
+    if (i && i.delegatedToken) return { 'Authorization': 'Bearer ' + i.delegatedToken };
+    return _ar_supplementToken ? { 'Authorization': 'Bearer ' + _ar_supplementToken } : {};
+  }
+  function _imp_actingSiteKey() {
+    var i = _imp();
+    if (i) return i.targetSiteKey;
+    var id = getStoredIdentity();
+    return id ? id.siteKey : null;
+  }
+  // Is the logged-in user an allowlisted advisor? cb(allowed, advisorName).
+  function _imp_checkAllowed(cb) {
+    if (!_ar_supplementToken) { cb(false, ''); return; }
+    fetch(PUSH_WORKER + '/advisor/allowlist/check', { headers: { 'Authorization': 'Bearer ' + _ar_supplementToken } })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { cb(!!(j && j.allowed), (j && j.name) || ''); })
+      .catch(function () { cb(false, ''); });
+  }
+
+  // Roster-search modal → pick a target → start the impersonation session.
+  function openImpersonationPicker(advisorName) {
+    _ar_getRosterMap();
+    var overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;display:flex;align-items:center;justify-content:center;';
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) document.body.removeChild(overlay); });
+    var modal = document.createElement('div');
+    modal.style.cssText = 'background:var(--card,#1c2128);border:1px solid var(--border,#30363d);border-radius:8px;padding:1rem;width:min(420px,92vw);max-height:80vh;display:flex;flex-direction:column;gap:.6rem;';
+    var h = document.createElement('h2'); h.style.cssText = 'margin:0;font-size:1rem;color:var(--text,#e6edf3);'; h.textContent = 'Advise a player'; modal.appendChild(h);
+    var sub = document.createElement('div'); sub.style.cssText = 'font-size:.72rem;color:var(--muted,#8b949e);'; sub.textContent = 'Search the roster. You will build their report on their behalf — your own report stays untouched.'; modal.appendChild(sub);
+    var input = document.createElement('input'); input.type = 'text'; input.placeholder = 'Search name…';
+    input.style.cssText = 'padding:.5rem;border:1px solid var(--border,#30363d);border-radius:6px;background:var(--surface,#161b22);color:var(--text,#e6edf3);'; modal.appendChild(input);
+    var list = document.createElement('div'); list.style.cssText = 'overflow:auto;display:flex;flex-direction:column;gap:.25rem;'; modal.appendChild(list);
+    function render() {
+      while (list.firstChild) list.removeChild(list.firstChild);
+      var q = input.value.trim().toLowerCase();
+      if (q.length < 2 || !_ar_rosterByName) return;
+      var seen = 0;
+      Object.keys(_ar_rosterByName).forEach(function (nm) {
+        if (seen >= 30 || nm.indexOf(q) === -1) return;
+        var p = _ar_rosterByName[nm]; if (!p || !p.siteKey) return;
+        var ownId = getStoredIdentity();
+        if (ownId && p.siteKey === ownId.siteKey) return; // can't advise self
+        seen++;
+        var row = document.createElement('button'); row.type = 'button';
+        row.style.cssText = 'text-align:left;padding:.4rem .5rem;border:1px solid var(--border,#30363d);border-radius:6px;background:var(--surface,#161b22);color:var(--text,#e6edf3);cursor:pointer;';
+        row.textContent = p.name;
+        row.addEventListener('click', function () { document.body.removeChild(overlay); _imp_start(p.siteKey, p.name, advisorName); });
+        list.appendChild(row);
+      });
+    }
+    input.addEventListener('input', render);
+    overlay.appendChild(modal); document.body.appendChild(overlay); input.focus();
+  }
+
+  // Call /advisor/delegate, then enter the in-memory session.
+  function _imp_start(targetSiteKey, targetName, advisorName) {
+    if (!_ar_supplementToken) { alert('Your own identity must be verified first.'); return; }
+    fetch(PUSH_WORKER + '/advisor/delegate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _ar_supplementToken },
+      body: JSON.stringify({ targetSiteKey: targetSiteKey }),
+    }).then(function (r) { return r.json().then(function (j) { return { status: r.status, j: j }; }); })
+      .then(function (res) {
+        if (res.status !== 200 || !res.j || !res.j.token) {
+          alert('Could not start advise session: ' + ((res.j && res.j.error) || ('HTTP ' + res.status)));
+          return;
+        }
+        var j = res.j;
+        window._impersonation = {
+          active: true, targetSiteKey: j.targetSiteKey, targetName: j.targetName || targetName,
+          delegatedToken: j.token, advisorName: j.advisorName || advisorName, expires: j.expires,
+        };
+        wizardState._viewOnly = true;                 // reuse #107 own-data write-suppression
+        wizardState.player = { name: window._impersonation.targetName, siteKey: j.targetSiteKey };
+        wizardState.reportData = [];
+        _imp_renderBanner();
+        // Open the report-ID input wizard so the advisor can paste the target's report(s).
+        wizardState.step = 'input';
+        document.getElementById('wizard').classList.add('open');
+        renderWizardStep();
+      })
+      .catch(function () { alert('Could not start advise session (network error).'); });
+  }
+
+  function _imp_renderBanner() {
+    var i = _imp(); if (!i) return;
+    var b = document.getElementById('imp-banner');
+    if (!b) { b = document.createElement('div'); b.id = 'imp-banner'; document.body.insertBefore(b, document.body.firstChild); }
+    b.style.cssText = 'position:sticky;top:0;z-index:960;background:#d29922;color:#0d1117;padding:.4rem .8rem;font-size:.8rem;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:.5rem;';
+    while (b.firstChild) b.removeChild(b.firstChild);
+    var msg = document.createElement('span');
+    msg.textContent = 'Acting as ' + i.targetName + ' on behalf — your own report is untouched';
+    b.appendChild(msg);
+    var btns = document.createElement('span');
+    btns.style.cssText = 'display:flex;gap:.4rem;align-items:center;flex-shrink:0;';
+    var hand = document.createElement('button'); hand.type = 'button'; hand.textContent = 'Handoff';
+    hand.title = 'Generate the report shortcode + advise link for ' + i.targetName;
+    hand.style.cssText = 'background:#0d1117;color:#d29922;border:none;border-radius:4px;padding:.2rem .6rem;cursor:pointer;font-weight:700;';
+    hand.addEventListener('click', function () { _imp_openHandoff(); });
+    btns.appendChild(hand);
+    var ex = document.createElement('button'); ex.type = 'button'; ex.textContent = 'Exit';
+    ex.style.cssText = 'background:#0d1117;color:#d29922;border:none;border-radius:4px;padding:.2rem .6rem;cursor:pointer;font-weight:700;';
+    ex.addEventListener('click', function () { window._impersonation = null; location.href = location.pathname; });
+    btns.appendChild(ex);
+    b.appendChild(btns);
+  }
+
+  // On-behalf handoff: mint the target's report shortcode, create an advise
+  // link (delegated), optionally notify, and record to the advisor's history.
+  function _imp_openHandoff() {
+    var i = _imp(); if (!i) return;
+    var state = { shortcode: '', adviseCode: '' };
+    var overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1001;display:flex;align-items:center;justify-content:center;';
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) document.body.removeChild(overlay); });
+    var m = document.createElement('div');
+    m.style.cssText = 'background:var(--card,#1c2128);border:1px solid var(--border,#30363d);border-radius:8px;padding:1rem;width:min(480px,94vw);display:flex;flex-direction:column;gap:.6rem;max-height:85vh;overflow:auto;';
+    var h = document.createElement('h2'); h.style.cssText = 'margin:0;font-size:1rem;color:var(--text,#e6edf3);'; h.textContent = 'Hand off to ' + i.targetName; m.appendChild(h);
+    var note = document.createElement('div'); note.style.cssText = 'font-size:.72rem;color:var(--muted,#8b949e);'; note.textContent = 'Everything here is saved under ' + i.targetName + "'s account. They log in, verify their UID, and load their shortcode to receive it."; m.appendChild(note);
+    var status = document.createElement('div'); status.style.cssText = 'font-size:.75rem;color:var(--muted,#8b949e);min-height:1em;';
+    function setStatus(t, err) { status.textContent = t; status.style.color = err ? 'var(--red,#f85149)' : 'var(--muted,#8b949e)'; }
+
+    function resultRow(label, value, hrefBuild) {
+      var row = document.createElement('div');
+      row.style.cssText = 'display:flex;align-items:center;gap:.4rem;font-size:.8rem;background:var(--surface,#161b22);border:1px solid var(--border,#30363d);border-radius:6px;padding:.4rem .5rem;';
+      var lab = document.createElement('span'); lab.style.cssText = 'color:var(--muted,#8b949e);'; lab.textContent = label; row.appendChild(lab);
+      var val = document.createElement('span'); val.style.cssText = 'color:var(--accent,#79c0ff);font-weight:600;word-break:break-all;'; val.textContent = value; row.appendChild(val);
+      var copy = document.createElement('button'); copy.type = 'button'; copy.textContent = 'Copy';
+      copy.style.cssText = 'margin-left:auto;background:var(--surface,#161b22);border:1px solid var(--border,#30363d);border-radius:4px;color:var(--text,#e6edf3);padding:.15rem .5rem;cursor:pointer;font-size:.72rem;';
+      copy.addEventListener('click', function () { try { navigator.clipboard.writeText(hrefBuild ? hrefBuild(value) : value); copy.textContent = 'Copied'; setTimeout(function(){ copy.textContent='Copy'; }, 1200); } catch (e) {} });
+      row.appendChild(copy);
+      m.appendChild(row);
+    }
+    function recordHistory() {
+      if (!_ar_supplementToken) return;
+      fetch(PUSH_WORKER + '/advisor/onbehalf/record', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _ar_supplementToken },
+        body: JSON.stringify({ targetSiteKey: i.targetSiteKey, targetName: i.targetName, adviseCode: state.adviseCode, shortcode: state.shortcode }),
+      }).catch(function () {});
+    }
+
+    // 1. Save report shortcode (uses target siteKey via saveConfig _imp() branch)
+    var b1 = document.createElement('button'); b1.className = 'btn-primary'; b1.style.width = '100%';
+    b1.textContent = '1. Save ' + i.targetName + "'s report shortcode";
+    var hasReports = wizardState.reportData && wizardState.reportData.length > 0;
+    if (!hasReports) { b1.disabled = true; b1.textContent = 'Load a battle report first, then save the shortcode'; }
+    b1.addEventListener('click', function () {
+      b1.disabled = true; setStatus('Saving shortcode…');
+      // saveConfig resolves to the shortcode STRING (not an object).
+      saveConfig(false).then(function (code) {
+        if (code) { state.shortcode = code; resultRow('Shortcode:', code); setStatus('Shortcode saved.'); recordHistory(); }
+        else { setStatus('Shortcode save failed.', true); b1.disabled = false; }
+      }).catch(function (e) { setStatus('Shortcode save failed: ' + (e && e.message ? e.message : e), true); b1.disabled = false; });
+    });
+    m.appendChild(b1);
+
+    // 2. Create advise link (delegated /advisor/request)
+    var b2 = document.createElement('button'); b2.className = 'btn-secondary'; b2.style.width = '100%';
+    b2.textContent = '2. Create advise link';
+    b2.addEventListener('click', function () {
+      // The advise link's plan builder loads the player's report via this
+      // shortcode, so it must be a real saved code — never a placeholder.
+      if (!state.shortcode) { setStatus('Save the report shortcode first (step 1).', true); return; }
+      b2.disabled = true; setStatus('Creating advise link…');
+      fetch(PUSH_WORKER + '/advisor/request', {
+        method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json' }, _imp_authHeader()),
+        body: JSON.stringify({ reportShortcode: state.shortcode, note: 'Set up on behalf' }),
+      }).then(function (r) { return r.json().then(function (j) { return { status: r.status, j: j }; }); })
+        .then(function (res) {
+          if (res.status === 200 && res.j && res.j.code) {
+            state.adviseCode = res.j.code;
+            resultRow('Advise link:', res.j.url || ('https://2864tw.com/armory-report.html?advise=' + res.j.code));
+            setStatus('Advise link created. Open it yourself to build the plan steps, then share it with ' + i.targetName + '.');
+            recordHistory();
+          } else { setStatus('Advise link failed: ' + ((res.j && res.j.error) || ('HTTP ' + res.status)), true); b2.disabled = false; }
+        }).catch(function (e) { setStatus('Advise link failed (network).', true); b2.disabled = false; });
+    });
+    m.appendChild(b2);
+
+    // 3. Notify the target (delegated /advisor/notify)
+    var b3 = document.createElement('button'); b3.className = 'btn-secondary'; b3.style.width = '100%';
+    b3.textContent = '3. Notify ' + i.targetName + ' (if subscribed)';
+    b3.addEventListener('click', function () {
+      b3.disabled = true; setStatus('Sending notification…');
+      fetch(PUSH_WORKER + '/advisor/notify', { method: 'POST', headers: _imp_authHeader() })
+        .then(function (r) { return r.json(); })
+        .then(function (j) { setStatus(j && j.ok ? ('Notification sent (' + (j.sent || 0) + ' device' + ((j.sent === 1) ? '' : 's') + ').') : 'Notify failed.', !(j && j.ok)); })
+        .catch(function () { setStatus('Notify failed (network).', true); b3.disabled = false; });
+    });
+    m.appendChild(b3);
+
+    m.appendChild(status);
+    var close = document.createElement('button'); close.className = 'btn-secondary'; close.style.width = '100%'; close.textContent = 'Done';
+    close.addEventListener('click', function () { document.body.removeChild(overlay); });
+    m.appendChild(close);
+    overlay.appendChild(m); document.body.appendChild(overlay);
+  }
+
+  // Power-user "Advise history": players this advisor has set up reports for.
+  // Default view = last 14 days, not dismissed; toggles reveal older + dismissed.
+  function _imp_openHistory() {
+    var id = getStoredIdentity();
+    if (!id || !id.siteKey || !_ar_supplementToken) { alert('Verify your identity first.'); return; }
+    var DAY = 86400000, showOlder = false, showDismissed = false;
+    var overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1001;display:flex;align-items:center;justify-content:center;';
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) document.body.removeChild(overlay); });
+    var m = document.createElement('div');
+    m.style.cssText = 'background:var(--card,#1c2128);border:1px solid var(--border,#30363d);border-radius:8px;padding:1rem;width:min(520px,94vw);display:flex;flex-direction:column;gap:.5rem;max-height:85vh;overflow:auto;';
+    var h = document.createElement('h2'); h.style.cssText = 'margin:0;font-size:1rem;color:var(--text,#e6edf3);'; h.textContent = 'Advise history'; m.appendChild(h);
+    var listWrap = document.createElement('div'); listWrap.style.cssText = 'display:flex;flex-direction:column;gap:.4rem;'; m.appendChild(listWrap);
+    var entries = [];
+    function hide(code, hidden) {
+      fetch(PUSH_WORKER + '/advisor/onbehalf/hide', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _ar_supplementToken },
+        body: JSON.stringify({ adviseCode: code, hidden: hidden }),
+      }).then(function () { load(); }).catch(function () {});
+    }
+    function row(e) {
+      var r = document.createElement('div');
+      r.style.cssText = 'background:var(--surface,#161b22);border:1px solid var(--border,#30363d);border-radius:6px;padding:.45rem .55rem;display:flex;flex-direction:column;gap:.25rem;' + (e.hidden ? 'opacity:.55;' : '');
+      var top = document.createElement('div'); top.style.cssText = 'display:flex;align-items:center;gap:.4rem;';
+      var nm = document.createElement('span'); nm.style.cssText = 'font-weight:600;color:var(--text,#e6edf3);font-size:.85rem;'; nm.textContent = e.targetName || '(unknown)'; top.appendChild(nm);
+      var dt = document.createElement('span'); dt.style.cssText = 'font-size:.68rem;color:var(--muted,#8b949e);'; dt.textContent = e.ts ? new Date(e.ts).toLocaleDateString() : ''; top.appendChild(dt);
+      var act = document.createElement('button'); act.type = 'button'; act.textContent = e.hidden ? 'Restore' : '✕';
+      act.title = e.hidden ? 'Restore to the list' : 'Dismiss from the list';
+      act.style.cssText = 'margin-left:auto;background:none;border:1px solid var(--border,#30363d);border-radius:4px;color:var(--muted,#8b949e);cursor:pointer;font-size:.72rem;padding:.1rem .45rem;';
+      act.addEventListener('click', function () { hide(e.adviseCode || ('ts' + e.ts), !e.hidden); });
+      top.appendChild(act);
+      r.appendChild(top);
+      function copyRow(label, value) {
+        if (!value) return;
+        var cr = document.createElement('div'); cr.style.cssText = 'display:flex;align-items:center;gap:.4rem;font-size:.72rem;';
+        var l = document.createElement('span'); l.style.color = 'var(--muted,#8b949e)'; l.textContent = label; cr.appendChild(l);
+        var v = document.createElement('span'); v.style.cssText = 'color:var(--accent,#79c0ff);word-break:break-all;'; v.textContent = value; cr.appendChild(v);
+        var cp = document.createElement('button'); cp.type = 'button'; cp.textContent = 'Copy'; cp.style.cssText = 'margin-left:auto;background:none;border:1px solid var(--border,#30363d);border-radius:4px;color:var(--text,#e6edf3);cursor:pointer;font-size:.68rem;padding:.05rem .4rem;';
+        cp.addEventListener('click', function () { try { navigator.clipboard.writeText(value); cp.textContent = 'Copied'; setTimeout(function(){ cp.textContent='Copy'; }, 1200); } catch (x) {} });
+        cr.appendChild(cp); r.appendChild(cr);
+      }
+      if (e.adviseCode) copyRow('Advise link:', 'https://2864tw.com/armory-report.html?advise=' + e.adviseCode);
+      if (e.shortcode) copyRow('Shortcode:', e.shortcode);
+      return r;
+    }
+    function render() {
+      while (listWrap.firstChild) listWrap.removeChild(listWrap.firstChild);
+      var now = Date.now();
+      var recent = entries.filter(function (e) { return !e.hidden && (now - (e.ts || 0)) < 14 * DAY; });
+      var older = entries.filter(function (e) { return !e.hidden && (now - (e.ts || 0)) >= 14 * DAY; });
+      var dismissed = entries.filter(function (e) { return e.hidden; });
+      var shown = recent.concat(showOlder ? older : []).concat(showDismissed ? dismissed : []);
+      if (!shown.length) { var em = document.createElement('div'); em.style.cssText = 'color:var(--muted,#8b949e);font-size:.8rem;padding:.5rem;'; em.textContent = 'No advise activity in the last 14 days.'; listWrap.appendChild(em); }
+      shown.forEach(function (e) { listWrap.appendChild(row(e)); });
+      var toggles = document.createElement('div'); toggles.style.cssText = 'display:flex;gap:.5rem;margin-top:.3rem;';
+      if (older.length) { var o = document.createElement('button'); o.type = 'button'; o.style.cssText = 'background:none;border:1px solid var(--border,#30363d);border-radius:4px;color:var(--muted,#8b949e);cursor:pointer;font-size:.72rem;padding:.15rem .5rem;'; o.textContent = (showOlder ? 'Hide older' : 'Show older (' + older.length + ')'); o.addEventListener('click', function () { showOlder = !showOlder; render(); }); toggles.appendChild(o); }
+      if (dismissed.length) { var d = document.createElement('button'); d.type = 'button'; d.style.cssText = 'background:none;border:1px solid var(--border,#30363d);border-radius:4px;color:var(--muted,#8b949e);cursor:pointer;font-size:.72rem;padding:.15rem .5rem;'; d.textContent = (showDismissed ? 'Hide dismissed' : 'Show dismissed (' + dismissed.length + ')'); d.addEventListener('click', function () { showDismissed = !showDismissed; render(); }); toggles.appendChild(d); }
+      listWrap.appendChild(toggles);
+    }
+    function load() {
+      fetch(PUSH_WORKER + '/advisor/onbehalf/' + id.siteKey, { headers: { 'Authorization': 'Bearer ' + _ar_supplementToken } })
+        .then(function (r) { return r.json(); })
+        .then(function (j) { entries = (j && Array.isArray(j.entries)) ? j.entries : []; render(); })
+        .catch(function () { entries = []; render(); });
+    }
+    var close = document.createElement('button'); close.className = 'btn-secondary'; close.style.cssText = 'width:100%;margin-top:.3rem;'; close.textContent = 'Close';
+    close.addEventListener('click', function () { document.body.removeChild(overlay); });
+    m.appendChild(close);
+    overlay.appendChild(m); document.body.appendChild(overlay);
+    load();
+  }
 
   // ── Flag utilities ────────────────────────────────────────────────────────
   var SVG_NS = 'http://www.w3.org/2000/svg';
@@ -3594,8 +3856,6 @@
   // ── Shortcode sharing helpers ─────────────────────────────────────────────
   // Back-compat alias so existing call sites keep working without migration.
   // New code should prefer `ArmoryIdentity.get()`.
-  window.ArmoryIdentity = ArmoryIdentity;
-
   function getStoredIdentity() {
     return ArmoryIdentity.get();
   }
@@ -3604,7 +3864,7 @@
   // report cap (9 instead of 6) when adding from the Manage Reports modal.
   function isVerifiedS2864Member() {
     var id = getStoredIdentity();
-    return !!(id && id.siteKey && !id.guest); // MATHOMHOUSE: member gate
+    return !!(id && id.name && id.siteKey && !id.guest);
   }
 
   // Stable per-device advisor identifier used by the multi-advisor plan
@@ -4001,7 +4261,7 @@
     setTimeout(function() { input.focus(); }, 50);
   }
 
-  var SUPPLEMENT_WORKER = 'https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev';
+  var SUPPLEMENT_WORKER = 'https://push-worker.27tb8s6fct.workers.dev';
   var _ar_supplementToken = null;
   var _ar_supplementTokenExpires = 0;
 
@@ -4069,16 +4329,11 @@
   // Ensure a fresh token is available; auto-handshake from cached uidHash
   // when possible. Throws when no cached hash exists (caller surfaces a
   // re-enter UID prompt).
-  async function _ar_ensureSupplementToken(siteKey) { // MATHOMHOUSE: siteKey handshake
-    if (_ar_supplementToken && _ar_supplementToken !== 'local' && _ar_supplementTokenExpires > Date.now()) return;
-    var r = await fetch(SUPPLEMENT_WORKER + '/supplement/handshake', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ siteKey: siteKey })
-    });
-    var d = await r.json();
-    _ar_supplementToken = d.token;
-    _ar_supplementTokenExpires = Date.now() + 864e7;
+  async function _ar_ensureSupplementToken(siteKey) {
+    if (_ar_supplementToken && Date.now() < _ar_supplementTokenExpires - 10000) return;
+    var hash = _ar_getStoredUidHash(siteKey);
+    if (!hash) throw new Error('No upload token. Re-enter UID.');
+    await _ar_handshake(hash);
   }
 
   // Background re-sync: if the owner has local data newer than what the
@@ -4113,14 +4368,22 @@
   }
 
   async function _ar_supplementUpload(kind, json, siteKey) {
-    try {
-      await _ar_ensureSupplementToken(siteKey);
-    } catch (e) {
-      throw e;
+    var _authHeader;
+    if (_imp() && siteKey === _imp().targetSiteKey) {
+      // On-behalf: authenticate with the short-lived delegated token (scoped to
+      // runepool for the target). Never touch the advisor's own supplement token.
+      _authHeader = 'Bearer ' + _imp().delegatedToken;
+    } else {
+      try {
+        await _ar_ensureSupplementToken(siteKey);
+      } catch (e) {
+        throw e;
+      }
+      _authHeader = 'Bearer ' + _ar_supplementToken;
     }
     var r = await fetch(SUPPLEMENT_WORKER + '/supplement/upload', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _ar_supplementToken },
+      headers: { 'Content-Type': 'application/json', 'Authorization': _authHeader },
       body: JSON.stringify({ kind: kind, json: json })
     });
     if (!r.ok) {
@@ -4801,7 +5064,7 @@
   }
 
   function _ar_rehydrateInv(raw, lk) {
-    var ASSET = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/';
+    var ASSET = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/';
     var out = {
       meta: raw.meta || {}, resources: raw.resources || {},
       tabs: { item: [], unit: [], decor: [], hero: [], cpnt: [] },
@@ -5194,7 +5457,10 @@
   function saveConfig(showToast) {
     var identity = getStoredIdentity();
     var deviceId = getDeviceId();
-    var siteKey = (identity && identity.siteKey) ? identity.siteKey : ('guest_' + deviceId);
+    // On-behalf: mint the shortcode under the TARGET's siteKey (so the player
+    // can load it later) — not the advisor's own.
+    var siteKey = _imp() ? _imp().targetSiteKey
+                : ((identity && identity.siteKey) ? identity.siteKey : ('guest_' + deviceId));
     var playerName = (wizardState.player && wizardState.player.name) || (identity && identity.name) || 'Guest';
     var reportIds = wizardState.reportData.map(function(r) { return r.id; }).join(',');
 
@@ -5216,7 +5482,10 @@
         reportIds: reportIds,
         marchGroups: loadMarches()
       };
-      if (endpoint) body.endpoint = endpoint;
+      // On-behalf: stamp who set it up; do NOT attach the advisor's own push
+      // endpoint (it would fail the worker's identity check against the target).
+      if (_imp()) body.createdByAdvisor = _imp().advisorName;
+      if (endpoint && !_imp()) body.endpoint = endpoint;
 
       return fetch(PUSH_WORKER + '/report-config', {
         method: 'POST',
@@ -5225,12 +5494,16 @@
       }).then(function(r) { return r.json(); });
     }).then(function(result) {
       if (result && result.ok) {
-        // Cache shortcode in localStorage
-        try {
-          var saved = JSON.parse(localStorage.getItem('playerReport') || '{}');
-          saved.shortcode = result.shortcode;
-          localStorage.setItem('playerReport', JSON.stringify(saved));
-        } catch(e) {}
+        // Cache shortcode in localStorage — but NEVER while impersonating
+        // (that would write the advisor's own playerReport). On-behalf, the
+        // shortcode is surfaced in the handoff card instead.
+        if (!_imp()) {
+          try {
+            var saved = JSON.parse(localStorage.getItem('playerReport') || '{}');
+            saved.shortcode = result.shortcode;
+            localStorage.setItem('playerReport', JSON.stringify(saved));
+          } catch(e) {}
+        }
         // Update displayed shortcode in header if exists
         var codeDisplay = document.getElementById('header-shortcode');
         if (codeDisplay) codeDisplay.textContent = result.shortcode;
@@ -5274,7 +5547,7 @@
   }
 
   function copyShareLink(code) {
-    var url = 'https://mathomhouse.github.io/armory-report.html?code=' + code;
+    var url = 'https://2864tw.com/armory-report.html?code=' + code;
     navigator.clipboard.writeText(url).then(function() {
       showToastMessage('Link copied!');
     }).catch(function() {
@@ -5324,7 +5597,7 @@
     copyLinkBtn.className = 'btn-secondary';
     copyLinkBtn.textContent = 'Copy Link';
     copyLinkBtn.onclick = function() {
-      var url = 'https://mathomhouse.github.io/armory-report.html?code=' + code;
+      var url = 'https://2864tw.com/armory-report.html?code=' + code;
       navigator.clipboard.writeText(url).then(function() {
         copiedEl.textContent = 'Link copied!';
         setTimeout(function() { copiedEl.textContent = ''; }, 2000);
@@ -5409,6 +5682,7 @@
         // shortcode. Otherwise an in-memory load of someone else's report
         // would silently overwrite the viewer's saved marches.
         if (isSamePlayer && result.marchGroups) saveMarches(result.marchGroups);
+        window._ar_setupBy = (result && result.createdByAdvisor) || null;
         applyShortcodeConfig(result.playerName, ids, isSamePlayer, result.siteKey);
       })
       .catch(function() {
@@ -5592,7 +5866,7 @@
   var EB_ELEMENTS = {1:'Fire',2:'Water',3:'Wind',4:'Ground'};
   var EB_FIELD_NAMES = {1:'CPNT Mastery',2:'Formation',3:'Equip',4:'Defense',5:'Offense'};
   var EB_FIELD_SLOT_COUNTS = {1:5,2:7,3:6,4:9,5:9};
-  var EB_ICON_BASE = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/beast-icons/';
+  var EB_ICON_BASE = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/beast-icons/';
 
   // Buff names verified against in-game effect_buff TABLE + LocalManager.getText() (2026-05-04).
   // 520110-113 = ATK, 520120-123 = HP Boost, 520130-133 = Elemental Enhance, 520140-143 = Elemental RES.
@@ -6226,6 +6500,29 @@
         if (errDiv) errDiv.textContent = 'Your player (' + (wizardState.player.name || '') + ') was not found in this report.';
         if (loadBtn) { loadBtn.disabled = false; loadBtn.textContent = 'Load'; }
         return;
+      }
+      // Recover the player's avatar from this report when we don't have one
+      // yet — same source as the shortcode-load path (the battle report's own
+      // playerInfo). Impersonation pre-sets player as {name, siteKey} with no
+      // avatar, so without this the dashboard shows the initial fallback.
+      if (!wizardState.player.avatar) {
+        try {
+          var _sides = [data.battle.attacker, data.battle.defender];
+          for (var _si = 0; _si < _sides.length && !wizardState.player.avatar; _si++) {
+            var _pl = (_sides[_si] && _sides[_si].players) || [];
+            for (var _pj = 0; _pj < _pl.length; _pj++) {
+              var _info = JSON.parse(_pl[_pj].playerInfo || '{}');
+              if (_info.username === wizardState.player.name) {
+                var _av = getAvatar(_info);
+                if (_av) {
+                  wizardState.player.avatar = _av;
+                  wizardState.player.avatarFallback = (_info.username || '?').charAt(0).toUpperCase();
+                }
+                break;
+              }
+            }
+          }
+        } catch (e) {}
       }
       wizardState.reportData.push({ id: id, extracted: extracted });
       wizardState.step = 'summary';
@@ -7033,20 +7330,26 @@
 
   // ── Persist + render full report ──────────────────────────────────────────
   function saveAndRenderReport() {
-    var saved = {
-      player: wizardState.player,
-      reportIds: wizardState.reportData.map(function(r) { return r.id; }),
-      marchGroups: loadMarches()
-    };
-    try {
-      var prior = JSON.parse(localStorage.getItem('playerReport') || '{}');
-      if (prior.shortcode) saved.shortcode = prior.shortcode;
-    } catch(e) {}
-    localStorage.setItem('playerReport', JSON.stringify(saved));
+    // On-behalf impersonation: render the target's report from in-memory
+    // wizardState only — NEVER write the advisor's own playerReport /
+    // playerReportData (the isolation guarantee). renderFullReport() reads
+    // from wizardState, so the report still renders fully.
+    if (!_imp()) {
+      var saved = {
+        player: wizardState.player,
+        reportIds: wizardState.reportData.map(function(r) { return r.id; }),
+        marchGroups: loadMarches()
+      };
+      try {
+        var prior = JSON.parse(localStorage.getItem('playerReport') || '{}');
+        if (prior.shortcode) saved.shortcode = prior.shortcode;
+      } catch(e) {}
+      localStorage.setItem('playerReport', JSON.stringify(saved));
 
-    var cache = {};
-    wizardState.reportData.forEach(function(r) { cache[r.id] = r.extracted; });
-    localStorage.setItem('playerReportData', JSON.stringify(cache));
+      var cache = {};
+      wizardState.reportData.forEach(function(r) { cache[r.id] = r.extracted; });
+      localStorage.setItem('playerReportData', JSON.stringify(cache));
+    }
 
     closeWizard();
     renderFullReport();
@@ -7064,7 +7367,7 @@
     left.className = 'rh-left';
 
     var homeLink = document.createElement('a');
-    homeLink.href = 'https://mathomhouse.github.io';
+    homeLink.href = 'https://2864tw.com';
     homeLink.className = 'rh-btn';
     homeLink.title = 'Home';
     homeLink.appendChild(svgIcon({ children: [['path', { 'd': 'M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z' }], ['polyline', { 'points': '9 22 9 12 15 12 15 22' }]] }));
@@ -7164,11 +7467,42 @@
       title.textContent = 'Armory Report';
       left.appendChild(title);
     }
+    // Attribution: when this report's shortcode was set up by an advisor on the
+    // player's behalf, surface a small "Set up by «advisor»" note. Not shown
+    // while the advisor is themselves impersonating.
+    if (!_imp() && window._ar_setupBy) {
+      var setupNote = document.createElement('span');
+      setupNote.className = 'rh-title';
+      setupNote.style.cssText = 'font-size:.68rem;color:var(--muted);opacity:.85;';
+      setupNote.textContent = 'Set up by ' + window._ar_setupBy;
+      left.appendChild(setupNote);
+    }
     hdr.appendChild(left);
 
     // ── Right side: lang, feedback, settings, share ──
     var right = document.createElement('div');
     right.className = 'rh-right';
+
+    // ── Advisor "Advise a player" button — shown async if allowlisted ──
+    if (!_imp()) {
+      _imp_checkAllowed(function (allowed, advisorName) {
+        if (!allowed || _imp()) return;
+        var adBtn = document.createElement('button');
+        adBtn.className = 'rh-btn';
+        adBtn.type = 'button';
+        adBtn.title = 'Generate a report on behalf of another player';
+        adBtn.textContent = 'Advise a player';
+        adBtn.addEventListener('click', function () { openImpersonationPicker(advisorName); });
+        right.appendChild(adBtn);
+        var histBtn = document.createElement('button');
+        histBtn.className = 'rh-btn';
+        histBtn.type = 'button';
+        histBtn.title = 'Players you have set up reports for (on behalf)';
+        histBtn.textContent = 'Advise history';
+        histBtn.addEventListener('click', function () { _imp_openHistory(); });
+        right.appendChild(histBtn);
+      });
+    }
 
     // What's New (S2864 beta callout) — for verified S2864 members viewing
     // their own report (not view-only / shortcode-share). Persistent: stays
@@ -7264,28 +7598,16 @@
     langBtn.addEventListener('click', function() { openLangPicker(); });
     right.appendChild(langBtn);
 
-    // MATHOMHOUSE: feedback-btn
-    var _mhFbBtn = document.createElement('button');
-    _mhFbBtn.className = 'rh-btn';
-    _mhFbBtn.type = 'button';
-    _mhFbBtn.title = 'Send Feedback';
-    var _mhFbSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    _mhFbSvg.setAttribute('width', '14'); _mhFbSvg.setAttribute('height', '14');
-    _mhFbSvg.setAttribute('viewBox', '0 0 24 24'); _mhFbSvg.setAttribute('fill', 'none');
-    _mhFbSvg.setAttribute('stroke', 'currentColor'); _mhFbSvg.setAttribute('stroke-width', '2');
-    _mhFbSvg.setAttribute('stroke-linecap', 'round'); _mhFbSvg.setAttribute('stroke-linejoin', 'round');
-    var _mhFbPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    _mhFbPath.setAttribute('d', 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z');
-    _mhFbSvg.appendChild(_mhFbPath);
-    _mhFbBtn.appendChild(_mhFbSvg);
-    var _mhFbLbl = document.createElement('span');
-    _mhFbLbl.className = 'rh-label';
-    _mhFbLbl.textContent = 'Feedback';
-    _mhFbBtn.appendChild(_mhFbLbl);
-    _mhFbBtn.addEventListener('click', function () {
-      if (typeof openFeedbackModal === 'function') openFeedbackModal();
-    });
-    right.insertBefore(_mhFbBtn, right.firstChild);
+    // Feedback: handled by feedback-widget.js (auto-appends to <header>)
+    // Move floating widget button into header (may have been hidden on landing or floating)
+    setTimeout(function() {
+      var fwBtn = document.getElementById('fw-hdr-btn');
+      if (fwBtn) {
+        fwBtn.style.cssText = ''; // Clear any display:none or position:fixed
+        fwBtn.style.display = '';
+        if (fwBtn.parentNode !== right) right.insertBefore(fwBtn, right.firstChild);
+      }
+    }, 100);
 
     // Settings / Identity button
     var prefsBtn = document.createElement('button');
@@ -7803,7 +8125,7 @@
         copyBtn.className = 'rh-prefs-btn';
         copyBtn.textContent = 'Copy Link';
         copyBtn.addEventListener('click', function() {
-          navigator.clipboard.writeText('https://mathomhouse.github.io/armory-report.html?code=' + shortcode).then(function() {
+          navigator.clipboard.writeText('https://2864tw.com/armory-report.html?code=' + shortcode).then(function() {
             copyBtn.textContent = 'Copied!';
             setTimeout(function() { copyBtn.textContent = 'Copy Link'; }, 1500);
           });
@@ -7974,7 +8296,7 @@
             cpBtn.style.fontSize = '.7rem';
             (function(code) {
               cpBtn.addEventListener('click', function() {
-                navigator.clipboard.writeText('https://mathomhouse.github.io/armory-report.html?code=' + code).then(function() {
+                navigator.clipboard.writeText('https://2864tw.com/armory-report.html?code=' + code).then(function() {
                   cpBtn.textContent = '\u2713';
                   setTimeout(function() { cpBtn.textContent = 'Copy'; }, 1200);
                 });
@@ -8369,7 +8691,7 @@
     bmWrap.appendChild(_ar_buildPowerToolCard({
       title: 'Skill Dismantle (standalone)',
       desc: 'Same bulk-dismantle wizard available inside Import TopWar Data. Use this when you only want to scrap skill items and skip the full snapshot extract.',
-      url: 'javascript:(function(){var s=document.createElement(\'script\');s.src=\'https://mathomhouse.github.io/dismantle-bookmarklet.js?_=\'+Date.now();s.onerror=function(){alert(\'Bookmarklet load failed. Check internet + try again.\');};document.body.appendChild(s);})();'
+      url: 'javascript:(function(){var s=document.createElement(\'script\');s.src=\'https://2864tw.com/dismantle-bookmarklet.js?_=\'+Date.now();s.onerror=function(){alert(\'Bookmarklet load failed. Check internet + try again.\');};document.body.appendChild(s);})();'
     }));
   }
 
@@ -8387,7 +8709,6 @@
     if (wizardState.player && wizardState.player.name && !wizardState.player.siteKey && _ar_rosterByName) {
       var rosterMatch = _ar_rosterByName[String(wizardState.player.name).toLowerCase()];
       if (rosterMatch && rosterMatch.siteKey) wizardState.player.siteKey = rosterMatch.siteKey;
-      if (!wizardState.player.siteKey) { try { var _li = window.ArmoryIdentity && window.ArmoryIdentity.get && window.ArmoryIdentity.get(); if (_li && _li.siteKey) wizardState.player.siteKey = _li.siteKey; } catch(_e){} } // MATHOMHOUSE: siteKey fallback
     }
 
     var merged = mergeReportData(wizardState.reportData);
@@ -8595,7 +8916,8 @@
     setTimeout(_ar_updateTabScrollState, 400);
 
     var siteKey = (wizardState.player && wizardState.player.siteKey) || (window._reportSiteKey) || null;
-    var inS2864 = !!siteKey; // MATHOMHOUSE: inS2864 renderFullReport
+    var inS2864 = false;
+    if (siteKey && _ar_rosterMap && _ar_rosterMap[siteKey]) inS2864 = true;
     // Resolve identity + own-report before building tabDefs — the Advisor
     // Plans tab gate at the bottom of this block reads isOwnReport and was
     // silently dropping the tab (var hoisting → undefined) until both
@@ -10686,7 +11008,7 @@
     // mock is removed post-beta, players still get the tab plus the empty
     // state until they paste their own bookmarklet output.
     var siteKey = (wizardState.player && wizardState.player.siteKey) || null;
-    var inS2864 = !!siteKey; // MATHOMHOUSE: inS2864 heroesTab
+    var inS2864 = siteKey && _ar_rosterMap && _ar_rosterMap[siteKey];
     var gearPoolAvailable = !!inS2864;
 
     if (!gearPoolAvailable) {
@@ -13661,7 +13983,7 @@
       awSec.appendChild(awLbl);
       var awLevels = h.aws || {};
       var awPanel = renderHeroAwakening(h.id, h.aw, !!h.fa, awLevels, window._heroAwakeningData,
-        'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/hero-awake-skills/');
+        'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/hero-awake-skills/');
       if (awPanel) { awSec.appendChild(awPanel); pane.appendChild(awSec); }
     }
   }
@@ -15573,7 +15895,7 @@
     var head = _adv_mk('div', { cls: 'advisor-rec-head' });
     if (r.iconPath) {
       var sanitizedName = _adv_sanitizeDecorNameForIcon(r.name);
-      var iconUrl = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/decor-icons/' +
+      var iconUrl = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/decor-icons/' +
                     r.group + '_' + sanitizedName + '.png';
       var img = _adv_mk('img', { attrs: { src: iconUrl, loading: 'lazy', alt: '' } });
       img.onerror = function() { img.style.display = 'none'; };
@@ -21255,6 +21577,48 @@
     sub.textContent = 'Available runes — your bag plus runes on unequipped gold pieces.';
     toolbar.appendChild(sub);
 
+    // On-behalf (impersonation): the advisor edits the TARGET's rune pool using
+    // the same editor. Save routes through _ar_supplementUpload with the
+    // delegated token. No privacy/advice controls — just the editor.
+    if (!isOwnerVerified && _imp() && siteKey === _imp().targetSiteKey) {
+      var obEdit = document.createElement('button');
+      obEdit.className = 'runepool-edit-btn';
+      obEdit.type = 'button';
+      obEdit.style.marginLeft = 'auto';
+      obEdit.title = "Edit and save " + _imp().targetName + "'s rune pool on their behalf.";
+      obEdit.textContent = 'Edit Pool (on behalf)';
+      obEdit.onclick = function() {
+        obEdit.disabled = true;
+        Promise.all([
+          _ar_loadInvLookups().catch(function() { return null; }),
+          _ar_loadRuneTypes().catch(function() { return null; })
+        ]).then(function(arr) {
+          obEdit.disabled = false;
+          var lookups = arr[0];
+          var catalog = arr[1];
+          var savedNow = ArmoryIdentity.getSupplement('runepool', siteKey);
+          var bagCounts0 = {};
+          var gearCounts0 = {};
+          if (savedNow && savedNow.pool) {
+            for (var nm in savedNow.pool) {
+              bagCounts0[nm] = savedNow.pool[nm][0] || 0;
+              var sg = 0;
+              for (var k0 = 1; k0 <= 6; k0++) sg += (savedNow.pool[nm][k0] || 0);
+              gearCounts0[nm] = sg;
+            }
+          } else {
+            var ext = _ar_extractRunePool(inv, gear, lookups);
+            bagCounts0 = ext.bagCounts;
+            gearCounts0 = ext.gearCounts;
+          }
+          _ar_openRunepoolEditModal(siteKey, bagCounts0, gearCounts0, catalog, function() {
+            renderRunePoolTab(siteKey, _ar_isUnlocked(siteKey));
+          });
+        });
+      };
+      toolbar.appendChild(obEdit);
+    }
+
     if (isOwnerVerified) {
       var editBtn = document.createElement('button');
       editBtn.className = 'runepool-edit-btn';
@@ -21785,7 +22149,7 @@
         var odBar = document.createElement('div');
         odBar.style.cssText = 'display:flex;align-items:center;gap:.6rem;padding:10px 16px;margin:0 16px 6px;background:linear-gradient(135deg, rgba(210,153,34,0.14), rgba(240,198,116,0.08));border:1px solid rgba(210,153,34,0.4);border-radius:8px;flex-wrap:wrap;';
         var odIcon = document.createElement('img');
-        odIcon.src = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/inventory-icons/image__item__item_940001.png';
+        odIcon.src = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/inventory-icons/image__item__item_940001.png';
         odIcon.alt = '';
         odIcon.style.cssText = 'width:20px;height:20px;object-fit:contain;flex-shrink:0;';
         odIcon.onerror = function() { odIcon.style.display = 'none'; };
@@ -22485,9 +22849,9 @@
   // Synthetic aggregate cell (Gems / Odinium / Food / Oil). Click → modal
   // showing every contributing pack with per-pack value × amount × total.
   function _ar_buildAggregateCell(kind, data) {
-    var TR = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/treasury-icons/';
+    var TR = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/treasury-icons/';
     var META = {
-      gem:     { name: 'Gems',     iconUrl: 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/inventory-icons/image__item__item_1000000.png', q: 5 },
+      gem:     { name: 'Gems',     iconUrl: 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/inventory-icons/image__item__item_1000000.png', q: 5 },
       odinium: { name: 'Odinium',  iconUrl: TR + 'odinium.png', q: 5 },
       food:    { name: 'Food',     iconUrl: TR + 'food.png',    q: 4 },
       oil:     { name: 'Oil',      iconUrl: TR + 'oil.png',     q: 4 }
@@ -23026,7 +23390,7 @@
         'Tap Share → Add Bookmark → Save (any page)',
         'Use the "Show bookmarklet URL" box below to copy the bookmarklet link',
         'Open Bookmarks → Edit → tap the new bookmark, clear the URL field, paste, rename to "' + bmLabel + '" and save',
-        'Open Safari and go to https://h5.topwargame.com/h5game/index.html — log in to your account if not already',
+        'Open Safari and go to https://h5.topwargame.com/h5game/index.html — log in to your S2864 account if not already',
         'Open the relevant panel inside the game (Bag for inventory, Beast list for bench), then tap the address bar, type "' + bmLabel + '", and tap the suggestion'
       ])));
       wrap.appendChild(makeDetails('Android Chrome setup', makeOl([
@@ -23034,7 +23398,7 @@
         'Menu (⋮) → Add to bookmarks (any page)',
         'Use the "Show bookmarklet URL" box below to copy the bookmarklet link',
         'Menu (⋮) → Bookmarks → tap-and-hold the new bookmark → Edit. Clear the URL field, paste, rename to "' + bmLabel + '" and save',
-        'Open Chrome and go to https://h5.topwargame.com/h5game/index.html — log in to your account if not already',
+        'Open Chrome and go to https://h5.topwargame.com/h5game/index.html — log in to your S2864 account if not already',
         'Open the relevant panel inside the game (Bag for inventory, Beast list for bench)',
         'In the URL bar type "' + bmLabel + '", then tap the autocomplete suggestion (Chrome strips javascript: when typed manually — picking from autocomplete preserves it)'
       ])));
@@ -23539,7 +23903,7 @@
         v: 1,
         meta: { ts: nowIso },
         pool: pool,
-        source: 'manual'
+        source: _imp() ? 'advisor-onbehalf' : 'manual'
       };
       var serialized = JSON.stringify(payload);
       if (serialized.length > _AR_SUP_MAX_BYTES) {
@@ -24164,8 +24528,8 @@
     // the matching plan card. Advisor side: ?advise=<code> bootstraps advisor
     // view-only mode against the player's report.
     openBtn.href = isOwner
-      ? ('https://mathomhouse.github.io/armory-report.html?plan=' + rec.code)
-      : ('https://mathomhouse.github.io/armory-report.html?advise=' + rec.code);
+      ? ('https://2864tw.com/armory-report.html?plan=' + rec.code)
+      : ('https://2864tw.com/armory-report.html?advise=' + rec.code);
     openBtn.target = '_self';
     actions.appendChild(openBtn);
 
@@ -24177,7 +24541,7 @@
       copyBtn.className = 'asr-action';
       copyBtn.textContent = 'Copy link';
       copyBtn.title = 'Copy the advisor URL for code ' + rec.code;
-      var shareUrl = 'https://mathomhouse.github.io/armory-report.html?advise=' + rec.code;
+      var shareUrl = 'https://2864tw.com/armory-report.html?advise=' + rec.code;
       copyBtn.addEventListener('click', async function() {
         var prev = copyBtn.textContent;
         try {
@@ -25935,14 +26299,32 @@
     actions.appendChild(save);
     modal.appendChild(actions);
 
-    // Sorted hero list — heroes with at least 1 gear piece bubble first.
-    var heroes = ((ctx.merged && ctx.merged.heroes) || []).slice().sort(function(a, b) {
-      var ag = (a.heroEquips || []).length, bg = (b.heroEquips || []).length;
-      if (ag !== bg) return bg - ag;
-      var an = (typeof heroName === 'function') ? heroName(a.id) : ('Hero ' + a.id);
-      var bn = (typeof heroName === 'function') ? heroName(b.id) : ('Hero ' + b.id);
-      return an.localeCompare(bn);
-    });
+    // Sorted hero list for the source/destination dropdowns. MUST be the UNION
+    // of merged.heroes (battle report) AND every hero present in gearByHero
+    // (which also includes gear-supplement heroes) — otherwise a hero shown in
+    // the gear gallery (built from gearByHero) can't be selected as a source or
+    // destination, and clicking that hero's tile silently falls back to another
+    // hero (the "Astrid clickable in gallery but not in the dropdown" bug).
+    var heroes = (function() {
+      var byId = {};
+      ((ctx.merged && ctx.merged.heroes) || []).forEach(function(h) { if (h && h.id != null) byId[h.id] = h; });
+      var g = (ctx.state && ctx.state.gearByHero) || {};
+      Object.keys(g).forEach(function(k) {
+        var hid = parseInt(k, 10);
+        if (!hid || byId[hid]) return;
+        var slots = g[k] || {};
+        var n = 0;
+        for (var s = 1; s <= 6; s++) { if (Object.prototype.hasOwnProperty.call(slots, s)) n++; }
+        byId[hid] = { id: hid, heroEquips: new Array(n) }; // synthetic — heroOpt only reads .length
+      });
+      return Object.keys(byId).map(function(k) { return byId[k]; }).sort(function(a, b) {
+        var ag = (a.heroEquips || []).length, bg = (b.heroEquips || []).length;
+        if (ag !== bg) return bg - ag;
+        var an = (typeof heroName === 'function') ? heroName(a.id) : ('Hero ' + a.id);
+        var bn = (typeof heroName === 'function') ? heroName(b.id) : ('Hero ' + b.id);
+        return an.localeCompare(bn);
+      });
+    })();
     function heroOpt(h) {
       var opt = document.createElement('option');
       opt.value = String(h.id);
@@ -26276,18 +26658,36 @@
       var prefillHasRune = !!(prefill && prefill.rune && prefill.rune.runeName);
       if (prefill && prefill.slot) {
         srcSlotSel.value = String(prefill.slot);
-        srcSlotSel.disabled = true;
+        srcSlotSel.disabled = true; // slot is locked — inherit is same-slot only
+      }
+      // Pre-select the clicked hero as a STARTING POINT, but keep BOTH hero
+      // selects enabled so the advisor can freely flip source/destination.
+      // (Disabling a pinned select traps the advisor when the prefill heroId
+      // doesn't resolve to an option — the "source hero empty" bug.) Always
+      // fall back to a valid option so neither side is left blank.
+      function _ensureHeroSel(sel, val) {
+        if (val != null) sel.value = String(val);
+        if (!sel.value && sel.options.length) sel.value = sel.options[0].value;
       }
       if (prefill && prefillHasRune) {
-        // Clicked slot has a rune → it's the source.
-        srcHeroSel.value = String(prefill.heroId);
-        srcHeroSel.disabled = true;
+        // Clicked slot already holds a rune → default the clicked hero as source.
+        _ensureHeroSel(srcHeroSel, prefill.heroId);
+        // Default the destination to another hero who owns this slot, if any.
+        var defDst = null;
+        var gMapD = ctx.state && ctx.state.gearByHero;
+        if (gMapD) {
+          Object.keys(gMapD).some(function(k) {
+            var hh = parseInt(k, 10);
+            if (!hh || hh === prefill.heroId) return false;
+            if (gMapD[k] && Object.prototype.hasOwnProperty.call(gMapD[k], prefill.slot)) { defDst = hh; return true; }
+            return false;
+          });
+        }
+        _ensureHeroSel(dstHeroSel, defDst);
       } else if (prefill && prefill.heroId) {
-        // Clicked slot is empty → it's the destination. Pick a default
-        // source from any other hero that has a rune in this same slot, so
-        // the modal opens with a valid step instead of an immediate error.
-        dstHeroSel.value = String(prefill.heroId);
-        dstHeroSel.disabled = true;
+        // Clicked slot is empty → default the clicked hero as destination, and
+        // pick a default source from any other hero that has a rune in this slot.
+        _ensureHeroSel(dstHeroSel, prefill.heroId);
         var defaultSrcHero = null;
         var gMap = ctx.state && ctx.state.gearByHero;
         if (gMap) {
@@ -26299,11 +26699,10 @@
             if (r2 && r2.runeName) { defaultSrcHero = hid2; break; }
           }
         }
-        if (defaultSrcHero) srcHeroSel.value = String(defaultSrcHero);
-        // Re-label the "auto-locked" hint so the advisor sees which side is
-        // pinned to the clicked tile.
-        dstSlotLbl.textContent = 'Destination slot (locked to clicked tile)';
-        dstHeroLbl.textContent = 'Destination hero (locked to clicked tile)';
+        _ensureHeroSel(srcHeroSel, defaultSrcHero);
+      } else {
+        _ensureHeroSel(srcHeroSel, null);
+        _ensureHeroSel(dstHeroSel, null);
       }
       refresh();
       refs.srcHeroSel = srcHeroSel; refs.srcSlotSel = srcSlotSel; refs.dstHeroSel = dstHeroSel;
@@ -26723,7 +27122,7 @@
         if (entry.status === 'open') {
           var openHelp = document.createElement('div');
           openHelp.className = 'adv-plan-card-open';
-          var url = 'https://mathomhouse.github.io/armory-report.html?advise=' + entry.code;
+          var url = 'https://2864tw.com/armory-report.html?advise=' + entry.code;
           openHelp.appendChild(document.createTextNode('Share this link with your advisor: '));
           var a = document.createElement('a');
           a.href = url; a.textContent = url;
@@ -27470,6 +27869,12 @@
     var p = document.createElement('p');
     p.textContent = 'One tap on h5.topwargame.com snapshots every supplement; paste the JSON below to upload them.';
     modal.appendChild(p);
+
+    // Bookmarklet walkthrough videos (Safari / Chrome). Sits at the top of
+    // the modal so first-time players see it before the paste box; the
+    // detected browser's version loads by default with a one-tap toggle
+    // to the other.
+    modal.appendChild(_ar_buildWalkthroughVideoCard());
 
     modal.appendChild(_ar_buildBookmarkletPanel({
       fileName: 'all-bookmarklet.txt',
@@ -29696,7 +30101,7 @@
           copyBtn.title = 'Copy share link';
           (function(sc) {
             copyBtn.addEventListener('click', function() {
-              navigator.clipboard.writeText('https://mathomhouse.github.io/armory-report.html?code=' + sc);
+              navigator.clipboard.writeText('https://2864tw.com/armory-report.html?code=' + sc);
               copyBtn.textContent = 'Copied!';
               setTimeout(function() { copyBtn.textContent = 'Copy'; }, 1500);
             });
@@ -32227,6 +32632,7 @@
             // own shortcode. Otherwise a view-only load would overwrite the
             // viewer's saved marches in localStorage.
             if (isSamePlayer && result.marchGroups) saveMarches(result.marchGroups);
+            window._ar_setupBy = (result && result.createdByAdvisor) || null;
             applyShortcodeConfig(result.playerName, ids, isSamePlayer, result.siteKey);
           } else {
             normalInit();
@@ -32251,7 +32657,6 @@
   })();
 </script>
 <script src="https://translate.googleapis.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<!-- MATHOMHOUSE: removed-feedback-widget-script -->
-<a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
+<script src="feedback-widget.js"></script>
 </body>
 </html>
