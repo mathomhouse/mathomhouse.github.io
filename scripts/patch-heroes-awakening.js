@@ -137,5 +137,13 @@ if (!content.includes('ha-feedback-btn')) {
 // 17. Update Phase I server reference — page is now on mathomhouse (all servers), not just Server 2864
 content = content.replace('Phase I is live on Server 2864.', 'Phase I is live on all servers.');
 
+// 18. Replace original footer with mathomhouse standard footer
+if (!content.includes('<!-- MATHOMHOUSE: replaced-footer -->')) {
+  content = content.replace(
+    /<footer[\s\S]*?<\/footer>/,
+    '<!-- MATHOMHOUSE: replaced-footer -->\n<footer>&copy; 2024 Mathom House &middot; Not affiliated with TopWar</footer>'
+  );
+}
+
 fs.writeFileSync(filePath, content, 'utf8');
 console.log(`Patched ${filePath}`);
