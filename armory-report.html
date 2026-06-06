@@ -4,10 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com https://www.googletagmanager.com; style-src 'unsafe-inline' https://mathomhouse.github.io https://fonts.googleapis.com https://translate.googleapis.com https://www.gstatic.com; img-src 'self' https://knight-cdn.akamaized.net https://h5.topwargame.com https://raw.githubusercontent.com data: https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://fonts.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://docs.google.com https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev https://fight-report-va.oss-accelerate.aliyuncs.com https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://push-worker.27tb8s6fct.workers.dev https://*.clarity.ms https://c.bing.com https://www.google-analytics.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://translate.google.com https://www.youtube-nocookie.com; font-src https://fonts.gstatic.com;">
-<title>Armory Report | Mathom House</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com; style-src 'unsafe-inline' https://translate.googleapis.com https://www.gstatic.com; img-src 'self' https://knight-cdn.akamaized.net https://h5.topwargame.com https://raw.githubusercontent.com data: https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://fonts.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://fight-report-va.oss-accelerate.aliyuncs.com https://fight-report.oss-accelerate.aliyuncs.com https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://push-worker.27tb8s6fct.workers.dev https://*.clarity.ms https://c.bing.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://translate.google.com https://www.youtube-nocookie.com;">
+<title>Armory Report — Server 2864</title>
 <style>
-  
+  :root {
+    --bg: #0d1117; --surface: #161b22; --card: #1c2128; --border: #30363d;
+    --text: #e6edf3; --muted: #8b949e; --accent: #79c0ff;
+    --green: #3fb950; --red: #f85149; --yellow: #d29922; --blue: #388bfd;
+    --army: #56d364; --navy: #6cb6ff; --air: #e3b341;
+  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; margin: 0; padding: 0; }
 
@@ -3358,27 +3363,8 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "won9zormpi");
 </script>
-<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)})();</script>
-<link rel="stylesheet" href="styles/mathomhouse.css">
-<link rel="stylesheet" href="styles/header.css">
-<link rel="stylesheet" href="styles/layout.css">
-<script src="header.js" defer></script>
-<script src="scripts/armory-auth-override.js" defer></script>
-<script src="scripts/feedback-modal.js" defer></script>
-<meta name="description" content="Tools and calculators for Top War players.">
-<meta property="og:title" content="Mathom House • Armory Report">
-<meta property="og:description" content="Check out your armory report.">
-<meta property="og:image" content="https://mathomhouse.github.io/mathomhouselogo.png">
-<meta property="og:url" content="https://mathomhouse.github.io/armory-report.html">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="From Artu, Gikey, and Tex">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-<style id="armory-font-fix">body,button,.tab-btn{font-family:Rajdhani,-apple-system,BlinkMacSystemFont,sans-serif;font-size:15px;}input,select,textarea{font-family:Rajdhani,-apple-system,BlinkMacSystemFont,sans-serif!important;font-size:15px!important;}</style>
-<style id="armory-tex-credit-css">.landing-credit{font-size:.78rem;color:var(--muted);text-align:center;margin:0 auto .5rem;opacity:.7;}</style>
-<style id="armory-dark-select">[data-theme="dark"] select{background-color:#1e2235;color:#e0e0e0;border-color:#444;}[data-theme="dark"] select option{background-color:#1e2235;color:#e0e0e0;}</style>
 </head>
 <body>
-<header id="header-placeholder"></header>
 
 <div id="google_translate_element"></div>
 
@@ -3402,8 +3388,6 @@
       </div>
     </div>
     <h2 class="landing-title">My Armory Report</h2>
-    <p class="landing-credit">Credit for implementation of the armory report goes to Tex (S2864).</p>
-    <!-- MATHOMHOUSE: tex-credit-landing -->
     <p class="landing-desc">Paste your battle report IDs to generate a comprehensive personal account report. View your heroes, gear, decorations, base skins, enigma beasts, and HT chips — all in one place.</p>
     <div class="landing-features">
       <div class="landing-feature">6 Reports<span>Merge up to 6 battle reports</span></div>
@@ -3426,8 +3410,18 @@
 <script>
   (function () {
   var CDN_BASE = 'https://fight-report-va.oss-accelerate.aliyuncs.com/prod/';
-  var ASSET_BASE = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/';
-  var PUSH_WORKER = 'https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev';
+  // Chinese-server reports live on the same path under a different OSS host
+  // (no "-va"). Same JSON shape — try the global host, fall back to CN.
+  var CDN_BASE_CN = 'https://fight-report.oss-accelerate.aliyuncs.com/prod/';
+  function fetchReportResponse(id) {
+    var suffix = id.substring(0, 4) + '/' + id + '.json';
+    return fetch(CDN_BASE + suffix).then(function(r) {
+      if (r.ok) return r;
+      return fetch(CDN_BASE_CN + suffix).then(function(r2) { return r2.ok ? r2 : r; });
+    }).catch(function() { return fetch(CDN_BASE_CN + suffix); });
+  }
+  var ASSET_BASE = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/';
+  var PUSH_WORKER = 'https://push-worker.27tb8s6fct.workers.dev';
 
   // ── Advisor "on-behalf" impersonation session (in-memory only; never persisted) ──
   // When active, the advisor acts as `targetSiteKey` using a short-lived delegated
@@ -3512,6 +3506,10 @@
         wizardState._viewOnly = true;                 // reuse #107 own-data write-suppression
         wizardState.player = { name: window._impersonation.targetName, siteKey: j.targetSiteKey };
         wizardState.reportData = [];
+        // Start the target's marches blank (advisor sets them up fresh; a later
+        // Resume restores whatever was saved). loadMarches() now reads this
+        // override exclusively while _imp() is active.
+        window._advisorOverrideMarches = [];
         _imp_renderBanner();
         // Open the report-ID input wizard so the advisor can paste the target's report(s).
         wizardState.step = 'input';
@@ -3532,14 +3530,29 @@
     b.appendChild(msg);
     var btns = document.createElement('span');
     btns.style.cssText = 'display:flex;gap:.4rem;align-items:center;flex-shrink:0;';
+    // Manage Marches right on the banner — set up the player's named groups
+    // without leaving the screen; Handoff (next) saves + copies the link.
+    var marchB = document.createElement('button'); marchB.type = 'button'; marchB.textContent = 'Marches';
+    marchB.title = 'Set up ' + i.targetName + "'s march groups (names + heroes), then Handoff to send";
+    marchB.style.cssText = 'background:#0d1117;color:#d29922;border:none;border-radius:4px;padding:.2rem .6rem;cursor:pointer;font-weight:700;';
+    marchB.addEventListener('click', function () {
+      var m = null; try { m = mergeReportData(wizardState.reportData); } catch (e) {}
+      openMarchModal((m && m.heroes) || []);
+    });
+    btns.appendChild(marchB);
     var hand = document.createElement('button'); hand.type = 'button'; hand.textContent = 'Handoff';
     hand.title = 'Generate the report shortcode + advise link for ' + i.targetName;
     hand.style.cssText = 'background:#0d1117;color:#d29922;border:none;border-radius:4px;padding:.2rem .6rem;cursor:pointer;font-weight:700;';
     hand.addEventListener('click', function () { _imp_openHandoff(); });
     btns.appendChild(hand);
+    var histB = document.createElement('button'); histB.type = 'button'; histB.textContent = 'History';
+    histB.title = 'Players you have set up reports for (on behalf) — reopen any of them';
+    histB.style.cssText = 'background:#0d1117;color:#d29922;border:none;border-radius:4px;padding:.2rem .6rem;cursor:pointer;font-weight:700;';
+    histB.addEventListener('click', function () { _imp_openHistory(); });
+    btns.appendChild(histB);
     var ex = document.createElement('button'); ex.type = 'button'; ex.textContent = 'Exit';
     ex.style.cssText = 'background:#0d1117;color:#d29922;border:none;border-radius:4px;padding:.2rem .6rem;cursor:pointer;font-weight:700;';
-    ex.addEventListener('click', function () { window._impersonation = null; location.href = location.pathname; });
+    ex.addEventListener('click', function () { window._impersonation = null; window._advisorOverrideMarches = null; location.href = location.pathname; });
     btns.appendChild(ex);
     b.appendChild(btns);
   }
@@ -3608,8 +3621,9 @@
         .then(function (res) {
           if (res.status === 200 && res.j && res.j.code) {
             state.adviseCode = res.j.code;
-            resultRow('Advise link:', res.j.url || ('https://mathomhouse.github.io/armory-report.html?advise=' + res.j.code));
-            setStatus('Advise link created. Open it yourself to build the plan steps, then share it with ' + i.targetName + '.');
+            resultRow('Advise link (you build here):', res.j.url || ('https://2864tw.com/armory-report.html?advise=' + res.j.code));
+            resultRow('Player view (send to ' + i.targetName + '):', 'https://2864tw.com/armory-report.html?code=' + state.shortcode + '&plan=' + res.j.code);
+            setStatus('Open the advise link yourself to build the plan steps. Then send the Player view link to ' + i.targetName + ' — it opens their report straight to the plan, no login or typing needed.');
             recordHistory();
           } else { setStatus('Advise link failed: ' + ((res.j && res.j.error) || ('HTTP ' + res.status)), true); b2.disabled = false; }
         }).catch(function (e) { setStatus('Advise link failed (network).', true); b2.disabled = false; });
@@ -3649,10 +3663,12 @@
     var h = document.createElement('h2'); h.style.cssText = 'margin:0;font-size:1rem;color:var(--text,#e6edf3);'; h.textContent = 'Advise history'; m.appendChild(h);
     var listWrap = document.createElement('div'); listWrap.style.cssText = 'display:flex;flex-direction:column;gap:.4rem;'; m.appendChild(listWrap);
     var entries = [];
-    function hide(code, hidden) {
+    function hide(e, hidden) {
+      // Send BOTH adviseCode and ts so entries without an advise code (pool-only
+      // auto-records) can still be dismissed — the worker matches on either.
       fetch(PUSH_WORKER + '/advisor/onbehalf/hide', {
         method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _ar_supplementToken },
-        body: JSON.stringify({ adviseCode: code, hidden: hidden }),
+        body: JSON.stringify({ adviseCode: e.adviseCode || '', ts: e.ts, hidden: hidden }),
       }).then(function () { load(); }).catch(function () {});
     }
     function row(e) {
@@ -3661,10 +3677,18 @@
       var top = document.createElement('div'); top.style.cssText = 'display:flex;align-items:center;gap:.4rem;';
       var nm = document.createElement('span'); nm.style.cssText = 'font-weight:600;color:var(--text,#e6edf3);font-size:.85rem;'; nm.textContent = e.targetName || '(unknown)'; top.appendChild(nm);
       var dt = document.createElement('span'); dt.style.cssText = 'font-size:.68rem;color:var(--muted,#8b949e);'; dt.textContent = e.ts ? new Date(e.ts).toLocaleDateString() : ''; top.appendChild(dt);
+      var res = null;
+      if (!e.hidden) {
+        res = document.createElement('button'); res.type = 'button'; res.textContent = 'Resume';
+        res.title = 'Reopen ' + (e.targetName || 'this player') + "'s report on their behalf";
+        res.style.cssText = 'margin-left:auto;background:var(--accent,#79c0ff);color:#0d1117;border:none;border-radius:4px;cursor:pointer;font-size:.72rem;font-weight:700;padding:.12rem .55rem;';
+        res.addEventListener('click', function () { try { document.body.removeChild(overlay); } catch (x) {} _imp_resume(e); });
+        top.appendChild(res);
+      }
       var act = document.createElement('button'); act.type = 'button'; act.textContent = e.hidden ? 'Restore' : '✕';
       act.title = e.hidden ? 'Restore to the list' : 'Dismiss from the list';
-      act.style.cssText = 'margin-left:auto;background:none;border:1px solid var(--border,#30363d);border-radius:4px;color:var(--muted,#8b949e);cursor:pointer;font-size:.72rem;padding:.1rem .45rem;';
-      act.addEventListener('click', function () { hide(e.adviseCode || ('ts' + e.ts), !e.hidden); });
+      act.style.cssText = (res ? 'margin-left:.35rem;' : 'margin-left:auto;') + 'background:none;border:1px solid var(--border,#30363d);border-radius:4px;color:var(--muted,#8b949e);cursor:pointer;font-size:.72rem;padding:.1rem .45rem;';
+      act.addEventListener('click', function () { hide(e, !e.hidden); });
       top.appendChild(act);
       r.appendChild(top);
       function copyRow(label, value) {
@@ -3676,7 +3700,8 @@
         cp.addEventListener('click', function () { try { navigator.clipboard.writeText(value); cp.textContent = 'Copied'; setTimeout(function(){ cp.textContent='Copy'; }, 1200); } catch (x) {} });
         cr.appendChild(cp); r.appendChild(cr);
       }
-      if (e.adviseCode) copyRow('Advise link:', 'https://mathomhouse.github.io/armory-report.html?advise=' + e.adviseCode);
+      if (e.shortcode && e.adviseCode) copyRow('Player view:', 'https://2864tw.com/armory-report.html?code=' + e.shortcode + '&plan=' + e.adviseCode);
+      if (e.adviseCode) copyRow('Advise link:', 'https://2864tw.com/armory-report.html?advise=' + e.adviseCode);
       if (e.shortcode) copyRow('Shortcode:', e.shortcode);
       return r;
     }
@@ -3705,6 +3730,88 @@
     m.appendChild(close);
     overlay.appendChild(m); document.body.appendChild(overlay);
     load();
+  }
+
+  // Auto-record the current on-behalf target to the advisor's history. Called
+  // after an on-behalf rune-pool save so the advisor's work is tracked even
+  // before they run Handoff. When a battle report is loaded, also persist the
+  // target's report-config (same shortcode each time per device+siteKey) so a
+  // later Resume can rebuild the report without re-entering report IDs.
+  function _imp_autoRecord() {
+    var i = _imp(); if (!i || !_ar_supplementToken) return;
+    function postRecord(shortcode) {
+      fetch(PUSH_WORKER + '/advisor/onbehalf/record', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _ar_supplementToken },
+        body: JSON.stringify({ targetSiteKey: i.targetSiteKey, targetName: i.targetName, shortcode: shortcode || '' }),
+      }).catch(function () {});
+    }
+    var hasReports = wizardState.reportData && wizardState.reportData.length > 0;
+    if (hasReports) {
+      // saveConfig resolves to the shortcode string (target siteKey + no advisor endpoint when _imp()).
+      saveConfig(false).then(function (code) { postRecord(typeof code === 'string' ? code : ''); })
+        .catch(function () { postRecord(''); });
+    } else {
+      postRecord('');
+    }
+  }
+
+  // Resume an on-behalf session from a history entry: re-mint a delegated token
+  // for that target, then rebuild their report from the saved shortcode (no
+  // report-ID re-entry). Falls back to the report-ID input wizard when the
+  // entry has no shortcode yet (pool-only auto-record before any report load).
+  function _imp_resume(entry) {
+    if (!entry || !entry.targetSiteKey) return;
+    if (!_ar_supplementToken) { alert('Verify your own identity first.'); return; }
+    fetch(PUSH_WORKER + '/advisor/delegate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _ar_supplementToken },
+      body: JSON.stringify({ targetSiteKey: entry.targetSiteKey }),
+    }).then(function (r) { return r.json().then(function (j) { return { status: r.status, j: j }; }); })
+      .then(function (res) {
+        if (res.status !== 200 || !res.j || !res.j.token) {
+          alert('Could not resume advise session: ' + ((res.j && res.j.error) || ('HTTP ' + res.status)));
+          return;
+        }
+        var j = res.j;
+        window._impersonation = {
+          active: true, targetSiteKey: j.targetSiteKey, targetName: j.targetName || entry.targetName,
+          delegatedToken: j.token, advisorName: j.advisorName || '', expires: j.expires,
+        };
+        wizardState._viewOnly = true;
+        wizardState.player = { name: window._impersonation.targetName, siteKey: j.targetSiteKey };
+        window._advisorOverrideMarches = [];   // replaced below once the config loads
+        _imp_renderBanner();
+        if (entry.shortcode) {
+          fetch(PUSH_WORKER + '/report-config?code=' + encodeURIComponent(String(entry.shortcode)).toUpperCase())
+            .then(function (r) { return r.json(); })
+            .then(function (cfg) {
+              if (cfg && cfg.ok && cfg.reportIds) {
+                window._ar_setupBy = cfg.createdByAdvisor || null;
+                // Surface the target's saved marches so the advisor edits the
+                // real state (not their own marches).
+                window._advisorOverrideMarches = Array.isArray(cfg.marchGroups) ? cfg.marchGroups.slice() : [];
+                applyShortcodeConfig(cfg.playerName || window._impersonation.targetName,
+                  cfg.reportIds.split(',').filter(Boolean), false, j.targetSiteKey);
+              } else {
+                _imp_openInputWizard();
+              }
+            })
+            .catch(function () { _imp_openInputWizard(); });
+        } else {
+          _imp_openInputWizard();
+        }
+      })
+      .catch(function () { alert('Could not resume advise session (network error).'); });
+  }
+
+  // Open the report-ID input wizard for the active on-behalf session.
+  function _imp_openInputWizard() {
+    wizardState.reportData = [];
+    wizardState.step = 'input';
+    var wz = document.getElementById('wizard');
+    if (wz) wz.classList.add('open');
+    renderWizardStep();
   }
 
   // ── Flag utilities ────────────────────────────────────────────────────────
@@ -3872,8 +3979,6 @@
   // ── Shortcode sharing helpers ─────────────────────────────────────────────
   // Back-compat alias so existing call sites keep working without migration.
   // New code should prefer `ArmoryIdentity.get()`.
-  window.ArmoryIdentity = ArmoryIdentity;
-
   function getStoredIdentity() {
     return ArmoryIdentity.get();
   }
@@ -3882,7 +3987,7 @@
   // report cap (9 instead of 6) when adding from the Manage Reports modal.
   function isVerifiedS2864Member() {
     var id = getStoredIdentity();
-    return !!(id && id.siteKey && !id.guest); // MATHOMHOUSE: member gate
+    return !!(id && id.name && id.siteKey && !id.guest);
   }
 
   // Stable per-device advisor identifier used by the multi-advisor plan
@@ -4279,7 +4384,7 @@
     setTimeout(function() { input.focus(); }, 50);
   }
 
-  var SUPPLEMENT_WORKER = 'https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev';
+  var SUPPLEMENT_WORKER = 'https://push-worker.27tb8s6fct.workers.dev';
   var _ar_supplementToken = null;
   var _ar_supplementTokenExpires = 0;
 
@@ -4347,16 +4452,11 @@
   // Ensure a fresh token is available; auto-handshake from cached uidHash
   // when possible. Throws when no cached hash exists (caller surfaces a
   // re-enter UID prompt).
-  async function _ar_ensureSupplementToken(siteKey) { // MATHOMHOUSE: siteKey handshake
-    if (_ar_supplementToken && _ar_supplementToken !== 'local' && _ar_supplementTokenExpires > Date.now()) return;
-    var r = await fetch(SUPPLEMENT_WORKER + '/supplement/handshake', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ siteKey: siteKey })
-    });
-    var d = await r.json();
-    _ar_supplementToken = d.token;
-    _ar_supplementTokenExpires = Date.now() + 864e7;
+  async function _ar_ensureSupplementToken(siteKey) {
+    if (_ar_supplementToken && Date.now() < _ar_supplementTokenExpires - 10000) return;
+    var hash = _ar_getStoredUidHash(siteKey);
+    if (!hash) throw new Error('No upload token. Re-enter UID.');
+    await _ar_handshake(hash);
   }
 
   // Background re-sync: if the owner has local data newer than what the
@@ -5087,7 +5187,7 @@
   }
 
   function _ar_rehydrateInv(raw, lk) {
-    var ASSET = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/';
+    var ASSET = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/';
     var out = {
       meta: raw.meta || {}, resources: raw.resources || {},
       tabs: { item: [], unit: [], decor: [], hero: [], cpnt: [] },
@@ -5480,9 +5580,16 @@
   function saveConfig(showToast) {
     var identity = getStoredIdentity();
     var deviceId = getDeviceId();
-    // On-behalf: mint the shortcode under the TARGET's siteKey (so the player
-    // can load it later) — not the advisor's own.
+    // On-behalf: write under the PLAYER's siteKey, not the advisor's own.
+    //  - impersonation: the delegated target.
+    //  - ?advise= builder / any view-only load with a resolved 16-hex player
+    //    siteKey: the loaded player (so an advisor on the plan screen who edits
+    //    marches persists them to that player's config).
+    var _foreignPlayerKey = ((window._adviseCode || (wizardState && wizardState._viewOnly))
+      && wizardState.player && /^[a-f0-9]{16}$/.test(String(wizardState.player.siteKey || '')))
+      ? wizardState.player.siteKey : null;
     var siteKey = _imp() ? _imp().targetSiteKey
+                : _foreignPlayerKey ? _foreignPlayerKey
                 : ((identity && identity.siteKey) ? identity.siteKey : ('guest_' + deviceId));
     var playerName = (wizardState.player && wizardState.player.name) || (identity && identity.name) || 'Guest';
     var reportIds = wizardState.reportData.map(function(r) { return r.id; }).join(',');
@@ -5508,7 +5615,10 @@
       // On-behalf: stamp who set it up; do NOT attach the advisor's own push
       // endpoint (it would fail the worker's identity check against the target).
       if (_imp()) body.createdByAdvisor = _imp().advisorName;
-      if (endpoint && !_imp()) body.endpoint = endpoint;
+      else if (_foreignPlayerKey) body.createdByAdvisor = (identity && identity.name) || 'An advisor';
+      // Never attach the advisor's own push endpoint when saving for another
+      // player — the worker's identity check would 403 it.
+      if (endpoint && !_imp() && !_foreignPlayerKey) body.endpoint = endpoint;
 
       return fetch(PUSH_WORKER + '/report-config', {
         method: 'POST',
@@ -5517,10 +5627,11 @@
       }).then(function(r) { return r.json(); });
     }).then(function(result) {
       if (result && result.ok) {
-        // Cache shortcode in localStorage — but NEVER while impersonating
-        // (that would write the advisor's own playerReport). On-behalf, the
-        // shortcode is surfaced in the handoff card instead.
-        if (!_imp()) {
+        // Cache shortcode in localStorage — but NEVER when saving for another
+        // player (impersonation or advise/view-only), which would write the
+        // advisor's own playerReport. On-behalf, the shortcode is surfaced in
+        // the handoff card instead.
+        if (!_imp() && !_foreignPlayerKey) {
           try {
             var saved = JSON.parse(localStorage.getItem('playerReport') || '{}');
             saved.shortcode = result.shortcode;
@@ -5570,7 +5681,7 @@
   }
 
   function copyShareLink(code) {
-    var url = 'https://mathomhouse.github.io/armory-report.html?code=' + code;
+    var url = 'https://2864tw.com/armory-report.html?code=' + code;
     navigator.clipboard.writeText(url).then(function() {
       showToastMessage('Link copied!');
     }).catch(function() {
@@ -5620,7 +5731,7 @@
     copyLinkBtn.className = 'btn-secondary';
     copyLinkBtn.textContent = 'Copy Link';
     copyLinkBtn.onclick = function() {
-      var url = 'https://mathomhouse.github.io/armory-report.html?code=' + code;
+      var url = 'https://2864tw.com/armory-report.html?code=' + code;
       navigator.clipboard.writeText(url).then(function() {
         copiedEl.textContent = 'Link copied!';
         setTimeout(function() { copiedEl.textContent = ''; }, 2000);
@@ -5705,6 +5816,10 @@
         // shortcode. Otherwise an in-memory load of someone else's report
         // would silently overwrite the viewer's saved marches.
         if (isSamePlayer && result.marchGroups) saveMarches(result.marchGroups);
+        // View-only load (e.g. a player-view ?code=&plan= link the advisor sent):
+        // surface the server marches in-memory so the plan + grouped views render
+        // with the advisor's grouping, without writing the viewer's localStorage.
+        else if (Array.isArray(result.marchGroups) && result.marchGroups.length) window._advisorOverrideMarches = result.marchGroups.slice();
         window._ar_setupBy = (result && result.createdByAdvisor) || null;
         applyShortcodeConfig(result.playerName, ids, isSamePlayer, result.siteKey);
       })
@@ -5889,7 +6004,7 @@
   var EB_ELEMENTS = {1:'Fire',2:'Water',3:'Wind',4:'Ground'};
   var EB_FIELD_NAMES = {1:'CPNT Mastery',2:'Formation',3:'Equip',4:'Defense',5:'Offense'};
   var EB_FIELD_SLOT_COUNTS = {1:5,2:7,3:6,4:9,5:9};
-  var EB_ICON_BASE = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/beast-icons/';
+  var EB_ICON_BASE = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/beast-icons/';
 
   // Buff names verified against in-game effect_buff TABLE + LocalManager.getText() (2026-05-04).
   // 520110-113 = ATK, 520120-123 = HP Boost, 520130-133 = Elemental Enhance, 520140-143 = Elemental RES.
@@ -6474,9 +6589,7 @@
     loadBtn.appendChild(spinner);
     loadBtn.appendChild(document.createTextNode('Loading\u2026'));
 
-    var url = CDN_BASE + id.substring(0, 4) + '/' + id + '.json';
-
-    fetch(url)
+    fetchReportResponse(id)
       .then(function(res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
         return res.json();
@@ -7390,7 +7503,7 @@
     left.className = 'rh-left';
 
     var homeLink = document.createElement('a');
-    homeLink.href = 'https://mathomhouse.github.io';
+    homeLink.href = 'https://2864tw.com';
     homeLink.className = 'rh-btn';
     homeLink.title = 'Home';
     homeLink.appendChild(svgIcon({ children: [['path', { 'd': 'M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z' }], ['polyline', { 'points': '9 22 9 12 15 12 15 22' }]] }));
@@ -7510,18 +7623,33 @@
     if (!_imp()) {
       _imp_checkAllowed(function (allowed, advisorName) {
         if (!allowed || _imp()) return;
+        // Icon + span.rh-label so the @600px rule collapses these to icon-only
+        // chips on mobile (same as the other header buttons) instead of keeping
+        // full text and overflowing the header.
         var adBtn = document.createElement('button');
         adBtn.className = 'rh-btn';
         adBtn.type = 'button';
         adBtn.title = 'Generate a report on behalf of another player';
-        adBtn.textContent = 'Advise a player';
+        adBtn.appendChild(svgIcon({ size: 13, linecap: 'round', linejoin: 'round', children: [
+          ['path', { 'd': 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' }],
+          ['circle', { 'cx': '9', 'cy': '7', 'r': '4' }],
+          ['line', { 'x1': '19', 'y1': '8', 'x2': '19', 'y2': '14' }],
+          ['line', { 'x1': '22', 'y1': '11', 'x2': '16', 'y2': '11' }]
+        ] }));
+        var adLabel = document.createElement('span'); adLabel.className = 'rh-label'; adLabel.textContent = 'Advise a player';
+        adBtn.appendChild(adLabel);
         adBtn.addEventListener('click', function () { openImpersonationPicker(advisorName); });
         right.appendChild(adBtn);
         var histBtn = document.createElement('button');
         histBtn.className = 'rh-btn';
         histBtn.type = 'button';
         histBtn.title = 'Players you have set up reports for (on behalf)';
-        histBtn.textContent = 'Advise history';
+        histBtn.appendChild(svgIcon({ size: 13, linecap: 'round', linejoin: 'round', children: [
+          ['circle', { 'cx': '12', 'cy': '12', 'r': '10' }],
+          ['polyline', { 'points': '12 6 12 12 16 14' }]
+        ] }));
+        var histLabel = document.createElement('span'); histLabel.className = 'rh-label'; histLabel.textContent = 'Advise history';
+        histBtn.appendChild(histLabel);
         histBtn.addEventListener('click', function () { _imp_openHistory(); });
         right.appendChild(histBtn);
       });
@@ -7621,28 +7749,16 @@
     langBtn.addEventListener('click', function() { openLangPicker(); });
     right.appendChild(langBtn);
 
-    // MATHOMHOUSE: feedback-btn
-    var _mhFbBtn = document.createElement('button');
-    _mhFbBtn.className = 'rh-btn';
-    _mhFbBtn.type = 'button';
-    _mhFbBtn.title = 'Send Feedback';
-    var _mhFbSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    _mhFbSvg.setAttribute('width', '14'); _mhFbSvg.setAttribute('height', '14');
-    _mhFbSvg.setAttribute('viewBox', '0 0 24 24'); _mhFbSvg.setAttribute('fill', 'none');
-    _mhFbSvg.setAttribute('stroke', 'currentColor'); _mhFbSvg.setAttribute('stroke-width', '2');
-    _mhFbSvg.setAttribute('stroke-linecap', 'round'); _mhFbSvg.setAttribute('stroke-linejoin', 'round');
-    var _mhFbPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    _mhFbPath.setAttribute('d', 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z');
-    _mhFbSvg.appendChild(_mhFbPath);
-    _mhFbBtn.appendChild(_mhFbSvg);
-    var _mhFbLbl = document.createElement('span');
-    _mhFbLbl.className = 'rh-label';
-    _mhFbLbl.textContent = 'Feedback';
-    _mhFbBtn.appendChild(_mhFbLbl);
-    _mhFbBtn.addEventListener('click', function () {
-      if (typeof openFeedbackModal === 'function') openFeedbackModal();
-    });
-    right.insertBefore(_mhFbBtn, right.firstChild);
+    // Feedback: handled by feedback-widget.js (auto-appends to <header>)
+    // Move floating widget button into header (may have been hidden on landing or floating)
+    setTimeout(function() {
+      var fwBtn = document.getElementById('fw-hdr-btn');
+      if (fwBtn) {
+        fwBtn.style.cssText = ''; // Clear any display:none or position:fixed
+        fwBtn.style.display = '';
+        if (fwBtn.parentNode !== right) right.insertBefore(fwBtn, right.firstChild);
+      }
+    }, 100);
 
     // Settings / Identity button
     var prefsBtn = document.createElement('button');
@@ -8160,7 +8276,7 @@
         copyBtn.className = 'rh-prefs-btn';
         copyBtn.textContent = 'Copy Link';
         copyBtn.addEventListener('click', function() {
-          navigator.clipboard.writeText('https://mathomhouse.github.io/armory-report.html?code=' + shortcode).then(function() {
+          navigator.clipboard.writeText('https://2864tw.com/armory-report.html?code=' + shortcode).then(function() {
             copyBtn.textContent = 'Copied!';
             setTimeout(function() { copyBtn.textContent = 'Copy Link'; }, 1500);
           });
@@ -8331,7 +8447,7 @@
             cpBtn.style.fontSize = '.7rem';
             (function(code) {
               cpBtn.addEventListener('click', function() {
-                navigator.clipboard.writeText('https://mathomhouse.github.io/armory-report.html?code=' + code).then(function() {
+                navigator.clipboard.writeText('https://2864tw.com/armory-report.html?code=' + code).then(function() {
                   cpBtn.textContent = '\u2713';
                   setTimeout(function() { cpBtn.textContent = 'Copy'; }, 1200);
                 });
@@ -8726,7 +8842,13 @@
     bmWrap.appendChild(_ar_buildPowerToolCard({
       title: 'Skill Dismantle (standalone)',
       desc: 'Same bulk-dismantle wizard available inside Import TopWar Data. Use this when you only want to scrap skill items and skip the full snapshot extract.',
-      url: 'javascript:(function(){var s=document.createElement(\'script\');s.src=\'https://mathomhouse.github.io/dismantle-bookmarklet.js?_=\'+Date.now();s.onerror=function(){alert(\'Bookmarklet load failed. Check internet + try again.\');};document.body.appendChild(s);})();'
+      url: 'javascript:(function(){var s=document.createElement(\'script\');s.src=\'https://2864tw.com/dismantle-bookmarklet.js?_=\'+Date.now();s.onerror=function(){alert(\'Bookmarklet load failed. Check internet + try again.\');};document.body.appendChild(s);})();'
+    }));
+
+    bmWrap.appendChild(_ar_buildPowerToolCard({
+      title: 'Hunting Guild Bulk Merge (standalone)',
+      desc: 'Runs the Hunting Guild Merge for you in a loop and auto-handles every treasure popup it rolls (Repair Equipment, Treasure Wheel, Treasure Store, Treasure Guard). Pick how many merges and your Treasure Guard policy, then watch it go. Summoned guards spawn on your world map for you to fight within the hour.',
+      url: 'javascript:(function(){var s=document.createElement(\'script\');s.src=\'https://2864tw.com/merge-bookmarklet.js?_=\'+Date.now();s.onerror=function(){alert(\'Bookmarklet load failed. Check internet + try again.\');};document.body.appendChild(s);})();'
     }));
   }
 
@@ -8739,12 +8861,20 @@
     // Block on roster fetch so the Inventory tab decision is correct on first render.
     // Fetch is CDN-cached (<100ms typical); failure falls back to empty roster (no S2864 tabs).
     try { if (!_ar_rosterMap) { await _ar_getRosterMap(); } } catch (e) { _ar_rosterMap = _ar_rosterMap || {}; _ar_rosterByName = _ar_rosterByName || {}; }
+    // On-behalf (impersonation): the target siteKey from /advisor/delegate is
+    // authoritative. selectPlayer() rebuilds wizardState.player from the battle
+    // report with no siteKey, and the roster-name fallback below misses whenever
+    // the in-game name carries emoji/suffix/case the roster doesn't (e.g. "Livv👑").
+    // Force the known target siteKey so the on-behalf rune-pool editor + supplement
+    // saves always resolve, even for a from-scratch target.
+    if (_imp() && wizardState.player) {
+      wizardState.player.siteKey = _imp().targetSiteKey;
+    }
     // Battle reports populate wizardState.player from CDN data which has no siteKey.
     // Look up siteKey via roster name (S2864 only — non-roster players just get null).
     if (wizardState.player && wizardState.player.name && !wizardState.player.siteKey && _ar_rosterByName) {
       var rosterMatch = _ar_rosterByName[String(wizardState.player.name).toLowerCase()];
       if (rosterMatch && rosterMatch.siteKey) wizardState.player.siteKey = rosterMatch.siteKey;
-      if (!wizardState.player.siteKey) { try { var _li = window.ArmoryIdentity && window.ArmoryIdentity.get && window.ArmoryIdentity.get(); if (_li && _li.siteKey) wizardState.player.siteKey = _li.siteKey; } catch(_e){} } // MATHOMHOUSE: siteKey fallback
     }
 
     var merged = mergeReportData(wizardState.reportData);
@@ -8952,13 +9082,21 @@
     setTimeout(_ar_updateTabScrollState, 400);
 
     var siteKey = (wizardState.player && wizardState.player.siteKey) || (window._reportSiteKey) || null;
-    var inS2864 = !!siteKey; // MATHOMHOUSE: inS2864 renderFullReport
+    var inS2864 = false;
+    if (siteKey && _ar_rosterMap && _ar_rosterMap[siteKey]) inS2864 = true;
     // Resolve identity + own-report before building tabDefs — the Advisor
     // Plans tab gate at the bottom of this block reads isOwnReport and was
     // silently dropping the tab (var hoisting → undefined) until both
     // declarations moved above the tab list.
     var ownIdentityForTabs = getStoredIdentity();
     var isOwnReport = _ar_isOwnReport(siteKey);
+    // Player-view deep link (?plan=<code>): an advisor hands this to the player
+    // so their report opens straight onto the Advisor Plans tab. Surface that
+    // tab even on a view-only (no-identity) load — the plan/index reads are
+    // public, and the tab renders read-only for anyone who isn't the verified
+    // owner (see renderMyAdvisorPlansTab / _ar_renderPlanStepList).
+    var hasPlanDeepLink = false;
+    try { hasPlanDeepLink = /^[a-z0-9]{6}$/.test((new URLSearchParams(location.search).get('plan') || '').toLowerCase()); } catch (e) {}
     var tabDefs = [
       { id: 'overview', label: 'Overview' },
       { id: 'heroes', label: 'Heroes & Gear' },
@@ -8971,11 +9109,11 @@
     if (inS2864) {
       tabDefs.push({ id: 'inventory', label: 'Inventory' });
       tabDefs.push({ id: 'runepool', label: 'Rune Pool' });
-      // Player-side accept/skip viewer (Phase 4) — only on the player's own
-      // report. Advisor index fetch happens during hydrate; tab stays empty
-      // until the player creates a request, but is always visible to keep
-      // the feature discoverable.
-      if (isOwnReport && !window._adviseCode) {
+      // Player-side accept/skip viewer (Phase 4) — on the player's own report,
+      // OR when an advisor handed them a ?plan= player-view link. Advisor index
+      // fetch happens during hydrate; tab stays empty until a request exists,
+      // but is always visible to keep the feature discoverable.
+      if ((isOwnReport || hasPlanDeepLink) && !window._adviseCode) {
         tabDefs.push({ id: 'myadvisorplans', label: 'Advisor Plans' });
       }
     }
@@ -9082,7 +9220,8 @@
       });
       // Phase 4: fetch advisor index in parallel so the Advisor Plans tab
       // badges with the count of planned (unapplied) plans + an indicator dot.
-      if (_ar_isOwnReport(wizardState.player.siteKey) && !window._adviseCode) {
+      // Also fetch for a ?plan= player-view link so a link-only viewer sees it.
+      if ((_ar_isOwnReport(wizardState.player.siteKey) || hasPlanDeepLink) && !window._adviseCode) {
         _ar_refreshAdvisorIndex(wizardState.player.siteKey);
       }
     }
@@ -10202,7 +10341,19 @@
   // window-scoped override so the device's localStorage (the advisor's own
   // saved marches) is never clobbered. Non-advisor reads fall through to
   // the device's saved marchGroups.
+  // Any advisor / view-only context (impersonation, ?advise= builder, or any
+  // view-only foreign load) is NOT the viewer's own report.
+  function _marchNonOwner() {
+    return !!(_imp() || window._adviseCode || (typeof wizardState !== 'undefined' && wizardState && wizardState._viewOnly));
+  }
   function loadMarches() {
+    // In any advisor / view-only context the player's marches live ONLY in the
+    // in-memory override. Never fall through to the viewer's own device
+    // localStorage — even when the override is empty. This is what stops
+    // "advising Wonka shows my own personal marches".
+    if (_marchNonOwner()) {
+      return Array.isArray(window._advisorOverrideMarches) ? window._advisorOverrideMarches : [];
+    }
     if (Array.isArray(window._advisorOverrideMarches) && window._advisorOverrideMarches.length > 0) {
       return window._advisorOverrideMarches;
     }
@@ -10214,11 +10365,35 @@
   }
 
   function saveMarches(marches) {
+    // Advisor / view-only: mutate the in-memory override only; never write the
+    // viewer's own device localStorage. (Authoritative persist to the player is
+    // saveConfig() via _persistMarchesOnBehalf, gated to real advisor contexts.)
+    if (_marchNonOwner()) {
+      window._advisorOverrideMarches = Array.isArray(marches) ? marches.slice() : [];
+      return;
+    }
     try {
       var saved = JSON.parse(localStorage.getItem('playerReport')) || {};
       saved.marchGroups = marches;
       localStorage.setItem('playerReport', JSON.stringify(saved));
     } catch(e) {}
+  }
+
+  // Persist the player's marches to THEIR report-config (saveConfig reads
+  // loadMarches()). Debounced. Gated to REAL advisor contexts only —
+  // impersonation or an advise link the player shared — so a random view-only
+  // viewer who opens someone's report can't rewrite that player's marches.
+  var _marchPersistTimer = null;
+  function _persistMarchesOnBehalf() {
+    if (!_imp() && !window._adviseCode) return;
+    if (_marchPersistTimer) clearTimeout(_marchPersistTimer);
+    _marchPersistTimer = setTimeout(function () {
+      _marchPersistTimer = null;
+      // saveConfig rejects when no report is loaded yet (no reportIds). That's
+      // fine — the edits live in the in-memory override and persist on the next
+      // successful save / Handoff. Swallow the rejection to avoid console noise.
+      try { var _p = saveConfig(false); if (_p && typeof _p.catch === 'function') _p.catch(function () {}); } catch (e) {}
+    }, 900);
   }
 
 
@@ -10715,17 +10890,55 @@
   }
 
   function openMarchModal(heroes) {
+    heroes = heroes || [];
     var overlay = document.getElementById('march-modal-overlay');
-    if (!overlay) return;
+    // Build the modal on demand if the Heroes & Gear tab hasn't rendered it yet
+    // (e.g. opened from the impersonation banner or the advisor plan screen).
+    // Single instance only — buildHeroesUI also guards on this id.
+    if (!overlay) { overlay = buildMarchModal(heroes); document.body.appendChild(overlay); }
     overlay.classList.add('open');
     renderMarchList(heroes);
     resetMarchForm();
     populateMarchHeroSelects(heroes);
   }
 
+  // Optional one-shot callback fired after the march modal closes — lets the
+  // surface that opened it (e.g. the advisor plan screen) re-render so its
+  // gallery / step pickers pick up the new grouping/order.
+  var _marchModalOnClose = null;
   function closeMarchModal() {
     var overlay = document.getElementById('march-modal-overlay');
     if (overlay) overlay.classList.remove('open');
+    if (typeof _marchModalOnClose === 'function') {
+      var cb = _marchModalOnClose; _marchModalOnClose = null;
+      try { cb(); } catch (e) {}
+    }
+  }
+
+  // Edit-in-place state: index of the march being edited (null = add mode).
+  var _marchEditIndex = null;
+  function _exitMarchEditMode() {
+    _marchEditIndex = null;
+    var addBtn = document.getElementById('march-add-btn');
+    if (addBtn) addBtn.textContent = 'Add March';
+  }
+  function _beginEditMarch(idx, heroes) {
+    var marches = loadMarches();
+    var m = marches[idx];
+    if (!m) return;
+    _marchEditIndex = idx;
+    var nameInput = document.getElementById('march-name-input');
+    if (nameInput) nameInput.value = m.name || '';
+    for (var i = 1; i <= 3; i++) {
+      var sel = document.getElementById('march-hero-' + i);
+      if (sel) sel.value = (m.heroIds && m.heroIds[i - 1] != null) ? String(m.heroIds[i - 1]) : '';
+    }
+    var firstSel = document.getElementById('march-hero-1');
+    if (firstSel) { try { firstSel.dispatchEvent(new Event('change')); } catch (e) {} }
+    var addBtn = document.getElementById('march-add-btn');
+    if (addBtn) addBtn.textContent = 'Save Changes';
+    var err = document.getElementById('march-form-error'); if (err) err.style.display = 'none';
+    if (nameInput) { try { nameInput.focus(); nameInput.scrollIntoView({ block: 'nearest' }); } catch (e) {} }
   }
 
   function renderMarchList(heroes) {
@@ -10740,6 +10953,20 @@
       container.appendChild(empty);
       return;
     }
+    function ctrlBtn(label, title, disabled) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.textContent = label; b.title = title; b.disabled = !!disabled;
+      b.style.cssText = 'background:none;border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;font-size:.8rem;line-height:1;padding:.12rem .42rem;font-family:inherit;' + (disabled ? 'opacity:.35;cursor:default;' : '');
+      return b;
+    }
+    function commit(cur) {
+      _exitMarchEditMode();          // a structural change cancels any in-progress edit
+      saveMarches(cur);
+      _persistMarchesOnBehalf();     // round-trip to the target's config when impersonating
+      renderMarchList(heroes);
+      populateMarchFilter(heroes);
+      renderHeroGrid(heroes);
+    }
     marches.forEach(function(m, i) {
       var row = document.createElement('div');
       row.className = 'march-row';
@@ -10751,21 +10978,30 @@
       heroSpan.className = 'march-row-heroes';
       heroSpan.textContent = m.heroIds.map(function(hid) { return heroName(hid); }).join(', ');
       row.appendChild(heroSpan);
-      var delBtn = document.createElement('button');
-      delBtn.className = 'march-delete-btn';
-      delBtn.textContent = '\u00d7';
-      delBtn.title = 'Delete march';
+
+      // Right-aligned action cluster: reorder up/down, edit (rename + reassign), delete.
+      var actions = document.createElement('span');
+      actions.style.cssText = 'margin-left:auto;display:flex;gap:.2rem;flex-shrink:0;';
+      var upBtn = ctrlBtn('\u2191', 'Move up', i === 0);
+      var downBtn = ctrlBtn('\u2193', 'Move down', i === marches.length - 1);
+      var editBtn = ctrlBtn('\u270e', 'Edit name and heroes');
+      var delBtn = ctrlBtn('\u00d7', 'Delete march');
       (function(idx) {
+        upBtn.addEventListener('click', function() {
+          var cur = loadMarches(); if (idx <= 0) return;
+          var t = cur[idx]; cur[idx] = cur[idx - 1]; cur[idx - 1] = t; commit(cur);
+        });
+        downBtn.addEventListener('click', function() {
+          var cur = loadMarches(); if (idx >= cur.length - 1) return;
+          var t = cur[idx]; cur[idx] = cur[idx + 1]; cur[idx + 1] = t; commit(cur);
+        });
+        editBtn.addEventListener('click', function() { _beginEditMarch(idx, heroes); });
         delBtn.addEventListener('click', function() {
-          var cur = loadMarches();
-          cur.splice(idx, 1);
-          saveMarches(cur);
-          renderMarchList(heroes);
-          populateMarchFilter(heroes);
-          renderHeroGrid(heroes);
+          var cur = loadMarches(); cur.splice(idx, 1); commit(cur);
         });
       })(i);
-      row.appendChild(delBtn);
+      actions.appendChild(upBtn); actions.appendChild(downBtn); actions.appendChild(editBtn); actions.appendChild(delBtn);
+      row.appendChild(actions);
       container.appendChild(row);
     });
   }
@@ -10825,6 +11061,7 @@
   }
 
   function resetMarchForm() {
+    _exitMarchEditMode();
     var nameInput = document.getElementById('march-name-input');
     if (nameInput) nameInput.value = '';
     for (var i = 1; i <= 3; i++) {
@@ -10853,11 +11090,17 @@
 
     if (errEl) errEl.style.display = 'none';
     var marches = loadMarches();
-    marches.push({ name: name, heroIds: ids });
+    if (_marchEditIndex !== null && _marchEditIndex >= 0 && _marchEditIndex < marches.length) {
+      marches[_marchEditIndex] = { name: name, heroIds: ids };   // rename / re-assign in place
+    } else {
+      marches.push({ name: name, heroIds: ids });
+    }
     saveMarches(marches);
+    _persistMarchesOnBehalf();
     renderMarchList(heroes);
     populateMarchFilter(heroes);
-    resetMarchForm();
+    renderHeroGrid(heroes);
+    resetMarchForm();   // also exits edit mode (relabels button to "Add March")
   }
 
   function buildMarchModal(heroes) {
@@ -10910,6 +11153,7 @@
     btnRow.className = 'march-form-row';
     var addBtn = document.createElement('button');
     addBtn.className = 'march-btn march-btn-add';
+    addBtn.id = 'march-add-btn';
     addBtn.textContent = 'Add March';
     addBtn.addEventListener('click', function() { addMarch(heroes); });
     btnRow.appendChild(addBtn);
@@ -11010,7 +11254,9 @@
     container.appendChild(filterBar);
 
     // March modal
-    container.appendChild(buildMarchModal(heroes));
+    // Single modal instance (fixed ids) — skip if the banner/advisor screen
+    // already built one on document.body.
+    if (!document.getElementById('march-modal-overlay')) container.appendChild(buildMarchModal(heroes));
 
     // Populate march filter
     populateMarchFilter(heroes);
@@ -11043,7 +11289,7 @@
     // mock is removed post-beta, players still get the tab plus the empty
     // state until they paste their own bookmarklet output.
     var siteKey = (wizardState.player && wizardState.player.siteKey) || null;
-    var inS2864 = !!siteKey; // MATHOMHOUSE: inS2864 heroesTab
+    var inS2864 = siteKey && _ar_rosterMap && _ar_rosterMap[siteKey];
     var gearPoolAvailable = !!inS2864;
 
     if (!gearPoolAvailable) {
@@ -14018,7 +14264,7 @@
       awSec.appendChild(awLbl);
       var awLevels = h.aws || {};
       var awPanel = renderHeroAwakening(h.id, h.aw, !!h.fa, awLevels, window._heroAwakeningData,
-        'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/hero-awake-skills/');
+        'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/hero-awake-skills/');
       if (awPanel) { awSec.appendChild(awPanel); pane.appendChild(awSec); }
     }
   }
@@ -15930,7 +16176,7 @@
     var head = _adv_mk('div', { cls: 'advisor-rec-head' });
     if (r.iconPath) {
       var sanitizedName = _adv_sanitizeDecorNameForIcon(r.name);
-      var iconUrl = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/decor-icons/' +
+      var iconUrl = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/decor-icons/' +
                     r.group + '_' + sanitizedName + '.png';
       var img = _adv_mk('img', { attrs: { src: iconUrl, loading: 'lazy', alt: '' } });
       img.onerror = function() { img.style.display = 'none'; };
@@ -22184,7 +22430,7 @@
         var odBar = document.createElement('div');
         odBar.style.cssText = 'display:flex;align-items:center;gap:.6rem;padding:10px 16px;margin:0 16px 6px;background:linear-gradient(135deg, rgba(210,153,34,0.14), rgba(240,198,116,0.08));border:1px solid rgba(210,153,34,0.4);border-radius:8px;flex-wrap:wrap;';
         var odIcon = document.createElement('img');
-        odIcon.src = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/inventory-icons/image__item__item_940001.png';
+        odIcon.src = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/inventory-icons/image__item__item_940001.png';
         odIcon.alt = '';
         odIcon.style.cssText = 'width:20px;height:20px;object-fit:contain;flex-shrink:0;';
         odIcon.onerror = function() { odIcon.style.display = 'none'; };
@@ -22884,9 +23130,9 @@
   // Synthetic aggregate cell (Gems / Odinium / Food / Oil). Click → modal
   // showing every contributing pack with per-pack value × amount × total.
   function _ar_buildAggregateCell(kind, data) {
-    var TR = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/treasury-icons/';
+    var TR = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/treasury-icons/';
     var META = {
-      gem:     { name: 'Gems',     iconUrl: 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/inventory-icons/image__item__item_1000000.png', q: 5 },
+      gem:     { name: 'Gems',     iconUrl: 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/inventory-icons/image__item__item_1000000.png', q: 5 },
       odinium: { name: 'Odinium',  iconUrl: TR + 'odinium.png', q: 5 },
       food:    { name: 'Food',     iconUrl: TR + 'food.png',    q: 4 },
       oil:     { name: 'Oil',      iconUrl: TR + 'oil.png',     q: 4 }
@@ -23425,7 +23671,7 @@
         'Tap Share → Add Bookmark → Save (any page)',
         'Use the "Show bookmarklet URL" box below to copy the bookmarklet link',
         'Open Bookmarks → Edit → tap the new bookmark, clear the URL field, paste, rename to "' + bmLabel + '" and save',
-        'Open Safari and go to https://h5.topwargame.com/h5game/index.html — log in to your account if not already',
+        'Open Safari and go to https://h5.topwargame.com/h5game/index.html — log in to your S2864 account if not already',
         'Open the relevant panel inside the game (Bag for inventory, Beast list for bench), then tap the address bar, type "' + bmLabel + '", and tap the suggestion'
       ])));
       wrap.appendChild(makeDetails('Android Chrome setup', makeOl([
@@ -23433,7 +23679,7 @@
         'Menu (⋮) → Add to bookmarks (any page)',
         'Use the "Show bookmarklet URL" box below to copy the bookmarklet link',
         'Menu (⋮) → Bookmarks → tap-and-hold the new bookmark → Edit. Clear the URL field, paste, rename to "' + bmLabel + '" and save',
-        'Open Chrome and go to https://h5.topwargame.com/h5game/index.html — log in to your account if not already',
+        'Open Chrome and go to https://h5.topwargame.com/h5game/index.html — log in to your S2864 account if not already',
         'Open the relevant panel inside the game (Bag for inventory, Beast list for bench)',
         'In the URL bar type "' + bmLabel + '", then tap the autocomplete suggestion (Chrome strips javascript: when typed manually — picking from autocomplete preserves it)'
       ])));
@@ -23958,6 +24204,9 @@
         save.disabled = false; cancel.disabled = false;
         return;
       }
+      // On-behalf: track this target in the advisor's history right away (and
+      // persist the report-config so Resume works) — no need to wait for Handoff.
+      if (_imp()) { try { _imp_autoRecord(); } catch (e) {} }
       document.body.removeChild(bg);
       if (typeof onSaved === 'function') onSaved();
     };
@@ -24563,8 +24812,8 @@
     // the matching plan card. Advisor side: ?advise=<code> bootstraps advisor
     // view-only mode against the player's report.
     openBtn.href = isOwner
-      ? ('https://mathomhouse.github.io/armory-report.html?plan=' + rec.code)
-      : ('https://mathomhouse.github.io/armory-report.html?advise=' + rec.code);
+      ? ('https://2864tw.com/armory-report.html?plan=' + rec.code)
+      : ('https://2864tw.com/armory-report.html?advise=' + rec.code);
     openBtn.target = '_self';
     actions.appendChild(openBtn);
 
@@ -24576,7 +24825,7 @@
       copyBtn.className = 'asr-action';
       copyBtn.textContent = 'Copy link';
       copyBtn.title = 'Copy the advisor URL for code ' + rec.code;
-      var shareUrl = 'https://mathomhouse.github.io/armory-report.html?advise=' + rec.code;
+      var shareUrl = 'https://2864tw.com/armory-report.html?advise=' + rec.code;
       copyBtn.addEventListener('click', async function() {
         var prev = copyBtn.textContent;
         try {
@@ -25294,7 +25543,28 @@
     gallerySec.className = 'adv-plan-section';
     var galleryTitle = document.createElement('div');
     galleryTitle.className = 'adv-plan-section-title';
-    galleryTitle.textContent = 'Hero gear';
+    galleryTitle.style.display = 'flex';
+    galleryTitle.style.alignItems = 'center';
+    galleryTitle.style.gap = '.6rem';
+    galleryTitle.style.flexWrap = 'wrap';
+    var galleryTitleText = document.createElement('span');
+    galleryTitleText.textContent = 'Hero gear';
+    galleryTitle.appendChild(galleryTitleText);
+    // Manage Marches right here on the advise screen — so an advisor working
+    // from the advise link sets up the player's groups without navigating away.
+    // Edits persist to the player's config (saveConfig via _persistMarchesOnBehalf
+    // in advise mode); on close the plan re-renders so the gallery/pickers regroup.
+    var mmBtn = document.createElement('button');
+    mmBtn.type = 'button';
+    mmBtn.textContent = 'Manage Marches';
+    mmBtn.title = "Set up this player's march groups (names + heroes) — grouped here and saved into their report";
+    mmBtn.style.cssText = 'margin-left:auto;background:var(--surface,#161b22);border:1px solid var(--border,#30363d);color:var(--accent,#79c0ff);border-radius:6px;padding:.22rem .6rem;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit;';
+    mmBtn.addEventListener('click', function() {
+      var _sk = (wizardState.player && wizardState.player.siteKey) || null;
+      _marchModalOnClose = function() { try { renderAdvisorPlanTab(_sk, merged); } catch (e) {} };
+      openMarchModal((merged && merged.heroes) || []);
+    });
+    galleryTitle.appendChild(mmBtn);
     gallerySec.appendChild(galleryTitle);
     var galleryHelp = document.createElement('div');
     galleryHelp.className = 'adv-gallery-help';
@@ -26340,6 +26610,17 @@
     // the gear gallery (built from gearByHero) can't be selected as a source or
     // destination, and clicking that hero's tile silently falls back to another
     // hero (the "Astrid clickable in gallery but not in the dropdown" bug).
+    // March-aware ordering for the step pickers — same grouping/order the gear
+    // gallery uses, so dropdowns mirror the gallery instead of going alphabetical.
+    var _stepHeroMarch = {};
+    (function() {
+      var ms = (typeof loadMarches === 'function') ? loadMarches() : [];
+      (ms || []).forEach(function(mm, mi) {
+        ((mm && mm.heroIds) || []).forEach(function(hid, pos) {
+          if (_stepHeroMarch[hid] == null) _stepHeroMarch[hid] = { name: mm.name, marchIdx: mi, pos: pos };
+        });
+      });
+    })();
     var heroes = (function() {
       var byId = {};
       ((ctx.merged && ctx.merged.heroes) || []).forEach(function(h) { if (h && h.id != null) byId[h.id] = h; });
@@ -26353,6 +26634,12 @@
         byId[hid] = { id: hid, heroEquips: new Array(n) }; // synthetic — heroOpt only reads .length
       });
       return Object.keys(byId).map(function(k) { return byId[k]; }).sort(function(a, b) {
+        // march order first (marchIdx -> position in march), then the prior
+        // gear-count-desc -> alphabetical fallback for unassigned heroes.
+        var am = _stepHeroMarch[a.id], bm = _stepHeroMarch[b.id];
+        var ai = am ? am.marchIdx : 9999, bi = bm ? bm.marchIdx : 9999;
+        if (ai !== bi) return ai - bi;
+        if (ai !== 9999) { var ap = am ? am.pos : 0, bp = bm ? bm.pos : 0; if (ap !== bp) return ap - bp; }
         var ag = (a.heroEquips || []).length, bg = (b.heroEquips || []).length;
         if (ag !== bg) return bg - ag;
         var an = (typeof heroName === 'function') ? heroName(a.id) : ('Hero ' + a.id);
@@ -26365,7 +26652,8 @@
       opt.value = String(h.id);
       var name = (typeof heroName === 'function') ? heroName(h.id) : ('Hero ' + h.id);
       var slotsFilled = (h.heroEquips || []).length;
-      opt.textContent = name + (slotsFilled ? ' (' + slotsFilled + '/6)' : ' (no gear)');
+      var mm = _stepHeroMarch[h.id];
+      opt.textContent = (mm ? '[' + mm.name + '] ' : '') + name + (slotsFilled ? ' (' + slotsFilled + '/6)' : ' (no gear)');
       return opt;
     }
 
@@ -27003,6 +27291,12 @@
     if (!container) return;
     container.replaceChildren();
 
+    // Read-only viewer = anyone who isn't the verified owner (e.g. a player who
+    // opened an advisor's ?plan= link without verifying their UID). They can SEE
+    // and follow the plan; accept / apply / delete (which need the owner token)
+    // are hidden. The owner keeps the full interactive view.
+    var _roViewer = !(_ar_isOwnReport(siteKey) && _ar_isUnlocked(siteKey));
+
     var header = document.createElement('div');
     header.className = 'adv-plan-section';
     var title = document.createElement('div');
@@ -27011,7 +27305,9 @@
     header.appendChild(title);
     var blurb = document.createElement('div');
     blurb.style.cssText = 'font-size:.78rem;color:var(--muted);line-height:1.5;';
-    blurb.textContent = 'Plans your advisors have saved for you. Expand a plan to walk through the steps in-game, mark each as accepted or skipped, then Apply Accepted Steps to update your rune pool.';
+    blurb.textContent = _roViewer
+      ? 'This is the rune plan your advisor built for you. Expand it to see every step, then make the changes in-game. To tick steps off and roll them into your saved rune pool here, open this on your own device after verifying your in-game UID.'
+      : 'Plans your advisors have saved for you. Expand a plan to walk through the steps in-game, mark each as accepted or skipped, then Apply Accepted Steps to update your rune pool.';
     header.appendChild(blurb);
     container.appendChild(header);
 
@@ -27143,7 +27439,7 @@
             delBtn.textContent = prevTxt;
           }
         });
-        hdr.appendChild(delBtn);
+        if (!_roViewer) hdr.appendChild(delBtn);
         card.appendChild(hdr);
 
         if (entry.note) {
@@ -27157,7 +27453,7 @@
         if (entry.status === 'open') {
           var openHelp = document.createElement('div');
           openHelp.className = 'adv-plan-card-open';
-          var url = 'https://mathomhouse.github.io/armory-report.html?advise=' + entry.code;
+          var url = 'https://2864tw.com/armory-report.html?advise=' + entry.code;
           openHelp.appendChild(document.createTextNode('Share this link with your advisor: '));
           var a = document.createElement('a');
           a.href = url; a.textContent = url;
@@ -27268,6 +27564,9 @@
 
   function _ar_renderPlanStepList(host, entry, plan, siteKey, merged, catalog, lookups) {
     var alreadyApplied = entry.status === 'applied';
+    // Read-only when the viewer isn't the verified owner (e.g. a ?plan= link
+    // viewer): show the steps to follow in-game, but no Accept/Apply controls.
+    var _roViewer = !(_ar_isOwnReport(siteKey) && _ar_isUnlocked(siteKey));
     // Per-step accept state. Default all checked unless plan was already applied.
     // Steps that no longer validate against the player's current state (rune
     // already merged, fodder spent elsewhere, slot now empty, etc.) start
@@ -27596,23 +27895,38 @@
         stalePill.title = validation.errors.join('. ') || 'No longer valid against current pool/gear.';
         li.appendChild(stalePill);
       }
-      var lbl = document.createElement('label');
-      lbl.className = 'as-accept-toggle';
-      var cb = document.createElement('input');
-      cb.type = 'checkbox';
-      cb.checked = accepted[i];
-      cb.disabled = alreadyApplied;
-      cb.onchange = function() {
-        accepted[i] = cb.checked;
-        updateApplySummary();
-      };
-      lbl.appendChild(cb);
-      var lblText = document.createTextNode(' Accept');
-      lbl.appendChild(lblText);
-      li.appendChild(lbl);
+      if (!_roViewer) {
+        var lbl = document.createElement('label');
+        lbl.className = 'as-accept-toggle';
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.checked = accepted[i];
+        cb.disabled = alreadyApplied;
+        cb.onchange = function() {
+          accepted[i] = cb.checked;
+          updateApplySummary();
+        };
+        lbl.appendChild(cb);
+        var lblText = document.createTextNode(' Accept');
+        lbl.appendChild(lblText);
+        li.appendChild(lbl);
+      }
       list.appendChild(li);
     });
     host.appendChild(list);
+
+    // Read-only (link) viewer: no accept/apply controls — just a note to follow
+    // the steps in-game. Everything below (summary + apply row) is owner-only.
+    if (_roViewer) {
+      var roNote = document.createElement('div');
+      roNote.className = 'adv-apply-summary';
+      roNote.style.cssText = 'font-size:.74rem;color:var(--muted);line-height:1.5;margin-top:.4rem;';
+      roNote.textContent = alreadyApplied
+        ? 'Your advisor already applied this plan to your rune pool.'
+        : 'Follow these steps in your game, in order. Nothing here changes your account — this is just the plan to follow.';
+      host.appendChild(roNote);
+      return;
+    }
 
     var summary = document.createElement('div');
     summary.className = 'adv-apply-summary';
@@ -27904,6 +28218,12 @@
     var p = document.createElement('p');
     p.textContent = 'One tap on h5.topwargame.com snapshots every supplement; paste the JSON below to upload them.';
     modal.appendChild(p);
+
+    // Bookmarklet walkthrough videos (Safari / Chrome). Sits at the top of
+    // the modal so first-time players see it before the paste box; the
+    // detected browser's version loads by default with a one-tap toggle
+    // to the other.
+    modal.appendChild(_ar_buildWalkthroughVideoCard());
 
     modal.appendChild(_ar_buildBookmarkletPanel({
       fileName: 'all-bookmarklet.txt',
@@ -30130,7 +30450,7 @@
           copyBtn.title = 'Copy share link';
           (function(sc) {
             copyBtn.addEventListener('click', function() {
-              navigator.clipboard.writeText('https://mathomhouse.github.io/armory-report.html?code=' + sc);
+              navigator.clipboard.writeText('https://2864tw.com/armory-report.html?code=' + sc);
               copyBtn.textContent = 'Copied!';
               setTimeout(function() { copyBtn.textContent = 'Copy'; }, 1500);
             });
@@ -30237,6 +30557,11 @@
   }
 
   function saveState() {
+    // Never write device localStorage while impersonating or in any view-only
+    // load — that would leak the target/foreign identity + marches into the
+    // viewer's own playerReport (bug #107 surface). On-behalf persistence goes
+    // through saveConfig() under the target's siteKey instead.
+    if (_imp() || (wizardState && wizardState._viewOnly)) return;
     var saved = {
       player: wizardState.player,
       reportIds: wizardState.reportData.map(function(r) { return r.id; }),
@@ -32417,8 +32742,7 @@
         return;
       }
 
-      var prefix = id.substring(0, 4);
-      fetch(CDN_BASE + prefix + '/' + id + '.json')
+      fetchReportResponse(id)
         .then(function(r) { return r.ok ? r.json() : null; })
         .then(function(data) {
           if (data && data.battle) {
@@ -32661,6 +32985,9 @@
             // own shortcode. Otherwise a view-only load would overwrite the
             // viewer's saved marches in localStorage.
             if (isSamePlayer && result.marchGroups) saveMarches(result.marchGroups);
+            // View-only load (player-view link): surface server marches in-memory
+            // so grouped views render without writing the viewer's localStorage.
+            else if (Array.isArray(result.marchGroups) && result.marchGroups.length) window._advisorOverrideMarches = result.marchGroups.slice();
             window._ar_setupBy = (result && result.createdByAdvisor) || null;
             applyShortcodeConfig(result.playerName, ids, isSamePlayer, result.siteKey);
           } else {
@@ -32686,7 +33013,6 @@
   })();
 </script>
 <script src="https://translate.googleapis.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<!-- MATHOMHOUSE: removed-feedback-widget-script -->
-<a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
+<script src="feedback-widget.js"></script>
 </body>
 </html>
