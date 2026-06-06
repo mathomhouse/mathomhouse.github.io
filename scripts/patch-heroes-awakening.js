@@ -116,7 +116,7 @@ if (!content.includes('fonts.googleapis.com/css2?family=Rajdhani')) {
 //     heroes-awakening uses Rajdhani (site UI font) as body font so inherit-based elements
 //     (buttons, appbar, tabs) match the rest of the site rather than falling back to system-ui.
 //     Injected last so it wins over mathomhouse.css.
-const fontFixStyle = '<style id="ha-font-fix">html{font-family:\'Rajdhani\',BlinkMacSystemFont,\'Segoe UI\',sans-serif!important;}body{font-family:\'Rajdhani\',BlinkMacSystemFont,\'Segoe UI\',sans-serif!important;font-size:14px!important;}button,input,select,textarea{font-family:inherit!important;}</style>';
+const fontFixStyle = '<style id="ha-font-fix">html{font-family:\'Rajdhani\',BlinkMacSystemFont,\'Segoe UI\',sans-serif!important;font-size:16px!important;}body{font-family:\'Rajdhani\',BlinkMacSystemFont,\'Segoe UI\',sans-serif!important;font-size:14px!important;}button,input,select,textarea{font-family:inherit!important;}</style>';
 if (content.includes('id="ha-font-fix"')) {
   content = content.replace(/<style id="ha-font-fix">[\s\S]*?<\/style>/, fontFixStyle);
 } else {
