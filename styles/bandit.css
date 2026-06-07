@@ -152,15 +152,21 @@
 .march-type-tag.air   { color: var(--gold);   border-color: var(--gold-dim); background: rgba(201,168,76,0.07); }
 
 /* ── Priority list ── */
+.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
 .priority-table {
   width: 100%;
+  min-width: 680px;
   border-collapse: collapse;
   background: var(--surface);
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.88rem;
   border-radius: var(--radius);
   overflow: hidden;
-  border: 1px solid var(--border);
 }
 .priority-table thead th {
   background: var(--surface2);
@@ -203,6 +209,24 @@
 .pri-status.next    { color: #f0883e;       background: rgba(240,136,62,0.1); border: 1px solid rgba(240,136,62,0.3); }
 .pri-status.planned { color: var(--text-dim); background: transparent; border: 1px solid var(--border); }
 .pri-reason { color: var(--text-dim); font-size: 0.8rem; }
+.pri-resources { font-size: 0.78rem; min-width: 160px; }
+.res-chip {
+  display: inline-block;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  border-radius: 3px; padding: 2px 6px;
+  margin: 2px 2px 2px 0;
+  white-space: nowrap;
+}
+.res-chip.stone { color: var(--gold);   background: rgba(201,168,76,0.12); border: 1px solid var(--gold-dim); }
+.res-chip.card  { color: #c084fc;       background: rgba(192,132,252,0.1); border: 1px solid rgba(192,132,252,0.3); }
+.res-chip.shard { color: var(--accent); background: rgba(59,130,246,0.1);  border: 1px solid rgba(59,130,246,0.3); }
+.res-chip.chip  { color: var(--green);  background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.3); }
+.res-note {
+  display: block;
+  font-size: 0.68rem; color: var(--text-dim);
+  margin-top: 3px; font-style: italic;
+}
 
 /* ── Summary stat strip ── */
 .stat-strip {
