@@ -300,6 +300,17 @@ if (content.includes('id="armory-dark-select"')) {
   content = content.replace('</head>', `${darkSelectStyle}\n</head>`);
 }
 
+// 19. Push .modal-bg child dialogs below fixed header
+// .modal-bg uses align-items:flex-start + padding:1rem — only 16px top gap, header is ~55px.
+// .ms-modal, .bench-modal, .whats-new-modal-card all use this overlay.
+// Centered overlays (align-items:center) are fine — content has enough headroom at max-height.
+const msModalStyle = '<style id="armory-ms-modal-pos">.ms-modal,.bench-modal,.whats-new-modal-card{margin-top:3.5rem;}</style>';
+if (content.includes('id="armory-ms-modal-pos"')) {
+  content = content.replace(/<style id="armory-ms-modal-pos">[\s\S]*?<\/style>/, msModalStyle);
+} else {
+  content = content.replace('</head>', `${msModalStyle}\n</head>`);
+}
+
 // 17. Remove dead feedback-widget.js script tag
 if (!content.includes('<!-- MATHOMHOUSE: removed-feedback-widget-script -->')) {
   content = content.replace(
