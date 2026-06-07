@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bandit — Hero Awakening Roadmap</title>
+  <!-- Anti-flash -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/mathomhouse.css">
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/bandit.css">
+  <script src="header.js" defer></script>
+  <link rel="icon" href="/cutelogo.ico" type="image/x-icon">
+
+</head>
+<body>
+
+<!-- ── Auth overlay ──────────────────────────────────────────────── -->
+<div class="auth-overlay active" id="authOverlay">
+  <div class="auth-modal">
+    <div class="auth-lock">🔒</div>
+    <h2>Restricted Access</h2>
+    <p>Bandit account planning document — enter the access code to continue.</p>
+    <input class="auth-input" type="password" id="pwInput" placeholder="Access code" autocomplete="off" />
+    <div class="auth-error" id="authError"></div>
+    <button class="auth-btn" id="authBtn">Unlock</button>
+  </div>
+</div>
+
+<!-- ── Page body ─────────────────────────────────────────────────── -->
+<div class="page-body" id="pageBody">
+
+  <header id="header-placeholder"></header>
+
+  <!-- Page hero -->
+  <div class="page-hero">
+    <div class="breadcrumb">Top War · Internal Document</div>
+    <h1>Bandit — Hero Awakening Roadmap</h1>
+    <p>Current march compositions, awakening priorities, and projected timeline</p>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- MARCHES                                                        -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <section class="section" style="padding-top: 32px;">
+    <div class="section-header">
+      <h2>March Compositions</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="march-grid">
+
+      <!-- Navy Main -->
+      <div class="march-card">
+        <div class="march-label">March 1</div>
+        <div class="march-name">Navy Main</div>
+        <div class="march-type-tag navy">Navy</div>
+        <div class="march-heroes">
+          <div class="hero-slot">
+            <div class="hero-avatar">
+              <img src="https://h5.topwargame.com/DynRes/images/headpic/hero_icon240_global.png?t=22.jpg" alt="Sinope">
+            </div>
+            <div class="hero-slot-name">Sinope</div>
+          </div>
+          <div class="hero-slot">
+            <div class="hero-avatar">
+              <img src="https://h5.topwargame.com/DynRes/images/headpic/hero_icon241_global.png?t=22.jpg" alt="Margaretha">
+            </div>
+            <div class="hero-slot-name">Margaretha</div>
+          </div>
+          <div class="hero-slot">
+            <div class="hero-avatar" style="border-color:var(--gold-dim);box-shadow:0 0 10px var(--gold-glow)">
+              <img src="https://h5.topwargame.com/DynRes/images/headpic/hero_awakeicon234_global.png?t=22.jpg" alt="Shen Suyu">
+            </div>
+            <div class="hero-slot-name" style="color:var(--gold)">Shen Suyu ★</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Army Secondary -->
+      <div class="march-card">
+        <div class="march-label">March 2</div>
+        <div class="march-name">Army Secondary</div>
+        <div class="march-type-tag army">Army</div>
+        <div class="march-heroes">
+          <div class="hero-slot">
+            <div class="hero-avatar">
+              <img src="https://h5.topwargame.com/DynRes/images/headpic/hero_icon170_global.png?t=22.jpg" alt="Rohr">
+            </div>
+            <div class="hero-slot-name">Rohr</div>
+          </div>
+          <div class="hero-slot">
+            <div class="hero-avatar">
+              <img src="https://h5.topwargame.com/DynRes/images/headpic/hero_icon169_global.png?t=22.jpg" alt="Sara">
+            </div>
+            <div class="hero-slot-name">Sara</div>
+          </div>
+          <div class="hero-slot">
+            <div class="hero-avatar">
+              <img src="https://h5.topwargame.com/DynRes/images/headpic/hero_icon174_global.png?t=22.jpg" alt="Ella">
+            </div>
+            <div class="hero-slot-name">Ella</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Air Force -->
+      <div class="march-card">
+        <div class="march-label">March 3</div>
+        <div class="march-name">Air Force</div>
+        <div class="march-type-tag air">Air</div>
+        <div class="march-heroes">
+          <div class="hero-slot">
+            <div class="hero-avatar">
+              <img src="https://h5.topwargame.com/DynRes/images/headpic/hero_icon332_global.png?t=22.jpg" alt="Vivian">
+            </div>
+            <div class="hero-slot-name">Vivian</div>
+          </div>
+          <div class="hero-slot">
+            <div class="hero-avatar">
+              <img src="https://h5.topwargame.com/DynRes/images/headpic/hero_icon338_global.png?t=22.jpg" alt="Franziska">
+            </div>
+            <div class="hero-slot-name">Franziska</div>
+          </div>
+          <div class="hero-slot">
+            <div class="hero-avatar">
+              <img src="https://h5.topwargame.com/DynRes/images/headpic/hero_icon334_global.png?t=22.jpg" alt="Jett">
+            </div>
+            <div class="hero-slot-name">Jett</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navy Secondary -->
+      <div class="march-card">
+        <div class="march-label">March 4</div>
+        <div class="march-name">Navy Secondary</div>
+        <div class="march-type-tag navy">Navy</div>
+        <div class="march-heroes">
+          <div class="hero-slot">
+            <div class="hero-avatar">
+              <img src="https://h5.topwargame.com/DynRes/images/headpic/hero_icon231_global.png?t=22.jpg" alt="Jester">
+            </div>
+            <div class="hero-slot-name">Jester</div>
+          </div>
+          <div class="hero-slot">
+            <div class="hero-avatar">
+              <img src="https://h5.topwargame.com/DynRes/images/headpic/hero_icon237_global.png?t=22.jpg" alt="Alvida">
+            </div>
+            <div class="hero-slot-name">Alvida</div>
+          </div>
+          <div class="hero-slot">
+            <div class="hero-avatar">
+              <img src="https://h5.topwargame.com/DynRes/images/headpic/hero_icon225_global.png?t=22.jpg" alt="Crimson Typhoon">
+            </div>
+            <div class="hero-slot-name">Crimson</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- AWAKENING PRIORITIES                                           -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Awakening Priority Order</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="table-container">
+      <table class="priority-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Hero</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="pri-num">1</td>
+            <td class="pri-name">Shen Suyu</td>
+            <td><span class="pri-type navy">Navy</span></td>
+            <td><span class="pri-status wip">Skills 3 &amp; 4 → Tier 6</span></td>
+            <td class="pri-reason">Skills 1 &amp; 2 already Tier 6 ✓ — push Cinder Plume (4→6) then Phoenix Ascension (1→6)</td>
+          </tr>
+          <tr>
+            <td class="pri-num">2</td>
+            <td class="pri-name">Sara</td>
+            <td><span class="pri-type army">Army</span></td>
+            <td><span class="pri-status next">Awaken — Phase I (Live)</span></td>
+            <td class="pri-reason">Phase I awakening available now; army march support</td>
+          </tr>
+          <tr>
+            <td class="pri-num">3</td>
+            <td class="pri-name">Rohr</td>
+            <td><span class="pri-type army">Army</span></td>
+            <td><span class="pri-status planned">ES7 Prep — Phase II pending</span></td>
+            <td class="pri-reason">Awakening not live yet (Phase II); upgrade Exclusive Skill to Lv.7 now so awakening skills launch at full power</td>
+          </tr>
+          <tr>
+            <td class="pri-num">4?</td>
+            <td class="pri-name">Jett</td>
+            <td><span class="pri-type air">Air</span></td>
+            <td><span class="pri-status planned">Awaken? — Phase I (Live)</span></td>
+            <td class="pri-reason">Phase I available; decision pending — Ignition trio anchor for air march</td>
+          </tr>
+          <tr>
+            <td class="pri-num">—</td>
+            <td class="pri-name">Sinope</td>
+            <td><span class="pri-type navy">Navy</span></td>
+            <td><span class="pri-status planned">Phase II — Not Live</span></td>
+            <td class="pri-reason">Navy Main lead; high value but gate not open yet</td>
+          </tr>
+          <tr>
+            <td class="pri-num">—</td>
+            <td class="pri-name">Alvida</td>
+            <td><span class="pri-type navy">Navy</span></td>
+            <td><span class="pri-status planned">Phase II — Not Live</span></td>
+            <td class="pri-reason">Navy Secondary lead; part of Splash trio</td>
+          </tr>
+          <tr>
+            <td class="pri-num">—</td>
+            <td class="pri-name">Vivian</td>
+            <td><span class="pri-type air">Air</span></td>
+            <td><span class="pri-status planned">Phase II — Not Live</span></td>
+            <td class="pri-reason">Air Force march; part of Ignition trio with Jett &amp; Franziska</td>
+          </tr>
+          <tr>
+            <td class="pri-num">—</td>
+            <td class="pri-name">Margaretha / Ella / Franziska</td>
+            <td><span class="pri-type navy">Navy/Army/Air</span></td>
+            <td><span class="pri-status planned">Phase III — Future</span></td>
+            <td class="pri-reason">Long-term targets — march depth across all three unit types</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- SUMMARY                                                        -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Overall Progress</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="stat-strip">
+      <div class="stat-tile wip">
+        <div class="sv">1</div>
+        <div class="sl">Awakened</div>
+      </div>
+      <div class="stat-tile wip">
+        <div class="sv">30</div>
+        <div class="sl">Shen Suyu Awaken Lv</div>
+      </div>
+      <div class="stat-tile next">
+        <div class="sv">2</div>
+        <div class="sl">Phase I Available</div>
+      </div>
+      <div class="stat-tile total">
+        <div class="sv">10+</div>
+        <div class="sl">Total Roadmap Heroes</div>
+      </div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-bar"><div class="progress-fill" style="width:11%"></div></div>
+      <div class="progress-label">1 of 9 march heroes awakened — Phase I gate open for Sara &amp; Jett</div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- CURRENT FOCUS                                                   -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Current Focus — Shen Suyu</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="hero-grid">
+
+      <div class="hcard wip">
+        <div class="hcard-top">
+          <div class="hcard-name">Shen Suyu</div>
+          <div class="hcard-type navy">Navy</div>
+        </div>
+        <div class="hcard-status">
+          <div class="status-dot"></div>
+          <span class="status-txt">Awakened Lv 30 / 40 — Skills in progress</span>
+        </div>
+        <div class="hcard-bar"><div class="hcard-bar-fill" style="width:75%"></div></div>
+        <div class="hcard-detail">
+          <b>Awaken Level:</b> 30 / 40 (sweet spot reached)<br><br>
+          <b>Nirvana</b> — Tier 6 / 10 ✓<br>
+          <b>Phoenix Blaze</b> — Tier 6 / 10 ✓<br>
+          <b>Cinder Plume</b> — Tier 4 / 10 → <b style="color:var(--gold)">target: 6</b> (~450 stones)<br>
+          <b>Phoenix Ascension</b> — Tier 1 / 10 → <b style="color:var(--gold)">target: 6</b> (~675 stones)
+        </div>
+        <div class="hcard-note">
+          <div class="nt">Next action</div>
+          Push Cinder Plume 4→6 then Phoenix Ascension 1→6. ~1,125 awakening stones total remaining for all-Tier-6 goal.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- NEXT UP — PHASE I AVAILABLE NOW                                -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Next Up — Phase I Gate Open</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="hero-grid">
+
+      <div class="hcard next">
+        <div class="hcard-top">
+          <div class="hcard-name">Sara</div>
+          <div class="hcard-type army">Army</div>
+        </div>
+        <div class="hcard-status">
+          <div class="status-dot"></div>
+          <span class="status-txt">Awaken — Phase I (Available Now)</span>
+        </div>
+        <div class="hcard-bar"><div class="hcard-bar-fill"></div></div>
+        <div class="hcard-detail">
+          <b>Awaken Level:</b> 0 — not yet started<br>
+          <b>Phase gate:</b> Phase I (live)<br>
+          <b>March:</b> Army Secondary
+        </div>
+        <div class="hcard-note">
+          <div class="nt">Why next</div>
+          Priority #2. Phase I awakening card available — no gate blocking this.
+        </div>
+      </div>
+
+      <div class="hcard planned">
+        <div class="hcard-top">
+          <div class="hcard-name">Jett</div>
+          <div class="hcard-type air">Air</div>
+        </div>
+        <div class="hcard-status">
+          <div class="status-dot"></div>
+          <span class="status-txt">Awaken? — Phase I (Available Now)</span>
+        </div>
+        <div class="hcard-bar"><div class="hcard-bar-fill"></div></div>
+        <div class="hcard-detail">
+          <b>Awaken Level:</b> 0 — not yet started<br>
+          <b>Phase gate:</b> Phase I (live)<br>
+          <b>March:</b> Air Force; Ignition trio anchor
+        </div>
+        <div class="hcard-note">
+          <div class="nt">Decision pending</div>
+          Priority #4 (tentative). Phase I available — awaiting go/no-go decision.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- PREP — ES7 BEFORE PHASE II OPENS                               -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Prep Work — Before Phase II</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="hero-grid">
+
+      <div class="hcard planned">
+        <div class="hcard-top">
+          <div class="hcard-name">Rohr</div>
+          <div class="hcard-type army">Army</div>
+        </div>
+        <div class="hcard-status">
+          <div class="status-dot"></div>
+          <span class="status-txt">ES7 Target — Phase II Pending</span>
+        </div>
+        <div class="hcard-bar"><div class="hcard-bar-fill"></div></div>
+        <div class="hcard-detail">
+          <b>Awakening:</b> Phase II gate — not live yet<br>
+          <b>Action now:</b> Upgrade Exclusive Skill to Lv.7<br>
+          <b>Why ES7 first:</b> ES7 boosts all awakening skill buffs; doing it after awakening costs ~9× more hero ES chips
+        </div>
+        <div class="hcard-note">
+          <div class="nt">Priority #3</div>
+          Reach ES7 before Phase II drops so awakening is at full power from day one.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- FUTURE — PHASE II & III                                        -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Future Pipeline — Phase II &amp; III</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="hero-grid">
+
+      <div class="hcard planned">
+        <div class="hcard-top">
+          <div class="hcard-name">Sinope</div>
+          <div class="hcard-type navy">Navy</div>
+        </div>
+        <div class="hcard-status">
+          <div class="status-dot"></div>
+          <span class="status-txt">Phase II — Not Yet Live</span>
+        </div>
+        <div class="hcard-bar"><div class="hcard-bar-fill"></div></div>
+        <div class="hcard-detail"><b>March:</b> Navy Main<br><b>Gate:</b> Phase II (coming soon)</div>
+      </div>
+
+      <div class="hcard planned">
+        <div class="hcard-top">
+          <div class="hcard-name">Alvida</div>
+          <div class="hcard-type navy">Navy</div>
+        </div>
+        <div class="hcard-status">
+          <div class="status-dot"></div>
+          <span class="status-txt">Phase II — Not Yet Live</span>
+        </div>
+        <div class="hcard-bar"><div class="hcard-bar-fill"></div></div>
+        <div class="hcard-detail"><b>March:</b> Navy Secondary<br><b>Gate:</b> Phase II (coming soon)</div>
+      </div>
+
+      <div class="hcard planned">
+        <div class="hcard-top">
+          <div class="hcard-name">Vivian</div>
+          <div class="hcard-type air">Air</div>
+        </div>
+        <div class="hcard-status">
+          <div class="status-dot"></div>
+          <span class="status-txt">Phase II — Not Yet Live</span>
+        </div>
+        <div class="hcard-bar"><div class="hcard-bar-fill"></div></div>
+        <div class="hcard-detail"><b>March:</b> Air Force<br><b>Gate:</b> Phase II (coming soon)</div>
+      </div>
+
+      <div class="hcard planned">
+        <div class="hcard-top">
+          <div class="hcard-name">Ella</div>
+          <div class="hcard-type army">Army</div>
+        </div>
+        <div class="hcard-status">
+          <div class="status-dot"></div>
+          <span class="status-txt">Phase III — Future</span>
+        </div>
+        <div class="hcard-bar"><div class="hcard-bar-fill"></div></div>
+        <div class="hcard-detail"><b>March:</b> Army Secondary<br><b>Gate:</b> Phase III (future)</div>
+      </div>
+
+      <div class="hcard planned">
+        <div class="hcard-top">
+          <div class="hcard-name">Margaretha</div>
+          <div class="hcard-type navy">Navy</div>
+        </div>
+        <div class="hcard-status">
+          <div class="status-dot"></div>
+          <span class="status-txt">Phase III — Future</span>
+        </div>
+        <div class="hcard-bar"><div class="hcard-bar-fill"></div></div>
+        <div class="hcard-detail"><b>March:</b> Navy Main<br><b>Gate:</b> Phase III (future)</div>
+      </div>
+
+      <div class="hcard planned">
+        <div class="hcard-top">
+          <div class="hcard-name">Franziska</div>
+          <div class="hcard-type air">Air</div>
+        </div>
+        <div class="hcard-status">
+          <div class="status-dot"></div>
+          <span class="status-txt">Phase III — Future</span>
+        </div>
+        <div class="hcard-bar"><div class="hcard-bar-fill"></div></div>
+        <div class="hcard-detail"><b>March:</b> Air Force<br><b>Gate:</b> Phase III (future)</div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- RESOURCE GUIDE                                                  -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Resource Reference</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="res-grid">
+
+      <div class="res-card">
+        <div class="rc-label">Shen Suyu — skills 3 &amp; 4 to Tier 6</div>
+        <div class="rc-name">Awakening Stones Needed</div>
+        <div class="rc-row"><span class="rk">Cinder Plume 4→6</span><span class="rv warn">450 stones</span></div>
+        <div class="rc-row"><span class="rk">Phoenix Ascension 1→6</span><span class="rv warn">675 stones</span></div>
+        <div class="rc-row"><span class="rk">Total remaining</span><span class="rv">1,125 stones</span></div>
+        <div class="rc-bar"><div class="rc-bar-fill" style="width:60%;background:var(--gold)"></div></div>
+        <div class="rc-row"><span class="rk">Best source</span><span class="rv">Path of Awakening ($4.99/mo — 120 stones)</span></div>
+      </div>
+
+      <div class="res-card">
+        <div class="rc-label">Sara — awakening</div>
+        <div class="rc-name">Per-Hero Items</div>
+        <div class="rc-row"><span class="rk">Awakening Card</span><span class="rv">1× Sara card (Phase I)</span></div>
+        <div class="rc-row"><span class="rk">Awaken Lv 0→30</span><span class="rv">1,140 hero shards + 740 ES chips</span></div>
+        <div class="rc-row"><span class="rk">Skills 1–4 to Tier 6</span><span class="rv">2,700 stones</span></div>
+        <div class="rc-bar"><div class="rc-bar-fill" style="width:0%;background:var(--accent)"></div></div>
+        <div class="rc-row"><span class="rk">Status</span><span class="rv warn">Not started</span></div>
+      </div>
+
+      <div class="res-card">
+        <div class="rc-label">Rohr — ES7 prep</div>
+        <div class="rc-name">Exclusive Skill Chips</div>
+        <div class="rc-row"><span class="rk">ES5 cost</span><span class="rv">81 chips</span></div>
+        <div class="rc-row"><span class="rk">ES7 cost (total)</span><span class="rv">729 chips</span></div>
+        <div class="rc-row"><span class="rk">Why ES7 before awaken</span><span class="rv good">ES7 boosts all 4 skills</span></div>
+        <div class="rc-bar"><div class="rc-bar-fill" style="width:0%;background:var(--green)"></div></div>
+        <div class="rc-row"><span class="rk">Phase II gate</span><span class="rv warn">Not live yet</span></div>
+      </div>
+
+      <div class="res-card">
+        <div class="rc-label">General rule</div>
+        <div class="rc-name">One Skill to Tier 6 Cost</div>
+        <div class="rc-row"><span class="rk">Stones per skill (0→6)</span><span class="rv">675 stones</span></div>
+        <div class="rc-row"><span class="rk">All 4 skills to Tier 6</span><span class="rv">2,700 stones</span></div>
+        <div class="rc-row"><span class="rk">All 4 skills to Tier 10</span><span class="rv">9,000 stones</span></div>
+        <div class="rc-bar"><div class="rc-bar-fill" style="width:100%;background:var(--accent)"></div></div>
+        <div class="rc-row"><span class="rk">Strategy</span><span class="rv good">Tier 6 first, Tier 10 later</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- TIMELINE                                                       -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Projected Timeline</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="note-callout" style="margin-bottom: 28px;">
+      <div class="nc-head">Strategic context</div>
+      Shen Suyu (Navy) is the only awakened hero — already at the Lv.30 sweet spot. Priority now is skill completion, then expanding to Phase I heroes Sara and Jett while Phase II/III gates are still closed. Rohr ES7 prep runs in parallel since awakening is not yet available. <b>Phase II and III release dates are not confirmed.</b>
+    </div>
+
+    <div class="tl-list">
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-date">Now</div>
+          <div class="tl-dot active"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-title">Shen Suyu — Finish All Skills to Tier 6</div>
+          <div class="tl-body">Skills 1 &amp; 2 done. Push <b>Cinder Plume</b> 4→6 (~450 stones) then <b>Phoenix Ascension</b> 1→6 (~675 stones). ~1,125 stones remaining.</div>
+          <div class="tl-pills">
+            <span class="tl-pill done">Nirvana T6 ✓</span>
+            <span class="tl-pill done">Phoenix Blaze T6 ✓</span>
+            <span class="tl-pill gold">Cinder Plume → T6</span>
+            <span class="tl-pill gold">Phoenix Ascension → T6</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-date">Soon</div>
+          <div class="tl-dot future"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-title">Sara — Awaken (Phase I)</div>
+          <div class="tl-body">Phase I gate is live. Use Sara's awakening card, push to <b>Lv.30</b> then all 4 skills to Tier 6. Army Secondary march gets its first awakened hero.</div>
+          <div class="tl-pills">
+            <span class="tl-pill accent">Sara · Phase I</span>
+            <span class="tl-pill">Target: Lv.30 + all T6</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-date">Parallel</div>
+          <div class="tl-dot future"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-title">Rohr — Build to ES7</div>
+          <div class="tl-body">Phase II awakening not live. Use the wait time to reach <b>Exclusive Skill Lv.7</b>. ES7 unlocks a stronger tier of awakening skill buffs — doing this before awakening saves ~648 chips later.</div>
+          <div class="tl-pills">
+            <span class="tl-pill">Rohr · ES7 prep</span>
+            <span class="tl-pill">Phase II gate pending</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-date">TBD</div>
+          <div class="tl-dot future"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-title">Jett — Awaken? (Phase I)</div>
+          <div class="tl-body">Phase I available now. Decision pending. Jett is the anchor of the <b>Ignition trio</b> (Jett + Franziska + Vivian) — high value for Air Force march but Franziska (Phase III) and Vivian (Phase II) lag behind.</div>
+          <div class="tl-pills">
+            <span class="tl-pill">Jett · Phase I</span>
+            <span class="tl-pill">Decision pending</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-date">Phase II</div>
+          <div class="tl-dot future"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-title">Phase II Opens — Sinope, Rohr, Alvida, Vivian</div>
+          <div class="tl-body">When Phase II drops: awaken <b>Rohr</b> (ES7 ready), then <b>Sinope</b> (Navy Main), <b>Alvida</b> (Navy Secondary), <b>Vivian</b> (Air Force). No confirmed release date.</div>
+          <div class="tl-pills">
+            <span class="tl-pill">Rohr</span>
+            <span class="tl-pill">Sinope</span>
+            <span class="tl-pill">Alvida</span>
+            <span class="tl-pill">Vivian</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-date">Phase III</div>
+          <div class="tl-dot future"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-title">Phase III Opens — Margaretha, Ella, Franziska</div>
+          <div class="tl-body">Final wave. <b>Margaretha</b> (Navy Main), <b>Ella</b> (Army Secondary), <b>Franziska</b> (Air Force) complete march coverage across all three unit types. No confirmed release date.</div>
+          <div class="tl-pills">
+            <span class="tl-pill">Margaretha</span>
+            <span class="tl-pill">Ella</span>
+            <span class="tl-pill">Franziska</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    &copy; Bandit · Top War Hero Awakening Roadmap · Internal Document · Jun 2026
+  </footer>
+
+</div><!-- /page-body -->
+
+<script src="scripts/bandit.js" defer></script>
+</body>
+</html>
