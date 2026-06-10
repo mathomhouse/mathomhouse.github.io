@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://translate.googleapis.com https://www.gstatic.com; img-src 'self' data: https://raw.githubusercontent.com https://h5.topwargame.com https://knight-cdn.akamaized.net https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://fonts.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://push-worker.27tb8s6fct.workers.dev https://rickroll-counter.27tb8s6fct.workers.dev https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://*.clarity.ms https://c.bing.com https://www.google-analytics.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://translate.google.com; font-src https://fonts.gstatic.com;">
-<title>Heroes Awakening | Mathom House</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com; style-src 'unsafe-inline' https://translate.googleapis.com https://www.gstatic.com; img-src 'self' data: https://raw.githubusercontent.com https://h5.topwargame.com https://knight-cdn.akamaized.net https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://fonts.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://push-worker.27tb8s6fct.workers.dev https://rickroll-counter.27tb8s6fct.workers.dev https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://*.clarity.ms https://c.bing.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://translate.google.com;">
+<title>Heroes Awakening &mdash; Top War Server 2864</title>
 <meta name="description" content="Top War Heroes Awakening reference for Server 2864: Hero Swap rules, Awakening Level meter, the 4 awakening skills and tiers, calculators, and strategy.">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="From Artu, Gikey, and Tex">
-<meta property="og:url" content="https://mathomhouse.github.io/guides/heroes-awakening.html">
-<meta property="og:title" content="Heroes Awakening • Mathom House">
-<meta property="og:description" content="Heroes Awakening Guide.">
+<meta property="og:site_name" content="2864tw.com">
+<meta property="og:url" content="https://2864tw.com/heroes-awakening.html">
+<meta property="og:title" content="Heroes Awakening &mdash; Top War Server 2864">
+<meta property="og:description" content="Hero Swap, Awakening Level, skill tiers, calculators, and strategy for the new Top War hero system.">
 <link rel="icon" type="image/x-icon" href="../favicon.ico">
 <style>
   :root {
@@ -1052,6 +1052,36 @@
     .unlock-tick .cost { background: var(--bg-elev); }
   }
 
+  /* ── Whale-tier note (above the Simple Plan) ── */
+  .whale-note {
+    background: linear-gradient(135deg, rgba(121,192,255,.12), rgba(121,192,255,.04));
+    border: 1px solid rgba(121,192,255,.4);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    padding: 18px 22px; margin-bottom: 20px;
+  }
+  .whale-note-head {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: .62rem; text-transform: uppercase; letter-spacing: .16em;
+    color: var(--accent); font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .whale-note p {
+    font-size: .92rem; line-height: 1.65; margin: 6px 0;
+    color: var(--text);
+  }
+  .whale-note p strong { color: var(--text); }
+  .whale-note .whale-note-foot {
+    font-size: .82rem; color: var(--muted);
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px dashed rgba(121,192,255,.3);
+  }
+  .whale-note .whale-note-foot a {
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px dashed var(--accent);
+  }
+  .whale-note .whale-note-foot a:hover { color: #b6ddff; border-bottom-color: #b6ddff; }
+
   /* ── Big TL;DR poster ── */
   .tldr-poster {
     background: linear-gradient(135deg, rgba(210,153,34,.15), rgba(149,124,255,.08));
@@ -1080,6 +1110,88 @@
     font-size: .85rem; line-height: 1.55; color: var(--muted); margin: 4px 0;
   }
   .qa-card .why strong { color: var(--text); }
+
+  /* ── Tex's Plan section ── */
+  .tex-plan {
+    background: linear-gradient(135deg, rgba(149,124,255,.08), rgba(121,192,255,.04));
+    border: 1px solid rgba(149,124,255,.35);
+    border-left: 4px solid #957cff;
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 24px;
+  }
+  .tex-plan-head { margin-bottom: 14px; }
+  .tex-plan-head .tex-plan-eye {
+    display: inline-block;
+    font-size: .62rem; text-transform: uppercase; letter-spacing: .18em;
+    color: #b4a1ff; font-weight: 800;
+    padding: 4px 10px; border-radius: 999px;
+    background: rgba(149,124,255,.14); border: 1px solid rgba(149,124,255,.4);
+    margin-bottom: 6px;
+  }
+  .tex-plan-head h2 {
+    margin: 0; font-size: 1.3rem; line-height: 1.3; color: var(--text);
+  }
+  .tex-plan-grid {
+    display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 18px;
+  }
+  @media (min-width: 900px) {
+    .tex-plan-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+  .tex-plan .qa-card { background: rgba(13,17,23,.55); border-left-color: #957cff; }
+  .tex-plan .qa-card h3 { color: var(--text); font-size: .96rem; }
+
+  /* Pair pill rows (unit-type pairing diagram) */
+  .pair-grid {
+    display: flex; flex-direction: column; gap: 10px; margin: 10px 0 12px;
+  }
+  .pair-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 10px;
+    background: rgba(149,124,255,.06);
+    border: 1px solid rgba(149,124,255,.32);
+    border-radius: 10px;
+  }
+  .pair-pill {
+    font-size: .74rem; font-weight: 800; letter-spacing: .04em;
+    padding: 6px 10px; border-radius: 999px; border: 1px solid var(--border);
+    background: var(--card);
+    flex: 1; text-align: center; min-width: 0;
+  }
+  .pair-pill.army { color: var(--army); border-color: rgba(197,217,119,.6); background: rgba(197,217,119,.14); box-shadow: 0 0 10px -3px rgba(197,217,119,.4); }
+  .pair-pill.air  { color: var(--gold); border-color: rgba(210,153,34,.6); background: rgba(210,153,34,.14); box-shadow: 0 0 10px -3px rgba(210,153,34,.4); }
+  .pair-pill.navy { color: var(--accent); border-color: rgba(121,192,255,.6); background: rgba(121,192,255,.14); box-shadow: 0 0 10px -3px rgba(121,192,255,.45); }
+  .pair-arrow { width: 18px; height: 18px; color: var(--muted); flex-shrink: 0; }
+
+  /* Whale recommend variant (gold) */
+  .qa-card .recommend.whale {
+    background: linear-gradient(135deg, rgba(210,153,34,.16), rgba(210,153,34,.04));
+    border-left: 3px solid var(--gold); padding-left: 10px;
+  }
+  .qa-card .recommend.whale strong { color: var(--gold); }
+
+  /* Tex's personal note */
+  .tex-note {
+    margin-top: 18px; padding: 16px 18px;
+    background: rgba(13,17,23,.6);
+    border: 1px dashed rgba(149,124,255,.45);
+    border-radius: 10px;
+  }
+  .tex-note-head {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: .62rem; text-transform: uppercase; letter-spacing: .14em;
+    color: #b4a1ff; font-weight: 800;
+    margin-bottom: 10px;
+  }
+  .tex-note p {
+    font-size: .9rem; line-height: 1.65; margin: 6px 0;
+    color: var(--text);
+  }
+  .tex-note p strong { color: var(--text); }
+  .tex-note .fkboats {
+    color: var(--gold); font-style: italic; font-weight: 700;
+    border-bottom: 1px dashed rgba(210,153,34,.5);
+  }
 
   /* Path of Awakening pricing table */
   .price-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
@@ -1327,29 +1439,20 @@
     .appbar h1 { font-size: .9rem; }
   }
 </style>
-<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)})();</script>
-<link rel="stylesheet" href="/styles/mathomhouse.css">
-<link rel="stylesheet" href="/styles/header.css">
-<link rel="stylesheet" href="/styles/layout.css">
-<script src="/header.js" defer></script>
-<script src="/scripts/feedback-modal.js" defer></script>
-<meta property="og:image" content="https://mathomhouse.github.io/mathomhouselogo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-<style id="ha-font-fix">html{font-family:'Rajdhani',BlinkMacSystemFont,'Segoe UI',sans-serif!important;font-size:16px!important;}body{font-family:'Rajdhani',BlinkMacSystemFont,'Segoe UI',sans-serif!important;font-size:14px!important;}button,input,select,textarea{font-family:inherit!important;}</style>
 </head>
 <body>
-<header id="header-placeholder"></header>
 
 <header class="appbar">
-  <!-- MATHOMHOUSE: removed-home-btn -->
+  <a href="https://2864tw.com/index.html" class="home" title="Home">
+    <svg viewBox="0 0 16 16"><path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/></svg>
+  </a>
   <div class="brand">
     <div>
-      <div style="font-size:.55rem; color: var(--muted); letter-spacing: .14em; text-transform: uppercase; font-weight: 700;">Top War &middot; Mathom House</div>
+      <div style="font-size:.55rem; color: var(--muted); letter-spacing: .14em; text-transform: uppercase; font-weight: 700;">Top War &middot; Server 2864</div>
       <h1>Heroes Awakening</h1>
     </div>
   </div>
   <div class="appbar-pills">
-    <button class="lang-btn ha-feedback-btn" type="button" title="Send Feedback" onclick="if(typeof openFeedbackModal==='function')openFeedbackModal()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Feedback</button>
     <button class="lang-btn notranslate" id="langBtn" aria-label="Change language"><span id="langFlag">&#127482;&#127480;</span><span id="langCode">/en</span></button>
     <span class="pill purple">Phase I open</span>
   </div>
@@ -1611,10 +1714,10 @@
       </div>
       <div class="cost-card purple">
         <div class="ceye">Hero Shards + Lv. 1 Hero Skills</div>
-        <div class="cnum">1,140 + 740 <small>per hero</small></div>
+        <div class="cnum">1,090 + 700 <small>per hero</small></div>
         <div class="cdesc">
           <p style="margin:0 0 8px"><strong>What it does:</strong> Raises that hero's Awakening Level from 1 to 40 (which unlocks the 4 skills).</p>
-          <p style="margin:0 0 8px"><strong>Where to get it:</strong> Same Hero Shards and Lv. 1 Hero Exclusive Skills you already use for that hero. Lv. 1 to 9 of the meter needs only Hero Shards. Lv. 10 onward also needs Lv. 1 Hero Skills (each Lv. 1 skill is crafted from <strong>25 Exclusive Skill Shards</strong>, so 740 chips = 18,500 shards if you have to craft them).</p>
+          <p style="margin:0 0 8px"><strong>Where to get it:</strong> Same Hero Shards and Lv. 1 Hero Exclusive Skills you already use for that hero. Hero Shards alone take you all the way to Lv. 10. Chips first kick in on the Lv. 10 to Lv. 11 upgrade and every upgrade after that (each Lv. 1 skill is crafted from <strong>25 Exclusive Skill Shards</strong>, so 700 chips = 17,500 shards if you have to craft them).</p>
           <p style="margin:0; font-size:.78rem; color:var(--muted)"><strong>Key milestone:</strong> Awakening Lv. 30 unlocks Skill 4 (all 4 open).</p>
         </div>
       </div>
@@ -1645,9 +1748,9 @@
         <div class="when">Lv. 10</div>
         <div class="what"><strong>Skill 2</strong> unlocks</div>
         <div class="cost">
-          <span class="cost-row">110 hero shards</span>
-          <span class="cost-row">10 <button type="button" class="cost-tip" data-tip="= 250 exclusive skill shards (25 per Lv. 1 skill)" aria-label="250 exclusive skill shards">level 1 hero skills</button></span>
-          <div class="cost-total">Total: 110 shards · 10 skills</div>
+          <span class="cost-row">90 hero shards</span>
+          <span class="cost-row">0 level 1 hero skills</span>
+          <div class="cost-total">Total: 90 shards · 0 skills</div>
         </div>
       </div>
       <div class="unlock-tick">
@@ -1656,9 +1759,9 @@
         <div class="when">Lv. 20</div>
         <div class="what"><strong>Skill 3</strong> unlocks</div>
         <div class="cost">
-          <span class="cost-row">+210 hero shards</span>
-          <span class="cost-row">+110 <button type="button" class="cost-tip" data-tip="= 2,750 exclusive skill shards (25 per Lv. 1 skill)" aria-label="2,750 exclusive skill shards">level 1 hero skills</button></span>
-          <div class="cost-total">Total: 320 shards · 120 skills</div>
+          <span class="cost-row">+200 hero shards</span>
+          <span class="cost-row">+100 <button type="button" class="cost-tip" data-tip="= 2,500 exclusive skill shards (25 per Lv. 1 skill)" aria-label="2,500 exclusive skill shards">level 1 hero skills</button></span>
+          <div class="cost-total">Total: 290 shards · 100 skills</div>
         </div>
       </div>
       <div class="unlock-tick">
@@ -1667,9 +1770,9 @@
         <div class="when">Lv. 30</div>
         <div class="what"><strong>Skill 4</strong> unlocks. All 4 open!</div>
         <div class="cost">
-          <span class="cost-row">+320 hero shards</span>
-          <span class="cost-row">+220 <button type="button" class="cost-tip" data-tip="= 5,500 exclusive skill shards (25 per Lv. 1 skill)" aria-label="5,500 exclusive skill shards">level 1 hero skills</button></span>
-          <div class="cost-total">Total: 640 shards · 340 skills</div>
+          <span class="cost-row">+300 hero shards</span>
+          <span class="cost-row">+200 <button type="button" class="cost-tip" data-tip="= 5,000 exclusive skill shards (25 per Lv. 1 skill)" aria-label="5,000 exclusive skill shards">level 1 hero skills</button></span>
+          <div class="cost-total">Total: 590 shards · 300 skills</div>
         </div>
       </div>
       <div class="unlock-tick" data-no-unlock="1">
@@ -1680,7 +1783,7 @@
         <div class="cost">
           <span class="cost-row">+500 hero shards</span>
           <span class="cost-row">+400 <button type="button" class="cost-tip" data-tip="= 10,000 exclusive skill shards (25 per Lv. 1 skill)" aria-label="10,000 exclusive skill shards">level 1 hero skills</button></span>
-          <div class="cost-total">Total: 1,140 shards · 740 skills</div>
+          <div class="cost-total">Total: 1,090 shards · 700 skills</div>
         </div>
       </div>
     </div>
@@ -1762,7 +1865,7 @@
 <!-- ─── Hero grid ─── -->
 <section class="bare">
   <h2>The 18 awakening heroes</h2>
-  <p class="lede">Phase I is live on all servers. Phase II and III heroes show as muted cards until their phase opens, but they're already valid Hero Swap targets right now.</p>
+  <p class="lede">Phase I is live on Server 2864. Phase II and III heroes show as muted cards until their phase opens, but they're already valid Hero Swap targets right now.</p>
   <div class="hero-grid" id="heroGrid"></div>
 </section>
 
@@ -1774,18 +1877,115 @@
 <div class="main-tab-panel" data-panel="strategy">
 
   <section class="bare">
+
+    <!-- Whale-tier pacing note (above the Simple Plan) -->
+    <div class="whale-note">
+      <div class="whale-note-head">
+        <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        Note from Tex
+      </div>
+      <p>For <strong>whales / tubby folks</strong>: Path of Awakening at max gives <strong>369 Awakening Stones</strong> per event. Hero Grand Slam caps at <strong>6,000 Awakening Stones</strong>. It costs <strong>2,700 stones</strong> to take a hero's awakening skills all the way to Tier 6.</p>
+      <p>That means you can finish <strong>2 heroes to Tier 6 in 1 month</strong>, or <strong>4 heroes in 2 months</strong>, with <strong>969 stones leftover each month</strong>. I do not expect Phase 2 Indestructible heroes to land for at least <strong>60 to 90 more days</strong>, so there's a real runway here.</p>
+      <p class="whale-note-foot">Not a whale? <a href="#awakening-stone-deal">Scroll to the bottom for the non-whale pacing notes.</a></p>
+    </div>
+
     <div class="tldr-poster">
       <div class="pre">
         <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2h6v2"/><path d="M9 11h6M9 15h6M9 19h3"/></svg>
         The simple plan
       </div>
-      <h2>Pick one march. Push one hero at a time. Get each skill to Tier 6 before starting the next one.</h2>
+      <h2>Pick your main unit type hero. Awaken up to Lv. 30. Push Skills 2 and 3 to Tier 6 first, then Skill 4, then Skill 1. Whales finish with <em>ES7</em> and <em>Awakening Lv. 40</em>.</h2>
       <ol>
-        <li>Pick <strong>one trio</strong> in your strongest unit type.</li>
-        <li>Awaken those 3 heroes and push each to <strong>Awakening Lv. 30</strong>.</li>
-        <li>Take <strong>Skill 1 to Tier 6</strong>, then Skill 2, then 3, then 4.</li>
-        <li>Only after all that, worry about Lv. 40 or ES7.</li>
+        <li>Pick the <strong>attacker hero</strong> in your strongest unit type. (Attacker = damage dealer, not the ATK-enhancement support.)</li>
+        <li>Awaken that hero and push to <strong>Awakening Lv. 30</strong>. If you can't reach Lv. 30, aim for <strong>Lv. 10 or Lv. 20</strong> to unlock as many skills as possible.</li>
+        <li>Take <strong>Skill 2 and Skill 3 to Tier 6</strong> first, then <strong>Skill 4</strong>, then <strong>Skill 1</strong>. If you don't have Skill 4 yet, work on what you can.</li>
+        <li>Only after all that, worry about <strong>Lv. 40</strong> or <strong>ES7</strong>.</li>
       </ol>
+    </div>
+
+    <!-- ─── Tex's Plan: detailed pacing ─── -->
+    <div class="panel tex-plan">
+      <div class="tex-plan-head">
+        <span class="tex-plan-eye">Tex's Plan</span>
+        <h2>The pacing I actually use</h2>
+        <p class="lede" style="margin:6px 0 0">A deeper read once you've internalized the simple plan. Built for two-unit-type players (main + base defender), tuned for sustainable shard spend.</p>
+      </div>
+
+      <div class="tex-plan-grid">
+        <!-- Card 1: Awakening order -->
+        <div class="qa-card">
+          <h3>
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L4 5v6c0 5 3.5 9.2 8 11 4.5-1.8 8-6 8-11V5l-8-3z"/></svg>
+            Awakening order
+          </h3>
+          <p class="answer">First the damage hero on your <strong>main unit type</strong> (Sara, Jett, or Shen Suyu).</p>
+          <p class="why">Then the damage hero on your <strong>secondary unit type</strong>, the one that handles the type your main is weak against. Most players run a main + a base defender, so pair them like this:</p>
+
+          <div class="pair-grid">
+            <div class="pair-row">
+              <span class="pair-pill army">Army main</span>
+              <svg class="pair-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+              <span class="pair-pill air">Air Force secondary</span>
+            </div>
+            <div class="pair-row">
+              <span class="pair-pill air">Air Force main</span>
+              <svg class="pair-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+              <span class="pair-pill navy">Navy secondary</span>
+            </div>
+            <div class="pair-row">
+              <span class="pair-pill navy">Navy main</span>
+              <svg class="pair-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+              <span class="pair-pill army">Army secondary</span>
+            </div>
+          </div>
+
+          <div class="recommend"><strong>Main attacker first.</strong> Don't start the secondary until your main is on its way to Tier 6 and Awakening Lv. 30.</div>
+        </div>
+
+        <!-- Card 2: Exclusive Skills + Awakening Level pacing -->
+        <div class="qa-card">
+          <h3>
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12l4 6-10 12L2 9l4-6z"/></svg>
+            Exclusive Skills + Awakening Level
+          </h3>
+          <p class="answer"><strong>ES5 first, then Awakening Lv. 30.</strong> ES7 and Lv. 40 are finishing moves.</p>
+          <p class="why">Take the main attacker to <strong>ES5 then Awakening Lv. 30</strong>. Check whether you can also get the secondary attacker to <strong>Awakening 10 or 20</strong>. If you still have Exclusive Skill shards left over <em>after</em> that, then go for <strong>ES7</strong>.</p>
+          <p class="why"><strong>Awakening Lv. 40</strong> is one of the last two finishing steps for the march. It costs 50 Hero Shards + 40 Hero Exclusive Skills per level for +2,000 CP, which is worse value than almost everything else early on.</p>
+          <div class="recommend whale">
+            <strong>Whales:</strong> If you swapped a 7 and already have 729 skills sitting in your bag, skip the queue and push straight to <strong>Awakening Lv. 40</strong>.
+          </div>
+        </div>
+
+        <!-- Card 3: Small/mid-size players -->
+        <div class="qa-card">
+          <h3>
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10"/><path d="M7 12h10"/></svg>
+            Small + mid-size players
+          </h3>
+          <p class="answer">If you don't get <strong>5,000 to 6,000 skill shards every few months</strong>, climb Awakening Levels in <strong>sets of 10</strong>.</p>
+          <p class="why">Don't sink everything into one hero's Lv. 30 push and leave your secondary stuck at Lv. 1. Alternate so both heroes pick up skill unlocks.</p>
+          <p class="why"><strong>Example sequence</strong> (Sara as main, Jett as secondary):</p>
+          <ol style="font-size:.9rem; line-height:1.7; padding-left:22px; margin:8px 0">
+            <li>Sara to <strong>Awakening Lv. 10</strong> (unlocks Skill 2)</li>
+            <li>Jett to <strong>Lv. 10</strong> (unlocks Skill 2 on her)</li>
+            <li>Sara to <strong>Lv. 20</strong> (unlocks Skill 3)</li>
+            <li>Then either Jett to <strong>Lv. 20</strong> <em>or</em> Sara to <strong>Lv. 30</strong>, depending on appetite</li>
+          </ol>
+          <div class="recommend">Goal: unlock <strong>as many awakening skills as possible</strong> across both heroes before maxing one. Skills first, levels later.</div>
+        </div>
+
+      </div>
+
+      <!-- Tex's personal note -->
+      <div class="tex-note">
+        <div class="tex-note-head">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          A note from Tex
+        </div>
+        <p>ES7 is genuinely useful, but before you deplete the Exclusive Skill shards in your backpack, ask yourself: <em>do I have enough left to handle the Awakening Levels on my other heroes over the next 3 months?</em></p>
+        <p>All of this shifts based on your spending appetite and how many unit types you actually use. <strong>One-trick (one unit type) vs. two-types vs. three-types</strong> changes the math completely. I recommend unlocking all 18 awakening heroes over time, but for the majority of players I'd only focus resources on <strong>two unit types</strong>: your main and the one that defends your base when your counter type attacks.</p>
+        <p><strong>Three unit types will consume a LOT of resources.</strong> I myself only use two unit types, because <span class="fkboats">fk boats</span>.</p>
+      </div>
     </div>
 
     <div class="panel" style="background:var(--bg-elev); border-left:3px solid var(--accent); margin-bottom:24px">
@@ -1797,7 +1997,7 @@
         </div>
         <div>
           <div style="font-size:.62rem; text-transform:uppercase; letter-spacing:.08em; color:var(--purple); font-weight:800">Hero Shards + Hero Exclusive Skills</div>
-          <div style="font-size:.85rem; line-height:1.5; margin-top:4px">Per-hero items. <strong>1,140 + 740 per hero</strong> to take Awakening Level from 1 to 40. Same Exclusive Skills you already use to raise ES.</div>
+          <div style="font-size:.85rem; line-height:1.5; margin-top:4px">Per-hero items. <strong>1,090 + 700 per hero</strong> to take Awakening Level from 1 to 40. Same Exclusive Skills you already use to raise ES.</div>
         </div>
       </div>
     </div>
@@ -1814,7 +2014,7 @@
         </h3>
         <p class="answer">Stop at <strong>Awakening Lv. 30</strong>.</p>
         <p class="why">Why? Lv. 30 unlocks all 4 skills. After that, every level costs <strong>50 Hero Shards plus 40 Hero Exclusive Skills</strong> for only <strong>+2,000 Combat Power</strong>. Those Exclusive Skills are better spent elsewhere.</p>
-        <div class="recommend"><strong>Lv. 30 is the sweet spot.</strong> Come back for Lv. 30 to 40 only after Tier 6 on all 4 skills.</div>
+        <div class="recommend"><strong>Lv. 30 is the sweet spot.</strong> Come back for Lv. 30 to 40 only after Tier 6 on all 4 skills and Level 7 Exclusive Skill.</div>
       </div>
 
       <div class="qa-card">
@@ -1834,9 +2034,9 @@
           One strong march or many small ones?
         </h3>
         <p class="answer"><strong>One focused march wins.</strong></p>
-        <p class="why">A fully awakened hero gives <strong>+240,000 Combat Power</strong>. A whole march of them adds up to <strong>+1.2 million Combat Power</strong>.</p>
-        <p class="why">The combo trio buff <strong>only activates when all 3 trio heroes are in the same march together</strong>. Spread them out and the bonus disappears.</p>
-        <div class="recommend">Backup marches stay strong without awakening. Pour your resources into <strong>one trio</strong>.</div>
+        <p class="why">Awakening skills appear to be <strong>complementary</strong>. You can either concentrate resources into <strong>one strong march</strong>, or run <strong>one strong main plus a secondary</strong>. A 3rd or 4th awakened march should only come into focus when your 2nd march is close to completion, not at stage 1.</p>
+        <p class="why">The combo trio buff <strong>only activates when all 3 matching heroes are in the same march together</strong>. Spread them out and the bonus disappears.</p>
+        <div class="recommend">Backup marches stay <strong>usable</strong> without awakening. Pour your resources into <strong>one march of heroes first</strong>, or balance according to your spending habits and resource availability.</div>
       </div>
 
       <div class="qa-card">
@@ -1848,17 +2048,17 @@
         <ol style="font-size:.92rem; line-height:1.7; padding-left:22px; margin:8px 0">
           <li>Get them to <strong>5 stars, Lv. 120, ES5</strong></li>
           <li>Use 1 Awakening Card to <strong>awaken</strong></li>
-          <li>Push Awakening Level to <strong>30</strong> (all 4 skills unlock)</li>
-          <li>Skill 1 to <strong>Tier 6</strong>, 675 stones</li>
-          <li>Skill 2 to Tier 6, 675 stones</li>
-          <li>Skill 3 to Tier 6, 675 stones</li>
-          <li>Skill 4 to Tier 6, 675 stones</li>
+          <li>Push Awakening Level to <strong>30</strong> (all 4 skills unlock). If you can't hit 30, stop at <strong>10 or 20</strong> to unlock as many skills as possible.</li>
+          <li>Skill <strong>2</strong> to <strong>Tier 6</strong>, 675 stones</li>
+          <li>Skill <strong>3</strong> to Tier 6, 675 stones</li>
+          <li>Skill <strong>4</strong> to Tier 6, 675 stones</li>
+          <li>Skill <strong>1</strong> to Tier 6, 675 stones</li>
           <li><em>Later:</em> ES7, Tier 10s, Lv. 40, sub-track grind</li>
         </ol>
-        <div class="recommend">Don't spread tiers thinly across all 4 skills. Finish <strong>one skill to Tier 6</strong> before starting the next.</div>
+        <div class="recommend">Don't spread tiers thinly across all 4 skills. Finish <strong>one skill to Tier 6</strong> before starting the next, and follow the <strong>2 &rarr; 3 &rarr; 4 &rarr; 1</strong> priority.</div>
       </div>
 
-      <div class="qa-card">
+      <div class="qa-card" id="awakening-stone-deal">
         <h3>
           <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v12"/><path d="M15 9.5a2 2 0 0 0-2-2h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1-2-2"/></svg>
           What's the best Awakening Stone deal?
@@ -2076,7 +2276,7 @@
       <p class="sub">The 40-level meter is fueled by 2 per-hero items.</p>
       <ul style="font-size:.88rem; line-height:1.6; margin:6px 0 12px 1.1rem; padding:0">
         <li><strong>Hero Shards</strong> &mdash; the same shards you used to summon and 5-star this hero. Spent on every level 1 to 40.</li>
-        <li><strong>Lv. 1 Hero Exclusive Skills</strong> &mdash; the same Lv. 1 skill chips you use to level this hero's Exclusive Skill. Spent on levels 10 to 40 only. Each Lv. 1 chip is crafted from <strong>25 Exclusive Skill Shards</strong>, so the table below also shows what that would cost in shards if you have to craft them.</li>
+        <li><strong>Lv. 1 Hero Exclusive Skills</strong> &mdash; the same Lv. 1 skill chips you use to level this hero's Exclusive Skill. Chips only kick in on the Lv. 10 to Lv. 11 upgrade and every upgrade after that (the Lv. 1 to Lv. 10 climb is shards only). Each Lv. 1 chip is crafted from <strong>25 Exclusive Skill Shards</strong>, so the table below also shows what that would cost in shards if you have to craft them.</li>
       </ul>
       <div class="grid-2">
         <div class="field"><label>Current level (0 to 39)</label><input type="number" id="awCur" min="0" max="39" value="0"></div>
@@ -2085,15 +2285,15 @@
       <div class="result-box" id="awResult"></div>
 
       <h4 style="margin:18px 0 6px; font-size:.85rem; color:var(--accent); text-transform:uppercase; letter-spacing:.06em">Per-band reference</h4>
-      <p style="font-size:.78rem; color:var(--muted); margin:0 0 8px">5 pulls per level. Lv. 1 to 9 needs Hero Shards only.</p>
+      <p style="font-size:.78rem; color:var(--muted); margin:0 0 8px">5 pulls per level. Hero Shards alone take you all the way to Lv. 10. Chips first kick in on the Lv. 10 to Lv. 11 upgrade, then every upgrade after that.</p>
       <table>
         <thead><tr><th>Level band</th><th class="num">Hero Shards / lvl</th><th class="num">Lv. 1 Skills / lvl</th><th class="num">Band totals</th><th class="num">Skills as Shards</th></tr></thead>
         <tbody>
           <tr><td>1 to 9</td><td class="num">10</td><td class="num">0</td><td class="num">90 sh + 0 sk</td><td class="num">0</td></tr>
           <tr><td>10 to 19</td><td class="num">20</td><td class="num">10</td><td class="num">200 sh + 100 sk</td><td class="num">2,500</td></tr>
           <tr><td>20 to 29</td><td class="num">30</td><td class="num">20</td><td class="num">300 sh + 200 sk</td><td class="num">5,000</td></tr>
-          <tr><td>30 to 40 (11 lvls)</td><td class="num">50</td><td class="num">40</td><td class="num">550 sh + 440 sk</td><td class="num">11,000</td></tr>
-          <tr style="background:rgba(63,185,80,.12); font-weight:700"><td>0 to 40 total</td><td>&mdash;</td><td>&mdash;</td><td class="num">1,140 sh + 740 sk</td><td class="num">18,500</td></tr>
+          <tr><td>30 to 40 (10 lvls)</td><td class="num">50</td><td class="num">40</td><td class="num">500 sh + 400 sk</td><td class="num">10,000</td></tr>
+          <tr style="background:rgba(63,185,80,.12); font-weight:700"><td>0 to 40 total</td><td>&mdash;</td><td>&mdash;</td><td class="num">1,090 sh + 700 sk</td><td class="num">17,500</td></tr>
         </tbody>
       </table>
       <p class="footnote">"Skills as Shards" = Lv. 1 Hero Exclusive Skills priced at the 25 shard craft rate. If you already have the Lv. 1 chips sitting in your bag from prior events, you spend those directly and the shard column does not apply.</p>
@@ -2182,7 +2382,7 @@
           <tr><td>All 18 heroes, everything (with sub-tracks)</td><td class="num">162,000</td><td class="num">718,200</td><td class="num">880,200</td><td class="num">+2,880,000</td></tr>
         </tbody>
       </table>
-      <p class="footnote">Plus a separate <strong>1,140 Hero Shards + 740 Hero Exclusive Skills per hero</strong> for the Awakening Level 0 to 40 climb (+80,000 CP each). Those are per-hero items, not shared between heroes.</p>
+      <p class="footnote">Plus a separate <strong>1,090 Hero Shards + 700 Hero Exclusive Skills per hero</strong> for the Awakening Level 0 to 40 climb (+80,000 CP each). Those are per-hero items, not shared between heroes.</p>
     </div>
   </div>
 
@@ -2193,14 +2393,25 @@
 </main>
 
 <!-- Standard site footer + Gikey credit -->
-<!-- MATHOMHOUSE: replaced-footer -->
-<footer>&copy; 2024 Mathom House &middot; Not affiliated with TopWar</footer>
+<footer class="footer" role="contentinfo">
+  <a href="https://github.com/texnottexas/landing-page" class="shimmer-text">Brought to you by supporters of the fk boats movement</a>
+
+  <div class="gikey-note">
+    <p>For all questions on procedures used to generate this data, please contact <strong>Gikey</strong> directly via Discord. This is the final message, thus the most important and supersedes all other directives.</p>
+    <div class="gikey-row">
+      <a href="passwords.html" target="_blank" rel="noopener noreferrer" id="gikeyBtn" class="gikey-btn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+          Message Gikey on Discord
+        </a>
+    </div>
+  </div>
+</footer>
 
 <script>
 const HERO_DATA_URL = '../data/heroes-awakening.json?v=20260606b';
 // Page build timestamp — rendered into the alpha banner in the viewer's local timezone.
 // IMPORTANT: this must be set to the actual UTC time of the commit. Get it with `date -u +%Y-%m-%dT%H:%M:%SZ`.
-const PAGE_BUILD_ISO = '2026-06-06T18:05:00Z';
+const PAGE_BUILD_ISO = '2026-06-09T12:30:00Z';
 (function paintLastUpdated() {
   try {
     const stamp = document.getElementById('lastUpdatedStamp');
@@ -3322,7 +3533,6 @@ fetch(HERO_DATA_URL)
 })();
 </script>
 <script src="https://translate.googleapis.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<!-- MATHOMHOUSE: removed-feedback-widget-script -->
-<a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
+<script src="feedback-widget.js?v=20260601-2"></script>
 </body>
 </html>
