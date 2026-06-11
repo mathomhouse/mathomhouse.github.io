@@ -319,5 +319,20 @@ if (!content.includes('<!-- MATHOMHOUSE: removed-feedback-widget-script -->')) {
   );
 }
 
+// 20. Re-inject armory CSS vars removed by step 10 that mathomhouse.css doesn't define.
+//     Step 10 removes the entire :root block; --card, --muted, --yellow, --blue, --army,
+//     --navy, --air are never re-declared, so background:var(--card) renders transparent
+//     on every dialog. We restore the original armory dark values and add light-mode
+//     counterparts (armory never had light mode so these are new).
+const armoryVarsStyle = '<style id="armory-missing-vars">'
+  + ':root{--card:#1c2128;--cards:#1c2128;--muted:#8b949e;--yellow:#d29922;--blue:#388bfd;--army:#56d364;--navy:#6cb6ff;--air:#e3b341;}'
+  + '[data-theme="light"]{--card:#e9ebf0;--cards:#e9ebf0;--muted:#6e7891;}'
+  + '</style>';
+if (content.includes('id="armory-missing-vars"')) {
+  content = content.replace(/<style id="armory-missing-vars">[\s\S]*?<\/style>/, armoryVarsStyle);
+} else {
+  content = content.replace('</head>', `${armoryVarsStyle}\n</head>`);
+}
+
 fs.writeFileSync(filePath, content, 'utf8');
 console.log(`Patched ${filePath}`);
