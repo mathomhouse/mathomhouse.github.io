@@ -41,6 +41,7 @@ if (!content.includes('id="header-placeholder"')) {
 
 // 3. Set page title
 content = content.replace(/<title>[^<]*<\/title>/, '<title>Heroes Awakening | Mathom House</title>');
+content = content.replace(/<meta name="description"[^>]*>/, '<meta name="description" content="Top War Heroes Awakening reference: Hero Swap rules, Awakening Level meter, the 4 awakening skills and tiers, calculators, and strategy.">');
 
 // 4. Update og: meta tags — replace each individually (idempotent: regex matches any value).
 content = content.replace(/<meta property="og:type"[^>]*>/, '<meta property="og:type" content="website">');
