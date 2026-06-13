@@ -18,6 +18,29 @@
   <link rel="stylesheet" href="/styles/calculators.css">
   <link rel="stylesheet" href="/styles/bobsrunes.css">
   <style>
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 1em;
+    }
+    .tabs button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 0;
+      border: 2px solid transparent;
+      background: var(--accent-color);
+      color: white;
+      margin: 5px;
+      cursor: pointer;
+      transition: var(--transition-speed);
+    }
+    .tabs button:hover,
+    .tabs button.active {
+      background: var(--accent-hover);
+      transform: scale(1.05);
+    }
+
     #recommendations label,
     #loadouts label { display: block; margin-bottom: 3px; }
 
@@ -72,10 +95,10 @@
       <button class="tab-button active" onclick="openTab('loadouts')">Loadouts</button>
       <button class="tab-button" onclick="openTab('recommendations')">Recommendations</button>
     </div>
-
+    
     <!-- Loadouts Tab -->
     <div id="loadouts" class="tab-content active">
-
+      <br>
       <label for="marchTypeMeta">March Type:</label>
       <select id="marchTypeMeta" onchange="updateLoadoutOptions()">
         <option value="" disabled selected>Select march type</option>
@@ -85,7 +108,7 @@
       <select id="loadoutName">
         <option value="" disabled selected>Select loadout</option>
       </select>
-
+      <br>
       <div class="calculate-btn">
         <button onclick="showLoadout()">View Loadout</button>
       </div>
@@ -117,7 +140,7 @@
       <select id="recLoadoutName">
         <option value="" disabled selected>Select loadout</option>
       </select>
-
+      <br>
       <div class="calculate-btn">
         <button onclick="showRecommendedLoadout()">View Recommendation</button>
       </div>

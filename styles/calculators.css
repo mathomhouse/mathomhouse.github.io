@@ -105,7 +105,7 @@ select:focus {
 
 /* ─── CALC BUTTONS ────────────────────────────────────────────── */
 button.calc-btn,
-button[onclick]:not(.hamburger):not(.theme-toggle-btn):not(.mobile-group-btn):not(.close-btn):not(.remove-btn):not(.qty-btn):not(.add-btn):not(.cart-fab):not(.cart-button):not(.mobile-theme-btn) {
+button[onclick]:not(.hamburger):not(.theme-toggle-btn):not(.mobile-group-btn):not(.close-btn):not(.remove-btn):not(.qty-btn):not(.add-btn):not(.cart-fab):not(.cart-button):not(.mobile-theme-btn):not(.tab-button) {
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
@@ -120,7 +120,7 @@ button[onclick]:not(.hamburger):not(.theme-toggle-btn):not(.mobile-group-btn):no
   transition: background 0.2s, box-shadow 0.2s;
 }
 button.calc-btn:hover,
-button[onclick]:not(.hamburger):not(.theme-toggle-btn):not(.mobile-group-btn):not(.close-btn):not(.remove-btn):not(.qty-btn):not(.add-btn):not(.cart-fab):not(.cart-button):not(.mobile-theme-btn):hover {
+button[onclick]:not(.hamburger):not(.theme-toggle-btn):not(.mobile-group-btn):not(.close-btn):not(.remove-btn):not(.qty-btn):not(.add-btn):not(.cart-fab):not(.cart-button):not(.mobile-theme-btn):not(.tab-button):hover {
   background: rgba(201,168,76,0.22);
   box-shadow: 0 0 14px var(--gold-glow);
 }
