@@ -56,9 +56,19 @@ node scripts/patch-battle-report.js battle-report.html
 node scripts/patch-bookmarklet.js all-bookmarklet.js
 ```
 
+#### `guides/heroes-awakening.html`
+**NEVER directly edit `guides/heroes-awakening.html`.** All changes go in `scripts/patch-heroes-awakening.js`.
+```
+node scripts/patch-heroes-awakening.js guides/heroes-awakening.html
+```
+
 ## Key Notes
 
 - No local dev server needed — open HTML files directly in browser (or via `file://`)
 - `archive/` and `old files/` are kept for reference; don't edit them
 - When adding a new page to the nav, update both the desktop and mobile sections of `header.html` (they are separate DOM blocks)
-- `armory-report.html`, `battle-report.html`, and `all-bookmarklet.js` are patched third-party files — never edit directly, see patch workflow above
+- `armory-report.html`, `battle-report.html`, `all-bookmarklet.js`, and `guides/heroes-awakening.html` are patched third-party files — never edit directly, see patch workflow above
+- New guide pages: copy `templates/guidetemplate.html` as the starting point
+- Every page `<head>` must include the Google Fonts block (Rajdhani + Crimson Pro) — see `styles/mathomhouse.css` header comment for the exact snippet
+- `scripts/feedback-modal.js` is a self-contained drop-in feedback widget; load it on any page that needs a feedback button
+- `domain/` contains per-round Domain War pages (`round1.html`–`round6.html`); `domainmaps/` holds their JSON data; `EnigmaDominators/` holds Enigma Dominator round JSON data

@@ -146,5 +146,20 @@ if (!content.includes('<!-- MATHOMHOUSE: replaced-footer -->')) {
   );
 }
 
+// 19. Perf: cut the two largest always-on GPU drains so the page doesn't starve a
+//     concurrent video call (FaceTime down-ranks under GPU/main-thread saturation).
+//     Injected after the font-fix so it wins the cascade. Guarded by id="ha-perf-fix".
+const perfFixStyle = '<style id="ha-perf-fix">'
+  // full-screen feTurbulence noise: drop the per-frame viewport blend; keep faint static grain
+  + 'body::after{mix-blend-mode:normal!important;opacity:.06!important;}'
+  // sticky app bar: drop the continuous backdrop-blur pass; compensate with opaque bg
+  + '.appbar{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(7,9,13,.94)!important;}'
+  + '</style>';
+if (content.includes('id="ha-perf-fix"')) {
+  content = content.replace(/<style id="ha-perf-fix">[\s\S]*?<\/style>/, perfFixStyle);
+} else {
+  content = content.replace('</head>', `${perfFixStyle}\n</head>`);
+}
+
 fs.writeFileSync(filePath, content, 'utf8');
 console.log(`Patched ${filePath}`);
