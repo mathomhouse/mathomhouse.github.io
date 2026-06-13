@@ -1,371 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bobgrif's Titan Gear Runes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bobgrif's Titan Effects</title>
   <!-- Anti-flash -->
-  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
-  <link rel="stylesheet" href="styles/mathomhouse.css">
-  <link rel="stylesheet" href="styles/header.css">
-  <link rel="stylesheet" href="styles/layout.css">
-  <link rel="stylesheet" href="styles/calculators.css">
-  <script src="/test/header2.js" defer></script>
-  <style>
-  #comboResults {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
-
-  #comboResults .gear-box:last-child {
-    flex-basis: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 16px;
-    box-sizing: border-box;
-  }
-
-  .ht-slot {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 10px;
-    font-size: 1.1em;
-  }
-
-  .ht-icons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 8px;
-  }
-
-  .ht-icons img {
-    width: 64px;
-    height: 64px;
-    object-fit: contain;
-  }
-
-  .ht-name {
-    font-size: 1em;
-    text-align: center;
-    line-height: 1.2;
-    font-weight: 500;
-  }
-
-  /* Keep HT section full width and on bottom */
-  #comboResults .gear-box:last-child {
-    flex-basis: 100%;
-  }
-
-  /* Make hero boxes consistent width */
-  #comboResults .gear-box {
-    flex: 1 1 300px;
-    max-width: 300px;
-  }
-
-  /* On small screens, stack vertically (default behavior) */
-  @media (max-width: 768px) {
-    #comboResults {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    #comboResults .gear-box {
-      max-width: 100%;
-    }
-  }
-
-  .gear-box {
-    width: 300px;
-  }
-
-  .gear-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-top: 12px;
-  }
-
-  .gear-slot {
-    display: grid;
-    grid-template-rows: auto 48px auto;
-    align-items: center;
-    justify-items: center;
-    text-align: center;
-    height: 160px;
-  }
-
-  .gear-slot p {
-    margin: 4px 0;
-    line-height: 1.2;
-    max-width: 120px;
-    word-wrap: break-word;
-  }
-
-  .gear-slot p:nth-child(1),
-  .gear-slot p:nth-child(3) {
-    min-height: 2.2em;
-  }
-
-  .gear-slot img {
-    height: 64px;
-    margin: 4px 0;
-  }
-
-  input[type="number"],
-  select {
-    max-width: 150px;
-  }
-
-  .tabs {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-
-  .tab-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background: var(--accent-color, #333);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .tab-button.active {
-    background: var(--accent-hover, #555);
-  }
-
-  .tab-content {
-    display: none;
-  }
-
-  .tab-content.active {
-    display: block;
-  }
-  /* Center-align HT Section */
-  #comboResults .gear-box:last-child {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.03); /* Optional: subtle background */
-    padding: 20px;
-    box-sizing: border-box;
-  }
-
-  /* Change HT gear grid layout to centered flex */
-  #comboResults .gear-box:last-child .gear-grid {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-
-  /* Stack chip + HT vertically */
-  .ht-icons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-
-  /* Chip image adjustments */
-  .ht-icons img {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-  }
-
-  /* Chip name styling */
-  .chip-name {
-    font-size: 0.9em;
-    margin-top: 4px;
-    text-align: center;
-  }
-  /* Aligns HT Icons side by side */
-  .ht-icon-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-  }
-
-  /* Ensures each image + name is stacked */
-  .ht-icon-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* Ensure consistent image sizes */
-  .ht-icon-column img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-  }
-
-  /* Name styling */
-  .chip-name, .ht-name {
-    font-size: 0.9em;
-    margin-top: 4px;
-    text-align: center;
-  }
-  .skeleton-box {
-    background: linear-gradient(90deg, #eee 25%, #ddd 50%, #eee 75%);
-    background-size: 200% 100%;
-    animation: skeleton-loading 1.5s infinite linear;
-    border-radius: 12px;
-    width: 300px;
-    height: 200px;
-    margin: 10px;
-  }
-
-  @keyframes skeleton-loading {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
-
-</style>
+  <script>(function () { var t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); })()</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/styles/mathomhouse.css">
+  <link rel="stylesheet" href="/styles/header.css">
+  <link rel="stylesheet" href="/styles/layout.css">
+  <link rel="stylesheet" href="/styles/calculators.css">
+  <link rel="stylesheet" href="/styles/bobsrunes.css">
+  <script src="/header.js" defer></script>
 </head>
+
 <body>
-<header id="header-placeholder"></header>
+  <header id="header-placeholder"></header>
 
-<div class="container">
-  <h1>Bobgrif's Runes Guide</h1>
-  <p>This guide was made in collaboration with Bobgrif, who provided all the data to help you figure out how you should set up the runes in your marches!
-    <br><br>
-    Use the tabs below to view various loadouts by hero or see the Bobgrif's recommended marches and the runes they make.
-  </p>
+  <section class="page-hero">
+    <p class="breadcrumb"><a href="/">Home</a> / <a href="/guides.html">Guides</a> / Bobgrif's Titan Effects</p>
+    <h1>Bobgrif's Titan Effect Recommendations</h1>
+    <p>Titan gear effect setups and recommended marches. All data provided by Bobgrif. Last updated March 20th, 2026</p>
+  </section>
 
-  <div class="tabs">
-    <button class="tab-button active" onclick="openTab('loadouts')">Rune Loadouts</button>
-    <button class="tab-button" onclick="openTab('combos')">Suggested Marches</button>
-  </div>
+  <div class="container">
 
-  <!-- Loadouts Tab -->
-  <div id="loadouts" class="tab-content active">
-    <label for="branch">Choose Branch:</label><br>
-    <select id="branch" onchange="filterHeroesByRole()">
-      <option value="" disabled selected>Select branch</option>
-      <option value="Army">Army</option>
-      <option value="Navy">Navy</option>
-      <option value="Air Force">Air Force</option>
-    </select><br>
-
-    <label for="heroAttack">Attack Hero:</label><br>
-    <select id="heroAttack"></select><br>
-    <label for="heroHP">HP Hero:</label><br>
-    <select id="heroHP"></select><br>
-    <label for="heroIndestructible">Indestructible Hero:</label><br>
-    <select id="heroIndestructible"></select>
-
-    <div class="calculate-btn">
-      <button onclick="showGear()">View Rune Loadouts</button>
+    <div class="tabs">
+      <button class="tab-button active" onclick="openTab('loadouts')">Loadouts</button>
+      <button class="tab-button" onclick="openTab('recommendations')">Recommendations</button>
     </div>
 
-    <div id="results" class="gear-container">
-      <div class="skeleton-box"></div>
-      <div class="skeleton-box"></div>
-      <div class="skeleton-box"></div>
+    <!-- Loadouts Tab -->
+    <div id="loadouts" class="tab-content active">
+
+      <label for="marchTypeMeta">March Type:</label><br>
+      <select id="marchTypeMeta" onchange="updateLoadoutOptions()">
+        <option value="" disabled selected>Select march type</option>
+      </select><br>
+
+      <label for="loadoutName">Loadout:</label><br>
+      <select id="loadoutName">
+        <option value="" disabled selected>Select loadout</option>
+      </select>
+
+      <div class="calculate-btn">
+        <button onclick="showLoadout()">View Loadout</button>
+      </div>
+
+      <div id="loadoutResults" class="gear-container" style="display: none;"></div>
+
+    </div>
+
+    <!-- Recommendations Tab -->
+    <div id="recommendations" class="tab-content">
+      <h2>Recommended Marches</h2>
+      <p>Select your Skill Level, March Type, and Loadout to view recommended hero and titan effect combinations.</p>
+
+      <label for="skillLevel">Skill Level:</label><br>
+      <select id="skillLevel" onchange="updateRecMarchTypes()">
+        <option value="" disabled selected>Select skill level</option>
+        <option value="ES 5">ES 5</option>
+        <option value="ES 7">ES 7</option>
+      </select><br>
+
+      <label for="recMarchType">March Type:</label><br>
+      <select id="recMarchType" onchange="updateRecLoadouts()">
+        <option value="" disabled selected>Select march type</option>
+      </select><br>
+
+      <label for="recLoadoutName">Loadout:</label><br>
+      <select id="recLoadoutName">
+        <option value="" disabled selected>Select loadout</option>
+      </select>
+
+      <div class="calculate-btn">
+        <button onclick="showRecommendedLoadout()">View Recommendation</button>
+      </div>
+
+      <div id="recResults" class="gear-container" style="display: none;"></div>
+
     </div>
 
   </div>
 
-  <!-- Hero Combos Tab -->
-  <div id="combos" class="tab-content">
-    <h2>Recommended Hero Combinations + Runes</h2>
-    <p>Select your Exclusive Skill Level and March Type to view suggested hero and rune combinations.</p>
+  <script>
+    let marchData = {};
+let recommendedData = [];
 
-    <label for="skillLevel">Exclusive Skill Level:</label>
-  <select id="skillLevel" onchange="updateMarchOptions()">
-    <option value="" disabled selected>Select option</option>
-    <option value="Level 5 Skill">Level 5</option>
-    <option value="Level 7 Skill">Level 7</option>
-  </select>
+const dataUrl = 'data/titan-gear-data2.json';
 
-  <label for="marchType">March Type:</label>
-  <select id="marchType">
-    <option value="" disabled selected>Select option</option>
-  </select>
-
-  <div class="calculate-btn">
-    <button onclick="renderHeroCombos()">View Suggested Marches</button>
-  </div>
-
-    <div id="comboResults" style="margin-top: 20px;">
-      <div class="skeleton-box"></div>
-      <div class="skeleton-box"></div>
-    </div>
-  </div>
-</div>
-
-<script>
-let titanGearData = [];
-let suggestedCombosData = {};
-let heavyTrooperData = {};
-
-const liveUrl = 'testing';
-const fallbackUrl = 'data/titan-gear-data.json';
-
-fetch(liveUrl)
+fetch(dataUrl)
   .then(res => {
-    if (!res.ok) throw new Error("Live data unavailable");
+    if (!res.ok) throw new Error("Data unavailable");
     return res.json();
   })
   .then(data => {
-    console.log("Live data loaded");
-    titanGearData = data.titanGearData;
-    suggestedCombosData = data.suggestedCombos;
-    heavyTrooperData = data.heavyTroopers || {};
-    console.log("Heavy Troopers:", heavyTrooperData);
-    filterHeroesByRole();
-      document.getElementById('results').innerHTML = ''; // Clear Rune Loadouts skeleton
-      document.getElementById('comboResults').innerHTML = ''; // Clear Suggested Marches skeleton
-    updateMarchOptions();
+    marchData = data.marches;
+    recommendedData = data.recommended || [];
+    populateMarchTypeDropdown();
+    populateSkillLevelDropdown();
   })
   .catch(err => {
-  console.warn("Falling back to static data:", err.message);
+    console.error("Failed to load data:", err.message);
+    document.body.insertAdjacentHTML('afterbegin', `
+      <div id="fallback-banner" style="
+        background-color: #ffdddd;
+        color: #900;
+        padding: 10px;
+        text-align: center;
+        font-weight: bold;
+        border-bottom: 2px solid #900;
+        font-family: sans-serif;
+      ">
+        ⚠️ Could not load guide data. Please try refreshing the page.
+      </div>
+    `);
+  });
 
-  // Inject fallback banner at the top of the body
-  document.body.insertAdjacentHTML('afterbegin', `
-    <div id="fallback-banner" style="
-      background-color: #ffdddd;
-      color: #900;
-      padding: 10px;
-      text-align: center;
-      font-weight: bold;
-      border-bottom: 2px solid #900;
-      font-family: inherit;
-    ">
-      ⚠️ Live data could not be loaded. Displaying cached data.
-    </div>
-  `);
-
-  // Proceed with fetching fallback data
-  fetch(fallbackUrl)
-    .then(res => res.json())
-    .then(data => {
-      console.log("Fallback data loaded");
-      titanGearData = data.titanGearData;
-      suggestedCombosData = data.suggestedCombos;
-      heavyTrooperData = data.heavyTroopers || {};
-      console.log("Heavy Troopers (fallback):", heavyTrooperData);
-      filterHeroesByRole();
-
-      // Clear Skeletons for both sections
-      document.getElementById('results').innerHTML = '';
-      document.getElementById('comboResults').innerHTML = '';
-    });
-});
-;
+// ─── Tab Switching ────────────────────────────────────────────────────────────
 
 function openTab(tabId) {
   document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
@@ -374,123 +132,282 @@ function openTab(tabId) {
   event.target.classList.add('active');
 }
 
-function filterHeroesByRole() {
-  const branch = document.getElementById('branch').value;
+// ─── Loadouts Tab ─────────────────────────────────────────────────────────────
 
-  if (!branch) {
-    populateDropdown('heroAttack', []);
-    populateDropdown('heroHP', []);
-    populateDropdown('heroIndestructible', []);
-    return;
-  }
+// Dropdown 1: march type/meta — one option per tab in the JSON
+function populateMarchTypeDropdown() {
+  const select = document.getElementById('marchTypeMeta');
+  select.innerHTML = '<option value="" disabled selected>Select march type</option>';
 
-  const attackHeroes = titanGearData
-    .filter(h => (h.Branch === branch || h.Branch === "Universal") && h.Subcategory === "Attack")
-    .map(h => h.Hero);
+  // Display label map: JSON key → human-readable label
+  const labelMap = {
+    army_magnet:       'Army - Magnet',
+    army_hostile:      'Army - Hostile',
+    navy_splash:       'Navy - Splash',
+    navy_control:      'Navy - Control',
+    airforce_ignition: 'Air Force - Ignition',
+    airforce_combo:    'Air Force - Combo'
+  };
 
-  const hpHeroes = titanGearData
-    .filter(h => (h.Branch === branch || h.Branch === "Universal") && h.Subcategory === "HP")
-    .map(h => h.Hero);
-
-  const indestructibleHeroes = titanGearData
-    .filter(h => (h.Branch === branch || h.Branch === "Universal") && h.Subcategory === "Indestructible")
-    .map(h => h.Hero);
-
-  populateDropdown('heroAttack', attackHeroes);
-  populateDropdown('heroHP', hpHeroes);
-  populateDropdown('heroIndestructible', indestructibleHeroes);
-}
-
-function populateDropdown(dropdownId, heroList) {
-  const select = document.getElementById(dropdownId);
-  select.innerHTML = "";
-  heroList.forEach(hero => {
-    const option = document.createElement("option");
-    option.value = hero;
-    option.textContent = hero;
-    select.appendChild(option);
+  Object.keys(marchData).forEach(key => {
+    const opt = document.createElement('option');
+    opt.value = key;
+    opt.textContent = labelMap[key] || key;
+    select.appendChild(opt);
   });
 }
 
-function showGear() {
-  const branch = document.getElementById('branch').value;
-  const selections = [
-    { role: "Attack", id: "heroAttack" },
-    { role: "HP", id: "heroHP" },
-    { role: "Indestructible", id: "heroIndestructible" }
-  ];
+// Dropdown 2: loadout names — populated when march type is chosen
+function updateLoadoutOptions() {
+  const key = document.getElementById('marchTypeMeta').value;
+  const select = document.getElementById('loadoutName');
+  select.innerHTML = '<option value="" disabled selected>Select loadout</option>';
 
-  const resultsDiv = document.getElementById('results');
+  // Hide results when march type changes
+  document.getElementById('loadoutResults').style.display = 'none';
+
+  if (!key || !marchData[key]) return;
+
+  marchData[key].forEach((loadout, index) => {
+    const opt = document.createElement('option');
+    opt.value = index;
+    opt.textContent = loadout.march_name;
+    select.appendChild(opt);
+  });
+}
+
+// Render the selected loadout
+function showLoadout() {
+  const key = document.getElementById('marchTypeMeta').value;
+  const index = document.getElementById('loadoutName').value;
+
+  if (!key || index === '') return;
+
+  const loadout = marchData[key][index];
+  const resultsDiv = document.getElementById('loadoutResults');
+  resultsDiv.style.display = '';
   resultsDiv.innerHTML = '';
 
-  selections.forEach(({ role, id }) => {
-    const heroName = document.getElementById(id).value.trim();
-    const hero = titanGearData.find(item =>
-      item.Hero.trim() === heroName &&
-      item.Branch === branch
-    );
-    if (!hero || !hero.Loadouts) return;
+  const heroes = [
+    { role: 'Attack',         prefix: 'attack' },
+    { role: 'Indestructible', prefix: 'indestructible' },
+    { role: 'HP',             prefix: 'hp' }
+  ];
 
-    const heroBox = document.createElement('div');
-    heroBox.className = 'gear-box';
-    heroBox.dataset.hero = hero.Hero;
-    heroBox.dataset.branch = branch;
+  heroes.forEach(({ role, prefix }) => {
+    const heroName = loadout[`${prefix}_name`];
+    const gear = {
+      Gun:     loadout[`${prefix}_assault_pistol`],
+      Chest:   loadout[`${prefix}_tactical_backarmor`],
+      Optical: loadout[`${prefix}_optical_addon`],
+      Headset: loadout[`${prefix}_raysor_headset`],
+      Arms:    loadout[`${prefix}_portable_gps`],
+      Boots:   loadout[`${prefix}_power_boots`]
+    };
 
-    const loadoutKeys = Object.keys(hero.Loadouts);
-    const defaultLoadout = loadoutKeys[0];
-    const gear = hero.Loadouts[defaultLoadout];
-
-    heroBox.innerHTML = `
-      <h2>${hero.Hero}<br> <span style="font-size: 0.7em;">(${role})</span></h2>
-      <label>Loadout:</label>
-      <select class="hero-loadout" data-hero="${hero.Hero}" data-branch="${branch}" onchange="updateDynamicGear(this)">
-        ${loadoutKeys.map(key => `<option value="${key}">${key}</option>`).join('')}
-      </select>
-      <div class="gear-details" id="gear-${hero.Hero}-${branch}">
+    const box = document.createElement('div');
+    box.className = 'gear-box';
+    box.innerHTML = `
+      <h2>${heroName}<br><span style="font-size: 0.7em;">(${role})</span></h2>
+      <div class="gear-details">
         ${renderGearDetails(gear)}
       </div>
     `;
-    resultsDiv.appendChild(heroBox);
+    resultsDiv.appendChild(box);
   });
 }
 
-function updateDynamicGear(selectElement) {
-  const heroName = selectElement.dataset.hero;
-  const branch = selectElement.dataset.branch;
-  const selectedLoadout = selectElement.value;
+// ─── Recommendations Tab ──────────────────────────────────────────────────────
 
-  const hero = titanGearData.find(item =>
-    item.Hero.trim() === heroName &&
-    item.Branch === branch
+function populateSkillLevelDropdown() {
+  // Skill level dropdown is static — values must match what's in the JSON
+  // No dynamic population needed; just ensure the march type dropdown resets
+  const select = document.getElementById('recMarchType');
+  select.innerHTML = '<option value="" disabled selected>Select march type</option>';
+  document.getElementById('recLoadoutName').innerHTML = '<option value="" disabled selected>Select loadout</option>';
+}
+
+// Dropdown 2 (rec tab): march types available for the selected skill level
+function updateRecMarchTypes() {
+  const skillLevel = document.getElementById('skillLevel').value;
+  const select = document.getElementById('recMarchType');
+  select.innerHTML = '<option value="" disabled selected>Select march type</option>';
+  document.getElementById('recLoadoutName').innerHTML = '<option value="" disabled selected>Select loadout</option>';
+  document.getElementById('recResults').style.display = 'none';
+
+  if (!skillLevel) return;
+
+  // Get unique march_type values for this skill level
+  const marchTypes = [...new Set(
+    recommendedData
+      .filter(r => r.skill_level === skillLevel)
+      .map(r => r.march_type)
+  )];
+
+  const labelMap = {
+    army_magnet:       'Army - Magnet',
+    army_hostile:      'Army - Hostile',
+    navy_splash:       'Navy - Splash',
+    navy_control:      'Navy - Control',
+    airforce_ignition: 'Air Force - Ignition',
+    airforce_combo:    'Air Force - Combo'
+  };
+
+  marchTypes.forEach(type => {
+    const opt = document.createElement('option');
+    opt.value = type;
+    opt.textContent = labelMap[type] || type;
+    select.appendChild(opt);
+  });
+}
+
+// Dropdown 3 (rec tab): loadout names filtered by skill level + march type
+function updateRecLoadouts() {
+  const skillLevel = document.getElementById('skillLevel').value;
+  const marchType = document.getElementById('recMarchType').value;
+  const select = document.getElementById('recLoadoutName');
+  select.innerHTML = '<option value="" disabled selected>Select loadout</option>';
+  document.getElementById('recResults').style.display = 'none';
+
+  if (!skillLevel || !marchType) return;
+
+  const filtered = recommendedData.filter(
+    r => r.skill_level === skillLevel && r.march_type === marchType
   );
-  const gear = hero?.Loadouts?.[selectedLoadout];
 
-  const gearDiv = document.getElementById(`gear-${heroName}-${branch}`);
-  if (gearDiv && gear) {
-    gearDiv.innerHTML = renderGearDetails(gear);
+  filtered.forEach((loadout, index) => {
+    const opt = document.createElement('option');
+    opt.value = index;
+    opt.textContent = loadout.march_name;
+    select.appendChild(opt);
+  });
+}
+
+// Render the selected recommended loadout
+function showRecommendedLoadout() {
+  const skillLevel = document.getElementById('skillLevel').value;
+  const marchType = document.getElementById('recMarchType').value;
+  const index = document.getElementById('recLoadoutName').value;
+
+  if (!skillLevel || !marchType || index === '') return;
+
+  const filtered = recommendedData.filter(
+    r => r.skill_level === skillLevel && r.march_type === marchType
+  );
+  const loadout = filtered[index];
+
+  const resultsDiv = document.getElementById('recResults');
+  resultsDiv.style.display = '';
+  resultsDiv.innerHTML = '';
+
+  // Hero boxes
+  const heroes = [
+    { role: 'Attack',         prefix: 'attack' },
+    { role: 'Indestructible', prefix: 'indestructible' },
+    { role: 'HP',             prefix: 'hp' }
+  ];
+
+  heroes.forEach(({ role, prefix }) => {
+    const heroName = loadout[`${prefix}_name`];
+    const gear = {
+      Gun:     loadout[`${prefix}_assault_pistol`],
+      Chest:   loadout[`${prefix}_tactical_backarmor`],
+      Optical: loadout[`${prefix}_optical_addon`],
+      Headset: loadout[`${prefix}_raysor_headset`],
+      Arms:    loadout[`${prefix}_portable_gps`],
+      Boots:   loadout[`${prefix}_power_boots`]
+    };
+
+    const box = document.createElement('div');
+    box.className = 'gear-box';
+    box.innerHTML = `
+      <h2>${heroName}<br><span style="font-size: 0.7em;">(${role})</span></h2>
+      <div class="gear-details">
+        ${renderGearDetails(gear)}
+      </div>
+    `;
+    resultsDiv.appendChild(box);
+  });
+
+  // Heavy Trooper box
+  const htTrooper = loadout.heavy_trooper_type;
+  const htChip    = loadout.heavy_trooper_chip_type;
+  const htSlot    = loadout.heavy_trooper_placement;
+  const notes     = loadout.notes;
+
+  if (htTrooper || htChip) {
+    const htIconMap = {
+      "Earthshaker E-100":  "yellow",
+      "Blazing Gale Rx":    "red",
+      "Tide Crusher BW-3":  "blue",
+      "Doom Sawblade D-4":  "ball",
+      "Luminary Knight LP-4": "white",
+      "Blade Angel BA-6":   "pink"
+    };
+
+    const chipIconMap = {
+      "Xyston":               "xyston",
+      "Hoplon":               "hoplon",
+      "Shamshir":             "shamshir",
+      "Estoc Piercing Sword": "estoc",
+      "Rondel Dagger":        "rondel",
+      "Scramsax Blade":       "scramsax",
+      "Kris Sword":           "kris-sword",
+      "Ring of Cosmos":       "cosmos",
+      "Sasanian's Chain":     "sasanian"
+    };
+
+    const htKey   = htIconMap[htTrooper] || "unknown";
+    const chipKey = chipIconMap[htChip]  || "unknown";
+
+    const box = document.createElement('div');
+    box.className = 'gear-box';
+    box.innerHTML = `
+      <h3>Heavy Trooper</h3>
+      <div class="gear-grid">
+        <div class="ht-slot">Slot ${htSlot}</div>
+        <div class="gear-slot">
+          <div class="ht-icon-row">
+            <div class="ht-icon-column">
+              <img src="/images/${chipKey.replace(/ /g, '%20')}-icon.png" alt="${htChip}" title="${htChip}" />
+              <div class="chip-name">${htChip}</div>
+            </div>
+            <div class="ht-icon-column">
+              <img src="/images/${htKey.replace(/ /g, '%20')}-ht-icon.png" alt="${htTrooper}" title="${htTrooper}" />
+              <div class="ht-name">${htTrooper}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      ${notes ? `<p class="loadout-notes"><strong>Notes:</strong> ${notes}</p>` : ''}
+    `;
+    resultsDiv.appendChild(box);
   }
 }
 
+// ─── Shared Rendering ─────────────────────────────────────────────────────────
+
 function renderGearDetails(gear) {
   const displayNames = {
-    Gun: 'Assault Pistol',
-    Chest: 'Tactical Backarmor',
+    Gun:     'Assault Pistol',
+    Chest:   'Tactical Backarmor',
     Optical: 'Optical Add-on',
-    Headset: 'Raytheon Headset',
-    Arms: 'Portable GPS',
-    Boots: 'Power Boots'
+    Headset: 'Raysor Headset',
+    Arms:    'Portable GPS',
+    Boots:   'Power Boots'
   };
 
   const slotOrder = [
-    ['Gun', 'Headset'],
-    ['Chest', 'Arms'],
+    ['Gun',     'Headset'],
+    ['Chest',   'Arms'],
     ['Optical', 'Boots']
   ];
 
   return `<div class="gear-grid">` + slotOrder.map(pair => {
     return pair.map(slot => {
       const rune = gear[slot];
-      const iconPath = `images/runes/${rune}.png`;
+      if (!rune) return '';
+      const iconPath = `/images/runes/${rune.replace(/ /g, '%20')}.png`;
       return `
         <div class="gear-slot">
           <p><strong>${displayNames[slot]}</strong></p>
@@ -501,97 +418,8 @@ function renderGearDetails(gear) {
     }).join('');
   }).join('') + `</div>`;
 }
-
-function updateMarchOptions() {
-  const skillLevel = document.getElementById('skillLevel').value;
-  const marchSelect = document.getElementById('marchType');
-  marchSelect.innerHTML = '';
-
-  const marchTypes = Object.keys(suggestedCombosData[skillLevel] || {});
-  marchTypes.forEach(march => {
-    const opt = document.createElement('option');
-    opt.value = march;
-    opt.textContent = march;
-    marchSelect.appendChild(opt);
-  });
-}
-
-function renderHeroCombos() {
-  const skillLevel = document.getElementById('skillLevel').value;
-  const marchType = document.getElementById('marchType').value;
-  const resultsDiv = document.getElementById('comboResults');
-  resultsDiv.innerHTML = '';
-
-  const heroes = suggestedCombosData[skillLevel]?.[marchType] || [];
-  const heavyTroopers = heavyTrooperData?.[marchType] || [];
-  console.log(`Rendering combos for: ${marchType}`, heavyTroopers);
-
-  // Hero gear boxes
-  heroes.forEach(heroObj => {
-    const box = document.createElement('div');
-    box.className = 'gear-box';
-    box.innerHTML = `
-      <h3>${heroObj.Hero}</h3>
-      ${renderGearDetails(heroObj.Gear)}
-    `;
-    resultsDiv.appendChild(box);
-  });
-
-  // HT box
-  if (heavyTroopers.length) {
-    const box = document.createElement('div');
-    box.className = 'gear-box';
-    box.innerHTML = `
-      <h3>Heavy Trooper</h3>
-      <div class="gear-grid">
-        ${heavyTroopers.map(ht => {
-          const htIconMap = {
-            "Earthshaker E-100": "yellow",
-            "Blazing Gale Rx": "red",
-            "Tide Crusher BW-3": "blue",
-            "Doom Sawblade D-4": "ball",
-            "Luminary Knight LP-4": "white",
-            "Blade Angel BA-6": "pink"
-          };
-
-          const chipIconMap = {
-            "Xyston": "xyston",
-            "Hoplon": "hoplon",
-            "Shamshir": "shamshir",
-            "Estoc Piercing Sword": "estoc",
-            "Rondel Dagger": "rondel",
-            "Scramsax Blade": "scramsax",
-            "Kris Sword": "kris-sword",
-            "Ring of Cosmos": "cosmos",
-            "Sasanian's Chain": "sasanian"
-          };
-
-          const htKey = htIconMap[ht.trooper] || "unknown";
-          const chipKey = chipIconMap[ht.chipType] || "unknown";
-
-          return `
-            <div class="ht-slot">Slot ${ht.slot}</div>
-            <div class="gear-slot">
-              <div class="ht-icon-row">
-                <div class="ht-icon-column">
-                  <img src="images/${chipKey}-icon.png" alt="${ht.chipType}" title="${ht.chipType}" />
-                  <div class="chip-name">${ht.chipType}</div>
-                </div>
-                <div class="ht-icon-column">
-                  <img src="images/${htKey}-ht-icon.png" alt="${ht.trooper}" title="${ht.trooper}" />
-                  <div class="ht-name">${ht.trooper}</div>
-                </div>
-              </div>
-            </div>
-          `;
-
-        }).join('')}
-      </div>
-    `;
-    resultsDiv.appendChild(box);
-  }
-}
-</script>
+  </script>
 
 </body>
+
 </html>
