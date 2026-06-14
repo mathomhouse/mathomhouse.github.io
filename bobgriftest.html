@@ -490,11 +490,11 @@ function showRecommendedLoadout() {
       "Hoplon":               "hoplon",
       "Shamshir":             "shamshir",
       "Estoc Piercing Sword": "estoc",
-      "Rondel Dagger":        "rondel",
-      "Scramsax Blade":       "scramsax",
-      "Kris Sword":           "kris-sword",
-      "Ring of Cosmos":       "cosmos",
-      "Sasanian's Chain":     "sasanian"
+      "Rondel Dagger":        "rondel_dagger",
+      "Scramsax Blade":       "scramsax_blade",
+      "Kris Sword":           "kris_sword",
+      "Ring of Cosmos":       "Ring_of_Cosmos",
+      "Sasanian's Chain":     "sasanians_chain"
     };
 
     const htKey   = htIconMap[htTrooper] || "unknown";
@@ -547,7 +547,7 @@ function renderGearDetails(gear) {
     return pair.map(slot => {
       const rune = gear[slot];
       if (!rune) return '';
-      const iconPath = `/assets/rune-icons/${rune.replace(/ /g, '-')}.png`;
+      const iconPath = `/assets/rune-icons/${rune.toLowerCase().replace(/ /g, '-')}.png`;
       return `
         <div class="gear-slot">
           <p><strong>${displayNames[slot]}</strong></p>
