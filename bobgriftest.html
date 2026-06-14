@@ -51,13 +51,51 @@
       gap: 10px;
     }
     .gear-box .hero-head h2 { margin: 0; }
-    .hero-portrait {
+    .hero-portrait-wrap {
+      position: relative;
       width: 64px;
       height: 64px;
+      flex-shrink: 0;
+      border-radius: 50%;
+    }
+    /* spinning aura ring behind portrait — always spinning, brightens on hover */
+    .hero-portrait-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent 0deg, var(--gold) 60deg, #fff 90deg, var(--gold) 120deg, transparent 200deg, var(--gold-dim) 300deg, transparent 360deg);
+      opacity: .55;
+      z-index: 0;
+      transition: opacity .3s ease, filter .3s ease;
+      animation: portraitSpin 3s linear infinite;
+    }
+    .gear-box:hover .hero-portrait-wrap::before {
+      opacity: 1;
+      filter: drop-shadow(0 0 8px var(--gold));
+      animation-duration: 1.4s;
+    }
+    .hero-portrait {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
       object-fit: cover;
+      object-position: center top;
       border: 2px solid var(--gold-dim);
-      flex-shrink: 0;
+      background: var(--surface);
+      transition: transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s, box-shadow .35s;
+    }
+    .gear-box:hover .hero-portrait {
+      transform: scale(1.18);
+      border-color: var(--gold);
+      animation: portraitPulse 1.6s ease-in-out infinite;
+    }
+    @keyframes portraitSpin { to { transform: rotate(360deg); } }
+    @keyframes portraitPulse {
+      0%, 100% { box-shadow: 0 0 12px var(--gold-glow); transform: scale(1.18); }
+      50%      { box-shadow: 0 0 30px var(--gold), 0 0 50px var(--gold-glow); transform: scale(1.24); }
     }
 
     /* Card layout — match guides/bobstitaneffects (bobsrunes.css #results / #comboResults) */
@@ -207,7 +245,7 @@ fetch(dataUrl)
 // File extensions vary across assets/heroes-awakening/, so map slug → ext.
 const heroPortraitExt = {
   alvida: 'jpg', heid: 'jpg', joanmature: 'jpg',
-  carna: 'png', sara: 'png', shensuyu: 'png',
+  carna: 'jpg', sara: 'png', shensuyu: 'png',
   ella: 'jpeg', franziska: 'jpeg', lilia: 'jpeg', margaretha: 'jpeg', tannis: 'jpeg',
   jett: 'jpeg', lophy: 'jpeg', nova: 'jpeg', marvingt: 'jpeg', rohr: 'jpeg',
   sinope: 'jpeg', vivian: 'jpeg'
@@ -216,7 +254,7 @@ function heroPortrait(name) {
   const slug = (name || '').toLowerCase().replace(/\s+/g, '');
   const ext = heroPortraitExt[slug];
   if (!ext) return '';
-  return `<img class="hero-portrait" src="assets/heroes-awakening/${slug}_headshot.${ext}" alt="${name}" loading="lazy" onerror="this.style.display='none'">`;
+  return `<span class="hero-portrait-wrap"><img class="hero-portrait" src="assets/heroes-awakening/${slug}_headshot.${ext}" alt="${name}" loading="lazy" onerror="this.closest('.hero-portrait-wrap').style.display='none'"></span>`;
 }
 
 // ─── Tab Switching ────────────────────────────────────────────────────────────
