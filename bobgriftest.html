@@ -136,6 +136,45 @@
       #recResults { flex-direction: column; align-items: center; }
       #recResults .gear-box { max-width: 100%; }
     }
+
+    /* Gold borders around rune + HT chip icons */
+    #loadoutResults .gear-slot,
+    #recResults .gear-slot {
+      grid-template-rows: auto 84px auto;
+      height: auto;
+      row-gap: 8px;
+    }
+    .rune-icon {
+      box-sizing: content-box;
+      padding: 4px;
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      background: var(--surface);
+      box-shadow: 0 0 6px var(--gold-glow, rgba(255,200,80,.45)), inset 0 0 4px rgba(0,0,0,.4);
+    }
+    .chip-icon {
+      box-sizing: content-box;
+      padding: 3px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      background: var(--surface);
+      box-shadow: 0 0 6px var(--gold-glow, rgba(255,200,80,.45)), inset 0 0 4px rgba(0,0,0,.4);
+    }
+    /* Bottom-align HT chip/mecha names and add same buffer as runes */
+    #loadoutResults .ht-icon-row,
+    #recResults .ht-icon-row {
+      align-items: flex-end;
+    }
+    #loadoutResults .ht-icon-column,
+    #recResults .ht-icon-column {
+      justify-content: flex-end;
+    }
+    #loadoutResults .chip-name,
+    #loadoutResults .ht-name,
+    #recResults .chip-name,
+    #recResults .ht-name {
+      margin-top: 12px;
+    }
   </style>
   <script src="/header.js" defer></script>
 </head>
@@ -530,7 +569,7 @@ function showRecommendedLoadout() {
         <div class="gear-slot">
           <div class="ht-icon-row">
             <div class="ht-icon-column">
-              <img src="/assets/ht-chip-icons/${chipKey.replace(/ /g, '_')}.png" alt="${htChip}" title="${htChip}" />
+              <img class="chip-icon" src="/assets/ht-chip-icons/${chipKey.replace(/ /g, '_')}.png" alt="${htChip}" title="${htChip}" />
               <div class="chip-name">${htChip}</div>
             </div>
             <div class="ht-icon-column">
@@ -574,7 +613,7 @@ function renderGearDetails(gear) {
       return `
         <div class="gear-slot">
           <p><strong>${displayNames[slot]}</strong></p>
-          <img src="${iconPath}" alt="${rune}" title="${rune}" />
+          <img class="rune-icon" src="${iconPath}" alt="${rune}" title="${rune}" />
           <p>${rune}</p>
         </div>
       `;
