@@ -477,12 +477,12 @@ function showRecommendedLoadout() {
 
   if (htTrooper || htChip) {
     const htIconMap = {
-      "Earthshaker E-100":  "yellow",
-      "Blazing Gale Rx":    "red",
-      "Tide Crusher BW-3":  "blue",
-      "Doom Sawblade D-4":  "ball",
-      "Luminary Knight LP-4": "white",
-      "Blade Angel BA-6":   "pink"
+      "Earthshaker E-100":  "mecha_1002",
+      "Blazing Gale Rx":    "mecha_1003",
+      "Tide Crusher BW-3":  "mecha_1004",
+      "Doom Sawblade D-4":  "mecha_1005",
+      "Luminary Knight LP-4": "mecha_1006",
+      "Blade Angel BA-6":   "mecha_1007"
     };
 
     const chipIconMap = {
@@ -509,11 +509,11 @@ function showRecommendedLoadout() {
         <div class="gear-slot">
           <div class="ht-icon-row">
             <div class="ht-icon-column">
-              <img src="/images/${chipKey.replace(/ /g, '%20')}-icon.png" alt="${htChip}" title="${htChip}" />
+              <img src="/assets/ht-chip-icons/${chipKey.replace(/ /g, '_')}.png" alt="${htChip}" title="${htChip}" />
               <div class="chip-name">${htChip}</div>
             </div>
             <div class="ht-icon-column">
-              <img src="/images/${htKey.replace(/ /g, '%20')}-ht-icon.png" alt="${htTrooper}" title="${htTrooper}" />
+              <img src="/assets/mecha-icons/${htKey.replace(/ /g, '_')}.png" alt="${htTrooper}" title="${htTrooper}" />
               <div class="ht-name">${htTrooper}</div>
             </div>
           </div>
@@ -547,7 +547,7 @@ function renderGearDetails(gear) {
     return pair.map(slot => {
       const rune = gear[slot];
       if (!rune) return '';
-      const iconPath = `/images/runes/${rune.replace(/ /g, '%20')}.png`;
+      const iconPath = `/assets/rune-icons/${rune.replace(/ /g, '-')}.png`;
       return `
         <div class="gear-slot">
           <p><strong>${displayNames[slot]}</strong></p>
