@@ -176,14 +176,14 @@
       background: var(--surface);
       box-shadow: 0 0 6px var(--gold-glow, rgba(255,200,80,.45)), inset 0 0 4px rgba(0,0,0,.4);
     }
-    /* Bottom-align HT chip/mecha names and add same buffer as runes */
+    /* Top-align HT chip/mecha icons so a wrapped name pushes text down, not the icon up */
     #loadoutResults .ht-icon-row,
     #recResults .ht-icon-row {
-      align-items: flex-end;
+      align-items: flex-start;
     }
     #loadoutResults .ht-icon-column,
     #recResults .ht-icon-column {
-      justify-content: flex-end;
+      justify-content: flex-start;
     }
     #loadoutResults .chip-name,
     #loadoutResults .ht-name,
