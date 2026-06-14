@@ -160,6 +160,14 @@
       background: var(--surface);
       box-shadow: 0 0 6px var(--gold-glow, rgba(255,200,80,.45)), inset 0 0 4px rgba(0,0,0,.4);
     }
+    .mecha-icon {
+      box-sizing: content-box;
+      padding: 4px;
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      background: var(--surface);
+      box-shadow: 0 0 6px var(--gold-glow, rgba(255,200,80,.45)), inset 0 0 4px rgba(0,0,0,.4);
+    }
     /* Bottom-align HT chip/mecha names and add same buffer as runes */
     #loadoutResults .ht-icon-row,
     #recResults .ht-icon-row {
@@ -565,7 +573,7 @@ function showRecommendedLoadout() {
     box.innerHTML = `
       <h3>Heavy Trooper</h3>
       <div class="gear-grid">
-        <div class="ht-slot">Slot ${htSlot}</div>
+        <div class="ht-slot">${htSlot}</div>
         <div class="gear-slot">
           <div class="ht-icon-row">
             <div class="ht-icon-column">
@@ -573,7 +581,7 @@ function showRecommendedLoadout() {
               <div class="chip-name">${htChip}</div>
             </div>
             <div class="ht-icon-column">
-              <img src="/assets/mecha-icons/${htKey.replace(/ /g, '_')}.png" alt="${htTrooper}" title="${htTrooper}" />
+              <img class="mecha-icon" src="/assets/mecha-icons/${htKey.replace(/ /g, '_')}.png" alt="${htTrooper}" title="${htTrooper}" />
               <div class="ht-name">${htTrooper}</div>
             </div>
           </div>
