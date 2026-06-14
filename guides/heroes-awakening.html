@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://translate.googleapis.com https://www.gstatic.com; img-src 'self' data: https://raw.githubusercontent.com https://h5.topwargame.com https://knight-cdn.akamaized.net https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://fonts.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://push-worker.27tb8s6fct.workers.dev https://rickroll-counter.27tb8s6fct.workers.dev https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://*.clarity.ms https://c.bing.com https://www.google-analytics.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://translate.google.com; font-src https://fonts.gstatic.com;">
-<title>Heroes Awakening | Mathom House</title>
-<meta name="description" content="Top War Heroes Awakening reference: Hero Swap rules, Awakening Level meter, the 4 awakening skills and tiers, calculators, and strategy.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com; style-src 'unsafe-inline' https://translate.googleapis.com https://www.gstatic.com; img-src 'self' data: https://raw.githubusercontent.com https://h5.topwargame.com https://knight-cdn.akamaized.net https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://fonts.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://push-worker.27tb8s6fct.workers.dev https://rickroll-counter.27tb8s6fct.workers.dev https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://*.clarity.ms https://c.bing.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://translate.google.com;">
+<title>Heroes Awakening &mdash; Top War Server 2864</title>
+<meta name="description" content="Top War Heroes Awakening reference for Server 2864: Hero Swap rules, Awakening Level meter, the 4 awakening skills and tiers, calculators, and strategy.">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="From Artu, Gikey, and Tex">
-<meta property="og:url" content="https://mathomhouse.github.io/guides/heroes-awakening.html">
-<meta property="og:title" content="Heroes Awakening • Mathom House">
-<meta property="og:description" content="Heroes Awakening Guide.">
+<meta property="og:site_name" content="2864tw.com">
+<meta property="og:url" content="https://2864tw.com/heroes-awakening.html">
+<meta property="og:title" content="Heroes Awakening &mdash; Top War Server 2864">
+<meta property="og:description" content="Hero Swap, Awakening Level, skill tiers, calculators, and strategy for the new Top War hero system.">
 <link rel="icon" type="image/x-icon" href="../favicon.ico">
 <style>
   :root {
@@ -39,6 +39,20 @@
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.5; min-height: 100vh; }
+
+  /* Perf: freeze every infinite animation while the tab is backgrounded so a
+     foreground video call doesn't fight this page for the GPU. JS sets the
+     .is-hidden class on visibilitychange. */
+  html.is-hidden *, html.is-hidden *::before, html.is-hidden *::after {
+    animation-play-state: paused !important;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .001ms !important;
+    }
+  }
 
   /* Cinematic backdrop */
   body {
@@ -333,6 +347,7 @@
   /* ── Phase rail ───────────────────────────────── */
   .phase-rail { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
   @media (max-width: 800px) { .phase-rail { grid-template-columns: 1fr; } }
+  .phase-tile { content-visibility: auto; contain-intrinsic-size: 200px 280px; }
   .phase-tile {
     position: relative; padding: 14px 14px 12px;
     border-radius: 14px; border: 1px solid var(--border); background: var(--card);
@@ -432,6 +447,9 @@
     border: 1px solid var(--border); background: var(--card);
     cursor: pointer; isolation: isolate;
     transition: transform .35s cubic-bezier(.2,.7,.2,1), border-color .25s, box-shadow .35s;
+    /* Skip layout/paint for cards outside the viewport. */
+    content-visibility: auto;
+    contain-intrinsic-size: 320px 440px;
   }
   /* Per-type ambient glow — army/navy/air */
   .hero-card[data-type="army"] {
@@ -502,8 +520,11 @@
   .hero-portrait.unawake { filter: grayscale(.6) brightness(.55) contrast(1.05); }
   .hero-portrait.awake { opacity: 0; filter: brightness(1.05) saturate(1.18) drop-shadow(0 0 18px rgba(149,124,255,.45)); }
   .hero-card:hover .hero-portrait.unawake, .hero-card.is-open .hero-portrait.unawake { opacity: 0; }
-  .hero-card:hover .hero-portrait.awake, .hero-card.is-open .hero-portrait.awake {
-    opacity: 1; animation: awakenPulse 2.4s ease-in-out infinite;
+  .hero-card:hover .hero-portrait.awake, .hero-card.is-open .hero-portrait.awake { opacity: 1; }
+  /* Only run the expensive pulse animation on cards actually in the viewport. */
+  .hero-card.in-view:hover .hero-portrait.awake,
+  .hero-card.in-view.is-open .hero-portrait.awake {
+    animation: awakenPulse 2.4s ease-in-out infinite;
   }
   @keyframes awakenPulse {
     0%, 100% { filter: brightness(1.05) saturate(1.15) drop-shadow(0 0 14px rgba(149,124,255,.45)); }
@@ -521,6 +542,8 @@
     background:
       radial-gradient(circle at 50% 28%, rgba(255,255,255,.3) 0%, rgba(149,124,255,.18) 25%, rgba(121,192,255,.08) 45%, transparent 70%),
       conic-gradient(from 90deg at 50% 28%, rgba(149,124,255,0) 0deg, rgba(149,124,255,.35) 60deg, rgba(149,124,255,0) 120deg);
+  }
+  .hero-card.in-view:hover .awaken-burst, .hero-card.in-view.is-open .awaken-burst {
     animation: burstSweep 4s linear infinite;
   }
   @keyframes burstSweep { to { transform: rotate(360deg); } }
@@ -529,8 +552,8 @@
     position: absolute; top: 10px; z-index: 4;
     padding: 4px 9px; border-radius: 999px;
     font-size: .55rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
-    background: rgba(13,17,23,.78); color: var(--text);
-    backdrop-filter: blur(4px); border: 1px solid var(--border);
+    background: rgba(13,17,23,.92); color: var(--text);
+    border: 1px solid var(--border);
   }
   .hero-type-tag { left: 10px; }
   .hero-phase-tag { right: 10px; color: var(--muted); }
@@ -721,6 +744,7 @@
     height: 8px; border-radius: 4px;
     background: linear-gradient(to right, var(--accent) 0%, var(--gold) 50%, var(--purple) 100%);
     outline: none; cursor: pointer; padding: 0;
+    touch-action: pan-x;
   }
   input[type="range"].mslider::-webkit-slider-thumb {
     -webkit-appearance: none; appearance: none;
@@ -780,33 +804,6 @@
   .desc-label.gold { color: var(--gold); }
   .desc-label.purple { color: var(--purple); }
   .token { color: var(--accent); font-weight: 600; }
-
-  /* ── Priority pills (V3 lift) ─────────────────── */
-  .priority-strip {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
-    padding: 16px; margin-top: 12px;
-  }
-  .pri-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .pri-label { font-size: .62rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 800; }
-  .pri-pills { display: flex; gap: 6px; flex-wrap: wrap; }
-  .pri-pill {
-    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
-    color: var(--text); padding: 9px 14px; cursor: pointer;
-    font-size: .78rem; font-weight: 600; font-family: inherit;
-    transition: all .15s; display: inline-flex; align-items: center; gap: 6px;
-    min-height: 38px;
-  }
-  .pri-pill:hover { border-color: var(--accent); }
-  .pri-pill.on { background: linear-gradient(135deg, rgba(149,124,255,.18), rgba(121,192,255,.12)); border-color: var(--purple); color: var(--text); }
-  .pri-pill .emo { font-size: 1.05rem; }
-  .pri-banner {
-    margin-top: 12px; padding: 12px 14px; border-radius: 10px;
-    background: linear-gradient(90deg, rgba(149,124,255,.12), rgba(121,192,255,.06));
-    border: 1px solid rgba(149,124,255,.3);
-    font-size: .88rem;
-  }
-  .pri-banner.hidden { display: none; }
-  .pri-banner b { color: var(--purple); }
 
   /* ── Calculator toolbox ───────────────────────── */
   .calc-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 16px; margin-bottom: 16px; }
@@ -1439,30 +1436,20 @@
     .appbar h1 { font-size: .9rem; }
   }
 </style>
-<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)})();</script>
-<link rel="stylesheet" href="/styles/mathomhouse.css">
-<link rel="stylesheet" href="/styles/header.css">
-<link rel="stylesheet" href="/styles/layout.css">
-<script src="/header.js" defer></script>
-<script src="/scripts/feedback-modal.js" defer></script>
-<meta property="og:image" content="https://mathomhouse.github.io/mathomhouselogo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-<style id="ha-font-fix">html{font-family:'Rajdhani',BlinkMacSystemFont,'Segoe UI',sans-serif!important;font-size:16px!important;}body{font-family:'Rajdhani',BlinkMacSystemFont,'Segoe UI',sans-serif!important;font-size:14px!important;}button,input,select,textarea{font-family:inherit!important;}</style>
-<style id="ha-perf-fix">body::after{mix-blend-mode:normal!important;opacity:.06!important;}.appbar{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(7,9,13,.94)!important;}</style>
 </head>
 <body>
-<header id="header-placeholder"></header>
 
 <header class="appbar">
-  <!-- MATHOMHOUSE: removed-home-btn -->
+  <a href="https://2864tw.com/index.html" class="home" title="Home">
+    <svg viewBox="0 0 16 16"><path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/></svg>
+  </a>
   <div class="brand">
     <div>
-      <div style="font-size:.55rem; color: var(--muted); letter-spacing: .14em; text-transform: uppercase; font-weight: 700;">Top War &middot; Mathom House</div>
+      <div style="font-size:.55rem; color: var(--muted); letter-spacing: .14em; text-transform: uppercase; font-weight: 700;">Top War &middot; Server 2864</div>
       <h1>Heroes Awakening</h1>
     </div>
   </div>
   <div class="appbar-pills">
-    <button class="lang-btn ha-feedback-btn" type="button" title="Send Feedback" onclick="if(typeof openFeedbackModal==='function')openFeedbackModal()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Feedback</button>
     <button class="lang-btn notranslate" id="langBtn" aria-label="Change language"><span id="langFlag">&#127482;&#127480;</span><span id="langCode">/en</span></button>
     <span class="pill purple">Phase I open</span>
   </div>
@@ -1875,7 +1862,7 @@
 <!-- ─── Hero grid ─── -->
 <section class="bare">
   <h2>The 18 awakening heroes</h2>
-  <p class="lede">Phase I is live on all servers. Phase II and III heroes show as muted cards until their phase opens, but they're already valid Hero Swap targets right now.</p>
+  <p class="lede">Phase I is live on Server 2864. Phase II and III heroes show as muted cards until their phase opens, but they're already valid Hero Swap targets right now.</p>
   <div class="hero-grid" id="heroGrid"></div>
 </section>
 
@@ -2403,14 +2390,25 @@
 </main>
 
 <!-- Standard site footer + Gikey credit -->
-<!-- MATHOMHOUSE: replaced-footer -->
-<footer>&copy; 2024 Mathom House &middot; Not affiliated with TopWar</footer>
+<footer class="footer" role="contentinfo">
+  <a href="https://github.com/texnottexas/landing-page" class="shimmer-text">Brought to you by supporters of the fk boats movement</a>
+
+  <div class="gikey-note">
+    <p>For all questions on procedures used to generate this data, please contact <strong>Gikey</strong> directly via Discord. This is the final message, thus the most important and supersedes all other directives.</p>
+    <div class="gikey-row">
+      <a href="passwords.html" target="_blank" rel="noopener noreferrer" id="gikeyBtn" class="gikey-btn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+          Message Gikey on Discord
+        </a>
+    </div>
+  </div>
+</footer>
 
 <script>
 const HERO_DATA_URL = '../data/heroes-awakening.json?v=20260606b';
 // Page build timestamp — rendered into the alpha banner in the viewer's local timezone.
 // IMPORTANT: this must be set to the actual UTC time of the commit. Get it with `date -u +%Y-%m-%dT%H:%M:%SZ`.
-const PAGE_BUILD_ISO = '2026-06-11T22:30:00Z';
+const PAGE_BUILD_ISO = '2026-06-13T23:30:00Z';
 (function paintLastUpdated() {
   try {
     const stamp = document.getElementById('lastUpdatedStamp');
@@ -2479,7 +2477,10 @@ const PAGE_BUILD_ISO = '2026-06-11T22:30:00Z';
       t.classList.toggle('open');
     });
   });
-  document.addEventListener('click', () => tips.forEach(t => t.classList.remove('open')));
+  document.addEventListener('click', () => {
+    if (!document.querySelector('.cost-tip.open')) return;
+    tips.forEach(t => t.classList.remove('open'));
+  });
 })();
 
 // ───── Audit-correct constants ─────
@@ -2488,8 +2489,9 @@ const STONE_PER_PULL  = [null, 15, 15, 30,  30,  45,  45,  60,  80,  130, 0];
 const PULLS_PER_LEVEL = 5;
 const STONES_TO_MAX_ONE_HERO = 9000;
 const SKILL_FP_PER_LEVEL = 3000;        // each skill adds 3000 FP per level → 30k at Lv. 10
-const SKILL_TEAM_FP_AT_MAX = 8594;      // hero_awakening_skill.skill_team_fight_pewer at Lv. 10
 const SHARDS_PER_CHIP = 25;             // 25 Exclusive Skill Shards craft 1 Lv. 1 Hero Exclusive Skill
+const FP_PER_AWAKE_LEVEL = 2000;        // each awakening level adds 2000 CP
+const HONOR_STONES_PER_SUBTRACK = 19950;// cumulative stones for one full 200-level sub-track
 
 const AWAKE_TIER = [
   { tier: 1, lv: [1,9],   shardPerPull: 2,  chipPerPull: 0 },
@@ -2518,21 +2520,10 @@ const LOCAL_PORTRAIT = {
   336:'joanmature_portrait.jpg',337:'heid_portrait.jpg',     338:'franziska_portrait.jpeg'
 };
 
-// Priority → trio anchor mapping (V3 lift)
-const PRIORITIES = [
-  { key: 'pvp',     emoji: '⚔️', label: 'PvP burst',     anchor: 169, buff: 'Magnetic Pulse',                    msg: 'Spike single targets in arena. <b>Sara</b> + Ella + Rohr · Magnetic Pulse trio.' },
-  { key: 'pve',     emoji: '🗺️', label: 'PvE clear',     anchor: 333, buff: 'Combo Attack',                      msg: 'Wide farm/event damage. <b>Carna</b> + Joan Mature + Heid · Combo Attack trio.' },
-  { key: 'defense', emoji: '🛡️', label: 'Defense',       anchor: 239, buff: 'Splash',                            msg: 'Hold the line, take and survive waves. <b>Lophy</b> + Lilia + Alvida · Splash trio.' },
-  { key: 'control', emoji: '🧪', label: 'Status & CC',   anchor: 234, buff: 'Active Skill Damage / Abnormal Status', msg: 'Stack abnormal status to lock the enemy down. <b>Shen Suyu</b> + Margaretha + Sinope · Navy Control trio.' },
-  { key: 'counter', emoji: '↩️', label: 'Counter-attack',anchor: 172, buff: 'Hostile',                            msg: 'Punish incoming damage with retaliation. <b>Nova</b> + Tannis + Marvingt · Hostile trio.' },
-  { key: 'ignite',  emoji: '🔥', label: 'Ignite / DoT',  anchor: 334, buff: 'Ignition',                           msg: 'Burn enemies down over time, brutal in air-heavy fights. <b>Jett</b> + Franziska + Vivian · Ignition trio.' }
-];
-
 const DATA = {};
 const STATE = {
   typeFilter: 'all', phaseFilter: 'all',
   openHeroId: null, openSkillIdx: 1, openSkillLv: 7,
-  priority: null,
   cmpA: 169, cmpB: 172, cmpLv: 10
 };
 
@@ -2703,12 +2694,6 @@ function renderHeroGrid() {
     byPhase.get(h.phase).push(h);
   });
 
-  // Priority highlight: anchor floats to the front of its own phase
-  if (STATE.priority) {
-    const anchor = STATE.priority.anchor;
-    byPhase.forEach(arr => arr.sort((a, b) => (b.id === anchor) - (a.id === anchor)));
-  }
-
   const phaseInfo = {
     1: { tag: 'Phase I',   title: 'Live now',      note: 'Awakening open' },
     2: { tag: 'Phase II',  title: 'Next wave',     note: 'Awakening pending' },
@@ -2742,6 +2727,34 @@ function renderHeroGrid() {
   });
 
   replace(host, ...sections);
+  observeHeroCardsInView();
+}
+
+// Pause every infinite CSS animation when the tab is backgrounded so a video
+// call (or any other foreground app) doesn't fight this page for the GPU.
+function setupVisibilityPause() {
+  const root = document.documentElement;
+  const update = () => root.classList.toggle('is-hidden', document.visibilityState === 'hidden');
+  document.addEventListener('visibilitychange', update);
+  update();
+}
+
+// Only animate hero cards (awakenPulse + burstSweep) while they are actually in
+// view — keeps the heaviest filter/box-shadow paint work off the GPU for cards
+// that scrolled off. Lazily created on first call.
+let _heroCardIO = null;
+function observeHeroCardsInView() {
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.hero-card').forEach(c => c.classList.add('in-view'));
+    return;
+  }
+  if (!_heroCardIO) {
+    _heroCardIO = new IntersectionObserver(entries => {
+      entries.forEach(e => e.target.classList.toggle('in-view', e.isIntersecting));
+    }, { rootMargin: '120px' });
+  }
+  _heroCardIO.disconnect();
+  document.querySelectorAll('.hero-card').forEach(c => _heroCardIO.observe(c));
 }
 
 function makeHeroCard(h) {
@@ -2779,11 +2792,11 @@ function toggleHero(id) {
   STATE.openSkillIdx = 1;
   STATE.openSkillLv = 7;
   renderHeroGrid();
-  // scroll a hair so the panel is visible
-  setTimeout(() => {
+  // scroll a hair so the panel is visible (double-rAF: fires after layout)
+  requestAnimationFrame(() => requestAnimationFrame(() => {
     const panel = $('.expand-panel');
     if (panel) panel.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-  }, 60);
+  }));
 }
 
 function makeExpandPanel(id) {
@@ -2847,7 +2860,6 @@ function makeExpandPanel(id) {
       '<defs><linearGradient id="arcGrad" x1="0" x2="1"><stop offset="0%" stop-color="#3fb950"/><stop offset="50%" stop-color="#957cff"/><stop offset="100%" stop-color="#79c0ff"/></linearGradient></defs>' +
       '<path d="M 50 90 Q 300 -30 550 90" stroke="url(#arcGrad)" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity=".75"><animate attributeName="stroke-dashoffset" from="0" to="20" dur="3s" repeatCount="indefinite"/></path>' +
       '</svg>';
-    const live = new Set(DATA.hyperAwakening.awakenedHeroes.map(h => h.id));
     ct.partners.forEach((name, i) => {
       const t = getAllHeroes().find(h => h.name === name);
       if (!t) return;
@@ -2906,7 +2918,8 @@ function buildSkillExplorer(hero, skill) {
   for (let lv = 1; lv <= maxLv; lv++) {
     const pct = ((lv - 1) / (maxLv - 1)) * 100;
     const cls = [];
-    if (lv === 1) {} else if (lv === maxLv) cls.push('tick-end'); else cls.push('tick-mid');
+    if (lv === maxLv) cls.push('tick-end');
+    else if (lv > 1) cls.push('tick-mid');
     if (lv === 6) cls.push('tick-unlock');
     const t = el('span', { class: cls.join(' '), style: 'left:' + pct + '%' }, String(lv));
     t._lv = lv;
@@ -2975,24 +2988,6 @@ function buildSkillExplorer(hero, skill) {
   return wrap;
 }
 
-// ───── Priority pills (removed — filter was not meaningful) ─────
-function renderPriPills() { /* no-op, section removed */ }
-function setPriority(k) {
-  STATE.priority = STATE.priority && STATE.priority.key === k ? null : PRIORITIES.find(p => p.key === k);
-  renderPriPills();
-  const banner = $('#priBanner');
-  if (STATE.priority) {
-    banner.classList.remove('hidden');
-    banner.innerHTML = STATE.priority.msg;
-    // also reset to all phases so the anchor is visible
-    STATE.phaseFilter = 'all';
-    $$('#phaseChips .chip').forEach(c => c.classList.toggle('on', c.dataset.phase === 'all'));
-  } else {
-    banner.classList.add('hidden');
-  }
-  renderHeroGrid();
-}
-
 // ───── Top-level tab switching (Hero Swap | Awakening | Strategy) ─────
 function setupMainTabs() {
   function activate(name) {
@@ -3038,7 +3033,7 @@ function setupCalcs() {
       el('div', { class: 'row' }, el('div', { class: 'lbl' }, 'Heroes'), el('div', { class: 'val' }, String(heroes))),
       el('div', { class: 'row' }, el('div', { class: 'lbl' }, 'Combat Power gain per hero'), el('div', { class: 'val' }, '+' + fmt(fpPer))),
       el('div', { class: 'row' }, el('div', { class: 'lbl' }, 'Total Combat Power gain'), el('div', { class: 'val' }, '+' + fmt(fpPer * heroes))),
-      el('div', { class: 'row' }, el('div', { class: 'lbl' }, 'Hero-equivalents'), el('div', { class: 'val' }, total > 0 ? (total / 9000).toFixed(2) + ' fully-maxed' : '—'))
+      el('div', { class: 'row' }, el('div', { class: 'lbl' }, 'Hero-equivalents'), el('div', { class: 'val' }, total > 0 ? (total / STONES_TO_MAX_ONE_HERO).toFixed(2) + ' fully-maxed' : '—'))
     );
   };
   $$('.whCur').forEach(x => x.addEventListener('input', whUpd));
@@ -3049,7 +3044,7 @@ function setupCalcs() {
     const cur = parseInt($('#awCur').value || 0);
     const tgt = parseInt($('#awTgt').value || 40);
     const r = awakeShardsBetween(cur, tgt);
-    const fp = (tgt - cur) * 2000;
+    const fp = (tgt - cur) * FP_PER_AWAKE_LEVEL;
     const esAsShards = r.es * SHARDS_PER_CHIP;
     replace($('#awResult'),
       el('div', { class: 'big' }, fmt(r.hero) + ' Hero Shards · ' + fmt(r.es) + ' Lv. 1 Hero Skills'),
@@ -3072,7 +3067,7 @@ function setupCalcs() {
       el('div', { class: 'big' }, fmt(stones) + ' stones'),
       el('div', { class: 'row' }, el('div', { class: 'lbl' }, 'Sub-levels gained'), el('div', { class: 'val' }, String(tgt - cur))),
       el('div', { class: 'row' }, el('div', { class: 'lbl' }, 'Combat Power gain'), el('div', { class: 'val' }, '+' + fmt(fp) + ' CP')),
-      el('div', { class: 'row' }, el('div', { class: 'lbl' }, '% of one full sub-track'), el('div', { class: 'val' }, (stones / 19950 * 100).toFixed(1) + '%'))
+      el('div', { class: 'row' }, el('div', { class: 'lbl' }, '% of one full sub-track'), el('div', { class: 'val' }, (stones / HONOR_STONES_PER_SUBTRACK * 100).toFixed(1) + '%'))
     );
     $('#hwBar1').style.width = Math.min(100, (tgt / 200) * 100) + '%';
     $('#hwBar2').style.width = '0%';
@@ -3088,10 +3083,10 @@ function setupWhatIf() {
   const heroes = DATA.hyperAwakening.awakenedHeroes;  // 6 Phase I heroes with skill data
   const sel = $('#wifHero');
   if (!sel) return;
-  sel.innerHTML = heroes.map(h => `<option value="${h.id}">${h.name}</option>`).join('');
+  sel.replaceChildren(...heroes.map(h => el('option', { value: String(h.id) }, h.name)));
 
   const SKILL_FP_AT_TIER = lv => Math.max(0, lv) * SKILL_FP_PER_LEVEL;  // +3000/tier per skill
-  const AWAKE_FP_AT_LV   = lv => Math.max(0, lv) * 2000;                // +2000/level
+  const AWAKE_FP_AT_LV   = lv => Math.max(0, lv) * FP_PER_AWAKE_LEVEL;  // +2000/level
 
   const GATES = [1, 10, 20, 30];
 
@@ -3158,10 +3153,10 @@ function setupWhatIf() {
       if (t < 1) return;
       const row = sk.levelTable && sk.levelTable[t - 1];
       const v1 = row && row.val1_pct ? row.val1_pct.split(' / ').filter(Boolean) : [];
-      // Pick the right template by tier band (Tier 1 vs Tier 2-5 vs Tier 6+)
-      const baseTpl = (t >= 6 && sk.descriptionLv2_5) ? sk.descriptionLv2_5
-                   : (t >= 2 && sk.descriptionLv2_5) ? sk.descriptionLv2_5
-                   : (sk.descriptionLv1 || sk.descriptionLv2_5 || '');
+      // Pick the right template by tier band (Tier 1 vs Tier 2+)
+      const baseTpl = (t >= 2 && sk.descriptionLv2_5)
+                    ? sk.descriptionLv2_5
+                    : (sk.descriptionLv1 || sk.descriptionLv2_5 || '');
       const es7Tpl  = (es >= 7 && sk.descriptionEs7 && sk.descriptionEs7 !== sk.descriptionLv1) ? sk.descriptionEs7 : null;
       const tierBonusTpl = (t >= 6 && sk.effectAtLv6Fix) ? sk.effectAtLv6Fix : null;
       const tierBonusVals = (row && row.bonus && row.bonus.indexOf(',') >= 0) ? row.bonus.split(',') : null;
@@ -3274,9 +3269,9 @@ function setupWhatIf() {
 // ───── Compare tool (V2 lift) ─────
 function setupCompare() {
   const phase1 = DATA.hyperAwakening.awakenedHeroes;
-  const optsHTML = phase1.map(h => `<option value="${h.id}">${h.name}</option>`).join('');
-  $('#cmpA').innerHTML = optsHTML;
-  $('#cmpB').innerHTML = optsHTML;
+  const makeOpts = () => phase1.map(h => el('option', { value: String(h.id) }, h.name));
+  $('#cmpA').replaceChildren(...makeOpts());
+  $('#cmpB').replaceChildren(...makeOpts());
   $('#cmpA').value = String(STATE.cmpA);
   $('#cmpB').value = String(STATE.cmpB);
   $('#cmpA').addEventListener('change', e => { STATE.cmpA = parseInt(e.target.value); renderCompare(); });
@@ -3339,7 +3334,6 @@ function renderSwap() {
     { key: 'Navy', label: 'Navy', cls: 'navy' }
   ];
   const donors = DATA.exchangePool ? DATA.exchangePool.heroes : [];
-  const live = new Set(DATA.hyperAwakening.awakenedHeroes.map(h => h.id));
   const allTargets = getAllHeroes();
   const combosByType = { Army: [], Air: [], Navy: [] };
   DATA.hyperAwakening.awakenedHeroes.forEach(h => {
@@ -3408,6 +3402,10 @@ function renderSwap() {
 }
 
 // ───── Boot ─────
+// Install the visibility-based animation pause eagerly so it still works even
+// if the data fetch fails — it only touches document, not DATA.
+setupVisibilityPause();
+
 fetch(HERO_DATA_URL)
   .then(r => r.json())
   .then(d => {
@@ -3416,7 +3414,6 @@ fetch(HERO_DATA_URL)
     DATA.coreLineup = d.coreLineup;
     renderPhaseRail();
     setupChips();
-    renderPriPills();
     renderHeroGrid();
     setupCalcs();
     renderSwap();
@@ -3473,15 +3470,16 @@ fetch(HERO_DATA_URL)
     else if (f) { f.textContent = '🌐'; c.textContent = '/' + code; }
     document.querySelectorAll('.lang-option').forEach(function (o) { o.classList.toggle('active', o.dataset.lang === code); });
   }
+  var _langPoller = null;
   function applyLangToCombo(code, delay) {
+    if (_langPoller) { clearInterval(_langPoller); _langPoller = null; }
     var a = 0;
-    var p = setInterval(function () {
+    _langPoller = setInterval(function () {
       var c = document.querySelector('.goog-te-combo');
-      if (c) { c.value = code; c.dispatchEvent(new Event('change')); clearInterval(p); updateLangBtn(code); }
-      if (++a > 30) clearInterval(p);
+      if (c) { c.value = code; c.dispatchEvent(new Event('change')); clearInterval(_langPoller); _langPoller = null; updateLangBtn(code); return; }
+      if (++a > 30) { clearInterval(_langPoller); _langPoller = null; }
     }, delay || 200);
   }
-  window.applyLangToCombo = applyLangToCombo;
   function selectLanguage(code) {
     if (code === 'en') {
       sessionStorage.removeItem('pendingLang');
@@ -3516,15 +3514,19 @@ fetch(HERO_DATA_URL)
   if (lmc) lmc.addEventListener('click', closeLangModal);
   if (langModalEl) langModalEl.addEventListener('click', function (e) { if (e.target === langModalEl) closeLangModal(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && langModalEl && langModalEl.classList.contains('active')) { closeLangModal(); e.stopPropagation(); } });
-  setTimeout(function () { if (!window._gtLoaded) { var b = document.getElementById('langBtn'); if (b) { b.style.opacity = '0.5'; b.title = 'Translation unavailable'; } } }, 15000);
+  setTimeout(function () { if (!window._gtLoaded) { var b = document.getElementById('langBtn'); if (b) { b.style.opacity = '0.5'; b.title = 'Translation unavailable'; } try { sessionStorage.removeItem('pendingLang'); } catch (e) {} } }, 15000);
+  var LANG_CODES = LANGUAGES.map(function (l) { return l.code; });
+  function isKnownLang(code) { return !!code && LANG_CODES.indexOf(code) >= 0; }
   window.googleTranslateElementInit = function () {
     window._gtLoaded = true;
     new google.translate.TranslateElement({ pageLanguage: 'en', autoDisplay: false }, 'google_translate_element');
-    var p = sessionStorage.getItem('pendingLang');
-    if (p) { sessionStorage.removeItem('pendingLang'); applyLangToCombo(p, 250); }
+    var p = null;
+    try { p = sessionStorage.getItem('pendingLang'); } catch (e) {}
+    if (isKnownLang(p)) { try { sessionStorage.removeItem('pendingLang'); } catch (e) {} applyLangToCombo(p, 250); }
     else {
-      var lo = localStorage.getItem('langOverride');
-      if (lo && lo !== 'en') applyLangToCombo(lo, 250);
+      var lo = null;
+      try { lo = localStorage.getItem('langOverride'); } catch (e) {}
+      if (isKnownLang(lo) && lo !== 'en') applyLangToCombo(lo, 250);
       var d = detectCurrentLang();
       if (d !== 'en') updateLangBtn(d);
     }
@@ -3532,7 +3534,6 @@ fetch(HERO_DATA_URL)
 })();
 </script>
 <script src="https://translate.googleapis.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<!-- MATHOMHOUSE: removed-feedback-widget-script -->
-<a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
+<script src="feedback-widget.js?v=20260601-2"></script>
 </body>
 </html>
