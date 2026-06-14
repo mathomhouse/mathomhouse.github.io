@@ -225,7 +225,7 @@
     <!-- Recommendations Tab -->
     <div id="recommendations" class="tab-content">
       <h2>Recommended Marches</h2>
-      <p>Select your Skill Level, March Type, and Loadout to view recommended rune and Heavy Trooper combinations.</p>
+      <p>Select your Skill Level and March Type to view recommended rune and Heavy Trooper combinations.</p>
 
       <label for="skillLevel">Skill Level:</label>
       <select id="skillLevel" onchange="updateRecMarchTypes()">
@@ -235,13 +235,8 @@
       </select><br>
 
       <label for="recMarchType">March Type:</label>
-      <select id="recMarchType" onchange="updateRecLoadouts()">
+      <select id="recMarchType">
         <option value="" disabled selected>Select march type</option>
-      </select><br>
-
-      <label for="recLoadoutName">Loadout:</label>
-      <select id="recLoadoutName">
-        <option value="" disabled selected>Select loadout</option>
       </select>
       <br>
       <div class="calculate-btn">
@@ -425,7 +420,6 @@ function populateSkillLevelDropdown() {
   // No dynamic population needed; just ensure the march type dropdown resets
   const select = document.getElementById('recMarchType');
   select.innerHTML = '<option value="" disabled selected>Select march type</option>';
-  document.getElementById('recLoadoutName').innerHTML = '<option value="" disabled selected>Select loadout</option>';
 }
 
 // Dropdown 2 (rec tab): march types available for the selected skill level
@@ -433,7 +427,6 @@ function updateRecMarchTypes() {
   const skillLevel = document.getElementById('skillLevel').value;
   const select = document.getElementById('recMarchType');
   select.innerHTML = '<option value="" disabled selected>Select march type</option>';
-  document.getElementById('recLoadoutName').innerHTML = '<option value="" disabled selected>Select loadout</option>';
   document.getElementById('recResults').style.display = 'none';
 
   if (!skillLevel) return;
@@ -462,40 +455,16 @@ function updateRecMarchTypes() {
   });
 }
 
-// Dropdown 3 (rec tab): loadout names filtered by skill level + march type
-function updateRecLoadouts() {
-  const skillLevel = document.getElementById('skillLevel').value;
-  const marchType = document.getElementById('recMarchType').value;
-  const select = document.getElementById('recLoadoutName');
-  select.innerHTML = '<option value="" disabled selected>Select loadout</option>';
-  document.getElementById('recResults').style.display = 'none';
-
-  if (!skillLevel || !marchType) return;
-
-  const filtered = recommendedData.filter(
-    r => r.skill_level === skillLevel && r.march_type === marchType
-  );
-
-  filtered.forEach((loadout, index) => {
-    const opt = document.createElement('option');
-    opt.value = index;
-    opt.textContent = loadout.march_name;
-    select.appendChild(opt);
-  });
-}
-
 // Render the selected recommended loadout
 function showRecommendedLoadout() {
   const skillLevel = document.getElementById('skillLevel').value;
   const marchType = document.getElementById('recMarchType').value;
-  const index = document.getElementById('recLoadoutName').value;
 
-  if (!skillLevel || !marchType || index === '') return;
+  if (!skillLevel || !marchType) return;
 
-  const filtered = recommendedData.filter(
+  const loadout = recommendedData.find(
     r => r.skill_level === skillLevel && r.march_type === marchType
   );
-  const loadout = filtered[index];
 
   const resultsDiv = document.getElementById('recResults');
   resultsDiv.style.display = '';
