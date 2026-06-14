@@ -31,6 +31,15 @@ Additional specialized sheets: `styles/store.css`, `styles/calculators.css`, `st
 ### Scripts
 Page-specific JS lives in `scripts/` and is loaded via `<script src="scripts/foo.js" defer>`. Data files live in `data/` as JSON.
 
+### Animation gating (REQUIRED)
+
+Any CSS/JS animation added to a page **must** be gated to pause when it isn't actually being seen — otherwise it burns CPU/battery off-screen and in background tabs. Both gates are required:
+
+1. **Not in view** — pause when the animated element is scrolled out of the viewport. Use an `IntersectionObserver` that toggles a class (e.g. `.in-view`) and a CSS rule `:not(.in-view) … { animation-play-state: paused; }`. Re-observe dynamically rendered elements after each render.
+2. **Page backgrounded** — pause when the tab/device is hidden. Add a `visibilitychange` listener that toggles a body class (e.g. `.anims-paused`) from `document.hidden`, with a CSS rule `.anims-paused … { animation-play-state: paused; }`.
+
+The two gates are independent and stack via `animation-play-state`. Reference implementation: `bobgriftest.html` (`.hero-portrait` headshot animations).
+
 ### Patch workflow (third-party files)
 
 Three files are third-party sources that get replaced from upstream. **NEVER edit them directly.** All changes must go in their respective patch scripts. Do not run the patch scripts — the user runs them.
