@@ -44,6 +44,22 @@
     #recommendations label,
     #loadouts label { display: block; margin-bottom: 3px; }
 
+    .gear-box .hero-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .gear-box .hero-head h2 { margin: 0; }
+    .hero-portrait {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--gold-dim);
+      flex-shrink: 0;
+    }
+
     /* Card layout — match guides/bobstitaneffects (bobsrunes.css #results / #comboResults) */
     #loadoutResults .gear-box { width: 300px; }
 
@@ -187,6 +203,22 @@ fetch(dataUrl)
     `);
   });
 
+// ─── Hero Portraits ───────────────────────────────────────────────────────────
+// File extensions vary across assets/heroes-awakening/, so map slug → ext.
+const heroPortraitExt = {
+  alvida: 'jpg', heid: 'jpg', joanmature: 'jpg',
+  carna: 'png', sara: 'png', shensuyu: 'png',
+  ella: 'jpeg', franziska: 'jpeg', lilia: 'jpeg', margaretha: 'jpeg', tannis: 'jpeg',
+  jett: 'jpeg', lophy: 'jpeg', nova: 'jpeg', marvingt: 'jpeg', rohr: 'jpeg',
+  sinope: 'jpeg', vivian: 'jpeg'
+};
+function heroPortrait(name) {
+  const slug = (name || '').toLowerCase().replace(/\s+/g, '');
+  const ext = heroPortraitExt[slug];
+  if (!ext) return '';
+  return `<img class="hero-portrait" src="assets/heroes-awakening/${slug}_headshot.${ext}" alt="${name}" loading="lazy" onerror="this.style.display='none'">`;
+}
+
 // ─── Tab Switching ────────────────────────────────────────────────────────────
 
 function openTab(tabId) {
@@ -272,7 +304,10 @@ function showLoadout() {
     const box = document.createElement('div');
     box.className = 'gear-box';
     box.innerHTML = `
-      <h2>${heroName}<br><span style="font-size: 0.7em;">(${role})</span></h2>
+      <div class="hero-head">
+        <h2>${heroName}<br><span style="font-size: 0.7em;">(${role})</span></h2>
+        ${heroPortrait(heroName)}
+      </div>
       <div class="gear-details">
         ${renderGearDetails(gear)}
       </div>
@@ -385,7 +420,10 @@ function showRecommendedLoadout() {
     const box = document.createElement('div');
     box.className = 'gear-box';
     box.innerHTML = `
-      <h2>${heroName}<br><span style="font-size: 0.7em;">(${role})</span></h2>
+      <div class="hero-head">
+        <h2>${heroName}<br><span style="font-size: 0.7em;">(${role})</span></h2>
+        ${heroPortrait(heroName)}
+      </div>
       <div class="gear-details">
         ${renderGearDetails(gear)}
       </div>
