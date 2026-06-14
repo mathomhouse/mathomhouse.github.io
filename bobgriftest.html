@@ -75,6 +75,9 @@
       filter: drop-shadow(0 0 8px var(--gold));
       animation-duration: 1.4s;
     }
+    /* Pause portrait animations while the card is scrolled out of view */
+    .gear-box:not(.in-view) .hero-portrait-wrap::before,
+    .gear-box:not(.in-view) .hero-portrait { animation-play-state: paused; }
     .hero-portrait {
       position: relative;
       z-index: 1;
@@ -250,6 +253,14 @@ const heroPortraitExt = {
   jett: 'jpeg', lophy: 'jpeg', nova: 'jpeg', marvingt: 'jpeg', rohr: 'jpeg',
   sinope: 'jpeg', vivian: 'jpeg'
 };
+// Pause portrait animations on cards outside the viewport (save CPU)
+const cardObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => e.target.classList.toggle('in-view', e.isIntersecting));
+}, { rootMargin: '120px' });
+function observeGearBoxes() {
+  document.querySelectorAll('.gear-box').forEach(b => cardObserver.observe(b));
+}
+
 function heroPortrait(name) {
   const slug = (name || '').toLowerCase().replace(/\s+/g, '');
   const ext = heroPortraitExt[slug];
@@ -352,6 +363,8 @@ function showLoadout() {
     `;
     resultsDiv.appendChild(box);
   });
+
+  observeGearBoxes();
 }
 
 // ─── Recommendations Tab ──────────────────────────────────────────────────────
@@ -523,6 +536,8 @@ function showRecommendedLoadout() {
     `;
     resultsDiv.appendChild(box);
   }
+
+  observeGearBoxes();
 }
 
 // ─── Shared Rendering ─────────────────────────────────────────────────────────
