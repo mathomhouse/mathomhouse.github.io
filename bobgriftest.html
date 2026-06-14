@@ -78,6 +78,9 @@
     /* Pause portrait animations while the card is scrolled out of view */
     .gear-box:not(.in-view) .hero-portrait-wrap::before,
     .gear-box:not(.in-view) .hero-portrait { animation-play-state: paused; }
+    /* Pause all portrait animations while the tab is backgrounded */
+    .anims-paused .hero-portrait-wrap::before,
+    .anims-paused .hero-portrait { animation-play-state: paused; }
     .hero-portrait {
       position: relative;
       z-index: 1;
@@ -260,6 +263,11 @@ const cardObserver = new IntersectionObserver((entries) => {
 function observeGearBoxes() {
   document.querySelectorAll('.gear-box').forEach(b => cardObserver.observe(b));
 }
+
+// Pause all portrait animations while the tab is backgrounded
+document.addEventListener('visibilitychange', () => {
+  document.body.classList.toggle('anims-paused', document.hidden);
+});
 
 function heroPortrait(name) {
   const slug = (name || '').toLowerCase().replace(/\s+/g, '');
