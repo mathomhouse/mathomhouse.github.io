@@ -208,13 +208,9 @@
       </select><br>
 
       <label for="loadoutName">Loadout:</label>
-      <select id="loadoutName">
+      <select id="loadoutName" onchange="showLoadout()">
         <option value="" disabled selected>Select loadout</option>
       </select>
-      <br>
-      <div class="calculate-btn">
-        <button onclick="showLoadout()">View Loadout</button>
-      </div>
 
       <br>
 
@@ -235,13 +231,9 @@
       </select><br>
 
       <label for="recMarchType">March Type:</label>
-      <select id="recMarchType">
+      <select id="recMarchType" onchange="showRecommendedLoadout()">
         <option value="" disabled selected>Select march type</option>
       </select>
-      <br>
-      <div class="calculate-btn">
-        <button onclick="showRecommendedLoadout()">View Recommendation</button>
-      </div>
 
       <br>
 
@@ -426,10 +418,16 @@ function populateSkillLevelDropdown() {
 function updateRecMarchTypes() {
   const skillLevel = document.getElementById('skillLevel').value;
   const select = document.getElementById('recMarchType');
-  select.innerHTML = '<option value="" disabled selected>Select march type</option>';
-  document.getElementById('recResults').style.display = 'none';
 
-  if (!skillLevel) return;
+  // Remember what was selected before repopulating
+  const previousMarchType = select.value;
+
+  select.innerHTML = '<option value="" disabled selected>Select march type</option>';
+
+  if (!skillLevel) {
+    document.getElementById('recResults').style.display = 'none';
+    return;
+  }
 
   // Get unique march_type values for this skill level
   const marchTypes = [...new Set(
@@ -453,6 +451,14 @@ function updateRecMarchTypes() {
     opt.textContent = labelMap[type] || type;
     select.appendChild(opt);
   });
+
+  // Re-select the previous march type if it's still available
+  if (previousMarchType && marchTypes.includes(previousMarchType)) {
+    select.value = previousMarchType;
+    showRecommendedLoadout(); // auto-render with preserved selection
+  } else {
+    document.getElementById('recResults').style.display = 'none';
+  }
 }
 
 // Render the selected recommended loadout
