@@ -1,7 +1,7 @@
 let marchData = {};
 let recommendedData = [];
 
-const dataUrl = 'data/titan-gear-data2.json';
+const dataUrl = '/data/titan-gear-data2.json';
 
 fetch(dataUrl)
   .then(res => {
