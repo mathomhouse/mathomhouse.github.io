@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
-
+ 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pet Comparison Calculator</title>
-
+ 
   <meta name="description" content="Tools and calculators for Top War players.">
-
+ 
   <meta property="og:title" content="Mathom House • Pets Calculator">
   <meta property="og:description" content="Compare the max stats of your pets!">
   <meta property="og:url" content="https://mathomhouse.github.io/pets.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="From Artu and Gikey">
   <meta property="og:image" content="https://mathomhouse.github.io/images/pets-icon.png">
-
+ 
   <!-- Anti-flash -->
   <script>(function () { var t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); })()</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="styles/layout.css">
   <link rel="stylesheet" href="styles/calculators.css">
   <script src="header.js" defer></script>
-
+ 
   <style>
     .gear-box form {
       display: grid;
@@ -33,22 +33,22 @@
       gap: 10px;
       align-items: center;
     }
-
+ 
     .gear-box select {
       max-width: none;
       width: 100%;
     }
-
+ 
     .gear-box select:disabled {
       opacity: 0.45;
       cursor: not-allowed;
     }
-
+ 
     .gear-box {
       font-family: 'Rajdhani', sans-serif;
       width: 350px;
     }
-
+ 
     .field-group-label {
       grid-column: 1 / -1;
       font-weight: 600;
@@ -59,9 +59,15 @@
       margin-top: 6px;
       margin-bottom: -4px;
     }
+ 
+    .calculate-btn {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
   </style>
 </head>
-
+ 
 <body>
   <header id="header-placeholder"></header>
   <div class="container">
@@ -73,23 +79,23 @@
       The Reset button will clear all fields if you want to start over.<br><br>
       Credit to Tex (s2864) for the data used to make this!
     </p>
-
+ 
     <div class="gear-container">
-
+ 
       <!-- ── Pet 1 ── -->
       <div class="gear-box">
         <h2 style="text-align: center;">Pet 1</h2>
         <form onsubmit="return false;">
-
+ 
           <span class="field-group-label">Identity</span>
-
+ 
           <label>Rarity:</label>
           <select id="rarity1">
             <option value="" disabled selected>Select option</option>
             <option value="gold">Gold</option>
             <option value="purple">Purple</option>
           </select>
-
+ 
           <label>Species:</label>
           <select id="species1">
             <option value="" disabled selected>Select option</option>
@@ -102,52 +108,52 @@
             <option value="Lion">Lion</option>
             <option value="Ray">Ray</option>
           </select>
-
+ 
           <span class="field-group-label">Main Stat</span>
-
+ 
           <label>Main Stat:</label>
           <select id="mainStat1" disabled>
             <option value="" disabled selected>Select a species &amp; rarity first</option>
           </select>
-
+ 
           <span class="field-group-label">Sub Stats</span>
-
+ 
           <label>Sub Stat 1:</label>
           <select id="subStat1_1" disabled>
             <option value="" disabled selected>Select a species &amp; rarity first</option>
           </select>
-
+ 
           <label>Sub Stat 2:</label>
           <select id="subStat1_2" disabled>
             <option value="" disabled selected>Select a species &amp; rarity first</option>
           </select>
-
+ 
           <label>Sub Stat 3:</label>
           <select id="subStat1_3" disabled>
             <option value="" disabled selected>Select a species &amp; rarity first</option>
           </select>
-
+ 
           <span class="field-group-label">Potential</span>
-
+ 
           <label>Potential:</label>
           <input type="number" id="potential1" placeholder="e.g. 15000">
         </form>
       </div>
-
+ 
       <!-- ── Pet 2 ── -->
       <div class="gear-box">
         <h2 style="text-align: center;">Pet 2</h2>
         <form onsubmit="return false;">
-
+ 
           <span class="field-group-label">Identity</span>
-
+ 
           <label>Rarity:</label>
           <select id="rarity2">
             <option value="" disabled selected>Select option</option>
             <option value="gold">Gold</option>
             <option value="purple">Purple</option>
           </select>
-
+ 
           <label>Species:</label>
           <select id="species2">
             <option value="" disabled selected>Select option</option>
@@ -160,46 +166,46 @@
             <option value="Lion">Lion</option>
             <option value="Ray">Ray</option>
           </select>
-
+ 
           <span class="field-group-label">Main Stat</span>
-
+ 
           <label>Main Stat:</label>
           <select id="mainStat2" disabled>
             <option value="" disabled selected>Select a species &amp; rarity first</option>
           </select>
-
+ 
           <span class="field-group-label">Sub Stats</span>
-
+ 
           <label>Sub Stat 1:</label>
           <select id="subStat2_1" disabled>
             <option value="" disabled selected>Select a species &amp; rarity first</option>
           </select>
-
+ 
           <label>Sub Stat 2:</label>
           <select id="subStat2_2" disabled>
             <option value="" disabled selected>Select a species &amp; rarity first</option>
           </select>
-
+ 
           <label>Sub Stat 3:</label>
           <select id="subStat2_3" disabled>
             <option value="" disabled selected>Select a species &amp; rarity first</option>
           </select>
-
+ 
           <span class="field-group-label">Potential</span>
-
+ 
           <label>Potential:</label>
           <input type="number" id="potential2" placeholder="e.g. 15000">
         </form>
       </div>
-
+ 
     </div><!-- /.gear-container -->
-
+ 
     <div class="calculate-btn">
       <button onclick="calculate()">Compare</button>
       <button onclick="resetForm()" style="background-color: #FF0000;">Reset</button>
     </div>
     <br>
-
+ 
     <div class="gear-container">
       <div id="comparison-result1" class="gear-box" style="display:none">
         <div id="result1"></div>
