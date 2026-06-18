@@ -57,7 +57,7 @@ function heroPortrait(name) {
   const slug = (name || '').toLowerCase().replace(/\s+/g, '');
   const ext = heroPortraitExt[slug];
   if (!ext) return '';
-  return `<span class="hero-portrait-wrap"><img class="hero-portrait" src="assets/heroes-awakening/${slug}_headshot.${ext}" alt="${name}" loading="lazy" onerror="this.closest('.hero-portrait-wrap').style.display='none'"></span>`;
+  return `<span class="hero-portrait-wrap"><img class="hero-portrait" src="/assets/heroes-awakening/${slug}_headshot.${ext}" alt="${name}" loading="lazy" onerror="this.closest('.hero-portrait-wrap').style.display='none'"></span>`;
 }
 
 // ─── Tab Switching ────────────────────────────────────────────────────────────
