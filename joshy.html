@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Win Guarantee Bot™ — Mathom House</title>
+    <!-- Anti-flash -->
+    <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/mathomhouse.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/calculators.css">
+    <script src="header.js" defer></script>
+    <link rel="icon" href="/cutelogo.ico" type="image/x-icon">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .bot-page-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-top: 40px;
+            padding-bottom: 60px;
+        }
+
+        /* Config step cards */
+        .config-step {
+            width: 100%;
+            max-width: 420px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .config-step label {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--text-muted, var(--text));
+            opacity: 0.65;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.08em;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .config-step select,
+        .config-step input[type="range"] {
+            width: 100%;
+        }
+
+        .config-step select {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+        }
+
+        .slider-val {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+            text-align: right;
+            margin-top: 0.35rem;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        /* Status log box */
+        .status-box {
+            width: 100%;
+            max-width: 420px;
+            margin-top: 1.5rem;
+            padding: 1rem 1.25rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            text-align: left;
+            display: none;
+        }
+
+        .status-line {
+            font-family: 'Courier New', monospace;
+            font-size: 0.82rem;
+            color: var(--text);
+            opacity: 0.7;
+            margin: 0.25rem 0;
+            display: none;
+        }
+
+        .status-line.ok {
+            opacity: 1;
+        }
+
+        .status-line.ok::before {
+            content: "✓  ";
+            color: #1dd1a1;
+        }
+
+        .status-line.err {
+            display: block;
+            opacity: 1;
+            color: var(--red);
+            font-weight: 700;
+        }
+
+        .status-line.err::before {
+            content: "✗  ";
+        }
+
+        /* Crash output box */
+        .crash-box {
+            width: 100%;
+            max-width: 420px;
+            margin-top: 1rem;
+            padding: 1.25rem 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--red);
+            background: color-mix(in srgb, var(--red) 10%, var(--surface));
+            text-align: left;
+            display: none;
+        }
+
+        .crash-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--red);
+            margin: 0 0 0.6rem;
+        }
+
+        .crash-body {
+            font-family: 'Courier New', monospace;
+            font-size: 0.82rem;
+            color: var(--red);
+            opacity: 0.85;
+            line-height: 1.65;
+            white-space: pre-wrap;
+            margin: 0;
+        }
+
+        .crash-footer {
+            margin-top: 0.9rem;
+            font-size: 0.78rem;
+            color: var(--text);
+            opacity: 0.5;
+            font-family: 'Crimson Pro', serif;
+            font-style: italic;
+        }
+
+        .retry-btn {
+            margin-top: 1.25rem;
+            font-size: 0.85rem;
+            color: var(--text);
+            opacity: 0.55;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            text-decoration: underline;
+            display: none;
+        }
+
+        .retry-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header-placeholder"></header>
+
+    <div class="container">
+        <div class="bot-page-center">
+            <h1>Win Guarantee Bot™</h1>
+            <p class="calc-desc">Configure your parameters. Mathematically guaranteed to work.*</p>
+
+            <!-- Step 1: Aggression Slider -->
+            <div class="config-step">
+                <label for="aggression">Aggression Level</label>
+                <input type="range" id="aggression" min="1" max="100" value="50" step="1"
+                    oninput="document.getElementById('agg-val').textContent = this.value + '%'">
+                <div class="slider-val" id="agg-val">50%</div>
+            </div>
+
+            <!-- Step 2: Excuse Dropdown -->
+            <div class="config-step">
+                <label for="excuse">Default Excuse (deployed automatically on loss)</label>
+                <select id="excuse">
+                    <option>Server lag</option>
+                    <option>My mouse double-clicked</option>
+                    <option>I was testing</option>
+                    <option>That never happens normally</option>
+                    <option>You had a good build</option>
+                </select>
+            </div>
+
+            <button id="deployBtn" class="calc-btn" onclick="startDeploy()">Deploy Bot</button>
+
+            <!-- Animated status log -->
+            <div class="status-box" id="statusBox">
+                <div class="status-line" id="s1">Initializing core win engine...</div>
+                <div class="status-line" id="s2">Loading cheat detection bypass module...</div>
+                <div class="status-line" id="s3">Calibrating excuse delivery system...</div>
+                <div class="status-line" id="s4">Contacting win guarantee servers...</div>
+                <div class="status-line" id="s5">FATAL: WinEngine.exe has encountered an unrecoverable error</div>
+            </div>
+
+            <!-- Crash output -->
+            <div class="crash-box" id="crashBox">
+                <p class="crash-title">UNHANDLED EXCEPTION — WinEngine.exe has stopped working</p>
+                <pre class="crash-body" id="crashBody"></pre>
+                <p class="crash-footer">*Guarantee voided by: skill gap, opponent having a better build, Mercury retrograde, and most other circumstances.</p>
+            </div>
+
+            <button class="retry-btn" id="retryBtn" onclick="reset()">↺ Try again (results may vary)</button>
+        </div>
+    </div>
+
+    <script>
+        const crashMessages = [
+            (a, e) => `NullPointerException at WinModule.guarantee()
+→ Could not locate "skill" in player profile
+→ Excuse queued: "${e}"
+→ Aggression was ${a}% — try setting it higher next time`,
+
+            (a, e) => `StackOverflowError: win() called recursively
+→ Bot attempted to guarantee win 2,847 times
+→ All 2,847 attempts returned: loss
+→ Excuse fallback: "${e}"
+→ Bot has filed a formal complaint against itself`,
+
+            (a, e) => `SEGFAULT: illegal memory access at 0x00000WIN
+→ Win module attempted to access memory it does not own
+→ (Specifically: the opponent's win)
+→ Aggression ${a}% was insufficient
+→ Pre-loaded excuse "${e}" dispatched to match chat`,
+
+            (a, e) => `TypeError: cannot read property 'victory' of undefined
+→ 'victory' was not found in match results
+→ Searched 3 rounds. Still undefined.
+→ Excuse engine activated: "${e}"
+→ Bot is embarrassed and requests to not be discussed`,
+        ];
+
+        function startDeploy() {
+            document.getElementById('deployBtn').disabled = true;
+
+            const statusBox = document.getElementById('statusBox');
+            statusBox.style.display = 'block';
+
+            const stepIds = ['s1', 's2', 's3', 's4', 's5'];
+            const okSteps = ['s1', 's2', 's3', 's4'];
+            let i = 0;
+
+            function showNext() {
+                const el = document.getElementById(stepIds[i]);
+                el.style.display = 'block';
+
+                if (i < okSteps.length) {
+                    // Slight delay before adding the checkmark so it "processes"
+                    setTimeout(() => {
+                        if (stepIds[i] !== 's5') el.classList.add('ok');
+                        i++;
+                        if (i < okSteps.length) {
+                            setTimeout(showNext, 700);
+                        } else {
+                            // All ok steps done — show the fatal error
+                            setTimeout(() => {
+                                const errEl = document.getElementById('s5');
+                                errEl.style.display = 'block';
+                                errEl.classList.add('err');
+                                setTimeout(showCrash, 450);
+                            }, 700);
+                        }
+                    }, 550);
+                }
+            }
+
+            showNext();
+        }
+
+        function showCrash() {
+            const a = document.getElementById('aggression').value;
+            const e = document.getElementById('excuse').value;
+            const msg = crashMessages[Math.floor(Math.random() * crashMessages.length)](a, e);
+
+            document.getElementById('crashBody').textContent = msg;
+            document.getElementById('crashBox').style.display = 'block';
+            document.getElementById('retryBtn').style.display = 'inline';
+        }
+
+        function reset() {
+            ['s1', 's2', 's3', 's4', 's5'].forEach(id => {
+                const el = document.getElementById(id);
+                el.style.display = 'none';
+                el.classList.remove('ok', 'err');
+            });
+
+            document.getElementById('statusBox').style.display = 'none';
+            document.getElementById('crashBox').style.display = 'none';
+            document.getElementById('retryBtn').style.display = 'none';
+            document.getElementById('deployBtn').disabled = false;
+        }
+    </script>
+</body>
+
+</html>
