@@ -334,5 +334,15 @@ if (content.includes('id="armory-missing-vars"')) {
   content = content.replace('</head>', `${armoryVarsStyle}\n</head>`);
 }
 
+// 21. Hide cloud-sync pills — functionality is broken, suppress until fixed.
+//     Early-return a hidden detached span so callers (which set .style/.title and
+//     append the result) keep working but nothing renders.
+if (!content.includes('// MATHOMHOUSE: cloud-sync disabled')) {
+  content = content.replace(
+    'function _ar_buildCloudSyncPill(kind, siteKey, opts) {\n    opts = opts || {};',
+    'function _ar_buildCloudSyncPill(kind, siteKey, opts) {\n    opts = opts || {};\n    { var _mhHidden = document.createElement(\'span\'); _mhHidden.style.display = \'none\'; return _mhHidden; } // MATHOMHOUSE: cloud-sync disabled'
+  );
+}
+
 fs.writeFileSync(filePath, content, 'utf8');
 console.log(`Patched ${filePath}`);
