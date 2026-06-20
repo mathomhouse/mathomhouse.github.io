@@ -21,19 +21,19 @@
   <section class="page-hero">
     <p class="breadcrumb"><a href="/">Home</a> / <a href="/guides.html">Guides</a> / Enigma Platform Upgrades</p>
     <h1>Enigma Platform Upgrades</h1>
-    <p>Repeater cost for upgrading each enigma platform and their stat boosts. Use the dropdown to select a category.</p>
+    <p>Repeater cost for upgrading each enigma platform and their stat boosts. Use the tabs to select a category.</p>
   </section>
 
   <div class="container">
-    <select id="enigmaSelect" onchange="showTable()">
-            <option value="">Select</option>
-            <option value="enigmaComponent">Component</option>
-            <option value="enigmaFormation">Formation</option>
-            <option value="enigmaEquipment">Equipment</option>
-        </select>
+    <div class="tabs">
+      <button class="tab-button active" onclick="openTab('enigmaComponent')">Component</button>
+      <button class="tab-button" onclick="openTab('enigmaFormation')">Formation</button>
+      <button class="tab-button" onclick="openTab('enigmaEquipment')">Equipment</button>
+    </div>
 
     <div class="table-container">
-      <table id = "enigmaComponent" hidden = "true">
+      <div id="enigmaComponent" class="tab-content active">
+      <table>
   <thead>
     <tr>
       <th rowspan="2">Level</th>
@@ -74,8 +74,10 @@
     <tr><td>20</td><td>250</td><td>288%</td><td>250</td><td>144%</td><td>250</td><td>384%</td><td>250</td><td>384%</td><td>250</td><td>384%</td></tr>
   </tbody>
 </table>
+      </div>
 
-      <table id = "enigmaFormation" hidden = "true">
+      <div id="enigmaFormation" class="tab-content">
+      <table>
   <thead>
     <tr>
       <th rowspan="2">Level</th>
@@ -120,8 +122,10 @@
     <tr><td>20</td><td>620</td><td>144%</td><td>620</td><td>192%</td><td>620</td><td>192%</td><td>620</td><td>192%</td><td>620</td><td>144%</td><td>620</td><td>144%</td><td>620</td><td>144%</td></tr>
   </tbody>
 </table>
+      </div>
 
-  <table id = "enigmaEquipment" hidden = "true">  <thead>
+      <div id="enigmaEquipment" class="tab-content">
+      <table>  <thead>
     <tr>
       <th rowspan="2">Level</th>
       <th colspan="2">SLOT 1</th>
@@ -163,9 +167,9 @@
     <tr><td>20</td><td>1250</td><td>384%</td><td>1250</td><td>384%</td><td>1250</td><td>384%</td><td>1250</td><td>576%</td><td>1250</td><td>576%</td><td>1250</td><td>576%</td></tr>
   </tbody>
 </table>
+      </div>
 
-      
-    </div>    
+    </div>
 
     <div class="div-buffer"></div>
   </div>

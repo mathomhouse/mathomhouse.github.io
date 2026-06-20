@@ -36,15 +36,14 @@
 
     <div class="container">
 
-        <label for="skillsSelect">Select a skill category: </label>
-        <select id="skillsSelect" onchange="showTable()">
-            <option value="">Select</option>
-            <option value="skillsCombat">Combat Skills</option>
-            <option value="skillsNonCombat">Non-Combat Skills</option>
-            <option value="skillsGathering">Gathering Skills</option>
-        </select>
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('skillsCombat')">Combat Skills</button>
+            <button class="tab-button" onclick="openTab('skillsNonCombat')">Non-Combat Skills</button>
+            <button class="tab-button" onclick="openTab('skillsGathering')">Gathering Skills</button>
+        </div>
         <div class="table-container">
-            <table id="skillsCombat" hidden="true">
+            <div id="skillsCombat" class="tab-content active">
+            <table>
                 <thead>
                     <tr><th colspan="5">Combat Skills</th></tr>
                     <tr>
@@ -312,7 +311,9 @@
                     </tr>
                 </tbody>
             </table>
-            <table id="skillsNonCombat" hidden="true">
+            </div>
+            <div id="skillsNonCombat" class="tab-content">
+            <table>
                 <thead>
                     <tr><th colspan="5">Non-Combat Skills</th></tr>
                     <tr>
@@ -467,7 +468,9 @@
                     </tr>
                 </tbody>
             </table>
-            <table id="skillsGathering" hidden="true">
+            </div>
+            <div id="skillsGathering" class="tab-content">
+            <table>
                 <thead>
                     <tr><th colspan="5">Gathering Skills</th></tr>
                     <tr>
@@ -559,6 +562,7 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
     <script src="/scripts/passiveheroskills.js"></script>

@@ -1,29 +1,6 @@
-function showTable(){
-    var skillsCombat = document.getElementById("skillsCombat");
-    var skillsNonCombat = document.getElementById("skillsNonCombat");
-    var skillsGathering = document.getElementById("skillsGathering");
-
-    const dropdown = document.getElementById('skillsSelect');
-    const selectedValue = dropdown.options[dropdown.selectedIndex].value; 
-    if(selectedValue === skillsCombat.id){
-        skillsCombat.hidden = false;
-        skillsNonCombat.hidden = true;
-        skillsGathering.hidden = true;
-    }
-    else if(selectedValue === skillsNonCombat.id){
-        skillsCombat.hidden = true;
-        skillsNonCombat.hidden = false;
-        skillsGathering.hidden = true;
-    }
-    else if(selectedValue === skillsGathering.id){
-        skillsCombat.hidden = true;
-        skillsNonCombat.hidden = true;
-        skillsGathering.hidden = false;
-    }
-    else{
-        //empty string
-        skillsCombat.hidden = true;
-        skillsNonCombat.hidden = true;
-        skillsGathering.hidden = true;
-    }
+function openTab(tabId){
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    event.target.classList.add('active');
 }

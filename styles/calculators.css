@@ -408,3 +408,59 @@ canvas {
     gap: 20px; /* Slightly tighter gap for mobile screens */
   }
 }
+
+/* ─── ANIMATED BEAST HEADSHOT (pets.html / pets2.html) ────────────
+   Result cards set their own #result padding-right gutter inline. */
+#comparison-result1,
+#comparison-result2 { position: relative; }
+
+.pet-portrait-wrap {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+}
+.pet-portrait-wrap.gold {
+  --ring: var(--gold);
+  --ring-bright: #fff;
+  --ring-dim: var(--gold-dim);
+  --ring-glow: var(--gold-glow, rgba(255, 200, 80, .5));
+}
+.pet-portrait-wrap.purple {
+  --ring: #b06cf0;
+  --ring-bright: #f0d6ff;
+  --ring-dim: #6d3a9e;
+  --ring-glow: rgba(176, 108, 240, .5);
+}
+/* spinning aura ring behind portrait */
+.pet-portrait-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0deg, var(--ring) 60deg, var(--ring-bright) 90deg, var(--ring) 120deg, transparent 200deg, var(--ring-dim) 300deg, transparent 360deg);
+  opacity: .7;
+  z-index: 0;
+  filter: drop-shadow(0 0 6px var(--ring-glow));
+  animation: petSpin 3s linear infinite;
+}
+.pet-portrait {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 2px solid var(--ring);
+  background: var(--surface);
+  transition: opacity .3s ease;
+}
+@keyframes petSpin { to { transform: rotate(360deg); } }
+
+/* Animation gating (required): pause off-screen and when tab is hidden */
+#comparison-result1:not(.in-view) .pet-portrait-wrap::before,
+#comparison-result2:not(.in-view) .pet-portrait-wrap::before { animation-play-state: paused; }
+.anims-paused .pet-portrait-wrap::before { animation-play-state: paused; }
