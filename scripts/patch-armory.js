@@ -379,5 +379,39 @@ if (!content.includes('// MATHOMHOUSE: pill uid-gate removed')) {
   );
 }
 
+// 22. Settings button — sits just left of the Feedback button (the empty header
+//     slot). Opens the mathomhouse settings dialog (player, recovery code, share
+//     code), whose logic lives in armory-auth-override.js (window._mh_openSettingsDialog).
+if (!content.includes('// MATHOMHOUSE: settings-btn')) {
+  content = content.replace(
+    'right.insertBefore(_mhFbBtn, right.firstChild);',
+    `right.insertBefore(_mhFbBtn, right.firstChild);
+    // MATHOMHOUSE: settings-btn
+    var _mhSetBtn = document.createElement('button');
+    _mhSetBtn.className = 'rh-btn';
+    _mhSetBtn.type = 'button';
+    _mhSetBtn.title = 'Settings';
+    var _mhSetSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    _mhSetSvg.setAttribute('width', '14'); _mhSetSvg.setAttribute('height', '14');
+    _mhSetSvg.setAttribute('viewBox', '0 0 24 24'); _mhSetSvg.setAttribute('fill', 'none');
+    _mhSetSvg.setAttribute('stroke', 'currentColor'); _mhSetSvg.setAttribute('stroke-width', '2');
+    _mhSetSvg.setAttribute('stroke-linecap', 'round'); _mhSetSvg.setAttribute('stroke-linejoin', 'round');
+    var _mhSetCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    _mhSetCircle.setAttribute('cx', '12'); _mhSetCircle.setAttribute('cy', '12'); _mhSetCircle.setAttribute('r', '3');
+    var _mhSetPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    _mhSetPath.setAttribute('d', 'M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z');
+    _mhSetSvg.appendChild(_mhSetCircle); _mhSetSvg.appendChild(_mhSetPath);
+    _mhSetBtn.appendChild(_mhSetSvg);
+    var _mhSetLbl = document.createElement('span');
+    _mhSetLbl.className = 'rh-label';
+    _mhSetLbl.textContent = 'Settings';
+    _mhSetBtn.appendChild(_mhSetLbl);
+    _mhSetBtn.addEventListener('click', function () {
+      if (typeof window._mh_openSettingsDialog === 'function') window._mh_openSettingsDialog(player);
+    });
+    right.insertBefore(_mhSetBtn, _mhFbBtn);`
+  );
+}
+
 fs.writeFileSync(filePath, content, 'utf8');
 console.log(`Patched ${filePath}`);

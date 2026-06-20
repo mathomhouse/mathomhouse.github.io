@@ -426,4 +426,248 @@
     });
   }
 
+  // ── Settings dialog (player • recovery code • share code) ──────────────────
+  // Opened from the header Settings button injected by patch-armory.js
+  // (step 22). Lives here so it can call _ar_saveRecoveryCode directly.
+  function _mh_copyToClipboard(text, btn) {
+    if (!navigator.clipboard || !navigator.clipboard.writeText) return;
+    navigator.clipboard.writeText(text).then(function () {
+      var orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(function () { btn.textContent = orig; }, 1200);
+    }).catch(function () {});
+  }
+
+  function _mh_buildCodeField(labelText, value, emptyText, actionLabel, actionFn) {
+    var wrap = document.createElement('div');
+    wrap.className = 'mh-set-field';
+    var lbl = document.createElement('label');
+    lbl.textContent = labelText;
+    wrap.appendChild(lbl);
+
+    function valueRow(val) {
+      var row = document.createElement('div');
+      row.className = 'mh-set-row';
+      var code = document.createElement('div');
+      code.className = 'mh-set-code';
+      code.textContent = val;
+      var copy = document.createElement('button');
+      copy.className = 'mh-set-btn';
+      copy.textContent = 'Copy';
+      copy.addEventListener('click', function () { _mh_copyToClipboard(val, copy); });
+      row.appendChild(code);
+      row.appendChild(copy);
+      return row;
+    }
+
+    if (value) {
+      wrap.appendChild(valueRow(value));
+    } else {
+      var row = document.createElement('div');
+      row.className = 'mh-set-row';
+      var msg = document.createElement('span');
+      msg.className = 'mh-set-muted';
+      msg.textContent = emptyText;
+      row.appendChild(msg);
+      if (actionLabel && actionFn) {
+        var btn = document.createElement('button');
+        btn.className = 'mh-set-btn';
+        btn.textContent = actionLabel;
+        btn.addEventListener('click', function () {
+          btn.disabled = true; btn.textContent = '…';
+          Promise.resolve(actionFn(function (newVal) { row.replaceWith(valueRow(newVal)); }))
+            .catch(function () {})
+            .then(function () { btn.disabled = false; btn.textContent = actionLabel; });
+        });
+        row.appendChild(btn);
+      }
+      wrap.appendChild(row);
+    }
+    return wrap;
+  }
+
+  // Shared with the first-visit banner's restore flow. Returns Promise<string|null>:
+  // an error message, or null on success (caller reloads).
+  function _mh_loadRecoveryCode(code) {
+    return fetch(_WORKER + '/recovery/load?code=' + code).then(function (res) {
+      if (res.status === 404) return 'Code not found or expired.';
+      if (!res.ok) return 'Server error — try again.';
+      return res.json().then(function (data) {
+        localStorage.setItem('playerIdentity', JSON.stringify({
+          siteKey: data.siteKey, name: data.name || '', alliance: data.alliance || ''
+        }));
+        localStorage.setItem('armory_recovery_code', code);
+        return null;
+      });
+    }).catch(function () { return 'Network error — try again.'; });
+  }
+
+  function _mh_buildRestoreField() {
+    var wrap = document.createElement('div');
+    wrap.className = 'mh-set-field';
+    var lbl = document.createElement('label');
+    lbl.textContent = 'Restore from another device';
+    wrap.appendChild(lbl);
+
+    var row = document.createElement('div');
+    row.className = 'mh-set-row';
+    var input = document.createElement('input');
+    input.className = 'mh-set-code';
+    input.type = 'text';
+    input.placeholder = '12-char recovery code';
+    input.maxLength = 12;
+    input.autocapitalize = 'characters';
+    input.spellcheck = false;
+    var btn = document.createElement('button');
+    btn.className = 'mh-set-btn';
+    btn.textContent = 'Restore';
+    row.appendChild(input);
+    row.appendChild(btn);
+    wrap.appendChild(row);
+
+    var err = document.createElement('div');
+    err.className = 'mh-set-muted';
+    err.style.marginTop = '6px';
+    err.style.display = 'none';
+    wrap.appendChild(err);
+
+    function showErr(msg) { err.textContent = msg; err.style.color = '#f85149'; err.style.display = ''; }
+
+    btn.addEventListener('click', function () {
+      var code = input.value.trim().toUpperCase();
+      err.style.display = 'none';
+      if (code.length !== 12) { showErr('Enter the full 12-character code.'); return; }
+      if (!window.confirm('Restoring replaces this device’s profile with the one for this code. Unsaved local data on this device will be lost. Continue?')) return;
+      btn.disabled = true; btn.textContent = '…';
+      _mh_loadRecoveryCode(code).then(function (errorMsg) {
+        if (errorMsg) { showErr(errorMsg); btn.disabled = false; btn.textContent = 'Restore'; return; }
+        location.reload();
+      });
+    });
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') btn.click(); });
+
+    return wrap;
+  }
+
+  window._mh_openSettingsDialog = function (player) {
+    player = player || {};
+    var id = (window.ArmoryIdentity && window.ArmoryIdentity.get && window.ArmoryIdentity.get()) || {};
+    var name = player.name || id.name || 'Unknown';
+    var siteKey = id.siteKey || '';
+    var alliance = player.alliance || id.alliance || '';
+
+    if (!document.getElementById('mh-settings-style')) {
+      var st = document.createElement('style');
+      st.id = 'mh-settings-style';
+      st.textContent = [
+        '.mh-set-bg{position:fixed;inset:0;z-index:10050;background:rgba(0,0,0,.55);display:flex;align-items:flex-start;justify-content:center;padding:calc(60px + 2rem) 1rem 1rem;}',
+        '.mh-set-card{background:var(--card,#1c2128);color:var(--text,#e0e0e0);border:1px solid var(--border,#444);border-radius:10px;width:100%;max-width:420px;padding:18px 20px;box-shadow:0 8px 30px rgba(0,0,0,.5);max-height:calc(100vh - 60px - 4rem);overflow-y:auto;}',
+        '.mh-set-card h2{margin:0 0 16px;font-size:18px;display:flex;align-items:center;justify-content:space-between;}',
+        '.mh-set-close{background:none;border:none;color:var(--muted,#8b949e);font-size:24px;line-height:1;cursor:pointer;padding:0 4px;}',
+        '.mh-set-player{display:flex;align-items:center;gap:12px;margin-bottom:18px;}',
+        '.mh-set-av,.mh-set-av-fb{width:48px;height:48px;border-radius:50%;flex-shrink:0;}',
+        '.mh-set-av{object-fit:cover;}',
+        '.mh-set-av-fb{background:var(--accent,#4a7cff);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;}',
+        '.mh-set-pname{font-size:16px;font-weight:600;}',
+        '.mh-set-pmeta{font-size:12px;color:var(--muted,#8b949e);margin-top:2px;}',
+        '.mh-set-field{margin-bottom:14px;}',
+        '.mh-set-field label{display:block;font-size:12px;color:var(--muted,#8b949e);margin-bottom:5px;}',
+        '.mh-set-row{display:flex;align-items:center;gap:8px;}',
+        '.mh-set-code{flex:1;font-family:monospace;font-size:15px;letter-spacing:.08em;font-weight:600;background:var(--input-bg,#2a2f45);border:1px solid var(--border,#444);border-radius:6px;padding:8px 10px;color:var(--text,#e0e0e0);overflow-wrap:anywhere;}',
+        '.mh-set-btn{padding:8px 12px;background:transparent;color:var(--accent,#4a7cff);border:1px solid var(--border,#444);border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}',
+        '.mh-set-btn:hover{border-color:var(--accent,#4a7cff);}',
+        '.mh-set-btn:disabled{opacity:.5;cursor:default;}',
+        '.mh-set-muted{font-size:12px;color:var(--muted,#8b949e);}'
+      ].join('');
+      document.head.appendChild(st);
+    }
+
+    var bg = document.createElement('div');
+    bg.className = 'mh-set-bg';
+    var card = document.createElement('div');
+    card.className = 'mh-set-card';
+    bg.appendChild(card);
+
+    function close() { bg.remove(); document.removeEventListener('keydown', onKey); }
+    function onKey(e) { if (e.key === 'Escape') close(); }
+    bg.addEventListener('click', function (e) { if (e.target === bg) close(); });
+    document.addEventListener('keydown', onKey);
+
+    var h2 = document.createElement('h2');
+    h2.appendChild(document.createTextNode('Settings'));
+    var x = document.createElement('button');
+    x.className = 'mh-set-close';
+    x.setAttribute('aria-label', 'Close');
+    x.innerHTML = '&times;';
+    x.addEventListener('click', close);
+    h2.appendChild(x);
+    card.appendChild(h2);
+
+    // Player name + image
+    function fallbackAvatar() {
+      var fb = document.createElement('div');
+      fb.className = 'mh-set-av-fb';
+      fb.textContent = (player.avatarFallback || (name || '?').charAt(0)).toUpperCase();
+      return fb;
+    }
+    var pRow = document.createElement('div');
+    pRow.className = 'mh-set-player';
+    if (player.avatar) {
+      var av = document.createElement('img');
+      av.className = 'mh-set-av';
+      av.src = player.avatar;
+      av.alt = name;
+      av.addEventListener('error', function () { av.replaceWith(fallbackAvatar()); });
+      pRow.appendChild(av);
+    } else {
+      pRow.appendChild(fallbackAvatar());
+    }
+    var pInfo = document.createElement('div');
+    var pn = document.createElement('div');
+    pn.className = 'mh-set-pname';
+    pn.textContent = name;
+    pInfo.appendChild(pn);
+    var metaParts = [];
+    if (player.level) metaParts.push('Lv. ' + player.level);
+    if (player.server) metaParts.push('S' + player.server);
+    if (alliance) metaParts.push(alliance);
+    if (metaParts.length) {
+      var pm = document.createElement('div');
+      pm.className = 'mh-set-pmeta';
+      pm.textContent = metaParts.join(' · ');
+      pInfo.appendChild(pm);
+    }
+    pRow.appendChild(pInfo);
+    card.appendChild(pRow);
+
+    // Recovery code (generate on demand if absent)
+    card.appendChild(_mh_buildCodeField(
+      'Recovery Code',
+      localStorage.getItem('armory_recovery_code'),
+      'No recovery code yet.',
+      'Generate',
+      function (setVal) {
+        return _ar_saveRecoveryCode(siteKey, name, alliance).then(function (code) {
+          if (code) setVal(code);
+          else alert('Could not get recovery code. Try again later.');
+        });
+      }
+    ));
+
+    // Share code (read-only; created by saving a report)
+    var shareCode = null;
+    try { shareCode = JSON.parse(localStorage.getItem('playerReport') || '{}').shortcode || null; } catch (e) {}
+    card.appendChild(_mh_buildCodeField(
+      'Share Code',
+      shareCode,
+      'No share code yet — Save a report to create one.',
+      null, null
+    ));
+
+    // Restore from another device's recovery code
+    card.appendChild(_mh_buildRestoreField());
+
+    document.body.appendChild(bg);
+  };
+
 })();
