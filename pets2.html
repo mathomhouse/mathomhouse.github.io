@@ -65,6 +65,10 @@
       justify-content: center;
       gap: 16px;
     }
+
+    /* keep result text clear of the top-right portrait (styles in calculators.css) */
+    #result1,
+    #result2 { padding-right: 84px; }
   </style>
 </head>
  
@@ -208,9 +212,11 @@
  
     <div class="gear-container">
       <div id="comparison-result1" class="gear-box" style="display:none">
+        <span class="pet-portrait-wrap" id="petPortrait1" style="display:none"></span>
         <div id="result1"></div>
       </div>
       <div id="comparison-result2" class="gear-box" style="display:none">
+        <span class="pet-portrait-wrap" id="petPortrait2" style="display:none"></span>
         <div id="result2"></div>
       </div>
     </div>
@@ -462,7 +468,78 @@ function calculate() {
 
   document.getElementById("comparison-result1").style.display = "block";
   document.getElementById("comparison-result2").style.display = "block";
+
+  renderPetPortrait(1);
+  renderPetPortrait(2);
 }
+
+// ─── Animated beast headshots ───────────────────────────────────────────────
+// Rarity select → ring color; species value → asset basename.
+const beastNameMap = {
+  eagle: 'Tornadeagle', bear: 'Grizzroar', deer: 'Gleamdeer', ray: 'Dreadray',
+  kangaroo: 'Bounceroo', horse: 'Swiftsteed', lion: 'Dusklion',
+  egret: 'Crestegret', lynx: 'Fluffynx'
+};
+const petElements = ['Fire', 'Ground', 'Water', 'Wind'];
+const petRotators = {};
+
+function getBeastInfo(petNumber) {
+  const species = (document.getElementById(`species${petNumber}`).value || '').toLowerCase();
+  const rarity  = document.getElementById(`rarity${petNumber}`).value;
+  const beast = beastNameMap[species];
+  if (!beast) return null;
+  // Lynx is always gold.
+  const color = (species === 'lynx') ? 'gold' : (rarity === 'purple' ? 'purple' : 'gold');
+  return { color, beast };
+}
+
+function renderPetPortrait(petNumber) {
+  const wrap = document.getElementById(`petPortrait${petNumber}`);
+  if (!wrap) return;
+  if (petRotators[petNumber]) {
+    clearInterval(petRotators[petNumber]);
+    delete petRotators[petNumber];
+  }
+
+  const info = getBeastInfo(petNumber);
+  if (!info) {
+    wrap.innerHTML = '';
+    wrap.style.display = 'none';
+    return;
+  }
+
+  wrap.style.display = '';
+  wrap.className = `pet-portrait-wrap ${info.color}`;
+  const src = el => `assets/beast-icons/${info.beast}_${el}_headshot.png`;
+  let idx = Math.floor(Math.random() * petElements.length);
+  wrap.innerHTML = `<img class="pet-portrait" src="${src(petElements[idx])}" alt="${info.beast}" loading="lazy">`;
+  const img = wrap.querySelector('.pet-portrait');
+
+  // Rotate through the 4 element headshots; skip while hidden/off-screen.
+  const card = document.getElementById(`comparison-result${petNumber}`);
+  petRotators[petNumber] = setInterval(() => {
+    if (document.hidden || !card.classList.contains('in-view')) return;
+    idx = (idx + 1) % petElements.length;
+    img.style.opacity = '0';
+    setTimeout(() => { img.src = src(petElements[idx]); img.style.opacity = '1'; }, 300);
+  }, 3000);
+
+  observePetPortraits();
+}
+
+// Animation gating: pause ring spin off-screen and while tab is backgrounded.
+const petCardObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => e.target.classList.toggle('in-view', e.isIntersecting));
+}, { rootMargin: '120px' });
+function observePetPortraits() {
+  ['comparison-result1', 'comparison-result2'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) petCardObserver.observe(el);
+  });
+}
+document.addEventListener('visibilitychange', () => {
+  document.body.classList.toggle('anims-paused', document.hidden);
+});
 
 function renderResult(petNumber, pet) {
   const mainFormatted = pet.mainMaxKey === "MarchSize"
@@ -516,6 +593,10 @@ function resetForm() {
 
     document.getElementById(`result${n}`).innerHTML = "";
     document.getElementById(`comparison-result${n}`).style.display = "none";
+
+    if (petRotators[n]) { clearInterval(petRotators[n]); delete petRotators[n]; }
+    const wrap = document.getElementById(`petPortrait${n}`);
+    if (wrap) { wrap.innerHTML = ""; wrap.style.display = "none"; }
   });
 }
 

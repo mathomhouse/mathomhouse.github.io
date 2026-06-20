@@ -12,7 +12,7 @@
   <meta property="og:description" content="Compare the max stats of your pets!">
   <meta property="og:url" content="https://mathomhouse.github.io/pets.html">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="From Artu and Gikey">
+  <meta property="og:site_name" content="From Artu, Gikey, and Tex">
 
   <meta property="og:image" content="https://mathomhouse.github.io/images/pets-icon.png">
 
@@ -45,6 +45,10 @@
       font-family: 'Rajdhani', sans-serif;
       width: 350px;
     }
+
+    /* keep result text clear of the top-right portrait (styles in calculators.css) */
+    #result1,
+    #result2 { padding-right: 96px; }
   </style>
 </head>
 
@@ -218,9 +222,11 @@
     <br>
     <div class="gear-container">
       <div id="comparison-result1" class="gear-box" style="display:none">
+        <span class="pet-portrait-wrap" id="petPortrait1" style="display:none"></span>
         <div id="result1"></div>
       </div>
       <div id="comparison-result2" class="gear-box" style="display:none">
+        <span class="pet-portrait-wrap" id="petPortrait2" style="display:none"></span>
         <div id="result2"></div>
       </div>
     </div>
