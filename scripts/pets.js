@@ -59,7 +59,87 @@ const maxValues = {
 
     document.getElementById("comparison-result1").style.display = "block";
     document.getElementById("comparison-result2").style.display = "block";
+
+    renderPetPortrait(1);
+    renderPetPortrait(2);
   }
+
+  // ─── Animated beast headshots ───────────────────────────────────────────────
+  // Second word of the species option → asset basename. Lynx is the exception:
+  // always gold, and its name (no color prefix) maps straight to Fluffynx.
+  const beastNameMap = {
+    eagle: 'Tornadeagle', bear: 'Grizzroar', deer: 'Gleamdeer', ray: 'Dreadray',
+    kangaroo: 'Bounceroo', horse: 'Swiftsteed', lion: 'Dusklion',
+    egret: 'Crestegret', lynx: 'Fluffynx'
+  };
+  const petElements = ['Fire', 'Ground', 'Water', 'Wind'];
+  const petRotators = {};
+
+  function getBeastInfo(petNumber) {
+    const sel = document.getElementById(`species${petNumber}`);
+    if (!sel || sel.selectedIndex < 0) return null;
+    const text = sel.options[sel.selectedIndex].text.trim();
+    let color, beastWord;
+    if (/lynx/i.test(text)) {
+      color = 'gold';
+      beastWord = 'lynx';
+    } else {
+      const words = text.split(/\s+/);
+      color = (words[0] || '').toLowerCase();
+      beastWord = (words[1] || '').toLowerCase();
+    }
+    const beast = beastNameMap[beastWord];
+    if (!beast) return null;
+    return { color: color === 'purple' ? 'purple' : 'gold', beast };
+  }
+
+  function renderPetPortrait(petNumber) {
+    const wrap = document.getElementById(`petPortrait${petNumber}`);
+    if (!wrap) return;
+    if (petRotators[petNumber]) {
+      clearInterval(petRotators[petNumber]);
+      delete petRotators[petNumber];
+    }
+
+    const info = getBeastInfo(petNumber);
+    if (!info) {
+      wrap.innerHTML = '';
+      wrap.style.display = 'none';
+      return;
+    }
+
+    wrap.style.display = '';
+    wrap.className = `pet-portrait-wrap ${info.color}`;
+    const src = el => `assets/beast-icons/${info.beast}_${el}_headshot.png`;
+    let idx = Math.floor(Math.random() * petElements.length);
+    wrap.innerHTML = `<img class="pet-portrait" src="${src(petElements[idx])}" alt="${info.beast}" loading="lazy">`;
+    const img = wrap.querySelector('.pet-portrait');
+
+    // Rotate through the 4 element headshots; skip while hidden/off-screen.
+    const card = document.getElementById(`comparison-result${petNumber}`);
+    petRotators[petNumber] = setInterval(() => {
+      if (document.hidden || !card.classList.contains('in-view')) return;
+      idx = (idx + 1) % petElements.length;
+      img.style.opacity = '0';
+      setTimeout(() => { img.src = src(petElements[idx]); img.style.opacity = '1'; }, 300);
+    }, 3000);
+
+    observePetPortraits();
+  }
+
+  // Animation gating: pause ring spin off-screen and while tab is backgrounded.
+  const petCardObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => e.target.classList.toggle('in-view', e.isIntersecting));
+  }, { rootMargin: '120px' });
+  function observePetPortraits() {
+    ['comparison-result1', 'comparison-result2'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) petCardObserver.observe(el);
+    });
+  }
+  document.addEventListener('visibilitychange', () => {
+    document.body.classList.toggle('anims-paused', document.hidden);
+  });
 
   function resetForm() {
     document.querySelectorAll('input[type="number"]').forEach(input => input.value = '');
@@ -68,4 +148,10 @@ const maxValues = {
     document.getElementById("result2").textContent = '';
     document.getElementById("comparison-result1").style.display = "none";
     document.getElementById("comparison-result2").style.display = "none";
+
+    [1, 2].forEach(n => {
+      if (petRotators[n]) { clearInterval(petRotators[n]); delete petRotators[n]; }
+      const wrap = document.getElementById(`petPortrait${n}`);
+      if (wrap) { wrap.innerHTML = ''; wrap.style.display = 'none'; }
+    });
   }
