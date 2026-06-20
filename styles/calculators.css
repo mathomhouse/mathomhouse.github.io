@@ -125,6 +125,13 @@ button[onclick]:not(.hamburger):not(.theme-toggle-btn):not(.mobile-group-btn):no
   box-shadow: 0 0 14px var(--gold-glow);
 }
 
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+
 /* ─── CALC DESCRIPTION (intro text) ──────────────────────────── */
 .calc-desc,
 .container > p:first-of-type {

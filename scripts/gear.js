@@ -88,6 +88,7 @@
     }
 
     document.getElementById('result').textContent = result;
+    document.getElementById('comparison-result').hidden = false;
 }
 
 function resetValues() {
@@ -108,6 +109,7 @@ function resetValues() {
     document.getElementById('gear1-box').style.color = '';
     document.getElementById('gear2-box').style.color = '';
     document.getElementById('result').textContent = '';
+    document.getElementById('comparison-result').hidden = true;
 }
 function compareHTChips() {
     // HT Chips 1 stats
@@ -159,6 +161,7 @@ function compareHTChips() {
     }
 
     document.getElementById('ht-result').innerHTML = result;
+    document.getElementById('ht-chips-result').hidden = false;
 }
 
 function resetHTChips() {
@@ -167,6 +170,7 @@ function resetHTChips() {
 
     // Clear the result display
     document.getElementById('ht-result').innerHTML = '';
+    document.getElementById('ht-chips-result').hidden = true;
 
     // Reset background colors
     document.getElementById('ht-chips1-box').style.backgroundColor = '';
