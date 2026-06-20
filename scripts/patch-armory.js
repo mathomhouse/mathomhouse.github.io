@@ -334,13 +334,48 @@ if (content.includes('id="armory-missing-vars"')) {
   content = content.replace('</head>', `${armoryVarsStyle}\n</head>`);
 }
 
-// 21. Hide cloud-sync pills — functionality is broken, suppress until fixed.
-//     Early-return a hidden detached span so callers (which set .style/.title and
-//     append the result) keep working but nothing renders.
-if (!content.includes('// MATHOMHOUSE: cloud-sync disabled')) {
+// 21. Cloud-sync pill: drop the dead UID-verify gate so the owner always gets the
+//     "Sync now" path. hasUidHash is always false under the mathomhouse override
+//     (getUidHash -> null), which otherwise traps owners in the hidden openIdentityPrefs
+//     flow. Also strips the older "cloud-sync disabled" hide injection if a stale build
+//     still carries it, so re-running on a non-fresh file self-heals.
+content = content.replace(
+  "\n    { var _mhHidden = document.createElement('span'); _mhHidden.style.display = 'none'; return _mhHidden; } // MATHOMHOUSE: cloud-sync disabled",
+  ''
+);
+if (!content.includes('// MATHOMHOUSE: pill uid-gate removed')) {
   content = content.replace(
-    'function _ar_buildCloudSyncPill(kind, siteKey, opts) {\n    opts = opts || {};',
-    'function _ar_buildCloudSyncPill(kind, siteKey, opts) {\n    opts = opts || {};\n    { var _mhHidden = document.createElement(\'span\'); _mhHidden.style.display = \'none\'; return _mhHidden; } // MATHOMHOUSE: cloud-sync disabled'
+    `          if (!state.hasUidHash) {
+            line('Verify your in-game UID to enable cloud sync. Other viewers can’t see this snapshot until then.');
+            action('Verify UID', function () {
+              dismissTooltip();
+              try { openIdentityPrefs(wizardState.player || {}); } catch (e) { /* ignore */ }
+            });
+          } else {
+            line('Local snapshot is newer than the cloud copy. Push it now so other viewers stay in sync.');
+            action('Sync now', function (btn) {
+              btn.disabled = true; btn.textContent = 'Syncing…';
+              _ar_backgroundSyncSupplement(state.kind, siteKey).then(function (s) {
+                dismissTooltip();
+                refresh();
+              }).catch(function () {
+                dismissTooltip();
+                state.status = 'error'; paint();
+              });
+            });
+          }`,
+    `          // MATHOMHOUSE: pill uid-gate removed — tokenless handshake means the owner can always push
+          line('Local snapshot is newer than the cloud copy. Push it now so other viewers stay in sync.');
+          action('Sync now', function (btn) {
+            btn.disabled = true; btn.textContent = 'Syncing…';
+            _ar_backgroundSyncSupplement(state.kind, siteKey).then(function (s) {
+              dismissTooltip();
+              refresh();
+            }).catch(function () {
+              dismissTooltip();
+              state.status = 'error'; paint();
+            });
+          });`
   );
 }
 

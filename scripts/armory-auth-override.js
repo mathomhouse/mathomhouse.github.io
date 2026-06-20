@@ -277,29 +277,28 @@
       importInput.addEventListener('change', e => { if (e.target.files[0]) importProfile(e.target.files[0]); });
       importLabel.appendChild(importInput);
 
-      // Task 3 — Sync from Cloud button (commented out)
-      // const syncBtn = document.createElement('button');
-      // syncBtn.className = 'btn-secondary';
-      // syncBtn.textContent = 'Sync from Cloud';
-      // syncBtn.addEventListener('click', async () => {
-      //   syncBtn.disabled = true;
-      //   syncBtn.textContent = 'Syncing…';
-      //   const sk = window.ArmoryIdentity.get()?.siteKey;
-      //   if (sk) {
-      //     ['inv','bench','chips','gear','runepool','heroes','formation','enigma','decor','skin']
-      //       .forEach(kind => localStorage.removeItem('armory_lastSync_' + kind + '_' + sk));
-      //   }
-      //   if (window._ar_hydrateSupplementsFromWorker) {
-      //     await window._ar_hydrateSupplementsFromWorker(sk);
-      //   }
-      //   location.reload();
-      // });
+      // Task 3 — Sync from Cloud button. The dead window._ar_hydrateSupplementsFromWorker
+      // guard is dropped: clearing the last-sync markers + reload re-runs hydration on
+      // load (armory-report.html), which performs the full re-pull.
+      const syncBtn = document.createElement('button');
+      syncBtn.className = 'btn-secondary';
+      syncBtn.textContent = 'Sync from Cloud';
+      syncBtn.addEventListener('click', function () {
+        syncBtn.disabled = true;
+        syncBtn.textContent = 'Syncing…';
+        const sk = window.ArmoryIdentity.get()?.siteKey;
+        if (sk) {
+          ['inv','bench','chips','gear','runepool','heroes','formation','enigma','decor','skin']
+            .forEach(kind => localStorage.removeItem('armory_lastSync_' + kind + '_' + sk));
+        }
+        location.reload(); // reload re-runs _ar_hydrateSupplementsFromWorker -> full re-pull
+      });
 
       const wrapper = document.createElement('span');
       wrapper.id = 'ar-profile-btns';
       wrapper.appendChild(exportBtn);
       wrapper.appendChild(importLabel);
-      // wrapper.appendChild(syncBtn); // Task 3
+      wrapper.appendChild(syncBtn);
       btnRow.appendChild(wrapper);
     };
   }
