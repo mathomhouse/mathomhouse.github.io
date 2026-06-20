@@ -4,15 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com; style-src 'unsafe-inline' https://translate.googleapis.com https://www.gstatic.com; img-src 'self' https://knight-cdn.akamaized.net https://h5.topwargame.com https://raw.githubusercontent.com data: https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://fonts.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://fight-report-va.oss-accelerate.aliyuncs.com https://fight-report.oss-accelerate.aliyuncs.com https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://push-worker.27tb8s6fct.workers.dev https://*.clarity.ms https://c.bing.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://translate.google.com https://www.youtube-nocookie.com;">
-<title>Armory Report — Server 2864</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com https://www.googletagmanager.com; style-src 'unsafe-inline' https://mathomhouse.github.io https://fonts.googleapis.com https://translate.googleapis.com https://www.gstatic.com; img-src 'self' https://knight-cdn.akamaized.net https://h5.topwargame.com https://raw.githubusercontent.com data: https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://fonts.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://docs.google.com https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev https://fight-report-va.oss-accelerate.aliyuncs.com https://fight-report.oss-accelerate.aliyuncs.com https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://push-worker.27tb8s6fct.workers.dev https://*.clarity.ms https://c.bing.com https://www.google-analytics.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://translate.google.com https://www.youtube-nocookie.com; font-src https://fonts.gstatic.com;">
+<title>Armory Report | Mathom House</title>
 <style>
-  :root {
-    --bg: #0d1117; --surface: #161b22; --card: #1c2128; --border: #30363d;
-    --text: #e6edf3; --muted: #8b949e; --accent: #79c0ff;
-    --green: #3fb950; --red: #f85149; --yellow: #d29922; --blue: #388bfd;
-    --army: #56d364; --navy: #6cb6ff; --air: #e3b341;
-  }
+  
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; margin: 0; padding: 0; }
 
@@ -3366,8 +3361,29 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "won9zormpi");
 </script>
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)})();</script>
+<link rel="stylesheet" href="styles/mathomhouse.css">
+<link rel="stylesheet" href="styles/header.css">
+<link rel="stylesheet" href="styles/layout.css">
+<script src="header.js" defer></script>
+<script src="scripts/armory-auth-override.js" defer></script>
+<script src="scripts/feedback-modal.js" defer></script>
+<meta name="description" content="Tools and calculators for Top War players.">
+<meta property="og:title" content="Mathom House • Armory Report">
+<meta property="og:description" content="Check out your armory report.">
+<meta property="og:image" content="https://mathomhouse.github.io/mathomhouselogo.png">
+<meta property="og:url" content="https://mathomhouse.github.io/armory-report.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="From Artu, Gikey, and Tex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style id="armory-font-fix">body,button,.tab-btn{font-family:Rajdhani,-apple-system,BlinkMacSystemFont,sans-serif;font-size:15px;}input,select,textarea{font-family:Rajdhani,-apple-system,BlinkMacSystemFont,sans-serif!important;font-size:15px!important;}</style>
+<style id="armory-tex-credit-css">.landing-credit{font-size:.78rem;color:var(--muted);text-align:center;margin:0 auto .5rem;opacity:.7;}</style>
+<style id="armory-dark-select">[data-theme="dark"] select{background-color:#1e2235;color:#e0e0e0;border-color:#444;}[data-theme="dark"] select option{background-color:#1e2235;color:#e0e0e0;}</style>
+<style id="armory-ms-modal-pos">.ms-modal,.bench-modal,.whats-new-modal-card{margin-top:3.5rem;}</style>
+<style id="armory-missing-vars">:root{--card:#1c2128;--cards:#1c2128;--muted:#8b949e;--yellow:#d29922;--blue:#388bfd;--army:#56d364;--navy:#6cb6ff;--air:#e3b341;}[data-theme="light"]{--card:#e9ebf0;--cards:#e9ebf0;--muted:#6e7891;}</style>
 </head>
 <body>
+<header id="header-placeholder"></header>
 
 <div id="google_translate_element"></div>
 
@@ -3391,6 +3407,8 @@
       </div>
     </div>
     <h2 class="landing-title">My Armory Report</h2>
+    <p class="landing-credit">Credit for implementation of the armory report goes to Tex (S2864).</p>
+    <!-- MATHOMHOUSE: tex-credit-landing -->
     <p class="landing-desc">Paste your battle report IDs to generate a comprehensive personal account report. View your heroes, gear, decorations, base skins, enigma beasts, and HT chips — all in one place.</p>
     <div class="landing-features">
       <div class="landing-feature">6 Reports<span>Merge up to 6 battle reports</span></div>
@@ -3423,8 +3441,8 @@
       return fetch(CDN_BASE_CN + suffix).then(function(r2) { return r2.ok ? r2 : r; });
     }).catch(function() { return fetch(CDN_BASE_CN + suffix); });
   }
-  var ASSET_BASE = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/';
-  var PUSH_WORKER = 'https://push-worker.27tb8s6fct.workers.dev';
+  var ASSET_BASE = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/';
+  var PUSH_WORKER = 'https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev';
 
   // ── Advisor "on-behalf" impersonation session (in-memory only; never persisted) ──
   // When active, the advisor acts as `targetSiteKey` using a short-lived delegated
@@ -3624,8 +3642,8 @@
         .then(function (res) {
           if (res.status === 200 && res.j && res.j.code) {
             state.adviseCode = res.j.code;
-            resultRow('Advise link (you build here):', res.j.url || ('https://2864tw.com/armory-report.html?advise=' + res.j.code));
-            resultRow('Player view (send to ' + i.targetName + '):', 'https://2864tw.com/armory-report.html?code=' + state.shortcode + '&plan=' + res.j.code);
+            resultRow('Advise link (you build here):', res.j.url || ('https://mathomhouse.github.io/armory-report.html?advise=' + res.j.code));
+            resultRow('Player view (send to ' + i.targetName + '):', 'https://mathomhouse.github.io/armory-report.html?code=' + state.shortcode + '&plan=' + res.j.code);
             setStatus('Open the advise link yourself to build the plan steps. Then send the Player view link to ' + i.targetName + ' — it opens their report straight to the plan, no login or typing needed.');
             recordHistory();
           } else { setStatus('Advise link failed: ' + ((res.j && res.j.error) || ('HTTP ' + res.status)), true); b2.disabled = false; }
@@ -3703,8 +3721,8 @@
         cp.addEventListener('click', function () { try { navigator.clipboard.writeText(value); cp.textContent = 'Copied'; setTimeout(function(){ cp.textContent='Copy'; }, 1200); } catch (x) {} });
         cr.appendChild(cp); r.appendChild(cr);
       }
-      if (e.shortcode && e.adviseCode) copyRow('Player view:', 'https://2864tw.com/armory-report.html?code=' + e.shortcode + '&plan=' + e.adviseCode);
-      if (e.adviseCode) copyRow('Advise link:', 'https://2864tw.com/armory-report.html?advise=' + e.adviseCode);
+      if (e.shortcode && e.adviseCode) copyRow('Player view:', 'https://mathomhouse.github.io/armory-report.html?code=' + e.shortcode + '&plan=' + e.adviseCode);
+      if (e.adviseCode) copyRow('Advise link:', 'https://mathomhouse.github.io/armory-report.html?advise=' + e.adviseCode);
       if (e.shortcode) copyRow('Shortcode:', e.shortcode);
       return r;
     }
@@ -3982,6 +4000,8 @@
   // ── Shortcode sharing helpers ─────────────────────────────────────────────
   // Back-compat alias so existing call sites keep working without migration.
   // New code should prefer `ArmoryIdentity.get()`.
+  window.ArmoryIdentity = ArmoryIdentity;
+
   function getStoredIdentity() {
     return ArmoryIdentity.get();
   }
@@ -3990,7 +4010,7 @@
   // report cap (9 instead of 6) when adding from the Manage Reports modal.
   function isVerifiedS2864Member() {
     var id = getStoredIdentity();
-    return !!(id && id.name && id.siteKey && !id.guest);
+    return !!(id && id.siteKey && !id.guest); // MATHOMHOUSE: member gate
   }
 
   // Stable per-device advisor identifier used by the multi-advisor plan
@@ -4387,7 +4407,7 @@
     setTimeout(function() { input.focus(); }, 50);
   }
 
-  var SUPPLEMENT_WORKER = 'https://push-worker.27tb8s6fct.workers.dev';
+  var SUPPLEMENT_WORKER = 'https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev';
   var _ar_supplementToken = null;
   var _ar_supplementTokenExpires = 0;
 
@@ -4455,11 +4475,16 @@
   // Ensure a fresh token is available; auto-handshake from cached uidHash
   // when possible. Throws when no cached hash exists (caller surfaces a
   // re-enter UID prompt).
-  async function _ar_ensureSupplementToken(siteKey) {
-    if (_ar_supplementToken && Date.now() < _ar_supplementTokenExpires - 10000) return;
-    var hash = _ar_getStoredUidHash(siteKey);
-    if (!hash) throw new Error('No upload token. Re-enter UID.');
-    await _ar_handshake(hash);
+  async function _ar_ensureSupplementToken(siteKey) { // MATHOMHOUSE: siteKey handshake
+    if (_ar_supplementToken && _ar_supplementToken !== 'local' && _ar_supplementTokenExpires > Date.now()) return;
+    var r = await fetch(SUPPLEMENT_WORKER + '/supplement/handshake', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ siteKey: siteKey })
+    });
+    var d = await r.json();
+    _ar_supplementToken = d.token;
+    _ar_supplementTokenExpires = Date.now() + 864e7;
   }
 
   // Background re-sync: if the owner has local data newer than what the
@@ -5190,7 +5215,7 @@
   }
 
   function _ar_rehydrateInv(raw, lk) {
-    var ASSET = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/';
+    var ASSET = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/';
     var out = {
       meta: raw.meta || {}, resources: raw.resources || {},
       tabs: { item: [], unit: [], decor: [], hero: [], cpnt: [] },
@@ -5684,7 +5709,7 @@
   }
 
   function copyShareLink(code) {
-    var url = 'https://2864tw.com/armory-report.html?code=' + code;
+    var url = 'https://mathomhouse.github.io/armory-report.html?code=' + code;
     navigator.clipboard.writeText(url).then(function() {
       showToastMessage('Link copied!');
     }).catch(function() {
@@ -5734,7 +5759,7 @@
     copyLinkBtn.className = 'btn-secondary';
     copyLinkBtn.textContent = 'Copy Link';
     copyLinkBtn.onclick = function() {
-      var url = 'https://2864tw.com/armory-report.html?code=' + code;
+      var url = 'https://mathomhouse.github.io/armory-report.html?code=' + code;
       navigator.clipboard.writeText(url).then(function() {
         copiedEl.textContent = 'Link copied!';
         setTimeout(function() { copiedEl.textContent = ''; }, 2000);
@@ -6007,7 +6032,7 @@
   var EB_ELEMENTS = {1:'Fire',2:'Water',3:'Wind',4:'Ground'};
   var EB_FIELD_NAMES = {1:'CPNT Mastery',2:'Formation',3:'Equip',4:'Defense',5:'Offense'};
   var EB_FIELD_SLOT_COUNTS = {1:5,2:7,3:6,4:9,5:9};
-  var EB_ICON_BASE = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/beast-icons/';
+  var EB_ICON_BASE = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/beast-icons/';
 
   // Buff names verified against in-game effect_buff TABLE + LocalManager.getText() (2026-05-04).
   // 520110-113 = ATK, 520120-123 = HP Boost, 520130-133 = Elemental Enhance, 520140-143 = Elemental RES.
@@ -7506,7 +7531,7 @@
     left.className = 'rh-left';
 
     var homeLink = document.createElement('a');
-    homeLink.href = 'https://2864tw.com';
+    homeLink.href = 'https://mathomhouse.github.io';
     homeLink.className = 'rh-btn';
     homeLink.title = 'Home';
     homeLink.appendChild(svgIcon({ children: [['path', { 'd': 'M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z' }], ['polyline', { 'points': '9 22 9 12 15 12 15 22' }]] }));
@@ -7752,16 +7777,28 @@
     langBtn.addEventListener('click', function() { openLangPicker(); });
     right.appendChild(langBtn);
 
-    // Feedback: handled by feedback-widget.js (auto-appends to <header>)
-    // Move floating widget button into header (may have been hidden on landing or floating)
-    setTimeout(function() {
-      var fwBtn = document.getElementById('fw-hdr-btn');
-      if (fwBtn) {
-        fwBtn.style.cssText = ''; // Clear any display:none or position:fixed
-        fwBtn.style.display = '';
-        if (fwBtn.parentNode !== right) right.insertBefore(fwBtn, right.firstChild);
-      }
-    }, 100);
+    // MATHOMHOUSE: feedback-btn
+    var _mhFbBtn = document.createElement('button');
+    _mhFbBtn.className = 'rh-btn';
+    _mhFbBtn.type = 'button';
+    _mhFbBtn.title = 'Send Feedback';
+    var _mhFbSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    _mhFbSvg.setAttribute('width', '14'); _mhFbSvg.setAttribute('height', '14');
+    _mhFbSvg.setAttribute('viewBox', '0 0 24 24'); _mhFbSvg.setAttribute('fill', 'none');
+    _mhFbSvg.setAttribute('stroke', 'currentColor'); _mhFbSvg.setAttribute('stroke-width', '2');
+    _mhFbSvg.setAttribute('stroke-linecap', 'round'); _mhFbSvg.setAttribute('stroke-linejoin', 'round');
+    var _mhFbPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    _mhFbPath.setAttribute('d', 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z');
+    _mhFbSvg.appendChild(_mhFbPath);
+    _mhFbBtn.appendChild(_mhFbSvg);
+    var _mhFbLbl = document.createElement('span');
+    _mhFbLbl.className = 'rh-label';
+    _mhFbLbl.textContent = 'Feedback';
+    _mhFbBtn.appendChild(_mhFbLbl);
+    _mhFbBtn.addEventListener('click', function () {
+      if (typeof openFeedbackModal === 'function') openFeedbackModal();
+    });
+    right.insertBefore(_mhFbBtn, right.firstChild);
 
     // Settings / Identity button
     var prefsBtn = document.createElement('button');
@@ -8279,7 +8316,7 @@
         copyBtn.className = 'rh-prefs-btn';
         copyBtn.textContent = 'Copy Link';
         copyBtn.addEventListener('click', function() {
-          navigator.clipboard.writeText('https://2864tw.com/armory-report.html?code=' + shortcode).then(function() {
+          navigator.clipboard.writeText('https://mathomhouse.github.io/armory-report.html?code=' + shortcode).then(function() {
             copyBtn.textContent = 'Copied!';
             setTimeout(function() { copyBtn.textContent = 'Copy Link'; }, 1500);
           });
@@ -8450,7 +8487,7 @@
             cpBtn.style.fontSize = '.7rem';
             (function(code) {
               cpBtn.addEventListener('click', function() {
-                navigator.clipboard.writeText('https://2864tw.com/armory-report.html?code=' + code).then(function() {
+                navigator.clipboard.writeText('https://mathomhouse.github.io/armory-report.html?code=' + code).then(function() {
                   cpBtn.textContent = '\u2713';
                   setTimeout(function() { cpBtn.textContent = 'Copy'; }, 1200);
                 });
@@ -8845,19 +8882,19 @@
     bmWrap.appendChild(_ar_buildPowerToolCard({
       title: 'Skill Dismantle (standalone)',
       desc: 'Same bulk-dismantle wizard available inside Import TopWar Data. Use this when you only want to scrap skill items and skip the full snapshot extract.',
-      url: 'javascript:(function(){var s=document.createElement(\'script\');s.src=\'https://2864tw.com/dismantle-bookmarklet.js?_=\'+Date.now();s.onerror=function(){alert(\'Bookmarklet load failed. Check internet + try again.\');};document.body.appendChild(s);})();'
+      url: 'javascript:(function(){var s=document.createElement(\'script\');s.src=\'https://mathomhouse.github.io/dismantle-bookmarklet.js?_=\'+Date.now();s.onerror=function(){alert(\'Bookmarklet load failed. Check internet + try again.\');};document.body.appendChild(s);})();'
     }));
 
     bmWrap.appendChild(_ar_buildPowerToolCard({
       title: 'Hunting Guild Bulk Merge (standalone)',
       desc: 'Runs the Hunting Guild Merge for you in a loop and auto-handles every treasure popup it rolls (Repair Equipment, Treasure Wheel, Treasure Store, Treasure Guard). Pick how many merges and your Treasure Guard policy, then watch it go. Summoned guards spawn on your world map for you to fight within the hour.',
-      url: 'javascript:(function(){var s=document.createElement(\'script\');s.src=\'https://2864tw.com/merge-bookmarklet.js?_=\'+Date.now();s.onerror=function(){alert(\'Bookmarklet load failed. Check internet + try again.\');};document.body.appendChild(s);})();'
+      url: 'javascript:(function(){var s=document.createElement(\'script\');s.src=\'https://mathomhouse.github.io/merge-bookmarklet.js?_=\'+Date.now();s.onerror=function(){alert(\'Bookmarklet load failed. Check internet + try again.\');};document.body.appendChild(s);})();'
     }));
 
     bmWrap.appendChild(_ar_buildPowerToolCard({
       title: 'Alliance Defense Wave Skipper (standalone)',
       desc: 'Auto-runs the Skip and Confirm loop on the Alliance Defense fortress so you can fast-forward to a target wave. Click the defender monster to open its panel, run this, pick your stop wave, and watch it go. Each skip spends the normal in-game skip cost, and you can stop after any wave.',
-      url: 'javascript:(function(){var s=document.createElement(\'script\');s.src=\'https://2864tw.com/defense-skip-bookmarklet.js?_=\'+Date.now();s.onerror=function(){alert(\'Bookmarklet load failed. Check internet + try again.\');};document.body.appendChild(s);})();'
+      url: 'javascript:(function(){var s=document.createElement(\'script\');s.src=\'https://mathomhouse.github.io/defense-skip-bookmarklet.js?_=\'+Date.now();s.onerror=function(){alert(\'Bookmarklet load failed. Check internet + try again.\');};document.body.appendChild(s);})();'
     }));
   }
 
@@ -8884,6 +8921,7 @@
     if (wizardState.player && wizardState.player.name && !wizardState.player.siteKey && _ar_rosterByName) {
       var rosterMatch = _ar_rosterByName[String(wizardState.player.name).toLowerCase()];
       if (rosterMatch && rosterMatch.siteKey) wizardState.player.siteKey = rosterMatch.siteKey;
+      if (!wizardState.player.siteKey) { try { var _li = window.ArmoryIdentity && window.ArmoryIdentity.get && window.ArmoryIdentity.get(); if (_li && _li.siteKey) wizardState.player.siteKey = _li.siteKey; } catch(_e){} } // MATHOMHOUSE: siteKey fallback
     }
 
     var merged = mergeReportData(wizardState.reportData);
@@ -9091,8 +9129,7 @@
     setTimeout(_ar_updateTabScrollState, 400);
 
     var siteKey = (wizardState.player && wizardState.player.siteKey) || (window._reportSiteKey) || null;
-    var inS2864 = false;
-    if (siteKey && _ar_rosterMap && _ar_rosterMap[siteKey]) inS2864 = true;
+    var inS2864 = !!siteKey; // MATHOMHOUSE: inS2864 renderFullReport
     // Resolve identity + own-report before building tabDefs — the Advisor
     // Plans tab gate at the bottom of this block reads isOwnReport and was
     // silently dropping the tab (var hoisting → undefined) until both
@@ -11320,7 +11357,7 @@
     // mock is removed post-beta, players still get the tab plus the empty
     // state until they paste their own bookmarklet output.
     var siteKey = (wizardState.player && wizardState.player.siteKey) || null;
-    var inS2864 = siteKey && _ar_rosterMap && _ar_rosterMap[siteKey];
+    var inS2864 = !!siteKey; // MATHOMHOUSE: inS2864 heroesTab
     var gearPoolAvailable = !!inS2864;
 
     if (!gearPoolAvailable) {
@@ -11527,6 +11564,7 @@
   // it can never push the page wider than the viewport.
   function _ar_buildCloudSyncPill(kind, siteKey, opts) {
     opts = opts || {};
+    { var _mhHidden = document.createElement('span'); _mhHidden.style.display = 'none'; return _mhHidden; } // MATHOMHOUSE: cloud-sync disabled
     var isOwner = !!opts.isOwner;
     var pill = document.createElement('span');
     pill.style.cssText = 'display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);padding:4px 10px;border-radius:999px;border:1px solid var(--border);cursor:pointer;user-select:none;white-space:nowrap;';
@@ -14311,7 +14349,7 @@
       awSec.appendChild(awLbl);
       var awLevels = h.aws || {};
       var awPanel = renderHeroAwakening(h.id, h.aw, !!h.fa, awLevels, window._heroAwakeningData,
-        'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/hero-awake-skills/');
+        'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/hero-awake-skills/');
       if (awPanel) { awSec.appendChild(awPanel); pane.appendChild(awSec); }
     }
   }
@@ -16223,7 +16261,7 @@
     var head = _adv_mk('div', { cls: 'advisor-rec-head' });
     if (r.iconPath) {
       var sanitizedName = _adv_sanitizeDecorNameForIcon(r.name);
-      var iconUrl = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/decor-icons/' +
+      var iconUrl = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/decor-icons/' +
                     r.group + '_' + sanitizedName + '.png';
       var img = _adv_mk('img', { attrs: { src: iconUrl, loading: 'lazy', alt: '' } });
       img.onerror = function() { img.style.display = 'none'; };
@@ -22477,7 +22515,7 @@
         var odBar = document.createElement('div');
         odBar.style.cssText = 'display:flex;align-items:center;gap:.6rem;padding:10px 16px;margin:0 16px 6px;background:linear-gradient(135deg, rgba(210,153,34,0.14), rgba(240,198,116,0.08));border:1px solid rgba(210,153,34,0.4);border-radius:8px;flex-wrap:wrap;';
         var odIcon = document.createElement('img');
-        odIcon.src = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/inventory-icons/image__item__item_940001.png';
+        odIcon.src = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/inventory-icons/image__item__item_940001.png';
         odIcon.alt = '';
         odIcon.style.cssText = 'width:20px;height:20px;object-fit:contain;flex-shrink:0;';
         odIcon.onerror = function() { odIcon.style.display = 'none'; };
@@ -23177,9 +23215,9 @@
   // Synthetic aggregate cell (Gems / Odinium / Food / Oil). Click → modal
   // showing every contributing pack with per-pack value × amount × total.
   function _ar_buildAggregateCell(kind, data) {
-    var TR = 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/treasury-icons/';
+    var TR = 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/treasury-icons/';
     var META = {
-      gem:     { name: 'Gems',     iconUrl: 'https://raw.githubusercontent.com/texnottexas/landing-page/main/assets/inventory-icons/image__item__item_1000000.png', q: 5 },
+      gem:     { name: 'Gems',     iconUrl: 'https://raw.githubusercontent.com/mathomhouse/mathomhouse.github.io/main/assets/inventory-icons/image__item__item_1000000.png', q: 5 },
       odinium: { name: 'Odinium',  iconUrl: TR + 'odinium.png', q: 5 },
       food:    { name: 'Food',     iconUrl: TR + 'food.png',    q: 4 },
       oil:     { name: 'Oil',      iconUrl: TR + 'oil.png',     q: 4 }
@@ -23718,7 +23756,7 @@
         'Tap Share → Add Bookmark → Save (any page)',
         'Use the "Show bookmarklet URL" box below to copy the bookmarklet link',
         'Open Bookmarks → Edit → tap the new bookmark, clear the URL field, paste, rename to "' + bmLabel + '" and save',
-        'Open Safari and go to https://h5.topwargame.com/h5game/index.html — log in to your S2864 account if not already',
+        'Open Safari and go to https://h5.topwargame.com/h5game/index.html — log in to your account if not already',
         'Open the relevant panel inside the game (Bag for inventory, Beast list for bench), then tap the address bar, type "' + bmLabel + '", and tap the suggestion'
       ])));
       wrap.appendChild(makeDetails('Android Chrome setup', makeOl([
@@ -23726,7 +23764,7 @@
         'Menu (⋮) → Add to bookmarks (any page)',
         'Use the "Show bookmarklet URL" box below to copy the bookmarklet link',
         'Menu (⋮) → Bookmarks → tap-and-hold the new bookmark → Edit. Clear the URL field, paste, rename to "' + bmLabel + '" and save',
-        'Open Chrome and go to https://h5.topwargame.com/h5game/index.html — log in to your S2864 account if not already',
+        'Open Chrome and go to https://h5.topwargame.com/h5game/index.html — log in to your account if not already',
         'Open the relevant panel inside the game (Bag for inventory, Beast list for bench)',
         'In the URL bar type "' + bmLabel + '", then tap the autocomplete suggestion (Chrome strips javascript: when typed manually — picking from autocomplete preserves it)'
       ])));
@@ -24859,8 +24897,8 @@
     // the matching plan card. Advisor side: ?advise=<code> bootstraps advisor
     // view-only mode against the player's report.
     openBtn.href = isOwner
-      ? ('https://2864tw.com/armory-report.html?plan=' + rec.code)
-      : ('https://2864tw.com/armory-report.html?advise=' + rec.code);
+      ? ('https://mathomhouse.github.io/armory-report.html?plan=' + rec.code)
+      : ('https://mathomhouse.github.io/armory-report.html?advise=' + rec.code);
     openBtn.target = '_self';
     actions.appendChild(openBtn);
 
@@ -24872,7 +24910,7 @@
       copyBtn.className = 'asr-action';
       copyBtn.textContent = 'Copy link';
       copyBtn.title = 'Copy the advisor URL for code ' + rec.code;
-      var shareUrl = 'https://2864tw.com/armory-report.html?advise=' + rec.code;
+      var shareUrl = 'https://mathomhouse.github.io/armory-report.html?advise=' + rec.code;
       copyBtn.addEventListener('click', async function() {
         var prev = copyBtn.textContent;
         try {
@@ -27527,7 +27565,7 @@
         if (entry.status === 'open') {
           var openHelp = document.createElement('div');
           openHelp.className = 'adv-plan-card-open';
-          var url = 'https://2864tw.com/armory-report.html?advise=' + entry.code;
+          var url = 'https://mathomhouse.github.io/armory-report.html?advise=' + entry.code;
           openHelp.appendChild(document.createTextNode('Share this link with your advisor: '));
           var a = document.createElement('a');
           a.href = url; a.textContent = url;
@@ -28292,12 +28330,6 @@
     var p = document.createElement('p');
     p.textContent = 'One tap on h5.topwargame.com snapshots every supplement; paste the JSON below to upload them.';
     modal.appendChild(p);
-
-    // Bookmarklet walkthrough videos (Safari / Chrome). Sits at the top of
-    // the modal so first-time players see it before the paste box; the
-    // detected browser's version loads by default with a one-tap toggle
-    // to the other.
-    modal.appendChild(_ar_buildWalkthroughVideoCard());
 
     modal.appendChild(_ar_buildBookmarkletPanel({
       fileName: 'all-bookmarklet.txt',
@@ -30524,7 +30556,7 @@
           copyBtn.title = 'Copy share link';
           (function(sc) {
             copyBtn.addEventListener('click', function() {
-              navigator.clipboard.writeText('https://2864tw.com/armory-report.html?code=' + sc);
+              navigator.clipboard.writeText('https://mathomhouse.github.io/armory-report.html?code=' + sc);
               copyBtn.textContent = 'Copied!';
               setTimeout(function() { copyBtn.textContent = 'Copy'; }, 1500);
             });
@@ -33087,6 +33119,7 @@
   })();
 </script>
 <script src="https://translate.googleapis.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<script src="feedback-widget.js"></script>
+<!-- MATHOMHOUSE: removed-feedback-widget-script -->
+<a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
 </body>
 </html>
