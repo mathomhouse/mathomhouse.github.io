@@ -501,6 +501,9 @@
       });
     }).catch(function () { return 'Network error — try again.'; });
   }
+  // Exposed so the setup wizard (patched into armory-report.html via
+  // patch-armory.js) can offer recovery-code restore, not just Settings.
+  window._mh_loadRecoveryCode = _mh_loadRecoveryCode;
 
   function _mh_buildRestoreField() {
     var wrap = document.createElement('div');

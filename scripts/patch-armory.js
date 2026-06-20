@@ -413,5 +413,75 @@ if (!content.includes('// MATHOMHOUSE: settings-btn')) {
   );
 }
 
+// 23. Setup screen (first-visit wizard): rename the existing 4-char box to
+//     "Share code" and add a 12-char recovery-code restore input below it.
+//     Recovery restore was otherwise reachable only from the Settings dialog.
+//     The 6-space indent uniquely targets the renderStepInput wizard block
+//     (the Welcome Back block at 4-space indent is left untouched).
+//     Load logic lives in armory-auth-override.js (window._mh_loadRecoveryCode).
+content = content.replace(
+  "      codeInput.placeholder = 'Code';",
+  "      codeInput.placeholder = 'Share code';"
+);
+if (!content.includes('// MATHOMHOUSE: recovery-wizard')) {
+  content = content.replace(
+    '      container.appendChild(codeRow);',
+    `      container.appendChild(codeRow);
+      // MATHOMHOUSE: recovery-wizard — restore a profile from a 12-char recovery code
+      var rcDivider = document.createElement('div');
+      rcDivider.className = 'wizard-divider';
+      var rcDL = document.createElement('div'); rcDL.className = 'wizard-divider-line';
+      var rcDR = document.createElement('div'); rcDR.className = 'wizard-divider-line';
+      rcDivider.appendChild(rcDL);
+      rcDivider.appendChild(document.createTextNode('or restore with a recovery code'));
+      rcDivider.appendChild(rcDR);
+      container.appendChild(rcDivider);
+
+      var rcRow = document.createElement('div');
+      rcRow.className = 'wizard-code-row';
+      var rcInput = document.createElement('input');
+      rcInput.type = 'text';
+      rcInput.className = 'wizard-code-input';
+      rcInput.style.width = '160px';
+      rcInput.placeholder = 'Recovery code';
+      rcInput.id = 'wizard-recovery-input';
+      rcInput.maxLength = 12;
+      rcInput.setAttribute('autocomplete', 'off');
+      rcInput.setAttribute('autocapitalize', 'characters');
+      rcInput.spellcheck = false;
+      rcRow.appendChild(rcInput);
+
+      var rcBtn = document.createElement('button');
+      rcBtn.className = 'btn-secondary';
+      rcBtn.textContent = 'Restore';
+      rcRow.appendChild(rcBtn);
+      container.appendChild(rcRow);
+
+      var rcErr = document.createElement('div');
+      rcErr.className = 'wizard-error';
+      rcErr.id = 'wizard-recovery-error';
+      container.appendChild(rcErr);
+
+      var rcHint = document.createElement('p');
+      rcHint.style.cssText = 'font-size:.7rem;color:var(--muted);margin-top:.35rem;';
+      rcHint.textContent = 'Restore your profile on this device from a 12-character recovery code';
+      container.appendChild(rcHint);
+
+      function _mhWizardRestore() {
+        var code = (rcInput.value || '').trim().toUpperCase();
+        if (code.length !== 12) { rcErr.textContent = 'Enter the full 12-character recovery code.'; return; }
+        if (typeof window._mh_loadRecoveryCode !== 'function') { rcErr.textContent = 'Restore unavailable — reload the page and try again.'; return; }
+        rcErr.textContent = 'Restoring…';
+        rcBtn.disabled = true;
+        window._mh_loadRecoveryCode(code).then(function(errorMsg) {
+          if (errorMsg) { rcErr.textContent = errorMsg; rcBtn.disabled = false; return; }
+          location.reload();
+        });
+      }
+      rcBtn.addEventListener('click', _mhWizardRestore);
+      rcInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') _mhWizardRestore(); });`
+  );
+}
+
 fs.writeFileSync(filePath, content, 'utf8');
 console.log(`Patched ${filePath}`);
