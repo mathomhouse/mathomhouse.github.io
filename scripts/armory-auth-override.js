@@ -408,16 +408,9 @@
         return;
       }
       try {
-        const res = await fetch(`${_WORKER}/recovery/load?code=${code}`);
-        if (res.status === 404) { errEl.textContent = 'Code not found or expired.'; errEl.style.display = ''; return; }
-        if (!res.ok) { errEl.textContent = 'Server error — try again.'; errEl.style.display = ''; return; }
-        const data = await res.json();
-        localStorage.setItem('playerIdentity', JSON.stringify({
-          siteKey: data.siteKey, name: data.name || '', alliance: data.alliance || ''
-        }));
-        localStorage.setItem('armory_recovery_code', code);
-        // Task 4 — remove incorrect alert (commented out; supplement data loads from KV automatically)
-        // alert('Profile restored.\n\nNote: supplement data (inventory, bench, chips) is not included — re-import via bookmarklet after reload.');
+        const errorMsg = await _mh_loadRecoveryCode(code);
+        if (errorMsg) { errEl.textContent = errorMsg; errEl.style.display = ''; return; }
+        // No saved report for this profile — reload to the landing page.
         location.reload();
       } catch {
         errEl.textContent = 'Network error — try again.';
@@ -486,8 +479,32 @@
     return wrap;
   }
 
+  // A recovery code only restores the identity (siteKey/name/alliance). The
+  // actual report — the battle-report-derived config — lives server-side keyed
+  // by share code, not by siteKey, so a freshly restored device has no
+  // playerReport and boots straight to the landing page. Look up this siteKey's
+  // saved configs and jump into the richest one via ?code= (the boot handler
+  // auto-applies it). Returns Promise<boolean> — true if it navigated away.
+  function _mh_navigateToRestoredReport(siteKey) {
+    if (!siteKey) return Promise.resolve(false);
+    return fetch(_WORKER + '/report-configs', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ siteKey: siteKey })
+    }).then(function (r) { return r.ok ? r.json() : null; }).then(function (res) {
+      if (!res || !res.ok || !res.configs || !res.configs.length) return false;
+      // Pick the most recently updated config; first on a tie / missing dates.
+      function _ts(c) { var t = c && (c.updatedAt || c.date); var n = t ? new Date(t).getTime() : 0; return isNaN(n) ? 0 : n; }
+      var best = res.configs.reduce(function (a, b) { return _ts(b) > _ts(a) ? b : a; });
+      if (!best || !best.shortcode) return false;
+      window.location.replace('armory-report.html?code=' + encodeURIComponent(best.shortcode).toUpperCase());
+      return true;
+    }).catch(function () { return false; });
+  }
+
   // Shared with the first-visit banner's restore flow. Returns Promise<string|null>:
-  // an error message, or null on success (caller reloads).
+  // an error message, or null on success (caller reloads). On success with a
+  // saved report it navigates to ?code= and never resolves (page is unloading).
   function _mh_loadRecoveryCode(code) {
     return fetch(_WORKER + '/recovery/load?code=' + code).then(function (res) {
       if (res.status === 404) return 'Code not found or expired.';
@@ -497,7 +514,10 @@
           siteKey: data.siteKey, name: data.name || '', alliance: data.alliance || ''
         }));
         localStorage.setItem('armory_recovery_code', code);
-        return null;
+        return _mh_navigateToRestoredReport(data.siteKey).then(function (navigated) {
+          if (navigated) return new Promise(function () {}); // hold; page is navigating
+          return null; // identity restored, no saved report — caller reloads to landing
+        });
       });
     }).catch(function () { return 'Network error — try again.'; });
   }
