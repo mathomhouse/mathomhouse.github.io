@@ -2,30 +2,385 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top War Calculators</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/styles/mathomhouse.css">
-    <link rel="stylesheet" href="/styles/header.css">
-    <link rel="stylesheet" href="/styles/layout.css">
-    <link rel="stylesheet" href="/styles/calculators.css">
-    <script src="/header.js" defer></script>
-    <link rel="icon" href="/cutelogo.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="/cutelogo.ico">
-    <link rel="apple-touch-icon" sizes="167x167" href="/cutelogo.ico">
-    <link rel="apple-touch-icon" sizes="120x120" href="/cutelogo.ico">
-    <link rel="apple-touch-icon" sizes="76x76" href="/cutelogo.ico">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The JC (Ninja Mode)</title>
+  <meta name="description" content="Tools and calculators for Top War players.">
 
+        <meta property="og:title" content="Mathom House • Rune Guide">
+        <meta property="og:description" content="Check out different rune loadouts!">
+        <meta property="og:url" content="https://mathomhouse.github.io/bobgriftest.html">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="From Artu, Gikey, and Bobgrif">
+        <meta property="og:image" content="https://mathomhouse.github.io/images/bobgrif-icon.png">
+  <!-- Anti-flash -->
+  <script>(function () { var t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); })()</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/styles/mathomhouse.css">
+  <link rel="stylesheet" href="/styles/header.css">
+  <link rel="stylesheet" href="/styles/layout.css">
+  <link rel="stylesheet" href="/styles/calculators.css">
+  <link rel="stylesheet" href="/styles/bobsrunes.css">
+  <style>
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 1em;
+    }
+    .tabs button {
+      margin: 5px;
+      border-radius: 0;
+    }
+
+    #recommendations label,
+    #loadouts label { display: block; margin-bottom: 3px; }
+
+    .gear-box .hero-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .gear-box .hero-head h2 { margin: 0; }
+    .hero-portrait-wrap {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      flex-shrink: 0;
+      border-radius: 50%;
+    }
+    /* spinning aura ring behind portrait — always spinning, brightens on hover */
+    .hero-portrait-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent 0deg, var(--gold) 60deg, #fff 90deg, var(--gold) 120deg, transparent 200deg, var(--gold-dim) 300deg, transparent 360deg);
+      opacity: .55;
+      z-index: 0;
+      transition: opacity .3s ease, filter .3s ease;
+      animation: portraitSpin 3s linear infinite;
+    }
+    .gear-box:hover .hero-portrait-wrap::before {
+      opacity: 1;
+      filter: drop-shadow(0 0 8px var(--gold));
+      animation-duration: 1.4s;
+    }
+    /* Pause portrait animations while the card is scrolled out of view */
+    .gear-box:not(.in-view) .hero-portrait-wrap::before,
+    .gear-box:not(.in-view) .hero-portrait { animation-play-state: paused; }
+    /* Pause all portrait animations while the tab is backgrounded */
+    .anims-paused .hero-portrait-wrap::before,
+    .anims-paused .hero-portrait { animation-play-state: paused; }
+    .hero-portrait {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 2px solid var(--gold-dim);
+      background: var(--surface);
+      transition: transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s, box-shadow .35s;
+    }
+    .gear-box:hover .hero-portrait {
+      transform: scale(1.18);
+      border-color: var(--gold);
+      animation: portraitPulse 1.6s ease-in-out infinite;
+    }
+    @keyframes portraitSpin { to { transform: rotate(360deg); } }
+    @keyframes portraitPulse {
+      0%, 100% { box-shadow: 0 0 12px var(--gold-glow); transform: scale(1.18); }
+      50%      { box-shadow: 0 0 30px var(--gold), 0 0 50px var(--gold-glow); transform: scale(1.24); }
+    }
+
+    /* Card layout — match guides/bobstitaneffects (bobsrunes.css #results / #comboResults) */
+    #loadoutResults .gear-box { width: 300px; }
+
+    #recResults {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    #recResults .gear-box {
+      flex: 1 1 300px;
+      max-width: 300px;
+    }
+    #recResults .gear-box:last-child {
+      flex-basis: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    #recResults .gear-box:last-child .gear-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    @media (max-width: 768px) {
+      #recResults { flex-direction: column; align-items: center; }
+      #recResults .gear-box { max-width: 100%; }
+    }
+
+    /* Gold borders around rune + HT chip icons */
+    #loadoutResults .gear-slot,
+    #recResults .gear-slot {
+      grid-template-rows: auto 84px auto;
+      height: auto;
+      row-gap: 8px;
+    }
+    .rune-icon {
+      box-sizing: content-box;
+      padding: 4px;
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      background: var(--surface);
+      box-shadow: 0 0 6px var(--gold-glow, rgba(255,200,80,.45)), inset 0 0 4px rgba(0,0,0,.4);
+    }
+    .chip-icon {
+      box-sizing: content-box;
+      padding: 3px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      background: var(--surface);
+      box-shadow: 0 0 6px var(--gold-glow, rgba(255,200,80,.45)), inset 0 0 4px rgba(0,0,0,.4);
+    }
+    .mecha-icon {
+      box-sizing: content-box;
+      padding: 4px;
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      background: var(--surface);
+      box-shadow: 0 0 6px var(--gold-glow, rgba(255,200,80,.45)), inset 0 0 4px rgba(0,0,0,.4);
+    }
+    /* Top-align HT chip/mecha icons so a wrapped name pushes text down, not the icon up */
+    #loadoutResults .ht-icon-row,
+    #recResults .ht-icon-row {
+      align-items: flex-start;
+    }
+    #loadoutResults .ht-icon-column,
+    #recResults .ht-icon-column {
+      justify-content: flex-start;
+    }
+    #loadoutResults .chip-name,
+    #loadoutResults .ht-name,
+    #recResults .chip-name,
+    #recResults .ht-name {
+      margin-top: 12px;
+    }
+  </style>
+  <script src="/header.js" defer></script>
 </head>
 
 <body>
-     <header id="header-placeholder"></header>
-    <div style="font-size:64px;font-weight:bold ; text-align:center; vertical-align: center;">
-        <marquee behavior="scroll" direction="left">ABSOLUTELY FUCKING NO FUCKS GIVEN</marquee>
-</div>
+  <header id="header-placeholder"></header>
+
+  <section class="page-hero">
+    <p class="breadcrumb"><a href="/">Home</a> / <a href="/guides.html">Guides</a> / Bobgrif's Titan Effects</p>
+    <h1>The JC (Ninja Mode)</h1>
+    <p>Titan gear rune setup. All data provided by Bobgrif.</p>
+  </section>
+
+  <div class="container">
+
+    <div id="loadoutResults" class="gear-container"></div>
+
+  </div>
+
+  <script>
+    const jcLoadout = {
+      march_name: "The JC (Ninja Mode)",
+      attack_name: "Ella",
+      attack_assault_pistol: "Artillery Storm",
+      attack_tactical_backarmor: "Magnetize",
+      attack_optical_addon: "Tactical Awareness",
+      attack_raysor_headset: "Stealth Hologram",
+      attack_portable_gps: "Tactical Awareness",
+      attack_power_boots: "Stealth Hologram",
+      indestructible_name: "Rohr",
+      indestructible_assault_pistol: "Impact",
+      indestructible_tactical_backarmor: "Unbreakable",
+      indestructible_optical_addon: "Impact",
+      indestructible_raysor_headset: "Debilitate",
+      indestructible_portable_gps: "Tactical Awareness",
+      indestructible_power_boots: "Debilitate",
+      hp_name: "Sara",
+      hp_assault_pistol: "Magnetic Field",
+      hp_tactical_backarmor: "Steel Torrent",
+      hp_optical_addon: "Magnetic Field",
+      hp_raysor_headset: "Magnetize",
+      hp_portable_gps: "Tactical Awareness",
+      hp_power_boots: "Magnetize",
+      heavy_trooper_type: "Blade Angel BA-6",
+      heavy_trooper_chip_type: "Ring of Cosmos",
+      heavy_trooper_placement: "Slot 5"
+    };
+
+// ─── Hero Portraits ───────────────────────────────────────────────────────────
+const heroPortraitExt = {
+  alvida: 'jpg', heid: 'jpg', joanmature: 'jpg',
+  carna: 'jpg', sara: 'png', shensuyu: 'png',
+  ella: 'jpeg', franziska: 'jpeg', lilia: 'jpeg', margaretha: 'jpeg', tannis: 'jpeg',
+  jett: 'jpeg', lophy: 'jpeg', nova: 'jpeg', marvingt: 'jpeg', rohr: 'jpeg',
+  sinope: 'jpeg', vivian: 'jpeg'
+};
+
+const cardObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => e.target.classList.toggle('in-view', e.isIntersecting));
+}, { rootMargin: '120px' });
+
+function observeGearBoxes() {
+  document.querySelectorAll('.gear-box').forEach(b => cardObserver.observe(b));
+}
+
+document.addEventListener('visibilitychange', () => {
+  document.body.classList.toggle('anims-paused', document.hidden);
+});
+
+function heroPortrait(name) {
+  const slug = (name || '').toLowerCase().replace(/\s+/g, '');
+  const ext = heroPortraitExt[slug];
+  if (!ext) return '';
+  return `<span class="hero-portrait-wrap"><img class="hero-portrait" src="assets/heroes-awakening/${slug}_headshot.${ext}" alt="${name}" loading="lazy" onerror="this.closest('.hero-portrait-wrap').style.display='none'"></span>`;
+}
+
+// ─── Shared Rendering ─────────────────────────────────────────────────────────
+
+function renderGearDetails(gear) {
+  const displayNames = {
+    Gun:     'Assault Pistol',
+    Chest:   'Tactical Backarmor',
+    Optical: 'Optical Add-on',
+    Headset: 'Raysor Headset',
+    Arms:    'Portable GPS',
+    Boots:   'Power Boots'
+  };
+
+  const slotOrder = [
+    ['Gun',     'Headset'],
+    ['Chest',   'Arms'],
+    ['Optical', 'Boots']
+  ];
+
+  return `<div class="gear-grid">` + slotOrder.map(pair => {
+    return pair.map(slot => {
+      const rune = gear[slot];
+      if (!rune) return '';
+      const iconPath = `/assets/rune-icons/${rune.toLowerCase().replace(/ /g, '-')}.png`;
+      return `
+        <div class="gear-slot">
+          <p><strong>${displayNames[slot]}</strong></p>
+          <img class="rune-icon" src="${iconPath}" alt="${rune}" title="${rune}" />
+          <p>${rune}</p>
+        </div>
+      `;
+    }).join('');
+  }).join('') + `</div>`;
+}
+
+// ─── Auto-render JC's loadout on page load ────────────────────────────────────
+
+(function renderJCLoadout() {
+  const loadout = jcLoadout;
+  const resultsDiv = document.getElementById('loadoutResults');
+
+  const heroes = [
+    { role: 'Attack',         prefix: 'attack' },
+    { role: 'Indestructible', prefix: 'indestructible' },
+    { role: 'HP',             prefix: 'hp' }
+  ];
+
+  heroes.forEach(({ role, prefix }) => {
+    const heroName = loadout[`${prefix}_name`];
+    const gear = {
+      Gun:     loadout[`${prefix}_assault_pistol`],
+      Chest:   loadout[`${prefix}_tactical_backarmor`],
+      Optical: loadout[`${prefix}_optical_addon`],
+      Headset: loadout[`${prefix}_raysor_headset`],
+      Arms:    loadout[`${prefix}_portable_gps`],
+      Boots:   loadout[`${prefix}_power_boots`]
+    };
+
+    const box = document.createElement('div');
+    box.className = 'gear-box';
+    box.innerHTML = `
+      <div class="hero-head">
+        <h2>${heroName}<br><span style="font-size: 0.7em;">(${role})</span></h2>
+        ${heroPortrait(heroName)}
+      </div>
+      <div class="gear-details">
+        ${renderGearDetails(gear)}
+      </div>
+    `;
+    resultsDiv.appendChild(box);
+  });
+
+  // Heavy Trooper box
+  const htTrooper = loadout.heavy_trooper_type;
+  const htChip    = loadout.heavy_trooper_chip_type;
+  const htSlot    = loadout.heavy_trooper_placement;
+
+  const htIconMap = {
+    "Earthshaker E-100":    "mecha_1002",
+    "Blazing Gale Rx":      "mecha_1003",
+    "Tide Crusher BW-3":    "mecha_1004",
+    "Doom Sawblade D-4":    "mecha_1005",
+    "Luminary Knight LP-4": "mecha_1006",
+    "Blade Angel BA-6":     "mecha_1007"
+  };
+
+  const chipIconMap = {
+    "Xyston":               "Xyston",
+    "Hoplon":               "Hoplon",
+    "Shamshir":             "Shamshir",
+    "Estoc Piercing Sword": "Estoc",
+    "Rondel Dagger":        "Rondel_Dagger",
+    "Scramsax Blade":       "Scramsax_Blade",
+    "Kris Sword":           "Kris_Sword",
+    "Ring of Cosmos":       "Ring_of_Cosmos",
+    "Sasanian's Chain":     "Sasanians_Chain"
+  };
+
+  const htKey   = htIconMap[htTrooper]  || "unknown";
+  const chipKey = chipIconMap[htChip]   || "unknown";
+
+  const htBox = document.createElement('div');
+  htBox.className = 'gear-box';
+  htBox.innerHTML = `
+    <h3>Heavy Trooper</h3>
+    <div class="gear-grid">
+      <div class="ht-slot">${htSlot}</div>
+      <div class="gear-slot">
+        <div class="ht-icon-row">
+          <div class="ht-icon-column">
+            <img class="chip-icon" src="/assets/ht-chip-icons/${chipKey}.png" alt="${htChip}" title="${htChip}" />
+            <div class="chip-name">${htChip}</div>
+          </div>
+          <div class="ht-icon-column">
+            <img class="mecha-icon" src="/assets/mecha-icons/${htKey}.png" alt="${htTrooper}" title="${htTrooper}" />
+            <div class="ht-name">${htTrooper}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  resultsDiv.appendChild(htBox);
+
+  observeGearBoxes();
+})();
+  </script>
+
 </body>
 
 </html>
