@@ -492,7 +492,8 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ siteKey: siteKey })
     }).then(function (r) { return r.ok ? r.json() : null; }).then(function (res) {
-      if (!res || !res.ok || !res.configs || !res.configs.length) return false;
+      // /report-configs returns { configs } with no `ok` field — check the array directly.
+      if (!res || !Array.isArray(res.configs) || !res.configs.length) return false;
       // Pick the most recently updated config; first on a tie / missing dates.
       function _ts(c) { var t = c && (c.updatedAt || c.date); var n = t ? new Date(t).getTime() : 0; return isNaN(n) ? 0 : n; }
       var best = res.configs.reduce(function (a, b) { return _ts(b) > _ts(a) ? b : a; });
