@@ -492,6 +492,24 @@ content = content.replace(
   '.wizard-code-row { display: flex; gap: .5rem; align-items: stretch; justify-content: center; }'
 );
 
+// 23c. Match the setup-wizard button heights to their adjacent text inputs.
+//      .btn-primary has more vertical padding (.75rem) than .wizard-input (.65rem)
+//      and .btn-secondary (.65rem) more than .wizard-code-input (.5rem); with the
+//      rows on align-items:stretch this made the rows take the taller button
+//      height. Trim the button padding to its input's so they line up flush.
+if (!content.includes('MATHOMHOUSE: wizard-btn-height')) {
+  content = content.replace(
+    '.wizard-input::placeholder { color: var(--muted); }',
+    '.wizard-input::placeholder { color: var(--muted); }\n  /* MATHOMHOUSE: wizard-btn-height */\n  .wizard-input-row .btn-primary { padding-top: .65rem; padding-bottom: .65rem; }\n  .wizard-code-row .btn-secondary { padding-top: .5rem; padding-bottom: .5rem; }'
+  );
+}
+
+// 23d. Rename the share-code divider label.
+content = content.replace(
+  "divider.appendChild(document.createTextNode('or load a saved config'));",
+  "divider.appendChild(document.createTextNode('or load with a share code'));"
+);
+
 // 24. Persist the just-loaded share code so Save updates it (instead of minting a
 //     new one) and the dashboard badge displays it. applyShortcodeConfig only
 //     carried forward the prior localStorage shortcode, so loading by code on the
