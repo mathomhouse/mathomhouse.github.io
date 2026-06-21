@@ -483,5 +483,25 @@ if (!content.includes('// MATHOMHOUSE: recovery-wizard')) {
   );
 }
 
+// 24. Persist the just-loaded share code so Save updates it (instead of minting a
+//     new one) and the dashboard badge displays it. applyShortcodeConfig only
+//     carried forward the prior localStorage shortcode, so loading by code on the
+//     owner's own device lost the code. Pass the loaded code into the function and
+//     record it on owner loads.
+if (!content.includes('MATHOMHOUSE: keep loaded code')) {
+  content = content.replace(
+    'function applyShortcodeConfig(playerName, ids, persistToStorage, siteKey) {',
+    'function applyShortcodeConfig(playerName, ids, persistToStorage, siteKey, shortcode) {'
+  );
+  content = content.replace(
+    'if (priorShortcode) fakeSaved.shortcode = priorShortcode;',
+    'if (persistToStorage !== false && shortcode) fakeSaved.shortcode = shortcode; // MATHOMHOUSE: keep loaded code\n    else if (priorShortcode) fakeSaved.shortcode = priorShortcode;'
+  );
+  content = content.replace(
+    /applyShortcodeConfig\(result\.playerName, ids, isSamePlayer, result\.siteKey\);/g,
+    'applyShortcodeConfig(result.playerName, ids, isSamePlayer, result.siteKey, code.toUpperCase());'
+  );
+}
+
 fs.writeFileSync(filePath, content, 'utf8');
 console.log(`Patched ${filePath}`);

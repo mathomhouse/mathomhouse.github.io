@@ -29,6 +29,19 @@
   const _WORKER = window.SUPPLEMENT_WORKER
     || 'https://mathomhouse-tw-worker.mathomhouse-tw.workers.dev';
 
+  // Strip ?code from the URL after a recovery restore. Boot reads location.search
+  // during its own deferred script, so by window 'load' the code is already consumed.
+  var _mhStripUrl = false;
+  try { _mhStripUrl = !!sessionStorage.getItem('_mh_strip_code_url'); } catch (e) {}
+  if (_mhStripUrl) {
+    try { sessionStorage.removeItem('_mh_strip_code_url'); } catch (e) {}
+    window.addEventListener('load', function () {
+      if (new URLSearchParams(window.location.search).get('code')) {
+        history.replaceState({}, '', window.location.pathname);
+      }
+    });
+  }
+
   // Suppress calls to unimplemented routes (advisor, feedback) to avoid 404 noise.
   // Note: /flag-overrides is handled server-side — its fetch fires before this defer script runs.
   const _baseFetch = window.fetch.bind(window);
@@ -498,6 +511,9 @@
       function _ts(c) { var t = c && (c.updatedAt || c.date); var n = t ? new Date(t).getTime() : 0; return isNaN(n) ? 0 : n; }
       var best = res.configs.reduce(function (a, b) { return _ts(b) > _ts(a) ? b : a; });
       if (!best || !best.shortcode) return false;
+      // Mark so the destination page strips ?code from the URL after the report
+      // renders (recovery restore only — normal share links keep their ?code).
+      try { sessionStorage.setItem('_mh_strip_code_url', '1'); } catch (e) {}
       window.location.replace('armory-report.html?code=' + encodeURIComponent(best.shortcode).toUpperCase());
       return true;
     }).catch(function () { return false; });
