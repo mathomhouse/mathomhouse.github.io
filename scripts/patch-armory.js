@@ -442,7 +442,6 @@ if (!content.includes('// MATHOMHOUSE: recovery-wizard')) {
       var rcInput = document.createElement('input');
       rcInput.type = 'text';
       rcInput.className = 'wizard-code-input';
-      rcInput.style.width = '160px';
       rcInput.placeholder = 'Recovery code';
       rcInput.id = 'wizard-recovery-input';
       rcInput.maxLength = 12;
@@ -482,6 +481,16 @@ if (!content.includes('// MATHOMHOUSE: recovery-wizard')) {
       rcInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') _mhWizardRestore(); });`
   );
 }
+
+// 23b. Align the share-code / recovery-code rows: the secondary button is taller
+//      than the code input, and the row centered them (align-items:center), so
+//      their top borders sat a few px apart. Switch to stretch — matching the
+//      battle-report row (.wizard-input-row, default stretch) — so input and
+//      button share a height and their tops line up.
+content = content.replace(
+  '.wizard-code-row { display: flex; gap: .5rem; align-items: center; justify-content: center; }',
+  '.wizard-code-row { display: flex; gap: .5rem; align-items: stretch; justify-content: center; }'
+);
 
 // 24. Persist the just-loaded share code so Save updates it (instead of minting a
 //     new one) and the dashboard badge displays it. applyShortcodeConfig only
