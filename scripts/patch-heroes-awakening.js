@@ -161,5 +161,14 @@ if (content.includes('id="ha-perf-fix"')) {
   content = content.replace('</head>', `${perfFixStyle}\n</head>`);
 }
 
+// 20. Hide Grand Slam crowdsource card — its Submit posts to the upstream 2864tw
+//     worker (/grand-slam/submit), which mathomhouse has no endpoint for.
+if (!content.includes('id="ha-hide-grandslam"')) {
+  content = content.replace(
+    '</head>',
+    '<style id="ha-hide-grandslam">#grand-slam-card{display:none!important}</style>\n</head>'
+  );
+}
+
 fs.writeFileSync(filePath, content, 'utf8');
 console.log(`Patched ${filePath}`);
