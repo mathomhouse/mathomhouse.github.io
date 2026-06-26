@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://translate.googleapis.com https://www.gstatic.com; img-src 'self' data: https://raw.githubusercontent.com https://h5.topwargame.com https://knight-cdn.akamaized.net https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://fonts.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://push-worker.27tb8s6fct.workers.dev https://rickroll-counter.27tb8s6fct.workers.dev https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://*.clarity.ms https://c.bing.com https://www.google-analytics.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://translate.google.com; font-src https://fonts.gstatic.com;">
-<title>Heroes Awakening | Mathom House</title>
-<meta name="description" content="Top War Heroes Awakening reference: Hero Swap rules, Awakening Level meter, the 4 awakening skills and tiers, calculators, and strategy.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://translate-pa.googleapis.com https://www.clarity.ms https://*.clarity.ms https://c.bing.com; style-src 'unsafe-inline' https://translate.googleapis.com https://www.gstatic.com; img-src 'self' data: https://raw.githubusercontent.com https://h5.topwargame.com https://knight-cdn.akamaized.net https://translate.google.com https://translate.googleapis.com https://www.gstatic.com https://fonts.gstatic.com https://www.google.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://push-worker.27tb8s6fct.workers.dev https://rickroll-counter.27tb8s6fct.workers.dev https://translate.googleapis.com https://translate-pa.googleapis.com https://translate.google.com https://*.clarity.ms https://c.bing.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src https://translate.google.com;">
+<title>Heroes Awakening &mdash; Top War Server 2864</title>
+<meta name="description" content="Top War Heroes Awakening reference for Server 2864: Hero Swap rules, Awakening Level meter, the 4 awakening skills and tiers, calculators, and strategy.">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="From Artu, Gikey, and Tex">
-<meta property="og:url" content="https://mathomhouse.github.io/guides/heroes-awakening.html">
-<meta property="og:title" content="Heroes Awakening • Mathom House">
-<meta property="og:description" content="Heroes Awakening Guide.">
+<meta property="og:site_name" content="2864tw.com">
+<meta property="og:url" content="https://2864tw.com/heroes-awakening.html">
+<meta property="og:title" content="Heroes Awakening &mdash; Top War Server 2864">
+<meta property="og:description" content="Hero Swap, Awakening Level, skill tiers, calculators, and strategy for the new Top War hero system.">
 <link rel="icon" type="image/x-icon" href="../favicon.ico">
 <style>
   :root {
@@ -151,108 +151,6 @@
     .alpha-banner .ab-inner { flex-wrap: wrap; }
   }
 
-  /* Current verdict callout (sits below the work-in-progress banner) */
-  .verdict-bar {
-    background: linear-gradient(90deg, rgba(255,99,99,.10), rgba(210,153,34,.10));
-    border-bottom: 1px solid rgba(255,99,99,.45);
-    padding: 12px 14px;
-    font-size: .92rem; line-height: 1.5;
-    color: var(--text);
-    font-weight: 700;
-  }
-  .verdict-bar .vb-inner {
-    max-width: 1280px; margin: 0 auto;
-    display: flex; gap: 12px; align-items: flex-start;
-  }
-  .verdict-bar .vb-icon {
-    flex: 0 0 auto; color: #ff6363; margin-top: 1px;
-  }
-  .verdict-bar .vb-icon svg { width: 20px; height: 20px; display: block; }
-  .verdict-bar .vb-body { flex: 1 1 auto; }
-  .verdict-bar .vb-label {
-    color: #ff6363; text-transform: uppercase; letter-spacing: .08em;
-    font-size: .72rem; font-weight: 800; margin-right: 8px;
-  }
-  /* Full-width whale notice bar (its own section beneath the verdict).
-     Sized to match the verdict bar above it so the two read as a pair. */
-  .whale-bar {
-    display: block; width: 100%;
-    background: linear-gradient(90deg, rgba(56,139,253,.18), rgba(121,192,255,.10));
-    border: 0; border-top: 1px solid rgba(121,192,255,.35);
-    border-bottom: 1px solid rgba(121,192,255,.45);
-    padding: 12px 14px;
-    color: var(--text);
-    font: inherit;
-    text-align: left;
-    cursor: pointer;
-    transition: background .18s;
-  }
-  .whale-bar:hover { background: linear-gradient(90deg, rgba(56,139,253,.28), rgba(121,192,255,.18)); }
-  .whale-bar:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
-  .whale-bar .wb-inner {
-    max-width: 1280px; margin: 0 auto;
-    display: flex; gap: 12px; align-items: flex-start;
-  }
-  .whale-bar .wb-icon {
-    flex: 0 0 auto;
-    width: 30px; height: 22px;
-    color: var(--accent); margin-top: 1px;
-  }
-  .whale-bar .wb-icon svg { width: 30px; height: 22px; display: block; }
-  .whale-bar .wb-body { flex: 1 1 auto; min-width: 0; }
-  .whale-bar .wb-label {
-    color: var(--accent); text-transform: uppercase; letter-spacing: .08em;
-    font-size: .72rem; font-weight: 800; margin-right: 8px;
-    white-space: nowrap;
-  }
-  .whale-bar .wb-text {
-    font-size: .92rem; line-height: 1.5; color: var(--text);
-  }
-  .whale-bar .wb-cta {
-    flex: 0 0 auto; color: var(--accent); font-size: .8rem; font-weight: 700;
-    white-space: nowrap; margin-top: 2px;
-  }
-  @media (max-width: 600px) {
-    .whale-bar { padding: 10px 14px; }
-    .whale-bar .wb-inner { gap: 10px; }
-    .whale-bar .wb-icon { width: 28px; height: 21px; }
-    .whale-bar .wb-icon svg { width: 28px; height: 21px; }
-    .whale-bar .wb-label { display: block; margin: 0 0 2px; font-size: .68rem; }
-    .whale-bar .wb-text { font-size: .82rem; line-height: 1.4; }
-    .whale-bar .wb-cta { display: none; }
-  }
-
-  /* Whale advice modal */
-  .whale-modal-overlay {
-    display: none; position: fixed; inset: 0; z-index: 600;
-    background: rgba(0,0,0,.7);
-    align-items: center; justify-content: center; padding: 1rem;
-  }
-  .whale-modal-overlay.active { display: flex; }
-  .whale-modal {
-    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-    padding: 1.25rem 1.4rem; max-width: 560px; width: 100%;
-    max-height: 85vh; overflow-y: auto;
-    box-shadow: 0 18px 60px rgba(0,0,0,.55);
-  }
-  .whale-modal-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 12px; gap: 12px;
-  }
-  .whale-modal-title {
-    font-size: 1.05rem; font-weight: 800; color: var(--accent);
-    display: inline-flex; align-items: center; gap: 8px;
-  }
-  .whale-modal-close {
-    background: none; border: none; color: var(--muted);
-    cursor: pointer; font-size: 1.3rem; line-height: 1; padding: 4px 8px;
-  }
-  .whale-modal-close:hover { color: var(--text); }
-  .whale-modal-body p {
-    font-size: .92rem; line-height: 1.55; color: var(--text);
-    margin: 0 0 12px;
-  }
-  .whale-modal-body p:last-child { margin-bottom: 0; }
   .appbar h1 {
     font-size: 1.05rem; line-height: 1.2;
     background: linear-gradient(90deg, #fff 0%, #b8a4ff 50%, #79c0ff 100%);
@@ -848,28 +746,29 @@
   }
   .main-tab.on .sub { color: var(--accent); }
 
-  /* Mobile: force a 2x2 grid so the 4 tabs lay out evenly instead of wrapping
-     into an awkward 1 + 2 + 1 pattern. */
+  /* Mobile: force a 2-col grid so the tabs lay out evenly across rows.
+     Currently 6 tabs = 3 rows. Update :nth-child(-n+N) if tab count changes:
+     N = (rowCount - 1) * 2 so the last row drops its bottom divider. */
   @media (max-width: 700px) {
     .main-tabs {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0;
-      padding-top: 8px;
+      padding-top: 6px;
     }
     .main-tab {
-      padding: 12px 10px;
+      padding: 8px 10px;
       font-size: .88rem;
       border-bottom: 2px solid transparent;
       border-right: 1px solid var(--border);
     }
     .main-tab:nth-child(2n) { border-right: none; }
-    .main-tab:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+    .main-tab:nth-child(-n+4) { border-bottom: 1px solid var(--border); }
     .main-tab.on { border-bottom-color: var(--gold); }
     .main-tab .sub {
       font-size: .52rem;
-      line-height: 1.25;
-      margin-top: 3px;
+      line-height: 1.2;
+      margin-top: 2px;
     }
   }
   .main-tab-panel { display: none; }
@@ -882,6 +781,112 @@
   /* Strategy Q&A cards */
   .strat-qa { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 20px; }
   @media (min-width: 900px) { .strat-qa { grid-template-columns: 1fr 1fr; } }
+  /* Awakening Stone Costs tab - per-source cards */
+  .cost-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 18px 0 6px;
+  }
+  @media (max-width: 720px) { .cost-grid { grid-template-columns: 1fr; } }
+  .cost-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex; flex-direction: column;
+  }
+  .cost-card.best {
+    border-color: rgba(63,185,80,.55);
+    background: linear-gradient(135deg, rgba(63,185,80,.06), transparent);
+  }
+  .cost-card.placeholder {
+    border-style: dashed;
+    background: rgba(255,255,255,.02);
+  }
+  .cost-card h3 { font-size: 1.05rem; font-weight: 800; margin: 0; color: var(--text); }
+  .cost-card .card-meta {
+    font-size: .66rem; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--muted); font-weight: 700; margin: 3px 0 12px;
+  }
+  .cost-card .price-table { margin: 0; font-size: .85rem; }
+  .cost-card .price-table th { font-size: .66rem; padding: 6px 4px; }
+  .cost-card .price-table td { padding: 6px 4px; }
+  .cost-card .card-foot {
+    font-size: .78rem; color: var(--muted); line-height: 1.5; margin: 10px 0 0;
+  }
+  .cost-card .placeholder-body {
+    font-size: .85rem; color: var(--muted); line-height: 1.55;
+  }
+  .cost-card.crowdsource {
+    grid-column: 1 / -1;
+    border-color: rgba(121,192,255,.35);
+    background: linear-gradient(135deg, rgba(121,192,255,.04), transparent);
+  }
+  .gs-intro {
+    font-size: .85rem; color: var(--muted); line-height: 1.55; margin: 0 0 14px;
+  }
+  .gs-intro strong { color: var(--text); }
+  .gs-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 14px; }
+  @media (max-width: 600px) { .gs-form { grid-template-columns: 1fr; } }
+  .gs-field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .gs-field.full { grid-column: 1 / -1; }
+  .gs-field label {
+    font-size: .72rem; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--muted); font-weight: 600;
+  }
+  .gs-field label .opt { color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0; margin-left: 4px; font-size: .68rem; }
+  .gs-field input[type="number"] {
+    background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 10px; font-family: var(--mono); font-size: .9rem;
+    width: 100%; box-sizing: border-box;
+  }
+  .gs-field input[type="number"]:focus {
+    outline: none; border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(121,192,255,.18);
+  }
+  .gs-tier-row {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px;
+  }
+  .gs-tier {
+    flex: 0 0 auto;
+    background: var(--bg); color: var(--muted);
+    border: 1px solid var(--border); border-radius: 999px;
+    padding: 6px 11px; font-size: .78rem; font-family: var(--mono);
+    cursor: pointer; transition: all .15s;
+    user-select: none;
+  }
+  .gs-tier:hover { color: var(--text); border-color: var(--accent); }
+  .gs-tier.active {
+    background: rgba(121,192,255,.12); color: var(--accent);
+    border-color: rgba(121,192,255,.55); font-weight: 700;
+  }
+  .gs-actions {
+    grid-column: 1 / -1;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; flex-wrap: wrap; margin-top: 6px;
+  }
+  .gs-submit {
+    background: var(--accent); color: #0d1117;
+    border: 0; border-radius: 8px;
+    padding: 9px 18px; font-size: .9rem; font-weight: 700;
+    cursor: pointer; transition: filter .15s, opacity .15s;
+    font-family: inherit;
+  }
+  .gs-submit:hover { filter: brightness(1.1); }
+  .gs-submit:disabled { opacity: .55; cursor: not-allowed; }
+  .gs-who { font-size: .75rem; color: var(--muted); }
+  .gs-who strong { color: var(--text); font-weight: 600; }
+  .gs-msg {
+    grid-column: 1 / -1;
+    font-size: .82rem; padding: 9px 12px; border-radius: 8px;
+    margin-top: 2px; display: none;
+  }
+  .gs-msg.ok    { display: block; color: var(--green); background: rgba(63,185,80,.08); border: 1px solid rgba(63,185,80,.25); }
+  .gs-msg.err   { display: block; color: #ff7b72;    background: rgba(255,123,114,.08); border: 1px solid rgba(255,123,114,.3); }
+  .gs-msg.info  { display: block; color: var(--muted); background: rgba(255,255,255,.02); border: 1px solid var(--border); }
+
   .qa-card {
     background: var(--card); border: 1px solid var(--border); border-radius: 12px;
     padding: 18px 20px; border-left: 4px solid var(--accent);
@@ -1436,30 +1441,20 @@
     .appbar h1 { font-size: .9rem; }
   }
 </style>
-<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)})();</script>
-<link rel="stylesheet" href="/styles/mathomhouse.css">
-<link rel="stylesheet" href="/styles/header.css">
-<link rel="stylesheet" href="/styles/layout.css">
-<script src="/header.js" defer></script>
-<script src="/scripts/feedback-modal.js" defer></script>
-<meta property="og:image" content="https://mathomhouse.github.io/mathomhouselogo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-<style id="ha-font-fix">:root{--mono:'Rajdhani',BlinkMacSystemFont,'Segoe UI',sans-serif!important;}html{font-family:'Rajdhani',BlinkMacSystemFont,'Segoe UI',sans-serif!important;font-size:16px!important;}body{font-family:'Rajdhani',BlinkMacSystemFont,'Segoe UI',sans-serif!important;font-size:14px!important;}button,input,select,textarea{font-family:inherit!important;}</style>
-<style id="ha-perf-fix">body::after{mix-blend-mode:normal!important;opacity:.06!important;}.appbar{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(7,9,13,.94)!important;}</style>
 </head>
 <body>
-<header id="header-placeholder"></header>
 
 <header class="appbar">
-  <!-- MATHOMHOUSE: removed-home-btn -->
+  <a href="https://2864tw.com/index.html" class="home" title="Home">
+    <svg viewBox="0 0 16 16"><path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/></svg>
+  </a>
   <div class="brand">
     <div>
-      <div style="font-size:.55rem; color: var(--muted); letter-spacing: .14em; text-transform: uppercase; font-weight: 700;">Top War &middot; Mathom House</div>
+      <div style="font-size:.55rem; color: var(--muted); letter-spacing: .14em; text-transform: uppercase; font-weight: 700;">Top War &middot; Server 2864</div>
       <h1>Heroes Awakening</h1>
     </div>
   </div>
   <div class="appbar-pills">
-    <button class="lang-btn ha-feedback-btn" type="button" title="Send Feedback" onclick="if(typeof openFeedbackModal==='function')openFeedbackModal()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Feedback</button>
     <button class="lang-btn notranslate" id="langBtn" aria-label="Change language"><span id="langFlag">&#127482;&#127480;</span><span id="langCode">/en</span></button>
     <span class="pill purple">Phase I open</span>
   </div>
@@ -1475,54 +1470,6 @@
   </div>
 </div>
 
-<!-- Current verdict (Tex's recommendation, displayed prominently) -->
-<div class="verdict-bar" role="note">
-  <div class="vb-inner">
-    <span class="vb-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-    </span>
-    <span class="vb-body">
-      <span class="vb-label">Current Verdict</span>
-      <strong>Trade what you can to max out awakening heroes. Upgrade heroes to 2 stars and trade to unlock new heroes as needed. All 18 heroes should show <u>"swapped"</u>.</strong>
-    </span>
-  </div>
-</div>
-
-<!-- Whale-specific notice (its own full-width blue bar, opens the whale modal) -->
-<button type="button" class="whale-bar" id="whaleNoticeBtn" aria-haspopup="dialog">
-  <span class="wb-inner">
-    <span class="wb-icon" aria-hidden="true">
-      <svg viewBox="6 14 90 70" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#79c0ff" d="m39.301 31.129c0.003907 0.52734-0.28516 0.98828-0.73047 1.3281-0.50391 0.38281-1.1758 0.44922-1.8164 0.32812-1.793-0.33203-3.5195 0.035156-4.9883 1.1562-0.86719 0.66016-1.5859 1.3516-2.168 2.2539-0.015625 0.023438-0.125 0.19141-0.24219 0.14844-0.11719-0.042969-0.046875-0.26172-0.039063-0.28516 0.67578-2.1875 2.0039-4.1133 3.9023-5.4023 1.0625-0.71875 2.2109-1.1992 3.4922-1.293 1.2578-0.089843 2.5742 0.47266 2.5859 1.7617zm-15.617-11.102c0.28906 0.52734 0.60938 1.0391 0.85156 1.5898 0.3125 0.71484 0.44531 1.4492 0.52344 2.2188 0.003906 0.058593 0.011718 0.12109 0.050781 0.16406 0.054687 0.058594 0.15234 0.058594 0.22266 0.019531 0.070313-0.039062 0.12109-0.10547 0.16406-0.17578 0.41016-0.625 0.65625-1.3516 0.89062-2.0547 0.33984-1.0312 0.51562-2.1016 0.29297-3.1562-0.21094-1-1.0391-1.75-2.0703-1.6172-1.0742 0.14062-1.6367 1.2773-1.2695 2.2695 0.09375 0.25781 0.21484 0.5 0.34766 0.74219zm-8.7109 10.258c-0.67578 0.011719-1.3086 0.31641-1.6406 0.90234-0.25391 0.44922-0.17969 1 0.11719 1.3828 0.29297 0.375 0.80859 0.61328 1.3086 0.48828l1.4336-0.35547c1.1055-0.27344 2.25 0.16406 3.0625 0.55859 0.63672 0.30859 1.0117 0.53516 1.1445 0.4375 0.19922-0.15234-0.28906-0.73047-0.9375-1.3906-0.94922-0.96875-2.5586-2.0508-4.4883-2.0234zm23.406-3.0391c0.007813 0.046875 0.042969 0.082031 0.085938 0.10156 0.042968 0.019532 0.089844 0.023438 0.13281 0.027344 0.67969 0.050781 1.3516 0.10547 1.9961 0.33594 1.2344 0.44531 1.8203 1.1641 2.7852 0.94922 0.43359-0.097656 0.75781-0.47656 0.87891-0.82422 0.15625-0.43359 0.097657-0.89063-0.17969-1.2344-0.40625-0.50781-1.0508-0.71484-1.6797-0.75391-0.73438-0.046875-1.4766 0.097656-2.1758 0.32422-0.62891 0.20312-1.2422 0.47656-1.75 0.91016-0.050781 0.042969-0.10547 0.10156-0.097656 0.16797zm-28.395 2.5c1.2656-0.65234 1.793-1.3984 3.7461-1.6562 1.3438-0.17578-3.3516-2.4492-5.3398-0.65234-0.56641 0.51172-0.65625 1.3086-0.25391 1.9141 0.39453 0.58984 1.1758 0.73828 1.8477 0.39453zm32.508 47.93c-0.15234-0.17188-0.30469-0.33984-0.45703-0.51953-0.87109-1.043-1.5391-1.9805-2.1016-2.9492l-1.1016-1.8906c-3.7109-0.44922-6.3086-1.9609-8.6055-3.2969-1.3906-0.8125-2.707-1.5742-4.1055-1.9844-0.97656-0.28906-2.0156-0.42188-3.2734-0.42188-0.35156 0-0.70312 0.011719-1.0625 0.027344l-5.5703 0.28516c-0.64844 0.03125-1.4766 0.054688-2.3789 0.054688-1.8047 0-5.0781-0.085938-7.1289-0.60938 0 0.003906 0.003907 0.011718 0.003907 0.015625 1.5586 3.1094 3.7305 5.2188 6.6836 7.0586 3.4844 2.0508 7.0156 2.9844 11.012 3.6719 1.6914 2.6992 4.375 4.543 7.5 5.1758 1.1484 0.23047 2.2773 0.41797 3.4336 0.28516 0.40625-0.078125 0.75781-0.30859 0.91406-0.64062 0.35938-0.76562-0.51562-1.4922-1.0703-2.1484-0.50391-0.58984-0.96484-1.1992-1.2891-1.918 2.9141 0.066406 5.7266 0.035156 8.5977-0.19531zm-27.238-54.801c0.33203 0.054688 0.66797 0.078125 1 0.14453 0.76562 0.15234 1.5117 0.39062 2.2227 0.71875 0.35156 0.16406 0.69531 0.34766 1.0273 0.55469 0.16406 0.10156 0.32812 0.21094 0.48438 0.32422 0.11328 0.078124 0.22656 0.19922 0.35547 0.26562 0.027344 0.015626 0.054688 0.027344 0.082031 0.035157 0.050781 0.015625 0.10547 0.019531 0.15625 0.003906 0.058594-0.023437 0.10156-0.082031 0.11719-0.14453 0.058593-0.21484-0.082031-0.52734-0.14453-0.73047-0.074219-0.23438-0.16016-0.46484-0.25781-0.69141-0.20312-0.46094-0.45703-0.89844-0.75391-1.3047-0.8125-1.1172-1.9375-2.0195-3.2227-2.5273-1.75-0.87891-4.4219 0.44531-2.9805 2.4883 0.46875 0.5625 1.2188 0.75391 1.9102 0.86328zm4.6094 4.9023c-0.29688 0.45312-0.25 1.1797 0.19141 1.6172 1.1211 1.1172 2.0078 2.4453 2.6562 3.8828 0.25 0.55469 0.46484 1.1289 0.64453 1.7109 0.57422 1.875 0.67188 3.8633 0.80469 5.8086 0.023438 0.32031 0.039063 0.64062 0.058594 0.96094 0.9375-0.023437 1.8867-0.042968 2.8555-0.042968h0.125c0.03125-5.8594 1.9727-13.48 7.0898-16.75 1.0195-0.65234 2.1016-1.0938 3.2148-1.5547 1.3555-0.55859 2.6328-1.5352 2.2383-3.1133-0.14453-0.58203-0.67969-1.1641-1.3359-1.3984-0.87109-0.3125-1.7773-0.16016-2.6641 0.14844-1.7422 0.60547-3.2266 1.7305-4.4922 3.0781-3.3359 3.5547-4.8203 8.1094-5.3906 12.875-0.12891 1.0625-0.19531 1.9844-0.29297 3.168-0.25391-2.1367-0.51172-4.1367-1.1758-6.1211-0.48828-1.4648-1.4492-4.0586-2.9375-4.7031-0.58594-0.25391-1.2578-0.082031-1.5938 0.42969zm75.023 8.2344c-0.5625 4.0469-3.293 7.3867-7.168 8.6797-0.99609 0.33203-1.9844 0.55859-3.0234 0.77734-0.67187 0.14062-1.3242 0.3125-1.9336 0.58594-0.83203 0.37109-1.2578 1-1.4805 1.8711-2.0469 8.0391-5.9453 15.074-12.375 20.426-2.7383 2.2812-5.7383 4.1758-9.0234 5.5352l-1.2148 0.50391c-0.19531-0.24219-0.39453-0.48047-0.5625-0.73047l-0.28516-0.42188c-1.3555-2.0117-2.0391-3.0195-4.7031-4.3125-0.10938-0.050781-0.26563-0.11719-0.45313-0.19531-0.71094-0.28906-2.1836-0.89453-2.7344-1.8281-0.28125-0.47656-0.89453-0.63281-1.3672-0.35156-0.47656 0.28125-0.63281 0.89453-0.35156 1.3672 0.24609 0.41797 0.56641 0.76953 0.91797 1.0781 0.17188 0.18359 0.43359 0.375 0.75 0.56641 0.60156 0.39062 1.2148 0.67578 1.7109 0.88281 0.14453 0.066407 0.26953 0.125 0.35156 0.16406 2.5898 1.2539 3.0352 2.0938 4.5977 4.3945 1.1914 1.7539 2.7969 3.0977 4.5508 4.2656 0.82031 0.54688 2.2148 1.1953 1.9023 2.418-0.097657 0.39062-0.48828 0.8125-0.96875 0.96094-1.2305 0.37891-2.4922 0.37109-3.8398 0.34375-5.9609-0.12891-10.836-2.6094-14.602-7.1133-0.71875-0.85938-1.3477-1.707-1.9102-2.6719l-1.2773-2.1875c-0.21875-0.37109-0.53906-0.59766-0.97656-0.64062-5.7578-0.57031-8.6016-4.0391-12.723-5.2539-1.6406-0.48438-3.293-0.55859-5-0.47266l-5.5703 0.28516c-2.2969 0.11719-6.9141 0.070312-9.0547-0.52734-1.3203-0.37109-2.1289-1.5117-2.0547-2.9023 0.03125-0.55859 0.21484-1.0586 0.3125-1.625 0.69141-4.0703 1.0938-7.9688 3.9492-11.223 2.918-3.3242 6.9805-4.4453 11.285-4.7266 3.9609-0.26172 7.9336-0.25 11.906-0.089844 8.0469 0.32812 14.207 2.2969 21.641 5.0664 1.9609 0.73047 3.8711 1.4297 5.8828 2.0078 3.6328 1.043 7.3906 1.6016 11.023 0.21875 2.3047-0.875 4.2148-2.6016 5.2422-4.8203 0.32422-0.69922 0.17578-1.3477-0.42969-1.8203-1.2227-0.94531-3.0742-1.2734-5.0039-2.75-1.5586-1.1953-2.6172-2.7891-3.1641-4.6836-0.54297-1.8867-0.48047-3.9102 0.33594-5.6914 0.125-0.27734 0.38281-0.45703 0.62891-0.47656 0.85938-0.0625 0.86719 1.6836 3.2852 2.4727 0.37109 0.12109 0.71094 0.26562 1.0938 0.34375l2.5703 0.51562c2.5234 0.50391 4.3438 2.4023 4.9258 4.9688 1.9023-3.3867 4.7344-3.8867 8.2773-3.9258 1.1914-0.019531 2.332-0.21094 3.3828-0.76172 1.1523-0.60547 1.5-1.5547 2.2617-1.3438 0.82422 0.23047 0.56641 2.1953 0.47266 2.8555zm-62.039 23.699c-0.27344-0.4375-0.73438-0.71875-1.2969-0.71484-0.71875 0.007812-1.3242 0.55859-1.4492 1.2422-0.13281 0.71875 0.26172 1.4062 0.90625 1.6562 0.67188 0.25781 1.3789 0.023438 1.8125-0.60547 0.33594-0.48437 0.33594-1.0898 0.03125-1.5742z"/>
-      </svg>
-    </span>
-    <span class="wb-body">
-      <span class="wb-label">For whales</span>
-      <span class="wb-text">Click here for guidance on trading active secondary marches during the Phase 2 / Phase 3 wait.</span>
-    </span>
-    <span class="wb-cta" aria-hidden="true">Open notice &rarr;</span>
-  </span>
-</button>
-
-<!-- Whale advice modal -->
-<div class="whale-modal-overlay" id="whaleModal" role="dialog" aria-modal="true" aria-labelledby="whaleModalTitle">
-  <div class="whale-modal">
-    <div class="whale-modal-header">
-      <span class="whale-modal-title" id="whaleModalTitle">
-        <svg viewBox="6 14 90 70" xmlns="http://www.w3.org/2000/svg" style="width:34px;height:26px;vertical-align:-6px">
-          <path fill="#79c0ff" d="m39.301 31.129c0.003907 0.52734-0.28516 0.98828-0.73047 1.3281-0.50391 0.38281-1.1758 0.44922-1.8164 0.32812-1.793-0.33203-3.5195 0.035156-4.9883 1.1562-0.86719 0.66016-1.5859 1.3516-2.168 2.2539-0.015625 0.023438-0.125 0.19141-0.24219 0.14844-0.11719-0.042969-0.046875-0.26172-0.039063-0.28516 0.67578-2.1875 2.0039-4.1133 3.9023-5.4023 1.0625-0.71875 2.2109-1.1992 3.4922-1.293 1.2578-0.089843 2.5742 0.47266 2.5859 1.7617zm-15.617-11.102c0.28906 0.52734 0.60938 1.0391 0.85156 1.5898 0.3125 0.71484 0.44531 1.4492 0.52344 2.2188 0.003906 0.058593 0.011718 0.12109 0.050781 0.16406 0.054687 0.058594 0.15234 0.058594 0.22266 0.019531 0.070313-0.039062 0.12109-0.10547 0.16406-0.17578 0.41016-0.625 0.65625-1.3516 0.89062-2.0547 0.33984-1.0312 0.51562-2.1016 0.29297-3.1562-0.21094-1-1.0391-1.75-2.0703-1.6172-1.0742 0.14062-1.6367 1.2773-1.2695 2.2695 0.09375 0.25781 0.21484 0.5 0.34766 0.74219zm-8.7109 10.258c-0.67578 0.011719-1.3086 0.31641-1.6406 0.90234-0.25391 0.44922-0.17969 1 0.11719 1.3828 0.29297 0.375 0.80859 0.61328 1.3086 0.48828l1.4336-0.35547c1.1055-0.27344 2.25 0.16406 3.0625 0.55859 0.63672 0.30859 1.0117 0.53516 1.1445 0.4375 0.19922-0.15234-0.28906-0.73047-0.9375-1.3906-0.94922-0.96875-2.5586-2.0508-4.4883-2.0234zm23.406-3.0391c0.007813 0.046875 0.042969 0.082031 0.085938 0.10156 0.042968 0.019532 0.089844 0.023438 0.13281 0.027344 0.67969 0.050781 1.3516 0.10547 1.9961 0.33594 1.2344 0.44531 1.8203 1.1641 2.7852 0.94922 0.43359-0.097656 0.75781-0.47656 0.87891-0.82422 0.15625-0.43359 0.097657-0.89063-0.17969-1.2344-0.40625-0.50781-1.0508-0.71484-1.6797-0.75391-0.73438-0.046875-1.4766 0.097656-2.1758 0.32422-0.62891 0.20312-1.2422 0.47656-1.75 0.91016-0.050781 0.042969-0.10547 0.10156-0.097656 0.16797zm-28.395 2.5c1.2656-0.65234 1.793-1.3984 3.7461-1.6562 1.3438-0.17578-3.3516-2.4492-5.3398-0.65234-0.56641 0.51172-0.65625 1.3086-0.25391 1.9141 0.39453 0.58984 1.1758 0.73828 1.8477 0.39453zm32.508 47.93c-0.15234-0.17188-0.30469-0.33984-0.45703-0.51953-0.87109-1.043-1.5391-1.9805-2.1016-2.9492l-1.1016-1.8906c-3.7109-0.44922-6.3086-1.9609-8.6055-3.2969-1.3906-0.8125-2.707-1.5742-4.1055-1.9844-0.97656-0.28906-2.0156-0.42188-3.2734-0.42188-0.35156 0-0.70312 0.011719-1.0625 0.027344l-5.5703 0.28516c-0.64844 0.03125-1.4766 0.054688-2.3789 0.054688-1.8047 0-5.0781-0.085938-7.1289-0.60938 0 0.003906 0.003907 0.011718 0.003907 0.015625 1.5586 3.1094 3.7305 5.2188 6.6836 7.0586 3.4844 2.0508 7.0156 2.9844 11.012 3.6719 1.6914 2.6992 4.375 4.543 7.5 5.1758 1.1484 0.23047 2.2773 0.41797 3.4336 0.28516 0.40625-0.078125 0.75781-0.30859 0.91406-0.64062 0.35938-0.76562-0.51562-1.4922-1.0703-2.1484-0.50391-0.58984-0.96484-1.1992-1.2891-1.918 2.9141 0.066406 5.7266 0.035156 8.5977-0.19531zm-27.238-54.801c0.33203 0.054688 0.66797 0.078125 1 0.14453 0.76562 0.15234 1.5117 0.39062 2.2227 0.71875 0.35156 0.16406 0.69531 0.34766 1.0273 0.55469 0.16406 0.10156 0.32812 0.21094 0.48438 0.32422 0.11328 0.078124 0.22656 0.19922 0.35547 0.26562 0.027344 0.015626 0.054688 0.027344 0.082031 0.035157 0.050781 0.015625 0.10547 0.019531 0.15625 0.003906 0.058594-0.023437 0.10156-0.082031 0.11719-0.14453 0.058593-0.21484-0.082031-0.52734-0.14453-0.73047-0.074219-0.23438-0.16016-0.46484-0.25781-0.69141-0.20312-0.46094-0.45703-0.89844-0.75391-1.3047-0.8125-1.1172-1.9375-2.0195-3.2227-2.5273-1.75-0.87891-4.4219 0.44531-2.9805 2.4883 0.46875 0.5625 1.2188 0.75391 1.9102 0.86328zm4.6094 4.9023c-0.29688 0.45312-0.25 1.1797 0.19141 1.6172 1.1211 1.1172 2.0078 2.4453 2.6562 3.8828 0.25 0.55469 0.46484 1.1289 0.64453 1.7109 0.57422 1.875 0.67188 3.8633 0.80469 5.8086 0.023438 0.32031 0.039063 0.64062 0.058594 0.96094 0.9375-0.023437 1.8867-0.042968 2.8555-0.042968h0.125c0.03125-5.8594 1.9727-13.48 7.0898-16.75 1.0195-0.65234 2.1016-1.0938 3.2148-1.5547 1.3555-0.55859 2.6328-1.5352 2.2383-3.1133-0.14453-0.58203-0.67969-1.1641-1.3359-1.3984-0.87109-0.3125-1.7773-0.16016-2.6641 0.14844-1.7422 0.60547-3.2266 1.7305-4.4922 3.0781-3.3359 3.5547-4.8203 8.1094-5.3906 12.875-0.12891 1.0625-0.19531 1.9844-0.29297 3.168-0.25391-2.1367-0.51172-4.1367-1.1758-6.1211-0.48828-1.4648-1.4492-4.0586-2.9375-4.7031-0.58594-0.25391-1.2578-0.082031-1.5938 0.42969zm75.023 8.2344c-0.5625 4.0469-3.293 7.3867-7.168 8.6797-0.99609 0.33203-1.9844 0.55859-3.0234 0.77734-0.67187 0.14062-1.3242 0.3125-1.9336 0.58594-0.83203 0.37109-1.2578 1-1.4805 1.8711-2.0469 8.0391-5.9453 15.074-12.375 20.426-2.7383 2.2812-5.7383 4.1758-9.0234 5.5352l-1.2148 0.50391c-0.19531-0.24219-0.39453-0.48047-0.5625-0.73047l-0.28516-0.42188c-1.3555-2.0117-2.0391-3.0195-4.7031-4.3125-0.10938-0.050781-0.26563-0.11719-0.45313-0.19531-0.71094-0.28906-2.1836-0.89453-2.7344-1.8281-0.28125-0.47656-0.89453-0.63281-1.3672-0.35156-0.47656 0.28125-0.63281 0.89453-0.35156 1.3672 0.24609 0.41797 0.56641 0.76953 0.91797 1.0781 0.17188 0.18359 0.43359 0.375 0.75 0.56641 0.60156 0.39062 1.2148 0.67578 1.7109 0.88281 0.14453 0.066407 0.26953 0.125 0.35156 0.16406 2.5898 1.2539 3.0352 2.0938 4.5977 4.3945 1.1914 1.7539 2.7969 3.0977 4.5508 4.2656 0.82031 0.54688 2.2148 1.1953 1.9023 2.418-0.097657 0.39062-0.48828 0.8125-0.96875 0.96094-1.2305 0.37891-2.4922 0.37109-3.8398 0.34375-5.9609-0.12891-10.836-2.6094-14.602-7.1133-0.71875-0.85938-1.3477-1.707-1.9102-2.6719l-1.2773-2.1875c-0.21875-0.37109-0.53906-0.59766-0.97656-0.64062-5.7578-0.57031-8.6016-4.0391-12.723-5.2539-1.6406-0.48438-3.293-0.55859-5-0.47266l-5.5703 0.28516c-2.2969 0.11719-6.9141 0.070312-9.0547-0.52734-1.3203-0.37109-2.1289-1.5117-2.0547-2.9023 0.03125-0.55859 0.21484-1.0586 0.3125-1.625 0.69141-4.0703 1.0938-7.9688 3.9492-11.223 2.918-3.3242 6.9805-4.4453 11.285-4.7266 3.9609-0.26172 7.9336-0.25 11.906-0.089844 8.0469 0.32812 14.207 2.2969 21.641 5.0664 1.9609 0.73047 3.8711 1.4297 5.8828 2.0078 3.6328 1.043 7.3906 1.6016 11.023 0.21875 2.3047-0.875 4.2148-2.6016 5.2422-4.8203 0.32422-0.69922 0.17578-1.3477-0.42969-1.8203-1.2227-0.94531-3.0742-1.2734-5.0039-2.75-1.5586-1.1953-2.6172-2.7891-3.1641-4.6836-0.54297-1.8867-0.48047-3.9102 0.33594-5.6914 0.125-0.27734 0.38281-0.45703 0.62891-0.47656 0.85938-0.0625 0.86719 1.6836 3.2852 2.4727 0.37109 0.12109 0.71094 0.26562 1.0938 0.34375l2.5703 0.51562c2.5234 0.50391 4.3438 2.4023 4.9258 4.9688 1.9023-3.3867 4.7344-3.8867 8.2773-3.9258 1.1914-0.019531 2.332-0.21094 3.3828-0.76172 1.1523-0.60547 1.5-1.5547 2.2617-1.3438 0.82422 0.23047 0.56641 2.1953 0.47266 2.8555zm-62.039 23.699c-0.27344-0.4375-0.73438-0.71875-1.2969-0.71484-0.71875 0.007812-1.3242 0.55859-1.4492 1.2422-0.13281 0.71875 0.26172 1.4062 0.90625 1.6562 0.67188 0.25781 1.3789 0.023438 1.8125-0.60547 0.33594-0.48437 0.33594-1.0898 0.03125-1.5742z"/>
-        </svg>
-        For whale-y players
-      </span>
-      <button type="button" class="whale-modal-close" id="whaleModalClose" aria-label="Close">&#10005;</button>
-    </div>
-    <div class="whale-modal-body">
-      <p>Be careful when trading your active secondary marches in each unit type. The Phase 2 and Phase 3 awakening heroes are not expected for several months. During this time you will lose the ability to use those heroes in other marches.</p>
-      <p><u>TW will not have another hero swap event after this window.</u> So you will need to sacrifice those heroes to loan to Rivergame until they finish developing the hero system and awakening features, at which time there is no solid release date.</p>
-      <p>For some of you this may be a significant impact to your ability to defend and attack buildings. For others, less or no impact. This information is provided so that you may make an informed decision about how to best use the hero swap, as you will be giving up an ES7 and a hero to just sit idly on one of the 11 heroes you may already own.</p>
-    </div>
-  </div>
-</div>
 
 <main class="ctn">
 
@@ -1547,6 +1494,10 @@
   <button class="main-tab" data-tab="honor" type="button">
     Honor Wall
     <span class="sub">post-Tier 10 buffs</span>
+  </button>
+  <button class="main-tab" data-tab="costs" type="button">
+    Awakening Stone Costs
+    <span class="sub">every paid source ranked</span>
   </button>
 </nav>
 
@@ -1876,7 +1827,7 @@
 <!-- ─── Hero grid ─── -->
 <section class="bare">
   <h2>The 18 awakening heroes</h2>
-  <p class="lede">Phase I is live on all servers. Phase II and III heroes show as muted cards until their phase opens, but they're already valid Hero Swap targets right now.</p>
+  <p class="lede">Phase I is live on Server 2864. Phase II and III heroes show as muted cards until their phase opens, but they're already valid Hero Swap targets right now.</p>
   <div class="hero-grid" id="heroGrid"></div>
 </section>
 
@@ -1897,7 +1848,7 @@
       </div>
       <p>For <strong>whales / tubby folks</strong>: Path of Awakening at max gives <strong>369 Awakening Stones</strong> per event. Hero Grand Slam caps at <strong>6,000 Awakening Stones</strong>. It costs <strong>2,700 stones</strong> to take a hero's awakening skills all the way to Tier 6.</p>
       <p>That means you can finish <strong>2 heroes to Tier 6 in 1 month</strong>, or <strong>4 heroes in 2 months</strong>, with <strong>969 stones leftover each month</strong>. I do not expect Phase 2 Indestructible heroes to land for at least <strong>60 to 90 more days</strong>, so there's a real runway here.</p>
-      <p class="whale-note-foot">Not a whale? <a href="#awakening-stone-deal">Scroll to the bottom for the non-whale pacing notes.</a></p>
+      <p class="whale-note-foot">Not a whale? <a href="#costs">Check the Awakening Stone Costs tab for non-whale pacing notes.</a></p>
     </div>
 
     <div class="tldr-poster">
@@ -2067,55 +2018,6 @@
           <li><em>Later:</em> ES7, Tier 10s, Lv. 40, sub-track grind</li>
         </ol>
         <div class="recommend">Don't spread tiers thinly across all 4 skills. Finish <strong>one skill to Tier 6</strong> before starting the next, and follow the <strong>2 &rarr; 3 &rarr; 4 &rarr; 1</strong> priority.</div>
-      </div>
-
-      <div class="qa-card" id="awakening-stone-deal">
-        <h3>
-          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v12"/><path d="M15 9.5a2 2 0 0 0-2-2h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1-2-2"/></svg>
-          What's the best Awakening Stone deal?
-        </h3>
-        <p class="answer">The <strong>$4.99 pass</strong> is the best price per stone.</p>
-        <p class="why">The <strong>Path of Awakening</strong> event (runs monthly) has three tiers. The $19.99 deluxe only unlocks <em>after</em> you buy the $4.99 pass, so going all-in costs <strong>$24.98</strong>.</p>
-
-        <table class="price-table">
-          <thead><tr><th>Path</th><th class="num">Stones each event</th><th class="num">Total $</th><th class="num">Cost per stone</th></tr></thead>
-          <tbody>
-            <tr><td>Free only</td><td class="num">15</td><td class="num">$0</td><td class="num">.</td></tr>
-            <tr class="best"><td>Buy $4.99 pass <span class="badge">best deal</span></td><td class="num">120</td><td class="num">$4.99</td><td class="num">$0.04</td></tr>
-            <tr><td>Buy both ($4.99 + $19.99)</td><td class="num">369</td><td class="num">$24.98</td><td class="num">$0.07</td></tr>
-          </tbody>
-        </table>
-
-        <p style="margin-top:18px"><strong>Also in the shop (outside the event):</strong></p>
-        <table class="price-table">
-          <thead><tr><th>Source</th><th class="num">Stones per pack</th><th class="num">Cost per pack</th><th class="num">Cost per stone</th></tr></thead>
-          <tbody>
-            <tr><td>Hot Deals small pack <span class="badge">grab daily</span></td><td class="num">10</td><td class="num">$0.99</td><td class="num">$0.10</td></tr>
-            <tr><td>Hot Deals large pack <span class="badge">limit 400 stones</span></td><td class="num">60</td><td class="num">$8.99</td><td class="num">$0.15</td></tr>
-          </tbody>
-        </table>
-        <p style="font-size:.82rem; color:var(--muted); margin-top:6px">
-          The <strong>$0.99 small pack</strong> is the second-best per-stone rate on the page (after the $4.99 pass). Grab one every Hot Deals cycle. The <strong>$8.99 large pack</strong> is about <strong>3.75&times;</strong> the $4.99 pass rate; it caps at <strong>400 stones</strong> total (around <strong>$60</strong> to buy near the cap), so save it for top-ups when you've maxed the Path of Awakening.
-        </p>
-
-        <p style="margin-top:18px"><strong>How long until you hit Tier 6?</strong> (event runs monthly):</p>
-        <table class="price-table">
-          <thead><tr><th>Your spend</th><th class="num">1 skill to Tier 6</th><th class="num">All 4 to Tier 6</th><th class="num">All 4 to Tier 10</th></tr></thead>
-          <tbody>
-            <tr><td>Free only</td><td class="num">45 mo</td><td class="num">180 mo</td><td class="num">600 mo</td></tr>
-            <tr class="best"><td>$4.99 / mo</td><td class="num">~6 months</td><td class="num">~2 years</td><td class="num">~6 years</td></tr>
-            <tr><td>$24.98 / mo</td><td class="num">~2 months</td><td class="num">~7 months</td><td class="num">~2 years</td></tr>
-          </tbody>
-        </table>
-
-        <p style="font-size:.82rem; color:var(--muted); margin-top:10px">
-          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:-3px"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9 2h6"/></svg>
-          <strong>Real timelines are faster.</strong> Grand Slam Vouchers also redeem 1-for-1 for stones (up to 6,000 per Grand Slam event).
-        </p>
-
-        <div class="recommend">
-          <strong>If you spend monthly:</strong> the $4.99 pass alone is the best <em>value</em>. The full $24.98 path is about 3 times faster but costs more per stone. If you can't commit monthly, save up free-path stones and Grand Slam vouchers.
-        </div>
       </div>
 
     </div>
@@ -2382,10 +2284,6 @@
 
 <section class="bare">
     <div class="panel">
-      <div style="display:flex; align-items:center; gap:10px; flex-wrap: wrap; margin-bottom: 10px">
-        <span style="font-size:.62rem; font-weight:800; letter-spacing:.14em; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; background: rgba(63,185,80,.18); color: var(--green); border: 1px solid rgba(63,185,80,.5);">Mostly verified</span>
-        <span style="font-size:.7rem; color: var(--muted); font-weight: 600">System name, buffs, costs, and upgrade flow all confirmed in the live client. Stacking rules across multiple heroes still need play-test.</span>
-      </div>
       <h3>Honor Wall. Beyond Tier 10.</h3>
       <p class="sub">Past Tier 10, each hero's first two awakening skills get a 200-level <strong>Honor Wall</strong> upgrade track. The "Advance" button on the hero detail awakening tab opens it. Each sub-level adds two buffs: a <strong>Global Bonus</strong> (the +ATK or +HP curve) and a <strong>Deployment Bonus</strong> (the +DMG Increase or +DMG Reduction curve, only active when the hero is in your march). Same Awakening Stones currency as Tier 1 to 10. Buffs are scoped to the hero's unit type (Army, Navy, or Air Force).</p>
       <p class="sub" style="margin-top:8px"><strong>Upgrades are one sub-level at a time.</strong> Unlike the Tier 1 to 10 system which lets you batch 10 upgrades at once, the Honor Wall's Advance button only buys one sub-level per tap — so the cost-per-level numbers below are exactly what you pay each click.</p>
@@ -2485,17 +2383,180 @@
 
 </div><!-- /tab honor -->
 
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- TAB 6 — AWAKENING STONE COSTS                                -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="main-tab-panel" data-panel="costs">
+
+<section class="bare">
+  <h2>Awakening Stone Costs</h2>
+  <p class="lede">Every paid source of Awakening Stones, ranked by price per stone. Path of Awakening is the best value by a wide margin; the other sources are for when you want more stones than the monthly event provides.</p>
+
+  <div class="qa-card tldr" style="margin-top:14px">
+    <h3>
+      <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4.5L6 21l1.5-7.5L2 9h7z"/></svg>
+      Best deal at a glance
+    </h3>
+    <p class="answer">The <strong>$4.99 Path of Awakening pass</strong> is the best rate at <strong>$0.04 / stone</strong>.</p>
+    <p>Every other source is roughly 2.5x to 4x more expensive per stone. Lean on them only after you've maxed the monthly Path, or when you need a burst of stones for a specific goal.</p>
+  </div>
+
+  <div class="cost-grid">
+
+    <!-- Card 1: Path of Awakening -->
+    <div class="cost-card best">
+      <h3>Path of Awakening</h3>
+      <p class="card-meta">Monthly event · best value</p>
+      <table class="price-table">
+        <thead><tr><th>Path</th><th class="num">Stones</th><th class="num">$ / stone</th></tr></thead>
+        <tbody>
+          <tr><td>Free only</td><td class="num">15</td><td class="num">free</td></tr>
+          <tr class="best"><td>$4.99 pass <span class="badge">best</span></td><td class="num">120</td><td class="num">$0.04</td></tr>
+          <tr><td>$4.99 + $19.99</td><td class="num">369</td><td class="num">$0.07</td></tr>
+        </tbody>
+      </table>
+      <p class="card-foot">The $19.99 deluxe only unlocks after you buy the $4.99 pass, so going all-in costs <strong>$24.98</strong>.</p>
+    </div>
+
+    <!-- Card 2: Hot Deals -->
+    <div class="cost-card">
+      <h3>Hot Deals Shop</h3>
+      <p class="card-meta">Rotating shop · grab daily</p>
+      <table class="price-table">
+        <thead><tr><th>Pack</th><th class="num">Stones</th><th class="num">$ / stone</th></tr></thead>
+        <tbody>
+          <tr><td>$0.99 small <span class="badge">grab daily</span></td><td class="num">10</td><td class="num">$0.10</td></tr>
+          <tr><td>$8.99 large</td><td class="num">60</td><td class="num">$0.15</td></tr>
+        </tbody>
+      </table>
+      <p class="card-foot">The $0.99 small pack is the second-best per-stone rate on the page. The $8.99 large pack caps at <strong>400 stones</strong> total per cycle (about <strong>$60</strong> to hit the cap).</p>
+    </div>
+
+    <!-- Card 3: Hero Awakening Benefit Pack -->
+    <div class="cost-card">
+      <h3>Hero Awakening Benefit Pack</h3>
+      <p class="card-meta">Direct paid bundles</p>
+      <table class="price-table">
+        <thead><tr><th>Pack</th><th class="num">Stones</th><th class="num">$ / stone</th></tr></thead>
+        <tbody>
+          <tr><td>$4.99</td><td class="num">50</td><td class="num">$0.10</td></tr>
+          <tr><td>$8.99</td><td class="num">80</td><td class="num">$0.11</td></tr>
+          <tr><td>$19.99</td><td class="num">130</td><td class="num">$0.15</td></tr>
+          <tr><td>$49.99</td><td class="num">320</td><td class="num">$0.16</td></tr>
+          <tr><td>$99.99</td><td class="num">600</td><td class="num">$0.17</td></tr>
+        </tbody>
+      </table>
+      <p class="card-foot">Every tier is 2.5x to 4x the $4.99 Path of Awakening rate. The smallest pack ($4.99) has the best per-stone price within this bundle.</p>
+    </div>
+
+    <!-- Card 4: Hero Grand Slam (crowdsourced) -->
+    <div class="cost-card crowdsource" id="grand-slam-card">
+      <h3>Hero Grand Slam</h3>
+      <p class="card-meta">Event · voucher redeem · help us measure</p>
+      <p class="gs-intro">
+        Vouchers earned during Hero Grand Slam redeem <strong>1-for-1</strong> for Awakening Stones, up to <strong>6,000 stones</strong> per event. Per-pack voucher counts are not published in-game — tell us what you bought and how many vouchers you received, and once we have enough submissions we'll publish averages here.
+      </p>
+
+      <form class="gs-form" id="gs-form" autocomplete="off" novalidate>
+
+        <div class="gs-field">
+          <label for="gs-day">Day of event</label>
+          <input type="number" id="gs-day" min="1" max="31" step="1" placeholder="1, 2, 3...">
+        </div>
+
+        <div class="gs-field">
+          <label for="gs-vouchers">Total Grand Slam Vouchers received</label>
+          <input type="number" id="gs-vouchers" min="0" max="50000" step="1" placeholder="e.g. 145">
+        </div>
+
+        <div class="gs-field full">
+          <label>Highest pack purchased today <span class="opt">(includes everything cheaper than it)</span></label>
+          <div class="gs-tier-row" id="gs-tiers" role="radiogroup" aria-label="Highest pack tier purchased">
+            <button type="button" class="gs-tier active" data-tier="">None</button>
+            <button type="button" class="gs-tier" data-tier="0.99">$0.99</button>
+            <button type="button" class="gs-tier" data-tier="1.99">$1.99</button>
+            <button type="button" class="gs-tier" data-tier="4.99">$4.99</button>
+            <button type="button" class="gs-tier" data-tier="8.99">$8.99</button>
+            <button type="button" class="gs-tier" data-tier="19.99">$19.99</button>
+            <button type="button" class="gs-tier" data-tier="49.99">$49.99</button>
+          </div>
+        </div>
+
+        <div class="gs-field full">
+          <label for="gs-extra99">Additional $99.99 packs bought today <span class="opt">(only tier that allows multiple purchases per day)</span></label>
+          <input type="number" id="gs-extra99" min="0" max="50" step="1" placeholder="0">
+        </div>
+
+        <div class="gs-field">
+          <label for="gs-bal-before">Voucher balance <em>before</em> today <span class="opt">(optional)</span></label>
+          <input type="number" id="gs-bal-before" min="0" max="1000000" step="1" placeholder="optional">
+        </div>
+
+        <div class="gs-field">
+          <label for="gs-bal-after">Voucher balance <em>after</em> today <span class="opt">(optional)</span></label>
+          <input type="number" id="gs-bal-after" min="0" max="1000000" step="1" placeholder="optional">
+        </div>
+
+        <div class="gs-msg" id="gs-msg" role="status" aria-live="polite"></div>
+
+        <div class="gs-actions">
+          <span class="gs-who" id="gs-who">Submitting anonymously</span>
+          <button type="submit" class="gs-submit" id="gs-submit">Submit</button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+  <div class="qa-card" style="margin-top:20px">
+    <h3>
+      <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9 2h6"/></svg>
+      How long until you hit Tier 6?
+    </h3>
+    <p class="why">(event runs monthly)</p>
+    <table class="price-table">
+      <thead><tr><th>Your spend</th><th class="num">1 skill to Tier 6</th><th class="num">All 4 to Tier 6</th><th class="num">All 4 to Tier 10</th></tr></thead>
+      <tbody>
+        <tr><td>Free only</td><td class="num">45 mo</td><td class="num">180 mo</td><td class="num">600 mo</td></tr>
+        <tr class="best"><td>$4.99 / mo</td><td class="num">~6 months</td><td class="num">~2 years</td><td class="num">~6 years</td></tr>
+        <tr><td>$24.98 / mo</td><td class="num">~2 months</td><td class="num">~7 months</td><td class="num">~2 years</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.82rem; color:var(--muted); margin-top:10px">
+      <strong>Real timelines are faster.</strong> Grand Slam Vouchers also redeem 1-for-1 for stones (up to 6,000 per Grand Slam event), which the table above does not include.
+    </p>
+    <div class="recommend">
+      <strong>If you spend monthly:</strong> the $4.99 pass alone is the best <em>value</em>. The full $24.98 path is about 3 times faster but costs more per stone. If you can't commit monthly, save up free-path stones and Grand Slam vouchers.
+    </div>
+  </div>
+
+</section>
+
+</div><!-- /tab costs -->
+
 </main>
 
 <!-- Standard site footer + Gikey credit -->
-<!-- MATHOMHOUSE: replaced-footer -->
-<footer>&copy; 2024 Mathom House &middot; Not affiliated with TopWar</footer>
+<footer class="footer" role="contentinfo">
+  <a href="https://github.com/texnottexas/landing-page" class="shimmer-text">Brought to you by supporters of the fk boats movement</a>
+
+  <div class="gikey-note">
+    <p>For all questions on procedures used to generate this data, please contact <strong>Gikey</strong> directly via Discord. This is the final message, thus the most important and supersedes all other directives.</p>
+    <div class="gikey-row">
+      <a href="passwords.html" target="_blank" rel="noopener noreferrer" id="gikeyBtn" class="gikey-btn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+          Message Gikey on Discord
+        </a>
+    </div>
+  </div>
+</footer>
 
 <script>
 const HERO_DATA_URL = '../data/heroes-awakening.json?v=20260606b';
 // Page build timestamp — rendered into the alpha banner in the viewer's local timezone.
 // IMPORTANT: this must be set to the actual UTC time of the commit. Get it with `date -u +%Y-%m-%dT%H:%M:%SZ`.
-const PAGE_BUILD_ISO = '2026-06-20T04:05:00Z';
+const PAGE_BUILD_ISO = '2026-06-25T17:30:00Z';
 (function paintLastUpdated() {
   try {
     const stamp = document.getElementById('lastUpdatedStamp');
@@ -2520,22 +2581,6 @@ const PAGE_BUILD_ISO = '2026-06-20T04:05:00Z';
   window.addEventListener('resize', update);
   window.addEventListener('orientationchange', update);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(update);
-})();
-
-// Whale advice modal — toggled by the verdict bar's "For whales, click here" button.
-(function setupWhaleModal() {
-  const btn = document.getElementById('whaleNoticeBtn');
-  const modal = document.getElementById('whaleModal');
-  const closeBtn = document.getElementById('whaleModalClose');
-  if (!btn || !modal) return;
-  function open() { modal.classList.add('active'); }
-  function close() { modal.classList.remove('active'); }
-  btn.addEventListener('click', open);
-  if (closeBtn) closeBtn.addEventListener('click', close);
-  modal.addEventListener('click', e => { if (e.target === modal) close(); });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) { close(); e.stopPropagation(); }
-  });
 })();
 
 // Gikey contact button: looks like a Discord contact CTA, actually
@@ -3087,12 +3132,13 @@ function setupMainTabs() {
   }
   $$('.main-tab').forEach(t => t.addEventListener('click', () => activate(t.dataset.tab)));
   // Initial tab from hash (#swap | #awakening | #strategy), default swap
-  const initial = ['swap','awakening','strategy','calculators'].includes(location.hash.replace('#',''))
+  const TABS = ['swap','awakening','strategy','calculators','honor','costs'];
+  const initial = TABS.includes(location.hash.replace('#',''))
     ? location.hash.replace('#','') : 'swap';
   if (initial !== 'swap') activate(initial);
   window.addEventListener('hashchange', () => {
     const h = location.hash.replace('#','');
-    if (['swap','awakening','strategy','calculators'].includes(h)) activate(h);
+    if (TABS.includes(h)) activate(h);
   });
 }
 
@@ -3509,11 +3555,155 @@ fetch(HERO_DATA_URL)
     setupCalcs();
     renderSwap();
     setupMainTabs();
+    setupGrandSlamForm();
   })
   .catch(err => {
     console.error('Failed to load data', err);
     $('#heroGrid').innerHTML = '<p style="color: var(--red)">Failed to load heroes-awakening.json. Check the network tab.</p>';
   });
+
+// ---------------------------------------------------------------------------
+// Grand Slam crowdsourced data form
+// ---------------------------------------------------------------------------
+const GS_PUSH_WORKER = 'https://push-worker.27tb8s6fct.workers.dev';
+
+function gsGetIdentity() {
+  try {
+    const raw = localStorage.getItem('playerIdentity');
+    if (!raw || raw === 'anonymous') return null;
+    const id = JSON.parse(raw);
+    return (id && id.name && !id.guest) ? id : null;
+  } catch (e) { return null; }
+}
+
+function setupGrandSlamForm() {
+  const form = document.getElementById('gs-form');
+  if (!form) return;
+
+  const tierRow = document.getElementById('gs-tiers');
+  const dayInput = document.getElementById('gs-day');
+  const extra99Input = document.getElementById('gs-extra99');
+  const vouchersInput = document.getElementById('gs-vouchers');
+  const balBeforeInput = document.getElementById('gs-bal-before');
+  const balAfterInput = document.getElementById('gs-bal-after');
+  const submitBtn = document.getElementById('gs-submit');
+  const whoEl = document.getElementById('gs-who');
+  const msgEl = document.getElementById('gs-msg');
+
+  let selectedTier = '';
+
+  tierRow.addEventListener('click', (e) => {
+    const btn = e.target.closest('.gs-tier');
+    if (!btn) return;
+    tierRow.querySelectorAll('.gs-tier').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedTier = btn.getAttribute('data-tier') || '';
+  });
+
+  function refreshIdentity() {
+    const id = gsGetIdentity();
+    if (id) {
+      whoEl.innerHTML = 'Submitting as <strong></strong>';
+      whoEl.querySelector('strong').textContent = id.name;
+    } else {
+      whoEl.textContent = 'Submitting anonymously';
+    }
+  }
+  refreshIdentity();
+
+  function setMsg(kind, text) {
+    msgEl.className = 'gs-msg ' + kind;
+    msgEl.textContent = text;
+  }
+  function clearMsg() {
+    msgEl.className = 'gs-msg';
+    msgEl.textContent = '';
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearMsg();
+
+    const day = parseInt(dayInput.value, 10);
+    if (!Number.isFinite(day) || day < 1 || day > 31) {
+      setMsg('err', 'Pick a day of the event (1 to 31).');
+      dayInput.focus();
+      return;
+    }
+    const totalVouchers = parseInt(vouchersInput.value, 10);
+    if (!Number.isFinite(totalVouchers) || totalVouchers < 0) {
+      setMsg('err', 'Enter the total Grand Slam Vouchers received today.');
+      vouchersInput.focus();
+      return;
+    }
+    const extra99Raw = extra99Input.value.trim();
+    const extra99 = extra99Raw === '' ? 0 : parseInt(extra99Raw, 10);
+    if (!Number.isFinite(extra99) || extra99 < 0) {
+      setMsg('err', 'Additional $99.99 packs must be 0 or more.');
+      extra99Input.focus();
+      return;
+    }
+    if (!selectedTier && extra99 === 0) {
+      setMsg('err', 'Pick at least one pack tier, or enter $99.99 packs bought.');
+      return;
+    }
+
+    function optInt(v) {
+      const s = String(v == null ? '' : v).trim();
+      if (s === '') return null;
+      const n = parseInt(s, 10);
+      return Number.isFinite(n) && n >= 0 ? n : null;
+    }
+    const balanceBefore = optInt(balBeforeInput.value);
+    const balanceAfter  = optInt(balAfterInput.value);
+
+    const identity = gsGetIdentity();
+    const payload = {
+      day,
+      highestTier: selectedTier || null,
+      extra99,
+      totalVouchers,
+      balanceBefore,
+      balanceAfter,
+      siteKey: identity ? identity.siteKey : null,
+      name: identity ? identity.name : null,
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    setMsg('info', 'Sending...');
+
+    try {
+      const res = await fetch(GS_PUSH_WORKER + '/grand-slam/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      let data = null;
+      try { data = await res.json(); } catch (e) {}
+      if (res.ok && data && data.ok) {
+        setMsg('ok', 'Thanks! Submission recorded. Feel free to log another day or correction.');
+        form.reset();
+        tierRow.querySelectorAll('.gs-tier').forEach(b => b.classList.remove('active'));
+        tierRow.querySelector('.gs-tier[data-tier=""]').classList.add('active');
+        selectedTier = '';
+      } else if (res.status === 429) {
+        setMsg('err', (data && data.message) || 'Please wait a moment before submitting again.');
+      } else if (data && data.message) {
+        setMsg('err', data.message);
+      } else if (data && data.error) {
+        setMsg('err', 'Submission rejected (' + data.error + ').');
+      } else {
+        setMsg('err', 'Submission failed. Please try again.');
+      }
+    } catch (err) {
+      setMsg('err', 'Network error. Please try again.');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit';
+    }
+  });
+}
 </script>
 
 <!-- Language picker modal (same UX as bases.html and decor-index.html) -->
@@ -3625,7 +3815,6 @@ fetch(HERO_DATA_URL)
 })();
 </script>
 <script src="https://translate.googleapis.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<!-- MATHOMHOUSE: removed-feedback-widget-script -->
-<a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
+<script src="feedback-widget.js?v=20260601-2"></script>
 </body>
 </html>
