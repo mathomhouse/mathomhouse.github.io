@@ -42,7 +42,7 @@ The two gates are independent and stack via `animation-play-state`. Reference im
 
 ### Patch workflow (third-party files)
 
-Three files are third-party sources that get replaced from upstream. **NEVER edit them directly.** All changes must go in their respective patch scripts. Do not run the patch scripts — the user runs them.
+Four files are third-party sources that get replaced from upstream. **NEVER edit them directly.** All changes must go in their respective patch scripts. Do not run the patch scripts locally — the user runs them (CI also runs them automatically, see below).
 
 All patch scripts are idempotent (each step guarded by a marker comment or string check).
 
@@ -70,6 +70,10 @@ node scripts/patch-bookmarklet.js all-bookmarklet.js
 ```
 node scripts/patch-heroes-awakening.js guides/heroes-awakening.html
 ```
+
+#### CI automation
+
+`.github/workflows/patch-all.yml` runs automatically on push to any of the 4 patched files or their patch scripts (or manually via `workflow_dispatch`). It re-runs all 4 patch scripts, verifies each with a grep-based check, and if a check fails, rolls back that one file (`git checkout HEAD^`) and fails the job — this usually means a patch script needs updating for a new upstream version. On success it commits (GPG-signed, as `github-actions[bot]`) and pushes the patched files back to `main`. No manual commit of patched output is needed after pushing an upstream file update.
 
 ## Key Notes
 
