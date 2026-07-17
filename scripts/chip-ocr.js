@@ -49,7 +49,18 @@
   // ── Map an OCR'd stat label to a form field ──────────────────
   function classifyStat(text) {
     var t = ' ' + text.toLowerCase().replace(/[^a-z0-9%. ]/g, ' ').replace(/\s+/g, ' ') + ' ';
-    if (/crit/.test(t)) return /rate/.test(t) ? 'crit-rate' : 'crit-dmg';
+    if (/crit/.test(t)) {
+      if (/rate/.test(t)) return 'crit-rate';
+      if (/dmg|damage/.test(t)) return 'crit-dmg';
+      // Same shape as the elemental case above: "Crit." alone (with its
+      // value already attached) locking straight to crit-dmg would skip
+      // the continuation merge that could still find a wrapped "Rate" on
+      // the next line ("Heavy Trooper Crit." / "Rate  5.82%"). Unlike
+      // "Elemental" vs "Enhance", there's no legitimate standalone use of
+      // "Crit" alone, so deferring here (and letting fuzzyClassify decide
+      // if nothing further is ever found) carries no regression risk.
+      return null;
+    }
     if (/shield/.test(t)) return 'shield';
     if (/elemental/.test(t)) {
       if (/enhance/.test(t)) return 'elemental-enhance';
