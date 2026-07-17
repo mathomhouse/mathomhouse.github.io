@@ -82,7 +82,19 @@
     // "Increase DEF of all units" contains "increas" but is a DEF stat.
     if (/ def |defen[cs]e/.test(t)) return 'def';
     if (/increas| dmg /.test(t) && !/ atk |attack/.test(t)) return 'dmg-increase';
-    if (/attack| atk /.test(t)) return 'atk';
+    if (/attack| atk /.test(t)) {
+      // Confirmed via a real screenshot: "Heavy Trooper ATK SPD" can wrap
+      // so "SPD" lands on its own line below "Heavy Trooper ATK," and OCR
+      // reads them as two separate rows. Locking straight to 'atk' here
+      // (before the caller's below/above continuation merge ever runs)
+      // let the ATK SPD line's value get attributed to real Attack, while
+      // the orphaned "SPD" word was left behind as an unreadable leftover.
+      // Deferring costs nothing for genuine standalone ATK lines ("Army
+      // ATK", "Heavy Trooper Attack") — with no stray "SPD" nearby, the
+      // merge finds nothing and this falls through to fuzzyClassify(),
+      // which already resolves every ATK phrasing back to 'atk'.
+      return null;
+    }
     if (/ hp |boost/.test(t)) return 'hp';
     return null;
   }
