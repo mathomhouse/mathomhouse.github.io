@@ -258,8 +258,7 @@
     panel.records.forEach(function (r) {
       if (r.baseStat || !r.field || r.value === null) return;
       var scope = r.scope || null;
-      var included = scope === null || scope === 'all-units' ||
-        (troopType && troopType !== 'all-units-only' && scope === troopType);
+      var included = scope === null || scope === 'all-units' || (troopType && scope === troopType);
       if (!included) return;
       fields[r.field] = (fields[r.field] || 0) + r.value;
     });
@@ -1171,6 +1170,33 @@
         }
       }
     });
+
+    // Ctrl/Cmd+V has no equivalent on mobile — this button reads the
+    // clipboard directly (Async Clipboard API) for phones/tablets where
+    // a screenshot is copied but there's no keyboard to paste with.
+    var pasteBtn = document.getElementById('ht-ocr-paste-btn');
+    if (pasteBtn) {
+      pasteBtn.addEventListener('click', function () {
+        if (!navigator.clipboard || !navigator.clipboard.read) {
+          setStatus('Clipboard paste isn’t supported in this browser — use the drop zone to choose a file instead.', true);
+          return;
+        }
+        navigator.clipboard.read().then(function (clipItems) {
+          for (var i = 0; i < clipItems.length; i++) {
+            var types = clipItems[i].types;
+            for (var j = 0; j < types.length; j++) {
+              if (types[j].indexOf('image/') === 0) {
+                clipItems[i].getType(types[j]).then(processImageSource);
+                return;
+              }
+            }
+          }
+          setStatus('No image found on the clipboard — copy a screenshot first, then try again.', true);
+        }).catch(function () {
+          setStatus('Couldn’t read the clipboard — your browser may need permission granted for this page.', true);
+        });
+      });
+    }
 
     // Re-filter the last OCR result when Troop Type changes — no re-OCR.
     var troopTypeSelect = document.getElementById('ht-ocr-troop-type');

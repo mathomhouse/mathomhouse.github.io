@@ -504,6 +504,10 @@ canvas {
   padding: 4px 8px;
 }
 
+.ocr-paste-btn {
+  margin: 12px 0 0;
+}
+
 @media (max-width: 768px) {
   .ocr-drop { padding: 20px 14px; }
 }
