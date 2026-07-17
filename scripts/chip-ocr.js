@@ -39,8 +39,12 @@
   // 'atk' or fuzzy-matched elsewhere, but it has no form field and is never
   // filled in or scored (this calculator does not quantify ATK SPD).
 
-  // Words that can be part of a wrapped stat label ("...DMG / Increase")
-  var CONTINUATION_RE = /incre|decre|taken|reduc|rate|dmg|damage|shield|attack|atk|def|hp|crit|heavy|trooper|starting|units|boost|army|navy|air|all|elemental|enhance|inv|spd|speed/i;
+  // Words that can be part of a wrapped stat label ("...DMG / Increase").
+  // Includes "force" on its own because "Air Force" can wrap mid-phrase
+  // ("...of Air" / "Force  1.4%") — without it, a lone "Force" continuation
+  // line wouldn't be recognized and the stitched label would lose the
+  // "Force" token classifyScope() needs to detect the air-force scope.
+  var CONTINUATION_RE = /incre|decre|taken|reduc|rate|dmg|damage|shield|attack|atk|def|hp|crit|heavy|trooper|starting|units|boost|army|navy|air|force|all|elemental|enhance|inv|spd|speed/i;
 
   // ── Map an OCR'd stat label to a form field ──────────────────
   function classifyStat(text) {
