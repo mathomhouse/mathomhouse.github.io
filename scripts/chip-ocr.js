@@ -51,7 +51,20 @@
     var t = ' ' + text.toLowerCase().replace(/[^a-z0-9%. ]/g, ' ').replace(/\s+/g, ' ') + ' ';
     if (/crit/.test(t)) return /rate/.test(t) ? 'crit-rate' : 'crit-dmg';
     if (/shield/.test(t)) return 'shield';
-    if (/elemental/.test(t)) return /enhance/.test(t) ? 'elemental-enhance' : 'elemental-res';
+    if (/elemental/.test(t)) {
+      if (/enhance/.test(t)) return 'elemental-enhance';
+      // Ambiguous, not yet wrong: "Enhance" often wraps onto its own
+      // line ("Army Elemental" / "Enhance  6.54%"), with the value
+      // already attached to THIS line. Returning 'elemental-res' here
+      // would lock in a field before the caller's below/above
+      // continuation-line merge (parsePanels' records.forEach) ever
+      // runs — that merge only fires while rec.field is still falsy.
+      // Returning null lets it pull in a wrapped "Enhance" if there is
+      // one; a genuine Elemental RES line has nothing more to find and
+      // correctly falls through to fuzzyClassify()'s comparison against
+      // the '...elemental res' / '...elemental enhance' KNOWN_LABELS.
+      return null;
+    }
     if (/\binv\b|invincib/.test(t)) return 'inv';
     if (/atk\s*spd|attack\s*speed|\bspd\b/.test(t)) return 'atk-spd';
     if (/decreas|taken|reduc/.test(t)) return 'dmg-decrease';
