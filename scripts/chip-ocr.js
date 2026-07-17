@@ -800,9 +800,18 @@
   // full-image OCR pass mix words from Chip 1 and Chip 2. These two areas
   // deliberately contain just the Random Stat lists on the standard game
   // screen. Keeping the crop relative makes it work at any screenshot size.
+  //
+  // h is intentionally taller than a naive "4 single-line rows" estimate:
+  // long/two-word labels ("Air Force Decreased DMG Taken", "All units
+  // Elemental Enhance") routinely wrap to a second physical line in-game,
+  // and everything downstream (refinePanelValues, the geometric value
+  // reader) only ever looks inside this crop — a row whose pixels fall
+  // below the bottom edge is silently lost, not just misread. A panel
+  // with 2 of its 4 rows wrapped has 6 physical lines, not 4, so the
+  // budget needs headroom for that worst case, not just the common case.
   var STAT_LIST_AREAS = [
-    { x: 0.035, y: 0.490, w: 0.475, h: 0.165 }, // left / candidate chip
-    { x: 0.495, y: 0.490, w: 0.470, h: 0.165 }  // right / equipped chip
+    { x: 0.035, y: 0.490, w: 0.475, h: 0.245 }, // left / candidate chip
+    { x: 0.495, y: 0.490, w: 0.470, h: 0.245 }  // right / equipped chip
   ];
 
   // Wider per-side sweeps used when a tight crop finds nothing. Each
