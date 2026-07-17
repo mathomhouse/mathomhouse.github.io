@@ -46,6 +46,22 @@
   // Note: /flag-overrides is handled server-side — its fetch fires before this defer script runs.
   const _baseFetch = window.fetch.bind(window);
 
+  // Owner secret — high-entropy per-device write credential. Writes are gated by
+  // it server-side (TOFU on first handshake); the recovery code distributes it
+  // across devices. Generated lazily; once present it is never overwritten here,
+  // so a recovery restore that adopts another device's secret survives (Trap 1).
+  function _ensureOwnerSecret() {
+    try {
+      var s = localStorage.getItem('armory_owner_secret');
+      if (s && /^[0-9a-f]{32,64}$/.test(s)) return s;
+      var arr = new Uint8Array(16);
+      crypto.getRandomValues(arr);
+      s = Array.from(arr).map(function (b) { return b.toString(16).padStart(2, '0'); }).join(''); // 32 hex
+      localStorage.setItem('armory_owner_secret', s);
+      return s;
+    } catch (e) { return null; }
+  }
+
   // Eager handshake — caches a single token promise so supplement GETs never race the handshake.
   // Called immediately after ArmoryIdentity is patched; all concurrent GETs await the same promise.
   let _tokenPromise = null;
@@ -56,7 +72,7 @@
     _tokenPromise = _baseFetch(_WORKER + '/supplement/handshake', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ siteKey: sk })
+      body: JSON.stringify({ siteKey: sk, ownerSecret: _ensureOwnerSecret() })
     }).then(r => r.json()).then(d => {
       if (d.token) window._ar_supplementToken = d.token;
       return d.token || null;
@@ -94,20 +110,47 @@
         }
       }
 
-      // Reuse existing shortcode on Save — inject cached code into POST body so
-      // the worker updates the existing entry rather than generating a new one.
-      if (path === '/report-config' && opts && (opts.method || '').toUpperCase() === 'POST') {
+      // Inject ownerSecret into every handshake POST (covers the page's own
+      // _ar_ensureSupplementToken, which calls window.fetch). Our _ensureToken
+      // already adds it directly via _baseFetch and bypasses this.
+      if (path === '/supplement/handshake' && opts && (opts.method || '').toUpperCase() === 'POST') {
         try {
-          var cached = JSON.parse(localStorage.getItem('playerReport') || '{}').shortcode;
-          if (cached) {
-            var bodyObj = JSON.parse(opts.body);
-            if (!bodyObj.shortcode) {
-              bodyObj.shortcode = cached;
-              var newOpts = Object.assign({}, opts, { body: JSON.stringify(bodyObj) });
-              return _baseFetch(url, newOpts);
-            }
+          var hb = opts.body ? JSON.parse(opts.body) : {};
+          if (!hb.ownerSecret) {
+            hb.ownerSecret = _ensureOwnerSecret();
+            return _baseFetch(url, Object.assign({}, opts, { body: JSON.stringify(hb) }));
           }
         } catch (_) {}
+      }
+
+      // Save / delete a report config — attach the owner write token (and, on Save,
+      // reuse the cached share code so the worker updates the existing entry). The
+      // token is harmless while the worker isn't enforcing; required once it is.
+      // Retry once on 401 in case a stale token was cached.
+      if (path === '/report-config' && opts &&
+          ((opts.method || '').toUpperCase() === 'POST' || (opts.method || '').toUpperCase() === 'DELETE')) {
+        var _isPost = (opts.method || '').toUpperCase() === 'POST';
+        var _u = url, _o = opts;
+        var _send = function (token) {
+          var bodyObj = {};
+          try { bodyObj = _o.body ? JSON.parse(_o.body) : {}; } catch (_) {}
+          if (_isPost) {
+            try {
+              var cached = JSON.parse(localStorage.getItem('playerReport') || '{}').shortcode;
+              if (cached && !bodyObj.shortcode) bodyObj.shortcode = cached;
+            } catch (_) {}
+          }
+          var headers = Object.assign({}, _o && _o.headers);
+          if (token) headers['Authorization'] = 'Bearer ' + token;
+          return _baseFetch(_u, Object.assign({}, _o, { body: JSON.stringify(bodyObj), headers: headers }));
+        };
+        return _ensureToken().then(_send).then(function (resp) {
+          if (resp && resp.status === 401) {
+            _tokenPromise = null; window._ar_supplementToken = null;
+            return _ensureToken().then(_send);
+          }
+          return resp;
+        });
       }
 
       if (path.startsWith('/advisor/')) {
@@ -204,6 +247,7 @@
     for (let i = 0; i < localStorage.length; i++) {
       const k = localStorage.key(i);
       if (k === 'playerIdentity' || k === 'playerReport' || k === 'reportDeviceId'
+          || k === 'armory_owner_secret' || k === 'armory_recovery_code'
           || (sk && k.includes(sk))) {
         out[k] = localStorage.getItem(k);
       }
@@ -330,6 +374,15 @@
       // Returning visitor migrating from UID system: silently register
       _ar_saveRecoveryCode(_id.siteKey, _id.name || '', _id.alliance || '');
     }
+  } else if (!localStorage.getItem('armory_secret_backfilled')) {
+    // Transition: a user who already had a recovery code (pre-ownerSecret) needs
+    // the secret merged into their server-side recovery entry so cross-device
+    // restore can hand it over. /recovery/save dedups and backfills (worker Trap 2).
+    try {
+      const _bid = window.ArmoryIdentity.get();
+      Promise.resolve(_ar_saveRecoveryCode(_bid.siteKey, _bid.name || '', _bid.alliance || ''))
+        .then(function () { try { localStorage.setItem('armory_secret_backfilled', '1'); } catch (e) {} });
+    } catch (e) {}
   }
 
   async function _ar_saveRecoveryCode(siteKey, name, alliance) {
@@ -339,7 +392,8 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           siteKey, name, alliance,
-          deviceId: localStorage.getItem('reportDeviceId') || ''
+          deviceId: localStorage.getItem('reportDeviceId') || '',
+          ownerSecret: _ensureOwnerSecret()
         })
       });
       if (!res.ok) return null;
@@ -531,9 +585,32 @@
           siteKey: data.siteKey, name: data.name || '', alliance: data.alliance || ''
         }));
         localStorage.setItem('armory_recovery_code', code);
-        return _mh_navigateToRestoredReport(data.siteKey).then(function (navigated) {
-          if (navigated) return new Promise(function () {}); // hold; page is navigating
-          return null; // identity restored, no saved report — caller reloads to landing
+        // Force the next handshake to use the adopted/claimed secret.
+        _tokenPromise = null; window._ar_supplementToken = null;
+
+        function _finishRestore() {
+          return _mh_navigateToRestoredReport(data.siteKey).then(function (navigated) {
+            if (navigated) return new Promise(function () {}); // hold; page is navigating
+            return null; // identity restored, no saved report — caller reloads to landing
+          });
+        }
+
+        // Trap 1: adopt the origin device's secret BEFORE any generate-if-missing runs.
+        if (data.ownerSecret && /^[0-9a-f]{32,64}$/.test(data.ownerSecret)) {
+          try { localStorage.setItem('armory_owner_secret', data.ownerSecret); } catch (e) {}
+          try { localStorage.setItem('armory_secret_backfilled', '1'); } catch (e) {}
+          return _finishRestore();
+        }
+        // Trap 3: legacy recovery entry with no secret — claim write access with a
+        // fresh secret, proving ownership via the recovery code, then store it.
+        var sec = _ensureOwnerSecret();
+        return _baseFetch(_WORKER + '/owner/reset', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: code, ownerSecret: sec })
+        }).catch(function () {}).then(function () {
+          try { localStorage.setItem('armory_secret_backfilled', '1'); } catch (e) {}
+          return _finishRestore();
         });
       });
     }).catch(function () { return 'Network error — try again.'; });
