@@ -130,6 +130,8 @@
     ['army hp boost', 'hp'],
     ['all units hp', 'hp'],
     ['army atk', 'atk'],
+    ['navy atk', 'atk'],
+    ['air force atk', 'atk'],
     ['all units attack', 'atk'],
     ['heavy trooper elemental res', 'elemental-res'],
     ['heavy trooper elemental enhance', 'elemental-enhance'],
