@@ -384,6 +384,25 @@
           rec.field = classifyStat(label);
         }
         if (!rec.field) rec.field = fuzzyClassify(label);
+        // The field can resolve from a partial first line ("Increase DEF
+        // of" is already unambiguously 'def') without ever needing the
+        // wrapped second line ("Army") that the merges above only chase
+        // when rec.field is still blank. That leaves classifyScope()
+        // starved of the one word it needed — a scoped line silently
+        // defaults to unscoped (always-included) instead of being
+        // correctly filtered by Troop Type. Search independently for a
+        // scope word whenever one isn't already in the label, regardless
+        // of whether the field search above already stopped looking.
+        if (!classifyScope(label)) {
+          var scopeBelow = unassignedNear(rec, false);
+          scopeBelow.forEach(function (w) { assigned.add(w); });
+          label += ' ' + scopeBelow.map(function (w) { return w.text; }).join(' ');
+        }
+        if (!classifyScope(label)) {
+          var scopeAbove = unassignedNear(rec, true);
+          scopeAbove.forEach(function (w) { assigned.add(w); });
+          label += ' ' + scopeAbove.map(function (w) { return w.text; }).join(' ');
+        }
         rec.labelText = label.replace(/\s+/g, ' ').trim();
         rec.scope = classifyScope(label);
       });
