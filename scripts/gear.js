@@ -177,6 +177,14 @@ function resetHTChips() {
     document.getElementById('ht-chips2-box').style.backgroundColor = '';
     document.getElementById('ht-chips1-box').style.color = '';
     document.getElementById('ht-chips2-box').style.color = '';
+
+    // Clear any leftover OCR status message (chip-ocr.js owns this element)
+    var ocrStatus = document.getElementById('ht-ocr-status');
+    if (ocrStatus) {
+        ocrStatus.hidden = true;
+        ocrStatus.textContent = '';
+        ocrStatus.classList.remove('error');
+    }
 }
 
 

@@ -416,6 +416,98 @@ canvas {
   }
 }
 
+/* ─── OCR SCREENSHOT IMPORT (HT Chips) ─────────────────────────── */
+.ocr-import {
+  max-width: 700px;
+  margin: 0 auto 24px;
+  text-align: center;
+}
+
+.ocr-drop {
+  background: var(--surface);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 28px 20px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.ocr-drop:hover {
+  border-color: var(--gold-dim);
+}
+
+.ocr-drop.dragover {
+  border-color: var(--gold);
+  background: rgba(201, 168, 76, 0.08);
+  box-shadow: 0 0 0 3px var(--gold-glow);
+}
+
+.ocr-drop-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text);
+  margin: 0 0 6px;
+}
+
+.ocr-drop-hint {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+.ocr-status {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin: 10px 0 0;
+}
+
+.ocr-status.error {
+  color: var(--red);
+}
+
+.ocr-privacy-note {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin: 10px 0 0;
+}
+
+.ocr-privacy-note a {
+  color: var(--gold-dim);
+}
+
+.ocr-troop-type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.ocr-troop-type label {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.ocr-troop-type select {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.85rem;
+  padding: 4px 8px;
+}
+
+@media (max-width: 768px) {
+  .ocr-drop { padding: 20px 14px; }
+}
+
 /* ─── ANIMATED BEAST HEADSHOT (pets.html / pets2.html) ────────────
    Result cards set their own #result padding-right gutter inline. */
 #comparison-result1,

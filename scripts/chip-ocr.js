@@ -27,19 +27,29 @@
     'dmg-decrease': 'DMG Decrease',
     'crit-dmg': 'Crit DMG',
     'crit-rate': 'Crit Rate',
-    'atk': 'ATK',
-    'hp': 'HP'
+    'atk': 'Attack',
+    'hp': 'HP',
+    'elemental-res': 'Elemental RES',
+    'elemental-enhance': 'Elemental Enhance',
+    'inv': 'INV'
   };
-  var FIELD_ORDER = ['def', 'shield', 'dmg-increase', 'dmg-decrease', 'crit-dmg', 'crit-rate', 'atk', 'hp'];
+  var FIELD_ORDER = ['def', 'shield', 'dmg-increase', 'dmg-decrease', 'crit-dmg', 'crit-rate', 'atk', 'hp', 'elemental-res', 'elemental-enhance', 'inv'];
+  // 'atk-spd' is intentionally excluded from FIELD_NAMES/FIELD_ORDER — it's
+  // recognized by classifyStat() below so it doesn't get misclassified as
+  // 'atk' or fuzzy-matched elsewhere, but it has no form field and is never
+  // filled in or scored (this calculator does not quantify ATK SPD).
 
   // Words that can be part of a wrapped stat label ("...DMG / Increase")
-  var CONTINUATION_RE = /incre|decre|taken|reduc|rate|dmg|damage|shield|attack|atk|def|hp|crit|heavy|trooper|starting|units|boost|army|navy|air|all/i;
+  var CONTINUATION_RE = /incre|decre|taken|reduc|rate|dmg|damage|shield|attack|atk|def|hp|crit|heavy|trooper|starting|units|boost|army|navy|air|all|elemental|enhance|inv|spd|speed/i;
 
   // ── Map an OCR'd stat label to a form field ──────────────────
   function classifyStat(text) {
     var t = ' ' + text.toLowerCase().replace(/[^a-z0-9%. ]/g, ' ').replace(/\s+/g, ' ') + ' ';
     if (/crit/.test(t)) return /rate/.test(t) ? 'crit-rate' : 'crit-dmg';
     if (/shield/.test(t)) return 'shield';
+    if (/elemental/.test(t)) return /enhance/.test(t) ? 'elemental-enhance' : 'elemental-res';
+    if (/\binv\b|invincib/.test(t)) return 'inv';
+    if (/atk\s*spd|attack\s*speed|\bspd\b/.test(t)) return 'atk-spd';
     if (/decreas|taken|reduc/.test(t)) return 'dmg-decrease';
     // "Increase DEF of all units" contains "increas" but is a DEF stat.
     if (/ def |defen[cs]e/.test(t)) return 'def';
@@ -47,6 +57,19 @@
     if (/attack| atk /.test(t)) return 'atk';
     if (/ hp |boost/.test(t)) return 'hp';
     return null;
+  }
+
+  // ── Map an OCR'd stat label to the troop-type scope it applies to ──
+  // Right-side (march slot 4-6) chips roll stats prefixed with a troop
+  // type (Navy/Army/Air Force) or "All units". Left-side Heavy Trooper
+  // lines carry no such prefix and are always included (scope: null).
+  function classifyScope(text) {
+    var t = ' ' + text.toLowerCase().replace(/[^a-z0-9%. ]/g, ' ').replace(/\s+/g, ' ') + ' ';
+    if (/all units|all troops/.test(t)) return 'all-units';
+    if (/\bnavy\b/.test(t)) return 'navy';
+    if (/\barmy\b/.test(t)) return 'army';
+    if (/air\s*force|\baf\b/.test(t)) return 'air-force';
+    return null; // unscoped — Heavy Trooper / left-side chip lines, always included
   }
 
   // Fuzzy fallback for labels OCR garbled too badly for keywords
@@ -67,7 +90,11 @@
     ['army hp boost', 'hp'],
     ['all units hp', 'hp'],
     ['army atk', 'atk'],
-    ['all units attack', 'atk']
+    ['all units attack', 'atk'],
+    ['heavy trooper elemental res', 'elemental-res'],
+    ['heavy trooper elemental enhance', 'elemental-enhance'],
+    ['heavy trooper inv', 'inv'],
+    ['heavy trooper atk spd', 'atk-spd']
   ];
 
   function bigrams(s) {
@@ -166,6 +193,9 @@
     return edges.map(function (c) { return c.x; }).sort(function (a, b) { return a - b; });
   }
 
+  // Sums every usable record regardless of troop-type scope — used
+  // internally to judge whether a panel has enough data to be usable
+  // at all (see usablePanel()), independent of the Troop Type filter.
   function panelFields(panel) {
     var fields = {};
     panel.records.forEach(function (r) {
@@ -173,6 +203,30 @@
       fields[r.field] = (fields[r.field] || 0) + r.value;
     });
     return fields;
+  }
+
+  // Sums only the records relevant to the current Troop Type selection.
+  // Unscoped (Heavy Trooper / left-side) and 'all-units'-scoped records
+  // are always included; a troop-type-scoped record is included only
+  // when it matches the selected troopType. Non-matching records are
+  // silently dropped — this is what actually drives the filled-in form
+  // fields, so re-filtering on a dropdown change never needs new OCR.
+  function filteredPanelFields(panel, troopType) {
+    var fields = {};
+    panel.records.forEach(function (r) {
+      if (r.baseStat || !r.field || r.value === null) return;
+      var scope = r.scope || null;
+      var included = scope === null || scope === 'all-units' ||
+        (troopType && troopType !== 'all-units-only' && scope === troopType);
+      if (!included) return;
+      fields[r.field] = (fields[r.field] || 0) + r.value;
+    });
+    return fields;
+  }
+
+  function getTroopType() {
+    var sel = document.getElementById('ht-ocr-troop-type');
+    return sel ? sel.value : '';
   }
 
   // ── Parse OCR words into per-panel stat records ───────────────
@@ -290,6 +344,7 @@
         }
         if (!rec.field) rec.field = fuzzyClassify(label);
         rec.labelText = label.replace(/\s+/g, ' ').trim();
+        rec.scope = classifyScope(label);
       });
 
       // Keep only stats below this panel's "Random Stat" header, if
@@ -317,6 +372,7 @@
           value: null,
           decimal: false,
           field: f,
+          scope: classifyScope(text),
           labelWords: un,
           labelText: text,
           yc: row.yc,
@@ -637,16 +693,21 @@
   }
 
   // ── Fill the HT chip forms ────────────────────────────────────
-  function fillForms(panels) {
+  // troopType filters which right-side (scoped) records get summed in —
+  // see filteredPanelFields(). Re-callable on cached panels (see the
+  // Troop Type <select> change listener in init()) so switching the
+  // dropdown re-fills instantly without re-running OCR.
+  function fillForms(panels, troopType) {
     var parts = [];
     panels.forEach(function (panel, i) {
       var prefix = 'ht' + (i + 1) + '-';
       var filled = [];
+      var fields = filteredPanelFields(panel, troopType);
       FIELD_ORDER.forEach(function (f) {
         var input = document.getElementById(prefix + f);
         if (!input) return;
-        if (panel.fields[f] !== undefined) {
-          var v = Math.round(panel.fields[f] * 100) / 100;
+        if (fields[f] !== undefined) {
+          var v = Math.round(fields[f] * 100) / 100;
           input.value = v;
           filled.push(FIELD_NAMES[f] + ' ' + v + '%');
         } else {
@@ -906,7 +967,7 @@
       setStatus('No stat values found — make sure the chip stat panel(s) are visible and readable.', true);
       return parsed;
     }
-    var summary = fillForms(parsed.panels);
+    var summary = fillForms(parsed.panels, getTroopType());
     var notes = [];
     if (parsed.panels.length === 1) notes.push('only one stat panel detected, filled Chip 1');
     var unreadable = [];
@@ -1059,6 +1120,16 @@
         }
       }
     });
+
+    // Re-filter the last OCR result when Troop Type changes — no re-OCR.
+    var troopTypeSelect = document.getElementById('ht-ocr-troop-type');
+    if (troopTypeSelect) {
+      troopTypeSelect.addEventListener('change', function () {
+        var parsed = window.__chipOcr.lastParse;
+        if (!parsed || !parsed.panels || !parsed.panels.length) return;
+        fillForms(parsed.panels, troopTypeSelect.value);
+      });
+    }
   }
 
   if (document.readyState === 'loading') {
@@ -1070,9 +1141,11 @@
   // Exposed for testing
   window.__chipOcr = {
     classifyStat: classifyStat,
+    classifyScope: classifyScope,
     fuzzyClassify: fuzzyClassify,
     parsePanels: parsePanels,
     parseRefined: parseRefined,
+    filteredPanelFields: filteredPanelFields,
     runBrowserOcr: runBrowserOcr,
     finishParsed: finishParsed,
     processImageSource: processImageSource
