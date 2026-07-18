@@ -845,15 +845,12 @@
     var ctx = crop.getContext('2d');
     ctx.imageSmoothingEnabled = false;
     ctx.drawImage(canvas, sx, sy, sw, sh, 0, 0, crop.width, crop.height);
-    // Erase faint/ghost text so only dark card text reaches OCR. Dialog
-    // text lands near-black after the contrast boost; ghost text (if any,
-    // as seen bleeding through on the HT Chips screen) stays light gray.
-    var img = ctx.getImageData(0, 0, crop.width, crop.height);
-    var d = img.data;
-    for (var i = 0; i < d.length; i += 4) {
-      if (d[i] > 168) { d[i] = 255; d[i + 1] = 255; d[i + 2] = 255; }
-    }
-    ctx.putImageData(img, 0, 0);
+    // Unlike chip-ocr.js's HT Chips crop, this screen has no faint ghost
+    // overlay to strip out — and its Random Attribute values are
+    // color-coded by roll quality (purple/gold/blue), so a fixed
+    // brightness cutoff aimed at erasing gray ghost text risks clipping
+    // thin anti-aliased edges off legitimately-colored digits instead.
+    // No erasure step here.
     return crop;
   }
 
