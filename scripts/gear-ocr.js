@@ -342,6 +342,19 @@
           label += ' ' + aboveW.map(function (w) { return w.text; }).join(' ');
           rec.field = classifyStat(label);
         }
+        // classifyStat()'s ATK branch always defers rather than returning
+        // 'atk' directly, so a wrapped "SPD" gets a chance to merge in
+        // first. But fuzzyClassify() refuses anything under 6 letters —
+        // if OCR drops the troop-type word entirely (not just fails to
+        // attach it; genuinely never extracted as a word, so no merge can
+        // recover it), a bare "ATK" or "Attack" is short enough to fall
+        // through fuzzyClassify's length gate untested and end up
+        // unclassified. Confirmed in practice: "Navy ATK" lost "Navy"
+        // to OCR, leaving a 3-letter "ATK" that fuzzyClassify wouldn't
+        // even attempt. Trust it directly once merges are exhausted.
+        if (!rec.field && /attack|atk/i.test(label) && !/spd|speed/i.test(label)) {
+          rec.field = 'atk';
+        }
         if (!rec.field) rec.field = fuzzyClassify(label);
         // The field can resolve from a partial row without ever needing a
         // split-off scope word (see chip-ocr.js's identical fix for

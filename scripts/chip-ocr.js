@@ -399,6 +399,17 @@
         if (!rec.field && /elemental/i.test(label) && !/enhance/i.test(label)) {
           rec.field = 'elemental-res';
         }
+        // Same shape of gap on the ATK side: classifyStat()'s ATK branch
+        // always defers so a wrapped "SPD" gets a chance to merge in
+        // first, but fuzzyClassify() refuses anything under 6 letters —
+        // if OCR drops a troop-type word entirely (genuinely never
+        // extracted, not just mis-attached, so no merge can recover it),
+        // a bare "ATK"/"Attack" is short enough to fall through
+        // fuzzyClassify's length gate untested. Confirmed in gear-ocr.js
+        // with the identical pattern ("Navy ATK" losing "Navy" to OCR).
+        if (!rec.field && /attack|atk/i.test(label) && !/spd|speed/i.test(label)) {
+          rec.field = 'atk';
+        }
         if (!rec.field) rec.field = fuzzyClassify(label);
         // The field can resolve from a partial first line ("Increase DEF
         // of" is already unambiguously 'def') without ever needing the
