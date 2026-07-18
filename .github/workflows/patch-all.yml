@@ -11,6 +11,8 @@ on:
       - 'all-bookmarklet.js'
       - 'guides/heroes-awakening.html'
       - 'scripts/patch-heroes-awakening.js'
+      - 'eternal-land-calendar.html'
+      - 'scripts/patch-eternal-land-calendar.js'
   workflow_dispatch:
 
 permissions:
@@ -85,6 +87,21 @@ jobs:
           echo "::error::Heroes-awakening patch verification failed — source update incompatible with patch script. Restored previous version."
           exit 1
 
+      - name: Apply eternal-land-calendar patch
+        run: node scripts/patch-eternal-land-calendar.js eternal-land-calendar.html
+
+      - name: Verify eternal-land-calendar patch
+        run: |
+          grep -q 'header-placeholder' eternal-land-calendar.html && \
+          grep -q 'mathomhouse' eternal-land-calendar.html || echo "ELC_PATCH_FAILED=true" >> $GITHUB_ENV
+
+      - name: Rollback eternal-land-calendar on failure
+        if: env.ELC_PATCH_FAILED == 'true'
+        run: |
+          git checkout HEAD^ -- eternal-land-calendar.html
+          echo "::error::Eternal-land-calendar patch verification failed — source update incompatible with patch script. Restored previous version."
+          exit 1
+
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v6
         with:
@@ -96,6 +113,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "132933401+kimho2@users.noreply.github.com"
-          git add armory-report.html battle-report.html all-bookmarklet.js guides/heroes-awakening.html
+          git add armory-report.html battle-report.html all-bookmarklet.js guides/heroes-awakening.html eternal-land-calendar.html
           git diff --staged --quiet || git commit -S -m "chore: patch files for mathomhouse"
           git push

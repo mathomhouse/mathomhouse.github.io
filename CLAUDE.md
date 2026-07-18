@@ -71,16 +71,23 @@ node scripts/patch-bookmarklet.js all-bookmarklet.js
 node scripts/patch-heroes-awakening.js guides/heroes-awakening.html
 ```
 
+#### `eternal-land-calendar.html`
+**NEVER directly edit `eternal-land-calendar.html`.** All changes go in `scripts/patch-eternal-land-calendar.js`.
+```
+node scripts/patch-eternal-land-calendar.js eternal-land-calendar.html
+```
+Rebrand mirrors the others: injects the shared mathomhouse nav (`header.js` + `header-placeholder`) on top of the page's own header, swaps in site assets/fonts/OG tags, fixes the title, removes the 2864tw home button and dead `feedback-widget.js`, and widens the page's tight CSP for site assets + Google Fonts + GA. Its push reminders use the existing mathomhouse worker (`push-worker.27tb8s6fct.workers.dev`).
+
 #### CI automation
 
-`.github/workflows/patch-all.yml` runs automatically on push to any of the 4 patched files or their patch scripts (or manually via `workflow_dispatch`). It re-runs all 4 patch scripts, verifies each with a grep-based check, and if a check fails, rolls back that one file (`git checkout HEAD^`) and fails the job — this usually means a patch script needs updating for a new upstream version. On success it commits (GPG-signed, as `github-actions[bot]`) and pushes the patched files back to `main`. No manual commit of patched output is needed after pushing an upstream file update.
+`.github/workflows/patch-all.yml` runs automatically on push to any of the 5 patched files or their patch scripts (or manually via `workflow_dispatch`). It re-runs all 4 patch scripts, verifies each with a grep-based check, and if a check fails, rolls back that one file (`git checkout HEAD^`) and fails the job — this usually means a patch script needs updating for a new upstream version. On success it commits (GPG-signed, as `github-actions[bot]`) and pushes the patched files back to `main`. No manual commit of patched output is needed after pushing an upstream file update.
 
 ## Key Notes
 
 - No local dev server needed — open HTML files directly in browser (or via `file://`)
 - `archive/` and `old files/` are kept for reference; don't edit them
 - When adding a new page to the nav, update both the desktop and mobile sections of `header.html` (they are separate DOM blocks)
-- `armory-report.html`, `battle-report.html`, `all-bookmarklet.js`, and `guides/heroes-awakening.html` are patched third-party files — never edit directly, see patch workflow above
+- `armory-report.html`, `battle-report.html`, `all-bookmarklet.js`, `guides/heroes-awakening.html`, and `eternal-land-calendar.html` are patched third-party files — never edit directly, see patch workflow above
 - New guide pages: copy `templates/guidetemplate.html` as the starting point
 - Every page `<head>` must include the Google Fonts block (Rajdhani + Crimson Pro) — see `styles/mathomhouse.css` header comment for the exact snippet
 - `scripts/feedback-modal.js` is a self-contained drop-in feedback widget; load it on any page that needs a feedback button

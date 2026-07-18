@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'self'; style-src 'unsafe-inline'; connect-src 'self' https://push-worker.27tb8s6fct.workers.dev; img-src 'self' data:; base-uri 'self'; form-action 'none'; object-src 'none'; worker-src 'self'; manifest-src 'self';">
+<link rel="manifest" href="/manifest.json">
+<title>Eternal Land — Server 2864</title>
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { background:#0d1117; color:#e6edf3; font: 15px/1.5 -apple-system, 'Segoe UI', Roboto, sans-serif; }
+  header { background:#161b22; border-bottom:1px solid #30363d; padding:.85rem 2rem; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:30; box-shadow:0 1px 0 #30363d; }
+  .header-left { display:flex; align-items:center; gap:1.2rem; }
+  .header-title { font-size:1.1rem; font-weight:700; color:#79c0ff; }
+  .header-sub { font-size:.75rem; color:#8b949e; margin-top:3px; }
+  .nav-link { font-size:.8rem; color:#8b949e; text-decoration:none; padding:.35rem .8rem; border:1px solid #30363d; border-radius:7px; transition:all .15s; background:none; cursor:pointer; display:inline-flex; align-items:center; gap:.4rem; font-family:inherit; }
+  .nav-link:hover { border-color:#79c0ff; color:#79c0ff; }
+  #bnpBtn { background:none; border:1px solid #30363d; border-radius:8px; padding:.3rem .45rem; color:#8b949e; cursor:pointer; display:flex; align-items:center; }
+  #bnpBtn:hover { border-color:#3fb950; color:#3fb950; }
+  #bnpPop { display:none; position:absolute; top:calc(100% + 6px); left:0; background:#161b22; border:1px solid #30363d; border-radius:10px; padding:.4rem; z-index:500; min-width:168px; box-shadow:0 8px 24px rgba(0,0,0,.5); }
+  #bnpPop.open { display:block; }
+  .bnp-link { display:block; padding:.35rem .6rem; font-size:.78rem; color:#8b949e; text-decoration:none; border-radius:6px; white-space:nowrap; }
+  .bnp-link:hover { background:rgba(63,185,80,.08); color:#e6edf3; }
+  .bnp-link.bnp-cur { color:#3fb950; font-weight:600; pointer-events:none; }
+  @media (max-width:700px) { header { padding:.7rem 1rem; } }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 16px 14px 60px; }
+  .sub { color:#8b949e; margin-bottom: 14px; font-size:.82rem; }
+  .hero { display:flex; align-items:center; justify-content:space-between; gap:16px; background:linear-gradient(135deg,#161b22,#1c2128); border:1px solid #30363d; border-radius:10px; padding:14px 18px; margin-bottom:16px; flex-wrap:wrap; }
+  .hero-next { font-size:.68rem; letter-spacing:1.5px; color:#8b949e; font-weight:700; }
+  .hero-label { font-size:1.1rem; font-weight:700; color:#79c0ff; }
+  .hero-local { font-size:.8rem; color:#8b949e; margin-top:2px; }
+  .hero-count { font-size:1.6rem; font-weight:700; font-variant-numeric:tabular-nums; color:#3fb950; white-space:nowrap; }
+  .stagebar { display:flex; gap:4px; margin-bottom:16px; border-radius:8px; overflow:hidden; }
+  .seg { padding:8px 10px; min-width:0; cursor:pointer; transition:filter .15s; }
+  .seg:hover { filter:brightness(1.35); }
+  .seg b::after { content:" \203A"; opacity:.55; }
+  .ri { width:13px; height:13px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; vertical-align:-2px; margin-right:4px; color:#8b949e; }
+  .seg b { display:block; font-size:.82rem; white-space:nowrap; }
+  .seg span { font-size:.72rem; opacity:.85; white-space:nowrap; }
+  .seg.prep { background:#21262d; } .seg.s1 { background:#0d3321; } .seg.s2 { background:#0a2d42; }
+  .seg.s3 { background:#3b2c10; } .seg.s4 { background:#42150d; } .seg.s5 { background:#2d1b42; }
+  .flow { display:flex; flex-direction:column; gap:14px; }
+  .flow > * { margin-bottom:0 !important; }
+  .hero { order:1; } .stagebar { order:2; } .rhythms { order:3; } .viewbar { order:4; } .grid { order:5; } .foot { order:6; }
+  @media (max-width:700px) {
+    .stagebar { flex-wrap:wrap; order:4; } .seg { flex:1 1 30% !important; }
+    .viewbar { order:2; } .grid { order:3; } .rhythms { order:5; }
+    .hero { padding:10px 14px; } .hero-count { font-size:1.25rem; } .hero-label { font-size:.95rem; }
+  }
+  .rhythms { background:#161b22; border:1px solid #30363d; border-radius:8px; padding:9px 14px; }
+  .rhy-title { font-size:.64rem; letter-spacing:1px; color:#d29922; font-weight:700; margin-bottom:2px; }
+  .rhyrow { display:flex; align-items:center; gap:6px; padding:5px 0; font-size:.85rem; color:#c9d1d9; }
+  .rhyrow + .rhyrow { border-top:1px dashed #21262d; }
+  .rhyrow b { color:#e6edf3; font-variant-numeric:tabular-nums; }
+  .rhycd { margin-left:auto; font-size:.72rem; font-weight:700; font-variant-numeric:tabular-nums; color:#79c0ff; background:#0c2137; padding:2px 8px; border-radius:20px; white-space:nowrap; }
+  .rhycd.live { color:#3fb950; background:#0d2818; }
+  .modal-overlay { position:fixed; inset:0; background:rgba(1,4,9,.7); display:none; align-items:center; justify-content:center; z-index:40; padding:16px; }
+  .modal-overlay.open { display:flex; }
+  .modal { background:#161b22; border:1px solid #30363d; border-radius:12px; max-width:480px; width:100%; padding:16px 18px; max-height:85vh; overflow-y:auto; }
+  .modal h3 { font-size:1rem; margin-bottom:8px; }
+  .remrow { display:flex; align-items:center; gap:10px; padding:7px 0; border-top:1px dashed #21262d; flex-wrap:wrap; }
+  .remrow:first-of-type { border-top:none; }
+  .reminfo { flex:1; min-width:200px; }
+  .reminfo .rt { font-size:.9rem; font-weight:600; }
+  .reminfo .rd { font-size:.76rem; color:#8b949e; }
+  .rembtn { background:#21262d; border:1px solid #30363d; border-radius:20px; color:#8b949e; cursor:pointer; font-size:.78rem; font-weight:600; padding:5px 14px; white-space:nowrap; }
+  .rembtn.on { background:#0d2818; border-color:#1f6f38; color:#3fb950; font-weight:700; }
+  .remsel { background:#0d1117; border:1px solid #30363d; border-radius:6px; color:#e6edf3; font-size:.78rem; padding:4px 6px; }
+  .remnote { font-size:.72rem; color:#8b949e; margin-top:6px; }
+  .remhow { display:block; margin-top:4px; }
+  .remhow b { color:#c9d1d9; }
+  .viewbar { display:flex; align-items:center; gap:8px; margin-bottom:12px; }
+  .navbtn { background:#21262d; border:1px solid #30363d; border-radius:8px; color:#79c0ff; cursor:pointer; padding:6px 14px; display:inline-flex; align-items:center; }
+  .navbtn:disabled { opacity:.35; cursor:default; }
+  .viewlabel { flex:1; text-align:center; font-size:.85rem; color:#8b949e; font-weight:600; }
+  .togglebtn { background:#0c2137; border:1px solid #1f4e7a; border-radius:8px; color:#79c0ff; cursor:pointer; font-size:.78rem; font-weight:700; padding:6px 12px; white-space:nowrap; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:14px; align-items:start; }
+  .grid.dayview { display:block; max-width:520px; margin:0 auto; }
+  .grid.dayview .day { display:none; }
+  .grid.dayview .day.current { display:block; }
+  .day { background:#161b22; border:1px solid #30363d; border-radius:10px; padding:14px; border-top:3px solid #30363d; }
+  .day.prep { border-top-color:#8b949e; } .day.s1 { border-top-color:#3fb950; } .day.s2 { border-top-color:#388bfd; }
+  .day.s3 { border-top-color:#d29922; } .day.s4 { border-top-color:#f85149; } .day.s5 { border-top-color:#bc8cff; }
+  .day.today-city { box-shadow:0 0 0 1px #d29922, 0 0 18px rgba(210,153,34,.25); }
+  .dhead { display:flex; align-items:baseline; gap:8px; margin-bottom:10px; border-bottom:1px solid #21262d; padding-bottom:8px; }
+  .dow { color:#8b949e; font-size:.85rem; } .dnum { font-weight:700; font-size:1.05rem; }
+  .dsub { margin-left:auto; color:#8b949e; font-size:.78rem; font-weight:600; }
+  .day.s1 .dsub { color:#3fb950; } .day.s2 .dsub { color:#388bfd; }
+  .day.s3 .dsub { color:#d29922; } .day.s4 .dsub { color:#f85149; } .day.s5 .dsub { color:#bc8cff; }
+  .item { display:flex; gap:9px; padding:7px 0; align-items:flex-start; }
+  .item + .item { border-top:1px dashed #21262d; }
+  .item.quiet .t { color:#8b949e; font-style:italic; font-weight:400; font-size:.88rem; }
+  .t { font-size:.92rem; font-weight:600; }
+  .gg-line { margin-top:3px; }
+  .gg-who { display:inline-block; min-width:62px; font-size:.68rem; font-weight:700; letter-spacing:.4px; color:#8b949e; text-transform:uppercase; }
+  .note { color:#8b949e; font-size:.8rem; margin-top:2px; }
+  .acts { margin:4px 0 0 16px; padding:0; font-size:.84rem; color:#c9d1d9; font-weight:400; }
+  .tag { flex:none; font-size:.62rem; font-weight:700; letter-spacing:.4px; padding:2px 7px; border-radius:20px; margin-top:2px; border:1px solid; }
+  .tag-stage { color:#79c0ff; border-color:#1f4e7a; background:#0c2137; }
+  .tag-open { color:#3fb950; border-color:#1f6f38; background:#0d2818; }
+  .tag-unlock { color:#d29922; border-color:#7a5b16; background:#2a2008; }
+  .tag-city { color:#0d1117; border-color:#d29922; background:#d29922; }
+  .tag-ms { color:#39c5cf; border-color:#1b5e63; background:#0a2a2d; }
+  .tag-grp { color:#388bfd; border-color:#254b7a; background:#0d1f38; }
+  .tag-ch { color:#bc8cff; border-color:#5b3f85; background:#1f1633; }
+  .cdline { display:flex; justify-content:space-between; align-items:center; gap:8px; margin:-4px 0 8px; }
+  .local { color:#8b949e; font-size:.74rem; }
+  .cd { font-size:.74rem; font-weight:700; font-variant-numeric:tabular-nums; padding:2px 8px; border-radius:20px; white-space:nowrap; }
+  .cd.upcoming { color:#79c0ff; background:#0c2137; }
+  .cd.live { color:#3fb950; background:#0d2818; }
+  .cd.done { color:#8b949e; background:#21262d; }
+  .foot { margin-top:24px; color:#8b949e; font-size:.85rem; background:#161b22; border:1px solid #30363d; border-radius:8px; padding:14px 16px; }
+  .foot ul { margin:6px 0 0 18px; }
+  #toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#1c2128; border:1px solid #30363d; border-radius:8px; padding:10px 18px; font-size:.85rem; opacity:0; pointer-events:none; transition:opacity .25s; max-width:90vw; z-index:50; }
+  #toast.visible { opacity:1; }
+</style></head><body>
+<header>
+  <div class="header-left">
+    <div>
+      <div class="header-title notranslate">Eternal Land</div>
+      <div class="header-sub">Server 2864 · Jul 19 – Aug 8</div>
+    </div>
+    <a href="https://2864tw.com" class="nav-link" title="Home"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L10 3.5l7 7"/><path d="M5 9v7a1 1 0 001 1h3v-4h2v4h3a1 1 0 001-1V9"/></svg></a>
+    <div style="position:relative">
+      <button id="bnpBtn" title="All pages" onclick="document.getElementById('bnpPop').classList.toggle('open')"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5v-3z"/></svg></button>
+      <div id="bnpPop">
+        <a href="armory-report.html" class="bnp-link">Armory Report</a>
+        <a href="bases.html" class="bnp-link">Bases</a>
+        <a href="battle-report.html" class="bnp-link">Battle Reports</a>
+        <a href="chaos-crafting.html" class="bnp-link">Chaos Crafting</a>
+        <a href="decor-index.html" class="bnp-link">Decor Index</a>
+        <a href="enigma-viewer.html" class="bnp-link">Enigma Beasts</a>
+        <a href="eternal-land-calendar.html" class="bnp-link bnp-cur">Eternal Land</a>
+        <a href="heroes.html" class="bnp-link">Heroes</a>
+        <a href="heroes-awakening.html" class="bnp-link">Heroes Awakening</a>
+        <a href="ht-chips.html" class="bnp-link">HT Chips</a>
+        <a href="roadmap.html" class="bnp-link">Roadmap</a>
+        <a href="rockfield-optimizer.html" class="bnp-link">Rockfield Optimizer</a>
+        <a href="eternal-themes.html" class="bnp-link">Theme Vote</a>
+        <a href="titan.html" class="bnp-link">Titan Canyon</a>
+      </div>
+    </div>
+  </div>
+  <button class="nav-link" id="remOpen"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>Reminders</button>
+</header>
+<div class="wrap">
+<div class="sub">Times and countdowns are shown in your local time. Tap a stage for details.</div>
+<div class="flow">
+<div class="hero"><div><div class="hero-next">NEXT UP</div><div class="hero-label" id="heroLabel">—</div><div class="hero-local" id="heroLocal"></div></div><div class="hero-count" id="heroCount">—</div></div>
+<div class="stagebar"><div class="seg prep" data-stage="0" role="button" tabindex="0" style="flex:3"><b>Preparation</b><span>Jul 19 – Jul 22</span></div><div class="seg s1" data-stage="1" role="button" tabindex="0" style="flex:3"><b>Perimeter</b><span>Jul 22 – Jul 25</span></div><div class="seg s2" data-stage="2" role="button" tabindex="0" style="flex:4"><b>Entering</b><span>Jul 25 – Jul 29</span></div><div class="seg s3" data-stage="3" role="button" tabindex="0" style="flex:3"><b>Deep</b><span>Jul 29 – Aug 1</span></div><div class="seg s4" data-stage="4" role="button" tabindex="0" style="flex:5"><b>Battle</b><span>Aug 1 – Aug 6</span></div><div class="seg s5" data-stage="5" role="button" tabindex="0" style="flex:2"><b>Rewards</b><span>Aug 6 – Aug 8</span></div></div>
+<div class="rhythms"><div class="rhy-title">DAILY SCHEDULE</div>
+  <div class="rhyrow"><svg class="ri" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 21l2-2"/></svg>Ark Contest <b id="rhyArk"></b><span class="rhycd" id="cdArk"></span></div>
+  <div class="rhyrow"><svg class="ri" viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-2.6-6.4"/><path d="M21 3v6h-6"/></svg>Day reset <b id="rhyReset"></b><span class="rhycd" id="cdReset"></span></div>
+  <div class="rhyrow"><svg class="ri" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20"/><path d="M12 21L8 9l4-6 4 6z"/></svg>Resource Areas <b id="rhySra"></b><span class="rhycd" id="cdSra"></span></div>
+</div>
+<div class="viewbar"><button class="navbtn" id="prevDay" aria-label="Previous day"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button><div class="viewlabel" id="viewLabel"></div><button class="navbtn" id="nextDay" aria-label="Next day"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button><button class="togglebtn" id="viewToggle">Show all days</button></div>
+<div class="grid" id="grid">
+<div class="day prep" data-epoch="1784469600000" data-next="1784556000000">
+  <div class="dhead"><span class="dow">Sun</span><span class="dnum">Jul 19</span><span class="dsub">Prep Day 1</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-stage">STAGE</span><div><div class="t">Preparation Stage begins — Day 1: The Land Unknown</div><div class="note">Prep tasks on home server. Points do NOT carry into the main event.</div></div></div>
+</div><div class="day prep" data-epoch="1784556000000" data-next="1784642400000">
+  <div class="dhead"><span class="dow">Mon</span><span class="dnum">Jul 20</span><span class="dsub">Prep Day 2</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-stage">STAGE</span><div><div class="t">Prep Day 2: The Sentries</div></div></div>
+</div><div class="day prep" data-epoch="1784642400000" data-next="1784728800000">
+  <div class="dhead"><span class="dow">Tue</span><span class="dnum">Jul 21</span><span class="dsub">Prep Day 3</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-stage">STAGE</span><div><div class="t">Prep Day 3: Ultimate Arms Race</div></div></div>
+</div><div class="day s1" data-epoch="1784728800000" data-next="1784815200000">
+  <div class="dhead"><span class="dow">Wed</span><span class="dnum">Jul 22</span><span class="dsub">EL Day 1</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-open">MAP OPENS</span><div><div class="t">Eternal Land map opens — Perimeter stage</div><div class="note">Teleport in (free item). Alliance Forts + Power Stations buildable.</div></div></div><div class="item"><span class="tag tag-ms">MILITARY SUPPORT</span><div><div class="t">Campaign: Bullets Sweep</div><ul class="acts"><li>Defeat Dark Mechs (50 pts each)</li><li>Gather Food &amp; Oil (1 pt / 5K)</li><li>Gather Odinium (1 pt each)</li></ul><div class="note">Daily chests at 500 / 1,500 / 3,000 pts · top-1000 ranked daily · rank feeds overall leaderboard</div></div></div><div class="item"><span class="tag tag-grp">GROUP GOAL</span><div><div class="t"><span class="gg-who">Alliance</span> Build facilities 5,000 min total</div><div class="t gg-line"><span class="gg-who">Warzone</span> Kill 2,000 Dark Forces</div><div class="note">2-day window</div></div></div><div class="item"><span class="tag tag-ch">CHAPTER</span><div><div class="t">All warzones build 16 Alliance Forts</div><div class="note">Completing this chapter unlocks Expedition Outposts</div></div></div>
+</div><div class="day s1" data-epoch="1784815200000" data-next="1784901600000">
+  <div class="dhead"><span class="dow">Thu</span><span class="dnum">Jul 23</span><span class="dsub">EL Day 2</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-unlock">UNLOCKS</span><div><div class="t">Expedition Outposts activate</div></div></div><div class="item"><span class="tag tag-unlock">UNLOCKS</span><div><div class="t">Ark Contest begins — 12:00–1:00 PM ET daily</div><div class="note">Up to 4 Arks; some open Jul 24.</div></div></div><div class="item"><span class="tag tag-ms">MILITARY SUPPORT</span><div><div class="t">Campaign: Replenishment</div><ul class="acts"><li>Use training / repair / talent speed-ups (1 pt / 2 min)</li><li>Donate units (1–50 pts)</li></ul><div class="note">Daily chests at 500 / 1,500 / 3,000 pts · top-1000 ranked daily · rank feeds overall leaderboard</div></div></div><div class="item"><span class="tag tag-grp">GROUP GOAL</span><div><div class="t"><span class="gg-who">Alliance</span> Complete 1,000 Radar missions</div><div class="note">2-day window</div></div></div><div class="item"><span class="tag tag-ch">CHAPTER</span><div><div class="t">Alliance is conquering 1 Expedition Outpost</div><div class="note">Completing this chapter unlocks Expedition Bases</div></div></div>
+</div><div class="day s1" data-epoch="1784901600000" data-next="1784988000000">
+  <div class="dhead"><span class="dow">Fri</span><span class="dnum">Jul 24</span><span class="dsub">EL Day 3</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-unlock">UNLOCKS</span><div><div class="t">Expedition Bases activate + Rebuild missions</div></div></div><div class="item"><span class="tag tag-ms">MILITARY SUPPORT</span><div><div class="t">Campaign: All for One</div><ul class="acts"><li>Defeat Dark Mechs (50 pts each)</li><li>Donate units (1–50 pts)</li></ul><div class="note">Daily chests at 500 / 1,500 / 3,000 pts · top-1000 ranked daily · rank feeds overall leaderboard</div></div></div><div class="item"><span class="tag tag-grp">GROUP GOAL</span><div><div class="t"><span class="gg-who">Alliance</span> Gather 150M Oil + Food</div><div class="t gg-line"><span class="gg-who">Warzone</span> Gather 300M Food</div><div class="note">2-day window</div></div></div><div class="item"><span class="tag tag-ch">CHAPTER</span><div><div class="t">Conquering 1 Expedition Base · alliance kills 1,000 Dark Forces</div><div class="note">Completing this chapter unlocks Lv.1 Gates</div></div></div>
+</div><div class="day s2" data-epoch="1784988000000" data-next="1785074400000">
+  <div class="dhead"><span class="dow">Sat</span><span class="dnum">Jul 25</span><span class="dsub">EL Day 4</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-stage">STAGE</span><div><div class="t">Stage: Entering the Eternal Land</div></div></div><div class="item"><span class="tag tag-unlock">UNLOCKS</span><div><div class="t">Lv.1 Gates activate</div></div></div><div class="item"><span class="tag tag-unlock">UNLOCKS</span><div><div class="t">4 Special Resource Areas open (Lv.1–4 resources)</div><div class="note">Open daily 10:00 AM – 10:00 PM ET; resources refresh every 3h.</div></div></div><div class="item"><span class="tag tag-ms">MILITARY SUPPORT</span><div><div class="t">Campaign: More Assistance</div><ul class="acts"><li>Defeat Dark Mechs (50 pts each)</li><li>Gather Food &amp; Oil (1 pt / 5K)</li><li>Gather Odinium (1 pt each)</li></ul><div class="note">Daily chests at 500 / 1,500 / 3,000 pts · top-1000 ranked daily · rank feeds overall leaderboard</div></div></div><div class="item"><span class="tag tag-grp">GROUP GOAL</span><div><div class="t"><span class="gg-who">Alliance</span> Defeat 500 Lost Treasure Guards</div><div class="t gg-line"><span class="gg-who">Warzone</span> Defeat 1,000 Lost Treasure Guards</div><div class="note">2-day window</div></div></div><div class="item"><span class="tag tag-ch">CHAPTER</span><div><div class="t">Alliance is conquering 1 Lv.1 Gate</div><div class="note">Completing this chapter unlocks Military Bases / Arsenals</div></div></div>
+</div><div class="day s2" data-epoch="1785074400000" data-next="1785160800000">
+  <div class="dhead"><span class="dow">Sun</span><span class="dnum">Jul 26</span><span class="dsub">EL Day 5</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-ms">MILITARY SUPPORT</span><div><div class="t">Campaign: Bullets Sweep</div><ul class="acts"><li>Defeat Dark Mechs (50 pts each)</li><li>Gather Food &amp; Oil (1 pt / 5K)</li><li>Gather Odinium (1 pt each)</li></ul><div class="note">Daily chests at 500 / 1,500 / 3,000 pts · top-1000 ranked daily · rank feeds overall leaderboard</div></div></div><div class="item"><span class="tag tag-grp">GROUP GOAL</span><div><div class="t"><span class="gg-who">Alliance</span> Donate 1,000× to Tribal Tech</div><div class="note">2-day window</div></div></div><div class="item"><span class="tag tag-ch">CHAPTER</span><div><div class="t">All warzones build 500 Power Stations</div></div></div>
+</div><div class="day s2" data-epoch="1785160800000" data-next="1785247200000">
+  <div class="dhead"><span class="dow">Mon</span><span class="dnum">Jul 27</span><span class="dsub">EL Day 6</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-unlock">UNLOCKS</span><div><div class="t">Military Bases &amp; Arsenals activate</div></div></div><div class="item"><span class="tag tag-ms">MILITARY SUPPORT</span><div><div class="t">Campaign: War Rekindled</div><ul class="acts"><li>Use training / repair / talent speed-ups (1 pt / 2 min)</li><li>Defeat &amp; demote enemy units from other servers (up to 50 pts)</li></ul><div class="note">Daily chests at 500 / 1,500 / 3,000 pts · top-1000 ranked daily · rank feeds overall leaderboard</div></div></div><div class="item"><span class="tag tag-grp">GROUP GOAL</span><div><div class="t"><span class="gg-who">Alliance</span> Attack Chaotic Force 500×</div><div class="t gg-line"><span class="gg-who">Warzone</span> Attack Chaotic Force 1,000×</div><div class="note">2-day window</div></div></div><div class="item"><span class="tag tag-ch">CHAPTER</span><div><div class="t">Alliance holds 1 Military Base or Arsenal</div><div class="note">Completing this chapter unlocks Military Fortresses</div></div></div>
+</div><div class="day s2" data-epoch="1785247200000" data-next="1785333600000">
+  <div class="dhead"><span class="dow">Tue</span><span class="dnum">Jul 28</span><span class="dsub">EL Day 7</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-unlock">UNLOCKS</span><div><div class="t">Military Fortresses activate</div></div></div><div class="item"><span class="tag tag-ms">MILITARY SUPPORT</span><div><div class="t">Campaign: Team Competition</div><ul class="acts"><li>Defeat Dark Mechs (50 pts each)</li><li>Defeat &amp; demote enemy units from other servers (up to 50 pts)</li></ul><div class="note">Daily chests at 500 / 1,500 / 3,000 pts · top-1000 ranked daily · rank feeds overall leaderboard</div></div></div><div class="item"><span class="tag tag-grp">GROUP GOAL</span><div><div class="t"><span class="gg-who">Alliance</span> Kill 2,000 starred Dark Forces</div><div class="t gg-line"><span class="gg-who">Warzone</span> Kill 4,000 starred Dark Forces</div><div class="note">2-day window</div></div></div><div class="item"><span class="tag tag-ch">CHAPTER</span><div><div class="t">Conquering 1 Military Fortress · defeat 200 Dark Guardians</div><div class="note">Completing this chapter unlocks Lv.2 Gates</div></div></div>
+</div><div class="day s3" data-epoch="1785333600000" data-next="1785420000000">
+  <div class="dhead"><span class="dow">Wed</span><span class="dnum">Jul 29</span><span class="dsub">EL Day 8</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-stage">STAGE</span><div><div class="t">Stage: Deep into the Eternal Land</div></div></div><div class="item"><span class="tag tag-unlock">UNLOCKS</span><div><div class="t">Lv.2 Gates activate</div></div></div><div class="item"><span class="tag tag-unlock">UNLOCKS</span><div><div class="t">4 more Special Resource Areas open (Lv.3–5 resources)</div></div></div><div class="item"><span class="tag tag-ms">MILITARY SUPPORT</span><div><div class="t">Campaign: Bullets Sweep</div><ul class="acts"><li>Defeat Dark Mechs (50 pts each)</li><li>Gather Food &amp; Oil (1 pt / 5K)</li><li>Gather Odinium (1 pt each)</li></ul><div class="note">Daily chests at 500 / 1,500 / 3,000 pts · top-1000 ranked daily · rank feeds overall leaderboard</div></div></div><div class="item"><span class="tag tag-ch">CHAPTER</span><div><div class="t">Alliance is conquering 1 Lv.2 Gate</div><div class="note">Completing this chapter unlocks Research Facilities</div></div></div>
+</div><div class="day s3" data-epoch="1785420000000" data-next="1785506400000">
+  <div class="dhead"><span class="dow">Thu</span><span class="dnum">Jul 30</span><span class="dsub">EL Day 9</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-ms">MILITARY SUPPORT</span><div><div class="t">Campaign: Every Effort Counts</div><ul class="acts"><li>Defeat Dark Mechs (50 pts each)</li><li>Donate units (1–50 pts)</li></ul><div class="note">Daily chests at 500 / 1,500 / 3,000 pts · top-1000 ranked daily · rank feeds overall leaderboard</div></div></div><div class="item"><span class="tag tag-grp">GROUP GOAL</span><div><div class="t"><span class="gg-who">Alliance</span> Gain 200,000 Military Tokens</div><div class="note">2-day window</div></div></div><div class="item"><span class="tag tag-ch">CHAPTER</span><div><div class="t">Alliance reaches top 20 of Eternal Land</div></div></div>
+</div><div class="day s3" data-epoch="1785506400000" data-next="1785592800000">
+  <div class="dhead"><span class="dow">Fri</span><span class="dnum">Jul 31</span><span class="dsub">EL Day 10</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-unlock">UNLOCKS</span><div><div class="t">Research Facilities activate</div></div></div><div class="item"><span class="tag tag-ms">MILITARY SUPPORT</span><div><div class="t">Campaign: War Rekindled</div><ul class="acts"><li>Use training / repair / talent speed-ups (1 pt / 2 min)</li><li>Defeat &amp; demote enemy units from other servers (up to 50 pts)</li></ul><div class="note">Daily chests at 500 / 1,500 / 3,000 pts · top-1000 ranked daily · rank feeds overall leaderboard</div></div></div><div class="item"><span class="tag tag-grp">GROUP GOAL</span><div><div class="t"><span class="gg-who">Alliance</span> Kill 50,000 units of other warzones</div><div class="t gg-line"><span class="gg-who">Warzone</span> Kill 100,000 units of other warzones</div><div class="note">5-day window</div></div></div><div class="item"><span class="tag tag-ch">CHAPTER</span><div><div class="t">Alliance is conquering 1 Research Facility</div><div class="note">Completing this chapter unlocks Lv.3 Gates</div></div></div>
+</div><div class="day s4" data-epoch="1785592800000" data-next="1785679200000">
+  <div class="dhead"><span class="dow">Sat</span><span class="dnum">Aug 1</span><span class="dsub">EL Day 11</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-stage">STAGE</span><div><div class="t">Stage: Battle for the Eternal Land</div></div></div><div class="item"><span class="tag tag-unlock">UNLOCKS</span><div><div class="t">Lv.3 Gates activate</div></div></div><div class="item"><span class="tag tag-unlock">UNLOCKS</span><div><div class="t">Final 2 Special Resource Areas open (Lv.4–5 resources)</div></div></div><div class="item"><span class="tag tag-ms">MILITARY SUPPORT</span><div><div class="t">Campaign: Bullets Sweep</div><ul class="acts"><li>Defeat Dark Mechs (50 pts each)</li><li>Gather Food &amp; Oil (1 pt / 5K)</li><li>Gather Odinium (1 pt each)</li></ul><div class="note">Daily chests at 500 / 1,500 / 3,000 pts · top-1000 ranked daily · rank feeds overall leaderboard</div></div></div><div class="item"><span class="tag tag-ch">CHAPTER</span><div><div class="t">Alliance is conquering 1 Lv.3 Gate</div><div class="note">Completing this chapter unlocks the Eternal City</div></div></div>
+</div><div class="day s4 today-city" data-epoch="1785679200000" data-next="1785765600000">
+  <div class="dhead"><span class="dow">Sun</span><span class="dnum">Aug 2</span><span class="dsub">EL Day 12</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-city">ETERNAL CITY</span><div><div class="t">Eternal City activates</div><div class="note">The endgame objective — massive honor for the alliance that takes and holds it.</div></div></div><div class="item"><span class="tag tag-ms">MILITARY SUPPORT</span><div><div class="t">Campaign: War Rekindled</div><ul class="acts"><li>Use training / repair / talent speed-ups (1 pt / 2 min)</li><li>Defeat &amp; demote enemy units from other servers (up to 50 pts)</li></ul><div class="note">Daily chests at 500 / 1,500 / 3,000 pts · top-1000 ranked daily · rank feeds overall leaderboard</div></div></div><div class="item"><span class="tag tag-ch">CHAPTER</span><div><div class="t">Alliance is controlling the Eternal City · Individual: kill 1,000 units this stage</div></div></div>
+</div><div class="day s4" data-epoch="1785765600000" data-next="1785852000000">
+  <div class="dhead"><span class="dow">Mon</span><span class="dnum">Aug 3</span><span class="dsub">EL Day 13</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-ms">MILITARY SUPPORT</span><div><div class="t">Campaign: Full Attack Action</div><ul class="acts"><li>Gather Food &amp; Oil (1 pt / 5K)</li><li>Gather Odinium (1 pt each)</li><li>Defeat &amp; demote enemy units from other servers (up to 50 pts)</li></ul><div class="note">Daily chests at 500 / 1,500 / 3,000 pts · top-1000 ranked daily · rank feeds overall leaderboard</div></div></div><div class="item"><span class="tag tag-ch">CHAPTER</span><div><div class="t">Conquering 3 Expedition Bases of other warzones (3-day window)</div></div></div>
+</div><div class="day s4" data-epoch="1785852000000" data-next="1785938400000">
+  <div class="dhead"><span class="dow">Tue</span><span class="dnum">Aug 4</span><span class="dsub">EL Day 14</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-ms">MILITARY SUPPORT</span><div><div class="t">Campaign: War Rekindled</div><ul class="acts"><li>Use training / repair / talent speed-ups (1 pt / 2 min)</li><li>Defeat &amp; demote enemy units from other servers (up to 50 pts)</li></ul><div class="note">Daily chests at 500 / 1,500 / 3,000 pts · top-1000 ranked daily · rank feeds overall leaderboard</div></div></div>
+</div><div class="day s4" data-epoch="1785938400000" data-next="1786024800000">
+  <div class="dhead"><span class="dow">Wed</span><span class="dnum">Aug 5</span><span class="dsub">EL Day 15</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-ms">MILITARY SUPPORT</span><div><div class="t">Campaign: Full Attack Action</div><ul class="acts"><li>Gather Food &amp; Oil (1 pt / 5K)</li><li>Gather Odinium (1 pt each)</li><li>Defeat &amp; demote enemy units from other servers (up to 50 pts)</li></ul><div class="note">Daily chests at 500 / 1,500 / 3,000 pts · top-1000 ranked daily · rank feeds overall leaderboard</div></div></div>
+</div><div class="day s5" data-epoch="1786024800000" data-next="1786111200000">
+  <div class="dhead"><span class="dow">Thu</span><span class="dnum">Aug 6</span><span class="dsub">Rewards</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-stage">STAGE</span><div><div class="t">Claim Rewards stage (48h)</div><div class="note">Collect everything — unclaimed rewards are removed.</div></div></div>
+</div><div class="day s5" data-epoch="1786111200000" data-next="1786197600000">
+  <div class="dhead"><span class="dow">Fri</span><span class="dnum">Aug 7</span><span class="dsub">Rewards</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item quiet"><div class="t">Claim Rewards continues — collect before the event ends</div></div>
+</div><div class="day s5" data-epoch="1786197600000" data-next="1786284000000" data-end="1">
+  <div class="dhead"><span class="dow">Sat</span><span class="dnum">Aug 8</span><span class="dsub">Rewards</span></div>
+  <div class="cdline"><span class="local"></span><span class="cd"></span></div>
+  <div class="item"><span class="tag tag-stage">STAGE</span><div><div class="t">Event ends — everyone returns home</div><div class="note">Event items are deleted.</div></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="modal-overlay" id="stageModal"><div class="modal"><h3 id="stageTitle"></h3><p id="stageDesc" style="font-size:.9rem;color:#c9d1d9"></p><button class="togglebtn" id="stageClose" style="width:100%;margin-top:12px">Close</button></div></div>
+<div class="modal-overlay" id="remModal"><div class="modal"><h3>Push reminders</h3>
+  <div class="remrow"><div class="reminfo"><div class="rt">Ark Battle</div><div class="rd">Daily push when the battle hour starts (Jul 23 – Aug 5)</div></div><button class="rembtn" id="rem-ark">Off</button></div>
+  <div class="remrow"><div class="reminfo"><div class="rt">Military Support wrap-up</div><div class="rd">Warning before each day's scoring deadline (Jul 23 – Aug 6)</div></div>
+    <select class="remsel" id="rem-ms-lead"><option value="5">5 min before</option><option value="10">10 min before</option><option value="15" selected>15 min before</option></select>
+    <button class="rembtn" id="rem-ms">Off</button></div>
+  <div class="remrow"><div class="reminfo"><div class="rt">Unlocks &amp; Eternal City</div><div class="rd">15 min before each building unlock and the Eternal City activation</div></div><button class="rembtn" id="rem-unlock">Off</button></div>
+  <div class="remnote">Uses the same notification system as the site calendar — manage all reminders from the bell on the home page.
+    <span class="remhow"><b>iPhone:</b> open in Safari, tap Share, then Add to Home Screen, and open the app first.</span>
+    <span class="remhow"><b>Android:</b> open in Chrome, tap the three-dot menu (top right), then Install app (or Add to Home screen).</span>
+  </div>
+  <button class="togglebtn" id="remClose" style="width:100%;margin-top:12px">Close</button>
+</div></div>
+<div id="toast"></div>
+<script>
+var MILESTONES = [["Preparation Stage begins",1784469600000],["Prep Day 2: The Sentries",1784556000000],["Prep Day 3: Ultimate Arms Race",1784642400000],["Eternal Land map opens",1784728800000],["Expedition Outposts + first Ark battle",1784815200000],["Expedition Bases activate",1784901600000],["Lv.1 Gates + first Special Resource Areas",1784988000000],["Military Bases activate",1785160800000],["Military Fortresses activate",1785247200000],["Lv.2 Gates + Deep stage",1785333600000],["Research Facilities activate",1785506400000],["Lv.3 Gates + Battle stage",1785592800000],["ETERNAL CITY activates",1785679200000],["Claim Rewards stage",1786024800000],["Event ends",1786197600000]];
+var ARK_FIRST = 1784822400000, ARK_LAST = 1785945600000, DAY = 86400000, FIGHT = 3600000;
+var RESET_START = 1784469600000, EVENT_END = 1786197600000, SRA_FIRST = 1784988000000, SRA_LAST = 1785938400000;
+var LOCAL_FMT = { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' };
+function fmt(ms) {
+  if (ms < 0) ms = 0;
+  var s = Math.floor(ms / 1000), dd = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), sec = s % 60;
+  if (dd > 0) return dd + 'd ' + h + 'h ' + m + 'm';
+  if (h > 0) return h + 'h ' + m + 'm ' + String(sec).padStart(2, '0') + 's';
+  return m + 'm ' + String(sec).padStart(2, '0') + 's';
+}
+var cards = Array.prototype.slice.call(document.querySelectorAll('.day[data-epoch]'));
+cards.forEach(function (el) {
+  el.querySelector('.local').textContent = new Date(+el.dataset.epoch).toLocaleString(undefined, LOCAL_FMT) + ' your time';
+});
+function tick() {
+  var now = Date.now();
+  cards.forEach(function (el) {
+    var start = +el.dataset.epoch, next = +el.dataset.next, isEnd = el.dataset.end === '1';
+    var cd = el.querySelector('.cd');
+    if (now < start) { cd.textContent = 'in ' + fmt(start - now); cd.className = 'cd upcoming'; }
+    else if (!isEnd && now < next) { cd.textContent = 'LIVE · resets in ' + fmt(next - now); cd.className = 'cd live'; }
+    else { cd.textContent = isEnd ? 'event over' : 'done'; cd.className = 'cd done'; }
+  });
+  var nextM = null;
+  for (var i = 0; i < MILESTONES.length; i++) if (MILESTONES[i][1] > now) { nextM = MILESTONES[i]; break; }
+  if (nextM) {
+    document.getElementById('heroLabel').textContent = nextM[0];
+    document.getElementById('heroCount').textContent = fmt(nextM[1] - now);
+    document.getElementById('heroLocal').textContent = new Date(nextM[1]).toLocaleString(undefined, LOCAL_FMT) + ' your time';
+  } else {
+    document.getElementById('heroLabel').textContent = 'Event complete';
+    document.getElementById('heroCount').textContent = '—';
+    document.getElementById('heroLocal').textContent = '';
+  }
+  // daily-schedule row countdowns
+  function dailyState(first, last, dur, livePrefix) {
+    if (now > last + dur) return { label: 'done', live: false };
+    var since = now - first;
+    if (since >= 0 && since % DAY < dur) return { label: livePrefix + fmt(dur - since % DAY), live: true };
+    var nb = since < 0 ? first : first + Math.ceil(since / DAY) * DAY;
+    if (nb > last) return { label: 'done', live: false };
+    return { label: 'in ' + fmt(nb - now), live: false };
+  }
+  function setCd(id, st) {
+    var el = document.getElementById(id);
+    el.textContent = st.label;
+    el.className = 'rhycd' + (st.live ? ' live' : '');
+  }
+  setCd('cdArk', dailyState(ARK_FIRST, ARK_LAST, FIGHT, 'LIVE · ends in '));
+  setCd('cdSra', dailyState(SRA_FIRST, SRA_LAST, 12 * 3600000, 'OPEN · closes in '));
+  (function () {
+    if (now > EVENT_END) return setCd('cdReset', { label: 'event over', live: false });
+    var since = now - RESET_START;
+    var nb = since < 0 ? RESET_START : RESET_START + Math.ceil(since / DAY) * DAY;
+    if (nb > EVENT_END) return setCd('cdReset', { label: 'event over', live: false });
+    setCd('cdReset', { label: 'in ' + fmt(nb - now), live: false });
+  })();
+}
+tick();
+setInterval(tick, 1000);
+
+// ---- daily rhythms in local time ----
+var RESET_MS = 1784728800000;
+function lt(ms) { return new Date(ms).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); }
+document.getElementById('rhyArk').textContent = lt(ARK_FIRST) + '–' + lt(ARK_FIRST + FIGHT);
+document.getElementById('rhyReset').textContent = lt(RESET_MS);
+document.getElementById('rhySra').textContent = lt(RESET_MS) + '–' + lt(RESET_MS + 12 * 3600000);
+
+// ---- reminders modal ----
+var remModal = document.getElementById('remModal');
+document.getElementById('remOpen').addEventListener('click', function () { remModal.classList.add('open'); });
+document.getElementById('remClose').addEventListener('click', function () { remModal.classList.remove('open'); });
+remModal.addEventListener('click', function (e) { if (e.target === remModal) remModal.classList.remove('open'); });
+
+// ---- stage info modal ----
+var STAGE_INFO = [["Preparation \u00b7 Jul 19 \u2013 Jul 22", "Three days of prep tasks on your home server, one chapter per day: The Land Unknown, The Sentries, then the Ultimate Arms Race. Complete them for prep rewards. Points earned here do NOT carry into the main event."], ["Perimeter \u00b7 Jul 22 \u2013 Jul 25", "The Eternal Land map opens and you can teleport in (free item). Everyone starts in their own warzone's outer zone: build Alliance Forts and Power Stations, gather Amethyst, and take Expedition Outposts and Bases. Other warzones can't reach you yet."], ["Entering \u00b7 Jul 25 \u2013 Jul 29", "Lv.1 Gates open the second ring, where commanders from adjacent warzones can meet \u2014 the first PvP contact. Military Bases, Arsenals, and Fortresses activate during this stage, and the first Special Resource Areas open."], ["Deep \u00b7 Jul 29 \u2013 Aug 1", "Lv.2 Gates open the third ring, where four adjacent warzones converge. Research Facilities activate, and more Special Resource Areas open. Fights get bigger the closer you are to the center."], ["Battle \u00b7 Aug 1 \u2013 Aug 6", "Lv.3 Gates open the central area, where all eight warzones can meet \u2014 you can even attack other warzones' spawn areas. The Eternal City activates Aug 2: taking and holding it is the biggest honor prize of the event."], ["Rewards \u00b7 Aug 6 \u2013 Aug 8", "Battles are over \u2014 claim all your task rewards. When the timer hits zero everyone is transferred back to their home warzone and any unclaimed rewards are removed."]];
+var stageModal = document.getElementById('stageModal');
+function openStage(i) {
+  document.getElementById('stageTitle').textContent = STAGE_INFO[i][0];
+  document.getElementById('stageDesc').textContent = STAGE_INFO[i][1];
+  stageModal.classList.add('open');
+}
+document.querySelectorAll('.seg[data-stage]').forEach(function (seg) {
+  seg.addEventListener('click', function () { openStage(+seg.dataset.stage); });
+  seg.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openStage(+seg.dataset.stage); } });
+});
+document.getElementById('stageClose').addEventListener('click', function () { stageModal.classList.remove('open'); });
+stageModal.addEventListener('click', function (e) { if (e.target === stageModal) stageModal.classList.remove('open'); });
+
+// ---- day carousel ----
+var grid = document.getElementById('grid');
+var viewLabel = document.getElementById('viewLabel');
+var prevBtn = document.getElementById('prevDay'), nextBtn = document.getElementById('nextDay');
+var toggleBtn = document.getElementById('viewToggle');
+function todayIndex() {
+  var now = Date.now();
+  for (var i = 0; i < cards.length; i++) {
+    if (now >= +cards[i].dataset.epoch && now < +cards[i].dataset.next) return i;
+  }
+  for (var j = 0; j < cards.length; j++) if (+cards[j].dataset.epoch > now) return j;
+  return cards.length - 1;
+}
+var curIdx = todayIndex();
+var mode;
+try { mode = localStorage.getItem('elCalView'); } catch (e) {}
+if (mode !== 'day' && mode !== 'all') mode = (window.innerWidth <= 700 ? 'day' : 'all');
+function applyView() {
+  if (mode === 'day') {
+    grid.classList.add('dayview');
+    cards.forEach(function (c, i) { c.classList.toggle('current', i === curIdx); });
+    var el = cards[curIdx];
+    var dnum = el.querySelector('.dnum').textContent, dsub = el.querySelector('.dsub').textContent;
+    var isToday = Date.now() >= +el.dataset.epoch && Date.now() < +el.dataset.next;
+    viewLabel.textContent = dnum + ' · ' + dsub + (isToday ? ' (today)' : '');
+    viewLabel.style.textAlign = 'center';
+    prevBtn.style.display = nextBtn.style.display = '';
+    prevBtn.disabled = curIdx === 0; nextBtn.disabled = curIdx === cards.length - 1;
+    toggleBtn.textContent = 'Show all days';
+  } else {
+    grid.classList.remove('dayview');
+    cards.forEach(function (c) { c.classList.remove('current'); });
+    viewLabel.textContent = 'All 21 days';
+    viewLabel.style.textAlign = 'left';
+    prevBtn.style.display = nextBtn.style.display = 'none';
+    toggleBtn.textContent = 'Day view';
+  }
+}
+prevBtn.addEventListener('click', function () { if (curIdx > 0) { curIdx--; applyView(); } });
+nextBtn.addEventListener('click', function () { if (curIdx < cards.length - 1) { curIdx++; applyView(); } });
+toggleBtn.addEventListener('click', function () {
+  mode = (mode === 'day') ? 'all' : 'day';
+  if (mode === 'day') curIdx = todayIndex();
+  try { localStorage.setItem('elCalView', mode); } catch (e) {}
+  applyView();
+});
+// swipe support in day view
+var touchX = null;
+grid.addEventListener('touchstart', function (e) { if (mode === 'day') touchX = e.touches[0].clientX; }, { passive: true });
+grid.addEventListener('touchend', function (e) {
+  if (mode !== 'day' || touchX === null) return;
+  var dx = e.changedTouches[0].clientX - touchX; touchX = null;
+  if (dx < -50 && curIdx < cards.length - 1) { curIdx++; applyView(); }
+  else if (dx > 50 && curIdx > 0) { curIdx--; applyView(); }
+}, { passive: true });
+applyView();
+
+// ---- push reminders ----
+(function () {
+  var PUSH_WORKER = 'https://push-worker.27tb8s6fct.workers.dev';
+  var VAPID_PUBLIC_KEY = 'BKbuearRTBpH6pAjoky9HVOYehah7lQ1Uti3APPMAYvdZJCUI8COAmVK7hym7zmefTGnI9_-vQY86IXa_nCHXHc';
+  var pushSub = null;
+  function toast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('visible');
+    setTimeout(function () { t.classList.remove('visible'); }, 5000);
+  }
+  function urlB64ToUint8Array(b64) {
+    var pad = '='.repeat((4 - b64.length % 4) % 4);
+    var base64 = (b64 + pad).replace(/-/g, '+').replace(/_/g, '/');
+    var raw = atob(base64);
+    return Uint8Array.from(raw, function (c) { return c.charCodeAt(0); });
+  }
+  function bufToB64u(buf) {
+    return btoa(String.fromCharCode.apply(null, new Uint8Array(buf))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+  }
+  function getIdentity() {
+    try { var v = localStorage.getItem('playerIdentity'); if (!v || v === 'anonymous') return null; return JSON.parse(v); } catch (e) { return null; }
+  }
+  function getReminders() {
+    try { return JSON.parse(localStorage.getItem('pushReminders')) || []; } catch (e) { return []; }
+  }
+  function saveReminders(rems) {
+    try { localStorage.setItem('pushReminders', JSON.stringify(rems)); } catch (e) {}
+    if (pushSub) {
+      fetch(PUSH_WORKER + '/reminders', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ endpoint: pushSub.endpoint, reminders: rems }) }).catch(function () {});
+    }
+  }
+  function ensureSubscribed() {
+    if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
+      return Promise.reject(new Error('unsupported'));
+    }
+    return navigator.serviceWorker.register('/sw.js').then(function (reg) {
+      return reg.pushManager.getSubscription().then(function (sub) {
+        if (sub) return sub;
+        return Notification.requestPermission().then(function (perm) {
+          if (perm !== 'granted') throw new Error('denied');
+          return reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: urlB64ToUint8Array(VAPID_PUBLIC_KEY) });
+        });
+      });
+    }).then(function (sub) {
+      pushSub = sub;
+      try { localStorage.setItem('push_was_enabled_v1', new Date().toISOString()); } catch (e) {}
+      var identity = getIdentity();
+      return fetch(PUSH_WORKER + '/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          endpoint: sub.endpoint,
+          keys: { p256dh: bufToB64u(sub.getKey('p256dh')), auth: bufToB64u(sub.getKey('auth')) },
+          player: identity ? (identity.guest ? { name: identity.name, guest: true } : { name: identity.name, alliance: identity.alliance, siteKey: identity.siteKey || null }) : null,
+        }) }).catch(function () {}).then(function () { return sub; });
+    });
+  }
+  // preset definitions: id -> list of pattern entries (leadMinutes may be dynamic)
+  function presetEntries(preset) {
+    if (preset === 'ark') return [{ eventPattern: 'Ark Battle', leadMinutes: 2 }];
+    if (preset === 'ms') {
+      var lead = parseInt(document.getElementById('rem-ms-lead').value, 10) || 15;
+      return [{ eventPattern: 'Military Support Scoring Deadline', leadMinutes: lead }];
+    }
+    return [{ eventPattern: 'EL Unlock:', leadMinutes: 15 }, { eventPattern: 'ETERNAL CITY', leadMinutes: 15 }];
+  }
+  var PRESET_PATTERNS = {
+    ark: ['Ark Battle'],
+    ms: ['Military Support Scoring Deadline'],
+    unlock: ['EL Unlock:', 'ETERNAL CITY']
+  };
+  function isOn(preset) {
+    var rems = getReminders();
+    return PRESET_PATTERNS[preset].every(function (p) {
+      return rems.some(function (r) { return r.eventPattern === p; });
+    });
+  }
+  function refreshButtons() {
+    ['ark', 'ms', 'unlock'].forEach(function (preset) {
+      var btn = document.getElementById('rem-' + preset);
+      var on = isOn(preset);
+      btn.textContent = on ? '✓ On' : 'Off';
+      btn.classList.toggle('on', on);
+      if (preset === 'ms' && on) {
+        var rems = getReminders();
+        var r = rems.filter(function (x) { return x.eventPattern === 'Military Support Scoring Deadline'; })[0];
+        if (r) document.getElementById('rem-ms-lead').value = String(r.leadMinutes);
+      }
+    });
+  }
+  function setPreset(preset, on) {
+    var rems = getReminders().filter(function (r) {
+      return PRESET_PATTERNS[preset].indexOf(r.eventPattern) === -1;
+    });
+    if (on) rems = rems.concat(presetEntries(preset));
+    saveReminders(rems);
+    refreshButtons();
+  }
+  ['ark', 'ms', 'unlock'].forEach(function (preset) {
+    document.getElementById('rem-' + preset).addEventListener('click', function () {
+      var turnOn = !isOn(preset);
+      if (!turnOn) { setPreset(preset, false); toast('Reminder off'); return; }
+      ensureSubscribed().then(function () {
+        setPreset(preset, true);
+        toast('Reminder set ✓');
+      }).catch(function (err) {
+        if (err && err.message === 'unsupported') {
+          toast('Notifications need the installed app — use Add to Home Screen first');
+        } else if (err && err.message === 'denied') {
+          toast('Notification permission was denied — enable it in your browser settings');
+        } else {
+          toast('Could not enable notifications — try from the home page bell first');
+        }
+      });
+    });
+  });
+  document.getElementById('rem-ms-lead').addEventListener('change', function () {
+    if (isOn('ms')) { setPreset('ms', true); toast('Lead time updated'); }
+  });
+  // restore subscription reference on load (no prompt)
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistration('/').then(function (reg) {
+      if (!reg) return;
+      return reg.pushManager.getSubscription().then(function (sub) { if (sub) pushSub = sub; });
+    }).catch(function () {});
+  }
+  refreshButtons();
+})();
+
+// close the all-pages popover on outside click
+document.addEventListener('click', function (e) {
+  var pop = document.getElementById('bnpPop');
+  if (pop && !pop.contains(e.target) && !e.target.closest('#bnpBtn')) pop.classList.remove('open');
+});
+</script>
+<script src="feedback-widget.js"></script>
+</body></html>
