@@ -1225,11 +1225,6 @@
     if (!drop || !fileInput) return;
 
     drop.addEventListener('click', function () { fileInput.click(); });
-    // The "i" info disclosure lives inside the drop zone; without this,
-    // clicking it (or the text once expanded) bubbles up to the drop
-    // zone's own click handler above and opens the file picker.
-    var dropInfo = drop.querySelector('.ocr-info');
-    if (dropInfo) dropInfo.addEventListener('click', function (e) { e.stopPropagation(); });
     fileInput.addEventListener('change', function () {
       if (fileInput.files && fileInput.files[0]) {
         processImageSource(fileInput.files[0]);

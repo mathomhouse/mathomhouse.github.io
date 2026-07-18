@@ -511,9 +511,7 @@ canvas {
 }
 
 .ocr-info {
-  display: inline-block;
-  margin-left: 6px;
-  vertical-align: middle;
+  margin: 10px 0 0;
 }
 
 .ocr-info summary {

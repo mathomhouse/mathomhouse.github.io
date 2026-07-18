@@ -23,7 +23,7 @@
     <header id="header-placeholder"></header>
     <div class="container">
         <h1>HT Chips & Titan Gear Stat Comparison</h1>
-        <p>Enter the stats or share a screenshot of your HT Chips or Titan Gear and compare them against what you currently have equipped, to see which one better suits your needs. If using the screenshot OCR feature, <strong>double check the results before clicking compare.</strong><br><br>
+        <p>Enter the stats or share a screenshot of your HT Chips or Titan Gear and compare them against what you currently have equipped, to see which one better suits your needs.<br><br>
 
             <b>DISCLAIMER</b>: The multipliers used here are purely speculative. Do not take these results as gospel. Test or ask experienced players. </p>
 
@@ -39,45 +39,6 @@
             <h2>Titan Gear Comparison</h2>
             <p> Note: This does not consider "Base Attributes" in the comparison, only "Random Attributes". <br><br>
             </p>
-
-            <!-- Screenshot import (client-side OCR, scripts/gear-ocr.js) -->
-            <div class="ocr-import">
-                <div class="ocr-troop-type">
-                    <label for="gear-ocr-troop-type">Troop Type:</label>
-                    <select id="gear-ocr-troop-type">
-                        <option value="">Not set</option>
-                        <option value="navy">Navy</option>
-                        <option value="army">Army</option>
-                        <option value="air-force">Air Force</option>
-                    </select>
-                </div>
-                <div id="gear-ocr-drop" class="ocr-drop">
-                    <p class="ocr-drop-text">
-                        <strong>Drop a gear comparison screenshot here</strong>, click to choose a file,
-                        or paste (Ctrl/Cmd+V) anywhere on this tab. Fields will auto-fill below when the relevant troop type is selected.
-                    </p>
-                    <p class="ocr-drop-hint">
-                        <span style="color: red;"><strong>Double check the results before clicking compare.</strong> Results may not be 100% accurate.</span>
-                        <details class="ocr-info">
-                            <summary aria-label="Why results may be inaccurate">i</summary>
-                            <p class="ocr-info-text">
-                                OCR (optical character recognition) reads the screenshot's text using pattern
-                                matching, not real vision — it usually gets it right, but it can occasionally
-                                misread a digit or miss a word entirely, especially with small or stylized game
-                                fonts. This is a known limitation of OCR in general, not something unique to this
-                                tool. It's a convenience for filling in the fields quickly, not a guarantee — always
-                                double check the numbers before hitting Compare.
-                            </p>
-                        </details>
-                    </p>
-                </div>
-                <button type="button" id="gear-ocr-paste-btn" class="calc-btn ocr-paste-btn">Paste</button>
-                <input type="file" id="gear-ocr-file" accept="image/*" hidden>
-                <p id="gear-ocr-status" class="ocr-status" hidden aria-live="polite"></p>
-                <p class="ocr-privacy-note">
-                    OCR runs entirely in your browser, your screenshot is never saved or uploaded anywhere.
-                </p>
-            </div>
 
             <div class="gear-container">
                 <div class="gear-box" id="gear1-box">
@@ -160,19 +121,19 @@
                     </p>
                     <p class="ocr-drop-hint">
                         <span style="color: red;"><strong>Double check the results before clicking compare.</strong> Results may not be 100% accurate.</span>
-                        <details class="ocr-info">
-                            <summary aria-label="Why results may be inaccurate">i</summary>
-                            <p class="ocr-info-text">
-                                OCR (optical character recognition) reads the screenshot's text using pattern
-                                matching, not real vision — it usually gets it right, but it can occasionally
-                                misread a digit or miss a word entirely, especially with small or stylized game
-                                fonts. This is a known limitation of OCR in general, not something unique to this
-                                tool. It's a convenience for filling in the fields quickly, not a guarantee — always
-                                double check the numbers before hitting Compare.
-                            </p>
-                        </details>
                     </p>
                 </div>
+                <details class="ocr-info">
+                    <summary aria-label="Why results may be inaccurate">i</summary>
+                    <p class="ocr-info-text">
+                        OCR (optical character recognition) reads the screenshot's text using pattern
+                        matching, not real vision — it usually gets it right, but it can occasionally
+                        misread a digit or miss a word entirely, especially with small or stylized game
+                        fonts. This is a known limitation of OCR in general, not something unique to this
+                        tool. It's a convenience for filling in the fields quickly, not a guarantee — always
+                        double check the numbers before hitting Compare.
+                    </p>
+                </details>
                 <button type="button" id="ht-ocr-paste-btn" class="calc-btn ocr-paste-btn">Paste</button>
                 <input type="file" id="ht-ocr-file" accept="image/*" hidden>
                 <p id="ht-ocr-status" class="ocr-status" hidden aria-live="polite"></p>
@@ -273,7 +234,6 @@
 
     <script src="scripts/gear.js"></script>
     <script src="scripts/chip-ocr.js"></script>
-    <script src="scripts/gear-ocr.js"></script>
 <footer>&copy; 2024 Mathom House &middot; Not affiliated with TopWar</footer>
 <a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
 </body>
