@@ -801,6 +801,15 @@
       ctx.imageSmoothingEnabled = true;
       ctx.drawImage(canvas, x0, y0, x1 - x0, y1 - y0, 0, 0, region.width, region.height);
       return worker.recognize(region).then(function (res) {
+        // Debug aid — see window.__chipOcr.lastValueCrops. Exact image
+        // handed to OCR for this one value, and res.data.text is exactly
+        // what OCR read from it, before parseRefined() touches it.
+        window.__chipOcr.lastValueCrops = window.__chipOcr.lastValueCrops || [];
+        window.__chipOcr.lastValueCrops.push({
+          label: rec.labelText,
+          ocrText: res.data.text,
+          dataURL: region.toDataURL()
+        });
         return parseRefined(res.data.text);
       });
     }).catch(function () { return null; });
@@ -1110,6 +1119,10 @@
   // ── Browser OCR pipeline ──────────────────────────────────────
   function processCrop(workers, crop, i) {
     var label = 'Chip ' + (i + 1);
+    // Debug aid for calibrating crop/value-box boundaries against real
+    // screenshots — see window.__chipOcr.lastCrops.
+    window.__chipOcr.lastCrops = window.__chipOcr.lastCrops || [];
+    window.__chipOcr.lastCrops[i] = crop.toDataURL();
     return setPSM(workers.numbers, '6').then(function () {
       return recognize(workers.labels, crop, 'Reading ' + label + ' labels');
     }).then(function (labelsRes) {
