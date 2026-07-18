@@ -709,6 +709,15 @@
       ctx.imageSmoothingEnabled = true;
       ctx.drawImage(canvas, x0, y0, x1 - x0, y1 - y0, 0, 0, region.width, region.height);
       return worker.recognize(region).then(function (res) {
+        // Debug aid — see window.__gearOcr.lastValueCrops. This is the
+        // exact image handed to OCR for this one value, and res.data.text
+        // is exactly what OCR read from it, before parseRefined() touches it.
+        window.__gearOcr.lastValueCrops = window.__gearOcr.lastValueCrops || [];
+        window.__gearOcr.lastValueCrops.push({
+          label: rec.labelText,
+          ocrText: res.data.text,
+          dataURL: region.toDataURL()
+        });
         return parseRefined(res.data.text);
       });
     }).catch(function () { return null; });
