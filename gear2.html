@@ -44,6 +44,38 @@
             <h2>Titan Gear Comparison</h2>
             <p> Note: This does not consider "Base Attributes" in the comparison, only "Random Attributes".
             </p>
+
+            <!-- Screenshot import (client-side OCR, scripts/gear-ocr.js) -->
+            <div class="ocr-import">
+                <div class="ocr-troop-type">
+                    <label for="gear-ocr-troop-type">Troop Type:</label>
+                    <select id="gear-ocr-troop-type">
+                        <option value="">Not set</option>
+                        <option value="navy">Navy</option>
+                        <option value="army">Army</option>
+                        <option value="air-force">Air Force</option>
+                    </select>
+                </div>
+                <div id="gear-ocr-drop" class="ocr-drop">
+                    <p class="ocr-drop-text">
+                        <strong>Drop a gear comparison screenshot here</strong>, click to choose a file,
+                        or paste (Ctrl/Cmd+V) anywhere on this tab.
+                    </p>
+                    <p class="ocr-drop-hint">
+                        Works best with the in-game comparison screen showing one or two gear pieces.
+                        Auto-fills the fields below — double check the results before hitting Compare.
+                    </p>
+                </div>
+                <button type="button" id="gear-ocr-paste-btn" class="calc-btn ocr-paste-btn">Paste from Clipboard</button>
+                <input type="file" id="gear-ocr-file" accept="image/*" hidden>
+                <p id="gear-ocr-status" class="ocr-status" hidden aria-live="polite"></p>
+                <p class="ocr-privacy-note">
+                    OCR runs entirely in your browser (via
+                    <a href="https://github.com/naptha/tesseract.js" target="_blank" rel="noopener">Tesseract.js</a>,
+                    loaded from a CDN) — your screenshot is never uploaded to any server.
+                </p>
+            </div>
+
             <div class="gear-container">
                 <div class="gear-box" id="gear1-box">
                     <h2>Gear 1 Stats</h2>
@@ -233,6 +265,7 @@
 
     <script src="scripts/gear.js"></script>
     <script src="scripts/chip-ocr.js"></script>
+    <script src="scripts/gear-ocr.js"></script>
 <footer>&copy; 2024 Mathom House &middot; Not affiliated with TopWar</footer>
 <a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
 </body>

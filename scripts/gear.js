@@ -110,6 +110,14 @@ function resetValues() {
     document.getElementById('gear2-box').style.color = '';
     document.getElementById('result').textContent = '';
     document.getElementById('comparison-result').hidden = true;
+
+    // Clear any leftover OCR status message (gear-ocr.js owns this element)
+    var ocrStatus = document.getElementById('gear-ocr-status');
+    if (ocrStatus) {
+        ocrStatus.hidden = true;
+        ocrStatus.textContent = '';
+        ocrStatus.classList.remove('error');
+    }
 }
 function compareHTChips() {
     // HT Chips 1 stats
