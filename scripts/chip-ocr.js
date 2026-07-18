@@ -782,7 +782,12 @@
       x1 = Math.min(canvas.width, Math.ceil(x1));
       y1 = Math.min(canvas.height, Math.ceil(y1));
       if (x1 - x0 < 2 * panel.medH || y1 - y0 < panel.medH) return null;
-      var scale = Math.max(1.5, Math.min(6, 56 / (y1 - y0)));
+      // Bumped from the original 56px/6x target — gear-ocr.js's identical
+      // cropRead() got this same increase after a confirmed misread
+      // ("9.3%" read as "92.3%") on too-small a render; applying the same
+      // proven mitigation here after an analogous digit misread
+      // ("11.38%" read as "1.38%", also via this crop fallback path).
+      var scale = Math.max(1.5, Math.min(9, 110 / (y1 - y0)));
       var region = document.createElement('canvas');
       region.width = Math.round((x1 - x0) * scale);
       region.height = Math.round((y1 - y0) * scale);
