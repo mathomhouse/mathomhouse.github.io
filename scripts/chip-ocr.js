@@ -383,6 +383,22 @@
           label += ' ' + aboveW.map(function (w) { return w.text; }).join(' ');
           rec.field = classifyStat(label);
         }
+        // classifyStat()'s elemental branch always defers rather than
+        // returning 'elemental-res' directly, so a wrapped "Enhance" gets
+        // a chance to merge in first (see that branch's comment above).
+        // Once both merge directions here have been exhausted and
+        // "enhance" still never turned up, "elemental" alone is a strong,
+        // unambiguous signal — nothing else in this game uses that word —
+        // and trusting it directly is more reliable than falling through
+        // to fuzzyClassify(), which is generic string similarity and can
+        // be misled when the one distinguishing word ("RES") is missing
+        // from OCR entirely: confirmed in practice, "All units Elemental"
+        // (RES never read) fuzzy-matched to 'all units hp' instead of any
+        // Elemental-family label, purely because "all units" alone is a
+        // shorter, closer-length match than the longer Elemental entries.
+        if (!rec.field && /elemental/i.test(label) && !/enhance/i.test(label)) {
+          rec.field = 'elemental-res';
+        }
         if (!rec.field) rec.field = fuzzyClassify(label);
         // The field can resolve from a partial first line ("Increase DEF
         // of" is already unambiguously 'def') without ever needing the
