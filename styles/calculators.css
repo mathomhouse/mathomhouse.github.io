@@ -510,6 +510,52 @@ canvas {
   margin: 12px 0 0;
 }
 
+.ocr-info {
+  display: inline-block;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.ocr-info summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-dim);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.ocr-info summary::-webkit-details-marker {
+  display: none;
+}
+
+.ocr-info summary::marker {
+  display: none;
+}
+
+.ocr-info summary:hover {
+  border-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+.ocr-info-text {
+  margin: 8px 0 0;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+  text-align: left;
+}
+
 @media (max-width: 768px) {
   .ocr-drop { padding: 20px 14px; }
 }
