@@ -1011,6 +1011,11 @@
   // ── Browser OCR pipeline ──────────────────────────────────────
   function processCrop(workers, crop, i) {
     var label = 'Gear ' + (i + 1);
+    // Debug aid for calibrating GEAR_STAT_AREAS against real screenshots —
+    // lets a crop actually be viewed instead of only inferred from its
+    // OCR output. See window.__gearOcr.lastCrops.
+    window.__gearOcr.lastCrops = window.__gearOcr.lastCrops || [];
+    window.__gearOcr.lastCrops[i] = crop.toDataURL();
     return setPSM(workers.numbers, '6').then(function () {
       return recognize(workers.labels, crop, 'Reading ' + label + ' labels');
     }).then(function (labelsRes) {
