@@ -701,7 +701,13 @@
       x1 = Math.min(canvas.width, Math.ceil(x1));
       y1 = Math.min(canvas.height, Math.ceil(y1));
       if (x1 - x0 < 2 * panel.medH || y1 - y0 < panel.medH) return null;
-      var scale = Math.max(1.5, Math.min(6, 56 / (y1 - y0)));
+      // Targets a taller render than chip-ocr.js's equivalent (56px) —
+      // a real screenshot showed Tesseract consistently misreading a
+      // visually clean "9.3%" crop as "92.3%" (confirmed via the raw
+      // OCR text, not a downstream parsing bug); a larger, cleaner
+      // render is the standard mitigation for that class of glyph
+      // ambiguity.
+      var scale = Math.max(1.5, Math.min(9, 110 / (y1 - y0)));
       var region = document.createElement('canvas');
       region.width = Math.round((x1 - x0) * scale);
       region.height = Math.round((y1 - y0) * scale);
