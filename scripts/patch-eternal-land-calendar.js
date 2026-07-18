@@ -169,6 +169,11 @@ const elcTheme = '<style id="elc-theme">'
   // buttons are redundant with the shared nav. Kept in DOM (display:none) so the page's inline JS
   // (remOpen listener, bnpPop handlers) doesn't throw on missing elements.
   + 'body > header:not(#header-placeholder){display:none;}'
+  // full-bleed the hero card background to the screen edges while its content stays put: the real
+  // .hero box keeps its position/size (so text, grid, and the absolute title don't move), we just
+  // paint a 100vw band behind it via ::before. Its own bg/border are made transparent.
+  + '.hero{position:relative;z-index:0;overflow:visible!important;margin-top:-16px;background:transparent!important;border-color:transparent!important;border-radius:0!important;}'
+  + ".hero::before{content:'';position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;background-image:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,0.08) 0%,transparent 70%),repeating-linear-gradient(60deg,transparent,transparent 30px,rgba(37,45,69,0.3) 30px,rgba(37,45,69,0.3) 31px),repeating-linear-gradient(-60deg,transparent,transparent 30px,rgba(37,45,69,0.3) 30px,rgba(37,45,69,0.3) 31px),linear-gradient(135deg,#161b22,#1c2128);border-top:1px solid #30363d;border-bottom:1px solid #30363d;z-index:-1;pointer-events:none;}"
   // relocated page title inside the hero — enlarged, with the date as its own line under the title
   // (block, not inline) so it sits above the NEXT UP block in both layouts.
   + '.hero-el-title{font-size:1.45rem;font-weight:700;color:#79c0ff;margin-bottom:8px;}'
@@ -185,7 +190,7 @@ const elcTheme = '<style id="elc-theme">'
   + 'html[data-theme="light"] body{background:#ffffff;color:#1f2328;}'
   // surfaces
   + 'html[data-theme="light"] header,html[data-theme="light"] #bnpPop,html[data-theme="light"] .rhythms,html[data-theme="light"] .modal,html[data-theme="light"] .day,html[data-theme="light"] .foot{background:#f6f8fa;}'
-  + 'html[data-theme="light"] .hero{background:#f6f8fa;}'
+  + 'html[data-theme="light"] .hero::before{background-image:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,0.05) 0%,transparent 70%),repeating-linear-gradient(60deg,transparent,transparent 30px,rgba(37,45,69,0.07) 30px,rgba(37,45,69,0.07) 31px),repeating-linear-gradient(-60deg,transparent,transparent 30px,rgba(37,45,69,0.07) 30px,rgba(37,45,69,0.07) 31px),#f6f8fa;border-top-color:#d0d7de;border-bottom-color:#d0d7de;}'
   + 'html[data-theme="light"] #toast{background:#ffffff;}'
   // solid borders #30363d -> #d0d7de
   + 'html[data-theme="light"] header{border-bottom-color:#d0d7de;box-shadow:0 1px 0 #d0d7de;}'
