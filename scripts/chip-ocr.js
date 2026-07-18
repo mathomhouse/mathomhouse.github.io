@@ -403,6 +403,22 @@
           scopeAbove.forEach(function (w) { assigned.add(w); });
           label += ' ' + scopeAbove.map(function (w) { return w.text; }).join(' ');
         }
+        // "Army Decreased DMG" resolves to 'dmg-decrease' immediately via
+        // "Decreased" alone, without ever needing a wrapped "Taken" tail —
+        // so unlike the DEF/scope case above, nothing here ever goes
+        // looking for it, leaving "Taken" an orphan up for grabs by any
+        // OTHER record's own continuation search. Confirmed harmful in
+        // practice: a separate "All units Elemental RES" row, whose own
+        // "RES" OCR read failed outright, absorbed that orphaned "Taken"
+        // via its own above-search and misclassified as Attack. Claim it
+        // here regardless of whether this record needs it, so it's never
+        // available to be stolen by an unrelated row.
+        if (rec.field === 'dmg-decrease' && !/taken/i.test(label)) {
+          [false, true].forEach(function (above) {
+            unassignedNear(rec, above).filter(function (w) { return /taken/i.test(w.text); })
+              .forEach(function (w) { assigned.add(w); });
+          });
+        }
         rec.labelText = label.replace(/\s+/g, ' ').trim();
         rec.scope = classifyScope(label);
       });

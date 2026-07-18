@@ -359,6 +359,20 @@
           scopeAbove.forEach(function (w) { assigned.add(w); });
           label += ' ' + scopeAbove.map(function (w) { return w.text; }).join(' ');
         }
+        // "Navy Decreased DMG" resolves to 'dmg-decrease' immediately via
+        // "Decreased" alone, without ever needing a wrapped "Taken" tail —
+        // so nothing above ever goes looking for it, leaving "Taken" an
+        // orphan up for grabs by any OTHER record's own continuation
+        // search. Mirrors a confirmed real-world chip-ocr.js bug (a
+        // stray "Taken" got stolen by an unrelated row and caused a
+        // misclassification) — claim it here regardless of whether this
+        // record needs it, so it's never available to be stolen.
+        if (rec.field === 'dmg-decrease' && !/taken/i.test(label)) {
+          [false, true].forEach(function (above) {
+            unassignedNear(rec, above).filter(function (w) { return /taken/i.test(w.text); })
+              .forEach(function (w) { assigned.add(w); });
+          });
+        }
         rec.labelText = label.replace(/\s+/g, ' ').trim();
         rec.scope = classifyScope(label);
       });
