@@ -462,6 +462,8 @@ canvas {
   font-weight: 600;
   color: var(--text-dim);
   margin: 10px 0 0;
+  white-space: pre-line;
+  line-height: 1.6;
 }
 
 .ocr-status.error {

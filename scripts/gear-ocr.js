@@ -753,7 +753,7 @@
       });
       parts.push('Gear ' + (i + 1) + ': ' + filled.join(', '));
     });
-    return parts.join(' · ');
+    return parts.join('\n');
   }
 
   // ── Tesseract loading / word extraction ───────────────────────
@@ -1016,7 +1016,7 @@
     });
     if (unreadable.length) notes.push('could not read a number for: ' + unreadable.join(', '));
     if (parsed.unknownValues) notes.push(parsed.unknownValues + ' value(s) could not be matched to a stat');
-    setStatus('Filled — ' + summary + (notes.length ? ' (' + notes.join('; ') + ')' : '') + '. Check the values, then hit Compare.');
+    setStatus('Filled\n' + summary + (notes.length ? '\n(' + notes.join('; ') + ')' : '') + '\nCheck the values, then hit Compare.');
     return parsed;
   }
 
