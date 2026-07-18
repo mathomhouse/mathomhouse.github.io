@@ -23,14 +23,9 @@
     <header id="header-placeholder"></header>
     <div class="container">
         <h1>HT Chip & Titan Gear Stat Comparison</h1>
-        <p>Input the stats of your HT chips or your Titan Gear and compare it with the one that you
-            currently have equipped <br>
-            to compare which one will be better suited for your needs!<br><br>
+        <p>Enter the stats or share a screenshot of your HT Chips or Titan Gear and compare them against what you currently have equipped, to see which one better suits your needs. If using the screenshot OCR feature, <strong>double check the results before clicking compare.</strong><br><br>
 
-            <b>DISCLAIMER</b>: The data used to determine ATK and HP multipliers are purely speculatory. It was
-            taken from <br>
-            a screenshot floating around which details the value of certain stats relative to the base offensive/defensive attributes. 
-            <br>Do not take these results as gospel. Test or ask experienced players. </p>
+            <b>DISCLAIMER</b>: The multipliers used here are purely speculative. Do not take these results as gospel. Test or ask experienced players. </p>
 
 
         <!-- Tabs to select the type of calculator -->
@@ -42,7 +37,7 @@
         <!-- Titan Gear calculator -->
         <div id="titan-gear-calculator" class="tab-content">
             <h2>Titan Gear Comparison</h2>
-            <p> Note: This does not consider "Base Attributes" in the comparison, only "Random Attributes".
+            <p> Note: This does not consider "Base Attributes" in the comparison, only "Random Attributes". <br><br>
             </p>
 
             <!-- Screenshot import (client-side OCR, scripts/gear-ocr.js) -->
@@ -59,20 +54,17 @@
                 <div id="gear-ocr-drop" class="ocr-drop">
                     <p class="ocr-drop-text">
                         <strong>Drop a gear comparison screenshot here</strong>, click to choose a file,
-                        or paste (Ctrl/Cmd+V) anywhere on this tab.
+                        or paste (Ctrl/Cmd+V) anywhere on this tab. Fields will auto-fill below when the relevant troop type is selected.
                     </p>
                     <p class="ocr-drop-hint">
-                        Works best with the in-game comparison screen showing one or two gear pieces.
-                        Auto-fills the fields below — double check the results before hitting Compare.
+                        <span style="color: red;"><strong>Double check the results before clicking compare.</strong> Results may not be 100% accurate.</span> 
                     </p>
                 </div>
-                <button type="button" id="gear-ocr-paste-btn" class="calc-btn ocr-paste-btn">Paste from Clipboard</button>
+                <button type="button" id="gear-ocr-paste-btn" class="calc-btn ocr-paste-btn">Paste</button>
                 <input type="file" id="gear-ocr-file" accept="image/*" hidden>
                 <p id="gear-ocr-status" class="ocr-status" hidden aria-live="polite"></p>
                 <p class="ocr-privacy-note">
-                    OCR runs entirely in your browser (via
-                    <a href="https://github.com/naptha/tesseract.js" target="_blank" rel="noopener">Tesseract.js</a>,
-                    loaded from a CDN) — your screenshot is never uploaded to any server.
+                    OCR runs entirely in your browser, your screenshot is never saved or uploaded anywhere.
                 </p>
             </div>
 
@@ -131,14 +123,11 @@
         <!-- HT Chips calculator -->
         <div id="ht-chips-calculator" class="tab-content active">
             <h2>HT Chips Comparison</h2>
-            <p> Please note: this calculator does NOT take ATK SPD into account. 
-            ATK SPD is not quantifiable, and is only<br>relevant if it is higher
-                than your opponent. This calculator also does NOT take set bonuses into account.<br>
-                Use your own judgement.
-                <br>
+            <p> Please note: this calculator does NOT take ATK SPD into account. ATK SPD is not quantifiable, and is only relevant if it is higher than your opponent. This calculator also does NOT take set bonuses into account.<br>
+            Use your own judgement.
+            <br>
 
-                Add stats of the same type together (e.g. All units DMG increase and Navy DMG increase).
-                <br> Ignore those that are not your troop type. <br><br>
+            Add stats of the same type together (e.g. All units DMG increase and Navy DMG increase).Ignore those that are not your troop type. <br><br>
 
             </p>
 
@@ -155,21 +144,18 @@
                 </div>
                 <div id="ht-ocr-drop" class="ocr-drop">
                     <p class="ocr-drop-text">
-                        <strong>Drop a chip stats screenshot here</strong>, click to choose a file,
-                        or paste (Ctrl/Cmd+V) anywhere on this tab.
+                        <strong>Drop a chip comparison screenshot here</strong>, click to choose a file,
+                        or paste (Ctrl/Cmd+V) anywhere on this tab. Fields will auto-fill below when the relevant troop type is selected.
                     </p>
                     <p class="ocr-drop-hint">
-                        Works best with the in-game comparison screen showing one or two chips.
-                        Auto-fills the fields below — double check the results before hitting Compare.
+                        <span style="color: red;"><strong>Double check the results before clicking compare.</strong> Results may not be 100% accurate.</span> 
                     </p>
                 </div>
                 <button type="button" id="ht-ocr-paste-btn" class="calc-btn ocr-paste-btn">Paste from Clipboard</button>
                 <input type="file" id="ht-ocr-file" accept="image/*" hidden>
                 <p id="ht-ocr-status" class="ocr-status" hidden aria-live="polite"></p>
                 <p class="ocr-privacy-note">
-                    OCR runs entirely in your browser (via
-                    <a href="https://github.com/naptha/tesseract.js" target="_blank" rel="noopener">Tesseract.js</a>,
-                    loaded from a CDN) — your screenshot is never uploaded to any server.
+                    OCR runs entirely in your browser, your screenshot is never saved or uploaded anywhere.
                 </p>
             </div>
 
