@@ -614,7 +614,14 @@
       var slots = [];
       var dx = margin;
       glyphs.forEach(function (c) {
-        var gw = Math.max(1, Math.round(c.w * scale));
+        // A "1" is a thin vertical stroke — narrow enough in the source
+        // crop that a straight c.w * scale can round down to 1-2px,
+        // which Tesseract's WASM binary flatly refuses to recognize.
+        // Confirmed via chip-ocr.js's identical geometric reader: real
+        // console output ("Image too small to scale!!") next to a
+        // dropped "1" in "11.38%" reading as "1.38%". Floor it at a
+        // width Tesseract can actually attempt.
+        var gw = Math.max(24, Math.round(c.w * scale));
         var gh = Math.max(1, Math.round(c.h * scale));
         slots.push({ x0: dx, x1: dx + gw, text: '' });
         dx += gw + gap;
