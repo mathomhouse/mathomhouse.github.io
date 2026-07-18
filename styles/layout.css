@@ -390,6 +390,27 @@ footer a:hover { color: var(--gold); }
   box-shadow: 0 2px 8px rgba(248, 113, 113, 0.4);
 }
 
+.card.new-badge {
+  position: relative;
+}
+
+.card.new-badge::after {
+  content: 'NEW';
+  position: absolute;
+  top: -9px;
+  right: -9px;
+  background: var(--red);
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 7px;
+  border-radius: 5px;
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(248, 113, 113, 0.4);
+}
+
 .card-featured {
   display: flex;
   align-items: center; /* Centers icon and text horizontally */
