@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stat Comparison Calculator</title>
+    <meta name="description" content="Tools and calculators for Top War players.">
+    <meta property="og:title" content="Mathom House • Stat Comparison">
+    <meta property="og:description" content="Compare stats of your gear">
+    <meta property="og:url" content="https://mathomhouse.github.io/gear.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="From Artu and Gikey">
+    <meta property="og:image" content="https://mathomhouse.github.io/images/yellow-ht-icon.png">
     <!-- Anti-flash -->
     <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})()</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,15 +29,10 @@
     <!-- Placeholder for the header -->
     <header id="header-placeholder"></header>
     <div class="container">
-        <h1>HT Chip & Titan Gear Stat Comparison</h1>
-        <p>Input the stats of your HT chips or your Titan Gear and compare it with the one that you
-            currently have equipped <br>
-            to compare which one will be better suited for your needs!<br><br>
+        <h1>HT Chips & Titan Gear Stat Comparison</h1>
+        <p>Enter the stats or share a screenshot of your HT Chips and compare them against what you currently have equipped, to see which one better suits your needs.<br><br>
 
-            <b>DISCLAIMER</b>: The data used to determine ATK and HP multipliers are purely speculatory. It was
-            taken from <br>
-            a screenshot floating around which details the value of certain stats relative to the base offensive/defensive attributes. 
-            <br>Do not take these results as gospel. Test or ask experienced players. </p>
+            <b>DISCLAIMER</b>: The multipliers used here are purely speculative. Do not take these results as gospel. Test or ask experienced players. </p>
 
 
         <!-- Tabs to select the type of calculator -->
@@ -42,8 +44,9 @@
         <!-- Titan Gear calculator -->
         <div id="titan-gear-calculator" class="tab-content">
             <h2>Titan Gear Comparison</h2>
-            <p> Note: This does not consider "Base Attributes" in the comparison, only "Random Attributes".
+            <p> Note: This does not consider "Base Attributes" in the comparison, only "Random Attributes". <br><br>
             </p>
+
             <div class="gear-container">
                 <div class="gear-box" id="gear1-box">
                     <h2>Gear 1 Stats</h2>
@@ -99,16 +102,50 @@
         <!-- HT Chips calculator -->
         <div id="ht-chips-calculator" class="tab-content active">
             <h2>HT Chips Comparison</h2>
-            <p> Please note: this calculator does NOT take ATK SPD into account. 
-            ATK SPD is not quantifiable, and is only<br>relevant if it is higher
-                than your opponent. This calculator also does NOT take set bonuses into account.<br>
-                Use your own judgement.
-                <br>
+            <p>Shoutout to <strong>Ƥ€ΔĆĦ 🍑 (s2698)</strong> for the suggestion to add the screenshot uploading feature!<br> 
+                Please note: this calculator does NOT take ATK SPD into account. ATK SPD is not quantifiable, and is only relevant if it is higher than your opponent. This calculator also does NOT take set bonuses into account.<br>
+            Use your own judgement.
+            <br>
 
-                Add stats of the same type together (e.g. All units DMG increase and Navy DMG increase).
-                <br> Ignore those that are not your troop type. <br><br>
+            Add stats of the same type together (e.g. All units DMG increase and Navy DMG increase). Ignore those that are not your troop type. <br><br>
 
             </p>
+
+            <!-- Screenshot import (client-side OCR, scripts/chip-ocr.js) -->
+            <div class="ocr-import">
+                <div class="ocr-troop-type">
+                    <label for="ht-ocr-troop-type">Troop Type (right-side chips only):</label>
+                    <select id="ht-ocr-troop-type">
+                        <option value="">Not set</option>
+                        <option value="navy">Navy</option>
+                        <option value="army">Army</option>
+                        <option value="air-force">Air Force</option>
+                    </select>
+                </div>
+                <div id="ht-ocr-drop" class="ocr-drop">
+                    <p class="ocr-drop-text">
+                        <strong>Drop a chip comparison screenshot here</strong>, click to choose a file,
+                        or paste (Ctrl/Cmd+V) anywhere on this tab. Fields will auto-fill below when the relevant troop type is selected.
+                    </p>
+                    <p class="ocr-drop-hint">
+                        <span style="color: red;"><strong>Double check the results before clicking compare.</strong> Results may not be 100% accurate.</span> <br>
+                        Note: this feature only works with English
+                    </p>
+                </div>
+                <details class="ocr-info">
+                    <summary aria-label="Why results may be inaccurate">i</summary>
+                    <p class="ocr-info-text">
+                        Screenshot reading isn't perfect — it can occasionally misread a number, especially with the game's fancy fonts. Always double check the numbers before hitting the 'Compare' button.
+                    </p>
+                </details>
+                <button type="button" id="ht-ocr-paste-btn" class="calc-btn ocr-paste-btn">Paste</button>
+                <input type="file" id="ht-ocr-file" accept="image/*" hidden>
+                <p id="ht-ocr-status" class="ocr-status" hidden aria-live="polite"></p>
+                <p class="ocr-privacy-note">
+                    OCR runs entirely in your browser, your screenshot is never saved or uploaded anywhere.
+                </p>
+            </div>
+
             <div class="gear-container">
                 <div class="gear-box" id="ht-chips1-box">
                     <h2>HT Chip 1 Stats</h2>
@@ -131,11 +168,20 @@
                         <label for="ht1-crit-rate">Crit. Rate (%):</label>
                         <input type="number" id="ht1-crit-rate" placeholder="0">
 
-                        <label for="ht1-atk">ATK (%):</label>
+                        <label for="ht1-atk">Attack (%):</label>
                         <input type="number" id="ht1-atk" placeholder="0">
 
                         <label for="ht1-hp">HP (%):</label>
                         <input type="number" id="ht1-hp" placeholder="0">
+
+                        <label for="ht1-elemental-res">Elemental RES (%):</label>
+                        <input type="number" id="ht1-elemental-res" placeholder="0">
+
+                        <label for="ht1-elemental-enhance">Elemental Enhance (%):</label>
+                        <input type="number" id="ht1-elemental-enhance" placeholder="0">
+
+                        <label for="ht1-inv">INV (%):</label>
+                        <input type="number" id="ht1-inv" placeholder="0">
                     </form>
                 </div>
 
@@ -160,11 +206,20 @@
                         <label for="ht2-crit-rate">Crit. Rate (%):</label>
                         <input type="number" id="ht2-crit-rate" placeholder="0">
 
-                        <label for="ht2-atk">ATK (%):</label>
+                        <label for="ht2-atk">Attack (%):</label>
                         <input type="number" id="ht2-atk" placeholder="0">
 
                         <label for="ht2-hp">HP (%):</label>
                         <input type="number" id="ht2-hp" placeholder="0">
+
+                        <label for="ht2-elemental-res">Elemental RES (%):</label>
+                        <input type="number" id="ht2-elemental-res" placeholder="0">
+
+                        <label for="ht2-elemental-enhance">Elemental Enhance (%):</label>
+                        <input type="number" id="ht2-elemental-enhance" placeholder="0">
+
+                        <label for="ht2-inv">INV (%):</label>
+                        <input type="number" id="ht2-inv" placeholder="0">
                     </form>
                 </div>
             </div>
@@ -182,6 +237,7 @@
     </div>
 
     <script src="scripts/gear.js"></script>
+    <script src="scripts/chip-ocr.js"></script>
 <footer>&copy; 2024 Mathom House &middot; Not affiliated with TopWar</footer>
 <a href="#" class="back-top" id="backToTop" aria-label="Back to top">↑</a>
 </body>
